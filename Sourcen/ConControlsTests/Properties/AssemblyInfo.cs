@@ -2,12 +2,12 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("CUXTests")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ConControlsTests")]
+[assembly: AssemblyDescription("Unit test project for ConControls")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CUXTests")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyProduct("ConControlsTests")]
+[assembly: AssemblyCopyright("Copyright ©2020 René Vogt ")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -5,25 +5,26 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>0.0.1</Version>
     <Authors>René Vogt</Authors>
-    <Product>CUX</Product>
+    <Product>ConControls</Product>
     <Description>A library for console UI controls.</Description>
     <Copyright>René Vogt</Copyright>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/ReneVogt/CUX</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/ReneVogt/CUX</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/ReneVogt/ConControls</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ReneVogt/ConControls</RepositoryUrl>
     <SignAssembly>true</SignAssembly>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <AssemblyOriginatorKeyFile>René Vogt.pfx</AssemblyOriginatorKeyFile>
+    <Company />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Privat\Sourcen\CUX\Sourcen\CUX\CUX.xml</DocumentationFile>
+    <DocumentationFile>C:\Privat\Sourcen\ConControls\Sourcen\ConControls\ConControls.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Privat\Sourcen\CUX\Sourcen\CUX\CUX.xml</DocumentationFile>
+    <DocumentationFile>C:\Privat\Sourcen\ConControls\Sourcen\ConControls\ConControls.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

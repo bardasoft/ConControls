@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CUX
+namespace ConControls
 {
     internal class Class1
     {

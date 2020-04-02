@@ -1,9 +1,9 @@
-﻿using CUX;
+﻿using ConControls;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CUXTests
+namespace ConControlsTests
 {
-    static class COXTestsCli
+    static class ConControlsTestsCli
     {
         static void Main()
         {

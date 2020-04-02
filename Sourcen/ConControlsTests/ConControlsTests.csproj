@@ -8,8 +8,8 @@
     <ProjectGuid>{5920A0BB-2D33-453D-91D1-B01870F7F1A7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CUXTests</RootNamespace>
-    <AssemblyName>CUXTests</AssemblyName>
+    <RootNamespace>ConControlsTests</RootNamespace>
+    <AssemblyName>ConControlsTests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -59,7 +59,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="COXTestsCli.cs" />
+    <Compile Include="ConControlsTestsCli.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +67,9 @@
     <None Include="René Vogt.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CUX\CUX.csproj">
+    <ProjectReference Include="..\ConControls\ConControls.csproj">
       <Project>{7c62650c-7394-4d27-9985-1f78228c15e7}</Project>
-      <Name>CUX</Name>
+      <Name>ConControls</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
