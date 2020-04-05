@@ -1,5 +1,11 @@
+/*
+ * (C) René Vogt
+ *
+ * Published under MIT license as described in the LICENSE.md file.
+ *
+ */
+
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("ConControlsTests")]
