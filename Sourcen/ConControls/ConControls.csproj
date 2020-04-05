@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.1</Version>
+    <Version>0.1.0</Version>
     <Authors>René Vogt</Authors>
     <Product>ConControls</Product>
     <Description>A library for console UI controls.</Description>
@@ -17,14 +17,18 @@
     <Nullable>enable</Nullable>
     <AssemblyOriginatorKeyFile>René Vogt.pfx</AssemblyOriginatorKeyFile>
     <Company />
+    <PackageOutputPath>..\..\nuget</PackageOutputPath>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <PackageReleaseNotes>For complete release notes see https://github.com/ReneVogt/ConControls/blob/master/ReleaseNotes.md</PackageReleaseNotes>
+    <PackageTags>windows console ui</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Privat\Sourcen\ConControls\Sourcen\ConControls\ConControls.xml</DocumentationFile>
+    <DocumentationFile>ConControls.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\Privat\Sourcen\ConControls\Sourcen\ConControls\ConControls.xml</DocumentationFile>
+    <DocumentationFile>ConControls.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
