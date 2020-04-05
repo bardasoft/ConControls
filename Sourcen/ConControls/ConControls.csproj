@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -44,6 +43,8 @@
       <PackagePath></PackagePath>
     </None>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="..\..\README.md" pack="true" PackagePath="." />
+    <None Include="..\..\ReleaseNotes.md" pack="true" PackagePath="." />
   </ItemGroup>
 
 </Project>
