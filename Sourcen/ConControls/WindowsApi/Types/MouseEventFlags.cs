@@ -7,7 +7,7 @@
 
 using System;
 
-namespace ConControls.WindowsApi
+namespace ConControls.WindowsApi.Types
 {
     [Flags]
     enum MouseEventFlags: uint

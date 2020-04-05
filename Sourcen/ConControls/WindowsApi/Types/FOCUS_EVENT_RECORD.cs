@@ -5,7 +5,7 @@
  *
  */
 
-namespace ConControls.WindowsApi
+namespace ConControls.WindowsApi.Types
 { 
     struct FOCUS_EVENT_RECORD
     {

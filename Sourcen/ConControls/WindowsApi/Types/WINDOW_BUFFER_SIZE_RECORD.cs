@@ -5,10 +5,10 @@
  *
  */
 
-namespace ConControls.WindowsApi
+namespace ConControls.WindowsApi.Types
 {
-    struct MENU_EVENT_RECORD
+    struct WINDOW_BUFFER_SIZE_RECORD
     {
-        public uint CommandId;
+        public COORD Size;
     }
 }

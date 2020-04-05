@@ -5,7 +5,7 @@
  *
  */
 
-namespace ConControls.WindowsApi
+namespace ConControls.WindowsApi.Types
 { 
     enum VirtualKeys : ushort
     {

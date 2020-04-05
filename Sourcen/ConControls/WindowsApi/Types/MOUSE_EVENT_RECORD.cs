@@ -7,7 +7,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace ConControls.WindowsApi
+namespace ConControls.WindowsApi.Types
 {
     [StructLayout(LayoutKind.Explicit)]
     struct MOUSE_EVENT_RECORD

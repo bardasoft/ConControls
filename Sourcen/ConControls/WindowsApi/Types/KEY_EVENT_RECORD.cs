@@ -7,7 +7,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace ConControls.WindowsApi
+namespace ConControls.WindowsApi.Types
 {
     [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
     internal struct KEY_EVENT_RECORD
