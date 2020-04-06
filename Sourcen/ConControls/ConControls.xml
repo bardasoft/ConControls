@@ -4,5 +4,156 @@
         <name>ConControls</name>
     </assembly>
     <members>
+        <member name="T:ConControls.ConsoleContext">
+            <summary>
+            The context for a console UI session.
+            </summary>
+            <remarks>This context takes control over the console input buffer and
+            the current screen buffer to provide UI functionality. Only one context
+            may be instantiated at a time. Make sure to dispose of any previously
+            instantiated contexts before creating a new one.
+            </remarks>
+        </member>
+        <member name="E:ConControls.ConsoleContext.SizeChanged">
+            <inheritdoc />
+        </member>
+        <member name="E:ConControls.ConsoleContext.BackgroundColorChanged">
+            <inheritdoc />
+        </member>
+        <member name="E:ConControls.ConsoleContext.Disposed">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleContext.Size">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleContext.Width">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleContext.Height">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleContext.BackgroundColor">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleContext.Title">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleContext.SynchronizationLock">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleContext.IsDisposed">
+            <summary>
+            This <see cref="T:ConControls.ConsoleContext"/> instance has already been disposed.
+            </summary>
+        </member>
+        <member name="M:ConControls.ConsoleContext.#ctor">
+            <summary>
+            Opens a new <see cref="T:ConControls.ConsoleContext"/>. Only one instance can exist at a time.
+            Be sure to dispose of any previously instantiated contexts.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">A previously instantiated <see cref="T:ConControls.ConsoleContext"/> has not yet been disposed of. Only a single context can exist at a time.</exception>
+        </member>
+        <member name="M:ConControls.ConsoleContext.Finalize">
+            <summary>
+            Cleans up native resources.
+            </summary>
+        </member>
+        <member name="M:ConControls.ConsoleContext.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.ConsoleContext.Refresh">
+            <inheritdoc />
+        </member>
+        <member name="T:ConControls.IConsoleContext">
+            <summary>
+            Interface to a <see cref="T:ConControls.ConsoleContext"/>.
+            </summary>
+        </member>
+        <member name="E:ConControls.IConsoleContext.SizeChanged">
+            <summary>
+            Raised when the console window size changed.
+            </summary>
+        </member>
+        <member name="E:ConControls.IConsoleContext.BackgroundColorChanged">
+            <summary>
+            Raised when the background color of the console window changed.
+            </summary>
+        </member>
+        <member name="E:ConControls.IConsoleContext.Disposed">
+            <summary>
+            Raised when this console context is disposed of.
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleContext.Size">
+            <summary>
+            Gets or sets the size of the console window.
+            The <see cref="P:System.Drawing.Size.Width"/> is the number of characters per row.
+            The <see cref="P:System.Drawing.Size.Height"/> is the number of lines.
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleContext.Width">
+            <summary>
+            Gets or sets the width of the console window (in character columns).
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleContext.Height">
+            <summary>
+            Gets or sets the size of the console window (the number of rows).
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleContext.BackgroundColor">
+            <summary>
+            Gets or sets the background color of the console window.
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleContext.Title">
+            <summary>
+            The title of the console window.
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleContext.SynchronizationLock">
+            <summary>
+            An object that can be used to synchronize threads
+            that want to execute conosle operations
+            </summary>
+        </member>
+        <member name="M:ConControls.IConsoleContext.Refresh">
+            <summary>
+            Refreshes the console window.
+            This updates window (and buffer) sizes and colors and
+            redraws the embedded console controls.
+            </summary>
+        </member>
+        <member name="T:ConControls.Properties.Resources">
+            <summary>
+              Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.ResourceManager">
+            <summary>
+              Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Culture">
+            <summary>
+              Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+              Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_CanOnlyUseSingleContext">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die There can only be one single console context at a time! Dispose of any existing console context before instantiating a new one. ähnelt.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_HeightTooSmall">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The height of this console element must be at least {ß}! ähnelt.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_WidthTooSmall">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The width of this console element must be at least {ß}! ähnelt.
+            </summary>
+        </member>
     </members>
 </doc>

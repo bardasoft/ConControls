@@ -8,6 +8,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Text;
 using ConControls.WindowsApi.Types;
 
 namespace ConControls.WindowsApi
@@ -25,14 +26,19 @@ namespace ConControls.WindowsApi
             internal static extern bool GetConsoleMode(IntPtr consoleInputHandle, out ConsoleInputModes inputMode);
             [DllImport("kernel32.dll", SetLastError = true)]
             internal static extern bool GetConsoleMode(IntPtr consoleOutputHandle, out ConsoleOutputModes inputMode);
+            /* Retrieves the title for the current console window. */
+            [DllImport("kernel32.dll", EntryPoint = "GetConsoleTitle", CharSet = CharSet.Unicode, SetLastError = true)]
+            internal static extern int GetConsoleTitle(
+                StringBuilder titleBuilder,
+                int size);
             [DllImport("kernel32.dll", SetLastError = true)]
             internal static extern IntPtr GetStdHandle(int stdHandle);
             [DllImport("kernel32.dll", EntryPoint = "ReadConsoleInputW", CharSet = CharSet.Unicode, SetLastError = true)]
             internal static extern bool ReadConsoleInput(
                 IntPtr consoleInputHandle,
-                INPUT_RECORD[] recordBuffer,
-                uint elementsInBuffer,
-                out uint elementsRead);
+                [Out] INPUT_RECORD[] recordBuffer,
+                int elementsInBuffer,
+                out int elementsRead);
             [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
             internal static extern bool ReadConsoleOutput(
                 IntPtr consoleOutputHandle,
@@ -44,6 +50,8 @@ namespace ConControls.WindowsApi
             internal static extern bool SetConsoleMode(IntPtr consoleInputHandle, ConsoleInputModes inputMode);
             [DllImport("kernel32.dll", SetLastError = true)]
             internal static extern bool SetConsoleMode(IntPtr consoleOutputHandle, ConsoleOutputModes inputMode);
+            [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+            internal static extern bool SetConsoleTitle(string title);
             [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
             internal static extern bool WriteConsoleOutput(
                 IntPtr consoleOutputHandle,
@@ -57,8 +65,15 @@ namespace ConControls.WindowsApi
             NativeMethods.GetConsoleMode(consoleInputHandle, out inputMode);
         public bool GetConsoleMode(IntPtr consoleOutputHandle, out ConsoleOutputModes outputMode) =>
             NativeMethods.GetConsoleMode(consoleOutputHandle, out outputMode);
+        public string GetConsoleTitle()
+        {
+            StringBuilder titleBuilder = new StringBuilder(1024);
+            return NativeMethods.GetConsoleTitle(titleBuilder, 1024) == 0
+                       ? string.Empty
+                       : titleBuilder.ToString();
+        }
         public IntPtr GetStdHandle(int stdHandle) => NativeMethods.GetStdHandle(stdHandle);
-        public bool ReadConsoleInput(IntPtr consoleInputHandle, INPUT_RECORD[] recordBuffer, uint elementsInBuffer, out uint elementsRead) =>
+        public bool ReadConsoleInput(IntPtr consoleInputHandle, INPUT_RECORD[] recordBuffer, int elementsInBuffer, out int elementsRead) =>
             NativeMethods.ReadConsoleInput(consoleInputHandle, recordBuffer, elementsInBuffer, out elementsRead);
         public bool ReadConsoleOutput(IntPtr consoleOutputHandle, CHAR_INFO[] charInfoBuffer, COORD bufferSize, COORD offset,
                                       ref SMALL_RECT useRegion) =>
@@ -67,6 +82,7 @@ namespace ConControls.WindowsApi
             NativeMethods.SetConsoleMode(consoleInputHandle, inputMode);
         public bool SetConsoleMode(IntPtr consoleOutputHandle, ConsoleOutputModes outputMode) =>
             NativeMethods.SetConsoleMode(consoleOutputHandle, outputMode);
+        public void SetConsoleTitle(string title) => NativeMethods.SetConsoleTitle(title);
         public bool WriteConsoleOutput(IntPtr consoleOutputHandle, CHAR_INFO[] charInfoBuffer, COORD bufferSize, COORD offset,
                                        ref SMALL_RECT useRegion) =>
             NativeMethods.WriteConsoleOutput(consoleOutputHandle, charInfoBuffer, bufferSize, offset, ref useRegion);
