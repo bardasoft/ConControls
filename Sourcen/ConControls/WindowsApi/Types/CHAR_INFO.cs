@@ -7,5 +7,11 @@ namespace ConControls.WindowsApi.Types
     {
         public char Char;
         public ConCharAttributes Attributes;
+
+        public CHAR_INFO(char c, ConCharAttributes attributes)
+        {
+            Char = c;
+            Attributes = attributes;
+        }
     }
 }

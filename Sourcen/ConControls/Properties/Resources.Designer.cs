@@ -61,7 +61,16 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die There can only be one single console context at a time! Dispose of any existing console context before instantiating a new one. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The parent of the console window&apos;s root panel cannot be changed! ähnelt.
+        /// </summary>
+        internal static string Exception_CannotChangeRootPanelsParent {
+            get {
+                return ResourceManager.GetString("Exception_CannotChangeRootPanelsParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die There can only be one single console window at a time! Dispose of any existing console window before instantiating a new one. ähnelt.
         /// </summary>
         internal static string Exception_CanOnlyUseSingleContext {
             get {
@@ -70,20 +79,29 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The height of this console element must be at least {ß}! ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The controls cannot be part of different conosle windows! ähnelt.
         /// </summary>
-        internal static string Exception_HeightTooSmall {
+        internal static string Exception_DifferentWindow {
             get {
-                return ResourceManager.GetString("Exception_HeightTooSmall", resourceCulture);
+                return ResourceManager.GetString("Exception_DifferentWindow", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The width of this console element must be at least {ß}! ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The ConsoleColor \&quot;{0}\&quot; is not supported! ähnelt.
         /// </summary>
-        internal static string Exception_WidthTooSmall {
+        internal static string Exception_InvalidConsoleColor {
             get {
-                return ResourceManager.GetString("Exception_WidthTooSmall", resourceCulture);
+                return ResourceManager.GetString("Exception_InvalidConsoleColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The console window used by this control has already been disposed of! ähnelt.
+        /// </summary>
+        internal static string Exception_WindowDisposed {
+            get {
+                return ResourceManager.GetString("Exception_WindowDisposed", resourceCulture);
             }
         }
     }

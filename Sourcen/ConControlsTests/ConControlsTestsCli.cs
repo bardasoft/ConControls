@@ -6,28 +6,42 @@
  */
 
 using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using ConControls;
-using ConControls.WindowsApi;
-using ConControls.WindowsApi.Types;
 
 #pragma warning disable IDE0051 // Nicht verwendete private Member entfernen
 // ReSharper disable UnusedMember.Local
 
 namespace ConControlsTests
 {
+    [ExcludeFromCodeCoverage]
     static class ConControlsTestsCli
     {
         static void Main()
         {
             //Task.Run(ReadEvents).Wait();
-            using var context = new ConsoleContext();
-            Console.WriteLine(context.Title);
-            context.Title = "hallo welt!";
-            Console.WriteLine(context.Title);
+            using var window = new ConsoleWindow();
+            window.BackgroundColor = ConsoleColor.Blue;
+            window.Panel.Area = new Rectangle(10, 10, 10, 10);
+            window.Panel.BackgroundColor = ConsoleColor.Cyan;
+
+            Console.ReadLine();
+
+            //ConsoleColor[] colors = Enum.GetValues(typeof(ConsoleColor)).Cast<ConsoleColor>().ToArray();
+            //foreach (var color in colors)
+            //{
+            //    Console.ForegroundColor = color;
+            //    Console.BackgroundColor = color;
+            //    Console.WriteLine(' ');
+            //}
+
+            //var api = new NativeCalls();
+            //CHAR_INFO[] buffer = api.ReadConsoleOutput(new ConsoleOutputHandle(), new Rectangle(0, 0, 1, colors.Length));
+            //Console.ResetColor();
+            //Console.Clear();
+            //File.AppendAllLines(@"c:\Privat\colors.txt",colors.Select((color, i) =>
+            //                                                $"{color} = {buffer[i].Attributes}"));
         }
         //static void ReadEvents()
         //{

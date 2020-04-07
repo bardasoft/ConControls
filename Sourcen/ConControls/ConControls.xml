@@ -4,124 +4,341 @@
         <name>ConControls</name>
     </assembly>
     <members>
-        <member name="T:ConControls.ConsoleContext">
+        <member name="M:ConControls.ConsoleApi.ConsoleGraphics.DrawBackground(System.ConsoleColor,System.Drawing.Rectangle)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.ConsoleApi.ConsoleGraphics.Flush">
+            <inheritdoc />
+        </member>
+        <member name="T:ConControls.ConsoleApi.IConsoleGraphics">
             <summary>
-            The context for a console UI session.
+            Provides methods to draw on the console.
             </summary>
-            <remarks>This context takes control over the console input buffer and
-            the current screen buffer to provide UI functionality. Only one context
+        </member>
+        <member name="M:ConControls.ConsoleApi.IConsoleGraphics.DrawBackground(System.ConsoleColor,System.Drawing.Rectangle)">
+            <summary>
+            Sets the background <paramref name="color"/> in the specified <paramref name="area"/>.
+            The changes are only written to the screen buffer when <see cref="M:ConControls.ConsoleApi.IConsoleGraphics.Flush"/> is called.
+            </summary>
+            <param name="color">The <see cref="T:System.ConsoleColor"/> to use for the background.</param>
+            <param name="area">The area (in screen buffer coordinates) to fill.</param>
+        </member>
+        <member name="M:ConControls.ConsoleApi.IConsoleGraphics.Flush">
+            <summary>
+            Flushes the internal buffer to the console screen buffer.
+            </summary>
+        </member>
+        <member name="T:ConControls.ConsoleWindow">
+            <summary>
+            The window for a console UI session.
+            </summary>
+            <remarks>This window takes control over the console input buffer and
+            the current screen buffer to provide UI functionality. Only one window
             may be instantiated at a time. Make sure to dispose of any previously
             instantiated contexts before creating a new one.
             </remarks>
         </member>
-        <member name="E:ConControls.ConsoleContext.SizeChanged">
+        <member name="E:ConControls.ConsoleWindow.Disposed">
             <inheritdoc />
         </member>
-        <member name="E:ConControls.ConsoleContext.BackgroundColorChanged">
+        <member name="P:ConControls.ConsoleWindow.Size">
             <inheritdoc />
         </member>
-        <member name="E:ConControls.ConsoleContext.Disposed">
+        <member name="P:ConControls.ConsoleWindow.Width">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.ConsoleContext.Size">
+        <member name="P:ConControls.ConsoleWindow.Height">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.ConsoleContext.Width">
+        <member name="P:ConControls.ConsoleWindow.Panel">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.ConsoleContext.Height">
+        <member name="P:ConControls.ConsoleWindow.UpdateInhibited">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.ConsoleContext.BackgroundColor">
+        <member name="P:ConControls.ConsoleWindow.BackgroundColor">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.ConsoleContext.Title">
+        <member name="P:ConControls.ConsoleWindow.Title">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.ConsoleContext.SynchronizationLock">
+        <member name="P:ConControls.ConsoleWindow.IsDisposed">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.ConsoleContext.IsDisposed">
+        <member name="P:ConControls.ConsoleWindow.SynchronizationLock">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.ConsoleWindow.#ctor">
             <summary>
-            This <see cref="T:ConControls.ConsoleContext"/> instance has already been disposed.
-            </summary>
-        </member>
-        <member name="M:ConControls.ConsoleContext.#ctor">
-            <summary>
-            Opens a new <see cref="T:ConControls.ConsoleContext"/>. Only one instance can exist at a time.
+            Opens a new <see cref="T:ConControls.ConsoleWindow"/>. Only one instance can exist at a time.
             Be sure to dispose of any previously instantiated contexts.
             </summary>
-            <exception cref="T:System.InvalidOperationException">A previously instantiated <see cref="T:ConControls.ConsoleContext"/> has not yet been disposed of. Only a single context can exist at a time.</exception>
+            <exception cref="T:System.InvalidOperationException">A previously instantiated <see cref="T:ConControls.ConsoleWindow"/> has not yet been disposed of. Only a single window can exist at a time.</exception>
         </member>
-        <member name="M:ConControls.ConsoleContext.Finalize">
+        <member name="M:ConControls.ConsoleWindow.Finalize">
             <summary>
             Cleans up native resources.
             </summary>
         </member>
-        <member name="M:ConControls.ConsoleContext.Dispose">
+        <member name="M:ConControls.ConsoleWindow.Dispose">
             <inheritdoc />
         </member>
-        <member name="M:ConControls.ConsoleContext.Refresh">
+        <member name="M:ConControls.ConsoleWindow.GetGraphics">
             <inheritdoc />
         </member>
-        <member name="T:ConControls.IConsoleContext">
+        <member name="M:ConControls.ConsoleWindow.Draw">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.ConsoleWindow.BeginUpdate">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.ConsoleWindow.EndUpdate">
+            <inheritdoc />
+        </member>
+        <member name="T:ConControls.Controls.ConsoleControl">
             <summary>
-            Interface to a <see cref="T:ConControls.ConsoleContext"/>.
+            Base class for all console controls.
             </summary>
         </member>
-        <member name="E:ConControls.IConsoleContext.SizeChanged">
+        <member name="P:ConControls.Controls.ConsoleControl.Area">
             <summary>
-            Raised when the console window size changed.
+            The effective total area of the control.
+            This is the area the control effectivly fills in the console screen buffer
+            after applying layout and including borders.
             </summary>
         </member>
-        <member name="E:ConControls.IConsoleContext.BackgroundColorChanged">
+        <member name="P:ConControls.Controls.ConsoleControl.Window">
             <summary>
-            Raised when the background color of the console window changed.
+            The <see cref="T:ConControls.IConsoleWindow"/> that contains this control.
             </summary>
         </member>
-        <member name="E:ConControls.IConsoleContext.Disposed">
+        <member name="P:ConControls.Controls.ConsoleControl.Parent">
             <summary>
-            Raised when this console context is disposed of.
+            The parent <see cref="T:ConControls.Controls.ConsoleControl"/> that contains this control.
+            The parent must be contained by the same <see cref="T:ConControls.IConsoleWindow"/>.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The parent is not part of the same <see cref="T:ConControls.IConsoleWindow"/> or this control is the root element of the window..</exception>
+            <exception cref="T:System.ArgumentNullException">The parent is <code>null</code>.</exception>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Controls">
+            <summary>
+            The collection of <see cref="T:ConControls.Controls.ConsoleControl"/>s contained by this control.
             </summary>
         </member>
-        <member name="P:ConControls.IConsoleContext.Size">
+        <member name="P:ConControls.Controls.ConsoleControl.UpdateInhibited">
+            <summary>
+            Determines if the control can currently be redrawn, depending on calls to <see cref="M:ConControls.Controls.ConsoleControl.BeginUpdate"/> and
+            <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/> to this control or its parents.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.BackgroundColor">
+            <summary>
+            The background color of this control.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.CheckDisposed">
+            <summary>
+            Checks if the <see cref="T:ConControls.IConsoleWindow"/> containing this control has already
+            been disposed of and throws an <see cref="T:System.ObjectDisposedException"/> if it is.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.IConsoleWindow"/> has already been disposed of.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.Draw(ConControls.ConsoleApi.IConsoleGraphics)">
+            <summary>
+            Redraws the control into the console screen buffer.
+            </summary>
+            <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.IConsoleWindow"/> has already been disposed of.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.BeginUpdate">
+            <summary>
+            Inhibits any redrawing etc. until <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/> is called.
+            Use this to avoid multiple redrawings while updating multiple properties.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.EndUpdate">
+            <summary>
+            Finishes an update sequence. Call <see cref="M:ConControls.Controls.ConsoleControl.BeginUpdate"/> before you
+            update multiple properties to avoid multiple redrawings, and call <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/>
+            when you are finished and want to redraw the control.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnParentChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/> has changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnControlAdded(System.Object,ConControls.Controls.ControlCollectionChangedEventArgs)">
+            <summary>
+            Called when a <see cref="T:ConControls.Controls.ConsoleControl"/> has been added to this control.
+            </summary>
+            <param name="sender">The object that raised the event (must be <see cref="P:ConControls.Controls.ConsoleControl.Controls"/>).</param>
+            <param name="e">The <see cref="T:ConControls.Controls.ControlCollectionChangedEventArgs"/> containing the added <see cref="T:ConControls.Controls.ConsoleControl"/>.</param>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnControlRemoved(System.Object,ConControls.Controls.ControlCollectionChangedEventArgs)">
+            <summary>
+            Called when a <see cref="T:ConControls.Controls.ConsoleControl"/> has been removed from this control.
+            </summary>
+            <param name="sender">The object that raised the event (must be <see cref="P:ConControls.Controls.ConsoleControl.Controls"/>).</param>
+            <param name="e">The <see cref="T:ConControls.Controls.ControlCollectionChangedEventArgs"/> containing the removed <see cref="T:ConControls.Controls.ConsoleControl"/>.</param>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnBackgroundColorChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/> of this control has been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnAreaChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Area"/> of this control has been changed.
+            </summary>
+        </member>
+        <member name="T:ConControls.Controls.ConsolePanel">
+            <summary>
+            The base class for all custom console controls.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsolePanel.#ctor(ConControls.IConsoleWindow)">
+            <inheritdoc />
+        </member>
+        <member name="T:ConControls.Controls.ControlCollection">
+            <summary>
+            A collection of (child) <see cref="T:ConControls.Controls.ConsoleControl"/>s.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ControlCollection.ControlAdded">
+            <summary>
+            Raised when a <see cref="T:ConControls.Controls.ConsoleControl"/> is added to this
+            <see cref="T:ConControls.Controls.ControlCollection"/>.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ControlCollection.ControlRemoved">
+            <summary>
+            Raised when a <see cref="T:ConControls.Controls.ConsoleControl"/> is removed from this
+            <see cref="T:ConControls.Controls.ControlCollection"/>.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ControlCollection.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:ConControls.Controls.ConsoleControl"/> at the given <paramref name="index"/>.
+            </summary>
+            <param name="index">The index of the <see cref="T:ConControls.Controls.ConsoleControl"/> in this collection.</param>
+            <returns>The <see cref="T:ConControls.Controls.ConsoleControl"/> at the given <paramref name="index"/>.</returns>
+            <exception cref="T:System.IndexOutOfRangeException">The <paramref name="index"/> was outside this collection.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ControlCollection.Add(ConControls.Controls.ConsoleControl)">
+            <summary>
+            Adds the given <paramref name="control"/> to the collection.
+            </summary>
+            <param name="control">The <see cref="T:ConControls.Controls.ConsoleControl"/> to add.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ControlCollection.Remove(ConControls.Controls.ConsoleControl)">
+            <summary>
+            Removes the given <paramref name="control"/> from the collection.
+            </summary>
+            <param name="control">The <see cref="T:ConControls.Controls.ConsoleControl"/> to remove.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ControlCollection.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.ControlCollection.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="T:ConControls.Controls.ControlCollectionChangedEventArgs">
+            <summary>
+            Arguments for the <see cref="E:ConControls.Controls.ControlCollection.ControlAdded"/> and
+            <see cref="E:ConControls.Controls.ControlCollection.ControlRemoved"/> events.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ControlCollectionChangedEventArgs.Control">
+            <summary>
+            The <see cref="T:ConControls.Controls.ConsoleControl"/> that has been added or removed to
+            the <see cref="T:ConControls.Controls.ControlCollection"/>.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.RootPanel.#ctor(ConControls.IConsoleWindow)">
+            <inheritdoc />
+        </member>
+        <member name="T:ConControls.IConsoleWindow">
+            <summary>
+            Interface to a <see cref="T:ConControls.ConsoleWindow"/>.
+            </summary>
+        </member>
+        <member name="E:ConControls.IConsoleWindow.Disposed">
+            <summary>
+            Raised when this console window is disposed of.
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleWindow.Size">
             <summary>
             Gets or sets the size of the console window.
             The <see cref="P:System.Drawing.Size.Width"/> is the number of characters per row.
             The <see cref="P:System.Drawing.Size.Height"/> is the number of lines.
             </summary>
         </member>
-        <member name="P:ConControls.IConsoleContext.Width">
+        <member name="P:ConControls.IConsoleWindow.Width">
             <summary>
             Gets or sets the width of the console window (in character columns).
             </summary>
         </member>
-        <member name="P:ConControls.IConsoleContext.Height">
+        <member name="P:ConControls.IConsoleWindow.Height">
             <summary>
             Gets or sets the size of the console window (the number of rows).
             </summary>
         </member>
-        <member name="P:ConControls.IConsoleContext.BackgroundColor">
+        <member name="P:ConControls.IConsoleWindow.Panel">
+            <summary>
+            Gets the root panel of this window.
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleWindow.UpdateInhibited">
+            <summary>
+            Determines if the window can currently be redrawn, depending on calls to <see cref="M:ConControls.IConsoleWindow.BeginUpdate"/> and
+            <see cref="M:ConControls.IConsoleWindow.EndUpdate"/>.
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleWindow.BackgroundColor">
             <summary>
             Gets or sets the background color of the console window.
             </summary>
         </member>
-        <member name="P:ConControls.IConsoleContext.Title">
+        <member name="P:ConControls.IConsoleWindow.Title">
             <summary>
             The title of the console window.
             </summary>
         </member>
-        <member name="P:ConControls.IConsoleContext.SynchronizationLock">
+        <member name="P:ConControls.IConsoleWindow.IsDisposed">
+            <summary>
+            The window has been disposed of.
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleWindow.SynchronizationLock">
             <summary>
             An object that can be used to synchronize threads
             that want to execute conosle operations
             </summary>
         </member>
-        <member name="M:ConControls.IConsoleContext.Refresh">
+        <member name="M:ConControls.IConsoleWindow.GetGraphics">
             <summary>
-            Refreshes the console window.
-            This updates window (and buffer) sizes and colors and
-            redraws the embedded console controls.
+            Provides a <see cref="T:ConControls.ConsoleApi.IConsoleGraphics"/> to draw on this console window.
+            </summary>
+            <returns>An <see cref="T:ConControls.ConsoleApi.IConsoleGraphics"/> iterface to draw on this window.</returns>
+        </member>
+        <member name="M:ConControls.IConsoleWindow.Draw">
+            <summary>
+            Redraws the window.
+            </summary>
+        </member>
+        <member name="M:ConControls.IConsoleWindow.BeginUpdate">
+            <summary>
+            Use <see cref="M:ConControls.IConsoleWindow.BeginUpdate"/> to start updating multiple properties without multiple redrawings of the window.
+            Use <see cref="M:ConControls.IConsoleWindow.EndUpdate"/> when finished to finally redraw the window.
+            </summary>
+        </member>
+        <member name="M:ConControls.IConsoleWindow.EndUpdate">
+            <summary>
+            Use <see cref="M:ConControls.IConsoleWindow.BeginUpdate"/> to start updating multiple properties without multiple redrawings of the window.
+            Use <see cref="M:ConControls.IConsoleWindow.EndUpdate"/> when finished to finally redraw the window.
             </summary>
         </member>
         <member name="T:ConControls.Properties.Resources">
@@ -140,20 +357,58 @@
               Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
             </summary>
         </member>
+        <member name="P:ConControls.Properties.Resources.Exception_CannotChangeRootPanelsParent">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The parent of the console window&apos;s root panel cannot be changed! ähnelt.
+            </summary>
+        </member>
         <member name="P:ConControls.Properties.Resources.Exception_CanOnlyUseSingleContext">
             <summary>
-              Sucht eine lokalisierte Zeichenfolge, die There can only be one single console context at a time! Dispose of any existing console context before instantiating a new one. ähnelt.
+              Sucht eine lokalisierte Zeichenfolge, die There can only be one single console window at a time! Dispose of any existing console window before instantiating a new one. ähnelt.
             </summary>
         </member>
-        <member name="P:ConControls.Properties.Resources.Exception_HeightTooSmall">
+        <member name="P:ConControls.Properties.Resources.Exception_DifferentWindow">
             <summary>
-              Sucht eine lokalisierte Zeichenfolge, die The height of this console element must be at least {ß}! ähnelt.
+              Sucht eine lokalisierte Zeichenfolge, die The controls cannot be part of different conosle windows! ähnelt.
             </summary>
         </member>
-        <member name="P:ConControls.Properties.Resources.Exception_WidthTooSmall">
+        <member name="P:ConControls.Properties.Resources.Exception_InvalidConsoleColor">
             <summary>
-              Sucht eine lokalisierte Zeichenfolge, die The width of this console element must be at least {ß}! ähnelt.
+              Sucht eine lokalisierte Zeichenfolge, die The ConsoleColor \&quot;{0}\&quot; is not supported! ähnelt.
             </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_WindowDisposed">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The console window used by this control has already been disposed of! ähnelt.
+            </summary>
+        </member>
+        <member name="T:ConControls.WindowsApi.ConsoleInputHandle">
+            <summary>
+            A console input handle.
+            </summary>
+        </member>
+        <member name="M:ConControls.WindowsApi.ConsoleInputHandle.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.WindowsApi.ConsoleInputHandle.ReleaseHandle">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.WindowsApi.ConsoleInputHandle.IsInvalid">
+            <inheritdoc />
+        </member>
+        <member name="T:ConControls.WindowsApi.ConsoleOutputHandle">
+            <summary>
+            A console output handle.
+            </summary>
+        </member>
+        <member name="M:ConControls.WindowsApi.ConsoleOutputHandle.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.WindowsApi.ConsoleOutputHandle.ReleaseHandle">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.WindowsApi.ConsoleOutputHandle.IsInvalid">
+            <inheritdoc />
         </member>
     </members>
 </doc>

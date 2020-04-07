@@ -5,22 +5,18 @@
  *
  */
 
-using System;
+using System.Drawing;
 using ConControls.WindowsApi.Types;
 
 namespace ConControls.WindowsApi
 {
     interface INativeCalls
     {
-        bool GetConsoleMode(IntPtr consoleInputHandle, out ConsoleInputModes inputMode);
-        bool GetConsoleMode(IntPtr consoleOutputHandle, out ConsoleOutputModes outputMode);
+        CONSOLE_SCREEN_BUFFER_INFOEX GetConsoleScreenBufferInfo(ConsoleOutputHandle consoleOutputHandle);
         string GetConsoleTitle();
-        IntPtr GetStdHandle(int stdHandle);
-        bool ReadConsoleInput(IntPtr consoleInputHandle, INPUT_RECORD[] recordBuffer, int elementsInBuffer, out int elementsRead);
-        bool ReadConsoleOutput(IntPtr consoleOutputHandle, CHAR_INFO[] charInfoBuffer, COORD bufferSize, COORD offset, ref SMALL_RECT useRegion);
-        bool SetConsoleMode(IntPtr consoleInputHandle, ConsoleInputModes inputMode);
-        bool SetConsoleMode(IntPtr consoleOutputHandle, ConsoleOutputModes outputMode);
+        CHAR_INFO[] ReadConsoleOutput(ConsoleOutputHandle consoleOutputHandle, Rectangle region);
+        void SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, COORD size);
         void SetConsoleTitle(string title);
-        bool WriteConsoleOutput(IntPtr consoleOutputHandle, CHAR_INFO[] charInfoBuffer, COORD bufferSize, COORD offset, ref SMALL_RECT useRegion);
+        void WriteConsoleOutput(ConsoleOutputHandle consoleOutputHandle, CHAR_INFO[] buffer, Rectangle region);
     }
 }

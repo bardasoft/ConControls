@@ -117,13 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Exception_CannotChangeRootPanelsParent" xml:space="preserve">
+    <value>The parent of the console window's root panel cannot be changed!</value>
+  </data>
   <data name="Exception_CanOnlyUseSingleContext" xml:space="preserve">
-    <value>There can only be one single console context at a time! Dispose of any existing console context before instantiating a new one.</value>
+    <value>There can only be one single console window at a time! Dispose of any existing console window before instantiating a new one.</value>
   </data>
-  <data name="Exception_HeightTooSmall" xml:space="preserve">
-    <value>The height of this console element must be at least {ß}!</value>
+  <data name="Exception_DifferentWindow" xml:space="preserve">
+    <value>The controls cannot be part of different conosle windows!</value>
   </data>
-  <data name="Exception_WidthTooSmall" xml:space="preserve">
-    <value>The width of this console element must be at least {ß}!</value>
+  <data name="Exception_InvalidConsoleColor" xml:space="preserve">
+    <value>The ConsoleColor \"{0}\" is not supported!</value>
+  </data>
+  <data name="Exception_WindowDisposed" xml:space="preserve">
+    <value>The console window used by this control has already been disposed of!</value>
   </data>
 </root>

@@ -5,6 +5,7 @@
  *
  */
 
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace ConControls.WindowsApi.Types
@@ -14,5 +15,17 @@ namespace ConControls.WindowsApi.Types
     {
         public ushort X;
         public ushort Y;
+
+        public COORD(int x, int y)
+        {
+            X = (ushort)x;
+            Y = (ushort)y;
+        }
+        public COORD(Size size)
+            : this(size.Width, size.Height) { }
+        public COORD(Point size)
+            : this(size.X, size.Y) { }
+        public COORD(Rectangle rect)
+            : this(rect.Width, rect.Height) { }
     }
 }
