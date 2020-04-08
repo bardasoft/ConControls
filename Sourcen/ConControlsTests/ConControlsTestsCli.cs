@@ -30,7 +30,7 @@ namespace ConControlsTests
                 window.Panel.Area = new Rectangle(0, 0, window.Width, window.Height);
                 window.Panel.BackgroundColor = ConsoleColor.Cyan;
                 window.Panel.BorderColor = ConsoleColor.Yellow;
-                window.Panel.BorderStyle = BorderStyle.DoubleLined;
+                window.Panel.BorderStyle = BorderStyle.Bold;
             }
             finally
             {

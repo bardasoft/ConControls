@@ -8,30 +8,26 @@
         /// <summary>
         /// The upper left corner of a double-lined frame.
         /// </summary>
-        public override char UpperLeft => '╔';
+        public override char UpperLeft => (char)0x2554;
         /// <summary>
         /// The upper right corner of a double-lined frame.
         /// </summary>
-        public override char UpperRight => '╗';
+        public override char UpperRight => (char)0x2557;
         /// <summary>
         /// The lower left corner of a double-lined frame.
         /// </summary>
-        public override char LowerLeft => '╚';
+        public override char LowerLeft => (char)0x255A;
         /// <summary>
         /// The lower right corner of a double-lined frame.
         /// </summary>
-        public override char LowerRight => '╝';
+        public override char LowerRight => (char)0x255D;
         /// <summary>
         /// The horizontal line of a double-lined frame.
         /// </summary>
-        public override char Horizontal => '═';
+        public override char Horizontal => (char)0x2550;
         /// <summary>
         /// The vertical line of a double-lined frame.
         /// </summary>
-        public override char Vertical => '║';
-        /// <summary>
-        /// The cross of a double-lined frame.
-        /// </summary>
-        public override char Cross => '╬';
+        public override char Vertical => (char)0x2551;
     }
 }

@@ -7,11 +7,11 @@
     public sealed class ControlCollectionChangedEventArgs
     {
         /// <summary>
-        /// The <see cref="ConsoleControlBase"/> that has been added or removed to
+        /// The <see cref="ConsoleControl"/> that has been added or removed to
         /// the <see cref="ControlCollection"/>.
         /// </summary>
-        public ConsoleControlBase Control { get; }
+        public ConsoleControl Control { get; }
 
-        internal ControlCollectionChangedEventArgs(ConsoleControlBase control) => Control = control;
+        internal ControlCollectionChangedEventArgs(ConsoleControl control) => Control = control;
     }
 }

@@ -7,13 +7,18 @@
     {
         static readonly FrameCharSet singleLined = new SingleLinedFrameCharSet();
         static readonly FrameCharSet doubleLined = new DoubleLinedFrameCharSet();
+        static readonly FrameCharSet boldLined = new BoldinedFrameCharSet();
 
         /// <summary>
         /// Gets the <see cref="FrameCharSet"/> to use to draw a border in the given <paramref name="style"/>.
         /// </summary>
         /// <param name="style">The <see cref="BorderStyle"/> to get the <see cref="FrameCharSet"/> for.</param>
         /// <returns>A <see cref="FrameCharSet"/> that can provide the characters needed to draw the given <see cref="BorderStyle"/>.</returns>
-        public virtual FrameCharSet this[BorderStyle style] =>
-            style == BorderStyle.DoubleLined ? doubleLined : singleLined;
+        public virtual FrameCharSet this[BorderStyle style] => style switch
+        {
+            BorderStyle.DoubleLined => doubleLined,
+            BorderStyle.Bold => boldLined,
+            _ => singleLined
+        };
     }
 }

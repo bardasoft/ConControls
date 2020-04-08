@@ -5,14 +5,7 @@
     /// </summary>
     public abstract class FrameCharSet
     {
-        /*
-        ┌──┬──┐  ╔══╦══╗ ╒══╤══╕ ╓──╥──╖
-        │  │  │  ║  ║  ║ │  │  │ ║  ║  ║
-        ├──┼──┤  ╠══╬══╣ ╞══╪══╡ ╟──╫──╢
-        │  │  │  ║  ║  ║ │  │  │ ║  ║  ║
-        └──┴──┘  ╚══╩══╝ ╘══╧══╛ ╙──╨──╜
-         */
-
+   
         /// <summary>
         /// The upper left corner of a frame.
         /// </summary>
@@ -37,9 +30,5 @@
         /// The vertical line of a frame.
         /// </summary>
         public abstract char Vertical { get; }
-        /// <summary>
-        /// The cross of a frame.
-        /// </summary>
-        public abstract char Cross { get; }
     }
 }

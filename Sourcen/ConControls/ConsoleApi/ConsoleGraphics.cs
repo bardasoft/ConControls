@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using ConControls.Controls;
 using ConControls.WindowsApi;
 using ConControls.WindowsApi.Types;
@@ -22,13 +23,13 @@ namespace ConControls.ConsoleApi
             this.api = api;
             this.size = size;
             this.frameCharSets = frameCharSets;
-            Debug.WriteLine($"ConsoleGraphics: Initializing buffer with size {this.size}.");
+            Log($"Initializing buffer with size {this.size}.");
             buffer = api.ReadConsoleOutput(consoleOutputHandle, new Rectangle(Point.Empty, size));
         }
         /// <inheritdoc />
         public void DrawBackground(ConsoleColor color, Rectangle area)
         {
-            Debug.WriteLine($"ConsoleGraphics.DrawBackground: drawing background {area} with {color}.");
+            Log($"drawing background {area} with {color}.");
             var char_info = new CHAR_INFO(default, color.ToBackgroundColor());
             var indices = from x in Enumerable.Range(area.Left, area.Width)
                           from y in Enumerable.Range(area.Top, area.Height)
@@ -39,7 +40,7 @@ namespace ConControls.ConsoleApi
         /// <inheritdoc />
         public void DrawBorder(ConsoleColor background, ConsoleColor foreground, BorderStyle style, Rectangle area)
         {
-            Debug.WriteLine($"ConsoleGraphics.DrawBorder: drawing border {style} around {area} with {foreground} on {background}.");
+            Log($"drawing border {style} around {area} with {foreground} on {background}.");
             if (style == BorderStyle.None) return;
 
             var charSet = frameCharSets[style];
@@ -65,10 +66,16 @@ namespace ConControls.ConsoleApi
         /// <inheritdoc />
         public void Flush()
         {
-            Debug.WriteLine($"ConsoleGraphics.Flush: flushing buffer ({size}).");
+            Log($"flushing buffer ({size}).");
             api.WriteConsoleOutput(consoleOutputHandle, buffer, new Rectangle(Point.Empty, size));
         }
 
         int GetIndex(int x, int y) => y * size.Width + x;
+        [Conditional("DEBUG")]
+        static void Log(string msg, [CallerMemberName] string method = "?")
+        {
+            Debug.WriteLine($"{nameof(ConsoleGraphics)}.{method}: {msg}");
+        }
+
     }
 }

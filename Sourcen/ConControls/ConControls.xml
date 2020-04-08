@@ -4,6 +4,31 @@
         <name>ConControls</name>
     </assembly>
     <members>
+        <member name="T:ConControls.ConsoleApi.CodePageId">
+            <summary>
+            Windows API code page identifier.
+            </summary>
+        </member>
+        <member name="F:ConControls.ConsoleApi.CodePageId.IBM037">
+            <summary>
+            IBM EBCDIC US-Canada
+            </summary>
+        </member>
+        <member name="F:ConControls.ConsoleApi.CodePageId.IBM437">
+            <summary>
+            OEM United States
+            </summary>
+        </member>
+        <member name="F:ConControls.ConsoleApi.CodePageId.DOS720">
+            <summary>
+            Arabic (Transparent ASMO); Arabic (DOS)
+            </summary>
+        </member>
+        <member name="F:ConControls.ConsoleApi.CodePageId.IBM850">
+            <summary>
+            	OEM Multilingual Latin 1; Western European (DOS)
+            </summary>
+        </member>
         <member name="M:ConControls.ConsoleApi.ConsoleGraphics.DrawBackground(System.ConsoleColor,System.Drawing.Rectangle)">
             <inheritdoc />
         </member>
@@ -113,10 +138,45 @@
         <member name="M:ConControls.ConsoleWindow.EndUpdate">
             <inheritdoc />
         </member>
+        <member name="T:ConControls.Controls.BoldinedFrameCharSet">
+            <summary>
+            A <see cref="T:ConControls.Controls.FrameCharSet"/> for bold-lined frames.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.BoldinedFrameCharSet.UpperLeft">
+            <summary>
+            The upper left corner of a bold-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.BoldinedFrameCharSet.UpperRight">
+            <summary>
+            The upper right corner of a bold-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.BoldinedFrameCharSet.LowerLeft">
+            <summary>
+            The lower left corner of a bold-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.BoldinedFrameCharSet.LowerRight">
+            <summary>
+            The lower right corner of a bold-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.BoldinedFrameCharSet.Horizontal">
+            <summary>
+            The horizontal line of a bold-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.BoldinedFrameCharSet.Vertical">
+            <summary>
+            The vertical line of a bold-lined frame.
+            </summary>
+        </member>
         <member name="T:ConControls.Controls.BorderStyle">
             <summary>
             Border styles for <see cref="T:ConControls.IConsoleWindow"/> instances and
-            <see cref="T:ConControls.Controls.ConsoleControlBase"/>s.
+            <see cref="T:ConControls.Controls.ConsoleControl"/>s.
             </summary>
         </member>
         <member name="F:ConControls.Controls.BorderStyle.None">
@@ -134,196 +194,204 @@
             The control has a double-lined border.
             </summary>
         </member>
-        <member name="T:ConControls.Controls.ConsoleControl">
+        <member name="F:ConControls.Controls.BorderStyle.Bold">
             <summary>
-            The base class for all custom console controls.
+            The control has a bold-lined border.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.#ctor(ConControls.IConsoleWindow)">
-            <inheritdoc />
-        </member>
-        <member name="T:ConControls.Controls.ConsoleControlBase">
+        <member name="T:ConControls.Controls.ConsoleControl">
             <summary>
             Base class for all console controls.
             </summary>
         </member>
-        <member name="E:ConControls.Controls.ConsoleControlBase.AreaChanged">
+        <member name="E:ConControls.Controls.ConsoleControl.AreaChanged">
             <summary>
-            The <see cref="P:ConControls.Controls.ConsoleControlBase.Area"/> of the control has been changed.
+            The <see cref="P:ConControls.Controls.ConsoleControl.Area"/> of the control has been changed.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.Area">
+        <member name="P:ConControls.Controls.ConsoleControl.Name">
+            <summary>
+            The name of this control (merely for debug identification).
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Area">
             <summary>
             The effective total area of the control.
             This is the area the control effectivly fills in the console screen buffer
             after applying layout and including borders.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.Window">
+        <member name="P:ConControls.Controls.ConsoleControl.Window">
             <summary>
             The <see cref="T:ConControls.IConsoleWindow"/> that contains this control.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.Parent">
+        <member name="P:ConControls.Controls.ConsoleControl.Parent">
             <summary>
-            The parent <see cref="T:ConControls.Controls.ConsoleControlBase"/> that contains this control.
+            The parent <see cref="T:ConControls.Controls.ConsoleControl"/> that contains this control.
             The parent must be contained by the same <see cref="T:ConControls.IConsoleWindow"/>.
             </summary>
             <exception cref="T:System.InvalidOperationException">The parent is not part of the same <see cref="T:ConControls.IConsoleWindow"/> or this control is the root element of the window..</exception>
             <exception cref="T:System.ArgumentNullException">The parent is <code>null</code>.</exception>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.Controls">
+        <member name="P:ConControls.Controls.ConsoleControl.Controls">
             <summary>
-            The collection of <see cref="T:ConControls.Controls.ConsoleControlBase"/>s contained by this control.
+            The collection of <see cref="T:ConControls.Controls.ConsoleControl"/>s contained by this control.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.DrawingInhibited">
+        <member name="P:ConControls.Controls.ConsoleControl.DrawingInhibited">
             <summary>
-            Determines if the control can currently be redrawn, depending on calls to <see cref="M:ConControls.Controls.ConsoleControlBase.BeginUpdate"/> and
-            <see cref="M:ConControls.Controls.ConsoleControlBase.EndUpdate"/> to this control or its parents.
+            Determines if the control can currently be redrawn, depending on calls to <see cref="M:ConControls.Controls.ConsoleControl.BeginUpdate"/> and
+            <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/> to this control or its parents.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.BorderStyle">
+        <member name="P:ConControls.Controls.ConsoleControl.BorderStyle">
             <summary>
-            The <see cref="P:ConControls.Controls.ConsoleControlBase.BorderStyle"/> of this control.
-            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControlBase.Parent"/>'s border style will be used.
+            The <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control.
+            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s border style will be used.
             If this is <code>null</code>, too, no border will be drawn.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.BorderColor">
+        <member name="P:ConControls.Controls.ConsoleControl.BorderColor">
             <summary>
             The color of this control's border.
-            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControlBase.Parent"/>'s border color will be used.
+            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s border color will be used.
             If this is <code>null</code>, too, the default (<see cref="F:System.ConsoleColor.Yellow"/>) will be used.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.BackgroundColor">
+        <member name="P:ConControls.Controls.ConsoleControl.BackgroundColor">
             <summary>
             The background color of this control.
-            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControlBase.Parent"/>'s background color will be used.
+            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s background color will be used.
             If this is <code>null</code>, too, the default (<see cref="F:System.ConsoleColor.Black"/> will be used.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.CheckDisposed">
+        <member name="M:ConControls.Controls.ConsoleControl.#ctor(ConControls.IConsoleWindow)">
+            <summary>
+            Initializes an instance of <see cref="T:ConControls.Controls.ConsoleControl"/>.
+            </summary>
+            <param name="window"></param>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.CheckDisposed">
             <summary>
             Checks if the <see cref="T:ConControls.IConsoleWindow"/> containing this control has already
             been disposed of and throws an <see cref="T:System.ObjectDisposedException"/> if it is.
             </summary>
             <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.IConsoleWindow"/> has already been disposed of.</exception>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.Draw(ConControls.ConsoleApi.IConsoleGraphics)">
+        <member name="M:ConControls.Controls.ConsoleControl.Draw(ConControls.ConsoleApi.IConsoleGraphics)">
             <summary>
             Draws the control onto the console screen buffer.
             When overwriting this method, make sure to use the <see cref="P:ConControls.IConsoleWindow.SynchronizationLock"/>
-            to synchronize threads and to call <see cref="M:ConControls.Controls.ConsoleControlBase.CheckDisposed"/> to check if the window has not yet
+            to synchronize threads and to call <see cref="M:ConControls.Controls.ConsoleControl.CheckDisposed"/> to check if the window has not yet
             been disposed of.
             </summary>
             <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.IConsoleWindow"/> has already been disposed of.</exception>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.BeginUpdate">
+        <member name="M:ConControls.Controls.ConsoleControl.BeginUpdate">
             <summary>
-            Inhibits any redrawing etc. until <see cref="M:ConControls.Controls.ConsoleControlBase.EndUpdate"/> is called.
+            Inhibits any redrawing etc. until <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/> is called.
             Use this to avoid multiple redrawings while updating multiple properties.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.EndUpdate">
+        <member name="M:ConControls.Controls.ConsoleControl.EndUpdate">
             <summary>
-            Finishes an update sequence. Call <see cref="M:ConControls.Controls.ConsoleControlBase.BeginUpdate"/> before you
-            update multiple properties to avoid multiple redrawings, and call <see cref="M:ConControls.Controls.ConsoleControlBase.EndUpdate"/>
+            Finishes an update sequence. Call <see cref="M:ConControls.Controls.ConsoleControl.BeginUpdate"/> before you
+            update multiple properties to avoid multiple redrawings, and call <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/>
             when you are finished and want to redraw the control.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.OnParentChanged">
+        <member name="M:ConControls.Controls.ConsoleControl.OnParentChanged">
             <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControlBase.Parent"/> has changed.
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/> has changed.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.OnControlAdded(System.Object,ConControls.Controls.ControlCollectionChangedEventArgs)">
+        <member name="M:ConControls.Controls.ConsoleControl.OnControlAdded(System.Object,ConControls.Controls.ControlCollectionChangedEventArgs)">
             <summary>
-            Called when a <see cref="T:ConControls.Controls.ConsoleControlBase"/> has been added to this control.
+            Called when a <see cref="T:ConControls.Controls.ConsoleControl"/> has been added to this control.
             </summary>
-            <param name="sender">The object that raised the event (must be <see cref="P:ConControls.Controls.ConsoleControlBase.Controls"/>).</param>
-            <param name="e">The <see cref="T:ConControls.Controls.ControlCollectionChangedEventArgs"/> containing the added <see cref="T:ConControls.Controls.ConsoleControlBase"/>.</param>
+            <param name="sender">The object that raised the event (must be <see cref="P:ConControls.Controls.ConsoleControl.Controls"/>).</param>
+            <param name="e">The <see cref="T:ConControls.Controls.ControlCollectionChangedEventArgs"/> containing the added <see cref="T:ConControls.Controls.ConsoleControl"/>.</param>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.OnControlRemoved(System.Object,ConControls.Controls.ControlCollectionChangedEventArgs)">
+        <member name="M:ConControls.Controls.ConsoleControl.OnControlRemoved(System.Object,ConControls.Controls.ControlCollectionChangedEventArgs)">
             <summary>
-            Called when a <see cref="T:ConControls.Controls.ConsoleControlBase"/> has been removed from this control.
+            Called when a <see cref="T:ConControls.Controls.ConsoleControl"/> has been removed from this control.
             </summary>
-            <param name="sender">The object that raised the event (must be <see cref="P:ConControls.Controls.ConsoleControlBase.Controls"/>).</param>
-            <param name="e">The <see cref="T:ConControls.Controls.ControlCollectionChangedEventArgs"/> containing the removed <see cref="T:ConControls.Controls.ConsoleControlBase"/>.</param>
+            <param name="sender">The object that raised the event (must be <see cref="P:ConControls.Controls.ConsoleControl.Controls"/>).</param>
+            <param name="e">The <see cref="T:ConControls.Controls.ControlCollectionChangedEventArgs"/> containing the removed <see cref="T:ConControls.Controls.ConsoleControl"/>.</param>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.OnBackgroundColorChanged">
+        <member name="M:ConControls.Controls.ConsoleControl.OnBackgroundColorChanged">
             <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControlBase.BackgroundColor"/> of this control has been changed.
-            </summary>
-        </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.OnAreaChanged">
-            <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControlBase.Area"/> of this control has been changed.
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/> of this control has been changed.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.OnBorderStyleChanged">
+        <member name="M:ConControls.Controls.ConsoleControl.OnAreaChanged">
             <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControlBase.BorderStyle"/> of this control has been changed.
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Area"/> of this control has been changed.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControlBase.OnBorderColorChanged">
+        <member name="M:ConControls.Controls.ConsoleControl.OnBorderStyleChanged">
             <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControlBase.BorderColor"/> of this control has been changed.
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control has been changed.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.EffectiveBackgroundColor">
+        <member name="M:ConControls.Controls.ConsoleControl.OnBorderColorChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/> of this control has been changed.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBackgroundColor">
             <summary>
             Gets the effective background color (applying transparency).
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.EffectiveBorderColor">
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBorderColor">
             <summary>
             Gets the effective border color (applying transparency).
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControlBase.EffectiveBorderStyle">
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBorderStyle">
             <summary>
             Gets the effective border style (applying transparency).
             </summary>
         </member>
         <member name="T:ConControls.Controls.ControlCollection">
             <summary>
-            A collection of (child) <see cref="T:ConControls.Controls.ConsoleControlBase"/>s.
+            A collection of (child) <see cref="T:ConControls.Controls.ConsoleControl"/>s.
             </summary>
         </member>
         <member name="E:ConControls.Controls.ControlCollection.ControlAdded">
             <summary>
-            Raised when a <see cref="T:ConControls.Controls.ConsoleControlBase"/> is added to this
+            Raised when a <see cref="T:ConControls.Controls.ConsoleControl"/> is added to this
             <see cref="T:ConControls.Controls.ControlCollection"/>.
             </summary>
         </member>
         <member name="E:ConControls.Controls.ControlCollection.ControlRemoved">
             <summary>
-            Raised when a <see cref="T:ConControls.Controls.ConsoleControlBase"/> is removed from this
+            Raised when a <see cref="T:ConControls.Controls.ConsoleControl"/> is removed from this
             <see cref="T:ConControls.Controls.ControlCollection"/>.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ControlCollection.Item(System.Int32)">
             <summary>
-            Gets the <see cref="T:ConControls.Controls.ConsoleControlBase"/> at the given <paramref name="index"/>.
+            Gets the <see cref="T:ConControls.Controls.ConsoleControl"/> at the given <paramref name="index"/>.
             </summary>
-            <param name="index">The index of the <see cref="T:ConControls.Controls.ConsoleControlBase"/> in this collection.</param>
-            <returns>The <see cref="T:ConControls.Controls.ConsoleControlBase"/> at the given <paramref name="index"/>.</returns>
+            <param name="index">The index of the <see cref="T:ConControls.Controls.ConsoleControl"/> in this collection.</param>
+            <returns>The <see cref="T:ConControls.Controls.ConsoleControl"/> at the given <paramref name="index"/>.</returns>
             <exception cref="T:System.IndexOutOfRangeException">The <paramref name="index"/> was outside this collection.</exception>
         </member>
-        <member name="M:ConControls.Controls.ControlCollection.Add(ConControls.Controls.ConsoleControlBase)">
+        <member name="M:ConControls.Controls.ControlCollection.Add(ConControls.Controls.ConsoleControl)">
             <summary>
             Adds the given <paramref name="control"/> to the collection.
             </summary>
-            <param name="control">The <see cref="T:ConControls.Controls.ConsoleControlBase"/> to add.</param>
+            <param name="control">The <see cref="T:ConControls.Controls.ConsoleControl"/> to add.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
         </member>
-        <member name="M:ConControls.Controls.ControlCollection.Remove(ConControls.Controls.ConsoleControlBase)">
+        <member name="M:ConControls.Controls.ControlCollection.Remove(ConControls.Controls.ConsoleControl)">
             <summary>
             Removes the given <paramref name="control"/> from the collection.
             </summary>
-            <param name="control">The <see cref="T:ConControls.Controls.ConsoleControlBase"/> to remove.</param>
+            <param name="control">The <see cref="T:ConControls.Controls.ConsoleControl"/> to remove.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
         </member>
         <member name="M:ConControls.Controls.ControlCollection.GetEnumerator">
@@ -340,7 +408,7 @@
         </member>
         <member name="P:ConControls.Controls.ControlCollectionChangedEventArgs.Control">
             <summary>
-            The <see cref="T:ConControls.Controls.ConsoleControlBase"/> that has been added or removed to
+            The <see cref="T:ConControls.Controls.ConsoleControl"/> that has been added or removed to
             the <see cref="T:ConControls.Controls.ControlCollection"/>.
             </summary>
         </member>
@@ -379,11 +447,6 @@
             The vertical line of a double-lined frame.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.DoubleLinedFrameCharSet.Cross">
-            <summary>
-            The cross of a double-lined frame.
-            </summary>
-        </member>
         <member name="T:ConControls.Controls.FrameCharSet">
             <summary>
             Provides characters for drawing frames.
@@ -417,11 +480,6 @@
         <member name="P:ConControls.Controls.FrameCharSet.Vertical">
             <summary>
             The vertical line of a frame.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.FrameCharSet.Cross">
-            <summary>
-            The cross of a frame.
             </summary>
         </member>
         <member name="T:ConControls.Controls.FrameCharSets">
@@ -472,11 +530,6 @@
         <member name="P:ConControls.Controls.SingleLinedFrameCharSet.Vertical">
             <summary>
             The vertical line of a single-lined frame.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.SingleLinedFrameCharSet.Cross">
-            <summary>
-            The cross of a single-lined frame.
             </summary>
         </member>
         <member name="T:ConControls.IConsoleWindow">

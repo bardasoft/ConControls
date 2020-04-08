@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using ConControls.ConsoleApi;
 using ConControls.Controls;
@@ -99,7 +100,7 @@ namespace ConControls
         }
 
         /// <inheritdoc />
-        public ConsoleControlBase Panel { get; }
+        public ConsoleControl Panel { get; }
 
         /// <inheritdoc />
         public bool DrawingInhibited => inhibitDrawing > 0;
@@ -188,21 +189,21 @@ namespace ConControls
         /// <inheritdoc />
         public void Draw()
         {
-            Debug.WriteLine("ConsoleWindow.Draw: called.");
+            Log("called.");
             lock (SynchronizationLock)
             {
                 if (DrawingInhibited)
                 {
-                    Debug.WriteLine("ConsoleWindow.Draw: drawing inhibited.");
+                    Log("drawing inhibited.");
                     return;
                 }
                 var graphics = GetGraphics();
                 var rect = new Rectangle(0, 0, Size.Width, Size.Height);
-                Debug.WriteLine($"ConsoleWindow.Draw: drawing background at {rect}.");
+                Log($"drawing background at {rect}.");
                 graphics.DrawBackground(backgroundColor, rect);
-                Debug.WriteLine("ConsoleWindow.Draw: drawing root panel.");
+                Log("drawing root panel.");
                 Panel.Draw(graphics);
-                Debug.WriteLine("ConsoleWindow.Draw: flushing.");
+                Log("flushing.");
                 graphics.Flush();
             }
         }
@@ -240,10 +241,9 @@ namespace ConControls
                 try
                 {
                     var info = api.GetConsoleScreenBufferInfo(consoleOutputHandle);
-                    Debug.WriteLine(
-                        $"ConsoleWindow.AdjustWindowAndBufferSize: Read window props ({info.Window.Left}, {info.Window.Top}, {info.Window.Right}, {info.Window.Bottom}).");
+                    Log($"Read window props ({info.Window.Left}, {info.Window.Top}, {info.Window.Right}, {info.Window.Bottom}).");
                     var winSize = new Size(info.Window.Right - info.Window.Left + 1, info.Window.Bottom - info.Window.Top + 1);
-                    Debug.WriteLine($"ConsoleWindow.AdjustWindowAndBufferSize: Calculated window size {winSize}).");
+                    Log($"Calculated window size {winSize}).");
                     api.SetConsoleScreenBufferSize(consoleOutputHandle, new COORD(winSize));
                     Size = winSize;
                     var panelBounds = Panel.Area;
@@ -260,7 +260,7 @@ namespace ConControls
                     if (bottom >= Size.Height)
                         bottom = Size.Height - 1;
                     Rectangle panelRect = new Rectangle(left, top, right - left, bottom - top);
-                    Debug.WriteLine($"ConsoleWindow.AdjustWindowAndBufferSize: Setting root panel to area {panelRect}.");
+                    Log($"Setting root panel to area {panelRect}.");
                     Panel.Area = panelRect;
                 }
                 finally
@@ -269,5 +269,12 @@ namespace ConControls
                 }
             }
         }
+
+        [Conditional("DEBUG")]
+        static void Log(string msg, [CallerMemberName] string method = "?")
+        {
+            Debug.WriteLine($"{nameof(ConsoleWindow)}.{method}: {msg}");
+        }
+
     }
 }
