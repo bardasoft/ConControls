@@ -1,0 +1,38 @@
+﻿using System.Diagnostics.CodeAnalysis;
+using ConControls.Controls;
+using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace ConControlsTests.Controls.FrameCharSets
+{
+    [TestClass]
+    [ExcludeFromCodeCoverage]
+
+    public class FrameCharSetsTests
+    {
+        [TestMethod]
+        public void FrameCharSetsIndexer_SingleLinedStyle_SingleLinedSet()
+        {
+            var sut = new ConControls.Controls.FrameCharSets();
+            sut[BorderStyle.SingleLined].Should().BeOfType<SingleLinedFrameCharSet>();
+        }
+        [TestMethod]
+        public void FrameCharSetsIndexer_DoubleLinedStyle_DoubleLinedSet()
+        {
+            var sut = new ConControls.Controls.FrameCharSets();
+            sut[BorderStyle.DoubleLined].Should().BeOfType<DoubleLinedFrameCharSet>();
+        }
+        [TestMethod]
+        public void FrameCharSetsIndexer_BoldLinedStyle_BoldLinedSet()
+        {
+            var sut = new ConControls.Controls.FrameCharSets();
+            sut[BorderStyle.Bold].Should().BeOfType<BoldinedFrameCharSet>();
+        }
+        [TestMethod]
+        public void FrameCharSetsIndexer_UndefinedStyle_SingleLinedSet()
+        {
+            var sut = new ConControls.Controls.FrameCharSets();
+            sut[(BorderStyle)0x7FFFFFF].Should().BeOfType<SingleLinedFrameCharSet>();
+        }
+    }
+}

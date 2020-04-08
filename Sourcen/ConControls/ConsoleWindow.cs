@@ -155,7 +155,7 @@ namespace ConControls
                                     ConsoleInputModes.EnableMouseInput |
                                     ConsoleInputModes.EnableExtendedFlags);
             this.api.SetConsoleMode(consoleOutputHandle, ConsoleOutputModes.None);
-            Panel = new RootPanel(this);
+            Panel = new ConsoleControl(this);
             Panel.AreaChanged += (sender, e) => AdjustWindowAndBufferSize();
             AdjustWindowAndBufferSize();
         }

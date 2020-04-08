@@ -1,9 +1,12 @@
-﻿namespace ConControls.Controls 
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ConControls.Controls 
 {
     /// <summary>
     /// Arguments for the <see cref="ControlCollection.ControlAdded"/> and
     /// <see cref="ControlCollection.ControlRemoved"/> events.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public sealed class ControlCollectionChangedEventArgs
     {
         /// <summary>

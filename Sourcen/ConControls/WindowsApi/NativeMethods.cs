@@ -26,8 +26,6 @@ namespace ConControls.WindowsApi
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern bool GetConsoleMode(IntPtr consoleOutputHandle, out ConsoleOutputModes inputMode);
         [DllImport("kernel32.dll", SetLastError = true)]
-        internal static extern CodePageId GetConsoleOutputCP();
-        [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern bool GetConsoleScreenBufferInfoEx(ConsoleOutputHandle consoleOutputHandle, ref CONSOLE_SCREEN_BUFFER_INFOEX info);
         [DllImport("kernel32.dll", EntryPoint = "GetConsoleTitle", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern int GetConsoleTitle(
@@ -54,8 +52,6 @@ namespace ConControls.WindowsApi
         internal static extern bool SetConsoleMode(ConsoleInputHandle consoleInputHandle, ConsoleInputModes inputMode);
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern bool SetConsoleMode(ConsoleOutputHandle consoleOutputHandle, ConsoleOutputModes outputMode);
-        [DllImport("kernel32.dll", SetLastError = true)]
-        internal static extern bool SetConsoleOutputCP(CodePageId codePageId);
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern bool SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, COORD size);
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]

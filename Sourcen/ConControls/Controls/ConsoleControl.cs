@@ -10,7 +10,7 @@ namespace ConControls.Controls
     /// <summary>
     /// Base class for all console controls.
     /// </summary>
-    public abstract class ConsoleControl
+    public class ConsoleControl
     {
         Rectangle effectiveBounds;
         ConsoleControl? parent;
@@ -150,7 +150,7 @@ namespace ConControls.Controls
         /// Initializes an instance of <see cref="ConsoleControl"/>.
         /// </summary>
         /// <param name="window"></param>
-        protected ConsoleControl(IConsoleWindow window)
+        public ConsoleControl(IConsoleWindow window)
         {
             Window = window ?? throw new ArgumentNullException(nameof(window));
             name = GetType().Name;

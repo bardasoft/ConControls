@@ -4,31 +4,6 @@
         <name>ConControls</name>
     </assembly>
     <members>
-        <member name="T:ConControls.ConsoleApi.CodePageId">
-            <summary>
-            Windows API code page identifier.
-            </summary>
-        </member>
-        <member name="F:ConControls.ConsoleApi.CodePageId.IBM037">
-            <summary>
-            IBM EBCDIC US-Canada
-            </summary>
-        </member>
-        <member name="F:ConControls.ConsoleApi.CodePageId.IBM437">
-            <summary>
-            OEM United States
-            </summary>
-        </member>
-        <member name="F:ConControls.ConsoleApi.CodePageId.DOS720">
-            <summary>
-            Arabic (Transparent ASMO); Arabic (DOS)
-            </summary>
-        </member>
-        <member name="F:ConControls.ConsoleApi.CodePageId.IBM850">
-            <summary>
-            	OEM Multilingual Latin 1; Western European (DOS)
-            </summary>
-        </member>
         <member name="M:ConControls.ConsoleApi.ConsoleGraphics.DrawBackground(System.ConsoleColor,System.Drawing.Rectangle)">
             <inheritdoc />
         </member>
@@ -493,9 +468,6 @@
             </summary>
             <param name="style">The <see cref="T:ConControls.Controls.BorderStyle"/> to get the <see cref="T:ConControls.Controls.FrameCharSet"/> for.</param>
             <returns>A <see cref="T:ConControls.Controls.FrameCharSet"/> that can provide the characters needed to draw the given <see cref="T:ConControls.Controls.BorderStyle"/>.</returns>
-        </member>
-        <member name="M:ConControls.Controls.RootPanel.#ctor(ConControls.IConsoleWindow)">
-            <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.SingleLinedFrameCharSet">
             <summary>

@@ -22,7 +22,6 @@ namespace ConControls.WindowsApi
             if (!NativeMethods.SetConsoleCtrlHandler(handler, true))
                 throw Exceptions.Win32();
         }
-        public CodePageId GetConsoleOutputCodePage() => NativeMethods.GetConsoleOutputCP();
         public CONSOLE_SCREEN_BUFFER_INFOEX GetConsoleScreenBufferInfo(ConsoleOutputHandle consoleOutputHandle)
         {
             CONSOLE_SCREEN_BUFFER_INFOEX info = new CONSOLE_SCREEN_BUFFER_INFOEX
@@ -61,11 +60,6 @@ namespace ConControls.WindowsApi
         public void SetConsoleMode(ConsoleOutputHandle consoleOutputHandle, ConsoleOutputModes outputMode)
         {
             if (!NativeMethods.SetConsoleMode(consoleOutputHandle, outputMode))
-                throw Exceptions.Win32();
-        }
-        public void SetConsoleOutputCodePage(CodePageId codePageId)
-        {
-            if (!NativeMethods.SetConsoleOutputCP(codePageId))
                 throw Exceptions.Win32();
         }
         public void SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, COORD size)

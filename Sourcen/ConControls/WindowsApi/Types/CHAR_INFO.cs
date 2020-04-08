@@ -7,6 +7,7 @@ namespace ConControls.WindowsApi.Types
     [StructLayout(LayoutKind.Sequential)]
     struct CHAR_INFO
     {
+        [MarshalAs(UnmanagedType.U2)]
         public char Char;
         public ConCharAttributes Attributes;
 
