@@ -5,10 +5,12 @@
  *
  */
 
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 namespace ConControls.WindowsApi.Types
 {
+    [ExcludeFromCodeCoverage]
     [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
     internal struct KEY_EVENT_RECORD
     {

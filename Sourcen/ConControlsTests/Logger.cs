@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using ConControls;
 
-namespace ConControlsTests {
+namespace ConControlsTests 
+{
+    [ExcludeFromCodeCoverage]
     public sealed class Logger : TraceListener
     {
         readonly string file;

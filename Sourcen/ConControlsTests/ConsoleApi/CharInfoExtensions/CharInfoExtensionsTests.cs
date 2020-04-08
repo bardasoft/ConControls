@@ -69,19 +69,33 @@ namespace ConControlsTests.ConsoleApi.CharInfoExtensions
                                .BeEquivalentTo(255);
         }
         [TestMethod]
-        public void SetBackgroundColor()
+        public void SetBackground()
         {
-            Assert.Inconclusive();
+            const ConCharAttributes attribute = (ConCharAttributes)0xCCCC;
+            const ConCharAttributes expected = (ConCharAttributes)0xCC0C | ConCharAttributes.BackGroundGreen | ConCharAttributes.BackGroundIntensity;
+            CHAR_INFO source = new CHAR_INFO('x', attribute);
+            var result = source.SetBackground(ConsoleColor.Green);
+            result.Char.Should().Be('x');
+            result.Attributes.Should().Be(expected);
         }
         [TestMethod]
-        public void SetforegroundColor()
+        public void Setforeground()
         {
-            Assert.Inconclusive();
+            const ConCharAttributes attribute = (ConCharAttributes)0xCCCC;
+            const ConCharAttributes expected = (ConCharAttributes)0xCCC0 | ConCharAttributes.ForeGroundGreen | ConCharAttributes.ForeGroundIntensity;
+            CHAR_INFO source = new CHAR_INFO('x', attribute);
+            var result = source.SetForeground(ConsoleColor.Green);
+            result.Char.Should().Be('x');
+            result.Attributes.Should().Be(expected);
         }
         [TestMethod]
         public void SetChar()
         {
-            Assert.Inconclusive();
+            const ConCharAttributes attribute = (ConCharAttributes)0xCCCC;
+            CHAR_INFO source = new CHAR_INFO(' ', attribute);
+            var result = source.SetChar('x');
+            result.Char.Should().Be('x');
+            result.Attributes.Should().Be(attribute);
         }
     }
 }

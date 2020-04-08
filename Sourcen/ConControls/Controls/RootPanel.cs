@@ -1,6 +1,6 @@
 ﻿namespace ConControls.Controls
 {
-    sealed class RootPanel : ConsoleControl
+    sealed class RootPanel : ConsoleControlBase
     {
         /// <inheritdoc />
         internal RootPanel(IConsoleWindow window)

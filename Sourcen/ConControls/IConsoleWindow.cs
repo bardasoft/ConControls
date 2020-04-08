@@ -38,7 +38,7 @@ namespace ConControls
         /// <summary>
         /// Gets the root panel of this window.
         /// </summary>
-        ConsoleControl Panel { get; }
+        ConsoleControlBase Panel { get; }
 
         /// <summary>
         /// Determines if the window can currently be redrawn, depending on calls to <see cref="BeginUpdate"/> and

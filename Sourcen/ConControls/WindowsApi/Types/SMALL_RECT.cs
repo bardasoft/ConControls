@@ -1,8 +1,10 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace ConControls.WindowsApi.Types
 {
+    [ExcludeFromCodeCoverage]
     [StructLayout(LayoutKind.Sequential)]
     struct SMALL_RECT
     {

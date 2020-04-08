@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using ConControls.Properties;
 
 namespace ConControls
 {
+    [ExcludeFromCodeCoverage]
     static class Exceptions
     {
         internal static InvalidOperationException CanOnlyUseSingleContext() => new InvalidOperationException(Resources.Exception_CanOnlyUseSingleContext);

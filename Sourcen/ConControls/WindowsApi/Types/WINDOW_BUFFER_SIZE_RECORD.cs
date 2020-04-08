@@ -5,8 +5,11 @@
  *
  */
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace ConControls.WindowsApi.Types
 {
+    [ExcludeFromCodeCoverage]
     struct WINDOW_BUFFER_SIZE_RECORD
     {
         public COORD Size;

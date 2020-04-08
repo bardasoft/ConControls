@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Border styles for <see cref="IConsoleWindow"/> instances and
-    /// <see cref="ConsoleControl"/>s.
+    /// <see cref="ConsoleControlBase"/>s.
     /// </summary>
     public enum BorderStyle
     {

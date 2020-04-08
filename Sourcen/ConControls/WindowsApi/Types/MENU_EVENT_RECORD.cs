@@ -5,8 +5,11 @@
  *
  */
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace ConControls.WindowsApi.Types
 {
+    [ExcludeFromCodeCoverage]
     struct MENU_EVENT_RECORD
     {
         public uint CommandId;

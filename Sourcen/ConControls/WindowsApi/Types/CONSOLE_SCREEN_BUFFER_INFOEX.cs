@@ -1,7 +1,9 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 
 namespace ConControls.WindowsApi.Types
 {
+    [ExcludeFromCodeCoverage]
     [StructLayout(LayoutKind.Sequential)]
     struct CONSOLE_SCREEN_BUFFER_INFOEX
     { 

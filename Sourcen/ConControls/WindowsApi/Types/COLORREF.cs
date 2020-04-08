@@ -1,7 +1,9 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 
 namespace ConControls.WindowsApi.Types
 {
+    [ExcludeFromCodeCoverage]
     struct COLORREF
     {
         internal uint color;

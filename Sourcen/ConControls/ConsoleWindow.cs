@@ -99,7 +99,7 @@ namespace ConControls
         }
 
         /// <inheritdoc />
-        public ConsoleControl Panel { get; }
+        public ConsoleControlBase Panel { get; }
 
         /// <inheritdoc />
         public bool DrawingInhibited => inhibitDrawing > 0;

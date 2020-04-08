@@ -5,10 +5,12 @@
  *
  */
 
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 namespace ConControls.WindowsApi.Types
 {
+    [ExcludeFromCodeCoverage]
     [StructLayout(LayoutKind.Explicit)]
     struct MOUSE_EVENT_RECORD
     {

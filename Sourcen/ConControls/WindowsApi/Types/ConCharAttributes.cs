@@ -15,14 +15,6 @@ namespace ConControls.WindowsApi.Types
         BackGroundBlue = 0x0010,
         BackGroundGreen = 0x0020,
         BackGroundRed = 0x0040,
-        BackGroundIntensity = 0x0080,
-        
-        CommonLvbLeadingByte = 0x0100,
-        CommonLvbTrailingByte = 0x0200,
-        CommonLvbGridHorizontal = 0x0400,
-        CommonLvbGridLeftVertical = 0x0800,
-        CommonLvbGridRightVertical = 0x1000,
-        CommonLvbReverseVideo = 0x4000,
-        CommonLvbUnderscore = 0x8000
+        BackGroundIntensity = 0x0080
     }
 }
