@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="ConControlsTestsCli.cs" />
     <Compile Include="ConsoleApi\CharInfoExtensions\CharInfoExtensionsTests.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

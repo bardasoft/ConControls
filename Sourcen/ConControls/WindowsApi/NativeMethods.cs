@@ -9,6 +9,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
+using ConControls.ConsoleApi;
 using ConControls.WindowsApi.Types;
 
 namespace ConControls.WindowsApi
@@ -46,9 +47,11 @@ namespace ConControls.WindowsApi
             COORD offset,
             ref SMALL_RECT useRegion);
         [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern bool SetConsoleCtrlHandler(ConsoleControlHandler handler, bool add);
+        [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern bool SetConsoleMode(ConsoleInputHandle consoleInputHandle, ConsoleInputModes inputMode);
         [DllImport("kernel32.dll", SetLastError = true)]
-        internal static extern bool SetConsoleMode(ConsoleOutputHandle consoleOutputHandle, ConsoleOutputModes inputMode);
+        internal static extern bool SetConsoleMode(ConsoleOutputHandle consoleOutputHandle, ConsoleOutputModes outputMode);
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern bool SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, COORD size);
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]

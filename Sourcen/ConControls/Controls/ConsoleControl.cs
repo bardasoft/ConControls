@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using ConControls.ConsoleApi;
-using ConControls.WindowsApi;
 
 namespace ConControls.Controls
 {
@@ -11,12 +11,15 @@ namespace ConControls.Controls
     /// </summary>
     public abstract class ConsoleControl
     {
-        readonly INativeCalls api;
-
         Rectangle effectiveBounds;
         ConsoleControl? parent;
-        int inhibitUpdate;
+        int inhibitDrawing;
         ConsoleColor? backgroundColor;
+
+        /// <summary>
+        /// The <see cref="Area"/> of the control has been changed.
+        /// </summary>
+        public event EventHandler? AreaChanged;
 
         /// <summary>
         /// The effective total area of the control.
@@ -78,7 +81,7 @@ namespace ConControls.Controls
         /// Determines if the control can currently be redrawn, depending on calls to <see cref="BeginUpdate"/> and
         /// <see cref="EndUpdate"/> to this control or its parents.
         /// </summary>
-        public bool UpdateInhibited => inhibitUpdate > 0 || parent?.UpdateInhibited == true || Window.UpdateInhibited;
+        public bool DrawingInhibited => inhibitDrawing > 0 || parent?.DrawingInhibited == true || Window.DrawingInhibited;
 
         /// <summary>
         /// The background color of this control.
@@ -97,11 +100,9 @@ namespace ConControls.Controls
             }
         }
 
-        private protected ConsoleControl(IConsoleWindow window) : this(window, null) { }
-        private protected ConsoleControl(IConsoleWindow window, INativeCalls? api)
+        private protected ConsoleControl(IConsoleWindow window)
         {
             Window = window ?? throw new ArgumentNullException(nameof(window));
-            this.api = api ?? new NativeCalls();
             Controls = new ControlCollection(this);
             Controls.ControlAdded += OnControlAdded;
             Controls.ControlRemoved += OnControlRemoved;
@@ -117,26 +118,46 @@ namespace ConControls.Controls
             if (Window.IsDisposed) throw Exceptions.WindowDisposed();
         }
 
+        void Draw()
+        {
+            Debug.WriteLine("ConsoleControl.Draw: called.");
+            lock (Window.SynchronizationLock)
+            {
+                if (DrawingInhibited)
+                {
+                    Debug.WriteLine("ConsoleControl.Draw: drawing inhibited.");
+                    return;
+                }
+                Debug.WriteLine("ConsoleControl.Draw: executing.");
+                var graphics = Window.GetGraphics();
+                Draw(graphics);
+                graphics.Flush();
+            }
+        }
         /// <summary>
-        /// Redraws the control into the console screen buffer.
+        /// Draws the control onto the console screen buffer.
+        /// When overwriting this method, make sure to use the <see cref="IConsoleWindow.SynchronizationLock"/>
+        /// to synchronize threads and to call <see cref="CheckDisposed"/> to check if the window has not yet
+        /// been disposed of.
         /// </summary>
         /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
         public virtual void Draw(IConsoleGraphics graphics)
         {
             if (graphics == null) throw new ArgumentNullException(nameof(graphics));
+            Debug.WriteLine("ConsoleControl.Draw(IConsoleGrahics): called.");
 
             lock (Window.SynchronizationLock)
             {
                 CheckDisposed();
-                if (UpdateInhibited) return;
+                if (DrawingInhibited)
+                {
+                    Debug.WriteLine("ConsoleControl.Draw(IConsoleGrahics): drawing inhibited.");
+                    return;
+                }
+
+                Debug.WriteLine("ConsoleControl.Draw(IConsoleGrahics): drawing background.");
                 graphics.DrawBackground(backgroundColor ?? parent?.backgroundColor ?? Window.BackgroundColor, effectiveBounds);
             }
-        }
-        void Draw()
-        {
-            var graphics = Window.GetGraphics();
-            Draw(graphics);
-            graphics.Flush();
         }
 
         /// <summary>
@@ -145,7 +166,7 @@ namespace ConControls.Controls
         /// </summary>
         public void BeginUpdate()
         {
-            Interlocked.Increment(ref inhibitUpdate);
+            Interlocked.Increment(ref inhibitDrawing);
         }
         /// <summary>
         /// Finishes an update sequence. Call <see cref="BeginUpdate"/> before you
@@ -154,7 +175,7 @@ namespace ConControls.Controls
         /// </summary>
         public void EndUpdate()
         {
-            if (Interlocked.Decrement(ref inhibitUpdate) <= 0)
+            if (Interlocked.Decrement(ref inhibitDrawing) <= 0)
                 Draw();
         }
 
@@ -194,10 +215,19 @@ namespace ConControls.Controls
         /// </summary>
         protected virtual void OnAreaChanged()
         {
-            if (Parent == null)
-                Window.Draw();
-            else
-                Parent.Draw();
+            BeginUpdate();
+            try
+            {
+                AreaChanged?.Invoke(this, EventArgs.Empty);
+                if (Parent == null)
+                    Window.Draw();
+                else
+                    Parent.Draw();
+            }
+            finally
+            {
+                EndUpdate();
+            }
         }
     }
 }

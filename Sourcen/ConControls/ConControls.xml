@@ -53,7 +53,7 @@
         <member name="P:ConControls.ConsoleWindow.Panel">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.ConsoleWindow.UpdateInhibited">
+        <member name="P:ConControls.ConsoleWindow.DrawingInhibited">
             <inheritdoc />
         </member>
         <member name="P:ConControls.ConsoleWindow.BackgroundColor">
@@ -89,6 +89,9 @@
         <member name="M:ConControls.ConsoleWindow.Draw">
             <inheritdoc />
         </member>
+        <member name="M:ConControls.ConsoleWindow.Refresh">
+            <inheritdoc />
+        </member>
         <member name="M:ConControls.ConsoleWindow.BeginUpdate">
             <inheritdoc />
         </member>
@@ -98,6 +101,11 @@
         <member name="T:ConControls.Controls.ConsoleControl">
             <summary>
             Base class for all console controls.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleControl.AreaChanged">
+            <summary>
+            The <see cref="P:ConControls.Controls.ConsoleControl.Area"/> of the control has been changed.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.Area">
@@ -125,7 +133,7 @@
             The collection of <see cref="T:ConControls.Controls.ConsoleControl"/>s contained by this control.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControl.UpdateInhibited">
+        <member name="P:ConControls.Controls.ConsoleControl.DrawingInhibited">
             <summary>
             Determines if the control can currently be redrawn, depending on calls to <see cref="M:ConControls.Controls.ConsoleControl.BeginUpdate"/> and
             <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/> to this control or its parents.
@@ -145,7 +153,10 @@
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.Draw(ConControls.ConsoleApi.IConsoleGraphics)">
             <summary>
-            Redraws the control into the console screen buffer.
+            Draws the control onto the console screen buffer.
+            When overwriting this method, make sure to use the <see cref="P:ConControls.IConsoleWindow.SynchronizationLock"/>
+            to synchronize threads and to call <see cref="M:ConControls.Controls.ConsoleControl.CheckDisposed"/> to check if the window has not yet
+            been disposed of.
             </summary>
             <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.IConsoleWindow"/> has already been disposed of.</exception>
         </member>
@@ -291,7 +302,7 @@
             Gets the root panel of this window.
             </summary>
         </member>
-        <member name="P:ConControls.IConsoleWindow.UpdateInhibited">
+        <member name="P:ConControls.IConsoleWindow.DrawingInhibited">
             <summary>
             Determines if the window can currently be redrawn, depending on calls to <see cref="M:ConControls.IConsoleWindow.BeginUpdate"/> and
             <see cref="M:ConControls.IConsoleWindow.EndUpdate"/>.
@@ -327,6 +338,11 @@
         <member name="M:ConControls.IConsoleWindow.Draw">
             <summary>
             Redraws the window.
+            </summary>
+        </member>
+        <member name="M:ConControls.IConsoleWindow.Refresh">
+            <summary>
+            Performs a complete refresh of the console display.
             </summary>
         </member>
         <member name="M:ConControls.IConsoleWindow.BeginUpdate">

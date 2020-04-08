@@ -1,6 +1,4 @@
-﻿using ConControls.WindowsApi;
-
-namespace ConControls.Controls
+﻿namespace ConControls.Controls
 {
     /// <summary>
     /// The base class for all custom console controls.
@@ -10,8 +8,6 @@ namespace ConControls.Controls
         /// <inheritdoc />
         public ConsolePanel(IConsoleWindow window)
             : base(window) { }
-        internal ConsolePanel(IConsoleWindow window, INativeCalls api)
-            : base(window, api) { }
 
     }
 }

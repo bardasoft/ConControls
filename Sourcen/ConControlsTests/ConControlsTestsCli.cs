@@ -6,9 +6,12 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using ConControls;
+using ConControls.ConsoleApi;
+using ConControls.WindowsApi;
 
 #pragma warning disable IDE0051 // Nicht verwendete private Member entfernen
 // ReSharper disable UnusedMember.Local
@@ -18,15 +21,42 @@ namespace ConControlsTests
     [ExcludeFromCodeCoverage]
     static class ConControlsTestsCli
     {
-        static void Main()
+        static void RunTest()
         {
-            //Task.Run(ReadEvents).Wait();
             using var window = new ConsoleWindow();
             window.BackgroundColor = ConsoleColor.Blue;
             window.Panel.Area = new Rectangle(10, 10, 10, 10);
             window.Panel.BackgroundColor = ConsoleColor.Cyan;
-
             Console.ReadLine();
+        }
+
+        static void Main()
+        {
+            //Task.Run(ReadEvents).Wait();
+            using var logger = new Logger(@"c:\privat\concontrols.log");
+
+            bool ControlHandler(ConsoleControlEvent control)
+            {
+                var msg = $"ControlHandler: {control}";
+                Console.WriteLine(msg);
+                Debug.WriteLine(msg);
+                return true;
+            }
+
+            try
+            {
+                var api = new NativeCalls();
+                ConsoleControlHandler handler = ControlHandler;
+                api.AddControlControlHandler(handler);
+                RunTest();
+                api.RemoveControlControlHandler(handler);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            
+            Debug.WriteLine("Done.");
 
             //ConsoleColor[] colors = Enum.GetValues(typeof(ConsoleColor)).Cast<ConsoleColor>().ToArray();
             //foreach (var color in colors)

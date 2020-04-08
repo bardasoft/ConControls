@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
+using ConControls.ConsoleApi;
 using ConControls.WindowsApi.Types;
 
 namespace ConControls.WindowsApi
@@ -16,6 +17,11 @@ namespace ConControls.WindowsApi
     [ExcludeFromCodeCoverage]
     sealed class NativeCalls : INativeCalls
     {
+        public void AddControlControlHandler(ConsoleControlHandler handler)
+        {
+            if (!NativeMethods.SetConsoleCtrlHandler(handler, true))
+                throw Exceptions.Win32();
+        }
         public CONSOLE_SCREEN_BUFFER_INFOEX GetConsoleScreenBufferInfo(ConsoleOutputHandle consoleOutputHandle)
         {
             CONSOLE_SCREEN_BUFFER_INFOEX info = new CONSOLE_SCREEN_BUFFER_INFOEX
@@ -40,6 +46,21 @@ namespace ConControls.WindowsApi
             if (!NativeMethods.ReadConsoleOutput(consoleOutputHandle, buffer, new COORD(region), default, ref rect))
                 throw Exceptions.Win32();
             return buffer;
+        }
+        public void RemoveControlControlHandler(ConsoleControlHandler handler)
+        {
+            if (!NativeMethods.SetConsoleCtrlHandler(handler, false))
+                throw Exceptions.Win32();
+        }
+        public void SetConsoleMode(ConsoleInputHandle consoleInputHandle, ConsoleInputModes inputMode)
+        {
+            if (!NativeMethods.SetConsoleMode(consoleInputHandle, inputMode))
+                throw Exceptions.Win32();
+        }
+        public void SetConsoleMode(ConsoleOutputHandle consoleOutputHandle, ConsoleOutputModes outputMode)
+        {
+            if (!NativeMethods.SetConsoleMode(consoleOutputHandle, outputMode))
+                throw Exceptions.Win32();
         }
         public void SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, COORD size)
         {

@@ -39,7 +39,7 @@ namespace ConControls
         /// Determines if the window can currently be redrawn, depending on calls to <see cref="BeginUpdate"/> and
         /// <see cref="EndUpdate"/>.
         /// </summary>
-        bool UpdateInhibited { get; }
+        bool DrawingInhibited { get; }
         
         /// <summary>
         /// Gets or sets the background color of the console window.
@@ -71,6 +71,10 @@ namespace ConControls
         /// Redraws the window.
         /// </summary>
         void Draw();
+        /// <summary>
+        /// Performs a complete refresh of the console display.
+        /// </summary>
+        void Refresh();
         /// <summary>
         /// Use <see cref="BeginUpdate"/> to start updating multiple properties without multiple redrawings of the window.
         /// Use <see cref="EndUpdate"/> when finished to finally redraw the window.

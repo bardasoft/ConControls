@@ -1,0 +1,32 @@
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using ConControls;
+
+namespace ConControlsTests {
+    public sealed class Logger : TraceListener
+    {
+        readonly string file;
+        public Logger(string file)
+        {
+            this.file = file;
+            File.WriteAllText(this.file,$"{nameof(ConsoleWindow)} test starting.{Environment.NewLine}");
+            Debug.Listeners.Add(this);
+        }
+        public new void Dispose()
+        {
+            base.Dispose();
+            Debug.Listeners.Remove(this);
+        }
+        /// <inheritdoc />
+        public override void Write(string message)
+        {
+            File.AppendAllText(file, message);
+        }
+        /// <inheritdoc />
+        public override void WriteLine(string message)
+        {
+            File.AppendAllLines(file, new []{message});
+        }
+    }
+}

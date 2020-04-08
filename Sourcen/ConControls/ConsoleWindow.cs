@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
@@ -26,7 +27,7 @@ namespace ConControls
         readonly ConsoleOutputHandle consoleOutputHandle;
 
         int isDisposed;
-        int inhibitUpdate;
+        int inhibitDrawing;
         Size size;
         ConsoleColor backgroundColor = ConsoleColor.Black;
 
@@ -83,7 +84,7 @@ namespace ConControls
         public ConsoleControl Panel { get; }
 
         /// <inheritdoc />
-        public bool UpdateInhibited => inhibitUpdate > 0;
+        public bool DrawingInhibited => inhibitDrawing > 0;
 
         /// <inheritdoc />
         public ConsoleColor BackgroundColor
@@ -130,8 +131,14 @@ namespace ConControls
             if (consoleOutputHandle.IsInvalid)
                 throw Exceptions.Win32();
             this.api = api ?? new NativeCalls();
+            this.api.SetConsoleMode(consoleInputHandle,
+                                    ConsoleInputModes.EnableWindowInput | 
+                                    ConsoleInputModes.EnableMouseInput |
+                                    ConsoleInputModes.EnableExtendedFlags);
+            this.api.SetConsoleMode(consoleOutputHandle, ConsoleOutputModes.None);
             Panel = new RootPanel(this);
-            UpdateFromConsole();
+            Panel.AreaChanged += (sender, e) => AdjustWindowAndBufferSize();
+            AdjustWindowAndBufferSize();
         }
         /// <summary>
         /// Cleans up native resources.
@@ -163,21 +170,36 @@ namespace ConControls
         /// <inheritdoc />
         public void Draw()
         {
-            var graphics = GetGraphics();
-            graphics.DrawBackground(backgroundColor, new Rectangle(0, 0, Size.Width, Size.Height));
-            Panel.Draw(graphics);
-            graphics.Flush();
+            Debug.WriteLine("ConsoleWindow.Draw: called.");
+            lock (SynchronizationLock)
+            {
+                if (DrawingInhibited)
+                {
+                    Debug.WriteLine("ConsoleWindow.Draw: drawing inhibited.");
+                    return;
+                }
+                var graphics = GetGraphics();
+                var rect = new Rectangle(0, 0, Size.Width, Size.Height);
+                Debug.WriteLine($"ConsoleWindow.Draw: drawing background at {rect}.");
+                graphics.DrawBackground(backgroundColor, rect);
+                Debug.WriteLine("ConsoleWindow.Draw: drawing root panel.");
+                Panel.Draw(graphics);
+                Debug.WriteLine("ConsoleWindow.Draw: flushing.");
+                graphics.Flush();
+            }
         }
+        /// <inheritdoc />
+        public void Refresh() => AdjustWindowAndBufferSize();
         /// <inheritdoc />
         public void BeginUpdate()
         {
-            Interlocked.Increment(ref inhibitUpdate);
+            Interlocked.Increment(ref inhibitDrawing);
         }
         /// <inheritdoc />
         public void EndUpdate()
         {
-            if (Interlocked.Decrement(ref inhibitUpdate) <= 0)
-                UpdateFromConsole();
+            if (Interlocked.Decrement(ref inhibitDrawing) <= 0)
+                Draw();
         }
         void OnSizeChanged()
         {
@@ -188,28 +210,41 @@ namespace ConControls
             Draw();
         }
 
-        void UpdateFromConsole()
+        void AdjustWindowAndBufferSize()
         {
             lock (SynchronizationLock)
             {
-                var info = api.GetConsoleScreenBufferInfo(consoleOutputHandle);
-                var winSize = new Size(info.Window.Right - info.Window.Left + 1, info.Window.Bottom - info.Window.Top + 1);
-                api.SetConsoleScreenBufferSize(consoleOutputHandle, new COORD( winSize));
-                Size = winSize;
-                var panelBounds = Panel.Area;
-                int left = panelBounds.Left;
-                if (left >= Size.Width)
-                    left = Size.Width - 10;
-                int right = left + panelBounds.Width;
-                if (right >= Size.Width)
-                    right = Size.Width - 1;
-                int top = panelBounds.Top;
-                if (top >= Size.Height)
-                    top = Size.Height - 10;
-                int bottom = top + panelBounds.Height;
-                if (bottom >= Size.Height)
-                    bottom = Size.Height - 1;
-                Panel.Area = new Rectangle(left, top, right - left, bottom - top);
+                BeginUpdate();
+                try
+                {
+                    var info = api.GetConsoleScreenBufferInfo(consoleOutputHandle);
+                    Debug.WriteLine(
+                        $"ConsoleWindow.AdjustWindowAndBufferSize: Read window props ({info.Window.Left}, {info.Window.Top}, {info.Window.Right}, {info.Window.Bottom}).");
+                    var winSize = new Size(info.Window.Right - info.Window.Left + 1, info.Window.Bottom - info.Window.Top + 1);
+                    Debug.WriteLine($"ConsoleWindow.AdjustWindowAndBufferSize: Calculated window size {winSize}).");
+                    api.SetConsoleScreenBufferSize(consoleOutputHandle, new COORD(winSize));
+                    Size = winSize;
+                    var panelBounds = Panel.Area;
+                    int left = panelBounds.Left;
+                    if (left >= Size.Width)
+                        left = Size.Width - 10;
+                    int right = left + panelBounds.Width;
+                    if (right >= Size.Width)
+                        right = Size.Width - 1;
+                    int top = panelBounds.Top;
+                    if (top >= Size.Height)
+                        top = Size.Height - 10;
+                    int bottom = top + panelBounds.Height;
+                    if (bottom >= Size.Height)
+                        bottom = Size.Height - 1;
+                    Rectangle panelRect = new Rectangle(left, top, right - left, bottom - top);
+                    Debug.WriteLine($"ConsoleWindow.AdjustWindowAndBufferSize: Setting root panel to area {panelRect}.");
+                    Panel.Area = panelRect;
+                }
+                finally
+                {
+                    EndUpdate();
+                }
             }
         }
     }
