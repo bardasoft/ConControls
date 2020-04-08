@@ -14,6 +14,8 @@ namespace ConControls.Controls
         Rectangle effectiveBounds;
         ConsoleControl? parent;
         int inhibitDrawing;
+        BorderStyle? borderStyle;
+        ConsoleColor? borderColor;
         ConsoleColor? backgroundColor;
 
         /// <summary>
@@ -84,7 +86,40 @@ namespace ConControls.Controls
         public bool DrawingInhibited => inhibitDrawing > 0 || parent?.DrawingInhibited == true || Window.DrawingInhibited;
 
         /// <summary>
+        /// The <see cref="BorderStyle"/> of this control.
+        /// If this is <code>null</code> the <see cref="Parent"/>'s border style will be used.
+        /// If this is <code>null</code>, too, no border will be drawn.
+        /// </summary>
+        public BorderStyle? BorderStyle
+        {
+            get => borderStyle;
+            set
+            {
+                if (value == borderStyle) return;
+                borderStyle = value;
+                OnBorderStyleChanged();
+            }
+        }
+        /// <summary>
+        /// The color of this control's border.
+        /// If this is <code>null</code> the <see cref="Parent"/>'s border color will be used.
+        /// If this is <code>null</code>, too, the default (<see cref="ConsoleColor.Yellow"/>) will be used.
+        /// </summary>
+        public ConsoleColor? BorderColor
+        {
+            get => borderColor;
+            set
+            {
+                if (value == borderColor) return;
+                borderColor = value;
+                OnBorderColorChanged();
+            }
+        }
+
+        /// <summary>
         /// The background color of this control.
+        /// If this is <code>null</code> the <see cref="Parent"/>'s background color will be used.
+        /// If this is <code>null</code>, too, the default (<see cref="ConsoleColor.Black"/> will be used.
         /// </summary>
         public ConsoleColor? BackgroundColor
         {
@@ -155,8 +190,14 @@ namespace ConControls.Controls
                     return;
                 }
 
-                Debug.WriteLine("ConsoleControl.Draw(IConsoleGrahics): drawing background.");
+                var effectiveBackgroundColor = EffectiveBackgroundColor;
+                var effectiveBorderColor = EffectiveBorderColor;
+                var effectiveBorderStyle = EffectiveBorderStyle;
+
+                Debug.WriteLine($"ConsoleControl.Draw(IConsoleGrahics): drawing background ({effectiveBackgroundColor}.");
                 graphics.DrawBackground(backgroundColor ?? parent?.backgroundColor ?? Window.BackgroundColor, effectiveBounds);
+                Debug.WriteLine($"ConsoleControl.Draw(IConsoleGrahics): drawing border ({effectiveBorderColor}, {effectiveBorderStyle}.");
+                graphics.DrawBorder(effectiveBackgroundColor, effectiveBorderColor, effectiveBorderStyle, effectiveBounds);
             }
         }
 
@@ -229,5 +270,32 @@ namespace ConControls.Controls
                 EndUpdate();
             }
         }
+        /// <summary>
+        /// Called when the <see cref="BorderStyle"/> of this control has been changed.
+        /// </summary>
+        protected virtual void OnBorderStyleChanged()
+        {
+            Draw();
+        }
+        /// <summary>
+        /// Called when the <see cref="BorderColor"/> of this control has been changed.
+        /// </summary>
+        protected virtual void OnBorderColorChanged()
+        {
+            Draw();
+        }
+
+        /// <summary>
+        /// Gets the effective background color (applying transparency).
+        /// </summary>
+        protected ConsoleColor EffectiveBackgroundColor => backgroundColor ?? Parent?.EffectiveBackgroundColor ?? Window.BackgroundColor;
+        /// <summary>
+        /// Gets the effective border color (applying transparency).
+        /// </summary>
+        protected ConsoleColor EffectiveBorderColor => borderColor ?? Parent?.EffectiveBorderColor ?? ConsoleColor.Yellow;
+        /// <summary>
+        /// Gets the effective border style (applying transparency).
+        /// </summary>
+        protected BorderStyle EffectiveBorderStyle => borderStyle ?? Parent?.EffectiveBorderStyle ?? ConControls.Controls.BorderStyle.None;
     }
 }

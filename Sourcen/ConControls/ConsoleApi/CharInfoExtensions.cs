@@ -52,5 +52,6 @@ namespace ConControls.ConsoleApi
         internal static CHAR_INFO SetForeground(this CHAR_INFO info, ConsoleColor color) =>
             new CHAR_INFO(info.Char, (ConCharAttributes)((int)info.Attributes & 0xFFF0) | color.ToForegroundColor());
         internal static CHAR_INFO SetChar(this CHAR_INFO info, char c) => new CHAR_INFO(c, info.Attributes);
+        internal static CHAR_INFO AsCharInfo(this char c) => new CHAR_INFO(c, ConCharAttributes.None);
     }
 }

@@ -16,6 +16,11 @@ namespace ConControls
         event EventHandler? Disposed;
 
         /// <summary>
+        /// The <see cref="FrameCharSets"/> provider to use to draw frames.
+        /// </summary>
+        FrameCharSets FrameCharSets { get; set; }
+
+        /// <summary>
         /// Gets or sets the size of the console window.
         /// The <see cref="System.Drawing.Size.Width"/> is the number of characters per row.
         /// The <see cref="System.Drawing.Size.Height"/> is the number of lines.

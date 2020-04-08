@@ -10,8 +10,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using ConControls;
-using ConControls.ConsoleApi;
-using ConControls.WindowsApi;
+using ConControls.Controls;
 
 #pragma warning disable IDE0051 // Nicht verwendete private Member entfernen
 // ReSharper disable UnusedMember.Local
@@ -24,9 +23,20 @@ namespace ConControlsTests
         static void RunTest()
         {
             using var window = new ConsoleWindow();
-            window.BackgroundColor = ConsoleColor.Blue;
-            window.Panel.Area = new Rectangle(10, 10, 10, 10);
-            window.Panel.BackgroundColor = ConsoleColor.Cyan;
+            window.BeginUpdate();
+            try
+            {
+                window.BackgroundColor = ConsoleColor.Blue;
+                window.Panel.Area = new Rectangle(0, 0, window.Width, window.Height);
+                window.Panel.BackgroundColor = ConsoleColor.Cyan;
+                window.Panel.BorderColor = ConsoleColor.Yellow;
+                window.Panel.BorderStyle = BorderStyle.DoubleLined;
+            }
+            finally
+            {
+                window.EndUpdate();
+            }
+
             Console.ReadLine();
         }
 
@@ -34,22 +44,9 @@ namespace ConControlsTests
         {
             //Task.Run(ReadEvents).Wait();
             using var logger = new Logger(@"c:\privat\concontrols.log");
-
-            bool ControlHandler(ConsoleControlEvent control)
-            {
-                var msg = $"ControlHandler: {control}";
-                Console.WriteLine(msg);
-                Debug.WriteLine(msg);
-                return true;
-            }
-
             try
             {
-                var api = new NativeCalls();
-                ConsoleControlHandler handler = ControlHandler;
-                api.AddControlControlHandler(handler);
                 RunTest();
-                api.RemoveControlControlHandler(handler);
             }
             catch (Exception e)
             {

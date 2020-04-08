@@ -7,6 +7,9 @@
         <member name="M:ConControls.ConsoleApi.ConsoleGraphics.DrawBackground(System.ConsoleColor,System.Drawing.Rectangle)">
             <inheritdoc />
         </member>
+        <member name="M:ConControls.ConsoleApi.ConsoleGraphics.DrawBorder(System.ConsoleColor,System.ConsoleColor,ConControls.Controls.BorderStyle,System.Drawing.Rectangle)">
+            <inheritdoc />
+        </member>
         <member name="M:ConControls.ConsoleApi.ConsoleGraphics.Flush">
             <inheritdoc />
         </member>
@@ -21,6 +24,15 @@
             The changes are only written to the screen buffer when <see cref="M:ConControls.ConsoleApi.IConsoleGraphics.Flush"/> is called.
             </summary>
             <param name="color">The <see cref="T:System.ConsoleColor"/> to use for the background.</param>
+            <param name="area">The area (in screen buffer coordinates) to fill.</param>
+        </member>
+        <member name="M:ConControls.ConsoleApi.IConsoleGraphics.DrawBorder(System.ConsoleColor,System.ConsoleColor,ConControls.Controls.BorderStyle,System.Drawing.Rectangle)">
+            <summary>
+            Draws a border around (onto the edge of) the specified <paramref name="area"/>.
+            </summary>
+            <param name="background">The <see cref="T:System.ConsoleColor"/> to use for the background.</param>
+            <param name="foreground">The <see cref="T:System.ConsoleColor"/> to use for the border foreground.</param>
+            <param name="style">The <see cref="T:ConControls.Controls.BorderStyle"/> to use for the border.</param>
             <param name="area">The area (in screen buffer coordinates) to fill.</param>
         </member>
         <member name="M:ConControls.ConsoleApi.IConsoleGraphics.Flush">
@@ -39,6 +51,9 @@
             </remarks>
         </member>
         <member name="E:ConControls.ConsoleWindow.Disposed">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleWindow.FrameCharSets">
             <inheritdoc />
         </member>
         <member name="P:ConControls.ConsoleWindow.Size">
@@ -98,6 +113,27 @@
         <member name="M:ConControls.ConsoleWindow.EndUpdate">
             <inheritdoc />
         </member>
+        <member name="T:ConControls.Controls.BorderStyle">
+            <summary>
+            Border styles for <see cref="T:ConControls.IConsoleWindow"/> instances and
+            <see cref="T:ConControls.Controls.ConsoleControl"/>s.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.BorderStyle.None">
+            <summary>
+            The control has no border.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.BorderStyle.SingleLined">
+            <summary>
+            The control has a single-lined border.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.BorderStyle.DoubleLined">
+            <summary>
+            The control has a double-lined border.
+            </summary>
+        </member>
         <member name="T:ConControls.Controls.ConsoleControl">
             <summary>
             Base class for all console controls.
@@ -139,9 +175,25 @@
             <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/> to this control or its parents.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.ConsoleControl.BorderStyle">
+            <summary>
+            The <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control.
+            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s border style will be used.
+            If this is <code>null</code>, too, no border will be drawn.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.BorderColor">
+            <summary>
+            The color of this control's border.
+            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s border color will be used.
+            If this is <code>null</code>, too, the default (<see cref="F:System.ConsoleColor.Yellow"/>) will be used.
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.ConsoleControl.BackgroundColor">
             <summary>
             The background color of this control.
+            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s background color will be used.
+            If this is <code>null</code>, too, the default (<see cref="F:System.ConsoleColor.Black"/> will be used.
             </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.CheckDisposed">
@@ -200,6 +252,31 @@
         <member name="M:ConControls.Controls.ConsoleControl.OnAreaChanged">
             <summary>
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.Area"/> of this control has been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnBorderStyleChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control has been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnBorderColorChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/> of this control has been changed.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBackgroundColor">
+            <summary>
+            Gets the effective background color (applying transparency).
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBorderColor">
+            <summary>
+            Gets the effective border color (applying transparency).
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBorderStyle">
+            <summary>
+            Gets the effective border style (applying transparency).
             </summary>
         </member>
         <member name="T:ConControls.Controls.ConsolePanel">
@@ -267,8 +344,140 @@
             the <see cref="T:ConControls.Controls.ControlCollection"/>.
             </summary>
         </member>
+        <member name="T:ConControls.Controls.DoubleLinedFrameCharSet">
+            <summary>
+            A <see cref="T:ConControls.Controls.FrameCharSet"/> for double-lined frames.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.DoubleLinedFrameCharSet.UpperLeft">
+            <summary>
+            The upper left corner of a double-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.DoubleLinedFrameCharSet.UpperRight">
+            <summary>
+            The upper right corner of a double-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.DoubleLinedFrameCharSet.LowerLeft">
+            <summary>
+            The lower left corner of a double-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.DoubleLinedFrameCharSet.LowerRight">
+            <summary>
+            The lower right corner of a double-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.DoubleLinedFrameCharSet.Horizontal">
+            <summary>
+            The horizontal line of a double-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.DoubleLinedFrameCharSet.Vertical">
+            <summary>
+            The vertical line of a double-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.DoubleLinedFrameCharSet.Cross">
+            <summary>
+            The cross of a double-lined frame.
+            </summary>
+        </member>
+        <member name="T:ConControls.Controls.FrameCharSet">
+            <summary>
+            Provides characters for drawing frames.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.FrameCharSet.UpperLeft">
+            <summary>
+            The upper left corner of a frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.FrameCharSet.UpperRight">
+            <summary>
+            The upper right corner of a frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.FrameCharSet.LowerLeft">
+            <summary>
+            The lower left corner of a frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.FrameCharSet.LowerRight">
+            <summary>
+            The lower right corner of a frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.FrameCharSet.Horizontal">
+            <summary>
+            The horizontal line of a frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.FrameCharSet.Vertical">
+            <summary>
+            The vertical line of a frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.FrameCharSet.Cross">
+            <summary>
+            The cross of a frame.
+            </summary>
+        </member>
+        <member name="T:ConControls.Controls.FrameCharSets">
+            <summary>
+            Provides <see cref="T:ConControls.Controls.FrameCharSet"/> instances for given <see cref="T:ConControls.Controls.BorderStyle"/> values.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.FrameCharSets.Item(ConControls.Controls.BorderStyle)">
+            <summary>
+            Gets the <see cref="T:ConControls.Controls.FrameCharSet"/> to use to draw a border in the given <paramref name="style"/>.
+            </summary>
+            <param name="style">The <see cref="T:ConControls.Controls.BorderStyle"/> to get the <see cref="T:ConControls.Controls.FrameCharSet"/> for.</param>
+            <returns>A <see cref="T:ConControls.Controls.FrameCharSet"/> that can provide the characters needed to draw the given <see cref="T:ConControls.Controls.BorderStyle"/>.</returns>
+        </member>
         <member name="M:ConControls.Controls.RootPanel.#ctor(ConControls.IConsoleWindow)">
             <inheritdoc />
+        </member>
+        <member name="T:ConControls.Controls.SingleLinedFrameCharSet">
+            <summary>
+            A <see cref="T:ConControls.Controls.FrameCharSet"/> for single-lined frames.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.SingleLinedFrameCharSet.UpperLeft">
+            <summary>
+            The upper left corner of a single-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.SingleLinedFrameCharSet.UpperRight">
+            <summary>
+            The upper right corner of a single-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.SingleLinedFrameCharSet.LowerLeft">
+            <summary>
+            The lower left corner of a single-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.SingleLinedFrameCharSet.LowerRight">
+            <summary>
+            The lower right corner of a single-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.SingleLinedFrameCharSet.Horizontal">
+            <summary>
+            The horizontal line of a single-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.SingleLinedFrameCharSet.Vertical">
+            <summary>
+            The vertical line of a single-lined frame.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.SingleLinedFrameCharSet.Cross">
+            <summary>
+            The cross of a single-lined frame.
+            </summary>
         </member>
         <member name="T:ConControls.IConsoleWindow">
             <summary>
@@ -278,6 +487,11 @@
         <member name="E:ConControls.IConsoleWindow.Disposed">
             <summary>
             Raised when this console window is disposed of.
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleWindow.FrameCharSets">
+            <summary>
+            The <see cref="P:ConControls.IConsoleWindow.FrameCharSets"/> provider to use to draw frames.
             </summary>
         </member>
         <member name="P:ConControls.IConsoleWindow.Size">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using ConControls.Controls;
 
 namespace ConControls.ConsoleApi
 {
@@ -15,6 +16,14 @@ namespace ConControls.ConsoleApi
         /// <param name="color">The <see cref="ConsoleColor"/> to use for the background.</param>
         /// <param name="area">The area (in screen buffer coordinates) to fill.</param>
         void DrawBackground(ConsoleColor color, Rectangle area);
+        /// <summary>
+        /// Draws a border around (onto the edge of) the specified <paramref name="area"/>.
+        /// </summary>
+        /// <param name="background">The <see cref="ConsoleColor"/> to use for the background.</param>
+        /// <param name="foreground">The <see cref="ConsoleColor"/> to use for the border foreground.</param>
+        /// <param name="style">The <see cref="BorderStyle"/> to use for the border.</param>
+        /// <param name="area">The area (in screen buffer coordinates) to fill.</param>
+        void DrawBorder(ConsoleColor background, ConsoleColor foreground, BorderStyle style, Rectangle area);
         /// <summary>
         /// Flushes the internal buffer to the console screen buffer.
         /// </summary>

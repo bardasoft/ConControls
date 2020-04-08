@@ -28,11 +28,29 @@ namespace ConControls
 
         int isDisposed;
         int inhibitDrawing;
+        FrameCharSets frameCharSets = new FrameCharSets();
         Size size;
         ConsoleColor backgroundColor = ConsoleColor.Black;
 
         /// <inheritdoc />
         public event EventHandler? Disposed;
+
+        /// <inheritdoc />
+        public FrameCharSets FrameCharSets
+        {
+            get => frameCharSets;
+            set
+            {
+                if (frameCharSets == value) return;
+                if (value == null) throw new ArgumentNullException(nameof(FrameCharSets));
+
+                lock (SynchronizationLock)
+                {
+                    frameCharSets = value;
+                    OnFrameCharSetsChanged();
+                }
+            }
+        }
 
         /// <inheritdoc />
         public Size Size
@@ -43,7 +61,7 @@ namespace ConControls
             }
             set
             {
-                lock(SynchronizationLock)
+                lock (SynchronizationLock)
                 {
                     if (value == size) return;
                     size = value;
@@ -166,7 +184,7 @@ namespace ConControls
         }
 
         /// <inheritdoc />
-        public IConsoleGraphics GetGraphics() => new ConsoleGraphics(consoleOutputHandle, api, Size);
+        public IConsoleGraphics GetGraphics() => new ConsoleGraphics(consoleOutputHandle, api, Size, frameCharSets);
         /// <inheritdoc />
         public void Draw()
         {
@@ -200,6 +218,10 @@ namespace ConControls
         {
             if (Interlocked.Decrement(ref inhibitDrawing) <= 0)
                 Draw();
+        }
+        void OnFrameCharSetsChanged()
+        {
+            Draw();
         }
         void OnSizeChanged()
         {
