@@ -51,8 +51,15 @@ namespace ConControlsTests.Stubs
         }
         public Func<Size>? GetMaximumSize { get; set; }
         Size IConsoleWindow.MaximumSize => GetMaximumSize?.Invoke() ?? default;
+        public Func<ConsoleColor>? GetForeColor { get; set; }
+        public Action<ConsoleColor>? SetForeColor { get; set; }
+        ConsoleColor IConsoleWindow.ForeColor
+        {
+            get => GetForeColor?.Invoke() ?? default;
+            set => SetForeColor?.Invoke(value);
+        }
         public Func<ConsoleColor>? GetBackgroundColor { get; set; }
-        public Action<ConsoleColor>? SetBackgroundColor{ get; set; }
+        public Action<ConsoleColor>? SetBackgroundColor { get; set; }
         ConsoleColor IConsoleWindow.BackgroundColor
         {
             get => GetBackgroundColor?.Invoke() ?? default;

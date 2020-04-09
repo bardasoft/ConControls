@@ -10,6 +10,9 @@
         <member name="M:ConControls.ConsoleApi.ConsoleGraphics.DrawBorder(System.ConsoleColor,System.ConsoleColor,ConControls.Controls.BorderStyle,System.Drawing.Rectangle)">
             <inheritdoc />
         </member>
+        <member name="M:ConControls.ConsoleApi.ConsoleGraphics.FillArea(System.ConsoleColor,System.ConsoleColor,System.Char,System.Drawing.Rectangle)">
+            <inheritdoc />
+        </member>
         <member name="M:ConControls.ConsoleApi.ConsoleGraphics.Flush">
             <inheritdoc />
         </member>
@@ -34,6 +37,15 @@
             <param name="foreground">The <see cref="T:System.ConsoleColor"/> to use for the border foreground.</param>
             <param name="style">The <see cref="T:ConControls.Controls.BorderStyle"/> to use for the border.</param>
             <param name="area">The area (in screen buffer coordinates) to fill.</param>
+        </member>
+        <member name="M:ConControls.ConsoleApi.IConsoleGraphics.FillArea(System.ConsoleColor,System.ConsoleColor,System.Char,System.Drawing.Rectangle)">
+            <summary>
+            Fills the specified <paramref name="area"/> with the given colors and character.
+            </summary>
+            <param name="background">The background color to use.</param>
+            <param name="foreColor">The foreground color to use.</param>
+            <param name="c">The character to use.</param>
+            <param name="area">The area to fill.</param>
         </member>
         <member name="M:ConControls.ConsoleApi.IConsoleGraphics.Flush">
             <summary>
@@ -63,6 +75,9 @@
             <inheritdoc />
         </member>
         <member name="P:ConControls.ConsoleWindow.MaximumSize">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleWindow.ForeColor">
             <inheritdoc />
         </member>
         <member name="P:ConControls.ConsoleWindow.BackgroundColor">
@@ -261,6 +276,13 @@
             If this is <code>null</code>, too, the default (<see cref="F:System.ConsoleColor.Yellow"/>) will be used.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.ConsoleControl.ForeColor">
+            <summary>
+            The foreground color of this control.
+            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s foreground color will be used.
+            If this is <code>null</code>, too, the default (<see cref="F:System.ConsoleColor.Gray"/> will be used.
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.ConsoleControl.BackgroundColor">
             <summary>
             The background color of this control.
@@ -290,6 +312,11 @@
             been disposed of and throws an <see cref="T:System.ObjectDisposedException"/> if it is.
             </summary>
             <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.IConsoleWindow"/> has already been disposed of.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.Draw">
+            <summary>
+            Redraws the control.
+            </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.Draw(ConControls.ConsoleApi.IConsoleGraphics)">
             <summary>
@@ -359,6 +386,11 @@
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/> has changed.
             </summary>
         </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnForeColorChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.ForeColor"/> of this control has been changed.
+            </summary>
+        </member>
         <member name="M:ConControls.Controls.ConsoleControl.OnBackgroundColorChanged">
             <summary>
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/> of this control has been changed.
@@ -379,6 +411,11 @@
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/> of this control has been changed.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveForeColor">
+            <summary>
+            Gets the effective foreground color (applying transparency).
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.ConsoleControl.EffectiveBackgroundColor">
             <summary>
             Gets the effective background color (applying transparency).
@@ -393,6 +430,93 @@
             <summary>
             Gets the effective border style (applying transparency).
             </summary>
+        </member>
+        <member name="T:ConControls.Controls.ConsolePanel">
+            <summary>
+            A console panel control. A plain container
+            for other controls.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsolePanel.#ctor(ConControls.IConsoleWindow)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.ConsolePanel.#ctor(ConControls.IConsoleWindow,ConControls.Controls.ConsoleControl)">
+            <inheritdoc />
+        </member>
+        <member name="T:ConControls.Controls.ConsoleProgressBar">
+            <summary>
+            A console progress bar control.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.ConsoleProgressBar.DefaultProgressChar">
+            <summary>
+            The default progress character used by this progress bar.
+            </summary>
+        </member>
+        <member name="T:ConControls.Controls.ConsoleProgressBar.ProgressOrientation">
+            <summary>
+            The orientation of the progress bar.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.ConsoleProgressBar.ProgressOrientation.LeftToRight">
+            <summary>
+            Progress grows from left to right.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.ConsoleProgressBar.ProgressOrientation.RightToLeft">
+            <summary>
+            Progress grows from right to left.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.ConsoleProgressBar.ProgressOrientation.TopToBottom">
+            <summary>
+            Progress grows from top to bottom.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.ConsoleProgressBar.ProgressOrientation.BottomToTop">
+            <summary>
+            Progress grows from bottom to top.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleProgressBar.PercentageChanged">
+            <summary>
+            Raised when <see cref="P:ConControls.Controls.ConsoleProgressBar.Percentage"/> has been changed.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleProgressBar.ProgressCharChanged">
+            <summary>
+            Raised when <see cref="P:ConControls.Controls.ConsoleProgressBar.ProgressChar"/> has been changed.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleProgressBar.OrientationChanged">
+            <summary>
+            Raised when <see cref="P:ConControls.Controls.ConsoleProgressBar.Orientation"/> has been changed.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleProgressBar.Percentage">
+            <summary>
+            Gets or sets the percentage value of this progress bar.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">The value was less than zero or greater than 1.</exception>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleProgressBar.ProgressChar">
+            <summary>
+            Gets or sets the progress character used to display the progress bar.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleProgressBar.Orientation">
+            <summary>
+            Gets or sets the orientation of this progressbar (default is <see cref="F:ConControls.Controls.ConsoleProgressBar.ProgressOrientation.LeftToRight"/>).
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleProgressBar.#ctor(ConControls.IConsoleWindow)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.ConsoleProgressBar.#ctor(ConControls.IConsoleWindow,ConControls.Controls.ConsoleControl)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.ConsoleProgressBar.DrawClientArea(ConControls.ConsoleApi.IConsoleGraphics,System.Drawing.Rectangle)">
+            <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.ControlCollection">
             <summary>
@@ -642,6 +766,11 @@
             Gets the maximum size of the console window based on the current font and the size of the display.
             </summary>
         </member>
+        <member name="P:ConControls.IConsoleWindow.ForeColor">
+            <summary>
+            Gets or sets the foreground color of the console window.
+            </summary>
+        </member>
         <member name="P:ConControls.IConsoleWindow.BackgroundColor">
             <summary>
             Gets or sets the background color of the console window.
@@ -730,6 +859,16 @@
         <member name="P:ConControls.Properties.Resources.Exception_InvalidConsoleColor">
             <summary>
               Sucht eine lokalisierte Zeichenfolge, die The ConsoleColor \&quot;{0}\&quot; is not supported! ähnelt.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_ProgressBarPercentageMustBeNonNegative">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The percentage value of a progress bar cannot be less than zero! ähnelt.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_ProgressBarPercentageMustNotBeGreaterThan1">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The percentage value of a proress bar cannot be greater than 1! ähnelt.
             </summary>
         </member>
         <member name="P:ConControls.Properties.Resources.Exception_WindowDisposed">

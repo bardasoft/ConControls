@@ -40,6 +40,7 @@ namespace ConControls
         Size lastKnownSize;
 
         FrameCharSets frameCharSets = new FrameCharSets();
+        ConsoleColor foreColor = ConsoleColor.Gray;
         ConsoleColor backgroundColor = ConsoleColor.Black;
 
         /// <inheritdoc />
@@ -78,6 +79,17 @@ namespace ConControls
             {
                 var size = api.GetLargestConsoleWindowSize(consoleOutputHandle);
                 return new Size(size.X, size.Y);
+            }
+        }
+        /// <inheritdoc />
+        public ConsoleColor ForeColor
+        {
+            get => foreColor;
+            set
+            {
+                if (value == foreColor) return;
+                foreColor = value;
+                OnForeColorChanged();
             }
         }
         /// <inheritdoc />
@@ -223,6 +235,10 @@ namespace ConControls
             {
                 EndUpdate();
             }
+        }
+        void OnForeColorChanged()
+        {
+            Draw();
         }
         void OnBackgroundColorChanged()
         {

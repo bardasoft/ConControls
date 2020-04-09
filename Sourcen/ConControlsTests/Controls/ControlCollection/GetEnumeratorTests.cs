@@ -22,9 +22,9 @@ namespace ConControlsTests.Controls.ControlCollection
             var stubbedWindow = new StubIConsoleWindow();
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             stubbedWindow.GetControls = () => sut;
-            var control1 = new ConsoleControl(stubbedWindow);
-            var control2 = new ConsoleControl(stubbedWindow);
-            var control3 = new ConsoleControl(stubbedWindow);
+            var control1 = new ConsolePanel(stubbedWindow);
+            var control2 = new ConsolePanel(stubbedWindow);
+            var control3 = new ConsolePanel(stubbedWindow);
             sut.Should().Equal(control1, control2, control3);
         }
     }

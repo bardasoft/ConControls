@@ -32,6 +32,14 @@ namespace ConControls.ConsoleApi
         /// <param name="area">The area (in screen buffer coordinates) to fill.</param>
         void DrawBorder(ConsoleColor background, ConsoleColor foreground, BorderStyle style, Rectangle area);
         /// <summary>
+        /// Fills the specified <paramref name="area"/> with the given colors and character.
+        /// </summary>
+        /// <param name="background">The background color to use.</param>
+        /// <param name="foreColor">The foreground color to use.</param>
+        /// <param name="c">The character to use.</param>
+        /// <param name="area">The area to fill.</param>
+        void FillArea(ConsoleColor background, ConsoleColor foreColor, char c, Rectangle area);
+        /// <summary>
         /// Flushes the internal buffer to the console screen buffer.
         /// </summary>
         void Flush();

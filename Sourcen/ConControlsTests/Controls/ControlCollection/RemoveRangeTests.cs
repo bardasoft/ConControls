@@ -23,10 +23,10 @@ namespace ConControlsTests.Controls.ControlCollection
             stubbedWindow.GetControls = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new ConsoleControl(stubbedWindow);
-            var control2 = new ConsoleControl(stubbedWindow);
-            var control3 = new ConsoleControl(stubbedWindow);
-            var control4 = new ConsoleControl(stubbedWindow);
+            var control1 = new ConsolePanel(stubbedWindow);
+            var control2 = new ConsolePanel(stubbedWindow);
+            var control3 = new ConsolePanel(stubbedWindow);
+            var control4 = new ConsolePanel(stubbedWindow);
             sut.AddRange(control1, control2, control3);
             sut.RemoveRange(control1, null!, control4);
             sut.Should().Equal(control2, control3);
@@ -38,10 +38,10 @@ namespace ConControlsTests.Controls.ControlCollection
             stubbedWindow.GetControls = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new ConsoleControl(stubbedWindow);
-            var control2 = new ConsoleControl(stubbedWindow);
-            var control3 = new ConsoleControl(stubbedWindow);
-            var control4 = new ConsoleControl(stubbedWindow);
+            var control1 = new ConsolePanel(stubbedWindow);
+            var control2 = new ConsolePanel(stubbedWindow);
+            var control3 = new ConsolePanel(stubbedWindow);
+            var control4 = new ConsolePanel(stubbedWindow);
             sut.AddRange(control1, control2, control3);
 
             int fired = 0;
@@ -68,7 +68,7 @@ namespace ConControlsTests.Controls.ControlCollection
                 fired = true;
                 Assert.Fail();
             };
-            sut.RemoveRange(null!, new ConsoleControl(stubbedWindow));
+            sut.RemoveRange(null!, new ConsolePanel(stubbedWindow));
             fired.Should().BeFalse();
         }
 

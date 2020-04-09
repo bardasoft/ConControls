@@ -37,12 +37,7 @@ namespace ConControls.ConsoleApi
         public void DrawBackground(ConsoleColor color, Rectangle area)
         {
             Log($"drawing background {area} with {color}.");
-            var char_info = new CHAR_INFO(default, color.ToBackgroundColor());
-            var indices = from x in Enumerable.Range(area.Left, area.Width)
-                          from y in Enumerable.Range(area.Top, area.Height)
-                          select GetIndex(x, y);
-            foreach (var index in indices)
-                buffer[index] = char_info;
+            FillArea(color, color, default, area);
         }
         /// <inheritdoc />
         public void DrawBorder(ConsoleColor background, ConsoleColor foreground, BorderStyle style, Rectangle area)
@@ -70,6 +65,17 @@ namespace ConControls.ConsoleApi
                 buffer[GetIndex(area.Left, y)] = charInfo;
                 buffer[GetIndex(area.Right-1, y)] = charInfo;
             }
+        }
+        /// <inheritdoc />
+        public void FillArea(ConsoleColor background, ConsoleColor foreColor, char c, Rectangle area)
+        {
+            Log($"Fillig area {area} with '{c}' in {foreColor} on {background}.");
+            var char_info = new CHAR_INFO(c, background.ToBackgroundColor() | foreColor.ToForegroundColor());
+            var indices = from x in Enumerable.Range(area.Left, area.Width)
+                          from y in Enumerable.Range(area.Top, area.Height)
+                          select GetIndex(x, y);
+            foreach (var index in indices)
+                buffer[index] = char_info;
         }
         /// <inheritdoc />
         public void Flush()

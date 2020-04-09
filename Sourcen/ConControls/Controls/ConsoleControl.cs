@@ -26,6 +26,7 @@ namespace ConControls.Controls
         int inhibitDrawing;
         BorderStyle? borderStyle;
         ConsoleColor? borderColor;
+        ConsoleColor? foreColor;
         ConsoleColor? backgroundColor;
 
         /// <summary>
@@ -186,6 +187,24 @@ namespace ConControls.Controls
         }
 
         /// <summary>
+        /// The foreground color of this control.
+        /// If this is <code>null</code> the <see cref="Parent"/>'s foreground color will be used.
+        /// If this is <code>null</code>, too, the default (<see cref="ConsoleColor.Gray"/> will be used.
+        /// </summary>
+        public ConsoleColor? ForeColor
+        {
+            get => foreColor;
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (foreColor == value) return;
+                    foreColor = value;
+                    OnForeColorChanged();
+                }
+            }
+        }
+        /// <summary>
         /// The background color of this control.
         /// If this is <code>null</code> the <see cref="Parent"/>'s background color will be used.
         /// If this is <code>null</code>, too, the default (<see cref="ConsoleColor.Black"/> will be used.
@@ -210,7 +229,7 @@ namespace ConControls.Controls
         /// </summary>
         /// <param name="window">The <see cref="IConsoleWindow"/> this control should be placed on.</param>
         /// <exception cref="ArgumentNullException"><paramref name="window"/> is <code>null</code>.</exception>
-        public ConsoleControl(IConsoleWindow window)
+        private protected ConsoleControl(IConsoleWindow window)
         {
             Window = window ?? throw new ArgumentNullException(nameof(window));
             name = GetType().Name;
@@ -225,7 +244,7 @@ namespace ConControls.Controls
         /// <param name="window">The <see cref="IConsoleWindow"/> this control should be placed on.</param>
         /// <param name="parent">The parent <see cref="ConsoleControl"/> this control should be placed on.</param>
         /// <exception cref="ArgumentNullException"><paramref name="window"/> or <paramref name="parent"/> is <code>null</code>.</exception>
-        public ConsoleControl(IConsoleWindow window, ConsoleControl parent)
+        private protected ConsoleControl(IConsoleWindow window, ConsoleControl parent)
         {
             Window = window ?? throw new ArgumentNullException(nameof(window));
             this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
@@ -246,7 +265,10 @@ namespace ConControls.Controls
             if (Window.IsDisposed) throw Exceptions.WindowDisposed();
         }
 
-        void Draw()
+        /// <summary>
+        /// Redraws the control.
+        /// </summary>
+        public void Draw()
         {
             Log("parameterless called.");
             lock (Window.SynchronizationLock)
@@ -306,7 +328,7 @@ namespace ConControls.Controls
         /// <param name="graphics">An <see cref="IConsoleGraphics"/> that performs the drawing operations on
         /// the screen buffer.</param>
         /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
-        public virtual void DrawBackground(IConsoleGraphics graphics)
+        protected virtual void DrawBackground(IConsoleGraphics graphics)
         {
             if (graphics == null) throw new ArgumentNullException(nameof(graphics));
             lock (Window.SynchronizationLock)
@@ -334,13 +356,13 @@ namespace ConControls.Controls
         /// the screen buffer.</param>
         /// <returns>A <see cref="Rectangle"/> representing the available client area.</returns>
         /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
-        public virtual Rectangle DrawBorder(IConsoleGraphics graphics)
+        protected virtual Rectangle DrawBorder(IConsoleGraphics graphics)
         {
             if (graphics == null) throw new ArgumentNullException(nameof(graphics));
             lock (Window.SynchronizationLock)
             {
                 var effectiveBorderStyle = EffectiveBorderStyle;
-                Rectangle clientArea = effectiveBorderStyle != ConControls.Controls.BorderStyle.None
+                Rectangle clientArea = effectiveBorderStyle == ConControls.Controls.BorderStyle.None
                                            ? Area
                                            : new Rectangle(Area.X + 1, Area.Y + 1, Area.Width-2, Area.Height-2);
                 CheckDisposed();
@@ -370,7 +392,7 @@ namespace ConControls.Controls
         /// the screen buffer.</param>
         /// <param name="clientArea">An rectangle representing the client area (without borders) to draw on.</param>
         /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
-        public virtual void DrawClientArea(IConsoleGraphics graphics, Rectangle clientArea)
+        protected virtual void DrawClientArea(IConsoleGraphics graphics, Rectangle clientArea)
         {
             if (graphics == null) throw new ArgumentNullException(nameof(graphics));
             lock (Window.SynchronizationLock)
@@ -448,6 +470,13 @@ namespace ConControls.Controls
             }
         }
         /// <summary>
+        /// Called when the <see cref="ForeColor"/> of this control has been changed.
+        /// </summary>
+        protected virtual void OnForeColorChanged()
+        {
+            Draw();
+        }
+        /// <summary>
         /// Called when the <see cref="BackgroundColor"/> of this control has been changed.
         /// </summary>
         protected virtual void OnBackgroundColorChanged()
@@ -497,6 +526,10 @@ namespace ConControls.Controls
             Draw();
         }
 
+        /// <summary>
+        /// Gets the effective foreground color (applying transparency).
+        /// </summary>
+        protected ConsoleColor EffectiveForeColor => foreColor ?? Parent?.EffectiveForeColor ?? Window.ForeColor;
         /// <summary>
         /// Gets the effective background color (applying transparency).
         /// </summary>

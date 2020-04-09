@@ -41,6 +41,10 @@ namespace ConControls
         /// </summary>
         Size MaximumSize { get; }
         /// <summary>
+        /// Gets or sets the foreground color of the console window.
+        /// </summary>
+        ConsoleColor ForeColor { get; set; }
+        /// <summary>
         /// Gets or sets the background color of the console window.
         /// </summary>
         ConsoleColor BackgroundColor { get; set; }

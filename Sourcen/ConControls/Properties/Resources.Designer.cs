@@ -88,6 +88,24 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The percentage value of a progress bar cannot be less than zero! ähnelt.
+        /// </summary>
+        internal static string Exception_ProgressBarPercentageMustBeNonNegative {
+            get {
+                return ResourceManager.GetString("Exception_ProgressBarPercentageMustBeNonNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The percentage value of a proress bar cannot be greater than 1! ähnelt.
+        /// </summary>
+        internal static string Exception_ProgressBarPercentageMustNotBeGreaterThan1 {
+            get {
+                return ResourceManager.GetString("Exception_ProgressBarPercentageMustNotBeGreaterThan1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The console window used by this control has already been disposed of! ähnelt.
         /// </summary>
         internal static string Exception_WindowDisposed {

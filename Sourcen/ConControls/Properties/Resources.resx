@@ -126,6 +126,12 @@
   <data name="Exception_InvalidConsoleColor" xml:space="preserve">
     <value>The ConsoleColor \"{0}\" is not supported!</value>
   </data>
+  <data name="Exception_ProgressBarPercentageMustBeNonNegative" xml:space="preserve">
+    <value>The percentage value of a progress bar cannot be less than zero!</value>
+  </data>
+  <data name="Exception_ProgressBarPercentageMustNotBeGreaterThan1" xml:space="preserve">
+    <value>The percentage value of a proress bar cannot be greater than 1!</value>
+  </data>
   <data name="Exception_WindowDisposed" xml:space="preserve">
     <value>The console window used by this control has already been disposed of!</value>
   </data>
