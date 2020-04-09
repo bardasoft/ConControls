@@ -12,18 +12,37 @@ namespace ConControls.Controls
     /// </summary>
     public class ConsoleControl
     {
-        Rectangle effectiveBounds;
+        string name;
+        bool visible = true;
+        Rectangle area;
         ConsoleControl? parent;
         int inhibitDrawing;
         BorderStyle? borderStyle;
         ConsoleColor? borderColor;
         ConsoleColor? backgroundColor;
-        string name;
 
+        /// <summary>
+        /// The <see cref="Visible"/> property of the control has been changed.
+        /// </summary>
+        public event EventHandler? VisibleChanged;
         /// <summary>
         /// The <see cref="Area"/> of the control has been changed.
         /// </summary>
         public event EventHandler? AreaChanged;
+        /// <summary>
+        /// The <see cref="Parent"/> of the control has been changed.
+        /// </summary>
+        public event EventHandler? ParentChanged;
+        /// <summary>
+        /// A <see cref="ConsoleControl"/> has been added to the <see cref="Controls"/> collection
+        /// of this control.
+        /// </summary>
+        public event EventHandler<ControlCollectionChangedEventArgs>? ControlAdded;
+        /// <summary>
+        /// A <see cref="ConsoleControl"/> has been removed from the <see cref="Controls"/> collection
+        /// of this control.
+        /// </summary>
+        public event EventHandler<ControlCollectionChangedEventArgs>? ControlRemoved;
 
         /// <summary>
         /// The name of this control (merely for debug identification).
@@ -35,6 +54,19 @@ namespace ConControls.Controls
         }
 
         /// <summary>
+        /// Gets or sets wether the control should be visible (drawn) or not.
+        /// </summary>
+        public bool Visible
+        {
+            get => visible;
+            set
+            {
+                if (visible == value) return;
+                visible = value;
+                OnVisibleChanged();
+            }
+        }
+        /// <summary>
         /// The effective total area of the control.
         /// This is the area the control effectivly fills in the console screen buffer
         /// after applying layout and including borders.
@@ -43,14 +75,14 @@ namespace ConControls.Controls
         {
             get
             {
-                lock (Window.SynchronizationLock) return effectiveBounds;
+                lock (Window.SynchronizationLock) return area;
             }
             set
             {
                 lock (Window.SynchronizationLock)
                 {
-                    if (value == effectiveBounds) return;
-                    effectiveBounds = value;
+                    if (value == area) return;
+                    area = value;
                     OnAreaChanged();
                 }
             }
@@ -70,16 +102,35 @@ namespace ConControls.Controls
             get => parent;
             set
             {
-                if (Window.Panel == this) throw Exceptions.CannotChangeRootPanelsParent();
-                if (value == null) throw new ArgumentNullException(nameof(Parent));
-
-                lock(Window.SynchronizationLock)
+                lock (Window.SynchronizationLock)
                 {
                     if (parent == value) return;
-                    if (value.Window != Window) throw Exceptions.DifferentWindow();
-                    parent?.Controls.Remove(this);
-                    parent = value;
-                    parent.Controls.Add(this);
+                    if (value != null && value.Window != Window) throw Exceptions.DifferentWindow();
+
+                    if (parent == null || value == null)
+                        Window.BeginUpdate();
+                    parent?.BeginUpdate();
+                    value?.BeginUpdate();
+                    try
+                    {
+                        if (parent == null)
+                            Window.Controls.Remove(this);
+                        else
+                            parent.Controls.Remove(this);
+                        if (value == null)
+                            Window.Controls.Add(this);
+                        else
+                            value.Controls.Add(this);
+                    }
+                    finally
+                    {
+                        if (parent == null || value == null)
+                            Window.EndUpdate();
+                        parent?.EndUpdate();
+                        value?.EndUpdate();
+                        parent = value;
+                    }
+
                     OnParentChanged();
                 }
             }
@@ -94,7 +145,7 @@ namespace ConControls.Controls
         /// Determines if the control can currently be redrawn, depending on calls to <see cref="BeginUpdate"/> and
         /// <see cref="EndUpdate"/> to this control or its parents.
         /// </summary>
-        public bool DrawingInhibited => inhibitDrawing > 0 || parent?.DrawingInhibited == true || Window.DrawingInhibited;
+        public bool DrawingInhibited => !visible || inhibitDrawing > 0 || parent?.DrawingInhibited == true || Window.DrawingInhibited;
 
         /// <summary>
         /// The <see cref="BorderStyle"/> of this control.
@@ -147,16 +198,35 @@ namespace ConControls.Controls
         }
 
         /// <summary>
-        /// Initializes an instance of <see cref="ConsoleControl"/>.
+        /// Creates a new <see cref="ConsoleControl"/> and adds it to the
+        /// <paramref name="window"/>'s control collection.
         /// </summary>
-        /// <param name="window"></param>
+        /// <param name="window">The <see cref="IConsoleWindow"/> this control should be placed on.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="window"/> is <code>null</code>.</exception>
         public ConsoleControl(IConsoleWindow window)
         {
             Window = window ?? throw new ArgumentNullException(nameof(window));
             name = GetType().Name;
-            Controls = new ControlCollection(this);
+            Controls = new ControlCollection(Window);
             Controls.ControlAdded += OnControlAdded;
             Controls.ControlRemoved += OnControlRemoved;
+            window.Controls.Add(this);
+        }
+        /// <summary>
+        /// Initializes an instance of <see cref="ConsoleControl"/>.
+        /// </summary>
+        /// <param name="window">The <see cref="IConsoleWindow"/> this control should be placed on.</param>
+        /// <param name="parent">The parent <see cref="ConsoleControl"/> this control should be placed on.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="window"/> or <paramref name="parent"/> is <code>null</code>.</exception>
+        public ConsoleControl(IConsoleWindow window, ConsoleControl parent)
+        {
+            Window = window ?? throw new ArgumentNullException(nameof(window));
+            this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
+            name = GetType().Name;
+            Controls = new ControlCollection(Window);
+            Controls.ControlAdded += OnControlAdded;
+            Controls.ControlRemoved += OnControlRemoved;
+            parent.Controls.Add(this);
         }
 
         /// <summary>
@@ -179,9 +249,11 @@ namespace ConControls.Controls
                     Log("drawing inhibited.");
                     return;
                 }
-                Log("executing.");
+                Log("Getting graphics object.");
                 var graphics = Window.GetGraphics();
+                Log("Start drawing.");
                 Draw(graphics);
+                Log("Flushing.");
                 graphics.Flush();
             }
         }
@@ -190,7 +262,10 @@ namespace ConControls.Controls
         /// When overwriting this method, make sure to use the <see cref="IConsoleWindow.SynchronizationLock"/>
         /// to synchronize threads and to call <see cref="CheckDisposed"/> to check if the window has not yet
         /// been disposed of.
+        /// The <paramref name="graphics"/> buffer should be flushed by the caller.
         /// </summary>
+        /// <param name="graphics">An <see cref="IConsoleGraphics"/> that performs the drawing operations on
+        /// the screen buffer.</param>
         /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
         public virtual void Draw(IConsoleGraphics graphics)
         {
@@ -206,14 +281,99 @@ namespace ConControls.Controls
                     return;
                 }
 
-                var effectiveBackgroundColor = EffectiveBackgroundColor;
-                var effectiveBorderColor = EffectiveBorderColor;
-                var effectiveBorderStyle = EffectiveBorderStyle;
+                Log("Drawing background.");
+                DrawBackground(graphics);
+                Log("Drawing border.");
+                var clientArea = DrawBorder(graphics);
+                Log("Drawing client area.");
+                DrawClientArea(graphics, clientArea);
+            }
+        }
+        /// <summary>
+        /// Draws the background onto the console screen buffer.
+        /// When overwriting this method, make sure to use the <see cref="IConsoleWindow.SynchronizationLock"/>
+        /// to synchronize threads and to call <see cref="CheckDisposed"/> to check if the window has not yet
+        /// been disposed of.
+        /// The <paramref name="graphics"/> buffer should be flushed by the caller.
+        /// </summary>
+        /// <param name="graphics">An <see cref="IConsoleGraphics"/> that performs the drawing operations on
+        /// the screen buffer.</param>
+        /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
+        public virtual void DrawBackground(IConsoleGraphics graphics)
+        {
+            if (graphics == null) throw new ArgumentNullException(nameof(graphics));
+            lock (Window.SynchronizationLock)
+            {
+                CheckDisposed();
+                if (DrawingInhibited)
+                {
+                    Log("drawing inhibited.");
+                    return;
+                }
 
+                var effectiveBackgroundColor = EffectiveBackgroundColor;
                 Log($"drawing background ({effectiveBackgroundColor}.");
-                graphics.DrawBackground(backgroundColor ?? parent?.backgroundColor ?? Window.BackgroundColor, effectiveBounds);
-                Log($"drawing border ({effectiveBorderColor}, {effectiveBorderStyle}.");
-                graphics.DrawBorder(effectiveBackgroundColor, effectiveBorderColor, effectiveBorderStyle, effectiveBounds);
+                graphics.DrawBackground(backgroundColor ?? parent?.backgroundColor ?? Window.BackgroundColor, area);
+            }
+        }
+        /// <summary>
+        /// Draws the border of the control onto the console screen buffer and returns the remaining client area.
+        /// When overwriting this method, make sure to use the <see cref="IConsoleWindow.SynchronizationLock"/>
+        /// to synchronize threads and to call <see cref="CheckDisposed"/> to check if the window has not yet
+        /// been disposed of.
+        /// The <paramref name="graphics"/> buffer should be flushed by the caller.
+        /// </summary>
+        /// <param name="graphics">An <see cref="IConsoleGraphics"/> that performs the drawing operations on
+        /// the screen buffer.</param>
+        /// <returns>A <see cref="Rectangle"/> representing the available client area.</returns>
+        /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
+        public virtual Rectangle DrawBorder(IConsoleGraphics graphics)
+        {
+            if (graphics == null) throw new ArgumentNullException(nameof(graphics));
+            lock (Window.SynchronizationLock)
+            {
+                var effectiveBorderStyle = EffectiveBorderStyle;
+                Rectangle clientArea = effectiveBorderStyle != ConControls.Controls.BorderStyle.None
+                                           ? Area
+                                           : new Rectangle(Area.X + 1, Area.Y + 1, Area.Width-2, Area.Height-2);
+                CheckDisposed();
+                if (DrawingInhibited)
+                {
+                    Log("drawing inhibited.");
+                    return clientArea;
+                }
+
+                var effectiveBorderColor = EffectiveBorderColor;
+                var effectiveBackgroundColor = EffectiveBackgroundColor;
+
+                Log($"drawing border ({effectiveBorderColor} on {effectiveBackgroundColor}, {effectiveBorderStyle}).");
+                graphics.DrawBorder(effectiveBackgroundColor, effectiveBorderColor, effectiveBorderStyle, area);
+
+                return clientArea;
+            }
+        }
+        /// <summary>
+        /// Draws the client area and child controls onto the console screen buffer.
+        /// When overwriting this method, make sure to use the <see cref="IConsoleWindow.SynchronizationLock"/>
+        /// to synchronize threads and to call <see cref="CheckDisposed"/> to check if the window has not yet
+        /// been disposed of.
+        /// The <paramref name="graphics"/> buffer should be flushed by the caller.
+        /// </summary>
+        /// <param name="graphics">An <see cref="IConsoleGraphics"/> that performs the drawing operations on
+        /// the screen buffer.</param>
+        /// <param name="clientArea">An rectangle representing the client area (without borders) to draw on.</param>
+        /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
+        public virtual void DrawClientArea(IConsoleGraphics graphics, Rectangle clientArea)
+        {
+            if (graphics == null) throw new ArgumentNullException(nameof(graphics));
+            lock (Window.SynchronizationLock)
+            {
+                CheckDisposed();
+                if (DrawingInhibited)
+                {
+                    Log("drawing inhibited.");
+                    return;
+                }
 
                 Log("drawing children");
                 foreach (var child in Controls)
@@ -245,24 +405,41 @@ namespace ConControls.Controls
         /// </summary>
         protected virtual void OnParentChanged()
         {
+            BeginUpdate();
+            try
+            {
+                ParentChanged?.Invoke(this, EventArgs.Empty);
+            }
+            finally { EndUpdate(); }
         }
-        /// <summary>
-        /// Called when a <see cref="ConsoleControl"/> has been added to this control.
-        /// </summary>
-        /// <param name="sender">The object that raised the event (must be <see cref="Controls"/>).</param>
-        /// <param name="e">The <see cref="ControlCollectionChangedEventArgs"/> containing the added <see cref="ConsoleControl"/>.</param>
-        protected virtual void OnControlAdded(object sender, ControlCollectionChangedEventArgs e)
+        void OnControlAdded(object sender, ControlCollectionChangedEventArgs e)
         {
-            Draw();
+            if (e?.AddedControl == null) return;
+            BeginUpdate();
+            try
+            {
+                e.AddedControl.Parent = this;
+                // add event handlers when necessary
+
+                ControlAdded?.Invoke(this, e);
+            }
+            finally { EndUpdate(); }
+
         }
-        /// <summary>
-        /// Called when a <see cref="ConsoleControl"/> has been removed from this control.
-        /// </summary>
-        /// <param name="sender">The object that raised the event (must be <see cref="Controls"/>).</param>
-        /// <param name="e">The <see cref="ControlCollectionChangedEventArgs"/> containing the removed <see cref="ConsoleControl"/>.</param>
-        protected virtual void OnControlRemoved(object sender, ControlCollectionChangedEventArgs e)
+        void OnControlRemoved(object sender, ControlCollectionChangedEventArgs e)
         {
-            Draw();
+            if (e?.RemovedControl == null) return;
+            BeginUpdate();
+            try
+            {
+                // remove eventhandlers when necessary
+
+                ControlRemoved?.Invoke(this, e);
+            }
+            finally
+            {
+                EndUpdate();
+            }
         }
         /// <summary>
         /// Called when the <see cref="BackgroundColor"/> of this control has been changed.
@@ -270,6 +447,15 @@ namespace ConControls.Controls
         protected virtual void OnBackgroundColorChanged()
         {
             Draw();
+        }
+        void OnVisibleChanged()
+        {
+            lock (Window.SynchronizationLock)
+            {
+                if (parent == null) Window.Draw();
+                else parent.Draw();
+                VisibleChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
         /// <summary>
         /// Called when the <see cref="Area"/> of this control has been changed.

@@ -11,34 +11,41 @@ namespace ConControls
     public interface IConsoleWindow : IDisposable
     {
         /// <summary>
+        /// Raised when the <see cref="Size"/> of the console window changed.
+        /// </summary>
+        event EventHandler? SizeChanged;
+        /// <summary>
         /// Raised when this console window is disposed of.
         /// </summary>
         event EventHandler? Disposed;
 
         /// <summary>
-        /// The <see cref="FrameCharSets"/> provider to use to draw frames.
+        /// The title of the console window.
         /// </summary>
-        FrameCharSets FrameCharSets { get; set; }
-
+        string Title { get; set; }
         /// <summary>
-        /// Gets or sets the size of the console window.
+        /// Gets or sets the size of the console window (the area of the screen buffer).
         /// The <see cref="System.Drawing.Size.Width"/> is the number of characters per row.
         /// The <see cref="System.Drawing.Size.Height"/> is the number of lines.
         /// </summary>
         Size Size { get; set; }
         /// <summary>
-        /// Gets or sets the width of the console window (in character columns).
+        /// Gets the maximum size of the console window based on the current font and the size of the display.
         /// </summary>
-        int Width { get; set; }
+        Size MaximumSize { get; }
         /// <summary>
-        /// Gets or sets the size of the console window (the number of rows).
+        /// Gets or sets the background color of the console window.
         /// </summary>
-        int Height { get; set; }
+        ConsoleColor BackgroundColor { get; set; }
+        /// <summary>
+        /// The collection of <see cref="ConsoleControl"/>s on this window.
+        /// </summary>
+        ControlCollection Controls { get; }
 
         /// <summary>
-        /// Gets the root panel of this window.
+        /// The <see cref="FrameCharSets"/> provider to use to draw frames.
         /// </summary>
-        ConsoleControl Panel { get; }
+        FrameCharSets FrameCharSets { get; set; }
 
         /// <summary>
         /// Determines if the window can currently be redrawn, depending on calls to <see cref="BeginUpdate"/> and
@@ -47,20 +54,9 @@ namespace ConControls
         bool DrawingInhibited { get; }
         
         /// <summary>
-        /// Gets or sets the background color of the console window.
-        /// </summary>
-        ConsoleColor BackgroundColor { get; set; }
-
-        /// <summary>
-        /// The title of the console window.
-        /// </summary>
-        string Title { get; set; }
-
-        /// <summary>
         /// The window has been disposed of.
         /// </summary>
         bool IsDisposed { get; }
-
         /// <summary>
         /// An object that can be used to synchronize threads
         /// that want to execute conosle operations

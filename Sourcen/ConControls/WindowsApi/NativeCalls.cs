@@ -9,7 +9,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
-using ConControls.ConsoleApi;
 using ConControls.WindowsApi.Types;
 
 namespace ConControls.WindowsApi
@@ -17,11 +16,6 @@ namespace ConControls.WindowsApi
     [ExcludeFromCodeCoverage]
     sealed class NativeCalls : INativeCalls
     {
-        public void AddControlControlHandler(ConsoleControlHandler handler)
-        {
-            if (!NativeMethods.SetConsoleCtrlHandler(handler, true))
-                throw Exceptions.Win32();
-        }
         public CONSOLE_SCREEN_BUFFER_INFOEX GetConsoleScreenBufferInfo(ConsoleOutputHandle consoleOutputHandle)
         {
             CONSOLE_SCREEN_BUFFER_INFOEX info = new CONSOLE_SCREEN_BUFFER_INFOEX
@@ -39,6 +33,8 @@ namespace ConControls.WindowsApi
                 throw Exceptions.Win32();
             return titleBuilder.ToString();
         }
+        public COORD GetLargestConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle) =>
+            NativeMethods.GetLargestConsoleWindowSize(consoleOutputHandle);
         public CHAR_INFO[] ReadConsoleOutput(ConsoleOutputHandle consoleOutputHandle, Rectangle region)
         {
             SMALL_RECT rect = new SMALL_RECT(region);
@@ -46,11 +42,6 @@ namespace ConControls.WindowsApi
             if (!NativeMethods.ReadConsoleOutput(consoleOutputHandle, buffer, new COORD(region), default, ref rect))
                 throw Exceptions.Win32();
             return buffer;
-        }
-        public void RemoveControlControlHandler(ConsoleControlHandler handler)
-        {
-            if (!NativeMethods.SetConsoleCtrlHandler(handler, false))
-                throw Exceptions.Win32();
         }
         public void SetConsoleMode(ConsoleInputHandle consoleInputHandle, ConsoleInputModes inputMode)
         {
@@ -70,6 +61,13 @@ namespace ConControls.WindowsApi
         public void SetConsoleTitle(string title)
         {
             if (!NativeMethods.SetConsoleTitle(title))
+                throw Exceptions.Win32();
+        }
+        public void SetConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle, Size size)
+        {
+            if (!NativeMethods.SetConsoleWindowInfo(consoleOutputHandle,
+                                                    true,
+                                                    new SMALL_RECT(size)))
                 throw Exceptions.Win32();
         }
         public void WriteConsoleOutput(ConsoleOutputHandle consoleOutputHandle, CHAR_INFO[] buffer, Rectangle region)

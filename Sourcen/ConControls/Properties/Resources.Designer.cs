@@ -61,15 +61,6 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The parent of the console window&apos;s root panel cannot be changed! ähnelt.
-        /// </summary>
-        internal static string Exception_CannotChangeRootPanelsParent {
-            get {
-                return ResourceManager.GetString("Exception_CannotChangeRootPanelsParent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die There can only be one single console window at a time! Dispose of any existing console window before instantiating a new one. ähnelt.
         /// </summary>
         internal static string Exception_CanOnlyUseSingleContext {

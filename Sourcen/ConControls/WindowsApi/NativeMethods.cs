@@ -9,7 +9,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
-using ConControls.ConsoleApi;
 using ConControls.WindowsApi.Types;
 
 namespace ConControls.WindowsApi
@@ -31,6 +30,8 @@ namespace ConControls.WindowsApi
         internal static extern int GetConsoleTitle(
             StringBuilder titleBuilder,
             int size);
+        [DllImport("kernel32", SetLastError = true)]
+        internal static extern COORD GetLargestConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle);
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern IntPtr GetStdHandle(int stdHandle);
         [DllImport("kernel32.dll", EntryPoint = "ReadConsoleInputW", CharSet = CharSet.Unicode, SetLastError = true)]
@@ -47,8 +48,6 @@ namespace ConControls.WindowsApi
             COORD offset,
             ref SMALL_RECT useRegion);
         [DllImport("kernel32.dll", SetLastError = true)]
-        internal static extern bool SetConsoleCtrlHandler(ConsoleControlHandler handler, bool add);
-        [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern bool SetConsoleMode(ConsoleInputHandle consoleInputHandle, ConsoleInputModes inputMode);
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern bool SetConsoleMode(ConsoleOutputHandle consoleOutputHandle, ConsoleOutputModes outputMode);
@@ -56,6 +55,8 @@ namespace ConControls.WindowsApi
         internal static extern bool SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, COORD size);
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern bool SetConsoleTitle(string title);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern bool SetConsoleWindowInfo(ConsoleOutputHandle consoleOutputHandle, bool absolute, SMALL_RECT area);
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern bool WriteConsoleOutput(
             ConsoleOutputHandle consoleOutputHandle,

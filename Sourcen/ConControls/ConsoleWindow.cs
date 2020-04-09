@@ -29,12 +29,61 @@ namespace ConControls
 
         int isDisposed;
         int inhibitDrawing;
+
         FrameCharSets frameCharSets = new FrameCharSets();
-        Size size;
         ConsoleColor backgroundColor = ConsoleColor.Black;
 
         /// <inheritdoc />
+        public event EventHandler? SizeChanged;
+        /// <inheritdoc />
         public event EventHandler? Disposed;
+
+        /// <inheritdoc />
+        public string Title
+        {
+            get => api.GetConsoleTitle();
+            set => api.SetConsoleTitle(value ?? string.Empty);
+        }
+        /// <inheritdoc />
+        public Size Size
+        {
+            get
+            {
+                var info = api.GetConsoleScreenBufferInfo(consoleOutputHandle);
+                return new Size(info.Window.Right - info.Window.Left + 1, info.Window.Bottom - info.Window.Top + 1);
+            }
+            set
+            {
+                lock (SynchronizationLock)
+                {
+                    if (value == Size) return;
+                    api.SetConsoleWindowSize(consoleOutputHandle, value);
+                    OnSizeChanged();
+                }
+            }
+        }
+        /// <inheritdoc />
+        public Size MaximumSize
+        {
+            get
+            {
+                var size = api.GetLargestConsoleWindowSize(consoleOutputHandle);
+                return new Size(size.X, size.Y);
+            }
+        }
+        /// <inheritdoc />
+        public ConsoleColor BackgroundColor
+        {
+            get => backgroundColor;
+            set
+            {
+                if (value == backgroundColor) return;
+                backgroundColor = value;
+                OnBackgroundColorChanged();
+            }
+        }
+        /// <inheritdoc />
+        public ControlCollection Controls { get; }
 
         /// <inheritdoc />
         public FrameCharSets FrameCharSets
@@ -52,81 +101,10 @@ namespace ConControls
                 }
             }
         }
-
-        /// <inheritdoc />
-        public Size Size
-        {
-            get
-            {
-                lock (SynchronizationLock) return size;
-            }
-            set
-            {
-                lock (SynchronizationLock)
-                {
-                    if (value == size) return;
-                    size = value;
-                    OnSizeChanged();
-                }
-            }
-        }
-        /// <inheritdoc />
-        public int Width
-        {
-            get { lock(SynchronizationLock) return size.Width; }
-            set
-            {
-                lock(SynchronizationLock)
-                {
-                    if (value == size.Width) return;
-                    size = new Size(value, size.Height);
-                    OnSizeChanged();
-                }
-            }
-        }
-        /// <inheritdoc />
-        public int Height
-        {
-            get { lock(SynchronizationLock) return size.Height; }
-            set
-            {
-                lock (SynchronizationLock)
-                {
-                    if (value == size.Height) return;
-                    size = new Size(size.Width, value);
-                    OnSizeChanged();
-                }
-            }
-        }
-
-        /// <inheritdoc />
-        public ConsoleControl Panel { get; }
-
         /// <inheritdoc />
         public bool DrawingInhibited => inhibitDrawing > 0;
-
-        /// <inheritdoc />
-        public ConsoleColor BackgroundColor
-        {
-            get => backgroundColor;
-            set
-            {
-                if (value == backgroundColor) return;
-                backgroundColor = value;
-                OnBackgroundColorChanged();
-            }
-        }
-
-        /// <inheritdoc />
-        public string Title 
-        {
-            get => api.GetConsoleTitle();
-            set => api.SetConsoleTitle(value ?? string.Empty);
-        }
-
         /// <inheritdoc />
         public bool IsDisposed => isDisposed != 0;
-
         /// <inheritdoc />
         public object SynchronizationLock { get; } = new object();
 
@@ -155,9 +133,10 @@ namespace ConControls
                                     ConsoleInputModes.EnableMouseInput |
                                     ConsoleInputModes.EnableExtendedFlags);
             this.api.SetConsoleMode(consoleOutputHandle, ConsoleOutputModes.None);
-            Panel = new ConsoleControl(this);
-            Panel.AreaChanged += (sender, e) => AdjustWindowAndBufferSize();
-            AdjustWindowAndBufferSize();
+            Controls = new ControlCollection(this);
+            Controls.ControlAdded += (sender, e) => Draw();
+            Controls.ControlRemoved += (sender, e) => Draw();
+            SynchronizeConsoleSettings();
         }
         /// <summary>
         /// Cleans up native resources.
@@ -177,6 +156,8 @@ namespace ConControls
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
             if (disposing)
             {
+                Console.ResetColor();
+                Console.Clear();
                 consoleOutputHandle.Dispose();
                 consoleInputHandle.Dispose();
             }
@@ -201,14 +182,15 @@ namespace ConControls
                 var rect = new Rectangle(0, 0, Size.Width, Size.Height);
                 Log($"drawing background at {rect}.");
                 graphics.DrawBackground(backgroundColor, rect);
-                Log("drawing root panel.");
-                Panel.Draw(graphics);
+                Log("drawing controls.");
+                foreach(var control in Controls)
+                    control.Draw(graphics);
                 Log("flushing.");
                 graphics.Flush();
             }
         }
         /// <inheritdoc />
-        public void Refresh() => AdjustWindowAndBufferSize();
+        public void Refresh() => SynchronizeConsoleSettings();
         /// <inheritdoc />
         public void BeginUpdate()
         {
@@ -226,42 +208,31 @@ namespace ConControls
         }
         void OnSizeChanged()
         {
-            Draw();
+            BeginUpdate();
+            try
+            {
+                SizeChanged?.Invoke(this, EventArgs.Empty);
+            }
+            finally
+            {
+                EndUpdate();
+            }
         }
         void OnBackgroundColorChanged()
         {
             Draw();
         }
 
-        void AdjustWindowAndBufferSize()
+        void SynchronizeConsoleSettings()
         {
             lock (SynchronizationLock)
             {
                 BeginUpdate();
                 try
                 {
-                    var info = api.GetConsoleScreenBufferInfo(consoleOutputHandle);
-                    Log($"Read window props ({info.Window.Left}, {info.Window.Top}, {info.Window.Right}, {info.Window.Bottom}).");
-                    var winSize = new Size(info.Window.Right - info.Window.Left + 1, info.Window.Bottom - info.Window.Top + 1);
-                    Log($"Calculated window size {winSize}).");
-                    api.SetConsoleScreenBufferSize(consoleOutputHandle, new COORD(winSize));
-                    Size = winSize;
-                    var panelBounds = Panel.Area;
-                    int left = panelBounds.Left;
-                    if (left >= Size.Width)
-                        left = Size.Width - 10;
-                    int right = left + panelBounds.Width;
-                    if (right >= Size.Width)
-                        right = Size.Width - 1;
-                    int top = panelBounds.Top;
-                    if (top >= Size.Height)
-                        top = Size.Height - 10;
-                    int bottom = top + panelBounds.Height;
-                    if (bottom >= Size.Height)
-                        bottom = Size.Height - 1;
-                    Rectangle panelRect = new Rectangle(left, top, right - left, bottom - top);
-                    Log($"Setting root panel to area {panelRect}.");
-                    Panel.Area = panelRect;
+                    var bufferSize = new COORD(Size);
+                    Log($"Setting screen buffer size to {bufferSize}.");
+                    api.SetConsoleScreenBufferSize(consoleOutputHandle, new COORD(Size));
                 }
                 finally
                 {

@@ -20,6 +20,9 @@ namespace ConControls.WindowsApi.Types
             Right = (short)right;
             Bottom = (short)bottom;
         }
+        public SMALL_RECT(Size size)
+            : this(0, 0, size.Width - 1, size.Height - 1) { }
         public SMALL_RECT(Rectangle rect) : this(rect.Left, rect.Top, rect.Right, rect.Bottom) { }
+        
     }
 }

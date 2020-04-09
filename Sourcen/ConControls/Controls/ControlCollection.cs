@@ -10,7 +10,7 @@ namespace ConControls.Controls
     /// </summary>
     public sealed class ControlCollection : IEnumerable<ConsoleControl>
     {
-        readonly ConsoleControl owner;
+        readonly IConsoleWindow window;
         readonly List<ConsoleControl> controls = new List<ConsoleControl>();
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace ConControls.Controls
         /// <exception cref="IndexOutOfRangeException">The <paramref name="index"/> was outside this collection.</exception>
         public ConsoleControl this[int index] => controls[index];
 
-        internal ControlCollection(ConsoleControl owner) => this.owner = owner;
+        internal ControlCollection(IConsoleWindow window) => this.window = window;
 
         /// <summary>
         /// Adds the given <paramref name="control"/> to the collection.
@@ -44,9 +44,9 @@ namespace ConControls.Controls
         {
             if (control == null) throw new ArgumentNullException(nameof(control));
             if (controls.Contains(control)) return;
-            if (control.Window != owner.Window) throw Exceptions.DifferentWindow();
+            if (control.Window != window) throw Exceptions.DifferentWindow();
             controls.Add(control);
-            ControlAdded?.Invoke(this, new ControlCollectionChangedEventArgs(control));
+            ControlAdded?.Invoke(this, new ControlCollectionChangedEventArgs(addedControl: control));
         }
         /// <summary>
         /// Removes the given <paramref name="control"/> from the collection.
@@ -59,7 +59,7 @@ namespace ConControls.Controls
             if (control == null) throw new ArgumentNullException(nameof(control));
             if (!controls.Contains(control)) return;
             controls.Remove(control);
-            ControlRemoved?.Invoke(this, new ControlCollectionChangedEventArgs(control));
+            ControlRemoved?.Invoke(this, new ControlCollectionChangedEventArgs(removedControl: control));
         }
 
         /// <inheritdoc />

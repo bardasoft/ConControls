@@ -41,26 +41,27 @@ namespace ConControls.ConsoleApi
         public void DrawBorder(ConsoleColor background, ConsoleColor foreground, BorderStyle style, Rectangle area)
         {
             Log($"drawing border {style} around {area} with {foreground} on {background}.");
+            Log($"{area.Left} {area.Top} {area.Right} {area.Bottom}");
             if (style == BorderStyle.None) return;
 
             var charSet = frameCharSets[style];
             var attribute = background.ToBackgroundColor() | foreground.ToForegroundColor();
             buffer[GetIndex(area.Left, area.Top)] = new CHAR_INFO(charSet.UpperLeft, attribute);
-            buffer[GetIndex(area.Right, area.Top)] = new CHAR_INFO(charSet.UpperRight, attribute);
-            buffer[GetIndex(area.Left, area.Bottom)] = new CHAR_INFO(charSet.LowerLeft, attribute);
-            buffer[GetIndex(area.Right, area.Bottom)] = new CHAR_INFO(charSet.LowerRight, attribute);
+            buffer[GetIndex(area.Right-1, area.Top)] = new CHAR_INFO(charSet.UpperRight, attribute);
+            buffer[GetIndex(area.Left, area.Bottom-1)] = new CHAR_INFO(charSet.LowerLeft, attribute);
+            buffer[GetIndex(area.Right-1, area.Bottom-1)] = new CHAR_INFO(charSet.LowerRight, attribute);
 
             var charInfo = new CHAR_INFO(charSet.Horizontal, attribute);
-            for (int x = area.Left + 1; x < area.Right; x++)
+            for (int x = area.Left + 1; x < area.Right-1; x++)
             {
                 buffer[GetIndex(x, area.Top)] = charInfo;
-                buffer[GetIndex(x, area.Bottom)] = charInfo;
+                buffer[GetIndex(x, area.Bottom-1)] = charInfo;
             }
             charInfo = new CHAR_INFO(charSet.Vertical, attribute);
-            for (int y = area.Top + 1; y < area.Bottom; y++)
+            for (int y = area.Top + 1; y < area.Bottom-1; y++)
             {
                 buffer[GetIndex(area.Left, y)] = charInfo;
-                buffer[GetIndex(area.Right, y)] = charInfo;
+                buffer[GetIndex(area.Right-1, y)] = charInfo;
             }
         }
         /// <inheritdoc />

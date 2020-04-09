@@ -10,11 +10,20 @@ namespace ConControls.Controls
     public sealed class ControlCollectionChangedEventArgs
     {
         /// <summary>
-        /// The <see cref="ConsoleControl"/> that has been added or removed to
+        /// The <see cref="ConsoleControl"/> that has been added to
         /// the <see cref="ControlCollection"/>.
         /// </summary>
-        public ConsoleControl Control { get; }
+        public ConsoleControl? AddedControl { get; }
+        /// <summary>
+        /// The <see cref="ConsoleControl"/> that has been removed from
+        /// the <see cref="ControlCollection"/>.
+        /// </summary>
+        public ConsoleControl? RemovedControl { get; }
 
-        internal ControlCollectionChangedEventArgs(ConsoleControl control) => Control = control;
+        internal ControlCollectionChangedEventArgs(ConsoleControl? addedControl = null, ConsoleControl? removedControl = null)
+        {
+            AddedControl = addedControl;
+            RemovedControl = removedControl;
+        }
     }
 }

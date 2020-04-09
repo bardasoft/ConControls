@@ -29,5 +29,7 @@ namespace ConControls.WindowsApi.Types
             : this(size.X, size.Y) { }
         public COORD(Rectangle rect)
             : this(rect.Width, rect.Height) { }
+        /// <inheritdoc />
+        public override string ToString() => $"{nameof(COORD)}({nameof(X)}: {X}, {nameof(Y)}: {Y})";
     }
 }

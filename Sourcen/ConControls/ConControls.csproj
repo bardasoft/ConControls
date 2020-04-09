@@ -5,6 +5,8 @@
     <Version>0.1.0-alpha</Version>
     <Authors>René Vogt</Authors>
     <Product>ConControls</Product>
+    <Title>ConControls - Console UI controls</Title>
+    <PackageSummary>A library for console UI controls.</PackageSummary>
     <Description>A library for console UI controls.</Description>
     <Copyright>René Vogt</Copyright>
     <PackageLicenseExpression></PackageLicenseExpression>

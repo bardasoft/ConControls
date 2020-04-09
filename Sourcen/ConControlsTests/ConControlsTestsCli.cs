@@ -27,10 +27,14 @@ namespace ConControlsTests
             try
             {
                 window.BackgroundColor = ConsoleColor.Blue;
-                window.Panel.Area = new Rectangle(0, 0, window.Width, window.Height);
-                window.Panel.BackgroundColor = ConsoleColor.Cyan;
-                window.Panel.BorderColor = ConsoleColor.Yellow;
-                window.Panel.BorderStyle = BorderStyle.Bold;
+                // ReSharper disable once AssignmentIsFullyDiscarded
+                _ = new ConsoleControl(window)
+                {
+                    Area = new Rectangle(Point.Empty, window.Size),
+                    BackgroundColor = ConsoleColor.Cyan,
+                    BorderColor = ConsoleColor.Yellow,
+                    BorderStyle = BorderStyle.Bold
+                };
             }
             finally
             {
