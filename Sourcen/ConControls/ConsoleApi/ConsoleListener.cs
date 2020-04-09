@@ -17,15 +17,11 @@ namespace ConControls.ConsoleApi
 {
     sealed class ConsoleListener : IConsoleListener
     {
-        class InputWaitHandle : WaitHandle
-        {
-            public InputWaitHandle(IntPtr handle) => SafeWaitHandle = new SafeWaitHandle(handle, false);
-        }
-
         readonly INativeCalls api;
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
         readonly Thread thread;
         readonly ConsoleInputHandle consoleInputHandle = new ConsoleInputHandle();
+        readonly ConsoleOutputHandle consoleOutputHandle = new ConsoleOutputHandle();
         int disposed;
 
         public event EventHandler<ConsoleOutputReceivedEventArgs>? OutputReceived;
@@ -38,6 +34,12 @@ namespace ConControls.ConsoleApi
         internal ConsoleListener(INativeCalls? api = null)
         {
             this.api = api ?? new NativeCalls();
+            this.api.SetConsoleMode(consoleInputHandle,
+                                    ConsoleInputModes.EnableWindowInput |
+                                    ConsoleInputModes.EnableMouseInput |
+                                    ConsoleInputModes.EnableExtendedFlags);
+            this.api.SetConsoleMode(consoleOutputHandle, ConsoleOutputModes.None);
+
             thread = new Thread(ListenerThread);
             thread.Start();
         }
@@ -47,19 +49,21 @@ namespace ConControls.ConsoleApi
             if (Interlocked.CompareExchange(ref disposed, 1, 0) != 0) return;
             stopEvent.Set();
             thread.Join();
+            stopEvent.Dispose();
             consoleInputHandle.Dispose();
+            consoleOutputHandle.Dispose();
         }
         void ListenerThread()
         {
             Log("Starting thread.");
             IntPtr stdin = consoleInputHandle.DangerousGetHandle();
-            using var inputWaitHandle = new InputWaitHandle(stdin);
+            using var inputWaitHandle = new AutoResetEvent(false) {SafeWaitHandle = new SafeWaitHandle(stdin, false)};
             WaitHandle[] waitHandles = {stopEvent, inputWaitHandle};
             int index;
             while ((index = WaitHandle.WaitAny(waitHandles)) != 0)
             {
                 if (index != 1) continue;
-
+                //inputWaitHandle.Reset();
                 Log("Input handle signaled.");
                 ReadConsoleInput();
             }
@@ -100,10 +104,11 @@ namespace ConControls.ConsoleApi
             catch (Exception e)
             {
                 Log(e.ToString());
+                throw;
             }
         }
         [Conditional("DEBUG")]
-        void Log(string msg, [CallerMemberName] string member = "?")
+        static void Log(string msg, [CallerMemberName] string member = "?")
         {
             Debug.WriteLine($"{nameof(ConsoleListener)}.{member}: {msg}");
         }

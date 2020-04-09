@@ -52,6 +52,7 @@ namespace ConControlsTests
             try
             {
                 RunTest();
+                //Task.Run(ReadEvents).Wait();
             }
             catch (Exception e)
             {
@@ -78,13 +79,19 @@ namespace ConControlsTests
         //static void ReadEvents()
         //{
         //    var api = new NativeCalls();
-        //    var handle = api.GetStdHandle(NativeCalls.STDIN);
+        //    var handle = new ConsoleInputHandle();
         //    INPUT_RECORD[] buffer = new INPUT_RECORD[16];
         //    api.SetConsoleMode(handle, ConsoleInputModes.EnableWindowInput | ConsoleInputModes.EnableMouseInput | ConsoleInputModes.EnableExtendedFlags);
-        //    while (api.ReadConsoleInput(handle, buffer, buffer.Length, out var read))
-        //        foreach (var sizeRecord in buffer.Take(read).Where(r => r.EventType == InputEventType.WindowBufferSize))
-        //            Console.WriteLine($"Size: {sizeRecord.Event.SizeEvent.Size.X} {sizeRecord.Event.SizeEvent.Size.Y}");
+        //    //while (NativeMethods.ReadConsoleInput(handle, buffer, buffer.Length, out var read))
+        //    //    foreach (var sizeRecord in buffer.Take(read))
+        //    //        Console.WriteLine($"Event: {sizeRecord.EventType}");
+        //    while (true)
+
+        //    {
+        //        var records = api.ReadConsoleInput(handle);
+        //        foreach (var sizeRecord in records)
+        //            Console.WriteLine($"Event: {sizeRecord.EventType}");
+        //    }
         //}
-        //static string GetLastError() => new Win32Exception(Marshal.GetLastWin32Error()).Message;
     }
 }

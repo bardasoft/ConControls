@@ -31,6 +31,7 @@ namespace ConControls
         static int instancesCreated;
         
         readonly INativeCalls api;
+        readonly IConsoleListener consoleListener;
         readonly ConsoleInputHandle consoleInputHandle;
         readonly ConsoleOutputHandle consoleOutputHandle;
 
@@ -123,8 +124,8 @@ namespace ConControls
         /// <exception cref="InvalidOperationException">A previously instantiated <see cref="ConsoleWindow"/> has not yet been disposed of. Only a single window can exist at a time.</exception>
         [ExcludeFromCodeCoverage]
         public ConsoleWindow()
-            : this(null) { }
-        internal ConsoleWindow(INativeCalls? api)
+            : this(null, null) { }
+        internal ConsoleWindow(INativeCalls? api, IConsoleListener? consoleListener)
         {
             if (Interlocked.CompareExchange(ref instancesCreated, 1, 0) != 0)
                 throw Exceptions.CanOnlyUseSingleContext();
@@ -136,11 +137,7 @@ namespace ConControls
             if (consoleOutputHandle.IsInvalid)
                 throw Exceptions.Win32();
             this.api = api ?? new NativeCalls();
-            this.api.SetConsoleMode(consoleInputHandle,
-                                    ConsoleInputModes.EnableWindowInput | 
-                                    ConsoleInputModes.EnableMouseInput |
-                                    ConsoleInputModes.EnableExtendedFlags);
-            this.api.SetConsoleMode(consoleOutputHandle, ConsoleOutputModes.None);
+            this.consoleListener = consoleListener ?? new ConsoleListener(this.api);
             Controls = new ControlCollection(this);
             Controls.ControlAdded += (sender, e) => Draw();
             Controls.ControlRemoved += (sender, e) => Draw();
@@ -164,10 +161,11 @@ namespace ConControls
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
             if (disposing)
             {
-                Console.ResetColor();
-                Console.Clear();
+                consoleListener.Dispose();
                 consoleOutputHandle.Dispose();
                 consoleInputHandle.Dispose();
+                Console.ResetColor();
+                Console.Clear();
             }
             Interlocked.Decrement(ref instancesCreated);
             Disposed?.Invoke(this, EventArgs.Empty);
