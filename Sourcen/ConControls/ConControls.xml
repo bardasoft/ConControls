@@ -419,12 +419,32 @@
             <returns>The <see cref="T:ConControls.Controls.ConsoleControl"/> at the given <paramref name="index"/>.</returns>
             <exception cref="T:System.IndexOutOfRangeException">The <paramref name="index"/> was outside this collection.</exception>
         </member>
+        <member name="P:ConControls.Controls.ControlCollection.Count">
+            <summary>
+            Gets the number of controls in this collection.
+            </summary>
+        </member>
         <member name="M:ConControls.Controls.ControlCollection.Add(ConControls.Controls.ConsoleControl)">
             <summary>
             Adds the given <paramref name="control"/> to the collection.
             </summary>
             <param name="control">The <see cref="T:ConControls.Controls.ConsoleControl"/> to add.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
+            <exception cref="T:System.InvalidOperationException">The <paramref name="control"/> uses a different <see cref="T:ConControls.IConsoleWindow"/> than this collection.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ControlCollection.AddRange(ConControls.Controls.ConsoleControl[])">
+            <summary>
+            Adds a sequence of <see cref="T:ConControls.Controls.ConsoleControl"/> instances to the collection.
+            </summary>
+            <param name="controlsToAdd">The sequence of <see cref="T:ConControls.Controls.ConsoleControl"/> instances to add.</param>
+            <exception cref="T:System.InvalidOperationException">One or more controls in <paramref name="controlsToAdd"/> use a different <see cref="T:ConControls.IConsoleWindow"/> than this collection.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ControlCollection.AddRange(System.Collections.Generic.IEnumerable{ConControls.Controls.ConsoleControl})">
+            <summary>
+            Adds a sequence of <see cref="T:ConControls.Controls.ConsoleControl"/> instances to the collection.
+            </summary>
+            <param name="controlsToAdd">The sequence of <see cref="T:ConControls.Controls.ConsoleControl"/> instances to add.</param>
+            <exception cref="T:System.InvalidOperationException">One or more controls in <paramref name="controlsToAdd"/> use a different <see cref="T:ConControls.IConsoleWindow"/> than this collection.</exception>
         </member>
         <member name="M:ConControls.Controls.ControlCollection.Remove(ConControls.Controls.ConsoleControl)">
             <summary>
@@ -432,6 +452,22 @@
             </summary>
             <param name="control">The <see cref="T:ConControls.Controls.ConsoleControl"/> to remove.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ControlCollection.RemoveRange(ConControls.Controls.ConsoleControl[])">
+            <summary>
+            Removes the given sequence of <see cref="T:ConControls.Controls.ConsoleControl"/> instances
+            from the collection.
+            </summary>
+            <param name="controlsToRemove">The sequence of <see cref="T:ConControls.Controls.ConsoleControl"/> instances
+            to remove.</param>
+        </member>
+        <member name="M:ConControls.Controls.ControlCollection.RemoveRange(System.Collections.Generic.IEnumerable{ConControls.Controls.ConsoleControl})">
+            <summary>
+            Removes the given sequence of <see cref="T:ConControls.Controls.ConsoleControl"/> instances
+            from the collection.
+            </summary>
+            <param name="controlsToRemove">The sequence of <see cref="T:ConControls.Controls.ConsoleControl"/> instances
+            to remove.</param>
         </member>
         <member name="M:ConControls.Controls.ControlCollection.GetEnumerator">
             <inheritdoc />
@@ -445,15 +481,15 @@
             <see cref="E:ConControls.Controls.ControlCollection.ControlRemoved"/> events.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ControlCollectionChangedEventArgs.AddedControl">
+        <member name="P:ConControls.Controls.ControlCollectionChangedEventArgs.AddedControls">
             <summary>
-            The <see cref="T:ConControls.Controls.ConsoleControl"/> that has been added to
+            The collection of <see cref="T:ConControls.Controls.ConsoleControl"/> instances that have been added to
             the <see cref="T:ConControls.Controls.ControlCollection"/>.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ControlCollectionChangedEventArgs.RemovedControl">
+        <member name="P:ConControls.Controls.ControlCollectionChangedEventArgs.RemovedControls">
             <summary>
-            The <see cref="T:ConControls.Controls.ConsoleControl"/> that has been removed from
+            The collection of <see cref="T:ConControls.Controls.ConsoleControl"/> instances that have been removed from
             the <see cref="T:ConControls.Controls.ControlCollection"/>.
             </summary>
         </member>
@@ -634,8 +670,7 @@
         </member>
         <member name="P:ConControls.IConsoleWindow.SynchronizationLock">
             <summary>
-            An object that can be used to synchronize threads
-            that want to execute conosle operations
+            A synchronization object to synchronize conosle operations.
             </summary>
         </member>
         <member name="M:ConControls.IConsoleWindow.GetGraphics">

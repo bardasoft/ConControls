@@ -58,8 +58,7 @@ namespace ConControls
         /// </summary>
         bool IsDisposed { get; }
         /// <summary>
-        /// An object that can be used to synchronize threads
-        /// that want to execute conosle operations
+        /// A synchronization object to synchronize conosle operations.
         /// </summary>
         object SynchronizationLock { get; }
 

@@ -1,4 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace ConControls.Controls 
 {
@@ -10,20 +13,37 @@ namespace ConControls.Controls
     public sealed class ControlCollectionChangedEventArgs
     {
         /// <summary>
-        /// The <see cref="ConsoleControl"/> that has been added to
+        /// The collection of <see cref="ConsoleControl"/> instances that have been added to
         /// the <see cref="ControlCollection"/>.
         /// </summary>
-        public ConsoleControl? AddedControl { get; }
+        public IReadOnlyCollection<ConsoleControl> AddedControls { get; }
         /// <summary>
-        /// The <see cref="ConsoleControl"/> that has been removed from
+        /// The collection of <see cref="ConsoleControl"/> instances that have been removed from
         /// the <see cref="ControlCollection"/>.
         /// </summary>
-        public ConsoleControl? RemovedControl { get; }
+        public IReadOnlyCollection<ConsoleControl> RemovedControls { get; }
 
-        internal ControlCollectionChangedEventArgs(ConsoleControl? addedControl = null, ConsoleControl? removedControl = null)
+        ControlCollectionChangedEventArgs(IEnumerable<ConsoleControl> added, IEnumerable<ConsoleControl> removed)
         {
-            AddedControl = addedControl;
-            RemovedControl = removedControl;
+            AddedControls = added.ToList().AsReadOnly();
+            RemovedControls = removed.ToList().AsReadOnly();
         }
+
+        internal static ControlCollectionChangedEventArgs Added(ConsoleControl control) =>
+            new ControlCollectionChangedEventArgs(
+                new[] { control ?? throw new ArgumentNullException(nameof(control)) },
+                Enumerable.Empty<ConsoleControl>());
+        internal static ControlCollectionChangedEventArgs Added(IEnumerable<ConsoleControl> controls) =>
+            new ControlCollectionChangedEventArgs(
+                controls ?? throw new ArgumentOutOfRangeException(nameof(controls)),
+                Enumerable.Empty<ConsoleControl>());
+        internal static ControlCollectionChangedEventArgs Removed(ConsoleControl control) =>
+            new ControlCollectionChangedEventArgs(
+                Enumerable.Empty<ConsoleControl>(),
+                new[] {control ?? throw new ArgumentNullException(nameof(control))});
+        internal static ControlCollectionChangedEventArgs Removed(IEnumerable<ConsoleControl> controls) =>
+            new ControlCollectionChangedEventArgs(
+                Enumerable.Empty<ConsoleControl>(),
+                controls ?? throw new ArgumentOutOfRangeException(nameof(controls)));
     }
 }

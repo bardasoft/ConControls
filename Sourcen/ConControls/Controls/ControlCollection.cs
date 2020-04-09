@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace ConControls.Controls
@@ -31,6 +33,10 @@ namespace ConControls.Controls
         /// <returns>The <see cref="ConsoleControl"/> at the given <paramref name="index"/>.</returns>
         /// <exception cref="IndexOutOfRangeException">The <paramref name="index"/> was outside this collection.</exception>
         public ConsoleControl this[int index] => controls[index];
+        /// <summary>
+        /// Gets the number of controls in this collection.
+        /// </summary>
+        public int Count => controls.Count;
 
         internal ControlCollection(IConsoleWindow window) => this.window = window;
 
@@ -39,6 +45,7 @@ namespace ConControls.Controls
         /// </summary>
         /// <param name="control">The <see cref="ConsoleControl"/> to add.</param>
         /// <exception cref="ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
+        /// <exception cref="InvalidOperationException">The <paramref name="control"/> uses a different <see cref="IConsoleWindow"/> than this collection.</exception>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void Add(ConsoleControl control)
         {
@@ -46,7 +53,30 @@ namespace ConControls.Controls
             if (controls.Contains(control)) return;
             if (control.Window != window) throw Exceptions.DifferentWindow();
             controls.Add(control);
-            ControlAdded?.Invoke(this, new ControlCollectionChangedEventArgs(addedControl: control));
+            ControlAdded?.Invoke(this, ControlCollectionChangedEventArgs.Added(control));
+        }
+        /// <summary>
+        /// Adds a sequence of <see cref="ConsoleControl"/> instances to the collection.
+        /// </summary>
+        /// <param name="controlsToAdd">The sequence of <see cref="ConsoleControl"/> instances to add.</param>
+        /// <exception cref="InvalidOperationException">One or more controls in <paramref name="controlsToAdd"/> use a different <see cref="IConsoleWindow"/> than this collection.</exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void AddRange(params ConsoleControl[] controlsToAdd) => AddRange((IEnumerable<ConsoleControl>)controlsToAdd);
+        /// <summary>
+        /// Adds a sequence of <see cref="ConsoleControl"/> instances to the collection.
+        /// </summary>
+        /// <param name="controlsToAdd">The sequence of <see cref="ConsoleControl"/> instances to add.</param>
+        /// <exception cref="InvalidOperationException">One or more controls in <paramref name="controlsToAdd"/> use a different <see cref="IConsoleWindow"/> than this collection.</exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void AddRange(IEnumerable<ConsoleControl> controlsToAdd)
+        {
+            var range = controlsToAdd.Distinct()
+                                     .Where(control => control != null)
+                                     .Except(controls).ToArray();
+            if (range.Any(control => control.Window != window)) throw Exceptions.DifferentWindow();
+            if (range.Length == 0) return;
+            controls.AddRange(range);
+            ControlAdded?.Invoke(this, ControlCollectionChangedEventArgs.Added(range));
         }
         /// <summary>
         /// Removes the given <paramref name="control"/> from the collection.
@@ -59,13 +89,36 @@ namespace ConControls.Controls
             if (control == null) throw new ArgumentNullException(nameof(control));
             if (!controls.Contains(control)) return;
             controls.Remove(control);
-            ControlRemoved?.Invoke(this, new ControlCollectionChangedEventArgs(removedControl: control));
+            ControlRemoved?.Invoke(this, ControlCollectionChangedEventArgs.Removed(control));
+        }
+        /// <summary>
+        /// Removes the given sequence of <see cref="ConsoleControl"/> instances
+        /// from the collection.
+        /// </summary>
+        /// <param name="controlsToRemove">The sequence of <see cref="ConsoleControl"/> instances
+        /// to remove.</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void RemoveRange(params ConsoleControl[] controlsToRemove) => RemoveRange((IEnumerable<ConsoleControl>)controlsToRemove);
+        /// <summary>
+        /// Removes the given sequence of <see cref="ConsoleControl"/> instances
+        /// from the collection.
+        /// </summary>
+        /// <param name="controlsToRemove">The sequence of <see cref="ConsoleControl"/> instances
+        /// to remove.</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void RemoveRange(IEnumerable<ConsoleControl> controlsToRemove)
+        {
+            var range = new HashSet<ConsoleControl>(controlsToRemove.Intersect(controls));
+            if (range.Count == 0) return;
+            controls.RemoveAll(control => range.Contains(control));
+            ControlRemoved?.Invoke(this, ControlCollectionChangedEventArgs.Removed(range));
         }
 
         /// <inheritdoc />
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerator<ConsoleControl> GetEnumerator() => ((IEnumerable<ConsoleControl>)controls.ToArray()).GetEnumerator();
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage]
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

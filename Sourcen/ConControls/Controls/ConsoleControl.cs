@@ -414,11 +414,11 @@ namespace ConControls.Controls
         }
         void OnControlAdded(object sender, ControlCollectionChangedEventArgs e)
         {
-            if (e?.AddedControl == null) return;
             BeginUpdate();
             try
             {
-                e.AddedControl.Parent = this;
+                foreach (var addedControl in e.AddedControls)
+                    addedControl.Parent = this;
                 // add event handlers when necessary
 
                 ControlAdded?.Invoke(this, e);
@@ -428,7 +428,6 @@ namespace ConControls.Controls
         }
         void OnControlRemoved(object sender, ControlCollectionChangedEventArgs e)
         {
-            if (e?.RemovedControl == null) return;
             BeginUpdate();
             try
             {
