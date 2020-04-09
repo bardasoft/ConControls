@@ -7,6 +7,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using ConControls.WindowsApi.Types;
@@ -35,6 +36,13 @@ namespace ConControls.WindowsApi
         }
         public COORD GetLargestConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle) =>
             NativeMethods.GetLargestConsoleWindowSize(consoleOutputHandle);
+        public INPUT_RECORD[] ReadConsoleInput(ConsoleInputHandle consoleInputHandle, int maxElements = 1028)
+        {
+            INPUT_RECORD[] result = new INPUT_RECORD[maxElements];
+            if (!NativeMethods.ReadConsoleInput(consoleInputHandle, result, maxElements, out var read))
+                throw Exceptions.Win32();
+            return result.Take(read).ToArray();
+        }
         public CHAR_INFO[] ReadConsoleOutput(ConsoleOutputHandle consoleOutputHandle, Rectangle region)
         {
             SMALL_RECT rect = new SMALL_RECT(region);

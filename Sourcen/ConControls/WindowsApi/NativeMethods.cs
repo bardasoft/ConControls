@@ -36,7 +36,7 @@ namespace ConControls.WindowsApi
         internal static extern IntPtr GetStdHandle(int stdHandle);
         [DllImport("kernel32.dll", EntryPoint = "ReadConsoleInputW", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern bool ReadConsoleInput(
-            IntPtr consoleInputHandle,
+            ConsoleInputHandle consoleInputHandle,
             [Out] INPUT_RECORD[] recordBuffer,
             int elementsInBuffer,
             out int elementsRead);
