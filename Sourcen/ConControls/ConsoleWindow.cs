@@ -29,6 +29,7 @@ namespace ConControls
 
         int isDisposed;
         int inhibitDrawing;
+        Size lastKnownSize;
 
         FrameCharSets frameCharSets = new FrameCharSets();
         ConsoleColor backgroundColor = ConsoleColor.Black;
@@ -230,7 +231,15 @@ namespace ConControls
                 BeginUpdate();
                 try
                 {
-                    var bufferSize = new COORD(Size);
+                    var size = Size;
+                    if (size != lastKnownSize)
+                    {
+                        Log("Window size has changed since last synchronization.");
+                        lastKnownSize = size;
+                        OnSizeChanged();
+                    }
+
+                    var bufferSize = new COORD(size);
                     Log($"Setting screen buffer size to {bufferSize}.");
                     api.SetConsoleScreenBufferSize(consoleOutputHandle, new COORD(Size));
                 }
