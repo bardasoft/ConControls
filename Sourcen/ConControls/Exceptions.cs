@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * (C) René Vogt
+ *
+ * Published under MIT license as described in the LICENSE.md file.
+ *
+ */
+
+using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;

@@ -14,8 +14,8 @@ namespace ConControls.WindowsApi.Types
     [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
     internal struct KEY_EVENT_RECORD
     {
-        [FieldOffset(0), MarshalAs(UnmanagedType.Bool)]
-        public bool KeyDown;
+        [FieldOffset(0)]
+        public int KeyDown;
         [FieldOffset(4), MarshalAs(UnmanagedType.U2)]
         public ushort RepeatCount;
         [FieldOffset(6), MarshalAs(UnmanagedType.U2)]

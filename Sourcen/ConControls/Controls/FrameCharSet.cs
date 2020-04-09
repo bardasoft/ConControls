@@ -1,4 +1,11 @@
-﻿namespace ConControls.Controls 
+﻿/*
+ * (C) René Vogt
+ *
+ * Published under MIT license as described in the LICENSE.md file.
+ *
+ */
+
+namespace ConControls.Controls 
 {
     /// <summary>
     /// Provides characters for drawing frames.

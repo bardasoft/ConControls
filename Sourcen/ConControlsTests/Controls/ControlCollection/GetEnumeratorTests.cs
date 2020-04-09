@@ -1,4 +1,11 @@
-﻿using ConControls.Controls;
+﻿/*
+ * (C) René Vogt
+ *
+ * Published under MIT license as described in the LICENSE.md file.
+ *
+ */
+
+using ConControls.Controls;
 using ConControlsTests.Stubs;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

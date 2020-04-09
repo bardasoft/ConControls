@@ -26,6 +26,7 @@ namespace ConControlsTests
             window.BeginUpdate();
             try
             {
+                Debug.WriteLine($"SIZE: {window.Size} MAX: {window.MaximumSize}");
                 window.BackgroundColor = ConsoleColor.Blue;
                 // ReSharper disable once AssignmentIsFullyDiscarded
                 _ = new ConsoleControl(window)
