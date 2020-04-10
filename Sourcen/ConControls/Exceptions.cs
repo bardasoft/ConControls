@@ -26,5 +26,7 @@ namespace ConControls
             new ArgumentOutOfRangeException(Resources.Exception_ProgressBarPercentageMustBeNonNegative);
         internal static ArgumentOutOfRangeException ProgressBarPercentageMustNotBeGreaterThan1() => new ArgumentOutOfRangeException(
             Resources.Exception_ProgressBarPercentageMustNotBeGreaterThan1);
+        internal static InvalidOperationException CannotFocusUnFocusableControl(string controlType) =>
+            new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_CannotFocusUnFocusableControl, controlType));
     }
 }

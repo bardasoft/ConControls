@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
 using ConControls;
@@ -7,6 +8,7 @@ using ConControls.Controls;
 
 namespace ConControlsTests.Examples
 {
+    [ExcludeFromCodeCoverage]
     static class ProgressBarExample
     {
         public static void Run()
@@ -61,7 +63,7 @@ namespace ConControlsTests.Examples
                 window.BeginUpdate();
                 l2r.Percentage = r2l.Percentage = t2b.Percentage = b2t.Percentage = p;
                 window.EndUpdate();
-                Thread.Sleep(200);
+                Thread.Sleep(50);
             }
         }
     }

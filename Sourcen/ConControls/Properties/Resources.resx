@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Exception_CannotFocusUnFocusableControl" xml:space="preserve">
+    <value>This instance of "{0}" cannot be focused!</value>
+  </data>
   <data name="Exception_CanOnlyUseSingleContext" xml:space="preserve">
     <value>There can only be one single console window at a time! Dispose of any existing console window before instantiating a new one.</value>
   </data>
@@ -124,7 +127,7 @@
     <value>The controls cannot be part of different conosle windows!</value>
   </data>
   <data name="Exception_InvalidConsoleColor" xml:space="preserve">
-    <value>The ConsoleColor \"{0}\" is not supported!</value>
+    <value>The ConsoleColor "{0}" is not supported!</value>
   </data>
   <data name="Exception_ProgressBarPercentageMustBeNonNegative" xml:space="preserve">
     <value>The percentage value of a progress bar cannot be less than zero!</value>

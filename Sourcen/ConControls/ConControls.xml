@@ -86,6 +86,9 @@
         <member name="P:ConControls.ConsoleWindow.Controls">
             <inheritdoc />
         </member>
+        <member name="P:ConControls.ConsoleWindow.FocusedControl">
+            <inheritdoc />
+        </member>
         <member name="P:ConControls.ConsoleWindow.FrameCharSets">
             <inheritdoc />
         </member>
@@ -199,6 +202,11 @@
             The <see cref="P:ConControls.Controls.ConsoleControl.Visible"/> property of the control has been changed.
             </summary>
         </member>
+        <member name="E:ConControls.Controls.ConsoleControl.FocusedChanged">
+            <summary>
+            Raised when the <see cref="P:ConControls.Controls.ConsoleControl.Focused"/> property has been changed.
+            </summary>
+        </member>
         <member name="E:ConControls.Controls.ConsoleControl.AreaChanged">
             <summary>
             The <see cref="P:ConControls.Controls.ConsoleControl.Area"/> of the control has been changed.
@@ -230,6 +238,20 @@
             <summary>
             Gets or sets wether the control should be visible (drawn) or not.
             </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Focused">
+            <summary>
+            Gets or sets wether this control is focused or not.
+            Trying to set this to <code>true</code> though <see cref="M:ConControls.Controls.ConsoleControl.CanFocus"/> returns <code>false</code>
+            throws an <see cref="T:System.InvalidOperationException"/>.
+            </summary>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:ConControls.Controls.ConsoleControl.Focused"/> cannot be set to <code>true</code> when <see cref="M:ConControls.Controls.ConsoleControl.CanFocus"/> returns <code>false</code>.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.CanFocus">
+            <summary>
+            Determines wether this control can be focused or not.
+            </summary>
+            <returns><code>true</code> if this control can take focues, <code>false</code> if not.</returns>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.Area">
             <summary>
@@ -787,6 +809,11 @@
             The collection of <see cref="T:ConControls.Controls.ConsoleControl"/>s on this window.
             </summary>
         </member>
+        <member name="P:ConControls.IConsoleWindow.FocusedControl">
+            <summary>
+            Gets or sets the currently focused control on this window.
+            </summary>
+        </member>
         <member name="P:ConControls.IConsoleWindow.FrameCharSets">
             <summary>
             The <see cref="P:ConControls.IConsoleWindow.FrameCharSets"/> provider to use to draw frames.
@@ -852,6 +879,11 @@
               Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
             </summary>
         </member>
+        <member name="P:ConControls.Properties.Resources.Exception_CannotFocusUnFocusableControl">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die This instance of &quot;{0}&quot; cannot be focused! ähnelt.
+            </summary>
+        </member>
         <member name="P:ConControls.Properties.Resources.Exception_CanOnlyUseSingleContext">
             <summary>
               Sucht eine lokalisierte Zeichenfolge, die There can only be one single console window at a time! Dispose of any existing console window before instantiating a new one. ähnelt.
@@ -864,7 +896,7 @@
         </member>
         <member name="P:ConControls.Properties.Resources.Exception_InvalidConsoleColor">
             <summary>
-              Sucht eine lokalisierte Zeichenfolge, die The ConsoleColor \&quot;{0}\&quot; is not supported! ähnelt.
+              Sucht eine lokalisierte Zeichenfolge, die The ConsoleColor &quot;{0}&quot; is not supported! ähnelt.
             </summary>
         </member>
         <member name="P:ConControls.Properties.Resources.Exception_ProgressBarPercentageMustBeNonNegative">

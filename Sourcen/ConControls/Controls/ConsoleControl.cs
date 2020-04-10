@@ -16,10 +16,11 @@ namespace ConControls.Controls
     /// <summary>
     /// Base class for all console controls.
     /// </summary>
-    public class ConsoleControl
+    public abstract class ConsoleControl
     {
         string name;
         bool visible = true;
+        bool focused;
         Rectangle area;
         ConsoleControl? parent;
         int inhibitDrawing;
@@ -32,6 +33,10 @@ namespace ConControls.Controls
         /// The <see cref="Visible"/> property of the control has been changed.
         /// </summary>
         public event EventHandler? VisibleChanged;
+        /// <summary>
+        /// Raised when the <see cref="Focused"/> property has been changed.
+        /// </summary>
+        public event EventHandler? FocusedChanged;
         /// <summary>
         /// The <see cref="Area"/> of the control has been changed.
         /// </summary>
@@ -73,6 +78,33 @@ namespace ConControls.Controls
                 OnVisibleChanged();
             }
         }
+        /// <summary>
+        /// Gets or sets wether this control is focused or not.
+        /// Trying to set this to <code>true</code> though <see cref="CanFocus"/> returns <code>false</code>
+        /// throws an <see cref="InvalidOperationException"/>.
+        /// </summary>
+        /// <exception cref="InvalidOperationException"><see cref="Focused"/> cannot be set to <code>true</code> when <see cref="CanFocus"/> returns <code>false</code>.</exception>
+        public bool Focused
+        {
+            get {lock(Window.SynchronizationLock) return focused;}
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (value == focused) return;
+                    if (value && !CanFocus())
+                        throw Exceptions.CannotFocusUnFocusableControl(GetType().Name);
+                    focused = value;
+                    OnFocusedChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Determines wether this control can be focused or not.
+        /// </summary>
+        /// <returns><code>true</code> if this control can take focues, <code>false</code> if not.</returns>
+        public virtual bool CanFocus() => false;
+
         /// <summary>
         /// The effective total area of the control.
         /// This is the area the control effectivly fills in the console screen buffer
@@ -488,14 +520,33 @@ namespace ConControls.Controls
         {
             Draw();
         }
+        void OnFocusedChanged()
+        {
+            BeginUpdate();
+            try
+            {
+                if (Focused) Window.FocusedControl = this;
+                FocusedChanged?.Invoke(this, EventArgs.Empty);
+            }
+            finally
+            {
+                EndUpdate();
+
+            }
+        }
         void OnVisibleChanged()
         {
-            lock (Window.SynchronizationLock)
+            BeginUpdate();
+            try
             {
-                if (parent == null) Window.Draw();
-                else parent.Draw();
-                VisibleChanged?.Invoke(this, EventArgs.Empty);
+                lock (Window.SynchronizationLock)
+                {
+                    if (parent == null) Window.Draw();
+                    else parent.Draw();
+                    VisibleChanged?.Invoke(this, EventArgs.Empty);
+                }
             }
+            finally { EndUpdate(); }
         }
         /// <summary>
         /// Called when the <see cref="Area"/> of this control has been changed.

@@ -32,12 +32,12 @@ namespace ConControlsTests
         /// <inheritdoc />
         public override void Write(string message)
         {
-            File.AppendAllText(file, $"[{Thread.CurrentThread.ManagedThreadId}] {message}");
+            File.AppendAllText(file, message);
         }
         /// <inheritdoc />
         public override void WriteLine(string message)
         {
-            File.AppendAllLines(file, new []{$"[{Thread.CurrentThread.ManagedThreadId}] {message}"});
+            File.AppendAllLines(file, new []{message});
         }
     }
 }

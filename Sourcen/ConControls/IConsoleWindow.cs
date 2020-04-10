@@ -52,6 +52,10 @@ namespace ConControls
         /// The collection of <see cref="ConsoleControl"/>s on this window.
         /// </summary>
         ControlCollection Controls { get; }
+        /// <summary>
+        /// Gets or sets the currently focused control on this window.
+        /// </summary>
+        ConsoleControl? FocusedControl { get; set; }
 
         /// <summary>
         /// The <see cref="FrameCharSets"/> provider to use to draw frames.

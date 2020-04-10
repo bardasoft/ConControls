@@ -124,9 +124,11 @@ namespace ConControls.Controls
             }
         }
         /// <inheritdoc />
-        public ConsoleProgressBar(IConsoleWindow window) : base(window) { }
+        public ConsoleProgressBar(IConsoleWindow window)
+            : base(window) { }
         /// <inheritdoc />
-        public ConsoleProgressBar(IConsoleWindow window, ConsoleControl parent) : base(window, parent) { }
+        public ConsoleProgressBar(IConsoleWindow window, ConsoleControl parent)
+            : base(window, parent) { }
 
         /// <inheritdoc />
         protected override void DrawClientArea(IConsoleGraphics graphics)

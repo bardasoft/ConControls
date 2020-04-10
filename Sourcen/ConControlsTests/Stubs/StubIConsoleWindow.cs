@@ -67,6 +67,13 @@ namespace ConControlsTests.Stubs
         }
         public Func<ControlCollection>? GetControls { get; set; }
         ControlCollection IConsoleWindow.Controls => GetControls?.Invoke() ?? throw new NotImplementedException();
+        public Action<ConsoleControl?>? SetFocusedControl { get; set; }
+        public Func<ConsoleControl?>? GetFocusedControl { get; set; }
+        ConsoleControl? IConsoleWindow.FocusedControl
+        {
+            get => GetFocusedControl?.Invoke() ?? throw new NotImplementedException();
+            set => SetFocusedControl?.Invoke(value);
+        }
         public Func<FrameCharSets>? GetFrameCharSets{ get; set; }
         public Action<FrameCharSets>? SetFrameCharSets{ get; set; }
         FrameCharSets IConsoleWindow.FrameCharSets

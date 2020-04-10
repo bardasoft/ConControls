@@ -29,7 +29,7 @@ namespace ConControlsTests
         {
             //Task.Run(ReadEvents).Wait();
             using var logger = new Logger(@"c:\privat\concontrols.log");
-            ConControls.Logging.Logger.Context = DebugContext.ProgressBar;
+            ConControls.Logging.Logger.Context = DebugContext.None;
 
             try
             {

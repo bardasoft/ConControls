@@ -61,6 +61,15 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This instance of &quot;{0}&quot; cannot be focused! ähnelt.
+        /// </summary>
+        internal static string Exception_CannotFocusUnFocusableControl {
+            get {
+                return ResourceManager.GetString("Exception_CannotFocusUnFocusableControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die There can only be one single console window at a time! Dispose of any existing console window before instantiating a new one. ähnelt.
         /// </summary>
         internal static string Exception_CanOnlyUseSingleContext {
@@ -79,7 +88,7 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The ConsoleColor \&quot;{0}\&quot; is not supported! ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The ConsoleColor &quot;{0}&quot; is not supported! ähnelt.
         /// </summary>
         internal static string Exception_InvalidConsoleColor {
             get {

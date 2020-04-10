@@ -42,6 +42,8 @@ namespace ConControls
         ConsoleColor foreColor = ConsoleColor.Gray;
         ConsoleColor backgroundColor = ConsoleColor.Black;
 
+        ConsoleControl? focusedControl;
+
         /// <inheritdoc />
         public event EventHandler? SizeChanged;
         /// <inheritdoc />
@@ -104,6 +106,25 @@ namespace ConControls
         }
         /// <inheritdoc />
         public ControlCollection Controls { get; }
+        /// <inheritdoc />
+        public ConsoleControl? FocusedControl 
+        {
+            get
+            {
+                lock (SynchronizationLock) return focusedControl;
+            }
+            set
+            {
+                lock (SynchronizationLock)
+                {
+                    if (value == focusedControl || value == null) return;
+                    if (focusedControl != null) focusedControl.Focused = false;
+                    focusedControl = null;
+                    value.Focused = true; // may throw
+                    focusedControl = value;
+                }
+            }
+        }
 
         /// <inheritdoc />
         public FrameCharSets FrameCharSets
