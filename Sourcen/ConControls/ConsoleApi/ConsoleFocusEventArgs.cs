@@ -6,9 +6,12 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using ConControls.WindowsApi.Types;
 
-namespace ConControls.ConsoleApi {
+namespace ConControls.ConsoleApi 
+{
+    [ExcludeFromCodeCoverage]
     sealed class ConsoleFocusEventArgs : EventArgs
     {
         public bool SetFocus { get; }

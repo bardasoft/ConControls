@@ -6,11 +6,10 @@
  */
 
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using ConControls.Controls;
+using ConControls.Logging;
 using ConControls.WindowsApi;
 using ConControls.WindowsApi.Types;
 
@@ -30,20 +29,20 @@ namespace ConControls.ConsoleApi
             this.api = api;
             this.size = size;
             this.frameCharSets = frameCharSets;
-            Log($"Initializing buffer with size {this.size}.");
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.Graphics, $"Initializing buffer with size {this.size}.");
             buffer = api.ReadConsoleOutput(consoleOutputHandle, new Rectangle(Point.Empty, size));
         }
         /// <inheritdoc />
         public void DrawBackground(ConsoleColor color, Rectangle area)
         {
-            Log($"drawing background {area} with {color}.");
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.Graphics, $"drawing background {area} with {color}.");
             FillArea(color, color, default, area);
         }
         /// <inheritdoc />
         public void DrawBorder(ConsoleColor background, ConsoleColor foreground, BorderStyle style, Rectangle area)
         {
-            Log($"drawing border {style} around {area} with {foreground} on {background}.");
-            Log($"{area.Left} {area.Top} {area.Right} {area.Bottom}");
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.Graphics, $"drawing border {style} around {area} with {foreground} on {background}.");
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.Graphics, $"{area.Left} {area.Top} {area.Right} {area.Bottom}");
             if (style == BorderStyle.None) return;
 
             var charSet = frameCharSets[style];
@@ -69,7 +68,7 @@ namespace ConControls.ConsoleApi
         /// <inheritdoc />
         public void FillArea(ConsoleColor background, ConsoleColor foreColor, char c, Rectangle area)
         {
-            Log($"Fillig area {area} with '{c}' in {foreColor} on {background}.");
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.Graphics, $"Fillig area {area} with '{c}' in {foreColor} on {background}.");
             var char_info = new CHAR_INFO(c, background.ToBackgroundColor() | foreColor.ToForegroundColor());
             var indices = from x in Enumerable.Range(area.Left, area.Width)
                           from y in Enumerable.Range(area.Top, area.Height)
@@ -80,16 +79,10 @@ namespace ConControls.ConsoleApi
         /// <inheritdoc />
         public void Flush()
         {
-            Log($"flushing buffer ({size}).");
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.Graphics, $"flushing buffer ({size}).");
             api.WriteConsoleOutput(consoleOutputHandle, buffer, new Rectangle(Point.Empty, size));
         }
 
         int GetIndex(int x, int y) => y * size.Width + x;
-        [Conditional("DEBUG")]
-        static void Log(string msg, [CallerMemberName] string method = "?")
-        {
-            Debug.WriteLine($"{nameof(ConsoleGraphics)}.{method}: {msg}");
-        }
-
     }
 }

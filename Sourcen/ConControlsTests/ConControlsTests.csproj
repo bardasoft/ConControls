@@ -76,6 +76,7 @@
     <Compile Include="Controls\ControlCollection\AddTests.cs" />
     <Compile Include="Controls\ControlCollection\ControlCollectionTests.cs" />
     <Compile Include="Controls\FrameCharSets\FrameCharSetsTests.cs" />
+    <Compile Include="Examples\ProgressBarExample.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stubs\StubIConsoleWindow.cs" />

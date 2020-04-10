@@ -8,6 +8,7 @@
 using System;
 using System.Drawing;
 using ConControls.ConsoleApi;
+using ConControls.Logging;
 
 namespace ConControls.Controls 
 {
@@ -46,6 +47,7 @@ namespace ConControls.Controls
 
         double percentage;
         char progressChar = DefaultProgressChar;
+        Rectangle filledRect;
         ProgressOrientation orientation = ProgressOrientation.LeftToRight;
 
         /// <summary>
@@ -127,17 +129,33 @@ namespace ConControls.Controls
         public ConsoleProgressBar(IConsoleWindow window, ConsoleControl parent) : base(window, parent) { }
 
         /// <inheritdoc />
-        protected override void DrawClientArea(IConsoleGraphics graphics, Rectangle clientArea)
+        protected override void DrawClientArea(IConsoleGraphics graphics)
         {
-            base.DrawClientArea(graphics, clientArea);
-            Rectangle rect = orientation switch
+            base.DrawClientArea(graphics);
+            graphics.FillArea(EffectiveBackgroundColor, EffectiveForeColor, progressChar, GetRectangleToFill());
+        }
+        void UpdateRectangle()
+        {
+            Rectangle rect = GetRectangleToFill();
+            if (rect == filledRect)
+            {
+                Logger.Log(DebugContext.ProgressBar, "Rectangle did not change, no redraw.");
+                return;
+            }
+            Logger.Log(DebugContext.ProgressBar, "Rectangle changed... redrawing.");
+            filledRect = rect;
+            Draw();
+        }
+        Rectangle GetRectangleToFill()
+        {
+            var clientArea = GetClientArea();
+            return orientation switch
             {
                 ProgressOrientation.RightToLeft => GetRightToLeftRectangle(clientArea),
                 ProgressOrientation.TopToBottom => GetTopToBottomRectangle(clientArea),
                 ProgressOrientation.BottomToTop => GetBottomToTopRectangle(clientArea),
-                _ => GetLeftToRightRectangle(clientArea) 
+                _ => GetLeftToRightRectangle(clientArea)
             };
-            graphics.FillArea(EffectiveBackgroundColor, EffectiveForeColor, progressChar, rect);
         }
         Rectangle GetLeftToRightRectangle(Rectangle clientArea) =>
             new Rectangle(clientArea.Location, new Size((int)(percentage * clientArea.Width), clientArea.Height));
@@ -156,7 +174,7 @@ namespace ConControls.Controls
 
         void OnPercentageChanged()
         {
-            Draw();
+            UpdateRectangle();
             PercentageChanged?.Invoke(this, EventArgs.Empty);
         }
         void OnProgressCharChanged()
@@ -166,7 +184,7 @@ namespace ConControls.Controls
         }
         void OnOrientationChanged()
         {
-            Draw();
+            UpdateRectangle();
             OrientationChanged?.Invoke(this, EventArgs.Empty);
         }
     }

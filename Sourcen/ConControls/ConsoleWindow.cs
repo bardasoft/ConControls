@@ -6,13 +6,12 @@
  */
 
 using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using ConControls.ConsoleApi;
 using ConControls.Controls;
+using ConControls.Logging;
 using ConControls.WindowsApi;
 using ConControls.WindowsApi.Types;
 
@@ -188,22 +187,22 @@ namespace ConControls
         /// <inheritdoc />
         public void Draw()
         {
-            Log("called.");
+            Logger.Log(DebugContext.Window | DebugContext.Drawing, "called.");
             lock (SynchronizationLock)
             {
                 if (DrawingInhibited)
                 {
-                    Log("drawing inhibited.");
+                    Logger.Log(DebugContext.Window | DebugContext.Drawing, "drawing inhibited.");
                     return;
                 }
                 var graphics = GetGraphics();
                 var rect = new Rectangle(0, 0, Size.Width, Size.Height);
-                Log($"drawing background at {rect}.");
+                Logger.Log(DebugContext.Window | DebugContext.Drawing, $"drawing background at {rect}.");
                 graphics.DrawBackground(backgroundColor, rect);
-                Log("drawing controls.");
+                Logger.Log(DebugContext.Window | DebugContext.Drawing, "drawing controls.");
                 foreach(var control in Controls)
                     control.Draw(graphics);
-                Log("flushing.");
+                Logger.Log(DebugContext.Window | DebugContext.Drawing, "flushing.");
                 graphics.Flush();
             }
         }
@@ -255,13 +254,13 @@ namespace ConControls
                     var size = Size;
                     if (size != lastKnownSize)
                     {
-                        Log("Window size has changed since last synchronization.");
+                        Logger.Log(DebugContext.Window, "Window size has changed since last synchronization.");
                         lastKnownSize = size;
                         OnSizeChanged();
                     }
 
                     var bufferSize = new COORD(size);
-                    Log($"Setting screen buffer size to {bufferSize}.");
+                    Logger.Log(DebugContext.Window, $"Setting screen buffer size to {bufferSize}.");
                     api.SetConsoleScreenBufferSize(consoleOutputHandle, new COORD(Size));
                 }
                 finally
@@ -270,12 +269,5 @@ namespace ConControls
                 }
             }
         }
-
-        [Conditional("DEBUG")]
-        static void Log(string msg, [CallerMemberName] string method = "?")
-        {
-            Debug.WriteLine($"{nameof(ConsoleWindow)}.{method}: {msg}");
-        }
-
     }
 }

@@ -6,10 +6,13 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using ConControls.WindowsApi.Types;
 
-namespace ConControls.ConsoleApi {
+namespace ConControls.ConsoleApi
+{
+    [ExcludeFromCodeCoverage]
     sealed class ConsoleMouseEventArgs : EventArgs
     {
         public Point MousePosition { get; }

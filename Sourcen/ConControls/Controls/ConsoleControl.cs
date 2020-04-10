@@ -6,11 +6,10 @@
  */
 
 using System;
-using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using ConControls.ConsoleApi;
+using ConControls.Logging;
 
 namespace ConControls.Controls
 {
@@ -270,19 +269,19 @@ namespace ConControls.Controls
         /// </summary>
         public void Draw()
         {
-            Log("parameterless called.");
+            Logger.Log(DebugContext.Control | DebugContext.Drawing, "parameterless called.");
             lock (Window.SynchronizationLock)
             {
                 if (DrawingInhibited)
                 {
-                    Log("drawing inhibited.");
+                    Logger.Log(DebugContext.Control | DebugContext.Drawing, "drawing inhibited.");
                     return;
                 }
-                Log("Getting graphics object.");
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, "Getting graphics object.");
                 var graphics = Window.GetGraphics();
-                Log("Start drawing.");
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, "Start drawing.");
                 Draw(graphics);
-                Log("Flushing.");
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, "Flushing.");
                 graphics.Flush();
             }
         }
@@ -299,23 +298,23 @@ namespace ConControls.Controls
         public virtual void Draw(IConsoleGraphics graphics)
         {
             if (graphics == null) throw new ArgumentNullException(nameof(graphics));
-            Log("with graphics called.");
+            Logger.Log(DebugContext.Control | DebugContext.Drawing, "with graphics called.");
 
             lock (Window.SynchronizationLock)
             {
                 CheckDisposed();
                 if (DrawingInhibited)
                 {
-                    Log("drawing inhibited.");
+                    Logger.Log(DebugContext.Control | DebugContext.Drawing, "drawing inhibited.");
                     return;
                 }
 
-                Log("Drawing background.");
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, "Drawing background.");
                 DrawBackground(graphics);
-                Log("Drawing border.");
-                var clientArea = DrawBorder(graphics);
-                Log("Drawing client area.");
-                DrawClientArea(graphics, clientArea);
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, "Drawing border.");
+                DrawBorder(graphics);
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, "Drawing client area.");
+                DrawClientArea(graphics);
             }
         }
         /// <summary>
@@ -336,12 +335,12 @@ namespace ConControls.Controls
                 CheckDisposed();
                 if (DrawingInhibited)
                 {
-                    Log("drawing inhibited.");
+                    Logger.Log(DebugContext.Control | DebugContext.Drawing, "drawing inhibited.");
                     return;
                 }
 
                 var effectiveBackgroundColor = EffectiveBackgroundColor;
-                Log($"drawing background ({effectiveBackgroundColor}.");
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, $"drawing background ({effectiveBackgroundColor}.");
                 graphics.DrawBackground(backgroundColor ?? parent?.backgroundColor ?? Window.BackgroundColor, area);
             }
         }
@@ -356,29 +355,24 @@ namespace ConControls.Controls
         /// the screen buffer.</param>
         /// <returns>A <see cref="Rectangle"/> representing the available client area.</returns>
         /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
-        protected virtual Rectangle DrawBorder(IConsoleGraphics graphics)
+        protected virtual void DrawBorder(IConsoleGraphics graphics)
         {
             if (graphics == null) throw new ArgumentNullException(nameof(graphics));
             lock (Window.SynchronizationLock)
             {
                 var effectiveBorderStyle = EffectiveBorderStyle;
-                Rectangle clientArea = effectiveBorderStyle == ConControls.Controls.BorderStyle.None
-                                           ? Area
-                                           : new Rectangle(Area.X + 1, Area.Y + 1, Area.Width-2, Area.Height-2);
                 CheckDisposed();
                 if (DrawingInhibited)
                 {
-                    Log("drawing inhibited.");
-                    return clientArea;
+                    Logger.Log(DebugContext.Control | DebugContext.Drawing, "drawing inhibited.");
+                    return;
                 }
 
                 var effectiveBorderColor = EffectiveBorderColor;
                 var effectiveBackgroundColor = EffectiveBackgroundColor;
 
-                Log($"drawing border ({effectiveBorderColor} on {effectiveBackgroundColor}, {effectiveBorderStyle}).");
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, $"drawing border ({effectiveBorderColor} on {effectiveBackgroundColor}, {effectiveBorderStyle}).");
                 graphics.DrawBorder(effectiveBackgroundColor, effectiveBorderColor, effectiveBorderStyle, area);
-
-                return clientArea;
             }
         }
         /// <summary>
@@ -390,9 +384,8 @@ namespace ConControls.Controls
         /// </summary>
         /// <param name="graphics">An <see cref="IConsoleGraphics"/> that performs the drawing operations on
         /// the screen buffer.</param>
-        /// <param name="clientArea">An rectangle representing the client area (without borders) to draw on.</param>
         /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
-        protected virtual void DrawClientArea(IConsoleGraphics graphics, Rectangle clientArea)
+        protected virtual void DrawClientArea(IConsoleGraphics graphics)
         {
             if (graphics == null) throw new ArgumentNullException(nameof(graphics));
             lock (Window.SynchronizationLock)
@@ -400,11 +393,11 @@ namespace ConControls.Controls
                 CheckDisposed();
                 if (DrawingInhibited)
                 {
-                    Log("drawing inhibited.");
+                    Logger.Log(DebugContext.Control | DebugContext.Drawing, "drawing inhibited.");
                     return;
                 }
 
-                Log("drawing children");
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, "drawing children");
                 foreach (var child in Controls)
                     child.Draw(graphics);
             }
@@ -427,6 +420,18 @@ namespace ConControls.Controls
         {
             if (Interlocked.Decrement(ref inhibitDrawing) <= 0)
                 Draw();
+        }
+
+        /// <summary>
+        /// Determines the area of the control that can be used as "client" area.
+        /// This base method e.g. remove the border from the total control area.
+        /// </summary>
+        /// <returns>A <see cref="Rectangle"/> representing the client area of this control.</returns>
+        protected virtual Rectangle GetClientArea()
+        {
+            return EffectiveBorderStyle == ConControls.Controls.BorderStyle.None
+                       ? Area
+                       : new Rectangle(Area.X + 1, Area.Y + 1, Area.Width - 2, Area.Height - 2);
         }
 
         /// <summary>
@@ -542,11 +547,5 @@ namespace ConControls.Controls
         /// Gets the effective border style (applying transparency).
         /// </summary>
         protected BorderStyle EffectiveBorderStyle => borderStyle ?? Parent?.EffectiveBorderStyle ?? ConControls.Controls.BorderStyle.None;
-        
-        [Conditional("DEBUG")]
-        private protected void Log(string msg, [CallerMemberName] string method = "?")
-        {
-            Debug.WriteLine($"{GetType().Name}(\"{name}\").{method}: {msg}");
-        }
     }
 }

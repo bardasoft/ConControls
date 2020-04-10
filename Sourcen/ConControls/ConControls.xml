@@ -355,7 +355,7 @@
             <returns>A <see cref="T:System.Drawing.Rectangle"/> representing the available client area.</returns>
             <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.IConsoleWindow"/> has already been disposed of.</exception>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.DrawClientArea(ConControls.ConsoleApi.IConsoleGraphics,System.Drawing.Rectangle)">
+        <member name="M:ConControls.Controls.ConsoleControl.DrawClientArea(ConControls.ConsoleApi.IConsoleGraphics)">
             <summary>
             Draws the client area and child controls onto the console screen buffer.
             When overwriting this method, make sure to use the <see cref="P:ConControls.IConsoleWindow.SynchronizationLock"/>
@@ -365,7 +365,6 @@
             </summary>
             <param name="graphics">An <see cref="T:ConControls.ConsoleApi.IConsoleGraphics"/> that performs the drawing operations on
             the screen buffer.</param>
-            <param name="clientArea">An rectangle representing the client area (without borders) to draw on.</param>
             <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.IConsoleWindow"/> has already been disposed of.</exception>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.BeginUpdate">
@@ -380,6 +379,13 @@
             update multiple properties to avoid multiple redrawings, and call <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/>
             when you are finished and want to redraw the control.
             </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.GetClientArea">
+            <summary>
+            Determines the area of the control that can be used as "client" area.
+            This base method e.g. remove the border from the total control area.
+            </summary>
+            <returns>A <see cref="T:System.Drawing.Rectangle"/> representing the client area of this control.</returns>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.OnParentChanged">
             <summary>
@@ -515,7 +521,7 @@
         <member name="M:ConControls.Controls.ConsoleProgressBar.#ctor(ConControls.IConsoleWindow,ConControls.Controls.ConsoleControl)">
             <inheritdoc />
         </member>
-        <member name="M:ConControls.Controls.ConsoleProgressBar.DrawClientArea(ConControls.ConsoleApi.IConsoleGraphics,System.Drawing.Rectangle)">
+        <member name="M:ConControls.Controls.ConsoleProgressBar.DrawClientArea(ConControls.ConsoleApi.IConsoleGraphics)">
             <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.ControlCollection">

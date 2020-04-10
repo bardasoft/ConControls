@@ -6,9 +6,8 @@
  */
 
 using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Threading;
+using ConControls.Logging;
 using ConControls.WindowsApi;
 using ConControls.WindowsApi.Types;
 using Microsoft.Win32.SafeHandles;
@@ -55,7 +54,7 @@ namespace ConControls.ConsoleApi
         }
         void ListenerThread()
         {
-            Log("Starting thread.");
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Starting thread.");
             IntPtr stdin = consoleInputHandle.DangerousGetHandle();
             using var inputWaitHandle = new AutoResetEvent(false) {SafeWaitHandle = new SafeWaitHandle(stdin, false)};
             WaitHandle[] waitHandles = {stopEvent, inputWaitHandle};
@@ -64,20 +63,20 @@ namespace ConControls.ConsoleApi
             {
                 if (index != 1) continue;
                 //inputWaitHandle.Reset();
-                Log("Input handle signaled.");
+                Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Input handle signaled.");
                 ReadConsoleInput();
             }
-            Log("Stopping thread.");
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Stopping thread.");
         }
         void ReadConsoleInput()
         {
             try
             {
                 var records = api.ReadConsoleInput(consoleInputHandle);
-                Log($"Read {records.Length} input records.");
+                Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Read {records.Length} input records.");
                 foreach (var record in records)
                 {
-                    Log($"Record of type {record.EventType}.");
+                    Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Record of type {record.EventType}.");
                     switch (record.EventType)
                     {
                         case InputEventType.Key:
@@ -96,21 +95,16 @@ namespace ConControls.ConsoleApi
                             FocusEvent?.Invoke(this, new ConsoleFocusEventArgs(record.Event.FocusEvent));
                             break;
                         default:
-                            Log($"Unkown input record type \"{record.EventType}\"!");
+                            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Unkown input record type \"{record.EventType}\"!");
                             break;
                     }
                 }
             }
             catch (Exception e)
             {
-                Log(e.ToString());
+                Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, e.ToString());
                 throw;
             }
-        }
-        [Conditional("DEBUG")]
-        static void Log(string msg, [CallerMemberName] string member = "?")
-        {
-            Debug.WriteLine($"{nameof(ConsoleListener)}.{member}: {msg}");
         }
     }
 }
