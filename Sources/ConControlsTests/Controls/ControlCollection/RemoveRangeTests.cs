@@ -47,7 +47,7 @@ namespace ConControlsTests.Controls.ControlCollection
             sut.AddRange(control1, control2, control3);
 
             int fired = 0;
-            sut.ControlRemoved += (sender, e) =>
+            sut.ControlCollectionChanged += (sender, e) =>
             {
                 fired.Should().Be(0);
                 e.RemovedControls.Should().Equal(control1, control3);
@@ -66,7 +66,7 @@ namespace ConControlsTests.Controls.ControlCollection
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             bool fired = false;
-            sut.ControlRemoved += (sender, e) =>
+            sut.ControlCollectionChanged += (sender, e) =>
             {
                 fired = true;
                 Assert.Fail();

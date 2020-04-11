@@ -240,16 +240,10 @@
             The <see cref="P:ConControls.Controls.ConsoleControl.Parent"/> of the control has been changed.
             </summary>
         </member>
-        <member name="E:ConControls.Controls.ConsoleControl.ControlAdded">
+        <member name="E:ConControls.Controls.ConsoleControl.ControlCollectionChanged">
             <summary>
-            A <see cref="T:ConControls.Controls.ConsoleControl"/> has been added to the <see cref="P:ConControls.Controls.ConsoleControl.Controls"/> collection
-            of this control.
-            </summary>
-        </member>
-        <member name="E:ConControls.Controls.ConsoleControl.ControlRemoved">
-            <summary>
-            A <see cref="T:ConControls.Controls.ConsoleControl"/> has been removed from the <see cref="P:ConControls.Controls.ConsoleControl.Controls"/> collection
-            of this control.
+            One or more <see cref="T:ConControls.Controls.ConsoleControl"/> instances have been added to or
+            removed from the <see cref="P:ConControls.Controls.ConsoleControl.Controls"/> collection of this control.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.Name">
@@ -562,16 +556,10 @@
             A collection of (child) <see cref="T:ConControls.Controls.ConsoleControl"/>s.
             </summary>
         </member>
-        <member name="E:ConControls.Controls.ControlCollection.ControlAdded">
+        <member name="E:ConControls.Controls.ControlCollection.ControlCollectionChanged">
             <summary>
-            Raised when a <see cref="T:ConControls.Controls.ConsoleControl"/> is added to this
-            <see cref="T:ConControls.Controls.ControlCollection"/>.
-            </summary>
-        </member>
-        <member name="E:ConControls.Controls.ControlCollection.ControlRemoved">
-            <summary>
-            Raised when a <see cref="T:ConControls.Controls.ConsoleControl"/> is removed from this
-            <see cref="T:ConControls.Controls.ControlCollection"/>.
+            Raised when one or more <see cref="T:ConControls.Controls.ConsoleControl"/> instances
+            have been added to or removed from this <see cref="T:ConControls.Controls.ControlCollection"/>.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ControlCollection.Item(System.Int32)">
@@ -640,8 +628,7 @@
         </member>
         <member name="T:ConControls.Controls.ControlCollectionChangedEventArgs">
             <summary>
-            Arguments for the <see cref="E:ConControls.Controls.ControlCollection.ControlAdded"/> and
-            <see cref="E:ConControls.Controls.ControlCollection.ControlRemoved"/> events.
+            Arguments for the <see cref="E:ConControls.Controls.ControlCollection.ControlCollectionChanged"/> event.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ControlCollectionChangedEventArgs.AddedControls">
@@ -697,6 +684,9 @@
             </summary>
         </member>
         <member name="M:ConControls.Controls.FocusableControl.#ctor(ConControls.Controls.IControlContainer)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.FocusableControl.CanFocus">
             <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.FrameCharSet">

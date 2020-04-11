@@ -23,15 +23,10 @@ namespace ConControls.Controls
         readonly List<ConsoleControl> controls = new List<ConsoleControl>();
 
         /// <summary>
-        /// Raised when a <see cref="ConsoleControl"/> is added to this
-        /// <see cref="ControlCollection"/>.
+        /// Raised when one or more <see cref="ConsoleControl"/> instances
+        /// have been added to or removed from this <see cref="ControlCollection"/>.
         /// </summary>
-        public event EventHandler<ControlCollectionChangedEventArgs>? ControlAdded;
-        /// <summary>
-        /// Raised when a <see cref="ConsoleControl"/> is removed from this
-        /// <see cref="ControlCollection"/>.
-        /// </summary>
-        public event EventHandler<ControlCollectionChangedEventArgs>? ControlRemoved;
+        public event EventHandler<ControlCollectionChangedEventArgs>? ControlCollectionChanged;
 
         /// <summary>
         /// Gets the <see cref="ConsoleControl"/> at the given <paramref name="index"/>.
@@ -60,7 +55,7 @@ namespace ConControls.Controls
             if (controls.Contains(control)) return;
             if (control.Window != window) throw Exceptions.DifferentWindow();
             controls.Add(control);
-            ControlAdded?.Invoke(this, ControlCollectionChangedEventArgs.Added(control));
+            ControlCollectionChanged?.Invoke(this, ControlCollectionChangedEventArgs.Added(control));
         }
         /// <summary>
         /// Adds a sequence of <see cref="ConsoleControl"/> instances to the collection.
@@ -83,7 +78,7 @@ namespace ConControls.Controls
             if (range.Any(control => control.Window != window)) throw Exceptions.DifferentWindow();
             if (range.Length == 0) return;
             controls.AddRange(range);
-            ControlAdded?.Invoke(this, ControlCollectionChangedEventArgs.Added(range));
+            ControlCollectionChanged?.Invoke(this, ControlCollectionChangedEventArgs.Added(range));
         }
         /// <summary>
         /// Removes the given <paramref name="control"/> from the collection.
@@ -96,7 +91,7 @@ namespace ConControls.Controls
             if (control == null) throw new ArgumentNullException(nameof(control));
             if (!controls.Contains(control)) return;
             controls.Remove(control);
-            ControlRemoved?.Invoke(this, ControlCollectionChangedEventArgs.Removed(control));
+            ControlCollectionChanged?.Invoke(this, ControlCollectionChangedEventArgs.Removed(control));
         }
         /// <summary>
         /// Removes the given sequence of <see cref="ConsoleControl"/> instances
@@ -118,7 +113,7 @@ namespace ConControls.Controls
             var range = new HashSet<ConsoleControl>(controlsToRemove.Intersect(controls));
             if (range.Count == 0) return;
             controls.RemoveAll(control => range.Contains(control));
-            ControlRemoved?.Invoke(this, ControlCollectionChangedEventArgs.Removed(range));
+            ControlCollectionChanged?.Invoke(this, ControlCollectionChangedEventArgs.Removed(range));
         }
 
         /// <inheritdoc />

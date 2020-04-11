@@ -67,7 +67,7 @@ namespace ConControlsTests.Controls.ControlCollection
             var control4 = new ConsolePanel(stubbedWindow);
 
             int fired = 0;
-            sut.ControlAdded += (sender, e) =>
+            sut.ControlCollectionChanged += (sender, e) =>
             {
                 fired++;
                 if (fired == 1)
@@ -92,7 +92,7 @@ namespace ConControlsTests.Controls.ControlCollection
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             bool fired = false;
-            sut.ControlAdded += (sender, e) =>
+            sut.ControlCollectionChanged += (sender, e) =>
             {
                 fired = true;
                 Assert.Fail();

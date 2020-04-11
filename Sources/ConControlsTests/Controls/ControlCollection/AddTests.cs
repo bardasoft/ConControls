@@ -68,7 +68,7 @@ namespace ConControlsTests.Controls.ControlCollection
             ConsoleControl? control1 = new ConsolePanel(stubbedWindow);
             ConsoleControl? control2 = new ConsolePanel(stubbedWindow);
             int added1 = 0, added2 = 0;
-            sut.ControlAdded += (sender, e) =>
+            sut.ControlCollectionChanged += (sender, e) =>
             {
                 sender.Should().BeSameAs(sut);
                 if (e.AddedControls.Contains(control1))

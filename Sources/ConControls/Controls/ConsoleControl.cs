@@ -64,15 +64,10 @@ namespace ConControls.Controls
         /// </summary>
         public event EventHandler? ParentChanged;
         /// <summary>
-        /// A <see cref="ConsoleControl"/> has been added to the <see cref="Controls"/> collection
-        /// of this control.
+        /// One or more <see cref="ConsoleControl"/> instances have been added to or
+        /// removed from the <see cref="Controls"/> collection of this control.
         /// </summary>
-        public event EventHandler<ControlCollectionChangedEventArgs>? ControlAdded;
-        /// <summary>
-        /// A <see cref="ConsoleControl"/> has been removed from the <see cref="Controls"/> collection
-        /// of this control.
-        /// </summary>
-        public event EventHandler<ControlCollectionChangedEventArgs>? ControlRemoved;
+        public event EventHandler<ControlCollectionChangedEventArgs>? ControlCollectionChanged;
 
         /// <summary>
         /// The name of this control (merely for debug identification).
@@ -473,8 +468,7 @@ namespace ConControls.Controls
             borderStyle = Window.BorderStyle;
 
             Controls = new ControlCollection(Window);
-            Controls.ControlAdded += OnControlAdded;
-            Controls.ControlRemoved += OnControlRemoved;
+            Controls.ControlCollectionChanged += OnControlCollectionChanged;
             this.parent.Controls.Add(this);
         }
 
@@ -705,26 +699,27 @@ namespace ConControls.Controls
             using (DeferDrawing())            
                 ParentChanged?.Invoke(this, EventArgs.Empty);
         }
-        void OnControlAdded(object sender, ControlCollectionChangedEventArgs e)
+        void OnControlCollectionChanged(object sender, ControlCollectionChangedEventArgs e)
         {
-            using (DeferDrawing())
+            lock (Window.SynchronizationLock)
             {
-                        foreach (var addedControl in e.AddedControls)
-                    addedControl.Parent = this;
-                
-                // TODO: add event handlers when necessary
+                using(DeferDrawing())
+                {
+                    foreach (var addedControl in e.AddedControls)
+                    {
+                        addedControl.Parent = this;
+                        addedControl.AreaChanged += OnControlAreaChanged;
+                    }
 
-                ControlAdded?.Invoke(this, e);
+                    foreach (var removedControl in e.RemovedControls)
+                        removedControl.AreaChanged -= OnControlAreaChanged;
+
+                    ControlCollectionChanged?.Invoke(this, e);
+                }
             }
         }
-        void OnControlRemoved(object sender, ControlCollectionChangedEventArgs e)
-        {
-            using(DeferDrawing())
-            {
-                // TODO: remove eventhandlers when necessary
-                ControlRemoved?.Invoke(this, e);
-            }
-        }
+        void OnControlAreaChanged(object sender, EventArgs e) => Invalidate(true);
+
         /// <summary>
         /// Called when the <see cref="Focused"/> property of this control has been changed.
         /// </summary>

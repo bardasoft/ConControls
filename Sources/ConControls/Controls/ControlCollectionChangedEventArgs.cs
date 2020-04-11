@@ -13,8 +13,7 @@ using System.Linq;
 namespace ConControls.Controls 
 {
     /// <summary>
-    /// Arguments for the <see cref="ControlCollection.ControlAdded"/> and
-    /// <see cref="ControlCollection.ControlRemoved"/> events.
+    /// Arguments for the <see cref="ControlCollection.ControlCollectionChanged"/> event.
     /// </summary>
     [ExcludeFromCodeCoverage]
     public sealed class ControlCollectionChangedEventArgs

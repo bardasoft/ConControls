@@ -38,7 +38,7 @@ namespace ConControlsTests.Controls.ControlCollection
             bool called = false;
             sut.Add(control1);
             sut.Add(control2);
-            sut.ControlRemoved += (sender, e) =>
+            sut.ControlCollectionChanged += (sender, e) =>
             {
                 called.Should().BeFalse();
                 called = true;
@@ -62,7 +62,7 @@ namespace ConControlsTests.Controls.ControlCollection
             var control1 = new ConsolePanel(stubbedWindow);
             // ReSharper disable once UnusedVariable
             var control2 = new ConsolePanel(stubbedWindow);
-            sut.ControlRemoved += (sender, e) =>
+            sut.ControlCollectionChanged += (sender, e) =>
             {
                 called = true;
                 Assert.Fail();

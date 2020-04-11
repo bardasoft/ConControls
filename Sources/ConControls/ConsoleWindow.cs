@@ -172,8 +172,7 @@ namespace ConControls
             this.api = api ?? new NativeCalls();
             this.consoleListener = consoleListener ?? new ConsoleListener(this.api);
             Controls = new ControlCollection(this);
-            Controls.ControlAdded += (sender, e) => Draw();
-            Controls.ControlRemoved += (sender, e) => Draw();
+            Controls.ControlCollectionChanged += OnControlCollectionChanged;
             SynchronizeConsoleSettings();
         }
         /// <summary>
@@ -275,5 +274,19 @@ namespace ConControls
                 }
             }
         }
+        void OnControlCollectionChanged(object sender, ControlCollectionChangedEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                using(DeferDrawing())
+                {
+                    foreach (var control in e.AddedControls)
+                        control.AreaChanged += OnControlAreaChanged;
+                    foreach (var control in e.RemovedControls)
+                        control.AreaChanged -= OnControlAreaChanged;
+                }
+            }
+        }
+        void OnControlAreaChanged(object sender, EventArgs e) => Invalidate();
     }
 }
