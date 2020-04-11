@@ -79,6 +79,15 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ConsoleControl instances must be contained in an IConsoleContainer! Please provide a valid parent. ähnelt.
+        /// </summary>
+        internal static string Exception_ControlsMustBeContained {
+            get {
+                return ResourceManager.GetString("Exception_ControlsMustBeContained", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The controls cannot be part of different conosle windows! ähnelt.
         /// </summary>
         internal static string Exception_DifferentWindow {

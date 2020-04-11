@@ -9,6 +9,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using ConControls.Properties;
 
@@ -28,5 +29,6 @@ namespace ConControls
             Resources.Exception_ProgressBarPercentageMustNotBeGreaterThan1);
         internal static InvalidOperationException CannotFocusUnFocusableControl(string controlType) =>
             new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_CannotFocusUnFocusableControl, controlType));
+        internal static ArgumentNullException ControlsMustBeContained([CallerMemberName] string paramName = "Parent") => new ArgumentNullException(paramName: paramName, message: Resources.Exception_ControlsMustBeContained);
     }
 }

@@ -7,9 +7,10 @@
 
 using System;
 using ConControls.Controls;
-using ConControlsTests.Stubs;
+using ConControls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable AccessToDisposedClosure
 
 #nullable enable
 
@@ -29,8 +30,9 @@ namespace ConControlsTests.Controls.ControlCollection
         public void Remove_Control_RemovedAndEventCalled()
         {
             using var stubbedWindow = new StubIConsoleWindow();
+            stubbedWindow.WindowGet = () => stubbedWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.GetControls = () => sut;
+            stubbedWindow.ControlsGet = () => sut;
             var control1 = new ConsolePanel(stubbedWindow);
             var control2 = new ConsolePanel(stubbedWindow);
             bool called = false;
@@ -50,8 +52,9 @@ namespace ConControlsTests.Controls.ControlCollection
         public void Remove_ForeignControl_Nothing()
         {
             using var stubbedWindow = new StubIConsoleWindow();
+            stubbedWindow.WindowGet = () => stubbedWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.GetControls = () => sut;
+            stubbedWindow.ControlsGet = () => sut;
             var control3 = new ConsolePanel(stubbedWindow);
             sut.Remove(control3);
             bool called = false;

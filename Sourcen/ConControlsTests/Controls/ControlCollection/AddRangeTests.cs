@@ -7,7 +7,7 @@
 
 using System;
 using ConControls.Controls;
-using ConControlsTests.Stubs;
+using ConControls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,9 +22,11 @@ namespace ConControlsTests.Controls.ControlCollection
         public void AddRange_WithWrongWindow_Exception()
         {
             var stubbedWindow = new StubIConsoleWindow();
+            stubbedWindow.WindowGet = () => stubbedWindow;
             var differentWindow = new StubIConsoleWindow();
-            stubbedWindow.GetControls = () => new ConControls.Controls.ControlCollection(stubbedWindow);
-            differentWindow.GetControls = () => new ConControls.Controls.ControlCollection(differentWindow);
+            stubbedWindow.WindowGet = () => differentWindow;
+            stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
+            differentWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(differentWindow);
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             sut.AddRange(new ConsolePanel(stubbedWindow), new ConsolePanel(differentWindow), new ConsolePanel(stubbedWindow));
         }
@@ -32,7 +34,8 @@ namespace ConControlsTests.Controls.ControlCollection
         public void AddRange_Mutliple_Distinct()
         {
             var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.GetControls = () => new ConControls.Controls.ControlCollection(stubbedWindow);
+            stubbedWindow.WindowGet = () => stubbedWindow;
+            stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             var control1 = new ConsolePanel(stubbedWindow);
@@ -54,7 +57,8 @@ namespace ConControlsTests.Controls.ControlCollection
         public void AddRange_Mutliple_EventFired()
         {
             var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.GetControls = () => new ConControls.Controls.ControlCollection(stubbedWindow);
+            stubbedWindow.WindowGet = () => stubbedWindow;
+            stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             var control1 = new ConsolePanel(stubbedWindow);
@@ -84,7 +88,7 @@ namespace ConControlsTests.Controls.ControlCollection
         public void AddRange_EmptyRange_NotFired()
         {
             var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.GetControls = () => new ConControls.Controls.ControlCollection(stubbedWindow);
+            stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             bool fired = false;

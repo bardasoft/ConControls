@@ -16,53 +16,53 @@ namespace ConControlsTests.Examples
             using var window = new ConsoleWindow();
             Debug.WriteLine($"SIZE: {window.Size} MAX: {window.MaximumSize}");
             window.BackgroundColor = ConsoleColor.Blue;
-            var l2r = new ConsoleProgressBar(window)
+            var l2r = new ProgressBar(window)
             {
                 Name = "l2r",
                 Area = new Rectangle(0, 0, 10, 3),
                 BackgroundColor = ConsoleColor.Cyan,
                 BorderColor = ConsoleColor.Yellow,
                 BorderStyle = BorderStyle.Bold,
-                ForeColor = ConsoleColor.Green,
-                Orientation = ConsoleProgressBar.ProgressOrientation.LeftToRight
+                ForegroundColor = ConsoleColor.Green,
+                Orientation = ProgressBar.ProgressOrientation.LeftToRight
             };
-            var r2l = new ConsoleProgressBar(window)
+            var r2l = new ProgressBar(window)
             {
                 Name = "r2l",
                 Area = new Rectangle(3, 10, 10, 3),
                 BackgroundColor = ConsoleColor.Cyan,
                 BorderColor = ConsoleColor.Yellow,
                 BorderStyle = BorderStyle.Bold,
-                ForeColor = ConsoleColor.Green,
-                Orientation = ConsoleProgressBar.ProgressOrientation.RightToLeft
+                ForegroundColor = ConsoleColor.Green,
+                Orientation = ProgressBar.ProgressOrientation.RightToLeft
             };
-            var t2b = new ConsoleProgressBar(window)
+            var t2b = new ProgressBar(window)
             {
                 Name = "t2b",
                 Area = new Rectangle(0, 3, 3, 10),
                 BackgroundColor = ConsoleColor.Cyan,
                 BorderColor = ConsoleColor.Yellow,
                 BorderStyle = BorderStyle.Bold,
-                ForeColor = ConsoleColor.Green,
-                Orientation = ConsoleProgressBar.ProgressOrientation.TopToBottom
+                ForegroundColor = ConsoleColor.Green,
+                Orientation = ProgressBar.ProgressOrientation.TopToBottom
             };
-            var b2t = new ConsoleProgressBar(window)
+            var b2t = new ProgressBar(window)
             {
                 Name = "b2t",
                 Area = new Rectangle(10, 0, 3, 10),
                 BackgroundColor = ConsoleColor.Cyan,
                 BorderColor = ConsoleColor.Yellow,
                 BorderStyle = BorderStyle.Bold,
-                ForeColor = ConsoleColor.Green,
-                Orientation = ConsoleProgressBar.ProgressOrientation.BottomToTop
+                ForegroundColor = ConsoleColor.Green,
+                Orientation = ProgressBar.ProgressOrientation.BottomToTop
             };
 
             for (int i = 0; i < 2000000; i++)
             {
                 double p = (double)(i % 101) / 100;
-                window.BeginUpdate();
-                l2r.Percentage = r2l.Percentage = t2b.Percentage = b2t.Percentage = p;
-                window.EndUpdate();
+                using (window.DeferDrawing())
+                    l2r.Percentage = r2l.Percentage = t2b.Percentage = b2t.Percentage = p;
+                
                 Thread.Sleep(50);
             }
         }

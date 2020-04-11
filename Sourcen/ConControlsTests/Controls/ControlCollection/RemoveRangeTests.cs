@@ -6,7 +6,7 @@
  */
 
 using ConControls.Controls;
-using ConControlsTests.Stubs;
+using ConControls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,7 +20,8 @@ namespace ConControlsTests.Controls.ControlCollection
         public void RemoveRange_Removed()
         {
             var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.GetControls = () => new ConControls.Controls.ControlCollection(stubbedWindow);
+            stubbedWindow.WindowGet = () => stubbedWindow;
+            stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             var control1 = new ConsolePanel(stubbedWindow);
@@ -35,7 +36,8 @@ namespace ConControlsTests.Controls.ControlCollection
         public void RemoveRange_RemovedAndEventFired()
         {
             var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.GetControls = () => new ConControls.Controls.ControlCollection(stubbedWindow);
+            stubbedWindow.WindowGet = () => stubbedWindow;
+            stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             var control1 = new ConsolePanel(stubbedWindow);
@@ -59,7 +61,8 @@ namespace ConControlsTests.Controls.ControlCollection
         public void RemoveRange_EmptyRange_NotFired()
         {
             var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.GetControls = () => new ConControls.Controls.ControlCollection(stubbedWindow);
+            stubbedWindow.WindowGet = () => stubbedWindow;
+            stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             bool fired = false;

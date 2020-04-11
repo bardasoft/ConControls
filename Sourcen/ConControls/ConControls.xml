@@ -62,25 +62,40 @@
             instantiated contexts before creating a new one.
             </remarks>
         </member>
-        <member name="E:ConControls.ConsoleWindow.SizeChanged">
+        <member name="E:ConControls.ConsoleWindow.AreaChanged">
             <inheritdoc />
         </member>
         <member name="E:ConControls.ConsoleWindow.Disposed">
             <inheritdoc />
         </member>
+        <member name="P:ConControls.ConsoleWindow.Window">
+            <inheritdoc />
+        </member>
         <member name="P:ConControls.ConsoleWindow.Title">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleWindow.Location">
             <inheritdoc />
         </member>
         <member name="P:ConControls.ConsoleWindow.Size">
             <inheritdoc />
         </member>
+        <member name="P:ConControls.ConsoleWindow.Area">
+            <inheritdoc />
+        </member>
         <member name="P:ConControls.ConsoleWindow.MaximumSize">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.ConsoleWindow.ForeColor">
+        <member name="P:ConControls.ConsoleWindow.ForegroundColor">
             <inheritdoc />
         </member>
         <member name="P:ConControls.ConsoleWindow.BackgroundColor">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleWindow.BorderColor">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleWindow.BorderStyle">
             <inheritdoc />
         </member>
         <member name="P:ConControls.ConsoleWindow.Controls">
@@ -93,6 +108,12 @@
             <inheritdoc />
         </member>
         <member name="P:ConControls.ConsoleWindow.DrawingInhibited">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleWindow.Enabled">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.ConsoleWindow.Visible">
             <inheritdoc />
         </member>
         <member name="P:ConControls.ConsoleWindow.IsDisposed">
@@ -119,16 +140,13 @@
         <member name="M:ConControls.ConsoleWindow.GetGraphics">
             <inheritdoc />
         </member>
-        <member name="M:ConControls.ConsoleWindow.Draw">
-            <inheritdoc />
+        <member name="M:ConControls.ConsoleWindow.Invalidate">
+            <summary>
+            Invalidates the complete window to trigger a complete redrawing of
+            the controls.
+            </summary>
         </member>
-        <member name="M:ConControls.ConsoleWindow.Refresh">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.ConsoleWindow.BeginUpdate">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.ConsoleWindow.EndUpdate">
+        <member name="M:ConControls.ConsoleWindow.DeferDrawing">
             <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.BoldinedFrameCharSet">
@@ -197,6 +215,11 @@
             Base class for all console controls.
             </summary>
         </member>
+        <member name="E:ConControls.Controls.ConsoleControl.EnabledChanged">
+            <summary>
+            Raised when the <see cref="P:ConControls.Controls.ConsoleControl.Enabled"/> property has been changed.
+            </summary>
+        </member>
         <member name="E:ConControls.Controls.ConsoleControl.VisibleChanged">
             <summary>
             The <see cref="P:ConControls.Controls.ConsoleControl.Visible"/> property of the control has been changed.
@@ -234,6 +257,11 @@
             The name of this control (merely for debug identification).
             </summary>
         </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Enabled">
+            <summary>
+            Gets or sets wether the control is enabled or not.
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.ConsoleControl.Visible">
             <summary>
             Gets or sets wether the control should be visible (drawn) or not.
@@ -260,6 +288,12 @@
             after applying layout and including borders.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Location">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Size">
+            <inheritdoc />
+        </member>
         <member name="P:ConControls.Controls.ConsoleControl.Window">
             <summary>
             The <see cref="T:ConControls.IConsoleWindow"/> that contains this control.
@@ -280,53 +314,90 @@
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.DrawingInhibited">
             <summary>
-            Determines if the control can currently be redrawn, depending on calls to <see cref="M:ConControls.Controls.ConsoleControl.BeginUpdate"/> and
-            <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/> to this control or its parents.
+            Determines if the control can currently be redrawn, depending on calls to <see cref="M:ConControls.Controls.ConsoleControl.DeferDrawing"/>
+            to this control or its parents.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControl.BorderStyle">
+        <member name="P:ConControls.Controls.ConsoleControl.ForegroundColor">
             <summary>
-            The <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control.
-            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s border style will be used.
-            If this is <code>null</code>, too, no border will be drawn.
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for foreground drawings.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControl.BorderColor">
+        <member name="P:ConControls.Controls.ConsoleControl.FocusedForegroundColor">
             <summary>
-            The color of this control's border.
-            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s border color will be used.
-            If this is <code>null</code>, too, the default (<see cref="F:System.ConsoleColor.Yellow"/>) will be used.
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for foreground drawings when the control is focused.
+            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.ForegroundColor"/> value will be used.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControl.ForeColor">
+        <member name="P:ConControls.Controls.ConsoleControl.DisabledForegroundColor">
             <summary>
-            The foreground color of this control.
-            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s foreground color will be used.
-            If this is <code>null</code>, too, the default (<see cref="F:System.ConsoleColor.Gray"/> will be used.
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for foreground drawings when the control is disabled.
+            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.ForegroundColor"/> value will be used.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.BackgroundColor">
             <summary>
-            The background color of this control.
-            If this is <code>null</code> the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s background color will be used.
-            If this is <code>null</code>, too, the default (<see cref="F:System.ConsoleColor.Black"/> will be used.
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the background of this control.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.#ctor(ConControls.IConsoleWindow)">
+        <member name="P:ConControls.Controls.ConsoleControl.FocusedBackgroundColor">
             <summary>
-            Creates a new <see cref="T:ConControls.Controls.ConsoleControl"/> and adds it to the
-            <paramref name="window"/>'s control collection.
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the background of this control
+            when it is focused.
+            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/> value will be used.
             </summary>
-            <param name="window">The <see cref="T:ConControls.IConsoleWindow"/> this control should be placed on.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="window"/> is <code>null</code>.</exception>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.#ctor(ConControls.IConsoleWindow,ConControls.Controls.ConsoleControl)">
+        <member name="P:ConControls.Controls.ConsoleControl.DisabledBackgroundColor">
+            <summary>
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the background of this control
+            when it is disabled.
+            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/> value will be used.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.BorderColor">
+            <summary>
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the border of this control.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.FocusedBorderColor">
+            <summary>
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the border of this control
+            when it is focused.
+            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/> value will be used.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.DisabledBorderColor">
+            <summary>
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the border of this control
+            when it is disabled.
+            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/> value will be used.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.BorderStyle">
+            <summary>
+            Gets or sets the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.FocusedBorderStyle">
+            <summary>
+            Gets or sets the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control
+            when it is focused.
+            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> value will be used.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.DisabledBorderStyle">
+            <summary>
+            Gets or sets the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control
+            when it is disabled.
+            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> value will be used.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.#ctor(ConControls.Controls.IControlContainer)">
             <summary>
             Initializes an instance of <see cref="T:ConControls.Controls.ConsoleControl"/>.
             </summary>
-            <param name="window">The <see cref="T:ConControls.IConsoleWindow"/> this control should be placed on.</param>
             <param name="parent">The parent <see cref="T:ConControls.Controls.ConsoleControl"/> this control should be placed on.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="window"/> or <paramref name="parent"/> is <code>null</code>.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="parent"/> is <code>null</code>.</exception>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.CheckDisposed">
             <summary>
@@ -334,6 +405,15 @@
             been disposed of and throws an <see cref="T:System.ObjectDisposedException"/> if it is.
             </summary>
             <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.IConsoleWindow"/> has already been disposed of.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.Invalidate(System.Boolean)">
+            <summary>
+            Invalidates this control to trigger redrawing.
+            If <paramref name="onlyClientArea"/> is <code>true</code>, only
+            the client area (without borders) will be invalidated.
+            </summary>
+            <param name="onlyClientArea">Set this to <code>true</code> if only the client area should be redrawn.
+            This avoids drawing the border and background.</param>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.Draw">
             <summary>
@@ -389,17 +469,27 @@
             the screen buffer.</param>
             <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.IConsoleWindow"/> has already been disposed of.</exception>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.BeginUpdate">
+        <member name="M:ConControls.Controls.ConsoleControl.DeferDrawing">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveForegroundColor">
             <summary>
-            Inhibits any redrawing etc. until <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/> is called.
-            Use this to avoid multiple redrawings while updating multiple properties.
+            Gets the current foreground color based on the state of <see cref="P:ConControls.Controls.ConsoleControl.Enabled"/> and <see cref="P:ConControls.Controls.ConsoleControl.Focused"/> properties.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.EndUpdate">
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBackgroundColor">
             <summary>
-            Finishes an update sequence. Call <see cref="M:ConControls.Controls.ConsoleControl.BeginUpdate"/> before you
-            update multiple properties to avoid multiple redrawings, and call <see cref="M:ConControls.Controls.ConsoleControl.EndUpdate"/>
-            when you are finished and want to redraw the control.
+            Gets the current background color based on the state of <see cref="P:ConControls.Controls.ConsoleControl.Enabled"/> and <see cref="P:ConControls.Controls.ConsoleControl.Focused"/> properties.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBorderColor">
+            <summary>
+            Gets the current border color based on the state of <see cref="P:ConControls.Controls.ConsoleControl.Enabled"/> and <see cref="P:ConControls.Controls.ConsoleControl.Focused"/> properties.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBorderStyle">
+            <summary>
+            Gets the current border style based on the state of <see cref="P:ConControls.Controls.ConsoleControl.Enabled"/> and <see cref="P:ConControls.Controls.ConsoleControl.Focused"/> properties.
             </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.GetClientArea">
@@ -414,49 +504,48 @@
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/> has changed.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.OnForeColorChanged">
+        <member name="M:ConControls.Controls.ConsoleControl.OnFocusedChanged">
             <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControl.ForeColor"/> of this control has been changed.
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Focused"/> property of this control has been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnEnabledChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Enabled"/> property of this control has been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnVisibleChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Visible"/> property of this control has been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnForegroundColorChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.ForegroundColor"/>, <see cref="P:ConControls.Controls.ConsoleControl.FocusedForegroundColor"/> or
+            <see cref="P:ConControls.Controls.ConsoleControl.DisabledForegroundColor"/> of this control have been changed.
             </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.OnBackgroundColorChanged">
             <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/> of this control has been changed.
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/>, <see cref="P:ConControls.Controls.ConsoleControl.FocusedBackgroundColor"/> or
+            <see cref="P:ConControls.Controls.ConsoleControl.DisabledBackgroundColor"/> of this control have been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnBorderColorChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/>, <see cref="P:ConControls.Controls.ConsoleControl.FocusedBorderColor"/> or
+            <see cref="P:ConControls.Controls.ConsoleControl.DisabledBorderColor"/> of this control have been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnBorderStyleChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/>, <see cref="P:ConControls.Controls.ConsoleControl.FocusedBorderStyle"/> or
+            <see cref="P:ConControls.Controls.ConsoleControl.DisabledBorderStyle"/> of this control have been changed.
             </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.OnAreaChanged">
             <summary>
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.Area"/> of this control has been changed.
-            </summary>
-        </member>
-        <member name="M:ConControls.Controls.ConsoleControl.OnBorderStyleChanged">
-            <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control has been changed.
-            </summary>
-        </member>
-        <member name="M:ConControls.Controls.ConsoleControl.OnBorderColorChanged">
-            <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/> of this control has been changed.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.EffectiveForeColor">
-            <summary>
-            Gets the effective foreground color (applying transparency).
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBackgroundColor">
-            <summary>
-            Gets the effective background color (applying transparency).
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBorderColor">
-            <summary>
-            Gets the effective border color (applying transparency).
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.EffectiveBorderStyle">
-            <summary>
-            Gets the effective border style (applying transparency).
             </summary>
         </member>
         <member name="T:ConControls.Controls.ConsolePanel">
@@ -465,85 +554,7 @@
             for other controls.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsolePanel.#ctor(ConControls.IConsoleWindow)">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.Controls.ConsolePanel.#ctor(ConControls.IConsoleWindow,ConControls.Controls.ConsoleControl)">
-            <inheritdoc />
-        </member>
-        <member name="T:ConControls.Controls.ConsoleProgressBar">
-            <summary>
-            A console progress bar control.
-            </summary>
-        </member>
-        <member name="F:ConControls.Controls.ConsoleProgressBar.DefaultProgressChar">
-            <summary>
-            The default progress character used by this progress bar.
-            </summary>
-        </member>
-        <member name="T:ConControls.Controls.ConsoleProgressBar.ProgressOrientation">
-            <summary>
-            The orientation of the progress bar.
-            </summary>
-        </member>
-        <member name="F:ConControls.Controls.ConsoleProgressBar.ProgressOrientation.LeftToRight">
-            <summary>
-            Progress grows from left to right.
-            </summary>
-        </member>
-        <member name="F:ConControls.Controls.ConsoleProgressBar.ProgressOrientation.RightToLeft">
-            <summary>
-            Progress grows from right to left.
-            </summary>
-        </member>
-        <member name="F:ConControls.Controls.ConsoleProgressBar.ProgressOrientation.TopToBottom">
-            <summary>
-            Progress grows from top to bottom.
-            </summary>
-        </member>
-        <member name="F:ConControls.Controls.ConsoleProgressBar.ProgressOrientation.BottomToTop">
-            <summary>
-            Progress grows from bottom to top.
-            </summary>
-        </member>
-        <member name="E:ConControls.Controls.ConsoleProgressBar.PercentageChanged">
-            <summary>
-            Raised when <see cref="P:ConControls.Controls.ConsoleProgressBar.Percentage"/> has been changed.
-            </summary>
-        </member>
-        <member name="E:ConControls.Controls.ConsoleProgressBar.ProgressCharChanged">
-            <summary>
-            Raised when <see cref="P:ConControls.Controls.ConsoleProgressBar.ProgressChar"/> has been changed.
-            </summary>
-        </member>
-        <member name="E:ConControls.Controls.ConsoleProgressBar.OrientationChanged">
-            <summary>
-            Raised when <see cref="P:ConControls.Controls.ConsoleProgressBar.Orientation"/> has been changed.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleProgressBar.Percentage">
-            <summary>
-            Gets or sets the percentage value of this progress bar.
-            </summary>
-            <exception cref="T:System.ArgumentOutOfRangeException">The value was less than zero or greater than 1.</exception>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleProgressBar.ProgressChar">
-            <summary>
-            Gets or sets the progress character used to display the progress bar.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleProgressBar.Orientation">
-            <summary>
-            Gets or sets the orientation of this progressbar (default is <see cref="F:ConControls.Controls.ConsoleProgressBar.ProgressOrientation.LeftToRight"/>).
-            </summary>
-        </member>
-        <member name="M:ConControls.Controls.ConsoleProgressBar.#ctor(ConControls.IConsoleWindow)">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.Controls.ConsoleProgressBar.#ctor(ConControls.IConsoleWindow,ConControls.Controls.ConsoleControl)">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.Controls.ConsoleProgressBar.DrawClientArea(ConControls.ConsoleApi.IConsoleGraphics)">
+        <member name="M:ConControls.Controls.ConsolePanel.#ctor(ConControls.Controls.IControlContainer)">
             <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.ControlCollection">
@@ -680,6 +691,14 @@
             The vertical line of a double-lined frame.
             </summary>
         </member>
+        <member name="T:ConControls.Controls.FocusableControl">
+            <summary>
+            A <see cref="T:ConControls.Controls.ConsoleControl"/> that can take focus.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.FocusableControl.#ctor(ConControls.Controls.IControlContainer)">
+            <inheritdoc />
+        </member>
         <member name="T:ConControls.Controls.FrameCharSet">
             <summary>
             Provides characters for drawing frames.
@@ -727,6 +746,145 @@
             <param name="style">The <see cref="T:ConControls.Controls.BorderStyle"/> to get the <see cref="T:ConControls.Controls.FrameCharSet"/> for.</param>
             <returns>A <see cref="T:ConControls.Controls.FrameCharSet"/> that can provide the characters needed to draw the given <see cref="T:ConControls.Controls.BorderStyle"/>.</returns>
         </member>
+        <member name="T:ConControls.Controls.IControlContainer">
+            <summary>
+            An interface for classes that can contain console controls.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.IControlContainer.AreaChanged">
+            <summary>
+            Raised when the <see cref="P:ConControls.Controls.IControlContainer.Area"/> (or <see cref="P:ConControls.Controls.IControlContainer.Location"/> or <see cref="P:ConControls.Controls.IControlContainer.Size"/> have changed.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.Window">
+            <summary>
+            The main <see cref="T:ConControls.IConsoleWindow"/> this <see cref="T:ConControls.Controls.IControlContainer"/> belongs to.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.Location">
+            <summary>
+            The location of this <see cref="T:ConControls.Controls.IControlContainer"/> in character columns and rows
+            from the upper left corner of the console screen buffer.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.Size">
+            <summary>
+            The size of this <see cref="T:ConControls.Controls.IControlContainer"/> in character columns and rows.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.Area">
+            <summary>
+            A <see cref="T:System.Drawing.Rectangle"/> representing the area (in charactre columns and rows) this <see cref="T:ConControls.Controls.IControlContainer"/>
+            occupies in the console screen buffer.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.Controls">
+            <summary>
+            The collection of child controls in this <see cref="T:ConControls.Controls.IControlContainer"/>.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.DrawingInhibited">
+            <summary>
+            Determines if drawing is currently allowed or inhibited via <see cref="M:ConControls.Controls.IControlContainer.DeferDrawing"/>
+            or the <see cref="P:ConControls.Controls.IControlContainer.Visible"/> property.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.Enabled">
+            <summary>
+            Gets wether this control or <see cref="T:ConControls.Controls.IControlContainer"/> is enabled.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.Visible">
+            <summary>
+            Gets wether this control or <see cref="T:ConControls.Controls.IControlContainer"/> is visible.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.IControlContainer.DeferDrawing">
+            <summary>
+            Defers any drawing operation until the return value has been disposed of again.
+            </summary>
+            <remarks>Use this to surround a block of code that changes multiple properties of this
+            <see cref="T:ConControls.Controls.IControlContainer"/> or its children.
+            <p>
+            using(DeferDrawing){....}
+            </p>
+            At the end of this block, drawing will be resumed again.
+            </remarks>
+            <returns>An <see cref="T:System.IDisposable"/> that on calling <see cref="M:System.IDisposable.Dispose"/> releases
+            the drawing barriere of this window.</returns>
+        </member>
+        <member name="T:ConControls.Controls.ProgressBar">
+            <summary>
+            A console progress bar control.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.ProgressBar.DefaultProgressChar">
+            <summary>
+            The default progress character used by this progress bar.
+            </summary>
+        </member>
+        <member name="T:ConControls.Controls.ProgressBar.ProgressOrientation">
+            <summary>
+            The orientation of the progress bar.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.ProgressBar.ProgressOrientation.LeftToRight">
+            <summary>
+            Progress grows from left to right.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.ProgressBar.ProgressOrientation.RightToLeft">
+            <summary>
+            Progress grows from right to left.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.ProgressBar.ProgressOrientation.TopToBottom">
+            <summary>
+            Progress grows from top to bottom.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.ProgressBar.ProgressOrientation.BottomToTop">
+            <summary>
+            Progress grows from bottom to top.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ProgressBar.PercentageChanged">
+            <summary>
+            Raised when <see cref="P:ConControls.Controls.ProgressBar.Percentage"/> has been changed.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ProgressBar.ProgressCharChanged">
+            <summary>
+            Raised when <see cref="P:ConControls.Controls.ProgressBar.ProgressChar"/> has been changed.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ProgressBar.OrientationChanged">
+            <summary>
+            Raised when <see cref="P:ConControls.Controls.ProgressBar.Orientation"/> has been changed.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ProgressBar.Percentage">
+            <summary>
+            Gets or sets the percentage value of this progress bar.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">The value was less than zero or greater than 1.</exception>
+        </member>
+        <member name="P:ConControls.Controls.ProgressBar.ProgressChar">
+            <summary>
+            Gets or sets the progress character used to display the progress bar.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ProgressBar.Orientation">
+            <summary>
+            Gets or sets the orientation of this progressbar (default is <see cref="F:ConControls.Controls.ProgressBar.ProgressOrientation.LeftToRight"/>).
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ProgressBar.#ctor(ConControls.Controls.IControlContainer)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.ProgressBar.DrawClientArea(ConControls.ConsoleApi.IConsoleGraphics)">
+            <inheritdoc />
+        </member>
         <member name="T:ConControls.Controls.SingleLinedFrameCharSet">
             <summary>
             A <see cref="T:ConControls.Controls.FrameCharSet"/> for single-lined frames.
@@ -767,11 +925,6 @@
             Interface to a <see cref="T:ConControls.ConsoleWindow"/>.
             </summary>
         </member>
-        <member name="E:ConControls.IConsoleWindow.SizeChanged">
-            <summary>
-            Raised when the <see cref="P:ConControls.IConsoleWindow.Size"/> of the console window changed.
-            </summary>
-        </member>
         <member name="E:ConControls.IConsoleWindow.Disposed">
             <summary>
             Raised when this console window is disposed of.
@@ -782,31 +935,29 @@
             The title of the console window.
             </summary>
         </member>
-        <member name="P:ConControls.IConsoleWindow.Size">
-            <summary>
-            Gets or sets the size of the console window (the area of the screen buffer).
-            The <see cref="P:System.Drawing.Size.Width"/> is the number of characters per row.
-            The <see cref="P:System.Drawing.Size.Height"/> is the number of lines.
-            </summary>
-        </member>
         <member name="P:ConControls.IConsoleWindow.MaximumSize">
             <summary>
             Gets the maximum size of the console window based on the current font and the size of the display.
             </summary>
         </member>
-        <member name="P:ConControls.IConsoleWindow.ForeColor">
+        <member name="P:ConControls.IConsoleWindow.ForegroundColor">
             <summary>
-            Gets or sets the foreground color of the console window.
+            Gets or sets the default foreground color.
             </summary>
         </member>
         <member name="P:ConControls.IConsoleWindow.BackgroundColor">
             <summary>
-            Gets or sets the background color of the console window.
+            Gets or sets the default background color.
             </summary>
         </member>
-        <member name="P:ConControls.IConsoleWindow.Controls">
+        <member name="P:ConControls.IConsoleWindow.BorderColor">
             <summary>
-            The collection of <see cref="T:ConControls.Controls.ConsoleControl"/>s on this window.
+            Gets or sets the default border color.
+            </summary>
+        </member>
+        <member name="P:ConControls.IConsoleWindow.BorderStyle">
+            <summary>
+            Gets or sets the default border style.
             </summary>
         </member>
         <member name="P:ConControls.IConsoleWindow.FocusedControl">
@@ -817,12 +968,6 @@
         <member name="P:ConControls.IConsoleWindow.FrameCharSets">
             <summary>
             The <see cref="P:ConControls.IConsoleWindow.FrameCharSets"/> provider to use to draw frames.
-            </summary>
-        </member>
-        <member name="P:ConControls.IConsoleWindow.DrawingInhibited">
-            <summary>
-            Determines if the window can currently be redrawn, depending on calls to <see cref="M:ConControls.IConsoleWindow.BeginUpdate"/> and
-            <see cref="M:ConControls.IConsoleWindow.EndUpdate"/>.
             </summary>
         </member>
         <member name="P:ConControls.IConsoleWindow.IsDisposed">
@@ -840,28 +985,6 @@
             Provides a <see cref="T:ConControls.ConsoleApi.IConsoleGraphics"/> to draw on this console window.
             </summary>
             <returns>An <see cref="T:ConControls.ConsoleApi.IConsoleGraphics"/> iterface to draw on this window.</returns>
-        </member>
-        <member name="M:ConControls.IConsoleWindow.Draw">
-            <summary>
-            Redraws the window.
-            </summary>
-        </member>
-        <member name="M:ConControls.IConsoleWindow.Refresh">
-            <summary>
-            Performs a complete refresh of the console display.
-            </summary>
-        </member>
-        <member name="M:ConControls.IConsoleWindow.BeginUpdate">
-            <summary>
-            Use <see cref="M:ConControls.IConsoleWindow.BeginUpdate"/> to start updating multiple properties without multiple redrawings of the window.
-            Use <see cref="M:ConControls.IConsoleWindow.EndUpdate"/> when finished to finally redraw the window.
-            </summary>
-        </member>
-        <member name="M:ConControls.IConsoleWindow.EndUpdate">
-            <summary>
-            Use <see cref="M:ConControls.IConsoleWindow.BeginUpdate"/> to start updating multiple properties without multiple redrawings of the window.
-            Use <see cref="M:ConControls.IConsoleWindow.EndUpdate"/> when finished to finally redraw the window.
-            </summary>
         </member>
         <member name="T:ConControls.Properties.Resources">
             <summary>
@@ -887,6 +1010,11 @@
         <member name="P:ConControls.Properties.Resources.Exception_CanOnlyUseSingleContext">
             <summary>
               Sucht eine lokalisierte Zeichenfolge, die There can only be one single console window at a time! Dispose of any existing console window before instantiating a new one. ähnelt.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_ControlsMustBeContained">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die ConsoleControl instances must be contained in an IConsoleContainer! Please provide a valid parent. ähnelt.
             </summary>
         </member>
         <member name="P:ConControls.Properties.Resources.Exception_DifferentWindow">

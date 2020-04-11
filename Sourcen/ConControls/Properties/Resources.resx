@@ -123,6 +123,9 @@
   <data name="Exception_CanOnlyUseSingleContext" xml:space="preserve">
     <value>There can only be one single console window at a time! Dispose of any existing console window before instantiating a new one.</value>
   </data>
+  <data name="Exception_ControlsMustBeContained" xml:space="preserve">
+    <value>ConsoleControl instances must be contained in an IConsoleContainer! Please provide a valid parent.</value>
+  </data>
   <data name="Exception_DifferentWindow" xml:space="preserve">
     <value>The controls cannot be part of different conosle windows!</value>
   </data>

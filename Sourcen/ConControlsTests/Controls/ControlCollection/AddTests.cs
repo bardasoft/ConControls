@@ -8,9 +8,10 @@
 using System;
 using System.Linq;
 using ConControls.Controls;
-using ConControlsTests.Stubs;
+using ConControls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable AccessToDisposedClosure
 
 #nullable enable
 
@@ -34,19 +35,22 @@ namespace ConControlsTests.Controls.ControlCollection
         public void Add_WrongWindow_InvalidOperationException()
         {
             using var stubbedWindow = new StubIConsoleWindow();
+            stubbedWindow.WindowGet = () => stubbedWindow;
             using var differentWindow = new StubIConsoleWindow();
+            differentWindow.WindowGet = () => differentWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             var differentCollection = new ConControls.Controls.ControlCollection(differentWindow);
-            differentWindow.GetControls = () => differentCollection;
-            stubbedWindow.GetControls = () => sut;
+            differentWindow.ControlsGet = () => differentCollection;
+            stubbedWindow.ControlsGet = () => sut;
             sut.Add(new ConsolePanel(differentWindow));
         }
         [TestMethod]
         public void Add_Control_Added()
         {
             using var stubbedWindow = new StubIConsoleWindow();
+            stubbedWindow.WindowGet = () => stubbedWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.GetControls = () => sut;
+            stubbedWindow.ControlsGet = () => sut;
             var control = new ConsolePanel(stubbedWindow);
             sut.Count.Should().Be(1);
             sut[0].Should().BeSameAs(control);
@@ -55,9 +59,10 @@ namespace ConControlsTests.Controls.ControlCollection
         public void Add_ControlsTwice_AddedOnceAndEventsRaised()
         {
             using var stubbedWindow = new StubIConsoleWindow();
+            stubbedWindow.WindowGet = () => stubbedWindow;
             // for the window, to not interfer with sut
             var stubbedCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.GetControls = () => stubbedCollection;
+            stubbedWindow.ControlsGet = () => stubbedCollection;
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             ConsoleControl? control1 = new ConsolePanel(stubbedWindow);

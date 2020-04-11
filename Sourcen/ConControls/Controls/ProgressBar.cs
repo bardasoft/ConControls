@@ -15,7 +15,7 @@ namespace ConControls.Controls
     /// <summary>
     /// A console progress bar control.
     /// </summary>
-    public sealed class ConsoleProgressBar : ConsoleControl
+    public sealed class ProgressBar : ConsoleControl
     {
         /// <summary>
         /// The default progress character used by this progress bar.
@@ -124,17 +124,14 @@ namespace ConControls.Controls
             }
         }
         /// <inheritdoc />
-        public ConsoleProgressBar(IConsoleWindow window)
-            : base(window) { }
-        /// <inheritdoc />
-        public ConsoleProgressBar(IConsoleWindow window, ConsoleControl parent)
-            : base(window, parent) { }
+        public ProgressBar(IControlContainer parent)
+            : base(parent) { }
 
         /// <inheritdoc />
         protected override void DrawClientArea(IConsoleGraphics graphics)
         {
             base.DrawClientArea(graphics);
-            graphics.FillArea(EffectiveBackgroundColor, EffectiveForeColor, progressChar, GetRectangleToFill());
+            graphics.FillArea(EffectiveBackgroundColor, EffectiveForegroundColor, progressChar, GetRectangleToFill());
         }
         void UpdateRectangle()
         {

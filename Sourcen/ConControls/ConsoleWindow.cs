@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Threading;
 using ConControls.ConsoleApi;
 using ConControls.Controls;
+using ConControls.Helpers;
 using ConControls.Logging;
 using ConControls.WindowsApi;
 using ConControls.WindowsApi.Types;
@@ -33,28 +34,31 @@ namespace ConControls
         readonly IConsoleListener consoleListener;
         readonly ConsoleInputHandle consoleInputHandle;
         readonly ConsoleOutputHandle consoleOutputHandle;
+#pragma warning disable CA2213
+        readonly DisposableBlock drawingInhibiter;
+#pragma warning restore CA2213
 
         int isDisposed;
         int inhibitDrawing;
         Size lastKnownSize;
-
         FrameCharSets frameCharSets = new FrameCharSets();
-        ConsoleColor foreColor = ConsoleColor.Gray;
-        ConsoleColor backgroundColor = ConsoleColor.Black;
-
         ConsoleControl? focusedControl;
 
         /// <inheritdoc />
-        public event EventHandler? SizeChanged;
+        public event EventHandler? AreaChanged;
         /// <inheritdoc />
         public event EventHandler? Disposed;
 
+        /// <inheritdoc />
+        public IConsoleWindow Window => this;
         /// <inheritdoc />
         public string Title
         {
             get => api.GetConsoleTitle();
             set => api.SetConsoleTitle(value ?? string.Empty);
         }
+        /// <inheritdoc />
+        public Point Location { get; } = Point.Empty;
         /// <inheritdoc />
         public Size Size
         {
@@ -74,6 +78,9 @@ namespace ConControls
             }
         }
         /// <inheritdoc />
+        public Rectangle Area => new Rectangle(Point.Empty, Size);
+        
+        /// <inheritdoc />
         public Size MaximumSize
         {
             get
@@ -83,27 +90,13 @@ namespace ConControls
             }
         }
         /// <inheritdoc />
-        public ConsoleColor ForeColor
-        {
-            get => foreColor;
-            set
-            {
-                if (value == foreColor) return;
-                foreColor = value;
-                OnForeColorChanged();
-            }
-        }
+        public ConsoleColor ForegroundColor { get; set; } = ConsoleColor.Gray;
         /// <inheritdoc />
-        public ConsoleColor BackgroundColor
-        {
-            get => backgroundColor;
-            set
-            {
-                if (value == backgroundColor) return;
-                backgroundColor = value;
-                OnBackgroundColorChanged();
-            }
-        }
+        public ConsoleColor BackgroundColor { get; set; } = ConsoleColor.DarkBlue;
+        /// <inheritdoc />
+        public ConsoleColor BorderColor { get; set; } = ConsoleColor.Yellow;
+        /// <inheritdoc />
+        public BorderStyle BorderStyle { get; set; } = BorderStyle.None;
         /// <inheritdoc />
         public ControlCollection Controls { get; }
         /// <inheritdoc />
@@ -117,33 +110,40 @@ namespace ConControls
             {
                 lock (SynchronizationLock)
                 {
-                    if (value == focusedControl || value == null) return;
-                    if (focusedControl != null) focusedControl.Focused = false;
+                    if (value == focusedControl) return;
+                    if (value?.CanFocus() == false) throw Exceptions.CannotFocusUnFocusableControl(value.GetType().Name);
+                    var oldFocused = focusedControl;
                     focusedControl = null;
-                    value.Focused = true; // may throw
+                    if (oldFocused != null) oldFocused.Focused = false;
                     focusedControl = value;
+                    if (focusedControl == null) return;
+                    focusedControl.Focused = true;
                 }
             }
         }
-
         /// <inheritdoc />
         public FrameCharSets FrameCharSets
         {
-            get => frameCharSets;
+            get
+            {
+                lock (SynchronizationLock) return frameCharSets;
+            }
             set
             {
-                if (frameCharSets == value) return;
-                if (value == null) throw new ArgumentNullException(nameof(FrameCharSets));
-
                 lock (SynchronizationLock)
                 {
-                    frameCharSets = value;
+                    if (frameCharSets == value) return;
+                    frameCharSets = value ?? throw new ArgumentNullException(nameof(FrameCharSets));
                     OnFrameCharSetsChanged();
                 }
             }
         }
         /// <inheritdoc />
-        public bool DrawingInhibited => inhibitDrawing > 0;
+        public bool DrawingInhibited => !Visible || inhibitDrawing > 0;
+        /// <inheritdoc />
+        public bool Enabled => !IsDisposed;
+        /// <inheritdoc />
+        public bool Visible => !IsDisposed;
         /// <inheritdoc />
         public bool IsDisposed => isDisposed != 0;
         /// <inheritdoc />
@@ -162,6 +162,7 @@ namespace ConControls
             if (Interlocked.CompareExchange(ref instancesCreated, 1, 0) != 0)
                 throw Exceptions.CanOnlyUseSingleContext();
 
+            drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             consoleInputHandle = new ConsoleInputHandle();
             if (consoleInputHandle.IsInvalid)
                 throw Exceptions.Win32();
@@ -205,8 +206,7 @@ namespace ConControls
 
         /// <inheritdoc />
         public IConsoleGraphics GetGraphics() => new ConsoleGraphics(consoleOutputHandle, api, Size, frameCharSets);
-        /// <inheritdoc />
-        public void Draw()
+        void Draw()
         {
             Logger.Log(DebugContext.Window | DebugContext.Drawing, "called.");
             lock (SynchronizationLock)
@@ -219,7 +219,7 @@ namespace ConControls
                 var graphics = GetGraphics();
                 var rect = new Rectangle(0, 0, Size.Width, Size.Height);
                 Logger.Log(DebugContext.Window | DebugContext.Drawing, $"drawing background at {rect}.");
-                graphics.DrawBackground(backgroundColor, rect);
+                graphics.DrawBackground(BackgroundColor, rect);
                 Logger.Log(DebugContext.Window | DebugContext.Drawing, "drawing controls.");
                 foreach(var control in Controls)
                     control.Draw(graphics);
@@ -227,50 +227,39 @@ namespace ConControls
                 graphics.Flush();
             }
         }
-        /// <inheritdoc />
-        public void Refresh() => SynchronizeConsoleSettings();
-        /// <inheritdoc />
-        public void BeginUpdate()
+        /// <summary>
+        /// Invalidates the complete window to trigger a complete redrawing of
+        /// the controls.
+        /// </summary>
+        public void Invalidate()
         {
-            Interlocked.Increment(ref inhibitDrawing);
+            Draw();
         }
         /// <inheritdoc />
-        public void EndUpdate()
+        public IDisposable DeferDrawing()
+        {
+            Interlocked.Increment(ref inhibitDrawing);
+            return drawingInhibiter;
+        }
+        void EndDeferDrawing()
         {
             if (Interlocked.Decrement(ref inhibitDrawing) <= 0)
-                Draw();
+                Invalidate();
         }
         void OnFrameCharSetsChanged()
         {
-            Draw();
+            Invalidate();
         }
         void OnSizeChanged()
         {
-            BeginUpdate();
-            try
-            {
-                SizeChanged?.Invoke(this, EventArgs.Empty);
-            }
-            finally
-            {
-                EndUpdate();
-            }
+            using(DeferDrawing())
+                AreaChanged?.Invoke(this, EventArgs.Empty);
         }
-        void OnForeColorChanged()
-        {
-            Draw();
-        }
-        void OnBackgroundColorChanged()
-        {
-            Draw();
-        }
-
         void SynchronizeConsoleSettings()
         {
             lock (SynchronizationLock)
             {
-                BeginUpdate();
-                try
+                using(DeferDrawing())
                 {
                     var size = Size;
                     if (size != lastKnownSize)
@@ -283,10 +272,6 @@ namespace ConControls
                     var bufferSize = new COORD(size);
                     Logger.Log(DebugContext.Window, $"Setting screen buffer size to {bufferSize}.");
                     api.SetConsoleScreenBufferSize(consoleOutputHandle, new COORD(Size));
-                }
-                finally
-                {
-                    EndUpdate();
                 }
             }
         }

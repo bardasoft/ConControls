@@ -6,9 +6,11 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
 using ConControls.ConsoleApi;
+using ConControls.Helpers;
 using ConControls.Logging;
 
 namespace ConControls.Controls
@@ -16,19 +18,35 @@ namespace ConControls.Controls
     /// <summary>
     /// Base class for all console controls.
     /// </summary>
-    public abstract class ConsoleControl
+    [SuppressMessage("Design", "CA1001", Justification = "The DisposableBlock does not need to be disposed, its Dispose method has a different purpose.")]
+    public abstract class ConsoleControl : IControlContainer
     {
+        readonly DisposableBlock drawingInhibiter;
         string name;
+        bool enabled = true;
         bool visible = true;
-        bool focused;
-        Rectangle area;
-        ConsoleControl? parent;
-        int inhibitDrawing;
-        BorderStyle? borderStyle;
-        ConsoleColor? borderColor;
-        ConsoleColor? foreColor;
-        ConsoleColor? backgroundColor;
 
+        ConsoleColor foregroundColor;
+        ConsoleColor? focusedForegroundColor;
+        ConsoleColor? disabledForegroundColor;
+        ConsoleColor backgroundColor;
+        ConsoleColor? focusedBackgroundColor;
+        ConsoleColor? disabledBackgroundColor;
+        BorderStyle borderStyle;
+        BorderStyle? focusedBorderStyle;
+        BorderStyle? disabledBorderStyle;
+        ConsoleColor borderColor;
+        ConsoleColor? focusedBorderColor;
+        ConsoleColor? disabledBorderColor;
+
+        Rectangle area;
+        IControlContainer parent;
+        int inhibitDrawing;
+
+        /// <summary>
+        /// Raised when the <see cref="Enabled"/> property has been changed.
+        /// </summary>
+        public event EventHandler? EnabledChanged;
         /// <summary>
         /// The <see cref="Visible"/> property of the control has been changed.
         /// </summary>
@@ -61,21 +79,43 @@ namespace ConControls.Controls
         /// </summary>
         public string Name
         {
-            get => name;
-            set => name = string.IsNullOrWhiteSpace(value) ? GetType().Name : value.Trim();
+            get { lock(Window.SynchronizationLock) return name; }
+            set
+            {
+                lock(Window.SynchronizationLock)
+                    name = string.IsNullOrWhiteSpace(value) ? GetType().Name : value.Trim();
+            }
         }
-
+        /// <summary>
+        /// Gets or sets wether the control is enabled or not.
+        /// </summary>
+        public bool Enabled
+        {
+            get { lock (Window.SynchronizationLock) return enabled && parent.Enabled; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (enabled == value) return;
+                    enabled = value;
+                    OnEnabledChanged();
+                }
+            }
+        }
         /// <summary>
         /// Gets or sets wether the control should be visible (drawn) or not.
         /// </summary>
         public bool Visible
         {
-            get => visible;
+            get { lock (Window.SynchronizationLock) return visible && parent.Visible; }
             set
             {
-                if (visible == value) return;
-                visible = value;
-                OnVisibleChanged();
+                lock (Window.SynchronizationLock)
+                {
+                    if (visible == value) return;
+                    visible = value;
+                    OnVisibleChanged();
+                }
             }
         }
         /// <summary>
@@ -86,15 +126,18 @@ namespace ConControls.Controls
         /// <exception cref="InvalidOperationException"><see cref="Focused"/> cannot be set to <code>true</code> when <see cref="CanFocus"/> returns <code>false</code>.</exception>
         public bool Focused
         {
-            get {lock(Window.SynchronizationLock) return focused;}
+            get
+            {
+                lock (Window.SynchronizationLock) return Window.FocusedControl == this;
+            }
             set
             {
                 lock (Window.SynchronizationLock)
                 {
-                    if (value == focused) return;
+                    if (value == Focused) return;
                     if (value && !CanFocus())
                         throw Exceptions.CannotFocusUnFocusableControl(GetType().Name);
-                    focused = value;
+                    Window.FocusedControl = value ? this : null;
                     OnFocusedChanged();
                 }
             }
@@ -126,54 +169,74 @@ namespace ConControls.Controls
                 }
             }
         }
+        /// <inheritdoc />
+        public Point Location
+        {
+            get
+            {
+                lock (Window.SynchronizationLock)
+                    return area.Location;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (area.Location == value) return;
+                    area = new Rectangle(value, area.Size);
+                    OnAreaChanged();
+                }
+            }
+        }
+        /// <inheritdoc />
+        public Size Size
+        {
+            get
+            {
+                lock (Window.SynchronizationLock)
+                    return area.Size;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (area.Size == value) return;
+                    area = new Rectangle(area.Location, value);
+                    OnAreaChanged();
+                }
+            }
+        }
         /// <summary>
         /// The <see cref="IConsoleWindow"/> that contains this control.
         /// </summary>
-        public IConsoleWindow Window { get; }
+        public IConsoleWindow Window => parent.Window;
         /// <summary>
         /// The parent <see cref="ConsoleControl"/> that contains this control.
         /// The parent must be contained by the same <see cref="IConsoleWindow"/>.
         /// </summary>
         /// <exception cref="InvalidOperationException">The parent is not part of the same <see cref="IConsoleWindow"/> or this control is the root element of the window..</exception>
         /// <exception cref="ArgumentNullException">The parent is <code>null</code>.</exception>
-        public ConsoleControl? Parent
+        public IControlContainer Parent
         {
-            get => parent;
+            get { lock(Window.SynchronizationLock) return parent; }
             set
             {
                 lock (Window.SynchronizationLock)
                 {
                     if (parent == value) return;
-                    if (value != null && value.Window != Window) throw Exceptions.DifferentWindow();
-
-                    if (parent == null || value == null)
-                        Window.BeginUpdate();
-                    parent?.BeginUpdate();
-                    value?.BeginUpdate();
-                    try
-                    {
-                        if (parent == null)
-                            Window.Controls.Remove(this);
-                        else
-                            parent.Controls.Remove(this);
-                        if (value == null)
-                            Window.Controls.Add(this);
-                        else
-                            value.Controls.Add(this);
-                    }
-                    finally
-                    {
-                        if (parent == null || value == null)
-                            Window.EndUpdate();
-                        parent?.EndUpdate();
-                        value?.EndUpdate();
+                    if (value == null) throw Exceptions.ControlsMustBeContained();
+                    if (value.Window != Window) throw Exceptions.DifferentWindow();
+                    using (parent.DeferDrawing())
+                    using (value.DeferDrawing())
+                    { 
+                        var oldparent = parent;
                         parent = value;
+                        oldparent?.Controls.Remove(this);
+                        parent?.Controls.Add(this);
                     }
 
                     OnParentChanged();
                 }
             }
-
         }
         /// <summary>
         /// The collection of <see cref="ConsoleControl"/>s contained by this control.
@@ -181,68 +244,67 @@ namespace ConControls.Controls
         public ControlCollection Controls { get; }
 
         /// <summary>
-        /// Determines if the control can currently be redrawn, depending on calls to <see cref="BeginUpdate"/> and
-        /// <see cref="EndUpdate"/> to this control or its parents.
+        /// Determines if the control can currently be redrawn, depending on calls to <see cref="DeferDrawing"/>
+        /// to this control or its parents.
         /// </summary>
-        public bool DrawingInhibited => !visible || inhibitDrawing > 0 || parent?.DrawingInhibited == true || Window.DrawingInhibited;
+        public bool DrawingInhibited => !visible || inhibitDrawing > 0 || parent.DrawingInhibited;
 
         /// <summary>
-        /// The <see cref="BorderStyle"/> of this control.
-        /// If this is <code>null</code> the <see cref="Parent"/>'s border style will be used.
-        /// If this is <code>null</code>, too, no border will be drawn.
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings.
         /// </summary>
-        public BorderStyle? BorderStyle
+        public ConsoleColor ForegroundColor
         {
-            get => borderStyle;
-            set
-            {
-                if (value == borderStyle) return;
-                borderStyle = value;
-                OnBorderStyleChanged();
-            }
-        }
-        /// <summary>
-        /// The color of this control's border.
-        /// If this is <code>null</code> the <see cref="Parent"/>'s border color will be used.
-        /// If this is <code>null</code>, too, the default (<see cref="ConsoleColor.Yellow"/>) will be used.
-        /// </summary>
-        public ConsoleColor? BorderColor
-        {
-            get => borderColor;
-            set
-            {
-                if (value == borderColor) return;
-                borderColor = value;
-                OnBorderColorChanged();
-            }
-        }
-
-        /// <summary>
-        /// The foreground color of this control.
-        /// If this is <code>null</code> the <see cref="Parent"/>'s foreground color will be used.
-        /// If this is <code>null</code>, too, the default (<see cref="ConsoleColor.Gray"/> will be used.
-        /// </summary>
-        public ConsoleColor? ForeColor
-        {
-            get => foreColor;
+            get { lock (Window.SynchronizationLock) return foregroundColor; }
             set
             {
                 lock (Window.SynchronizationLock)
                 {
-                    if (foreColor == value) return;
-                    foreColor = value;
-                    OnForeColorChanged();
+                    if (foregroundColor == value) return;
+                    foregroundColor = value;
+                    OnForegroundColorChanged();
                 }
             }
         }
         /// <summary>
-        /// The background color of this control.
-        /// If this is <code>null</code> the <see cref="Parent"/>'s background color will be used.
-        /// If this is <code>null</code>, too, the default (<see cref="ConsoleColor.Black"/> will be used.
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings when the control is focused.
+        /// If this is <code>null</code>, the <see cref="ForegroundColor"/> value will be used.
         /// </summary>
-        public ConsoleColor? BackgroundColor
+        public ConsoleColor? FocusedForegroundColor
         {
-            get => backgroundColor;
+            get { lock (Window.SynchronizationLock) return focusedForegroundColor; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (focusedForegroundColor == value) return;
+                    focusedForegroundColor = value;
+                    OnForegroundColorChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings when the control is disabled.
+        /// If this is <code>null</code>, the <see cref="ForegroundColor"/> value will be used.
+        /// </summary>
+        public ConsoleColor? DisabledForegroundColor
+        {
+            get { lock (Window.SynchronizationLock) return disabledForegroundColor; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (disabledForegroundColor == value) return;
+                    disabledForegroundColor = value;
+                    OnForegroundColorChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for the background of this control.
+        /// </summary>
+        public ConsoleColor BackgroundColor
+        {
+            get { lock (Window.SynchronizationLock) return backgroundColor; }
             set
             {
                 lock (Window.SynchronizationLock)
@@ -253,37 +315,167 @@ namespace ConControls.Controls
                 }
             }
         }
-
         /// <summary>
-        /// Creates a new <see cref="ConsoleControl"/> and adds it to the
-        /// <paramref name="window"/>'s control collection.
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for the background of this control
+        /// when it is focused.
+        /// If this is <code>null</code>, the <see cref="BackgroundColor"/> value will be used.
         /// </summary>
-        /// <param name="window">The <see cref="IConsoleWindow"/> this control should be placed on.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="window"/> is <code>null</code>.</exception>
-        private protected ConsoleControl(IConsoleWindow window)
+        public ConsoleColor? FocusedBackgroundColor
         {
-            Window = window ?? throw new ArgumentNullException(nameof(window));
-            name = GetType().Name;
-            Controls = new ControlCollection(Window);
-            Controls.ControlAdded += OnControlAdded;
-            Controls.ControlRemoved += OnControlRemoved;
-            window.Controls.Add(this);
+            get { lock (Window.SynchronizationLock) return focusedBackgroundColor; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (focusedBackgroundColor == value) return;
+                    focusedBackgroundColor = value;
+                    OnBackgroundColorChanged();
+                }
+            }
         }
+        /// <summary>
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for the background of this control
+        /// when it is disabled.
+        /// If this is <code>null</code>, the <see cref="BackgroundColor"/> value will be used.
+        /// </summary>
+        public ConsoleColor? DisabledBackgroundColor
+        {
+            get { lock (Window.SynchronizationLock) return disabledBackgroundColor; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (disabledBackgroundColor == value) return;
+                    disabledBackgroundColor = value;
+                    OnBackgroundColorChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for the border of this control.
+        /// </summary>
+        public ConsoleColor BorderColor
+        {
+            get { lock (Window.SynchronizationLock) return borderColor; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (borderColor == value) return;
+                    borderColor = value;
+                    OnBorderColorChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for the border of this control
+        /// when it is focused.
+        /// If this is <code>null</code>, the <see cref="BorderColor"/> value will be used.
+        /// </summary>
+        public ConsoleColor? FocusedBorderColor
+        {
+            get { lock (Window.SynchronizationLock) return focusedBorderColor; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (focusedBorderColor == value) return;
+                    focusedBorderColor = value;
+                    OnBorderColorChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for the border of this control
+        /// when it is disabled.
+        /// If this is <code>null</code>, the <see cref="BorderColor"/> value will be used.
+        /// </summary>
+        public ConsoleColor? DisabledBorderColor
+        {
+            get { lock (Window.SynchronizationLock) return disabledBorderColor; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (disabledBorderColor == value) return;
+                    disabledBorderColor = value;
+                    OnBorderColorChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the <see cref="BorderStyle"/> of this control.
+        /// </summary>
+        public BorderStyle BorderStyle
+        {
+            get { lock (Window.SynchronizationLock) return borderStyle; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (borderStyle == value) return;
+                    borderStyle = value;
+                    OnBorderStyleChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the <see cref="BorderStyle"/> of this control
+        /// when it is focused.
+        /// If this is <code>null</code>, the <see cref="ConsoleControl.BorderStyle"/> value will be used.
+        /// </summary>
+        public BorderStyle? FocusedBorderStyle
+        {
+            get { lock (Window.SynchronizationLock) return focusedBorderStyle; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (focusedBorderStyle == value) return;
+                    focusedBorderStyle = value;
+                    OnBorderStyleChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the <see cref="BorderStyle"/> of this control
+        /// when it is disabled.
+        /// If this is <code>null</code>, the <see cref="ConsoleControl.BorderStyle"/> value will be used.
+        /// </summary>
+        public BorderStyle? DisabledBorderStyle
+        {
+            get { lock (Window.SynchronizationLock) return disabledBorderStyle; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (disabledBorderStyle == value) return;
+                    disabledBorderStyle = value;
+                    OnBorderStyleChanged();
+                }
+            }
+        }
+
         /// <summary>
         /// Initializes an instance of <see cref="ConsoleControl"/>.
         /// </summary>
-        /// <param name="window">The <see cref="IConsoleWindow"/> this control should be placed on.</param>
         /// <param name="parent">The parent <see cref="ConsoleControl"/> this control should be placed on.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="window"/> or <paramref name="parent"/> is <code>null</code>.</exception>
-        private protected ConsoleControl(IConsoleWindow window, ConsoleControl parent)
+        /// <exception cref="ArgumentNullException"><paramref name="parent"/> is <code>null</code>.</exception>
+        private protected ConsoleControl(IControlContainer parent)
         {
-            Window = window ?? throw new ArgumentNullException(nameof(window));
             this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
+            drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             name = GetType().Name;
+
+            foregroundColor = Window.ForegroundColor;
+            backgroundColor = Window.BackgroundColor;
+            borderColor = Window.BorderColor;
+            borderStyle = Window.BorderStyle;
+
             Controls = new ControlCollection(Window);
             Controls.ControlAdded += OnControlAdded;
             Controls.ControlRemoved += OnControlRemoved;
-            parent.Controls.Add(this);
+            this.parent.Controls.Add(this);
         }
 
         /// <summary>
@@ -297,9 +489,23 @@ namespace ConControls.Controls
         }
 
         /// <summary>
+        /// Invalidates this control to trigger redrawing.
+        /// If <paramref name="onlyClientArea"/> is <code>true</code>, only
+        /// the client area (without borders) will be invalidated.
+        /// </summary>
+        /// <param name="onlyClientArea">Set this to <code>true</code> if only the client area should be redrawn.
+        /// This avoids drawing the border and background.</param>
+        public void Invalidate(bool onlyClientArea = false)
+        {
+            if (onlyClientArea)
+                DrawClientArea(Window.GetGraphics());
+            else
+                Draw();
+        }
+        /// <summary>
         /// Redraws the control.
         /// </summary>
-        public void Draw()
+        protected virtual void Draw()
         {
             Logger.Log(DebugContext.Control | DebugContext.Drawing, "parameterless called.");
             lock (Window.SynchronizationLock)
@@ -371,9 +577,9 @@ namespace ConControls.Controls
                     return;
                 }
 
-                var effectiveBackgroundColor = EffectiveBackgroundColor;
-                Logger.Log(DebugContext.Control | DebugContext.Drawing, $"drawing background ({effectiveBackgroundColor}.");
-                graphics.DrawBackground(backgroundColor ?? parent?.backgroundColor ?? Window.BackgroundColor, area);
+                var color = EffectiveBackgroundColor;
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, $"drawing background ({color}.");
+                graphics.DrawBackground(color, area);
             }
         }
         /// <summary>
@@ -392,7 +598,6 @@ namespace ConControls.Controls
             if (graphics == null) throw new ArgumentNullException(nameof(graphics));
             lock (Window.SynchronizationLock)
             {
-                var effectiveBorderStyle = EffectiveBorderStyle;
                 CheckDisposed();
                 if (DrawingInhibited)
                 {
@@ -400,6 +605,7 @@ namespace ConControls.Controls
                     return;
                 }
 
+                var effectiveBorderStyle = EffectiveBorderStyle;
                 var effectiveBorderColor = EffectiveBorderColor;
                 var effectiveBackgroundColor = EffectiveBackgroundColor;
 
@@ -435,25 +641,50 @@ namespace ConControls.Controls
             }
         }
 
-        /// <summary>
-        /// Inhibits any redrawing etc. until <see cref="EndUpdate"/> is called.
-        /// Use this to avoid multiple redrawings while updating multiple properties.
-        /// </summary>
-        public void BeginUpdate()
+        /// <inheritdoc />
+        public IDisposable DeferDrawing()
         {
             Interlocked.Increment(ref inhibitDrawing);
+            return drawingInhibiter;
         }
-        /// <summary>
-        /// Finishes an update sequence. Call <see cref="BeginUpdate"/> before you
-        /// update multiple properties to avoid multiple redrawings, and call <see cref="EndUpdate"/>
-        /// when you are finished and want to redraw the control.
-        /// </summary>
-        public void EndUpdate()
+        void EndDeferDrawing()
         {
             if (Interlocked.Decrement(ref inhibitDrawing) <= 0)
-                Draw();
+                Invalidate();
         }
 
+        /// <summary>
+        /// Gets the current foreground color based on the state of <see cref="Enabled"/> and <see cref="Focused"/> properties.
+        /// </summary>
+        protected virtual ConsoleColor EffectiveForegroundColor => Enabled
+                                                                       ? Focused
+                                                                             ? focusedForegroundColor ?? foregroundColor
+                                                                             : foregroundColor
+                                                                       : disabledForegroundColor ?? foregroundColor;
+        /// <summary>
+        /// Gets the current background color based on the state of <see cref="Enabled"/> and <see cref="Focused"/> properties.
+        /// </summary>
+        protected virtual ConsoleColor EffectiveBackgroundColor => Enabled
+                                                                       ? Focused
+                                                                             ? focusedBackgroundColor ?? backgroundColor
+                                                                             : backgroundColor
+                                                                       : disabledBackgroundColor ?? backgroundColor;
+        /// <summary>
+        /// Gets the current border color based on the state of <see cref="Enabled"/> and <see cref="Focused"/> properties.
+        /// </summary>
+        protected virtual ConsoleColor EffectiveBorderColor => Enabled
+                                                                       ? Focused
+                                                                             ? focusedBorderColor ?? borderColor
+                                                                             : borderColor
+                                                                       : disabledBorderColor ?? borderColor;
+        /// <summary>
+        /// Gets the current border style based on the state of <see cref="Enabled"/> and <see cref="Focused"/> properties.
+        /// </summary>
+        protected virtual BorderStyle EffectiveBorderStyle => Enabled
+                                                                       ? Focused
+                                                                             ? focusedBorderStyle ?? borderStyle
+                                                                             : borderStyle
+                                                                       : disabledBorderStyle ?? borderStyle;
         /// <summary>
         /// Determines the area of the control that can be used as "client" area.
         /// This base method e.g. remove the border from the total control area.
@@ -461,7 +692,7 @@ namespace ConControls.Controls
         /// <returns>A <see cref="Rectangle"/> representing the client area of this control.</returns>
         protected virtual Rectangle GetClientArea()
         {
-            return EffectiveBorderStyle == ConControls.Controls.BorderStyle.None
+            return EffectiveBorderStyle == BorderStyle.None
                        ? Area
                        : new Rectangle(Area.X + 1, Area.Y + 1, Area.Width - 2, Area.Height - 2);
         }
@@ -471,132 +702,100 @@ namespace ConControls.Controls
         /// </summary>
         protected virtual void OnParentChanged()
         {
-            BeginUpdate();
-            try
-            {
+            using (DeferDrawing())            
                 ParentChanged?.Invoke(this, EventArgs.Empty);
-            }
-            finally { EndUpdate(); }
         }
         void OnControlAdded(object sender, ControlCollectionChangedEventArgs e)
         {
-            BeginUpdate();
-            try
+            using (DeferDrawing())
             {
-                foreach (var addedControl in e.AddedControls)
+                        foreach (var addedControl in e.AddedControls)
                     addedControl.Parent = this;
-                // add event handlers when necessary
+                
+                // TODO: add event handlers when necessary
 
                 ControlAdded?.Invoke(this, e);
             }
-            finally { EndUpdate(); }
-
         }
         void OnControlRemoved(object sender, ControlCollectionChangedEventArgs e)
         {
-            BeginUpdate();
-            try
+            using(DeferDrawing())
             {
-                // remove eventhandlers when necessary
-
+                // TODO: remove eventhandlers when necessary
                 ControlRemoved?.Invoke(this, e);
             }
-            finally
+        }
+        /// <summary>
+        /// Called when the <see cref="Focused"/> property of this control has been changed.
+        /// </summary>
+        protected virtual void OnFocusedChanged()
+        {
+            using (DeferDrawing())
             {
-                EndUpdate();
+                FocusedChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         /// <summary>
-        /// Called when the <see cref="ForeColor"/> of this control has been changed.
+        /// Called when the <see cref="Enabled"/> property of this control has been changed.
         /// </summary>
-        protected virtual void OnForeColorChanged()
+        protected virtual void OnEnabledChanged()
         {
-            Draw();
+            using(DeferDrawing())
+            {
+                EnabledChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
         /// <summary>
-        /// Called when the <see cref="BackgroundColor"/> of this control has been changed.
+        /// Called when the <see cref="Visible"/> property of this control has been changed.
+        /// </summary>
+        protected virtual void OnVisibleChanged()
+        {
+            using (DeferDrawing())
+            {
+                VisibleChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        /// <summary>
+        /// Called when the <see cref="ForegroundColor"/>, <see cref="FocusedForegroundColor"/> or
+        /// <see cref="DisabledForegroundColor"/> of this control have been changed.
+        /// </summary>
+        protected virtual void OnForegroundColorChanged()
+        {
+            Invalidate();
+        }
+        /// <summary>
+        /// Called when the <see cref="BackgroundColor"/>, <see cref="FocusedBackgroundColor"/> or
+        /// <see cref="DisabledBackgroundColor"/> of this control have been changed.
         /// </summary>
         protected virtual void OnBackgroundColorChanged()
         {
-            Draw();
+            Invalidate();
         }
-        void OnFocusedChanged()
+        /// <summary>
+        /// Called when the <see cref="BorderColor"/>, <see cref="FocusedBorderColor"/> or
+        /// <see cref="DisabledBorderColor"/> of this control have been changed.
+        /// </summary>
+        protected virtual void OnBorderColorChanged()
         {
-            BeginUpdate();
-            try
-            {
-                if (Focused) Window.FocusedControl = this;
-                FocusedChanged?.Invoke(this, EventArgs.Empty);
-            }
-            finally
-            {
-                EndUpdate();
-
-            }
+            Invalidate();
         }
-        void OnVisibleChanged()
+        /// <summary>
+        /// Called when the <see cref="BorderStyle"/>, <see cref="FocusedBorderStyle"/> or
+        /// <see cref="DisabledBorderStyle"/> of this control have been changed.
+        /// </summary>
+        protected virtual void OnBorderStyleChanged()
         {
-            BeginUpdate();
-            try
-            {
-                lock (Window.SynchronizationLock)
-                {
-                    if (parent == null) Window.Draw();
-                    else parent.Draw();
-                    VisibleChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-            finally { EndUpdate(); }
+            Invalidate();
         }
         /// <summary>
         /// Called when the <see cref="Area"/> of this control has been changed.
         /// </summary>
         protected virtual void OnAreaChanged()
         {
-            BeginUpdate();
-            try
+            using (DeferDrawing())
             {
                 AreaChanged?.Invoke(this, EventArgs.Empty);
-                if (Parent == null)
-                    Window.Draw();
-                else
-                    Parent.Draw();
-            }
-            finally
-            {
-                EndUpdate();
             }
         }
-        /// <summary>
-        /// Called when the <see cref="BorderStyle"/> of this control has been changed.
-        /// </summary>
-        protected virtual void OnBorderStyleChanged()
-        {
-            Draw();
-        }
-        /// <summary>
-        /// Called when the <see cref="BorderColor"/> of this control has been changed.
-        /// </summary>
-        protected virtual void OnBorderColorChanged()
-        {
-            Draw();
-        }
-
-        /// <summary>
-        /// Gets the effective foreground color (applying transparency).
-        /// </summary>
-        protected ConsoleColor EffectiveForeColor => foreColor ?? Parent?.EffectiveForeColor ?? Window.ForeColor;
-        /// <summary>
-        /// Gets the effective background color (applying transparency).
-        /// </summary>
-        protected ConsoleColor EffectiveBackgroundColor => backgroundColor ?? Parent?.EffectiveBackgroundColor ?? Window.BackgroundColor;
-        /// <summary>
-        /// Gets the effective border color (applying transparency).
-        /// </summary>
-        protected ConsoleColor EffectiveBorderColor => borderColor ?? Parent?.EffectiveBorderColor ?? ConsoleColor.Yellow;
-        /// <summary>
-        /// Gets the effective border style (applying transparency).
-        /// </summary>
-        protected BorderStyle EffectiveBorderStyle => borderStyle ?? Parent?.EffectiveBorderStyle ?? ConControls.Controls.BorderStyle.None;
     }
 }
