@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="Add method" Url="html/M_ConControls_Controls_ControlCollection_Add.htm" />
+  <HelpKINode Title="AddedControls property" Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_AddedControls.htm" />
+  <HelpKINode Title="AddRange method" Url="html/Overload_ConControls_Controls_ControlCollection_AddRange.htm" />
+  <HelpKINode Title="Area property">
+    <HelpKINode Title="ConsoleControl.Area Property " Url="html/P_ConControls_Controls_ConsoleControl_Area.htm" />
+    <HelpKINode Title="ConsoleWindow.Area Property " Url="html/P_ConControls_ConsoleWindow_Area.htm" />
+    <HelpKINode Title="IControlContainer.Area Property " Url="html/P_ConControls_Controls_IControlContainer_Area.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AreaChanged event">
+    <HelpKINode Title="ConsoleControl.AreaChanged Event" Url="html/E_ConControls_Controls_ConsoleControl_AreaChanged.htm" />
+    <HelpKINode Title="ConsoleWindow.AreaChanged Event" Url="html/E_ConControls_ConsoleWindow_AreaChanged.htm" />
+    <HelpKINode Title="IControlContainer.AreaChanged Event" Url="html/E_ConControls_Controls_IControlContainer_AreaChanged.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BackgroundColor property">
+    <HelpKINode Title="ConsoleControl.BackgroundColor Property " Url="html/P_ConControls_Controls_ConsoleControl_BackgroundColor.htm" />
+    <HelpKINode Title="ConsoleWindow.BackgroundColor Property " Url="html/P_ConControls_ConsoleWindow_BackgroundColor.htm" />
+    <HelpKINode Title="IConsoleWindow.BackgroundColor Property " Url="html/P_ConControls_IConsoleWindow_BackgroundColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Bold enumeration member" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="BoldinedFrameCharSet class">
+    <HelpKINode Title="BoldinedFrameCharSet Class" Url="html/T_ConControls_Controls_BoldinedFrameCharSet.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_BoldinedFrameCharSet__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_BoldinedFrameCharSet.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_BoldinedFrameCharSet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BoldinedFrameCharSet.BoldinedFrameCharSet constructor" Url="html/M_ConControls_Controls_BoldinedFrameCharSet__ctor.htm" />
+  <HelpKINode Title="BoldinedFrameCharSet.Horizontal property" Url="html/P_ConControls_Controls_BoldinedFrameCharSet_Horizontal.htm" />
+  <HelpKINode Title="BoldinedFrameCharSet.LowerLeft property" Url="html/P_ConControls_Controls_BoldinedFrameCharSet_LowerLeft.htm" />
+  <HelpKINode Title="BoldinedFrameCharSet.LowerRight property" Url="html/P_ConControls_Controls_BoldinedFrameCharSet_LowerRight.htm" />
+  <HelpKINode Title="BoldinedFrameCharSet.UpperLeft property" Url="html/P_ConControls_Controls_BoldinedFrameCharSet_UpperLeft.htm" />
+  <HelpKINode Title="BoldinedFrameCharSet.UpperRight property" Url="html/P_ConControls_Controls_BoldinedFrameCharSet_UpperRight.htm" />
+  <HelpKINode Title="BoldinedFrameCharSet.Vertical property" Url="html/P_ConControls_Controls_BoldinedFrameCharSet_Vertical.htm" />
+  <HelpKINode Title="BorderColor property">
+    <HelpKINode Title="ConsoleControl.BorderColor Property " Url="html/P_ConControls_Controls_ConsoleControl_BorderColor.htm" />
+    <HelpKINode Title="ConsoleWindow.BorderColor Property " Url="html/P_ConControls_ConsoleWindow_BorderColor.htm" />
+    <HelpKINode Title="IConsoleWindow.BorderColor Property " Url="html/P_ConControls_IConsoleWindow_BorderColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BorderStyle enumeration" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="BorderStyle property">
+    <HelpKINode Title="ConsoleControl.BorderStyle Property " Url="html/P_ConControls_Controls_ConsoleControl_BorderStyle.htm" />
+    <HelpKINode Title="ConsoleWindow.BorderStyle Property " Url="html/P_ConControls_ConsoleWindow_BorderStyle.htm" />
+    <HelpKINode Title="IConsoleWindow.BorderStyle Property " Url="html/P_ConControls_IConsoleWindow_BorderStyle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BottomToTop enumeration member" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="CanFocus method">
+    <HelpKINode Title="ConsoleControl.CanFocus Method " Url="html/M_ConControls_Controls_ConsoleControl_CanFocus.htm" />
+    <HelpKINode Title="FocusableControl.CanFocus Method " Url="html/M_ConControls_Controls_FocusableControl_CanFocus.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CheckDisposed method" Url="html/M_ConControls_Controls_ConsoleControl_CheckDisposed.htm" />
+  <HelpKINode Title="ConControls namespace" Url="html/N_ConControls.htm" />
+  <HelpKINode Title="ConControls.ConsoleApi namespace" Url="html/N_ConControls_ConsoleApi.htm" />
+  <HelpKINode Title="ConControls.ConsoleApi.IConsoleGraphics interface" Url="html/T_ConControls_ConsoleApi_IConsoleGraphics.htm" />
+  <HelpKINode Title="ConControls.ConsoleWindow class" Url="html/T_ConControls_ConsoleWindow.htm" />
+  <HelpKINode Title="ConControls.Controls namespace" Url="html/N_ConControls_Controls.htm" />
+  <HelpKINode Title="ConControls.Controls.BoldinedFrameCharSet class" Url="html/T_ConControls_Controls_BoldinedFrameCharSet.htm" />
+  <HelpKINode Title="ConControls.Controls.BorderStyle enumeration" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="ConControls.Controls.ConsoleControl class" Url="html/T_ConControls_Controls_ConsoleControl.htm" />
+  <HelpKINode Title="ConControls.Controls.ConsolePanel class" Url="html/T_ConControls_Controls_ConsolePanel.htm" />
+  <HelpKINode Title="ConControls.Controls.ControlCollection class" Url="html/T_ConControls_Controls_ControlCollection.htm" />
+  <HelpKINode Title="ConControls.Controls.ControlCollectionChangedEventArgs class" Url="html/T_ConControls_Controls_ControlCollectionChangedEventArgs.htm" />
+  <HelpKINode Title="ConControls.Controls.DoubleLinedFrameCharSet class" Url="html/T_ConControls_Controls_DoubleLinedFrameCharSet.htm" />
+  <HelpKINode Title="ConControls.Controls.FocusableControl class" Url="html/T_ConControls_Controls_FocusableControl.htm" />
+  <HelpKINode Title="ConControls.Controls.FrameCharSet class" Url="html/T_ConControls_Controls_FrameCharSet.htm" />
+  <HelpKINode Title="ConControls.Controls.FrameCharSets class" Url="html/T_ConControls_Controls_FrameCharSets.htm" />
+  <HelpKINode Title="ConControls.Controls.IControlContainer interface" Url="html/T_ConControls_Controls_IControlContainer.htm" />
+  <HelpKINode Title="ConControls.Controls.ProgressBar class" Url="html/T_ConControls_Controls_ProgressBar.htm" />
+  <HelpKINode Title="ConControls.Controls.ProgressBar.ProgressOrientation enumeration" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="ConControls.Controls.SingleLinedFrameCharSet class" Url="html/T_ConControls_Controls_SingleLinedFrameCharSet.htm" />
+  <HelpKINode Title="ConControls.IConsoleWindow interface" Url="html/T_ConControls_IConsoleWindow.htm" />
+  <HelpKINode Title="ConsoleControl class">
+    <HelpKINode Title="ConsoleControl Class" Url="html/T_ConControls_Controls_ConsoleControl.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_ConsoleControl.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ConsoleControl.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ConsoleControl.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConsoleControl.Area property" Url="html/P_ConControls_Controls_ConsoleControl_Area.htm" />
+  <HelpKINode Title="ConsoleControl.AreaChanged event" Url="html/E_ConControls_Controls_ConsoleControl_AreaChanged.htm" />
+  <HelpKINode Title="ConsoleControl.BackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_BackgroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.BorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_BorderColor.htm" />
+  <HelpKINode Title="ConsoleControl.BorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_BorderStyle.htm" />
+  <HelpKINode Title="ConsoleControl.CanFocus method" Url="html/M_ConControls_Controls_ConsoleControl_CanFocus.htm" />
+  <HelpKINode Title="ConsoleControl.CheckDisposed method" Url="html/M_ConControls_Controls_ConsoleControl_CheckDisposed.htm" />
+  <HelpKINode Title="ConsoleControl.ControlCollectionChanged event" Url="html/E_ConControls_Controls_ConsoleControl_ControlCollectionChanged.htm" />
+  <HelpKINode Title="ConsoleControl.Controls property" Url="html/P_ConControls_Controls_ConsoleControl_Controls.htm" />
+  <HelpKINode Title="ConsoleControl.DeferDrawing method" Url="html/M_ConControls_Controls_ConsoleControl_DeferDrawing.htm" />
+  <HelpKINode Title="ConsoleControl.DisabledBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBackgroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.DisabledBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBorderColor.htm" />
+  <HelpKINode Title="ConsoleControl.DisabledBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBorderStyle.htm" />
+  <HelpKINode Title="ConsoleControl.DisabledForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledForegroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.Draw method" Url="html/Overload_ConControls_Controls_ConsoleControl_Draw.htm" />
+  <HelpKINode Title="ConsoleControl.DrawBackground method" Url="html/M_ConControls_Controls_ConsoleControl_DrawBackground.htm" />
+  <HelpKINode Title="ConsoleControl.DrawBorder method" Url="html/M_ConControls_Controls_ConsoleControl_DrawBorder.htm" />
+  <HelpKINode Title="ConsoleControl.DrawClientArea method" Url="html/M_ConControls_Controls_ConsoleControl_DrawClientArea.htm" />
+  <HelpKINode Title="ConsoleControl.DrawingInhibited property" Url="html/P_ConControls_Controls_ConsoleControl_DrawingInhibited.htm" />
+  <HelpKINode Title="ConsoleControl.EffectiveBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBackgroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.EffectiveBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBorderColor.htm" />
+  <HelpKINode Title="ConsoleControl.EffectiveBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBorderStyle.htm" />
+  <HelpKINode Title="ConsoleControl.EffectiveForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveForegroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.Enabled property" Url="html/P_ConControls_Controls_ConsoleControl_Enabled.htm" />
+  <HelpKINode Title="ConsoleControl.EnabledChanged event" Url="html/E_ConControls_Controls_ConsoleControl_EnabledChanged.htm" />
+  <HelpKINode Title="ConsoleControl.Focused property" Url="html/P_ConControls_Controls_ConsoleControl_Focused.htm" />
+  <HelpKINode Title="ConsoleControl.FocusedBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBackgroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.FocusedBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBorderColor.htm" />
+  <HelpKINode Title="ConsoleControl.FocusedBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBorderStyle.htm" />
+  <HelpKINode Title="ConsoleControl.FocusedChanged event" Url="html/E_ConControls_Controls_ConsoleControl_FocusedChanged.htm" />
+  <HelpKINode Title="ConsoleControl.FocusedForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedForegroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.ForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_ForegroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.GetClientArea method" Url="html/M_ConControls_Controls_ConsoleControl_GetClientArea.htm" />
+  <HelpKINode Title="ConsoleControl.Invalidate method" Url="html/M_ConControls_Controls_ConsoleControl_Invalidate.htm" />
+  <HelpKINode Title="ConsoleControl.Location property" Url="html/P_ConControls_Controls_ConsoleControl_Location.htm" />
+  <HelpKINode Title="ConsoleControl.Name property" Url="html/P_ConControls_Controls_ConsoleControl_Name.htm" />
+  <HelpKINode Title="ConsoleControl.OnAreaChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnAreaChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnBackgroundColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBackgroundColorChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnBorderColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBorderColorChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnBorderStyleChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBorderStyleChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnEnabledChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnEnabledChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnFocusedChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnFocusedChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnForegroundColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnForegroundColorChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnParentChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnParentChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnVisibleChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnVisibleChanged.htm" />
+  <HelpKINode Title="ConsoleControl.Parent property" Url="html/P_ConControls_Controls_ConsoleControl_Parent.htm" />
+  <HelpKINode Title="ConsoleControl.ParentChanged event" Url="html/E_ConControls_Controls_ConsoleControl_ParentChanged.htm" />
+  <HelpKINode Title="ConsoleControl.Size property" Url="html/P_ConControls_Controls_ConsoleControl_Size.htm" />
+  <HelpKINode Title="ConsoleControl.Visible property" Url="html/P_ConControls_Controls_ConsoleControl_Visible.htm" />
+  <HelpKINode Title="ConsoleControl.VisibleChanged event" Url="html/E_ConControls_Controls_ConsoleControl_VisibleChanged.htm" />
+  <HelpKINode Title="ConsoleControl.Window property" Url="html/P_ConControls_Controls_ConsoleControl_Window.htm" />
+  <HelpKINode Title="ConsolePanel class">
+    <HelpKINode Title="ConsolePanel Class" Url="html/T_ConControls_Controls_ConsolePanel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_ConsolePanel__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_ConsolePanel.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ConsolePanel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ConsolePanel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConsolePanel.ConsolePanel constructor" Url="html/M_ConControls_Controls_ConsolePanel__ctor.htm" />
+  <HelpKINode Title="ConsoleWindow class">
+    <HelpKINode Title="ConsoleWindow Class" Url="html/T_ConControls_ConsoleWindow.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_ConsoleWindow__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_ConsoleWindow.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_ConsoleWindow.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_ConsoleWindow.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConsoleWindow.Area property" Url="html/P_ConControls_ConsoleWindow_Area.htm" />
+  <HelpKINode Title="ConsoleWindow.AreaChanged event" Url="html/E_ConControls_ConsoleWindow_AreaChanged.htm" />
+  <HelpKINode Title="ConsoleWindow.BackgroundColor property" Url="html/P_ConControls_ConsoleWindow_BackgroundColor.htm" />
+  <HelpKINode Title="ConsoleWindow.BorderColor property" Url="html/P_ConControls_ConsoleWindow_BorderColor.htm" />
+  <HelpKINode Title="ConsoleWindow.BorderStyle property" Url="html/P_ConControls_ConsoleWindow_BorderStyle.htm" />
+  <HelpKINode Title="ConsoleWindow.ConsoleWindow constructor" Url="html/M_ConControls_ConsoleWindow__ctor.htm" />
+  <HelpKINode Title="ConsoleWindow.Controls property" Url="html/P_ConControls_ConsoleWindow_Controls.htm" />
+  <HelpKINode Title="ConsoleWindow.DeferDrawing method" Url="html/M_ConControls_ConsoleWindow_DeferDrawing.htm" />
+  <HelpKINode Title="ConsoleWindow.Dispose method" Url="html/M_ConControls_ConsoleWindow_Dispose.htm" />
+  <HelpKINode Title="ConsoleWindow.Disposed event" Url="html/E_ConControls_ConsoleWindow_Disposed.htm" />
+  <HelpKINode Title="ConsoleWindow.DrawingInhibited property" Url="html/P_ConControls_ConsoleWindow_DrawingInhibited.htm" />
+  <HelpKINode Title="ConsoleWindow.Enabled property" Url="html/P_ConControls_ConsoleWindow_Enabled.htm" />
+  <HelpKINode Title="ConsoleWindow.Finalize method" Url="html/M_ConControls_ConsoleWindow_Finalize.htm" />
+  <HelpKINode Title="ConsoleWindow.FocusedControl property" Url="html/P_ConControls_ConsoleWindow_FocusedControl.htm" />
+  <HelpKINode Title="ConsoleWindow.ForegroundColor property" Url="html/P_ConControls_ConsoleWindow_ForegroundColor.htm" />
+  <HelpKINode Title="ConsoleWindow.FrameCharSets property" Url="html/P_ConControls_ConsoleWindow_FrameCharSets.htm" />
+  <HelpKINode Title="ConsoleWindow.GetGraphics method" Url="html/M_ConControls_ConsoleWindow_GetGraphics.htm" />
+  <HelpKINode Title="ConsoleWindow.Invalidate method" Url="html/M_ConControls_ConsoleWindow_Invalidate.htm" />
+  <HelpKINode Title="ConsoleWindow.IsDisposed property" Url="html/P_ConControls_ConsoleWindow_IsDisposed.htm" />
+  <HelpKINode Title="ConsoleWindow.Location property" Url="html/P_ConControls_ConsoleWindow_Location.htm" />
+  <HelpKINode Title="ConsoleWindow.MaximumSize property" Url="html/P_ConControls_ConsoleWindow_MaximumSize.htm" />
+  <HelpKINode Title="ConsoleWindow.Size property" Url="html/P_ConControls_ConsoleWindow_Size.htm" />
+  <HelpKINode Title="ConsoleWindow.SynchronizationLock property" Url="html/P_ConControls_ConsoleWindow_SynchronizationLock.htm" />
+  <HelpKINode Title="ConsoleWindow.Title property" Url="html/P_ConControls_ConsoleWindow_Title.htm" />
+  <HelpKINode Title="ConsoleWindow.Visible property" Url="html/P_ConControls_ConsoleWindow_Visible.htm" />
+  <HelpKINode Title="ConsoleWindow.Window property" Url="html/P_ConControls_ConsoleWindow_Window.htm" />
+  <HelpKINode Title="ControlCollection class">
+    <HelpKINode Title="ControlCollection Class" Url="html/T_ConControls_Controls_ControlCollection.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_ControlCollection.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ControlCollection.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ControlCollection.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ControlCollection.Add method" Url="html/M_ConControls_Controls_ControlCollection_Add.htm" />
+  <HelpKINode Title="ControlCollection.AddRange method" Url="html/Overload_ConControls_Controls_ControlCollection_AddRange.htm" />
+  <HelpKINode Title="ControlCollection.ControlCollectionChanged event" Url="html/E_ConControls_Controls_ControlCollection_ControlCollectionChanged.htm" />
+  <HelpKINode Title="ControlCollection.Count property" Url="html/P_ConControls_Controls_ControlCollection_Count.htm" />
+  <HelpKINode Title="ControlCollection.GetEnumerator method" Url="html/M_ConControls_Controls_ControlCollection_GetEnumerator.htm" />
+  <HelpKINode Title="ControlCollection.IEnumerable.GetEnumerator explicitly implemented method" Url="html/M_ConControls_Controls_ControlCollection_System_Collections_IEnumerable_GetEnumerator.htm" />
+  <HelpKINode Title="ControlCollection.Item property" Url="html/P_ConControls_Controls_ControlCollection_Item.htm" />
+  <HelpKINode Title="ControlCollection.Remove method" Url="html/M_ConControls_Controls_ControlCollection_Remove.htm" />
+  <HelpKINode Title="ControlCollection.RemoveRange method" Url="html/Overload_ConControls_Controls_ControlCollection_RemoveRange.htm" />
+  <HelpKINode Title="ControlCollectionChanged event">
+    <HelpKINode Title="ConsoleControl.ControlCollectionChanged Event" Url="html/E_ConControls_Controls_ConsoleControl_ControlCollectionChanged.htm" />
+    <HelpKINode Title="ControlCollection.ControlCollectionChanged Event" Url="html/E_ConControls_Controls_ControlCollection_ControlCollectionChanged.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ControlCollectionChangedEventArgs class">
+    <HelpKINode Title="ControlCollectionChangedEventArgs Class" Url="html/T_ConControls_Controls_ControlCollectionChangedEventArgs.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ControlCollectionChangedEventArgs.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ControlCollectionChangedEventArgs.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ControlCollectionChangedEventArgs.AddedControls property" Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_AddedControls.htm" />
+  <HelpKINode Title="ControlCollectionChangedEventArgs.RemovedControls property" Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_RemovedControls.htm" />
+  <HelpKINode Title="Controls property">
+    <HelpKINode Title="ConsoleControl.Controls Property " Url="html/P_ConControls_Controls_ConsoleControl_Controls.htm" />
+    <HelpKINode Title="ConsoleWindow.Controls Property " Url="html/P_ConControls_ConsoleWindow_Controls.htm" />
+    <HelpKINode Title="IControlContainer.Controls Property " Url="html/P_ConControls_Controls_IControlContainer_Controls.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Count property" Url="html/P_ConControls_Controls_ControlCollection_Count.htm" />
+  <HelpKINode Title="DefaultProgressChar field" Url="html/F_ConControls_Controls_ProgressBar_DefaultProgressChar.htm" />
+  <HelpKINode Title="DeferDrawing method">
+    <HelpKINode Title="ConsoleControl.DeferDrawing Method " Url="html/M_ConControls_Controls_ConsoleControl_DeferDrawing.htm" />
+    <HelpKINode Title="ConsoleWindow.DeferDrawing Method " Url="html/M_ConControls_ConsoleWindow_DeferDrawing.htm" />
+    <HelpKINode Title="IControlContainer.DeferDrawing Method " Url="html/M_ConControls_Controls_IControlContainer_DeferDrawing.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DisabledBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBackgroundColor.htm" />
+  <HelpKINode Title="DisabledBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBorderColor.htm" />
+  <HelpKINode Title="DisabledBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBorderStyle.htm" />
+  <HelpKINode Title="DisabledForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledForegroundColor.htm" />
+  <HelpKINode Title="Dispose method" Url="html/M_ConControls_ConsoleWindow_Dispose.htm" />
+  <HelpKINode Title="Disposed event">
+    <HelpKINode Title="ConsoleWindow.Disposed Event" Url="html/E_ConControls_ConsoleWindow_Disposed.htm" />
+    <HelpKINode Title="IConsoleWindow.Disposed Event" Url="html/E_ConControls_IConsoleWindow_Disposed.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DoubleLined enumeration member" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet class">
+    <HelpKINode Title="DoubleLinedFrameCharSet Class" Url="html/T_ConControls_Controls_DoubleLinedFrameCharSet.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_DoubleLinedFrameCharSet__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_DoubleLinedFrameCharSet.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_DoubleLinedFrameCharSet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DoubleLinedFrameCharSet.DoubleLinedFrameCharSet constructor" Url="html/M_ConControls_Controls_DoubleLinedFrameCharSet__ctor.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.Horizontal property" Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_Horizontal.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.LowerLeft property" Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_LowerLeft.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.LowerRight property" Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_LowerRight.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.UpperLeft property" Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_UpperLeft.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.UpperRight property" Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_UpperRight.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.Vertical property" Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_Vertical.htm" />
+  <HelpKINode Title="Draw method" Url="html/Overload_ConControls_Controls_ConsoleControl_Draw.htm" />
+  <HelpKINode Title="DrawBackground method">
+    <HelpKINode Title="ConsoleControl.DrawBackground Method " Url="html/M_ConControls_Controls_ConsoleControl_DrawBackground.htm" />
+    <HelpKINode Title="IConsoleGraphics.DrawBackground Method " Url="html/M_ConControls_ConsoleApi_IConsoleGraphics_DrawBackground.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DrawBorder method">
+    <HelpKINode Title="ConsoleControl.DrawBorder Method " Url="html/M_ConControls_Controls_ConsoleControl_DrawBorder.htm" />
+    <HelpKINode Title="IConsoleGraphics.DrawBorder Method " Url="html/M_ConControls_ConsoleApi_IConsoleGraphics_DrawBorder.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DrawClientArea method" Url="html/M_ConControls_Controls_ConsoleControl_DrawClientArea.htm" />
+  <HelpKINode Title="DrawingInhibited property">
+    <HelpKINode Title="ConsoleControl.DrawingInhibited Property " Url="html/P_ConControls_Controls_ConsoleControl_DrawingInhibited.htm" />
+    <HelpKINode Title="ConsoleWindow.DrawingInhibited Property " Url="html/P_ConControls_ConsoleWindow_DrawingInhibited.htm" />
+    <HelpKINode Title="IControlContainer.DrawingInhibited Property " Url="html/P_ConControls_Controls_IControlContainer_DrawingInhibited.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EffectiveBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBackgroundColor.htm" />
+  <HelpKINode Title="EffectiveBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBorderColor.htm" />
+  <HelpKINode Title="EffectiveBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBorderStyle.htm" />
+  <HelpKINode Title="EffectiveForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveForegroundColor.htm" />
+  <HelpKINode Title="Enabled property">
+    <HelpKINode Title="ConsoleControl.Enabled Property " Url="html/P_ConControls_Controls_ConsoleControl_Enabled.htm" />
+    <HelpKINode Title="ConsoleWindow.Enabled Property " Url="html/P_ConControls_ConsoleWindow_Enabled.htm" />
+    <HelpKINode Title="IControlContainer.Enabled Property " Url="html/P_ConControls_Controls_IControlContainer_Enabled.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnabledChanged event" Url="html/E_ConControls_Controls_ConsoleControl_EnabledChanged.htm" />
+  <HelpKINode Title="FillArea method" Url="html/M_ConControls_ConsoleApi_IConsoleGraphics_FillArea.htm" />
+  <HelpKINode Title="Finalize method" Url="html/M_ConControls_ConsoleWindow_Finalize.htm" />
+  <HelpKINode Title="Flush method" Url="html/M_ConControls_ConsoleApi_IConsoleGraphics_Flush.htm" />
+  <HelpKINode Title="FocusableControl class">
+    <HelpKINode Title="FocusableControl Class" Url="html/T_ConControls_Controls_FocusableControl.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_FocusableControl.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_FocusableControl.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_FocusableControl.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FocusableControl.CanFocus method" Url="html/M_ConControls_Controls_FocusableControl_CanFocus.htm" />
+  <HelpKINode Title="Focused property" Url="html/P_ConControls_Controls_ConsoleControl_Focused.htm" />
+  <HelpKINode Title="FocusedBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBackgroundColor.htm" />
+  <HelpKINode Title="FocusedBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBorderColor.htm" />
+  <HelpKINode Title="FocusedBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBorderStyle.htm" />
+  <HelpKINode Title="FocusedChanged event" Url="html/E_ConControls_Controls_ConsoleControl_FocusedChanged.htm" />
+  <HelpKINode Title="FocusedControl property">
+    <HelpKINode Title="ConsoleWindow.FocusedControl Property " Url="html/P_ConControls_ConsoleWindow_FocusedControl.htm" />
+    <HelpKINode Title="IConsoleWindow.FocusedControl Property " Url="html/P_ConControls_IConsoleWindow_FocusedControl.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FocusedForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedForegroundColor.htm" />
+  <HelpKINode Title="ForegroundColor property">
+    <HelpKINode Title="ConsoleControl.ForegroundColor Property " Url="html/P_ConControls_Controls_ConsoleControl_ForegroundColor.htm" />
+    <HelpKINode Title="ConsoleWindow.ForegroundColor Property " Url="html/P_ConControls_ConsoleWindow_ForegroundColor.htm" />
+    <HelpKINode Title="IConsoleWindow.ForegroundColor Property " Url="html/P_ConControls_IConsoleWindow_ForegroundColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FrameCharSet class">
+    <HelpKINode Title="FrameCharSet Class" Url="html/T_ConControls_Controls_FrameCharSet.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_FrameCharSet__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_FrameCharSet.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_FrameCharSet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FrameCharSet.FrameCharSet constructor" Url="html/M_ConControls_Controls_FrameCharSet__ctor.htm" />
+  <HelpKINode Title="FrameCharSet.Horizontal property" Url="html/P_ConControls_Controls_FrameCharSet_Horizontal.htm" />
+  <HelpKINode Title="FrameCharSet.LowerLeft property" Url="html/P_ConControls_Controls_FrameCharSet_LowerLeft.htm" />
+  <HelpKINode Title="FrameCharSet.LowerRight property" Url="html/P_ConControls_Controls_FrameCharSet_LowerRight.htm" />
+  <HelpKINode Title="FrameCharSet.UpperLeft property" Url="html/P_ConControls_Controls_FrameCharSet_UpperLeft.htm" />
+  <HelpKINode Title="FrameCharSet.UpperRight property" Url="html/P_ConControls_Controls_FrameCharSet_UpperRight.htm" />
+  <HelpKINode Title="FrameCharSet.Vertical property" Url="html/P_ConControls_Controls_FrameCharSet_Vertical.htm" />
+  <HelpKINode Title="FrameCharSets class">
+    <HelpKINode Title="FrameCharSets Class" Url="html/T_ConControls_Controls_FrameCharSets.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_FrameCharSets__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_FrameCharSets.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_FrameCharSets.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FrameCharSets property">
+    <HelpKINode Title="ConsoleWindow.FrameCharSets Property " Url="html/P_ConControls_ConsoleWindow_FrameCharSets.htm" />
+    <HelpKINode Title="IConsoleWindow.FrameCharSets Property " Url="html/P_ConControls_IConsoleWindow_FrameCharSets.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FrameCharSets.FrameCharSets constructor" Url="html/M_ConControls_Controls_FrameCharSets__ctor.htm" />
+  <HelpKINode Title="FrameCharSets.Item property" Url="html/P_ConControls_Controls_FrameCharSets_Item.htm" />
+  <HelpKINode Title="GetClientArea method" Url="html/M_ConControls_Controls_ConsoleControl_GetClientArea.htm" />
+  <HelpKINode Title="GetEnumerator method" Url="html/M_ConControls_Controls_ControlCollection_GetEnumerator.htm" />
+  <HelpKINode Title="GetGraphics method">
+    <HelpKINode Title="ConsoleWindow.GetGraphics Method " Url="html/M_ConControls_ConsoleWindow_GetGraphics.htm" />
+    <HelpKINode Title="IConsoleWindow.GetGraphics Method " Url="html/M_ConControls_IConsoleWindow_GetGraphics.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Horizontal property">
+    <HelpKINode Title="BoldinedFrameCharSet.Horizontal Property " Url="html/P_ConControls_Controls_BoldinedFrameCharSet_Horizontal.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.Horizontal Property " Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_Horizontal.htm" />
+    <HelpKINode Title="FrameCharSet.Horizontal Property " Url="html/P_ConControls_Controls_FrameCharSet_Horizontal.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.Horizontal Property " Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_Horizontal.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IConsoleGraphics interface">
+    <HelpKINode Title="IConsoleGraphics Interface" Url="html/T_ConControls_ConsoleApi_IConsoleGraphics.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_ConsoleApi_IConsoleGraphics.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IConsoleGraphics.DrawBackground method" Url="html/M_ConControls_ConsoleApi_IConsoleGraphics_DrawBackground.htm" />
+  <HelpKINode Title="IConsoleGraphics.DrawBorder method" Url="html/M_ConControls_ConsoleApi_IConsoleGraphics_DrawBorder.htm" />
+  <HelpKINode Title="IConsoleGraphics.FillArea method" Url="html/M_ConControls_ConsoleApi_IConsoleGraphics_FillArea.htm" />
+  <HelpKINode Title="IConsoleGraphics.Flush method" Url="html/M_ConControls_ConsoleApi_IConsoleGraphics_Flush.htm" />
+  <HelpKINode Title="IConsoleWindow interface">
+    <HelpKINode Title="IConsoleWindow Interface" Url="html/T_ConControls_IConsoleWindow.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_IConsoleWindow.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_IConsoleWindow.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_IConsoleWindow.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IConsoleWindow.BackgroundColor property" Url="html/P_ConControls_IConsoleWindow_BackgroundColor.htm" />
+  <HelpKINode Title="IConsoleWindow.BorderColor property" Url="html/P_ConControls_IConsoleWindow_BorderColor.htm" />
+  <HelpKINode Title="IConsoleWindow.BorderStyle property" Url="html/P_ConControls_IConsoleWindow_BorderStyle.htm" />
+  <HelpKINode Title="IConsoleWindow.Disposed event" Url="html/E_ConControls_IConsoleWindow_Disposed.htm" />
+  <HelpKINode Title="IConsoleWindow.FocusedControl property" Url="html/P_ConControls_IConsoleWindow_FocusedControl.htm" />
+  <HelpKINode Title="IConsoleWindow.ForegroundColor property" Url="html/P_ConControls_IConsoleWindow_ForegroundColor.htm" />
+  <HelpKINode Title="IConsoleWindow.FrameCharSets property" Url="html/P_ConControls_IConsoleWindow_FrameCharSets.htm" />
+  <HelpKINode Title="IConsoleWindow.GetGraphics method" Url="html/M_ConControls_IConsoleWindow_GetGraphics.htm" />
+  <HelpKINode Title="IConsoleWindow.IsDisposed property" Url="html/P_ConControls_IConsoleWindow_IsDisposed.htm" />
+  <HelpKINode Title="IConsoleWindow.MaximumSize property" Url="html/P_ConControls_IConsoleWindow_MaximumSize.htm" />
+  <HelpKINode Title="IConsoleWindow.SynchronizationLock property" Url="html/P_ConControls_IConsoleWindow_SynchronizationLock.htm" />
+  <HelpKINode Title="IConsoleWindow.Title property" Url="html/P_ConControls_IConsoleWindow_Title.htm" />
+  <HelpKINode Title="IControlContainer interface">
+    <HelpKINode Title="IControlContainer Interface" Url="html/T_ConControls_Controls_IControlContainer.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_IControlContainer.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_IControlContainer.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_IControlContainer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IControlContainer.Area property" Url="html/P_ConControls_Controls_IControlContainer_Area.htm" />
+  <HelpKINode Title="IControlContainer.AreaChanged event" Url="html/E_ConControls_Controls_IControlContainer_AreaChanged.htm" />
+  <HelpKINode Title="IControlContainer.Controls property" Url="html/P_ConControls_Controls_IControlContainer_Controls.htm" />
+  <HelpKINode Title="IControlContainer.DeferDrawing method" Url="html/M_ConControls_Controls_IControlContainer_DeferDrawing.htm" />
+  <HelpKINode Title="IControlContainer.DrawingInhibited property" Url="html/P_ConControls_Controls_IControlContainer_DrawingInhibited.htm" />
+  <HelpKINode Title="IControlContainer.Enabled property" Url="html/P_ConControls_Controls_IControlContainer_Enabled.htm" />
+  <HelpKINode Title="IControlContainer.Location property" Url="html/P_ConControls_Controls_IControlContainer_Location.htm" />
+  <HelpKINode Title="IControlContainer.Size property" Url="html/P_ConControls_Controls_IControlContainer_Size.htm" />
+  <HelpKINode Title="IControlContainer.Visible property" Url="html/P_ConControls_Controls_IControlContainer_Visible.htm" />
+  <HelpKINode Title="IControlContainer.Window property" Url="html/P_ConControls_Controls_IControlContainer_Window.htm" />
+  <HelpKINode Title="IEnumerable.GetEnumerator explicitly implemented method" Url="html/M_ConControls_Controls_ControlCollection_System_Collections_IEnumerable_GetEnumerator.htm" />
+  <HelpKINode Title="Invalidate method">
+    <HelpKINode Title="ConsoleControl.Invalidate Method " Url="html/M_ConControls_Controls_ConsoleControl_Invalidate.htm" />
+    <HelpKINode Title="ConsoleWindow.Invalidate Method " Url="html/M_ConControls_ConsoleWindow_Invalidate.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsDisposed property">
+    <HelpKINode Title="ConsoleWindow.IsDisposed Property " Url="html/P_ConControls_ConsoleWindow_IsDisposed.htm" />
+    <HelpKINode Title="IConsoleWindow.IsDisposed Property " Url="html/P_ConControls_IConsoleWindow_IsDisposed.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Item property">
+    <HelpKINode Title="ControlCollection.Item Property " Url="html/P_ConControls_Controls_ControlCollection_Item.htm" />
+    <HelpKINode Title="FrameCharSets.Item Property " Url="html/P_ConControls_Controls_FrameCharSets_Item.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LeftToRight enumeration member" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="Location property">
+    <HelpKINode Title="ConsoleControl.Location Property " Url="html/P_ConControls_Controls_ConsoleControl_Location.htm" />
+    <HelpKINode Title="ConsoleWindow.Location Property " Url="html/P_ConControls_ConsoleWindow_Location.htm" />
+    <HelpKINode Title="IControlContainer.Location Property " Url="html/P_ConControls_Controls_IControlContainer_Location.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LowerLeft property">
+    <HelpKINode Title="BoldinedFrameCharSet.LowerLeft Property " Url="html/P_ConControls_Controls_BoldinedFrameCharSet_LowerLeft.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.LowerLeft Property " Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_LowerLeft.htm" />
+    <HelpKINode Title="FrameCharSet.LowerLeft Property " Url="html/P_ConControls_Controls_FrameCharSet_LowerLeft.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.LowerLeft Property " Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_LowerLeft.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LowerRight property">
+    <HelpKINode Title="BoldinedFrameCharSet.LowerRight Property " Url="html/P_ConControls_Controls_BoldinedFrameCharSet_LowerRight.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.LowerRight Property " Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_LowerRight.htm" />
+    <HelpKINode Title="FrameCharSet.LowerRight Property " Url="html/P_ConControls_Controls_FrameCharSet_LowerRight.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.LowerRight Property " Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_LowerRight.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MaximumSize property">
+    <HelpKINode Title="ConsoleWindow.MaximumSize Property " Url="html/P_ConControls_ConsoleWindow_MaximumSize.htm" />
+    <HelpKINode Title="IConsoleWindow.MaximumSize Property " Url="html/P_ConControls_IConsoleWindow_MaximumSize.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Name property" Url="html/P_ConControls_Controls_ConsoleControl_Name.htm" />
+  <HelpKINode Title="None enumeration member" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="OnAreaChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnAreaChanged.htm" />
+  <HelpKINode Title="OnBackgroundColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBackgroundColorChanged.htm" />
+  <HelpKINode Title="OnBorderColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBorderColorChanged.htm" />
+  <HelpKINode Title="OnBorderStyleChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBorderStyleChanged.htm" />
+  <HelpKINode Title="OnEnabledChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnEnabledChanged.htm" />
+  <HelpKINode Title="OnFocusedChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnFocusedChanged.htm" />
+  <HelpKINode Title="OnForegroundColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnForegroundColorChanged.htm" />
+  <HelpKINode Title="OnParentChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnParentChanged.htm" />
+  <HelpKINode Title="OnVisibleChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnVisibleChanged.htm" />
+  <HelpKINode Title="Orientation property" Url="html/P_ConControls_Controls_ProgressBar_Orientation.htm" />
+  <HelpKINode Title="OrientationChanged event" Url="html/E_ConControls_Controls_ProgressBar_OrientationChanged.htm" />
+  <HelpKINode Title="Parent property" Url="html/P_ConControls_Controls_ConsoleControl_Parent.htm" />
+  <HelpKINode Title="ParentChanged event" Url="html/E_ConControls_Controls_ConsoleControl_ParentChanged.htm" />
+  <HelpKINode Title="Percentage property" Url="html/P_ConControls_Controls_ProgressBar_Percentage.htm" />
+  <HelpKINode Title="PercentageChanged event" Url="html/E_ConControls_Controls_ProgressBar_PercentageChanged.htm" />
+  <HelpKINode Title="ProgressBar class">
+    <HelpKINode Title="ProgressBar Class" Url="html/T_ConControls_Controls_ProgressBar.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_ProgressBar__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_ProgressBar.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_ConControls_Controls_ProgressBar.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ProgressBar.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ProgressBar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ProgressBar.DefaultProgressChar field" Url="html/F_ConControls_Controls_ProgressBar_DefaultProgressChar.htm" />
+  <HelpKINode Title="ProgressBar.Orientation property" Url="html/P_ConControls_Controls_ProgressBar_Orientation.htm" />
+  <HelpKINode Title="ProgressBar.OrientationChanged event" Url="html/E_ConControls_Controls_ProgressBar_OrientationChanged.htm" />
+  <HelpKINode Title="ProgressBar.Percentage property" Url="html/P_ConControls_Controls_ProgressBar_Percentage.htm" />
+  <HelpKINode Title="ProgressBar.PercentageChanged event" Url="html/E_ConControls_Controls_ProgressBar_PercentageChanged.htm" />
+  <HelpKINode Title="ProgressBar.ProgressBar constructor" Url="html/M_ConControls_Controls_ProgressBar__ctor.htm" />
+  <HelpKINode Title="ProgressBar.ProgressChar property" Url="html/P_ConControls_Controls_ProgressBar_ProgressChar.htm" />
+  <HelpKINode Title="ProgressBar.ProgressCharChanged event" Url="html/E_ConControls_Controls_ProgressBar_ProgressCharChanged.htm" />
+  <HelpKINode Title="ProgressBar.ProgressOrientation enumeration" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="ProgressChar property" Url="html/P_ConControls_Controls_ProgressBar_ProgressChar.htm" />
+  <HelpKINode Title="ProgressCharChanged event" Url="html/E_ConControls_Controls_ProgressBar_ProgressCharChanged.htm" />
+  <HelpKINode Title="Remove method" Url="html/M_ConControls_Controls_ControlCollection_Remove.htm" />
+  <HelpKINode Title="RemovedControls property" Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_RemovedControls.htm" />
+  <HelpKINode Title="RemoveRange method" Url="html/Overload_ConControls_Controls_ControlCollection_RemoveRange.htm" />
+  <HelpKINode Title="RightToLeft enumeration member" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="SingleLined enumeration member" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet class">
+    <HelpKINode Title="SingleLinedFrameCharSet Class" Url="html/T_ConControls_Controls_SingleLinedFrameCharSet.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_SingleLinedFrameCharSet__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_SingleLinedFrameCharSet.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_SingleLinedFrameCharSet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SingleLinedFrameCharSet.Horizontal property" Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_Horizontal.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.LowerLeft property" Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_LowerLeft.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.LowerRight property" Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_LowerRight.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.SingleLinedFrameCharSet constructor" Url="html/M_ConControls_Controls_SingleLinedFrameCharSet__ctor.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.UpperLeft property" Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_UpperLeft.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.UpperRight property" Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_UpperRight.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.Vertical property" Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_Vertical.htm" />
+  <HelpKINode Title="Size property">
+    <HelpKINode Title="ConsoleControl.Size Property " Url="html/P_ConControls_Controls_ConsoleControl_Size.htm" />
+    <HelpKINode Title="ConsoleWindow.Size Property " Url="html/P_ConControls_ConsoleWindow_Size.htm" />
+    <HelpKINode Title="IControlContainer.Size Property " Url="html/P_ConControls_Controls_IControlContainer_Size.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SynchronizationLock property">
+    <HelpKINode Title="ConsoleWindow.SynchronizationLock Property " Url="html/P_ConControls_ConsoleWindow_SynchronizationLock.htm" />
+    <HelpKINode Title="IConsoleWindow.SynchronizationLock Property " Url="html/P_ConControls_IConsoleWindow_SynchronizationLock.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Title property">
+    <HelpKINode Title="ConsoleWindow.Title Property " Url="html/P_ConControls_ConsoleWindow_Title.htm" />
+    <HelpKINode Title="IConsoleWindow.Title Property " Url="html/P_ConControls_IConsoleWindow_Title.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TopToBottom enumeration member" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="UpperLeft property">
+    <HelpKINode Title="BoldinedFrameCharSet.UpperLeft Property " Url="html/P_ConControls_Controls_BoldinedFrameCharSet_UpperLeft.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.UpperLeft Property " Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_UpperLeft.htm" />
+    <HelpKINode Title="FrameCharSet.UpperLeft Property " Url="html/P_ConControls_Controls_FrameCharSet_UpperLeft.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.UpperLeft Property " Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_UpperLeft.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UpperRight property">
+    <HelpKINode Title="BoldinedFrameCharSet.UpperRight Property " Url="html/P_ConControls_Controls_BoldinedFrameCharSet_UpperRight.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.UpperRight Property " Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_UpperRight.htm" />
+    <HelpKINode Title="FrameCharSet.UpperRight Property " Url="html/P_ConControls_Controls_FrameCharSet_UpperRight.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.UpperRight Property " Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_UpperRight.htm" />
+  </HelpKINode>
+  <HelpKINode Title="version">
+    <HelpKINode Title="1.0.0.0" Url="html/b4472bc6-aea3-4648-80e0-ccdeb00754bc.htm" />
+    <HelpKINode Title="history" Url="html/2ed3585b-daa4-43eb-820e-7dc224e7d618.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Vertical property">
+    <HelpKINode Title="BoldinedFrameCharSet.Vertical Property " Url="html/P_ConControls_Controls_BoldinedFrameCharSet_Vertical.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.Vertical Property " Url="html/P_ConControls_Controls_DoubleLinedFrameCharSet_Vertical.htm" />
+    <HelpKINode Title="FrameCharSet.Vertical Property " Url="html/P_ConControls_Controls_FrameCharSet_Vertical.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.Vertical Property " Url="html/P_ConControls_Controls_SingleLinedFrameCharSet_Vertical.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Visible property">
+    <HelpKINode Title="ConsoleControl.Visible Property " Url="html/P_ConControls_Controls_ConsoleControl_Visible.htm" />
+    <HelpKINode Title="ConsoleWindow.Visible Property " Url="html/P_ConControls_ConsoleWindow_Visible.htm" />
+    <HelpKINode Title="IControlContainer.Visible Property " Url="html/P_ConControls_Controls_IControlContainer_Visible.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VisibleChanged event" Url="html/E_ConControls_Controls_ConsoleControl_VisibleChanged.htm" />
+  <HelpKINode Title="Welcome" Url="html/8851347f-9bd6-4223-8758-d9c3c3124107.htm" />
+  <HelpKINode Title="Window property">
+    <HelpKINode Title="ConsoleControl.Window Property " Url="html/P_ConControls_Controls_ConsoleControl_Window.htm" />
+    <HelpKINode Title="ConsoleWindow.Window Property " Url="html/P_ConControls_ConsoleWindow_Window.htm" />
+    <HelpKINode Title="IControlContainer.Window Property " Url="html/P_ConControls_Controls_IControlContainer_Window.htm" />
+  </HelpKINode>
+</HelpKI>
