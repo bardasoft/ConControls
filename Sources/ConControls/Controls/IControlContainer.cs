@@ -27,7 +27,7 @@ namespace ConControls.Controls
         /// </summary>
         Size Size { get; }
         /// <summary>
-        /// A <see cref="Rectangle"/> representing the area (in charactre columns and rows) this <see cref="IControlContainer"/>
+        /// A <see cref="Rectangle"/> representing the area (in character columns and rows) this <see cref="IControlContainer"/>
         /// occupies in the console screen buffer.
         /// </summary>
         Rectangle Area { get; }
@@ -55,10 +55,17 @@ namespace ConControls.Controls
         /// Defers any drawing operation until the return value has been disposed of again.
         /// </summary>
         /// <remarks>Use this to surround a block of code that changes multiple properties of this
-        /// <see cref="IControlContainer"/> or its children.
-        /// <p>
-        /// using(DeferDrawing){....}
-        /// </p>
+        /// <see cref="IControlContainer"/> or its children. This avoids redrawing the control for
+        /// each changed property, and instead redraws the whole container when the returned value
+        /// is disposed.
+        /// <code language="c#">
+        /// ConsoleControl control = ...;
+        /// using(control.DeferDrawing())
+        /// {
+        ///     control.ForegroundColor = ConsoleColor.Green;
+        ///     control.BackgroundColor = ConsoleColor.Black;
+        /// }
+        /// </code>
         /// At the end of this block, drawing will be resumed again.
         /// </remarks>
         /// <returns>An <see cref="IDisposable"/> that on calling <see cref="IDisposable.Dispose"/> releases

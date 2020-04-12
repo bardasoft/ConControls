@@ -81,7 +81,7 @@
     <Compile Include="Controls\ControlCollection\RemoveTests.cs" />
     <Compile Include="Controls\ControlCollection\AddTests.cs" />
     <Compile Include="Controls\ControlCollection\ControlCollectionTests.cs" />
-    <Compile Include="Controls\FrameCharSets\FrameCharSetsTests.cs" />
+    <Compile Include="Controls\Drawing\FrameCharSets\FrameCharSetsTests.cs" />
     <Compile Include="Examples\ProgressBarExample.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,13 +10,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
 using ConControls.ConsoleApi;
-using ConControls.Controls;
+using ConControls.Controls.Drawing;
 using ConControls.Helpers;
 using ConControls.Logging;
 using ConControls.WindowsApi;
 using ConControls.WindowsApi.Types;
 
-namespace ConControls
+namespace ConControls.Controls
 {
     /// <summary>
     /// The window for a console UI session.

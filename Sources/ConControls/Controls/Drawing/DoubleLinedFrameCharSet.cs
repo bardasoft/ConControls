@@ -7,7 +7,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-namespace ConControls.Controls 
+namespace ConControls.Controls.Drawing 
 {
     /// <summary>
     /// A <see cref="FrameCharSet"/> for double-lined frames.

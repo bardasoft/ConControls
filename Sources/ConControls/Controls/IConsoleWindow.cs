@@ -7,10 +7,9 @@
 
 using System;
 using System.Drawing;
-using ConControls.ConsoleApi;
-using ConControls.Controls;
+using ConControls.Controls.Drawing;
 
-namespace ConControls
+namespace ConControls.Controls
 {
     /// <summary>
     /// Interface to a <see cref="ConsoleWindow"/>.

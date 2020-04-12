@@ -5,7 +5,7 @@
  *
  */
 
-namespace ConControls.Controls 
+namespace ConControls.Controls.Drawing 
 {
     /// <summary>
     /// Provides <see cref="FrameCharSet"/> instances for given <see cref="BorderStyle"/> values.

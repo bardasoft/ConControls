@@ -7,9 +7,8 @@
 
 using System;
 using System.Drawing;
-using ConControls.Controls;
 
-namespace ConControls.ConsoleApi
+namespace ConControls.Controls.Drawing
 {
     /// <summary>
     /// Provides methods to draw on the console.

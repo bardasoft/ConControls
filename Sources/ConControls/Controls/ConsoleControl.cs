@@ -10,6 +10,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
 using ConControls.ConsoleApi;
+using ConControls.Controls.Drawing;
 using ConControls.Helpers;
 using ConControls.Logging;
 

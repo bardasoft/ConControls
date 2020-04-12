@@ -5,7 +5,7 @@
  *
  */
 
-namespace ConControls.Controls 
+namespace ConControls.Controls.Drawing 
 {
     /// <summary>
     /// Provides characters for drawing frames.

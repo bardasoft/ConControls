@@ -8,6 +8,7 @@
 using System;
 using System.Drawing;
 using ConControls.ConsoleApi;
+using ConControls.Controls.Drawing;
 using ConControls.Logging;
 
 namespace ConControls.Controls 

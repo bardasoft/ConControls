@@ -8,12 +8,12 @@
 using System;
 using System.Drawing;
 using System.Linq;
-using ConControls.Controls;
+using ConControls.ConsoleApi;
 using ConControls.Logging;
 using ConControls.WindowsApi;
 using ConControls.WindowsApi.Types;
 
-namespace ConControls.ConsoleApi 
+namespace ConControls.Controls.Drawing 
 {
     sealed class ConsoleGraphics : IConsoleGraphics
     {
