@@ -13,6 +13,7 @@ namespace ConControls.ConsoleApi
     interface IConsoleListener : IDisposable
     {
         event EventHandler<ConsoleOutputReceivedEventArgs>? OutputReceived;
+        event EventHandler<ConsoleOutputReceivedEventArgs>? ErrorReceived;
         event EventHandler<ConsoleFocusEventArgs>? FocusEvent;
         event EventHandler<ConsoleKeyEventArgs>? KeyEvent;
         event EventHandler<ConsoleMouseEventArgs>? MouseEvent;

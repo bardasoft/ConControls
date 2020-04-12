@@ -22,9 +22,15 @@ namespace ConControls.ConsoleApi
         readonly ConsoleOutputModes originalOutputMode;
         readonly ConsoleInputModes originalInputMode;
 
+        readonly SafeFileHandle readStdOutHandle;
+        readonly SafeFileHandle writeStdOutHandle;
+        readonly SafeFileHandle readErrorHandle;
+        readonly SafeFileHandle writeErrorHandle;
+
         int disposed;
 
         public event EventHandler<ConsoleOutputReceivedEventArgs>? OutputReceived;
+        public event EventHandler<ConsoleOutputReceivedEventArgs>? ErrorReceived;
         public event EventHandler<ConsoleFocusEventArgs>? FocusEvent;
         public event EventHandler<ConsoleKeyEventArgs>? KeyEvent;
         public event EventHandler<ConsoleMouseEventArgs>? MouseEvent;
@@ -43,6 +49,13 @@ namespace ConControls.ConsoleApi
             originalOutputMode = this.api.GetConsoleMode(OriginalOutputHandle);
             OriginalInputHandle = this.api.GetInputHandle();
             originalInputMode = this.api.GetConsoleMode(OriginalInputHandle);
+
+            this.api.CreatePipe(out readStdOutHandle, out writeStdOutHandle);
+            using (var tempHandle = new ConsoleOutputHandle(writeStdOutHandle.DangerousGetHandle()))
+                this.api.SetOutputHandle(tempHandle);
+            this.api.CreatePipe(out readErrorHandle, out writeErrorHandle);
+            using (var tempHandle = new ConsoleErrorHandle(writeErrorHandle.DangerousGetHandle()))
+                this.api.SetErrorHandle(tempHandle);
             this.api.SetConsoleMode(OriginalInputHandle,
                                     ConsoleInputModes.EnableWindowInput |
                                     ConsoleInputModes.EnableMouseInput |
@@ -59,26 +72,47 @@ namespace ConControls.ConsoleApi
             stopEvent.Set();
             thread.Join();
             stopEvent.Dispose();
-            OriginalOutputHandle.Dispose();
             api.SetErrorHandle(OriginalErrorHandle);
             api.SetOutputHandle(OriginalOutputHandle);
             api.SetConsoleMode(OriginalInputHandle, originalInputMode);
             api.SetConsoleMode(OriginalOutputHandle, originalOutputMode);
+            readStdOutHandle.Dispose();
+            writeStdOutHandle.Dispose();
+            readErrorHandle.Dispose();
+            writeErrorHandle.Dispose();
             OriginalOutputHandle.Dispose();
+            OriginalErrorHandle.Dispose();
+            OriginalInputHandle.Dispose();
         }
         void ListenerThread()
         {
             Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Starting thread.");
             IntPtr stdin = OriginalOutputHandle.DangerousGetHandle();
-            using var inputWaitHandle = new AutoResetEvent(false) {SafeWaitHandle = new SafeWaitHandle(stdin, false)};
-            WaitHandle[] waitHandles = {stopEvent, inputWaitHandle};
+            IntPtr stdout = readStdOutHandle.DangerousGetHandle();
+            IntPtr stderr = readErrorHandle.DangerousGetHandle();
+            using var inputWaitHandle = new AutoResetEvent(false) { SafeWaitHandle = new SafeWaitHandle(stdin, false) };
+            using var outputWaitHandle = new AutoResetEvent(false) { SafeWaitHandle = new SafeWaitHandle(stdout, false) };
+            using var errorWaitHandle = new AutoResetEvent(false) { SafeWaitHandle = new SafeWaitHandle(stderr, false) };
+            WaitHandle[] waitHandles = {stopEvent, inputWaitHandle, outputWaitHandle, errorWaitHandle};
             int index;
             while ((index = WaitHandle.WaitAny(waitHandles)) != 0)
             {
-                if (index != 1) continue;
-                //inputWaitHandle.Reset();
-                Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Input handle signaled.");
-                ReadConsoleInput();
+                switch (index)
+                {
+                    case 1:
+                        Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Input handle signaled.");
+                        ReadConsoleInput();
+                        break;
+                    case 2:
+                        outputWaitHandle.Reset();
+                        Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Output handle signaled.");
+                        ReadConsoleOutput();
+                        break;
+                    case 3:
+                        Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Error handle signaled.");
+                        ReadConsoleError();
+                        break;
+                }
             }
             Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Stopping thread.");
         }
@@ -120,5 +154,17 @@ namespace ConControls.ConsoleApi
                 throw;
             }
         }
+        void ReadConsoleOutput()
+        {
+            string output = ReadFromHandle(readStdOutHandle);
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Received output: [{output}]");
+        }
+        void ReadConsoleError()
+        {
+            string error = ReadFromHandle(readErrorHandle);
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Received error: [{error}]");
+
+        }
+        static string ReadFromHandle(SafeFileHandle handle) => "dummy";
     }
 }

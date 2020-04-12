@@ -7,11 +7,13 @@
 
 using System.Drawing;
 using ConControls.WindowsApi.Types;
+using Microsoft.Win32.SafeHandles;
 
 namespace ConControls.WindowsApi
 {
     interface INativeCalls
     {
+        void CreatePipe(out SafeFileHandle readHandle, out SafeFileHandle writeHandle, int size = 2048);
         ConsoleInputModes GetConsoleMode(ConsoleInputHandle consoleInputHandle);
         ConsoleOutputModes GetConsoleMode(ConsoleOutputHandle consoleOutputHandle);
         CONSOLE_SCREEN_BUFFER_INFOEX GetConsoleScreenBufferInfo(ConsoleOutputHandle consoleOutputHandle);
