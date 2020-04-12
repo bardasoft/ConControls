@@ -19,8 +19,6 @@ namespace ConControls.ConsoleApi
         readonly INativeCalls api;
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
         readonly Thread thread;
-        readonly ConsoleInputHandle consoleInputHandle = new ConsoleInputHandle();
-        readonly ConsoleOutputHandle consoleOutputHandle = new ConsoleOutputHandle();
         int disposed;
 
         public event EventHandler<ConsoleOutputReceivedEventArgs>? OutputReceived;
@@ -30,14 +28,21 @@ namespace ConControls.ConsoleApi
         public event EventHandler<ConsoleSizeEventArgs>? SizeEvent;
         public event EventHandler<ConsoleMenuEventArgs>? MenuEvent;
 
+        public ConsoleErrorHandle OriginalErrorHandle { get; }
+        public ConsoleInputHandle OriginalInputHandle { get; }
+        public ConsoleOutputHandle OriginalOutputHandle { get; }
+
         internal ConsoleListener(INativeCalls? api = null)
         {
             this.api = api ?? new NativeCalls();
-            this.api.SetConsoleMode(consoleInputHandle,
+            OriginalErrorHandle = this.api.GetErrorHandle();
+            OriginalOutputHandle = this.api.GetOutputHandle();
+            OriginalInputHandle = this.api.GetInputHandle();
+            this.api.SetConsoleMode(OriginalInputHandle,
                                     ConsoleInputModes.EnableWindowInput |
                                     ConsoleInputModes.EnableMouseInput |
                                     ConsoleInputModes.EnableExtendedFlags);
-            this.api.SetConsoleMode(consoleOutputHandle, ConsoleOutputModes.None);
+            this.api.SetConsoleMode(OriginalOutputHandle, ConsoleOutputModes.None);
 
             thread = new Thread(ListenerThread);
             thread.Start();
@@ -49,13 +54,15 @@ namespace ConControls.ConsoleApi
             stopEvent.Set();
             thread.Join();
             stopEvent.Dispose();
-            consoleInputHandle.Dispose();
-            consoleOutputHandle.Dispose();
+            OriginalOutputHandle.Dispose();
+            api.SetErrorHandle(OriginalErrorHandle);
+            api.SetOutputHandle(OriginalOutputHandle);
+            OriginalOutputHandle.Dispose();
         }
         void ListenerThread()
         {
             Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Starting thread.");
-            IntPtr stdin = consoleInputHandle.DangerousGetHandle();
+            IntPtr stdin = OriginalOutputHandle.DangerousGetHandle();
             using var inputWaitHandle = new AutoResetEvent(false) {SafeWaitHandle = new SafeWaitHandle(stdin, false)};
             WaitHandle[] waitHandles = {stopEvent, inputWaitHandle};
             int index;
@@ -72,7 +79,7 @@ namespace ConControls.ConsoleApi
         {
             try
             {
-                var records = api.ReadConsoleInput(consoleInputHandle);
+                var records = api.ReadConsoleInput(OriginalInputHandle);
                 Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Read {records.Length} input records.");
                 foreach (var record in records)
                 {

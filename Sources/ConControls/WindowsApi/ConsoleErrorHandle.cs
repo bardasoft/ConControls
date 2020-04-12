@@ -12,12 +12,12 @@ using Microsoft.Win32.SafeHandles;
 namespace ConControls.WindowsApi 
 {
     /// <summary>
-    /// A console output handle.
+    /// A console standard error handle.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    sealed class ConsoleOutputHandle : SafeHandleZeroOrMinusOneIsInvalid
+    sealed class ConsoleErrorHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        internal ConsoleOutputHandle(IntPtr handle)
+        internal ConsoleErrorHandle(IntPtr handle)
             : base(false)
         {
             SetHandle(handle);

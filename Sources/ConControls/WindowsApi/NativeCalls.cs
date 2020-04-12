@@ -34,6 +34,13 @@ namespace ConControls.WindowsApi
                 throw Exceptions.Win32();
             return titleBuilder.ToString();
         }
+        public ConsoleErrorHandle GetErrorHandle() =>
+            new ConsoleErrorHandle(NativeMethods.GetStdHandle(NativeMethods.STDERR));
+        public ConsoleInputHandle GetInputHandle() =>
+            new ConsoleInputHandle(NativeMethods.GetStdHandle(NativeMethods.STDIN));
+        public ConsoleOutputHandle GetOutputHandle() =>
+            new ConsoleOutputHandle(NativeMethods.GetStdHandle(NativeMethods.STDOUT));
+
         public COORD GetLargestConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle) =>
             NativeMethods.GetLargestConsoleWindowSize(consoleOutputHandle);
         public INPUT_RECORD[] ReadConsoleInput(ConsoleInputHandle consoleInputHandle, int maxElements = 1028)
@@ -76,6 +83,21 @@ namespace ConControls.WindowsApi
             if (!NativeMethods.SetConsoleWindowInfo(consoleOutputHandle,
                                                     true,
                                                     new SMALL_RECT(size)))
+                throw Exceptions.Win32();
+        }
+        public void SetErrorHandle(ConsoleErrorHandle errorHandle)
+        {
+            if (!NativeMethods.SetStdHandle(NativeMethods.STDERR, errorHandle.DangerousGetHandle()))
+                throw Exceptions.Win32();
+        }
+        public void SetInputHandle(ConsoleInputHandle inputHandle)
+        {
+            if (!NativeMethods.SetStdHandle(NativeMethods.STDIN, inputHandle.DangerousGetHandle()))
+                throw Exceptions.Win32();
+        }
+        public void SetOutputHandle(ConsoleOutputHandle outputHandle)
+        {
+            if (!NativeMethods.SetStdHandle(NativeMethods.STDOUT, outputHandle.DangerousGetHandle()))
                 throw Exceptions.Win32();
         }
         public void WriteConsoleOutput(ConsoleOutputHandle consoleOutputHandle, CHAR_INFO[] buffer, Rectangle region)

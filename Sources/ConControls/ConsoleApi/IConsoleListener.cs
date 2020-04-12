@@ -6,6 +6,7 @@
  */
 
 using System;
+using ConControls.WindowsApi;
 
 namespace ConControls.ConsoleApi
 {
@@ -17,5 +18,9 @@ namespace ConControls.ConsoleApi
         event EventHandler<ConsoleMouseEventArgs>? MouseEvent;
         event EventHandler<ConsoleSizeEventArgs>? SizeEvent;
         event EventHandler<ConsoleMenuEventArgs>? MenuEvent;
+
+        ConsoleErrorHandle OriginalErrorHandle { get; }
+        ConsoleInputHandle OriginalInputHandle { get; }
+        ConsoleOutputHandle OriginalOutputHandle { get; }
     }
 }

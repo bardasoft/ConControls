@@ -1121,33 +1121,20 @@
               Sucht eine lokalisierte Zeichenfolge, die The console window used by this control has already been disposed of! ähnelt.
             </summary>
         </member>
+        <member name="T:ConControls.WindowsApi.ConsoleErrorHandle">
+            <summary>
+            A console standard error handle.
+            </summary>
+        </member>
         <member name="T:ConControls.WindowsApi.ConsoleInputHandle">
             <summary>
             A console input handle.
             </summary>
         </member>
-        <member name="M:ConControls.WindowsApi.ConsoleInputHandle.#ctor">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.WindowsApi.ConsoleInputHandle.ReleaseHandle">
-            <inheritdoc />
-        </member>
-        <member name="P:ConControls.WindowsApi.ConsoleInputHandle.IsInvalid">
-            <inheritdoc />
-        </member>
         <member name="T:ConControls.WindowsApi.ConsoleOutputHandle">
             <summary>
             A console output handle.
             </summary>
-        </member>
-        <member name="M:ConControls.WindowsApi.ConsoleOutputHandle.#ctor">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.WindowsApi.ConsoleOutputHandle.ReleaseHandle">
-            <inheritdoc />
-        </member>
-        <member name="P:ConControls.WindowsApi.ConsoleOutputHandle.IsInvalid">
-            <inheritdoc />
         </member>
         <member name="M:ConControls.WindowsApi.Types.COORD.ToString">
             <inheritdoc />

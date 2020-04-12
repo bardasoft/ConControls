@@ -5,8 +5,9 @@
  *
  */
 
+using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
 
 namespace ConControls.WindowsApi 
 {
@@ -14,13 +15,13 @@ namespace ConControls.WindowsApi
     /// A console input handle.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    sealed class ConsoleInputHandle : SafeHandle
+    sealed class ConsoleInputHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        /// <inheritdoc />
-        internal ConsoleInputHandle() : base(NativeMethods.GetStdHandle(NativeMethods.STDIN), false) { }
-        /// <inheritdoc />
+        internal ConsoleInputHandle(IntPtr handle)
+            : base(false)
+        {
+            SetHandle(handle);
+        }
         protected override bool ReleaseHandle() => true;
-        /// <inheritdoc />
-        public override bool IsInvalid => handle.ToInt64() <= 0;
     }
 }

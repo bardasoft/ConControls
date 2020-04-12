@@ -163,14 +163,14 @@ namespace ConControls.Controls
                 throw Exceptions.CanOnlyUseSingleContext();
 
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
-            consoleInputHandle = new ConsoleInputHandle();
+            this.consoleListener = consoleListener ?? new ConsoleListener(this.api);
+            consoleInputHandle = this.consoleListener.OriginalInputHandle;
             if (consoleInputHandle.IsInvalid)
                 throw Exceptions.Win32();
-            consoleOutputHandle = new ConsoleOutputHandle();
+            consoleOutputHandle = this.consoleListener.OriginalOutputHandle;
             if (consoleOutputHandle.IsInvalid)
                 throw Exceptions.Win32();
             this.api = api ?? new NativeCalls();
-            this.consoleListener = consoleListener ?? new ConsoleListener(this.api);
             Controls = new ControlCollection(this);
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
             SynchronizeConsoleSettings();

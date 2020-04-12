@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
-using ConControls;
 using ConControls.Controls;
 
 namespace ConControlsTests.Examples
