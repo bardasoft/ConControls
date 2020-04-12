@@ -19,6 +19,9 @@ namespace ConControls.ConsoleApi
         readonly INativeCalls api;
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
         readonly Thread thread;
+        readonly ConsoleOutputModes originalOutputMode;
+        readonly ConsoleInputModes originalInputMode;
+
         int disposed;
 
         public event EventHandler<ConsoleOutputReceivedEventArgs>? OutputReceived;
@@ -37,7 +40,9 @@ namespace ConControls.ConsoleApi
             this.api = api ?? new NativeCalls();
             OriginalErrorHandle = this.api.GetErrorHandle();
             OriginalOutputHandle = this.api.GetOutputHandle();
+            originalOutputMode = this.api.GetConsoleMode(OriginalOutputHandle);
             OriginalInputHandle = this.api.GetInputHandle();
+            originalInputMode = this.api.GetConsoleMode(OriginalInputHandle);
             this.api.SetConsoleMode(OriginalInputHandle,
                                     ConsoleInputModes.EnableWindowInput |
                                     ConsoleInputModes.EnableMouseInput |
@@ -57,6 +62,8 @@ namespace ConControls.ConsoleApi
             OriginalOutputHandle.Dispose();
             api.SetErrorHandle(OriginalErrorHandle);
             api.SetOutputHandle(OriginalOutputHandle);
+            api.SetConsoleMode(OriginalInputHandle, originalInputMode);
+            api.SetConsoleMode(OriginalOutputHandle, originalOutputMode);
             OriginalOutputHandle.Dispose();
         }
         void ListenerThread()

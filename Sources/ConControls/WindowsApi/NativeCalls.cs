@@ -17,6 +17,10 @@ namespace ConControls.WindowsApi
     [ExcludeFromCodeCoverage]
     sealed class NativeCalls : INativeCalls
     {
+        public ConsoleInputModes GetConsoleMode(ConsoleInputHandle consoleInputHandle) =>
+            NativeMethods.GetConsoleMode(consoleInputHandle.DangerousGetHandle(), out ConsoleInputModes mode) ? mode : throw Exceptions.Win32();
+        public ConsoleOutputModes GetConsoleMode(ConsoleOutputHandle consoleOutputHandle) =>
+            NativeMethods.GetConsoleMode(consoleOutputHandle.DangerousGetHandle(), out ConsoleOutputModes mode) ? mode : throw Exceptions.Win32();
         public CONSOLE_SCREEN_BUFFER_INFOEX GetConsoleScreenBufferInfo(ConsoleOutputHandle consoleOutputHandle)
         {
             CONSOLE_SCREEN_BUFFER_INFOEX info = new CONSOLE_SCREEN_BUFFER_INFOEX

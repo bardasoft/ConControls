@@ -12,6 +12,8 @@ namespace ConControls.WindowsApi
 {
     interface INativeCalls
     {
+        ConsoleInputModes GetConsoleMode(ConsoleInputHandle consoleInputHandle);
+        ConsoleOutputModes GetConsoleMode(ConsoleOutputHandle consoleOutputHandle);
         CONSOLE_SCREEN_BUFFER_INFOEX GetConsoleScreenBufferInfo(ConsoleOutputHandle consoleOutputHandle);
         string GetConsoleTitle();
         ConsoleErrorHandle GetErrorHandle();
