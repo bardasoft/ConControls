@@ -22,6 +22,7 @@ namespace ConControls.Logging
 
         ProgressBar = 1 << 6,
 
+        Exception = 1 << 30,
         All = -1
     }
 }

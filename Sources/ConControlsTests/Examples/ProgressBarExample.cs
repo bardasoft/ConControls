@@ -61,7 +61,8 @@ namespace ConControlsTests.Examples
                 double p = (double)(i % 101) / 100;
                 using (window.DeferDrawing())
                     l2r.Percentage = r2l.Percentage = t2b.Percentage = b2t.Percentage = p;
-                
+                if (i % 10 == 0)
+                    Console.WriteLine($"Output at {i}");
                 Thread.Sleep(50);
             }
         }
