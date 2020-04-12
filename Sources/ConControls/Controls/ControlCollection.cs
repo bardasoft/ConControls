@@ -116,10 +116,20 @@ namespace ConControls.Controls
             ControlCollectionChanged?.Invoke(this, ControlCollectionChangedEventArgs.Removed(range));
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Gets an <see cref="IEnumerator{ConsoleControl}"/> that can enumerate the <see cref="ConsoleControl"/>
+        /// instances contained in this <see cref="ControlCollection"/>.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator{ConsoleControl}"/> that can enumerate the <see cref="ConsoleControl"/>
+        /// instances contained in this <see cref="ControlCollection"/>.</returns>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerator<ConsoleControl> GetEnumerator() => ((IEnumerable<ConsoleControl>)controls.ToArray()).GetEnumerator();
-        /// <inheritdoc />
+        /// <summary>
+        /// Gets an <see cref="IEnumerator"/> that can enumerate the <see cref="ConsoleControl"/>
+        /// instances contained in this <see cref="ControlCollection"/>.
+        /// </summary>
+        /// <returns>An <see cref="IEnumerator"/> that can enumerate the <see cref="ConsoleControl"/>
+        /// instances contained in this <see cref="ControlCollection"/>.</returns>
         [ExcludeFromCodeCoverage]
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

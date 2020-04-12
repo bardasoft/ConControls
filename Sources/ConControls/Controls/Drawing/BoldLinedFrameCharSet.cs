@@ -12,8 +12,11 @@ namespace ConControls.Controls.Drawing
     /// <summary>
     /// A <see cref="FrameCharSet"/> for bold-lined frames.
     /// </summary>
+    /// <seealso cref="FrameCharSet"/>
+    /// <seealso cref="FrameCharSets"/>
+    /// <seealso cref="IConsoleWindow.FrameCharSets"/>
     [ExcludeFromCodeCoverage]
-    public class BoldinedFrameCharSet : FrameCharSet
+    public class BoldLinedFrameCharSet : FrameCharSet
     {
         /// <summary>
         /// The upper left corner of a bold-lined frame.

@@ -11,7 +11,7 @@ of a console application without the overhead of creating a UI with frameworks l
 An introduction/manual/howto can be found [here](docs/001%20Intro.md).  
 Code examples are included in the test project (ConControlsTests).
 
-The api documentation is a [Sandcastle](https://github.com/EWSoftware/SHFB) created *.chm file: [ConControls API documentation.chm](docs/ConControls%20API%20documentation.chm).
+The api documentation is a [Sandcastle](https://github.com/EWSoftware/SHFB) created compiled html help file: [ConControls API documentation.chm](docs/ConControls%20API%20documentation.chm).
 
 ---
 

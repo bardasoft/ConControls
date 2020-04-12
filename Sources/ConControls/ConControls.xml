@@ -454,7 +454,13 @@
             </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleWindow.Dispose">
-            <inheritdoc />
+            <summary>
+            Releases any resources used by this <see cref="T:ConControls.Controls.ConsoleWindow"/>.
+            </summary>
+            <remarks>
+            The <see cref="M:ConControls.Controls.ConsoleWindow.Dispose"/> method releases any resources used by this instance.
+            It allows to create a new instance (only one <see cref="T:ConControls.Controls.ConsoleWindow"/> instance can be alive
+            at a time) and tries to reset the console to the state before the creation of this instacne.</remarks>
         </member>
         <member name="M:ConControls.Controls.ConsoleWindow.GetGraphics">
             <inheritdoc />
@@ -538,10 +544,20 @@
             to remove.</param>
         </member>
         <member name="M:ConControls.Controls.ControlCollection.GetEnumerator">
-            <inheritdoc />
+            <summary>
+            Gets an <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can enumerate the <see cref="T:ConControls.Controls.ConsoleControl"/>
+            instances contained in this <see cref="T:ConControls.Controls.ControlCollection"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can enumerate the <see cref="T:ConControls.Controls.ConsoleControl"/>
+            instances contained in this <see cref="T:ConControls.Controls.ControlCollection"/>.</returns>
         </member>
         <member name="M:ConControls.Controls.ControlCollection.System#Collections#IEnumerable#GetEnumerator">
-            <inheritdoc />
+            <summary>
+            Gets an <see cref="T:System.Collections.IEnumerator"/> that can enumerate the <see cref="T:ConControls.Controls.ConsoleControl"/>
+            instances contained in this <see cref="T:ConControls.Controls.ControlCollection"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> that can enumerate the <see cref="T:ConControls.Controls.ConsoleControl"/>
+            instances contained in this <see cref="T:ConControls.Controls.ControlCollection"/>.</returns>
         </member>
         <member name="T:ConControls.Controls.ControlCollectionChangedEventArgs">
             <summary>
@@ -560,37 +576,40 @@
             the <see cref="T:ConControls.Controls.ControlCollection"/>.
             </summary>
         </member>
-        <member name="T:ConControls.Controls.Drawing.BoldinedFrameCharSet">
+        <member name="T:ConControls.Controls.Drawing.BoldLinedFrameCharSet">
             <summary>
             A <see cref="T:ConControls.Controls.Drawing.FrameCharSet"/> for bold-lined frames.
             </summary>
+            <seealso cref="T:ConControls.Controls.Drawing.FrameCharSet"/>
+            <seealso cref="T:ConControls.Controls.Drawing.FrameCharSets"/>
+            <seealso cref="P:ConControls.Controls.IConsoleWindow.FrameCharSets"/>
         </member>
-        <member name="P:ConControls.Controls.Drawing.BoldinedFrameCharSet.UpperLeft">
+        <member name="P:ConControls.Controls.Drawing.BoldLinedFrameCharSet.UpperLeft">
             <summary>
             The upper left corner of a bold-lined frame.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.Drawing.BoldinedFrameCharSet.UpperRight">
+        <member name="P:ConControls.Controls.Drawing.BoldLinedFrameCharSet.UpperRight">
             <summary>
             The upper right corner of a bold-lined frame.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.Drawing.BoldinedFrameCharSet.LowerLeft">
+        <member name="P:ConControls.Controls.Drawing.BoldLinedFrameCharSet.LowerLeft">
             <summary>
             The lower left corner of a bold-lined frame.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.Drawing.BoldinedFrameCharSet.LowerRight">
+        <member name="P:ConControls.Controls.Drawing.BoldLinedFrameCharSet.LowerRight">
             <summary>
             The lower right corner of a bold-lined frame.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.Drawing.BoldinedFrameCharSet.Horizontal">
+        <member name="P:ConControls.Controls.Drawing.BoldLinedFrameCharSet.Horizontal">
             <summary>
             The horizontal line of a bold-lined frame.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.Drawing.BoldinedFrameCharSet.Vertical">
+        <member name="P:ConControls.Controls.Drawing.BoldLinedFrameCharSet.Vertical">
             <summary>
             The vertical line of a bold-lined frame.
             </summary>
@@ -611,6 +630,9 @@
             <summary>
             A <see cref="T:ConControls.Controls.Drawing.FrameCharSet"/> for double-lined frames.
             </summary>
+            <seealso cref="T:ConControls.Controls.Drawing.FrameCharSet"/>
+            <seealso cref="T:ConControls.Controls.Drawing.FrameCharSets"/>
+            <seealso cref="P:ConControls.Controls.IConsoleWindow.FrameCharSets"/>
         </member>
         <member name="P:ConControls.Controls.Drawing.DoubleLinedFrameCharSet.UpperLeft">
             <summary>
@@ -646,6 +668,16 @@
             <summary>
             Provides characters for drawing frames.
             </summary>
+            <remarks>
+            A <see cref="T:ConControls.Controls.Drawing.FrameCharSet"/> represents a character set to use to draw frames
+            on the console screen buffer. Each <see cref="T:ConControls.Controls.Drawing.FrameCharSet"/> represents the characters
+            used for a <see cref="T:ConControls.Controls.BorderStyle"/>.<br/>
+            You can inherit a class from <see cref="T:ConControls.Controls.Drawing.FrameCharSets"/> that provides <see cref="T:ConControls.Controls.Drawing.FrameCharSet"/> instances
+            for given <see cref="T:ConControls.Controls.BorderStyle"/> values. This <see cref="T:ConControls.Controls.Drawing.FrameCharSets"/> implementation can then be passed
+            to <see cref="P:ConControls.Controls.IConsoleWindow.FrameCharSets">IConsoleWindow.FrameCharSet</see>.
+            </remarks>
+            <seealso cref="T:ConControls.Controls.Drawing.FrameCharSet"/>
+            <seealso cref="P:ConControls.Controls.IConsoleWindow.FrameCharSets"/>
         </member>
         <member name="P:ConControls.Controls.Drawing.FrameCharSet.UpperLeft">
             <summary>
@@ -681,6 +713,36 @@
             <summary>
             Provides <see cref="T:ConControls.Controls.Drawing.FrameCharSet"/> instances for given <see cref="T:ConControls.Controls.BorderStyle"/> values.
             </summary>
+            <remarks>
+            You can inherit this class to return your own implementations of <see cref="T:ConControls.Controls.Drawing.FrameCharSet"/>
+            classes to change the characters used to draw control frames.
+            You can then pass your custom <see cref="T:ConControls.Controls.Drawing.FrameCharSets"/> instance to <see cref="P:ConControls.Controls.IConsoleWindow.FrameCharSets"/>
+            to have your custom characters used for frames.<br/>
+            This default implementation uses the followig <see cref="T:ConControls.Controls.Drawing.FrameCharSet"/> instances:
+            <list type="table">
+            <listheader>
+            <term><see cref="T:ConControls.Controls.BorderStyle"/></term>
+            <description><see cref="T:ConControls.Controls.Drawing.FrameCharSet"/></description>
+            </listheader>
+            <item>
+            <term><see cref="F:ConControls.Controls.BorderStyle.SingleLined"/></term>
+            <description><see cref="T:ConControls.Controls.Drawing.SingleLinedFrameCharSet"/></description>
+            </item>
+            <item>
+            <term><see cref="F:ConControls.Controls.BorderStyle.DoubleLined"/></term>
+            <description><see cref="T:ConControls.Controls.Drawing.DoubleLinedFrameCharSet"/></description>
+            </item>
+            <item>
+            <term><see cref="F:ConControls.Controls.BorderStyle.Bold"/></term>
+            <description><see cref="T:ConControls.Controls.Drawing.BoldLinedFrameCharSet"/></description>
+            </item>
+            </list>
+            </remarks>
+            <seealso cref="T:ConControls.Controls.Drawing.FrameCharSet"/>
+            <seealso cref="T:ConControls.Controls.Drawing.SingleLinedFrameCharSet"/>
+            <seealso cref="T:ConControls.Controls.Drawing.DoubleLinedFrameCharSet"/>
+            <seealso cref="T:ConControls.Controls.Drawing.BoldLinedFrameCharSet"/>
+            <seealso cref="P:ConControls.Controls.IConsoleWindow.FrameCharSets"/>
         </member>
         <member name="P:ConControls.Controls.Drawing.FrameCharSets.Item(ConControls.Controls.BorderStyle)">
             <summary>
@@ -725,10 +787,20 @@
             Flushes the internal buffer to the console screen buffer.
             </summary>
         </member>
+        <member name="T:ConControls.Controls.Drawing.NamespaceDoc">
+            <summary>
+            Provides classes that support the drawing of <see cref="T:ConControls.Controls.ConsoleControl"/>
+            instances into the console screen buffer. It also provides default character
+            sets to be used to draw control elements.
+            </summary>
+        </member>
         <member name="T:ConControls.Controls.Drawing.SingleLinedFrameCharSet">
             <summary>
             A <see cref="T:ConControls.Controls.Drawing.FrameCharSet"/> for single-lined frames.
             </summary>
+            <seealso cref="T:ConControls.Controls.Drawing.FrameCharSet"/>
+            <seealso cref="T:ConControls.Controls.Drawing.FrameCharSets"/>
+            <seealso cref="P:ConControls.Controls.IConsoleWindow.FrameCharSets"/>
         </member>
         <member name="P:ConControls.Controls.Drawing.SingleLinedFrameCharSet.UpperLeft">
             <summary>
@@ -865,7 +937,7 @@
         </member>
         <member name="P:ConControls.Controls.IControlContainer.Area">
             <summary>
-            A <see cref="T:System.Drawing.Rectangle"/> representing the area (in charactre columns and rows) this <see cref="T:ConControls.Controls.IControlContainer"/>
+            A <see cref="T:System.Drawing.Rectangle"/> representing the area (in character columns and rows) this <see cref="T:ConControls.Controls.IControlContainer"/>
             occupies in the console screen buffer.
             </summary>
         </member>

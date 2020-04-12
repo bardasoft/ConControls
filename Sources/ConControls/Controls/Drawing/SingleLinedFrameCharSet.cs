@@ -12,6 +12,9 @@ namespace ConControls.Controls.Drawing
     /// <summary>
     /// A <see cref="FrameCharSet"/> for single-lined frames.
     /// </summary>
+    /// <seealso cref="FrameCharSet"/>
+    /// <seealso cref="FrameCharSets"/>
+    /// <seealso cref="IConsoleWindow.FrameCharSets"/>
     [ExcludeFromCodeCoverage]
     public class SingleLinedFrameCharSet : FrameCharSet
     {

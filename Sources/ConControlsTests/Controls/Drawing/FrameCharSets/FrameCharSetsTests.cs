@@ -34,7 +34,7 @@ namespace ConControlsTests.Controls.Drawing.FrameCharSets
         public void FrameCharSetsIndexer_BoldLinedStyle_BoldLinedSet()
         {
             var sut = new ConControls.Controls.Drawing.FrameCharSets();
-            sut[BorderStyle.Bold].Should().BeOfType<BoldinedFrameCharSet>();
+            sut[BorderStyle.Bold].Should().BeOfType<BoldLinedFrameCharSet>();
         }
         [TestMethod]
         public void FrameCharSetsIndexer_UndefinedStyle_SingleLinedSet()

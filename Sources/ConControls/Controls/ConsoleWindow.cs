@@ -182,7 +182,13 @@ namespace ConControls.Controls
         {
             Dispose(false);
         }
-        /// <inheritdoc />
+        /// <summary>
+        /// Releases any resources used by this <see cref="ConsoleWindow"/>.
+        /// </summary>
+        /// <remarks>
+        /// The <see cref="ConsoleWindow.Dispose()"/> method releases any resources used by this instance.
+        /// It allows to create a new instance (only one <see cref="ConsoleWindow"/> instance can be alive
+        /// at a time) and tries to reset the console to the state before the creation of this instacne.</remarks>
         public void Dispose()
         {
             Dispose(true);
@@ -270,7 +276,7 @@ namespace ConControls.Controls
 
                     var bufferSize = new COORD(size);
                     Logger.Log(DebugContext.Window, $"Setting screen buffer size to {bufferSize}.");
-                    api.SetConsoleScreenBufferSize(consoleOutputHandle, new COORD(Size));
+                    api.SetConsoleScreenBufferSize(consoleOutputHandle, bufferSize);
                 }
             }
         }
