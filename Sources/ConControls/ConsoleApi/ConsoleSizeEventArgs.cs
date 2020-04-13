@@ -6,13 +6,11 @@
  */
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using ConControls.WindowsApi.Types;
 
 namespace ConControls.ConsoleApi 
 {
-    [ExcludeFromCodeCoverage]
     sealed class ConsoleSizeEventArgs : EventArgs
     {
         public Size Size { get; }

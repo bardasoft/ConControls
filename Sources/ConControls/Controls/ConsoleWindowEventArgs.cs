@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ConControls.Controls 
 {
@@ -24,6 +25,7 @@ namespace ConControls.Controls
         /// event and don't need the infrastructure tu take further care.<br/>
         /// If you don't handle the event, don't change this property.
         /// </remarks>
+        [ExcludeFromCodeCoverage]
         public bool Handled { get; set; }
 
         private protected ConsoleWindowEventArgs() { }

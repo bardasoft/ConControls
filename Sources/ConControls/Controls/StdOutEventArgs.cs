@@ -5,7 +5,6 @@
  *
  */
 
-using System;
 using ConControls.ConsoleApi;
 
 namespace ConControls.Controls 
@@ -13,7 +12,7 @@ namespace ConControls.Controls
     /// <summary>
     /// Arguments for the <see cref="IConsoleWindow.StdOutEvent">IConsoleWindow.StdOutEvent</see>.
     /// </summary>
-    public sealed class StdOutEventArgs : EventArgs
+    public sealed class StdOutEventArgs : ConsoleWindowEventArgs
     {
         /// <summary>
         /// The received output converted into a string.

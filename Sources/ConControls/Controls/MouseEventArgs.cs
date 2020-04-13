@@ -5,7 +5,6 @@
  *
  */
 
-using System;
 using System.Drawing;
 using ConControls.ConsoleApi;
 using ConControls.WindowsApi.Types;
@@ -15,7 +14,7 @@ namespace ConControls.Controls
     /// <summary>
     /// Arguments for the <see cref="IConsoleWindow.MouseEvent">IConsoleWindow.MouseEvent</see>.
     /// </summary>
-    public sealed class MouseEventArgs : EventArgs
+    public sealed class MouseEventArgs : ConsoleWindowEventArgs
     {
         /// <summary>
         /// The state of the control keys. This can be a combination

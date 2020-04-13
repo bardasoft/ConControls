@@ -6,12 +6,10 @@
  */
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using ConControls.WindowsApi.Types;
 
 namespace ConControls.ConsoleApi
 {
-    [ExcludeFromCodeCoverage]
     sealed class ConsoleMenuEventArgs : EventArgs
     {
         public uint CommandId { get; }

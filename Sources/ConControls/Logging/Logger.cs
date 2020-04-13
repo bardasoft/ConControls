@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace ConControls.Logging
 {
+    [ExcludeFromCodeCoverage]
     static class Logger
     {
         internal static DebugContext Context { get; set; }

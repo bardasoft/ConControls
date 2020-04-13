@@ -6,11 +6,9 @@
  */
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace ConControls.ConsoleApi
 {
-    [ExcludeFromCodeCoverage]
     sealed class ConsoleOutputReceivedEventArgs : EventArgs
     {
         public string Output

@@ -5,7 +5,6 @@
  *
  */
 
-using System;
 using ConControls.ConsoleApi;
 using ConControls.WindowsApi.Types;
 
@@ -14,7 +13,7 @@ namespace ConControls.Controls
     /// <summary>
     /// Arguments for the <see cref="IConsoleWindow.KeyEvent">IConsoleWindow.KeyEvent</see>.
     /// </summary>
-    public sealed class KeyEventArgs : EventArgs
+    public sealed class KeyEventArgs : ConsoleWindowEventArgs
     {
         /// <summary>
         /// The unicode character representing the key.

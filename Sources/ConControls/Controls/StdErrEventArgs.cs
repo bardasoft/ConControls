@@ -5,7 +5,6 @@
  *
  */
 
-using System;
 using ConControls.ConsoleApi;
 
 namespace ConControls.Controls 
@@ -13,7 +12,7 @@ namespace ConControls.Controls
     /// <summary>
     /// Arguments for the <see cref="IConsoleWindow.StdErrEvent">IConsoleWindow.StdErrEvent</see>.
     /// </summary>
-    public sealed class StdErrEventArgs : EventArgs
+    public sealed class StdErrEventArgs : ConsoleWindowEventArgs
     {
         /// <summary>
         /// The received error output converted into a string.
