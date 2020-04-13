@@ -47,6 +47,14 @@ namespace ConControls.Controls
         /// <inheritdoc />
         public event EventHandler? AreaChanged;
         /// <inheritdoc />
+        public event EventHandler<KeyEventArgs>? KeyEvent;
+        /// <inheritdoc />
+        public event EventHandler<MouseEventArgs>? MouseEvent;
+        /// <inheritdoc />
+        public event EventHandler<StdOutEventArgs>? StdOutEvent;
+        /// <inheritdoc />
+        public event EventHandler<StdErrEventArgs>? StdErrEvent;
+        /// <inheritdoc />
         public event EventHandler? Disposed;
 
         /// <inheritdoc />
@@ -111,7 +119,7 @@ namespace ConControls.Controls
                 lock (SynchronizationLock)
                 {
                     if (value == focusedControl) return;
-                    if (value?.CanFocus() == false) throw Exceptions.CannotFocusUnFocusableControl(value.GetType().Name);
+                    if (value?.CanFocus == false) throw Exceptions.CannotFocusUnFocusableControl(value.GetType().Name);
                     var oldFocused = focusedControl;
                     focusedControl = null;
                     if (oldFocused != null) oldFocused.Focused = false;
@@ -163,16 +171,26 @@ namespace ConControls.Controls
                 throw Exceptions.CanOnlyUseSingleContext();
 
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
+            this.api = api ?? new NativeCalls();
             this.consoleListener = consoleListener ?? new ConsoleListener(this.api);
+
+            this.consoleListener.OutputReceived += OnConsoleListenerOutputReceived;
+            this.consoleListener.ErrorReceived += OnConsoleListenerErrorReceived;
+            this.consoleListener.FocusEvent += OnConsoleListenerFocusReceived;
+            this.consoleListener.KeyEvent += OnConsoleListenerKeyReceived;
+            this.consoleListener.MenuEvent += OnConsoleListenerMenuReceived;
+            this.consoleListener.MouseEvent += OnConsoleListenerMouseReceived;
+            this.consoleListener.SizeEvent += OnConsoleListenerSizeReceived;
             consoleInputHandle = this.consoleListener.OriginalInputHandle;
             if (consoleInputHandle.IsInvalid)
                 throw Exceptions.Win32();
             consoleOutputHandle = this.consoleListener.OriginalOutputHandle;
             if (consoleOutputHandle.IsInvalid)
                 throw Exceptions.Win32();
-            this.api = api ?? new NativeCalls();
+
             Controls = new ControlCollection(this);
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
+            
             SynchronizeConsoleSettings();
         }
         /// <summary>
@@ -199,6 +217,13 @@ namespace ConControls.Controls
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
             if (disposing)
             {
+                consoleListener.OutputReceived -= OnConsoleListenerOutputReceived;
+                consoleListener.ErrorReceived -= OnConsoleListenerErrorReceived;
+                consoleListener.FocusEvent -= OnConsoleListenerFocusReceived;
+                consoleListener.KeyEvent -= OnConsoleListenerKeyReceived;
+                consoleListener.MenuEvent -= OnConsoleListenerMenuReceived;
+                consoleListener.MouseEvent -= OnConsoleListenerMouseReceived;
+                consoleListener.SizeEvent -= OnConsoleListenerSizeReceived;
                 consoleListener.Dispose();
                 consoleOutputHandle.Dispose();
                 consoleInputHandle.Dispose();
@@ -294,5 +319,65 @@ namespace ConControls.Controls
             }
         }
         void OnControlAreaChanged(object sender, EventArgs e) => Invalidate();
+
+        void OnConsoleListenerOutputReceived(object sender, ConsoleOutputReceivedEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                Logger.Log(DebugContext.Window, $"Received stdout: [{e.Output}]");
+                StdOutEvent?.Invoke(this, new StdOutEventArgs(e));
+            }
+        }
+        void OnConsoleListenerErrorReceived(object sender, ConsoleOutputReceivedEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                Logger.Log(DebugContext.Window, $"Received stderr: [{e.Output}]");
+                StdErrEvent?.Invoke(this, new StdErrEventArgs(e));
+            }
+        }
+        void OnConsoleListenerFocusReceived(object sender, ConsoleFocusEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                Logger.Log(DebugContext.Window, $"Received focus event: SetFocus: {e.SetFocus}");
+            }
+        }
+        void OnConsoleListenerKeyReceived(object sender, ConsoleKeyEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                Logger.Log(DebugContext.Window,
+                           $"Received key event: VK {e.VirtualKeyCode} UC '{e.UnicodeChar}' Down: {e.KeyDown} CK {e.ControlKeys} RC {e.RepeatCount}");
+                KeyEvent?.Invoke(this, new KeyEventArgs(e));
+            }
+        }
+        void OnConsoleListenerMenuReceived(object sender, ConsoleMenuEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                Logger.Log(DebugContext.Window, $"Received menu event: command: {e.CommandId}");
+            }
+        }
+
+        void OnConsoleListenerMouseReceived(object sender, ConsoleMouseEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                Logger.Log(DebugContext.Window,
+                           $"Received mouse event: [{e.EventFlags}] at {e.MousePosition} button '{e.ButtonState}' CK {e.ControlKeys} Scroll: {e.Scroll}");
+                MouseEvent?.Invoke(this, new MouseEventArgs(e));
+            }
+        }
+        void OnConsoleListenerSizeReceived(object sender, ConsoleSizeEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                Logger.Log(DebugContext.Window,
+                           $"Received size event: Size {e.Size}");
+                SynchronizeConsoleSettings();
+            }
+
+        }
     }
 }

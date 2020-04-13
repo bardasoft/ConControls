@@ -19,7 +19,7 @@ namespace ConControls.WindowsApi.Types
         [FieldOffset(4), MarshalAs(UnmanagedType.U2)]
         public ushort RepeatCount;
         [FieldOffset(6), MarshalAs(UnmanagedType.U2)]
-        public VirtualKeys VirtualKeyCode;
+        public VirtualKey VirtualKeyCode;
         [FieldOffset(8), MarshalAs(UnmanagedType.U2)]
         public ushort VirtualScanCode;
         [FieldOffset(10)]

@@ -17,6 +17,23 @@ namespace ConControls.Controls
     public interface IConsoleWindow : IControlContainer, IDisposable
     {
         /// <summary>
+        /// Raised when a console input key event has been received.
+        /// </summary>
+        event EventHandler<KeyEventArgs>? KeyEvent;
+        /// <summary>
+        /// Raised when a console input mouse event has been received.
+        /// </summary>
+        event EventHandler<MouseEventArgs>? MouseEvent;
+        /// <summary>
+        /// Raised when an output to stdout has been received.
+        /// </summary>
+        event EventHandler<StdOutEventArgs>? StdOutEvent;
+        /// <summary>
+        /// Raised when an output to stdout has been received.
+        /// </summary>
+        event EventHandler<StdErrEventArgs>? StdErrEvent;
+        
+        /// <summary>
         /// Raised when this console window is disposed of.
         /// </summary>
         event EventHandler? Disposed;

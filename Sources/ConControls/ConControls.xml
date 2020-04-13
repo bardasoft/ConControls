@@ -84,12 +84,12 @@
         <member name="P:ConControls.Controls.ConsoleControl.Focused">
             <summary>
             Gets or sets wether this control is focused or not.
-            Trying to set this to <code>true</code> though <see cref="M:ConControls.Controls.ConsoleControl.CanFocus"/> returns <code>false</code>
+            Trying to set this to <code>true</code> though <see cref="P:ConControls.Controls.ConsoleControl.CanFocus"/> returns <code>false</code>
             throws an <see cref="T:System.InvalidOperationException"/>.
             </summary>
-            <exception cref="T:System.InvalidOperationException"><see cref="P:ConControls.Controls.ConsoleControl.Focused"/> cannot be set to <code>true</code> when <see cref="M:ConControls.Controls.ConsoleControl.CanFocus"/> returns <code>false</code>.</exception>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:ConControls.Controls.ConsoleControl.Focused"/> cannot be set to <code>true</code> when <see cref="P:ConControls.Controls.ConsoleControl.CanFocus"/> returns <code>false</code>.</exception>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.CanFocus">
+        <member name="P:ConControls.Controls.ConsoleControl.CanFocus">
             <summary>
             Determines wether this control can be focused or not.
             </summary>
@@ -212,6 +212,16 @@
             </summary>
             <param name="parent">The parent <see cref="T:ConControls.Controls.ConsoleControl"/> this control should be placed on.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="parent"/> is <code>null</code>.</exception>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.Dispose">
+            <summary>
+            Disposes of any used resources and disconnects from the <see cref="P:ConControls.Controls.ConsoleControl.Window"/>.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.Dispose(System.Boolean)">
+            <summary>
+            Disposes of any used resources and disconnects from the <see cref="P:ConControls.Controls.ConsoleControl.Window"/>.
+            </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.CheckDisposed">
             <summary>
@@ -362,6 +372,34 @@
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.Area"/> of this control has been changed.
             </summary>
         </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnKeyEvent(System.Object,ConControls.Controls.KeyEventArgs)">
+            <summary>
+            Called when a <see cref="E:ConControls.Controls.IConsoleWindow.KeyEvent"/> has been received.
+            </summary>
+            <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
+            <param name="e">The event details.</param>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnMouseEvent(System.Object,ConControls.Controls.MouseEventArgs)">
+            <summary>
+            Called when a <see cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/> has been received.
+            </summary>
+            <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
+            <param name="e">The event details.</param>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnStdOutEvent(System.Object,ConControls.Controls.StdOutEventArgs)">
+            <summary>
+            Called when a <see cref="E:ConControls.Controls.IConsoleWindow.StdOutEvent"/> has been received.
+            </summary>
+            <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
+            <param name="e">The event details.</param>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnStdErrEvent(System.Object,ConControls.Controls.StdErrEventArgs)">
+            <summary>
+            Called when a <see cref="E:ConControls.Controls.IConsoleWindow.StdErrEvent"/> has been received.
+            </summary>
+            <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
+            <param name="e">The event details.</param>
+        </member>
         <member name="T:ConControls.Controls.ConsolePanel">
             <summary>
             A console panel control. A plain container
@@ -382,6 +420,18 @@
             </remarks>
         </member>
         <member name="E:ConControls.Controls.ConsoleWindow.AreaChanged">
+            <inheritdoc />
+        </member>
+        <member name="E:ConControls.Controls.ConsoleWindow.KeyEvent">
+            <inheritdoc />
+        </member>
+        <member name="E:ConControls.Controls.ConsoleWindow.MouseEvent">
+            <inheritdoc />
+        </member>
+        <member name="E:ConControls.Controls.ConsoleWindow.StdOutEvent">
+            <inheritdoc />
+        </member>
+        <member name="E:ConControls.Controls.ConsoleWindow.StdErrEvent">
             <inheritdoc />
         </member>
         <member name="E:ConControls.Controls.ConsoleWindow.Disposed">
@@ -473,6 +523,23 @@
         </member>
         <member name="M:ConControls.Controls.ConsoleWindow.DeferDrawing">
             <inheritdoc />
+        </member>
+        <member name="T:ConControls.Controls.ConsoleWindowEventArgs">
+            <summary>
+            Abstract base class for <see cref="T:System.EventArgs"/> used by the events fired by <see cref="T:ConControls.Controls.IConsoleWindow"/>.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleWindowEventArgs.Handled">
+            <summary>
+            Gets or sets wether this event has been finally handled and
+            no further action is needed.
+            </summary>
+            <remarks>
+            When handling events of an <see cref="T:ConControls.Controls.IConsoleWindow"/> like <seealso cref="E:ConControls.Controls.IConsoleWindow.KeyEvent"/> or
+            <seealso cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/>, set this property to <code>true</code> if you handled that
+            event and don't need the infrastructure tu take further care.<br/>
+            If you don't handle the event, don't change this property.
+            </remarks>
         </member>
         <member name="T:ConControls.Controls.ControlCollection">
             <summary>
@@ -832,20 +899,29 @@
             The vertical line of a single-lined frame.
             </summary>
         </member>
-        <member name="T:ConControls.Controls.FocusableControl">
-            <summary>
-            A <see cref="T:ConControls.Controls.ConsoleControl"/> that can take focus.
-            </summary>
-        </member>
-        <member name="M:ConControls.Controls.FocusableControl.#ctor(ConControls.Controls.IControlContainer)">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.Controls.FocusableControl.CanFocus">
-            <inheritdoc />
-        </member>
         <member name="T:ConControls.Controls.IConsoleWindow">
             <summary>
             Interface to a <see cref="T:ConControls.Controls.ConsoleWindow"/>.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.IConsoleWindow.KeyEvent">
+            <summary>
+            Raised when a console input key event has been received.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.IConsoleWindow.MouseEvent">
+            <summary>
+            Raised when a console input mouse event has been received.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.IConsoleWindow.StdOutEvent">
+            <summary>
+            Raised when an output to stdout has been received.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.IConsoleWindow.StdErrEvent">
+            <summary>
+            Raised when an output to stdout has been received.
             </summary>
         </member>
         <member name="E:ConControls.Controls.IConsoleWindow.Disposed">
@@ -983,6 +1059,87 @@
             <returns>An <see cref="T:System.IDisposable"/> that on calling <see cref="M:System.IDisposable.Dispose"/> releases
             the drawing barriere of this window.</returns>
         </member>
+        <member name="T:ConControls.Controls.KeyEventArgs">
+            <summary>
+            Arguments for the <see cref="E:ConControls.Controls.IConsoleWindow.KeyEvent">IConsoleWindow.KeyEvent</see>.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyEventArgs.UnicodeChar">
+            <summary>
+            The unicode character representing the key.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyEventArgs.RepeatCount">
+            <summary>
+            The repeat count, which indicates that a key is being held down.
+            </summary>
+            <remarks>
+            This property represents the repeat count, which indicates that a key is being held down.
+            For example, when a key is held down, you might get five events with this member equal to 1, one event with this member equal to 5, or multiple events with this member greater than or equal to 1.
+            </remarks>
+        </member>
+        <member name="P:ConControls.Controls.KeyEventArgs.VirtualKey">
+            <summary>
+            A <see cref="P:ConControls.Controls.KeyEventArgs.VirtualKey">virtual-key code</see> that identifies the given key
+            in a device-independent manner.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyEventArgs.VirtualScanCode">
+            <summary>
+            The virtual scan code of the given key that represents the device-dependent
+            value generated by the keyboard hardware.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyEventArgs.KeyDown">
+            <summary>
+            If the key is pressed, this member is <code>true</code>.
+            Otherwise, this member is <code>false</code> (the key is released).
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyEventArgs.ControlKeys">
+            <summary>
+            The state of the control keys. This can be a combination
+            of <see cref="T:ConControls.WindowsApi.Types.ControlKeyStates"/> values.
+            </summary>
+        </member>
+        <member name="T:ConControls.Controls.MouseEventArgs">
+            <summary>
+            Arguments for the <see cref="E:ConControls.Controls.IConsoleWindow.MouseEvent">IConsoleWindow.MouseEvent</see>.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.MouseEventArgs.ControlKeys">
+            <summary>
+            The state of the control keys. This can be a combination
+            of <see cref="T:ConControls.WindowsApi.Types.ControlKeyStates"/> values.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.MouseEventArgs.ButtonState">
+            <summary>
+            Indicates which mouse buttons are pressed.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.MouseEventArgs.Kind">
+            <summary>
+            The kind of mouse event. This can be a combination of <see cref="T:ConControls.WindowsApi.Types.MouseEventFlags"/> values.
+            </summary>
+            <remarks>
+            If this is <see cref="F:ConControls.WindowsApi.Types.MouseEventFlags.Wheeled"/> or <see cref="F:ConControls.WindowsApi.Types.MouseEventFlags.WheeledHorizontally"/>
+            see the <see cref="P:ConControls.Controls.MouseEventArgs.Scroll"/> value for the amount and direction of the mouse wheel rotation.</remarks>
+        </member>
+        <member name="P:ConControls.Controls.MouseEventArgs.Position">
+            <summary>
+            The mouse position, in terms of the console screen buffer's character-cell coordinates.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.MouseEventArgs.Scroll">
+            <summary>
+            Returns the amount and direction the mouse wheel has been rotated. This is only valid if <see cref="P:ConControls.Controls.MouseEventArgs.Kind"/>
+            is <see cref="F:ConControls.WindowsApi.Types.MouseEventFlags.Wheeled"/> or <see cref="F:ConControls.WindowsApi.Types.MouseEventFlags.WheeledHorizontally"/>.
+            </summary>
+            <remarks>
+            If this value is positive, the wheel was rotated forward (away from the user) or to the right (depending on <see cref="P:ConControls.Controls.MouseEventArgs.Kind"/>).<br/>
+            If the value is negative, the wheel was rotated backward (toward the user) or to the left.</remarks>
+        </member>
         <member name="T:ConControls.Controls.NamespaceDoc">
             <summary>
             This namespace provides the public console UI control classes
@@ -1065,6 +1222,26 @@
         <member name="M:ConControls.Controls.ProgressBar.DrawClientArea(ConControls.Controls.Drawing.IConsoleGraphics)">
             <inheritdoc />
         </member>
+        <member name="T:ConControls.Controls.StdErrEventArgs">
+            <summary>
+            Arguments for the <see cref="E:ConControls.Controls.IConsoleWindow.StdErrEvent">IConsoleWindow.StdErrEvent</see>.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.StdErrEventArgs.Error">
+            <summary>
+            The received error output converted into a string.
+            </summary>
+        </member>
+        <member name="T:ConControls.Controls.StdOutEventArgs">
+            <summary>
+            Arguments for the <see cref="E:ConControls.Controls.IConsoleWindow.StdOutEvent">IConsoleWindow.StdOutEvent</see>.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.StdOutEventArgs.Output">
+            <summary>
+            The received output converted into a string.
+            </summary>
+        </member>
         <member name="T:ConControls.Properties.Resources">
             <summary>
               Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
@@ -1089,6 +1266,11 @@
         <member name="P:ConControls.Properties.Resources.Exception_CanOnlyUseSingleContext">
             <summary>
               Sucht eine lokalisierte Zeichenfolge, die There can only be one single console window at a time! Dispose of any existing console window before instantiating a new one. ähnelt.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_ControlDisposed">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The control &quot;{0}&quot; has already been disposed of! ähnelt.
             </summary>
         </member>
         <member name="P:ConControls.Properties.Resources.Exception_ControlsMustBeContained">
@@ -1136,8 +1318,1099 @@
             A console output handle.
             </summary>
         </member>
+        <member name="T:ConControls.WindowsApi.NamespaceDoc">
+            <summary>
+            Provides native Win32 methods and Windows API types.
+            </summary>
+            <remarks>
+            This namespace provides internal classes to access unmanaged Windows API methods and types.<br/>
+            Except for a few types, this namespace is only for internal use.
+            </remarks>
+        </member>
+        <member name="T:ConControls.WindowsApi.Types.ControlKeyStates">
+            <summary>
+            The state of the control keys.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.RIGHT_ALT_PRESSED">
+            <summary>
+            The right ALT key is pressed.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.LEFT_ALT_PRESSED">
+            <summary>
+            The left ALT key is pressed.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.RIGHT_CTRL_PRESSED">
+            <summary>
+            The right CTRL key is pressed.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.LEFT_CTRL_PRESSED">
+            <summary>
+            The left CTRL key is pressed.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.SHIFT_PRESSED">
+            <summary>
+            The SHIFT key is pressed.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.NUMLOCK_ON">
+            <summary>
+            The NUM LOCK light is on.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.SCROLLLOCK_ON">
+            <summary>
+            The SCROLL LOCK light is on.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.CAPSLOCK_ON">
+            <summary>
+            The CAPS LOCK light is on.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.ENHANCED_KEY">
+            <summary>
+            The key is enhanced.
+            </summary>
+        </member>
         <member name="M:ConControls.WindowsApi.Types.COORD.ToString">
             <inheritdoc />
+        </member>
+        <member name="T:ConControls.WindowsApi.Types.MouseButtonStates">
+            <summary>
+            The states of the mouse buttons.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseButtonStates.LeftButtonPressed">
+            <summary>
+            The leftmost mouse button.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseButtonStates.RightButtonPressed">
+            <summary>
+            The rightmost mouse button.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseButtonStates.SecondButtonPressed">
+            <summary>
+            The second button from the left.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseButtonStates.ThirdButtonPressed">
+            <summary>
+            The third button from the left.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseButtonStates.FourthButtonPressed">
+            <summary>
+            The fourth button from the left.
+            </summary>
+        </member>
+        <member name="T:ConControls.WindowsApi.Types.MouseEventFlags">
+            <summary>
+            The different kinds of console mouse events.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseEventFlags.Moved">
+            <summary>
+            A change in mouse position occurred.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseEventFlags.DoubleClick">
+            <summary>
+            The second click (button press) of a double-click occurred.
+            The first click is returned as a regular button-press event.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseEventFlags.Wheeled">
+            <summary>
+            The vertical mouse wheel was moved.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseEventFlags.WheeledHorizontally">
+            <summary>
+            The horizontal mouse wheel was moved.
+            </summary>
+        </member>
+        <member name="T:ConControls.WindowsApi.Types.NamespaceDoc">
+            <summary>
+            Provides Windows API types, records and enums.
+            </summary>
+            <remarks>
+            This namespace provides types to marshal Win32 API calls, records and enums.<br/>
+            Except for a few types, this namespace is intended for internal use only.
+            </remarks>
+        </member>
+        <member name="T:ConControls.WindowsApi.Types.VirtualKey">
+            <summary>
+            Windows API virtual key codes (VK_ constants).
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.LeftButton">
+            <summary>
+            Left mouse button.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.RightButton">
+            <summary>
+            Right mouse button.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Cancel">
+            <summary>
+            Control-break processing.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.MiddleButton">
+            <summary>
+            Middle mouse button (three-button mouse).
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ExtraButton1">
+            <summary>
+            X1 mouse button.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ExtraButton2">
+            <summary>
+            X2 mouse button.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Back">
+            <summary>
+            Backspace key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Tab">
+            <summary>
+            Tab key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Clear">
+            <summary>
+            Clear key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Return">
+            <summary>
+            Enter key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Shift">
+            <summary>
+            Shift key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Control">
+            <summary>
+            Ctrl key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Menu">
+            <summary>
+            Alt key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Pause">
+            <summary>
+            Pause key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.CapsLock">
+            <summary>
+            Caps lock key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Kana">
+            <summary>
+            IME Kana mode.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Hangeul">
+            <summary>
+            IME Hanguel mode (maintained for compatibility; use VK_HANGUL)
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Hangul">
+            <summary>
+            IME Hangul mode
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ImeOn">
+            <summary>
+            IME On.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Junja">
+            <summary>
+            IME Junja mode.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Final">
+            <summary>
+            IME final mode.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Hanja">
+            <summary>
+            IME Hanja mode.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Kanji">
+            <summary>
+            IME Kanji mode.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ImeOff">
+            <summary>
+            IME off.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Escape">
+            <summary>
+            Esc key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Convert">
+            <summary>
+            IME convert.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.NonConvert">
+            <summary>
+            IME nonconvert.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Accept">
+            <summary>
+            IME accept.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ModeChange">
+            <summary>
+            IME mode change request.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Space">
+            <summary>
+            Space bar.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Prior">
+            <summary>
+            Page Up key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Next">
+            <summary>
+            Page down key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.End">
+            <summary>
+            End key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Home">
+            <summary>
+            Home key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Left">
+            <summary>
+            Left arrow key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Up">
+            <summary>
+            Up arrow key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Right">
+            <summary>
+             Right arrow key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Down">
+            <summary>
+            Down arrow key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Select">
+            <summary>
+            Select key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Print">
+            <summary>
+            Print key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Execute">
+            <summary>
+            Execute key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Snapshot">
+            <summary>
+            Print screen key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Insert">
+            <summary>
+            Ins key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Delete">
+            <summary>
+            Del key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Help">
+            <summary>
+            Help key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N0">
+            <summary>
+            0 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N1">
+            <summary>
+            1 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N2">
+            <summary>
+            2 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N3">
+            <summary>
+            3 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N4">
+            <summary>
+            4 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N5">
+            <summary>
+            5 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N6">
+            <summary>
+            6 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N7">
+            <summary>
+            7 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N8">
+            <summary>
+            8 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N9">
+            <summary>
+            9 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.A">
+            <summary>
+            A key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.B">
+            <summary>
+            B key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.C">
+            <summary>
+            C key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.D">
+            <summary>
+            D key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.E">
+            <summary>
+            E key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F">
+            <summary>
+            F key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.G">
+            <summary>
+            G key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.H">
+            <summary>
+            H key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.I">
+            <summary>
+            I key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.J">
+            <summary>
+            J key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.K">
+            <summary>
+            K key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.L">
+            <summary>
+            L key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.M">
+            <summary>
+            M key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.N">
+            <summary>
+            N key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.O">
+            <summary>
+            O key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.P">
+            <summary>
+            P key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Q">
+            <summary>
+            Q key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.R">
+            <summary>
+            R key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.S">
+            <summary>
+            S key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.T">
+            <summary>
+            T key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.U">
+            <summary>
+            U key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.V">
+            <summary>
+            V key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.W">
+            <summary>
+            W key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.X">
+            <summary>
+            X key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Y">
+            <summary>
+            Y key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Z">
+            <summary>
+            Z key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.LeftWindows">
+            <summary>
+            Left Windows key (natural keyboard).
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.RightWindows">
+            <summary>
+            Right Windows key (natural keyboard).
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Application">
+            <summary>
+            Application key (natural keyboard).
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Sleep">
+            <summary>
+            Computer sleep key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Numpad0">
+            <summary>
+            Numeric keypad 0 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Numpad1">
+            <summary>
+            Numeric keypad 1 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Numpad2">
+            <summary>
+            Numeric keypad 2 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Numpad3">
+            <summary>
+            Numeric keypad 3 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Numpad4">
+            <summary>
+            Numeric keypad 4 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Numpad5">
+            <summary>
+            Numeric keypad 5 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Numpad6">
+            <summary>
+            Numeric keypad 6 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Numpad7">
+            <summary>
+            Numeric keypad 7 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Numpad8">
+            <summary>
+            Numeric keypad 8 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Numpad9">
+            <summary>
+            Numeric keypad 9 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Multiply">
+            <summary>
+            Multiply key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Add">
+            <summary>
+            Add key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Separator">
+            <summary>
+            Separator key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Subtract">
+            <summary>
+            Subtract key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Decimal">
+            <summary>
+            Decimal key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Divide">
+            <summary>
+            Divide key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F1">
+            <summary>
+            F1 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F2">
+            <summary>
+            F2 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F3">
+            <summary>
+            F3 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F4">
+            <summary>
+            F4 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F5">
+            <summary>
+            F5 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F6">
+            <summary>
+            F6 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F7">
+            <summary>
+            F7 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F8">
+            <summary>
+            F8 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F9">
+            <summary>
+            F9 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F10">
+            <summary>
+            F10 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F11">
+            <summary>
+            F11 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F12">
+            <summary>
+            F12 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F13">
+            <summary>
+            F13 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F14">
+            <summary>
+            F14 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F15">
+            <summary>
+            F15 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F16">
+            <summary>
+            F16 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F17">
+            <summary>
+            F17 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F18">
+            <summary>
+            F18 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F19">
+            <summary>
+            F19 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F20">
+            <summary>
+            F20 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F21">
+            <summary>
+            F21 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F22">
+            <summary>
+            F22 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F23">
+            <summary>
+            F23 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.F24">
+            <summary>
+            F24 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.NumLock">
+            <summary>
+            NumLock key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ScrollLock">
+            <summary>
+            Scroll lock key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.LeftShift">
+            <summary>
+            Left shift key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.RightShift">
+            <summary>
+            Right shift key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.LeftControl">
+            <summary>
+            Left control key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.RightControl">
+            <summary>
+            Right control key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.LeftMenu">
+            <summary>
+            Left menu key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.RightMenu">
+            <summary>
+            Right menu key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.BrowserBack">
+            <summary>
+            Browser Back key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.BrowserForward">
+            <summary>
+            Browser Forward key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.BrowserRefresh">
+            <summary>
+            Browser Refresh key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.BrowserStop">
+            <summary>
+            Browser Stop key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.BrowserSearch">
+            <summary>
+            Browser search key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.BrowserFavorites">
+            <summary>
+            Browser Favorites key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.BrowserHome">
+            <summary>
+            Browser Start and Home key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.VolumeMute">
+            <summary>
+            Volumne Mute key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.VolumeDown">
+            <summary>
+            Volume Down key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.VolumeUp">
+            <summary>
+            Volumne Up key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.MediaNextTrack">
+            <summary>
+            Next track key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.MediaPrevTrack">
+            <summary>
+            Previous track key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.MediaStop">
+            <summary>
+            Stop media key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.MediaPlayPause">
+            <summary>
+            Play/pause media key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.LaunchMail">
+            <summary>
+            Start mail key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.LaunchMediaSelect">
+            <summary>
+            Select media key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.LaunchApplication1">
+            <summary>
+            Start application 1 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.LaunchApplication2">
+            <summary>
+            Start application 2 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEM1">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard.
+            For the US standard keyboard, the ';:' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMPlus">
+            <summary>
+            For any country/region, the '+' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMComma">
+            <summary>
+            For any country/region, the ',' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMMinus">
+            <summary>
+            For any country/region, the '-' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMPeriod">
+            <summary>
+            For any country/region, the '.' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEM2">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard.
+            For the US standard keyboard, the '/?' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEM3">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard.
+            For the US standard keyboard, the '`~' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEM4">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard.
+            For the US standard keyboard, the '[{' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEM5">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard.
+            For the US standard keyboard, the '\|' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEM6">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard.
+            For the US standard keyboard, the ']}' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEM7">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard.
+            For the US standard keyboard, the 'single-quote/double-quote' key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEM8">
+            <summary>
+            Used for miscellaneous characters; it can vary by keyboard.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMAX">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEM102">
+            <summary>
+            Either the angle bracket key or the backslash key on the RT 102-key keyboard.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ICOHelp">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ICO00">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ProcessKey">
+            <summary>
+            IME process key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ICOClear">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Packet">
+            <summary>
+            Used to pass Unicode characters as if they were keystrokes.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMReset">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMJump">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMPA1">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMPA2">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMPA3">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMWSCtrl">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMCUSel">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMATTN">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMFinish">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMCopy">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMAuto">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMENLW">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMBackTab">
+            <summary>
+            OEM specific.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.ATTN">
+            <summary>
+            Attn key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.CRSel">
+            <summary>
+            CrSel key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.EXSel">
+            <summary>
+            ExSel key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.EREOF">
+            <summary>
+            Erase EOF key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Play">
+            <summary>
+            Play key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.Zoom">
+            <summary>
+            Zoom key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.PA1">
+            <summary>
+            PA1 key.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.OEMClear">
+            <summary>
+            Clear key.
+            </summary>
         </member>
     </members>
 </doc>

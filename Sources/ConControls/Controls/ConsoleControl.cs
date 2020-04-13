@@ -21,7 +21,11 @@ namespace ConControls.Controls
     [SuppressMessage("Design", "CA1001", Justification = "The DisposableBlock does not need to be disposed, its Dispose method has a different purpose.")]
     public abstract class ConsoleControl : IControlContainer
     {
+#pragma warning disable CA2213
         readonly DisposableBlock drawingInhibiter;
+#pragma warning restore CA2213
+
+        int disposed;
         string name;
         bool enabled = true;
         bool visible = true;
@@ -84,7 +88,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets wether the control is enabled or not.
         /// </summary>
-        public bool Enabled
+        public virtual bool Enabled
         {
             get { lock (Window.SynchronizationLock) return enabled && parent.Enabled; }
             set
@@ -100,7 +104,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets wether the control should be visible (drawn) or not.
         /// </summary>
-        public bool Visible
+        public virtual bool Visible
         {
             get { lock (Window.SynchronizationLock) return visible && parent.Visible; }
             set
@@ -119,7 +123,7 @@ namespace ConControls.Controls
         /// throws an <see cref="InvalidOperationException"/>.
         /// </summary>
         /// <exception cref="InvalidOperationException"><see cref="Focused"/> cannot be set to <code>true</code> when <see cref="CanFocus"/> returns <code>false</code>.</exception>
-        public bool Focused
+        public virtual bool Focused
         {
             get
             {
@@ -130,7 +134,7 @@ namespace ConControls.Controls
                 lock (Window.SynchronizationLock)
                 {
                     if (value == Focused) return;
-                    if (value && !CanFocus())
+                    if (value && !CanFocus)
                         throw Exceptions.CannotFocusUnFocusableControl(GetType().Name);
                     Window.FocusedControl = value ? this : null;
                     OnFocusedChanged();
@@ -141,14 +145,14 @@ namespace ConControls.Controls
         /// Determines wether this control can be focused or not.
         /// </summary>
         /// <returns><code>true</code> if this control can take focues, <code>false</code> if not.</returns>
-        public virtual bool CanFocus() => false;
+        public virtual bool CanFocus => false;
 
         /// <summary>
         /// The effective total area of the control.
         /// This is the area the control effectivly fills in the console screen buffer
         /// after applying layout and including borders.
         /// </summary>
-        public Rectangle Area
+        public virtual Rectangle Area
         {
             get
             {
@@ -165,7 +169,7 @@ namespace ConControls.Controls
             }
         }
         /// <inheritdoc />
-        public Point Location
+        public virtual Point Location
         {
             get
             {
@@ -183,7 +187,7 @@ namespace ConControls.Controls
             }
         }
         /// <inheritdoc />
-        public Size Size
+        public virtual Size Size
         {
             get
             {
@@ -247,7 +251,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings.
         /// </summary>
-        public ConsoleColor ForegroundColor
+        public virtual ConsoleColor ForegroundColor
         {
             get { lock (Window.SynchronizationLock) return foregroundColor; }
             set
@@ -264,7 +268,7 @@ namespace ConControls.Controls
         /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings when the control is focused.
         /// If this is <code>null</code>, the <see cref="ForegroundColor"/> value will be used.
         /// </summary>
-        public ConsoleColor? FocusedForegroundColor
+        public virtual ConsoleColor? FocusedForegroundColor
         {
             get { lock (Window.SynchronizationLock) return focusedForegroundColor; }
             set
@@ -281,7 +285,7 @@ namespace ConControls.Controls
         /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings when the control is disabled.
         /// If this is <code>null</code>, the <see cref="ForegroundColor"/> value will be used.
         /// </summary>
-        public ConsoleColor? DisabledForegroundColor
+        public virtual ConsoleColor? DisabledForegroundColor
         {
             get { lock (Window.SynchronizationLock) return disabledForegroundColor; }
             set
@@ -297,7 +301,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for the background of this control.
         /// </summary>
-        public ConsoleColor BackgroundColor
+        public virtual ConsoleColor BackgroundColor
         {
             get { lock (Window.SynchronizationLock) return backgroundColor; }
             set
@@ -333,7 +337,7 @@ namespace ConControls.Controls
         /// when it is disabled.
         /// If this is <code>null</code>, the <see cref="BackgroundColor"/> value will be used.
         /// </summary>
-        public ConsoleColor? DisabledBackgroundColor
+        public virtual ConsoleColor? DisabledBackgroundColor
         {
             get { lock (Window.SynchronizationLock) return disabledBackgroundColor; }
             set
@@ -349,7 +353,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for the border of this control.
         /// </summary>
-        public ConsoleColor BorderColor
+        public virtual ConsoleColor BorderColor
         {
             get { lock (Window.SynchronizationLock) return borderColor; }
             set
@@ -367,7 +371,7 @@ namespace ConControls.Controls
         /// when it is focused.
         /// If this is <code>null</code>, the <see cref="BorderColor"/> value will be used.
         /// </summary>
-        public ConsoleColor? FocusedBorderColor
+        public virtual ConsoleColor? FocusedBorderColor
         {
             get { lock (Window.SynchronizationLock) return focusedBorderColor; }
             set
@@ -385,7 +389,7 @@ namespace ConControls.Controls
         /// when it is disabled.
         /// If this is <code>null</code>, the <see cref="BorderColor"/> value will be used.
         /// </summary>
-        public ConsoleColor? DisabledBorderColor
+        public virtual ConsoleColor? DisabledBorderColor
         {
             get { lock (Window.SynchronizationLock) return disabledBorderColor; }
             set
@@ -401,7 +405,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="BorderStyle"/> of this control.
         /// </summary>
-        public BorderStyle BorderStyle
+        public virtual BorderStyle BorderStyle
         {
             get { lock (Window.SynchronizationLock) return borderStyle; }
             set
@@ -419,7 +423,7 @@ namespace ConControls.Controls
         /// when it is focused.
         /// If this is <code>null</code>, the <see cref="ConsoleControl.BorderStyle"/> value will be used.
         /// </summary>
-        public BorderStyle? FocusedBorderStyle
+        public virtual BorderStyle? FocusedBorderStyle
         {
             get { lock (Window.SynchronizationLock) return focusedBorderStyle; }
             set
@@ -437,7 +441,7 @@ namespace ConControls.Controls
         /// when it is disabled.
         /// If this is <code>null</code>, the <see cref="ConsoleControl.BorderStyle"/> value will be used.
         /// </summary>
-        public BorderStyle? DisabledBorderStyle
+        public virtual BorderStyle? DisabledBorderStyle
         {
             get { lock (Window.SynchronizationLock) return disabledBorderStyle; }
             set
@@ -462,6 +466,11 @@ namespace ConControls.Controls
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             name = GetType().Name;
 
+            Window.KeyEvent += OnKeyEvent;
+            Window.MouseEvent += OnMouseEvent;
+            Window.StdOutEvent += OnStdOutEvent;
+            Window.StdErrEvent += OnStdErrEvent;
+
             foregroundColor = Window.ForegroundColor;
             backgroundColor = Window.BackgroundColor;
             borderColor = Window.BorderColor;
@@ -470,6 +479,26 @@ namespace ConControls.Controls
             Controls = new ControlCollection(Window);
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
             this.parent.Controls.Add(this);
+        }
+        /// <summary>
+        /// Disposes of any used resources and disconnects from the <see cref="Window"/>.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        /// <summary>
+        /// Disposes of any used resources and disconnects from the <see cref="Window"/>.
+        /// </summary>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (Interlocked.CompareExchange(ref disposed, 1, 0) != 0) return;
+            if (!disposing) return;
+            Window.KeyEvent -= OnKeyEvent;
+            Window.MouseEvent -= OnMouseEvent;
+            Window.StdOutEvent -= OnStdOutEvent;
+            Window.StdErrEvent -= OnStdErrEvent;
         }
 
         /// <summary>
@@ -480,6 +509,7 @@ namespace ConControls.Controls
         protected void CheckDisposed()
         {
             if (Window.IsDisposed) throw Exceptions.WindowDisposed();
+            if (disposed > 0) throw Exceptions.ControlDisposed(name);
         }
 
         /// <summary>
@@ -792,5 +822,29 @@ namespace ConControls.Controls
                 AreaChanged?.Invoke(this, EventArgs.Empty);
             }
         }
+        /// <summary>
+        /// Called when a <see cref="IConsoleWindow.KeyEvent"/> has been received.
+        /// </summary>
+        /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
+        /// <param name="e">The event details.</param>
+        protected virtual void OnKeyEvent(object sender, KeyEventArgs e) { }
+        /// <summary>
+        /// Called when a <see cref="IConsoleWindow.MouseEvent"/> has been received.
+        /// </summary>
+        /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
+        /// <param name="e">The event details.</param>
+        protected virtual void OnMouseEvent(object sender, MouseEventArgs e) { }
+        /// <summary>
+        /// Called when a <see cref="IConsoleWindow.StdOutEvent"/> has been received.
+        /// </summary>
+        /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
+        /// <param name="e">The event details.</param>
+        protected virtual void OnStdOutEvent(object sender, StdOutEventArgs e) { }
+        /// <summary>
+        /// Called when a <see cref="IConsoleWindow.StdErrEvent"/> has been received.
+        /// </summary>
+        /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
+        /// <param name="e">The event details.</param>
+        protected virtual void OnStdErrEvent(object sender, StdErrEventArgs e) { }
     }
 }

@@ -6,7 +6,7 @@ namespace ConControls.Controls
     /// <summary>
     /// An interface for classes that can contain console controls.
     /// </summary>
-    public interface IControlContainer
+    public interface IControlContainer : IDisposable
     {
         /// <summary>
         /// Raised when the <see cref="Area"/> (or <see cref="Location"/> or <see cref="Size"/> have changed.

@@ -21,6 +21,7 @@ namespace ConControls
     {
         internal static InvalidOperationException CanOnlyUseSingleContext() => new InvalidOperationException(Resources.Exception_CanOnlyUseSingleContext);
         internal static ObjectDisposedException WindowDisposed() => new ObjectDisposedException(objectName: nameof(ConsoleWindow), Resources.Exception_WindowDisposed);
+        internal static ObjectDisposedException ControlDisposed(string name) => new ObjectDisposedException(objectName: name, Resources.Exception_ControlDisposed);
         internal static Win32Exception Win32() => new Win32Exception(Marshal.GetLastWin32Error());
         internal static InvalidOperationException DifferentWindow() => new InvalidOperationException(Resources.Exception_DifferentWindow);
         internal static ArgumentOutOfRangeException InvalidConsoleColor(ConsoleColor color) => new ArgumentOutOfRangeException(paramName: nameof(color), color, string.Format(CultureInfo.CurrentCulture, Resources.Exception_InvalidConsoleColor, color));

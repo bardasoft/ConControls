@@ -16,7 +16,7 @@ namespace ConControls.ConsoleApi
     {
         public bool KeyDown { get; }
         public ushort RepeatCount { get; }
-        public VirtualKeys VirtualKeyCode { get; }
+        public VirtualKey VirtualKeyCode { get; }
         public ushort VirtualScanCode { get; }
         public char UnicodeChar { get; }
         public ControlKeyStates ControlKeys { get; }

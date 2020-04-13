@@ -79,6 +79,15 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The control &quot;{0}&quot; has already been disposed of! ähnelt.
+        /// </summary>
+        internal static string Exception_ControlDisposed {
+            get {
+                return ResourceManager.GetString("Exception_ControlDisposed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die ConsoleControl instances must be contained in an IConsoleContainer! Please provide a valid parent. ähnelt.
         /// </summary>
         internal static string Exception_ControlsMustBeContained {
