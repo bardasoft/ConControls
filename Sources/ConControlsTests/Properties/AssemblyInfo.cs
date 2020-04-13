@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ConControlsTests")]
-[assembly: AssemblyCopyright("Copyright ©2020 René Vogt ")]
+[assembly: AssemblyCopyright("Copyright © René Vogt")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

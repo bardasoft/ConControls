@@ -74,26 +74,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConControlsTestsCli.cs" />
-    <Compile Include="ConsoleApi\CharInfoExtensions\CharInfoExtensionsTests.cs" />
-    <Compile Include="ConsoleApi\ConsoleEventArgs\ConsoleMouseEventArgsTests.cs" />
-    <Compile Include="ConsoleApi\ConsoleEventArgs\ConsoleKeyEventArgsTests.cs" />
-    <Compile Include="ConsoleApi\ConsoleEventArgs\ConsoleOutputReceivedEventArgsTests.cs" />
-    <Compile Include="ConsoleApi\ConsoleEventArgs\ConsoleMenuEventArgsTests.cs" />
-    <Compile Include="ConsoleApi\ConsoleEventArgs\ConsoleFocusEventArgsTests.cs" />
-    <Compile Include="ConsoleApi\ConsoleEventArgs\ConsoleSizeEventArgsTests.cs" />
-    <Compile Include="Controls\ConsoleWindowEventArgs\StdErrEventArgsTests.cs" />
-    <Compile Include="Controls\ConsoleWindowEventArgs\StdOutEventArgsTests.cs" />
-    <Compile Include="Controls\ConsoleWindowEventArgs\MouseEventArgsTests.cs" />
-    <Compile Include="Controls\ConsoleWindowEventArgs\KeyEventArgsTests.cs" />
-    <Compile Include="Controls\ControlCollection\GetEnumeratorTests.cs" />
-    <Compile Include="Controls\ControlCollection\RemoveRangeTests.cs" />
-    <Compile Include="Controls\ControlCollection\AddRangeTests.cs" />
-    <Compile Include="Controls\ControlCollection\RemoveTests.cs" />
-    <Compile Include="Controls\ControlCollection\AddTests.cs" />
-    <Compile Include="Controls\ControlCollection\ControlCollectionTests.cs" />
-    <Compile Include="Controls\Drawing\FrameCharSets\FrameCharSetsTests.cs" />
+    <Compile Include="UnitTests\TestLogger.cs" />
+    <Compile Include="UnitTests\ConsoleApi\CharInfoExtensions\CharInfoExtensionsTests.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleMouseEventArgsTests.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleKeyEventArgsTests.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleOutputReceivedEventArgsTests.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleMenuEventArgsTests.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleFocusEventArgsTests.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleSizeEventArgsTests.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleListener\ErrorEvents.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleListener\ThreadManagement.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleListener\OutputEvents.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleListener\InputEvents.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleListener\ConsoleListenerTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\StdErrEventArgsTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\StdOutEventArgsTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\MouseEventArgsTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\KeyEventArgsTests.cs" />
+    <Compile Include="UnitTests\Controls\ControlCollection\GetEnumeratorTests.cs" />
+    <Compile Include="UnitTests\Controls\ControlCollection\RemoveRangeTests.cs" />
+    <Compile Include="UnitTests\Controls\ControlCollection\AddRangeTests.cs" />
+    <Compile Include="UnitTests\Controls\ControlCollection\RemoveTests.cs" />
+    <Compile Include="UnitTests\Controls\ControlCollection\AddTests.cs" />
+    <Compile Include="UnitTests\Controls\ControlCollection\ControlCollectionTests.cs" />
+    <Compile Include="UnitTests\Controls\Drawing\FrameCharSets\FrameCharSetsTests.cs" />
     <Compile Include="Examples\ProgressBarExample.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="UnitTests\Helpers\DisposableBlock\DispoableBlockTests.cs" />
+    <Compile Include="FileLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

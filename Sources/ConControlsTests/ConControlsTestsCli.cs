@@ -5,14 +5,17 @@
  *
  */
 
+#nullable enable
+#pragma warning disable IDE0051
+
+// ReSharper disable UnusedMember.Local
+
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using ConControls.Logging;
 using ConControlsTests.Examples;
 
-#pragma warning disable IDE0051 // Nicht verwendete private Member entfernen
-// ReSharper disable UnusedMember.Local
 
 namespace ConControlsTests
 {
@@ -28,8 +31,8 @@ namespace ConControlsTests
         static void Main()
         {
             //Task.Run(ReadEvents).Wait();
-            using var logger = new Logger(@"c:\privat\concontrols.log");
-            ConControls.Logging.Logger.Context = DebugContext.ConsoleListener;
+            using var logger = new FileLogger(@"c:\privat\concontrols.log");
+            Logger.Context = DebugContext.ConsoleListener;
 
             try
             {
