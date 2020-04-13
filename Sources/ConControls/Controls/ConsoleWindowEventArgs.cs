@@ -21,7 +21,7 @@ namespace ConControls.Controls
         /// </summary>
         /// <remarks>
         /// When handling events of an <see cref="IConsoleWindow"/> like <seealso cref="IConsoleWindow.KeyEvent"/> or
-        /// <seealso cref="IConsoleWindow.MouseEvent"/>, set this property to <code>true</code> if you handled that
+        /// <seealso cref="IConsoleWindow.MouseEvent"/>, set this property to <c>true</c> if you handled that
         /// event and don't need the infrastructure tu take further care.<br/>
         /// If you don't handle the event, don't change this property.
         /// </remarks>

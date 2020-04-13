@@ -11,9 +11,9 @@ namespace ConControls.Controls
     /// A console panel control. A plain container
     /// for other controls.
     /// </summary>
-    public sealed class ConsolePanel : ConsoleControl
+    public sealed class Panel : ConsoleControl
     {
         /// <inheritdoc />
-        public ConsolePanel(IControlContainer parent) : base(parent) { }
+        public Panel(IControlContainer parent) : base(parent) { }
     }
 }

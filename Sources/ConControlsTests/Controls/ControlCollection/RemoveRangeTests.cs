@@ -24,10 +24,10 @@ namespace ConControlsTests.Controls.ControlCollection
             stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new ConsolePanel(stubbedWindow);
-            var control2 = new ConsolePanel(stubbedWindow);
-            var control3 = new ConsolePanel(stubbedWindow);
-            var control4 = new ConsolePanel(stubbedWindow);
+            var control1 = new Panel(stubbedWindow);
+            var control2 = new Panel(stubbedWindow);
+            var control3 = new Panel(stubbedWindow);
+            var control4 = new Panel(stubbedWindow);
             sut.AddRange(control1, control2, control3);
             sut.RemoveRange(control1, null!, control4);
             sut.Should().Equal(control2, control3);
@@ -40,10 +40,10 @@ namespace ConControlsTests.Controls.ControlCollection
             stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new ConsolePanel(stubbedWindow);
-            var control2 = new ConsolePanel(stubbedWindow);
-            var control3 = new ConsolePanel(stubbedWindow);
-            var control4 = new ConsolePanel(stubbedWindow);
+            var control1 = new Panel(stubbedWindow);
+            var control2 = new Panel(stubbedWindow);
+            var control3 = new Panel(stubbedWindow);
+            var control4 = new Panel(stubbedWindow);
             sut.AddRange(control1, control2, control3);
 
             int fired = 0;
@@ -71,7 +71,7 @@ namespace ConControlsTests.Controls.ControlCollection
                 fired = true;
                 Assert.Fail();
             };
-            sut.RemoveRange(null!, new ConsolePanel(stubbedWindow));
+            sut.RemoveRange(null!, new Panel(stubbedWindow));
             fired.Should().BeFalse();
         }
 

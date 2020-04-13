@@ -1,7 +1,7 @@
 # ConControls 
 ### A class library for console UI controls.
 
-René Vogt, Dresden 2020/04/12
+René Vogt, Dresden 2020/04/13
 
 ---
 
@@ -9,14 +9,13 @@ This library provides easy to use console UI controls. You can use it to quickly
 of a console application without the overhead of creating a UI with frameworks like Windows Forms or WPF etc.
 
 An introduction/manual/howto can be found [here](docs/001%20Intro.md).  
-Code examples are included in the test project (ConControlsTests).
 
-The api documentation is a [Sandcastle](https://github.com/EWSoftware/SHFB) created compiled html help file: [ConControls API documentation.chm](docs/ConControls%20API%20documentation.chm).
+The api documentation is a [Sandcastle](https://github.com/EWSoftware/SHFB) compiled html help file: [ConControls API documentation.chm](docs/ConControls%20API%20documentation.chm).
 
 ---
 
 This package is available at https://www.nuget.org/packages/ConControls/ and can be installed like this:
-- PackageManager: `PM> Install-Package ConControls`
-- .NET CLI: `> dotnet add package ConControls`
-- PackageReference: `<PackageReference Include="ConControls"/>`
-- Paket CLI: `> paket add ConControls`
+- PackageManager: `PM> Install-Package ConControls -Version 0.1.0-beta`
+- .NET CLI: `> dotnet add package ConControls --version 0.1.0-beta`
+- PackageReference: `<PackageReference Include="ConControls" Version="0.1.0-alpha" />`
+- Paket CLI: `> paket add ConControls --version 0.1.0-alpha`

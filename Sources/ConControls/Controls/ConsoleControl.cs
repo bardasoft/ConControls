@@ -119,10 +119,10 @@ namespace ConControls.Controls
         }
         /// <summary>
         /// Gets or sets wether this control is focused or not.
-        /// Trying to set this to <code>true</code> though <see cref="CanFocus"/> returns <code>false</code>
+        /// Trying to set this to <c>true</c> though <see cref="CanFocus"/> returns <c>false</c>
         /// throws an <see cref="InvalidOperationException"/>.
         /// </summary>
-        /// <exception cref="InvalidOperationException"><see cref="Focused"/> cannot be set to <code>true</code> when <see cref="CanFocus"/> returns <code>false</code>.</exception>
+        /// <exception cref="InvalidOperationException"><see cref="Focused"/> cannot be set to <c>true</c> when <see cref="CanFocus"/> returns <c>false</c>.</exception>
         public virtual bool Focused
         {
             get
@@ -144,7 +144,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Determines wether this control can be focused or not.
         /// </summary>
-        /// <returns><code>true</code> if this control can take focues, <code>false</code> if not.</returns>
+        /// <returns><c>true</c> if this control can take focues, <c>false</c> if not.</returns>
         public virtual bool CanFocus => false;
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace ConControls.Controls
         /// The parent must be contained by the same <see cref="IConsoleWindow"/>.
         /// </summary>
         /// <exception cref="InvalidOperationException">The parent is not part of the same <see cref="IConsoleWindow"/> or this control is the root element of the window..</exception>
-        /// <exception cref="ArgumentNullException">The parent is <code>null</code>.</exception>
+        /// <exception cref="ArgumentNullException">The parent is <c>null</c>.</exception>
         public IControlContainer Parent
         {
             get { lock(Window.SynchronizationLock) return parent; }
@@ -266,7 +266,7 @@ namespace ConControls.Controls
         }
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings when the control is focused.
-        /// If this is <code>null</code>, the <see cref="ForegroundColor"/> value will be used.
+        /// If this is <c>null</c>, the <see cref="ForegroundColor"/> value will be used.
         /// </summary>
         public virtual ConsoleColor? FocusedForegroundColor
         {
@@ -283,7 +283,7 @@ namespace ConControls.Controls
         }
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings when the control is disabled.
-        /// If this is <code>null</code>, the <see cref="ForegroundColor"/> value will be used.
+        /// If this is <c>null</c>, the <see cref="ForegroundColor"/> value will be used.
         /// </summary>
         public virtual ConsoleColor? DisabledForegroundColor
         {
@@ -317,7 +317,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for the background of this control
         /// when it is focused.
-        /// If this is <code>null</code>, the <see cref="BackgroundColor"/> value will be used.
+        /// If this is <c>null</c>, the <see cref="BackgroundColor"/> value will be used.
         /// </summary>
         public ConsoleColor? FocusedBackgroundColor
         {
@@ -335,7 +335,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for the background of this control
         /// when it is disabled.
-        /// If this is <code>null</code>, the <see cref="BackgroundColor"/> value will be used.
+        /// If this is <c>null</c>, the <see cref="BackgroundColor"/> value will be used.
         /// </summary>
         public virtual ConsoleColor? DisabledBackgroundColor
         {
@@ -369,7 +369,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for the border of this control
         /// when it is focused.
-        /// If this is <code>null</code>, the <see cref="BorderColor"/> value will be used.
+        /// If this is <c>null</c>, the <see cref="BorderColor"/> value will be used.
         /// </summary>
         public virtual ConsoleColor? FocusedBorderColor
         {
@@ -387,7 +387,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for the border of this control
         /// when it is disabled.
-        /// If this is <code>null</code>, the <see cref="BorderColor"/> value will be used.
+        /// If this is <c>null</c>, the <see cref="BorderColor"/> value will be used.
         /// </summary>
         public virtual ConsoleColor? DisabledBorderColor
         {
@@ -419,9 +419,9 @@ namespace ConControls.Controls
             }
         }
         /// <summary>
-        /// Gets or sets the <see cref="BorderStyle"/> of this control
+        /// Gets or sets the <see cref="ConControls.Controls.BorderStyle"/> of this control
         /// when it is focused.
-        /// If this is <code>null</code>, the <see cref="ConsoleControl.BorderStyle"/> value will be used.
+        /// If this is <c>null</c>, the <see cref="BorderStyle"/> value will be used.
         /// </summary>
         public virtual BorderStyle? FocusedBorderStyle
         {
@@ -437,9 +437,9 @@ namespace ConControls.Controls
             }
         }
         /// <summary>
-        /// Gets or sets the <see cref="BorderStyle"/> of this control
+        /// Gets or sets the <see cref="ConControls.Controls.BorderStyle"/> of this control
         /// when it is disabled.
-        /// If this is <code>null</code>, the <see cref="ConsoleControl.BorderStyle"/> value will be used.
+        /// If this is <c>null</c>, the <see cref="BorderStyle"/> value will be used.
         /// </summary>
         public virtual BorderStyle? DisabledBorderStyle
         {
@@ -459,7 +459,7 @@ namespace ConControls.Controls
         /// Initializes an instance of <see cref="ConsoleControl"/>.
         /// </summary>
         /// <param name="parent">The parent <see cref="ConsoleControl"/> this control should be placed on.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="parent"/> is <code>null</code>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="parent"/> is <c>null</c>.</exception>
         private protected ConsoleControl(IControlContainer parent)
         {
             this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
@@ -514,10 +514,10 @@ namespace ConControls.Controls
 
         /// <summary>
         /// Invalidates this control to trigger redrawing.
-        /// If <paramref name="onlyClientArea"/> is <code>true</code>, only
+        /// If <paramref name="onlyClientArea"/> is <c>true</c>, only
         /// the client area (without borders) will be invalidated.
         /// </summary>
-        /// <param name="onlyClientArea">Set this to <code>true</code> if only the client area should be redrawn.
+        /// <param name="onlyClientArea">Set this to <c>true</c> if only the client area should be redrawn.
         /// This avoids drawing the border and background.</param>
         public void Invalidate(bool onlyClientArea = false)
         {

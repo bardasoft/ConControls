@@ -23,9 +23,9 @@ namespace ConControlsTests.Controls.ControlCollection
             stubbedWindow.WindowGet = () => stubbedWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             stubbedWindow.ControlsGet = () => sut;
-            var control1 = new ConsolePanel(stubbedWindow);
-            var control2 = new ConsolePanel(stubbedWindow);
-            var control3 = new ConsolePanel(stubbedWindow);
+            var control1 = new Panel(stubbedWindow);
+            var control2 = new Panel(stubbedWindow);
+            var control3 = new Panel(stubbedWindow);
             sut.Should().Equal(control1, control2, control3);
         }
     }

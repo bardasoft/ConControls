@@ -42,7 +42,7 @@ namespace ConControlsTests.Controls.ControlCollection
             var differentCollection = new ConControls.Controls.ControlCollection(differentWindow);
             differentWindow.ControlsGet = () => differentCollection;
             stubbedWindow.ControlsGet = () => sut;
-            sut.Add(new ConsolePanel(differentWindow));
+            sut.Add(new Panel(differentWindow));
         }
         [TestMethod]
         public void Add_Control_Added()
@@ -51,7 +51,7 @@ namespace ConControlsTests.Controls.ControlCollection
             stubbedWindow.WindowGet = () => stubbedWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             stubbedWindow.ControlsGet = () => sut;
-            var control = new ConsolePanel(stubbedWindow);
+            var control = new Panel(stubbedWindow);
             sut.Count.Should().Be(1);
             sut[0].Should().BeSameAs(control);
         }
@@ -65,8 +65,8 @@ namespace ConControlsTests.Controls.ControlCollection
             stubbedWindow.ControlsGet = () => stubbedCollection;
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            ConsoleControl? control1 = new ConsolePanel(stubbedWindow);
-            ConsoleControl? control2 = new ConsolePanel(stubbedWindow);
+            ConsoleControl? control1 = new Panel(stubbedWindow);
+            ConsoleControl? control2 = new Panel(stubbedWindow);
             int added1 = 0, added2 = 0;
             sut.ControlCollectionChanged += (sender, e) =>
             {

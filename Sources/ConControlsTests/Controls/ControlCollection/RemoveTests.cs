@@ -33,8 +33,8 @@ namespace ConControlsTests.Controls.ControlCollection
             stubbedWindow.WindowGet = () => stubbedWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             stubbedWindow.ControlsGet = () => sut;
-            var control1 = new ConsolePanel(stubbedWindow);
-            var control2 = new ConsolePanel(stubbedWindow);
+            var control1 = new Panel(stubbedWindow);
+            var control2 = new Panel(stubbedWindow);
             bool called = false;
             sut.Add(control1);
             sut.Add(control2);
@@ -55,13 +55,13 @@ namespace ConControlsTests.Controls.ControlCollection
             stubbedWindow.WindowGet = () => stubbedWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             stubbedWindow.ControlsGet = () => sut;
-            var control3 = new ConsolePanel(stubbedWindow);
+            var control3 = new Panel(stubbedWindow);
             sut.Remove(control3);
             bool called = false;
             // ReSharper disable once UnusedVariable
-            var control1 = new ConsolePanel(stubbedWindow);
+            var control1 = new Panel(stubbedWindow);
             // ReSharper disable once UnusedVariable
-            var control2 = new ConsolePanel(stubbedWindow);
+            var control2 = new Panel(stubbedWindow);
             sut.ControlCollectionChanged += (sender, e) =>
             {
                 called = true;

@@ -13,6 +13,10 @@ namespace ConControls.Controls.Drawing
     /// <summary>
     /// Provides methods to draw on the console.
     /// </summary>
+    /// <remarks>This interface represents an abstraction layer for <see cref="ConsoleControl"/> instances
+    /// to draw on the console screen buffer. It is implemented by the internal class <c>ConsoleGraphics</c>.<br/>
+    /// An instance of this interface must be provided by <see cref="IConsoleWindow.GetGraphics">IConsoleWindow.GetGraphics</see>
+    /// to enable controls to draw themselves.</remarks>
     public interface IConsoleGraphics
     {
         /// <summary>

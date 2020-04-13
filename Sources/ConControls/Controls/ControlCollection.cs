@@ -46,7 +46,7 @@ namespace ConControls.Controls
         /// Adds the given <paramref name="control"/> to the collection.
         /// </summary>
         /// <param name="control">The <see cref="ConsoleControl"/> to add.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="control"/> is <c>null</c>.</exception>
         /// <exception cref="InvalidOperationException">The <paramref name="control"/> uses a different <see cref="IConsoleWindow"/> than this collection.</exception>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void Add(ConsoleControl control)
@@ -84,7 +84,7 @@ namespace ConControls.Controls
         /// Removes the given <paramref name="control"/> from the collection.
         /// </summary>
         /// <param name="control">The <see cref="ConsoleControl"/> to remove.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="control"/> is <c>null</c>.</exception>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void Remove(ConsoleControl control)
         {

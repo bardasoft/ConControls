@@ -84,16 +84,16 @@
         <member name="P:ConControls.Controls.ConsoleControl.Focused">
             <summary>
             Gets or sets wether this control is focused or not.
-            Trying to set this to <code>true</code> though <see cref="P:ConControls.Controls.ConsoleControl.CanFocus"/> returns <code>false</code>
+            Trying to set this to <c>true</c> though <see cref="P:ConControls.Controls.ConsoleControl.CanFocus"/> returns <c>false</c>
             throws an <see cref="T:System.InvalidOperationException"/>.
             </summary>
-            <exception cref="T:System.InvalidOperationException"><see cref="P:ConControls.Controls.ConsoleControl.Focused"/> cannot be set to <code>true</code> when <see cref="P:ConControls.Controls.ConsoleControl.CanFocus"/> returns <code>false</code>.</exception>
+            <exception cref="T:System.InvalidOperationException"><see cref="P:ConControls.Controls.ConsoleControl.Focused"/> cannot be set to <c>true</c> when <see cref="P:ConControls.Controls.ConsoleControl.CanFocus"/> returns <c>false</c>.</exception>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.CanFocus">
             <summary>
             Determines wether this control can be focused or not.
             </summary>
-            <returns><code>true</code> if this control can take focues, <code>false</code> if not.</returns>
+            <returns><c>true</c> if this control can take focues, <c>false</c> if not.</returns>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.Area">
             <summary>
@@ -119,7 +119,7 @@
             The parent must be contained by the same <see cref="T:ConControls.Controls.IConsoleWindow"/>.
             </summary>
             <exception cref="T:System.InvalidOperationException">The parent is not part of the same <see cref="T:ConControls.Controls.IConsoleWindow"/> or this control is the root element of the window..</exception>
-            <exception cref="T:System.ArgumentNullException">The parent is <code>null</code>.</exception>
+            <exception cref="T:System.ArgumentNullException">The parent is <c>null</c>.</exception>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.Controls">
             <summary>
@@ -140,13 +140,13 @@
         <member name="P:ConControls.Controls.ConsoleControl.FocusedForegroundColor">
             <summary>
             Gets or sets the <see cref="T:System.ConsoleColor"/> to use for foreground drawings when the control is focused.
-            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.ForegroundColor"/> value will be used.
+            If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.ForegroundColor"/> value will be used.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.DisabledForegroundColor">
             <summary>
             Gets or sets the <see cref="T:System.ConsoleColor"/> to use for foreground drawings when the control is disabled.
-            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.ForegroundColor"/> value will be used.
+            If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.ForegroundColor"/> value will be used.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.BackgroundColor">
@@ -158,14 +158,14 @@
             <summary>
             Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the background of this control
             when it is focused.
-            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/> value will be used.
+            If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/> value will be used.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.DisabledBackgroundColor">
             <summary>
             Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the background of this control
             when it is disabled.
-            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/> value will be used.
+            If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.BackgroundColor"/> value will be used.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.BorderColor">
@@ -177,14 +177,14 @@
             <summary>
             Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the border of this control
             when it is focused.
-            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/> value will be used.
+            If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/> value will be used.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.DisabledBorderColor">
             <summary>
             Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the border of this control
             when it is disabled.
-            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/> value will be used.
+            If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderColor"/> value will be used.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.BorderStyle">
@@ -194,16 +194,16 @@
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.FocusedBorderStyle">
             <summary>
-            Gets or sets the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control
+            Gets or sets the <see cref="T:ConControls.Controls.BorderStyle"/> of this control
             when it is focused.
-            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> value will be used.
+            If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> value will be used.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.DisabledBorderStyle">
             <summary>
-            Gets or sets the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> of this control
+            Gets or sets the <see cref="T:ConControls.Controls.BorderStyle"/> of this control
             when it is disabled.
-            If this is <code>null</code>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> value will be used.
+            If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> value will be used.
             </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.#ctor(ConControls.Controls.IControlContainer)">
@@ -211,7 +211,7 @@
             Initializes an instance of <see cref="T:ConControls.Controls.ConsoleControl"/>.
             </summary>
             <param name="parent">The parent <see cref="T:ConControls.Controls.ConsoleControl"/> this control should be placed on.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="parent"/> is <code>null</code>.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="parent"/> is <c>null</c>.</exception>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.Dispose">
             <summary>
@@ -233,10 +233,10 @@
         <member name="M:ConControls.Controls.ConsoleControl.Invalidate(System.Boolean)">
             <summary>
             Invalidates this control to trigger redrawing.
-            If <paramref name="onlyClientArea"/> is <code>true</code>, only
+            If <paramref name="onlyClientArea"/> is <c>true</c>, only
             the client area (without borders) will be invalidated.
             </summary>
-            <param name="onlyClientArea">Set this to <code>true</code> if only the client area should be redrawn.
+            <param name="onlyClientArea">Set this to <c>true</c> if only the client area should be redrawn.
             This avoids drawing the border and background.</param>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.Draw">
@@ -400,15 +400,6 @@
             <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
             <param name="e">The event details.</param>
         </member>
-        <member name="T:ConControls.Controls.ConsolePanel">
-            <summary>
-            A console panel control. A plain container
-            for other controls.
-            </summary>
-        </member>
-        <member name="M:ConControls.Controls.ConsolePanel.#ctor(ConControls.Controls.IControlContainer)">
-            <inheritdoc />
-        </member>
         <member name="T:ConControls.Controls.ConsoleWindow">
             <summary>
             The window for a console UI session.
@@ -536,7 +527,7 @@
             </summary>
             <remarks>
             When handling events of an <see cref="T:ConControls.Controls.IConsoleWindow"/> like <seealso cref="E:ConControls.Controls.IConsoleWindow.KeyEvent"/> or
-            <seealso cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/>, set this property to <code>true</code> if you handled that
+            <seealso cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/>, set this property to <c>true</c> if you handled that
             event and don't need the infrastructure tu take further care.<br/>
             If you don't handle the event, don't change this property.
             </remarks>
@@ -570,7 +561,7 @@
             Adds the given <paramref name="control"/> to the collection.
             </summary>
             <param name="control">The <see cref="T:ConControls.Controls.ConsoleControl"/> to add.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <c>null</c>.</exception>
             <exception cref="T:System.InvalidOperationException">The <paramref name="control"/> uses a different <see cref="T:ConControls.Controls.IConsoleWindow"/> than this collection.</exception>
         </member>
         <member name="M:ConControls.Controls.ControlCollection.AddRange(ConControls.Controls.ConsoleControl[])">
@@ -592,7 +583,7 @@
             Removes the given <paramref name="control"/> from the collection.
             </summary>
             <param name="control">The <see cref="T:ConControls.Controls.ConsoleControl"/> to remove.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <code>null</code>.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <c>null</c>.</exception>
         </member>
         <member name="M:ConControls.Controls.ControlCollection.RemoveRange(ConControls.Controls.ConsoleControl[])">
             <summary>
@@ -822,6 +813,10 @@
             <summary>
             Provides methods to draw on the console.
             </summary>
+            <remarks>This interface represents an abstraction layer for <see cref="T:ConControls.Controls.ConsoleControl"/> instances
+            to draw on the console screen buffer. It is implemented by the internal class <c>ConsoleGraphics</c>.<br/>
+            An instance of this interface must be provided by <see cref="M:ConControls.Controls.IConsoleWindow.GetGraphics">IConsoleWindow.GetGraphics</see>
+            to enable controls to draw themselves.</remarks>
         </member>
         <member name="M:ConControls.Controls.Drawing.IConsoleGraphics.DrawBackground(System.ConsoleColor,System.Drawing.Rectangle)">
             <summary>
@@ -1092,8 +1087,8 @@
         </member>
         <member name="P:ConControls.Controls.KeyEventArgs.KeyDown">
             <summary>
-            If the key is pressed, this member is <code>true</code>.
-            Otherwise, this member is <code>false</code> (the key is released).
+            If the key is pressed, this member is <c>true</c>.
+            Otherwise, this member is <c>false</c> (the key is released).
             </summary>
         </member>
         <member name="P:ConControls.Controls.KeyEventArgs.ControlKeys">
@@ -1149,6 +1144,15 @@
             and the <see cref="T:ConControls.Controls.IControlContainer"/> interface.<br/>
             It also provides the <see cref="T:ConControls.Controls.ControlCollection"/> that can keep the child controls of a <see cref="T:ConControls.Controls.IControlContainer"/>.
             </remarks>
+        </member>
+        <member name="T:ConControls.Controls.Panel">
+            <summary>
+            A console panel control. A plain container
+            for other controls.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.Panel.#ctor(ConControls.Controls.IControlContainer)">
+            <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.ProgressBar">
             <summary>

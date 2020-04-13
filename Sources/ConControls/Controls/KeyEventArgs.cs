@@ -38,8 +38,8 @@ namespace ConControls.Controls
         /// </summary>
         public int VirtualScanCode { get; }
         /// <summary>
-        /// If the key is pressed, this member is <code>true</code>.
-        /// Otherwise, this member is <code>false</code> (the key is released).
+        /// If the key is pressed, this member is <c>true</c>.
+        /// Otherwise, this member is <c>false</c> (the key is released).
         /// </summary>
         public bool KeyDown { get; }
         /// <summary>
