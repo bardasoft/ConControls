@@ -223,7 +223,6 @@ namespace ConControls.ConsoleApi
                 StartReadingError();
             }
 
-            if (stopEvent.WaitOne(0)) return;
             string msg = Encoding.Default.GetString(errorBuffer, 0, read);
             Logger.Log(dbgctx, $"Read {read} bytes from stderr: [{msg}]");
             ErrorReceived?.Invoke(this, new ConsoleOutputReceivedEventArgs(msg));

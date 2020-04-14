@@ -8,7 +8,6 @@
 #nullable enable
 
 using System.Diagnostics.CodeAnalysis;
-using ConControls.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
@@ -17,15 +16,5 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
     [ExcludeFromCodeCoverage]
     public partial class ConsoleListenerTests
     {
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            Logger.Context = DebugContext.ConsoleListener;
-        }
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            Logger.Context = DebugContext.None;
-        }
     }
 }
