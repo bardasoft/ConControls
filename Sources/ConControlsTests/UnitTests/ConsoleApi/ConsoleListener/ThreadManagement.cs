@@ -49,6 +49,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                     .Should()
                     .Be(endTaskSource.Task, "Thread stop needed more than 2 seconds!");
                 threadEndLogged.Should().BeTrue();
+                sut.Dispose(); // should not fail
             }
             finally
             {
