@@ -74,7 +74,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConControlsTestsCli.cs" />
-    <Compile Include="UnitTests\TestLogger.cs" />
     <Compile Include="UnitTests\ConsoleApi\CharInfoExtensions\CharInfoExtensionsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleMouseEventArgsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleKeyEventArgsTests.cs" />

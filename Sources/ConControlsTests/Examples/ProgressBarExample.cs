@@ -8,11 +8,11 @@
 #nullable enable
 
 using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
 using ConControls.Controls;
+using ConControls.WindowsApi.Types;
 
 namespace ConControlsTests.Examples
 {
@@ -21,9 +21,17 @@ namespace ConControlsTests.Examples
     {
         public static void Run()
         {
-            using var window = new ConsoleWindow();
-            Debug.WriteLine($"SIZE: {window.Size} MAX: {window.MaximumSize}");
-            window.BackgroundColor = ConsoleColor.Blue;
+            using var window = new ConsoleWindow
+            {
+                BackgroundColor = ConsoleColor.Blue
+            };
+            bool stop = false;
+            window.KeyEvent += (sender, e) =>
+            {
+                if (e.KeyDown && e.VirtualKey == VirtualKey.Escape)
+                    stop = true;
+            };
+
             var l2r = new ProgressBar(window)
             {
                 Name = "l2r",
@@ -65,7 +73,7 @@ namespace ConControlsTests.Examples
                 Orientation = ProgressBar.ProgressOrientation.BottomToTop
             };
 
-            for (int i = 0; i < 2000000; i++)
+            for (int i = 0; i < 2000000 && !stop; i++)
             {
                 double p = (double)(i % 101) / 100;
                 using (window.DeferDrawing())

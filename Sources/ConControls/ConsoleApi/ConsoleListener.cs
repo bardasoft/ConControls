@@ -6,7 +6,8 @@
  */
 
 using System;
-using System.IO;
+using System.Diagnostics.CodeAnalysis;
+using System.IO.Pipes;
 using System.Text;
 using System.Threading;
 using ConControls.Logging;
@@ -18,18 +19,17 @@ namespace ConControls.ConsoleApi
 {
     sealed class ConsoleListener : IConsoleListener
     {
+        const DebugContext dbgctx = DebugContext.ConsoleApi | DebugContext.ConsoleListener;
         readonly INativeCalls api;
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
         readonly Thread thread;
         readonly ConsoleOutputModes originalOutputMode;
         readonly ConsoleInputModes originalInputMode;
 
-        readonly SafeFileHandle readStdOutHandle;
-        readonly SafeFileHandle writeStdOutHandle;
-        readonly SafeFileHandle readErrorHandle;
-        readonly SafeFileHandle writeErrorHandle;
-        readonly FileStream stdoutStream;
-        readonly FileStream errorStream;
+        readonly AnonymousPipeServerStream stdoutWriteStream;
+        readonly AnonymousPipeClientStream stdoutReadStream;
+        readonly AnonymousPipeServerStream stderrWriteStream;
+        readonly AnonymousPipeClientStream stderrReadStream;
         readonly byte[] stdoutBuffer = new byte[2048];
         readonly byte[] errorBuffer = new byte[2048];
 
@@ -56,14 +56,17 @@ namespace ConControls.ConsoleApi
             OriginalInputHandle = this.api.GetInputHandle();
             originalInputMode = this.api.GetConsoleMode(OriginalInputHandle);
 
-            this.api.CreatePipe(out readStdOutHandle, out writeStdOutHandle);
-            using (var tempHandle = new ConsoleOutputHandle(writeStdOutHandle.DangerousGetHandle()))
+            stdoutWriteStream = new AnonymousPipeServerStream(PipeDirection.Out);
+            stdoutReadStream = new AnonymousPipeClientStream(PipeDirection.In, stdoutWriteStream.ClientSafePipeHandle);
+            using (var tempHandle = new ConsoleOutputHandle(stdoutWriteStream.SafePipeHandle.DangerousGetHandle()))
                 this.api.SetOutputHandle(tempHandle);
-            stdoutStream = new FileStream(readStdOutHandle, FileAccess.Read);
-            this.api.CreatePipe(out readErrorHandle, out writeErrorHandle);
-            using (var tempHandle = new ConsoleErrorHandle(writeErrorHandle.DangerousGetHandle()))
+            StartReadingStdout();
+
+            stderrWriteStream = new AnonymousPipeServerStream(PipeDirection.Out);
+            stderrReadStream = new AnonymousPipeClientStream(PipeDirection.In, stderrWriteStream.ClientSafePipeHandle);
+            using (var tempHandle = new ConsoleErrorHandle(stderrWriteStream.SafePipeHandle.DangerousGetHandle()))
                 this.api.SetErrorHandle(tempHandle);
-            errorStream = new FileStream(readErrorHandle, FileAccess.Read);
+            StartReadingError();
 
             this.api.SetConsoleMode(OriginalInputHandle,
                                     ConsoleInputModes.EnableWindowInput |
@@ -78,51 +81,52 @@ namespace ConControls.ConsoleApi
         public void Dispose()
         {
             if (Interlocked.CompareExchange(ref disposed, 1, 0) != 0) return;
+            Logger.Log(dbgctx, "Disposing.");
             stopEvent.Set();
-            thread.Join();
-            stopEvent.Dispose();
             api.SetErrorHandle(OriginalErrorHandle);
             api.SetOutputHandle(OriginalOutputHandle);
+            stdoutWriteStream.Dispose();
+            stderrWriteStream.Dispose();
+            stdoutReadStream.Dispose();
+            stderrReadStream.Dispose();
+            thread.Join();
+            Logger.Log(dbgctx, "Thread finally finished.");
+            stopEvent.Dispose();
             api.SetConsoleMode(OriginalInputHandle, originalInputMode);
             api.SetConsoleMode(OriginalOutputHandle, originalOutputMode);
-            errorStream.Dispose();
-            stdoutStream.Dispose();
-            readStdOutHandle.Dispose();
-            writeStdOutHandle.Dispose();
-            readErrorHandle.Dispose();
-            writeErrorHandle.Dispose();
             OriginalOutputHandle.Dispose();
             OriginalErrorHandle.Dispose();
             OriginalInputHandle.Dispose();
         }
+
+        [SuppressMessage("Design", "CA1031", Justification = "Leave thread cleanly.")]
         void ListenerThread()
         {
             try
             {
-                Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Starting thread.");
-                StartReadingStdout();
-                StartReadingError();
-                IntPtr stdin = OriginalOutputHandle.DangerousGetHandle();
+                Logger.Log(dbgctx, "Starting thread.");
+                IntPtr stdin = OriginalInputHandle.DangerousGetHandle();
                 using var inputWaitHandle = new AutoResetEvent(false) {SafeWaitHandle = new SafeWaitHandle(stdin, false)};
                 WaitHandle[] waitHandles = {stopEvent, inputWaitHandle};
                 int index;
+                Logger.Log(dbgctx, "Waiting for input or stop event.");
                 while ((index = WaitHandle.WaitAny(waitHandles)) != 0)
                 {
+                    Logger.Log(dbgctx, $"Signaled handle: {index}.");
                     switch (index)
                     {
                         case 1:
-                            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Input handle signaled.");
+                            Logger.Log(dbgctx, "Input handle signaled.");
                             ReadConsoleInput();
                             break;
                     }
                 }
 
-                Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Stopping thread.");
+                Logger.Log(dbgctx, "Stopping thread.");
             }
             catch (Exception e)
             {
-                Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener | DebugContext.Exception, $"Thread failed: {e}");
-                throw;
+                Logger.Log(dbgctx | DebugContext.Exception, $"Thread failed: {e}");
             }
         }
         void ReadConsoleInput()
@@ -130,10 +134,10 @@ namespace ConControls.ConsoleApi
             try
             {
                 var records = api.ReadConsoleInput(OriginalInputHandle);
-                Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Read {records.Length} input records.");
+                Logger.Log(dbgctx, $"Read {records.Length} input records.");
                 foreach (var record in records)
                 {
-                    Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Record of type {record.EventType}.");
+                    Logger.Log(dbgctx, $"Record of type {record.EventType}.");
                     switch (record.EventType)
                     {
                         case InputEventType.Key:
@@ -152,43 +156,68 @@ namespace ConControls.ConsoleApi
                             FocusEvent?.Invoke(this, new ConsoleFocusEventArgs(record.Event.FocusEvent));
                             break;
                         default:
-                            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Unkown input record type \"{record.EventType}\"!");
+                            Logger.Log(dbgctx, $"Unkown input record type \"{record.EventType}\"!");
                             break;
                     }
                 }
             }
             catch (Exception e)
             {
-                Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, e.ToString());
+                Logger.Log(dbgctx, e.ToString());
                 throw;
             }
         }
-        void StartReadingStdout() =>
-            stdoutStream.BeginRead(stdoutBuffer, 0, stdoutBuffer.Length, OnStdoutRead, null);
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031", Justification = "Catch client handler exceptions.")]
+        void StartReadingStdout()
+        {
+            Logger.Log(dbgctx, "Start reading from stdout.");
+            stdoutReadStream.BeginRead(stdoutBuffer, 0, stdoutBuffer.Length, OnStdoutRead, null);
+        }
+        [SuppressMessage("Design", "CA1031", Justification = "Catch client handler exceptions.")]
         void OnStdoutRead(IAsyncResult ar)
         {
-            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Received stdout signal.");
-            int read = stdoutStream.EndRead(ar);
+            Logger.Log(dbgctx, "Received stdout signal.");
+            int read = stdoutReadStream.EndRead(ar);
+            if (stopEvent.WaitOne(0))
+            {
+                Logger.Log(dbgctx, "Stop signaled, no further reading.");
+                return;
+            }
+            if (read <= 0)
+            {
+                Logger.Log(dbgctx, "Read zero bytes, stream seems closed!");
+                return;
+            }
+
             StartReadingStdout();
-            if (stopEvent.WaitOne(0)) return;
             string msg = Encoding.Default.GetString(stdoutBuffer, 0, read);
-            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Read {read} bytes from stdout: [{msg}]");
+            Logger.Log(dbgctx, $"Read {read} bytes from stdout: [{msg}]");
             OutputReceived?.Invoke(this, new ConsoleOutputReceivedEventArgs(msg));
         }
-        void StartReadingError() =>
-            errorStream.BeginRead(errorBuffer, 0, errorBuffer.Length, OnErrorRead, null);
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031", Justification = "Catch client handler exceptions.")]
+        void StartReadingError()
+        {
+            stderrReadStream.BeginRead(errorBuffer, 0, errorBuffer.Length, OnErrorRead, null);
+            Logger.Log(dbgctx, "Start reading from stderr.");
+        }
+        [SuppressMessage("Design", "CA1031", Justification = "Catch client handler exceptions.")]
         void OnErrorRead(IAsyncResult ar)
         {
-            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, "Received error signal.");
-            int read = errorStream.EndRead(ar);
+            Logger.Log(dbgctx, "Received error signal.");
+            int read = stderrReadStream.EndRead(ar);
+            if (stopEvent.WaitOne(0))
+            {
+                Logger.Log(dbgctx, "Stop signaled, no further reading.");
+                return;
+            }
+            if (read <= 0)
+            {
+                Logger.Log(dbgctx, "Read zero bytes, stream seems closed!");
+                return;
+            }
+
             StartReadingError();
             if (stopEvent.WaitOne(0)) return;
             string msg = Encoding.Default.GetString(errorBuffer, 0, read);
-            Logger.Log(DebugContext.ConsoleApi | DebugContext.ConsoleListener, $"Read {read} bytes from stderr: [{msg}]");
+            Logger.Log(dbgctx, $"Read {read} bytes from stderr: [{msg}]");
             ErrorReceived?.Invoke(this, new ConsoleOutputReceivedEventArgs(msg));
         }
     }

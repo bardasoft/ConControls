@@ -5,25 +5,18 @@
  *
  */
 
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using ConControls.WindowsApi.Types;
-using Microsoft.Win32.SafeHandles;
 
 namespace ConControls.WindowsApi
 {
     [ExcludeFromCodeCoverage]
     sealed class NativeCalls : INativeCalls
     {
-        public void CreatePipe(out SafeFileHandle readHandle, out SafeFileHandle writeHandle, int size = 2048)
-        {
-            if (!NativeMethods.CreatePipe(out readHandle, out writeHandle, IntPtr.Zero, (uint)size))
-                throw Exceptions.Win32();
-        }
         public ConsoleInputModes GetConsoleMode(ConsoleInputHandle consoleInputHandle) =>
             NativeMethods.GetConsoleMode(consoleInputHandle.DangerousGetHandle(), out ConsoleInputModes mode) ? mode : throw Exceptions.Win32();
         public ConsoleOutputModes GetConsoleMode(ConsoleOutputHandle consoleOutputHandle) =>

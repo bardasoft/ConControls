@@ -10,7 +10,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
 using ConControls.WindowsApi.Types;
-using Microsoft.Win32.SafeHandles;
 
 namespace ConControls.WindowsApi
 {
@@ -21,9 +20,6 @@ namespace ConControls.WindowsApi
         internal const int STDOUT = -11;
         internal const int STDERR = -12;
 
-        [DllImport("kernel32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool CreatePipe(out SafeFileHandle readHandle, out SafeFileHandle writeHandle, IntPtr securityAttributes, uint size);
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool GetConsoleMode(IntPtr consoleInputHandle, out ConsoleInputModes inputMode);

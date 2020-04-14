@@ -18,9 +18,14 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
     public partial class ConsoleListenerTests
     {
         [TestInitialize]
-        public void TestInitialize() => Logger.Context = DebugContext.ConsoleListener;
+        public void TestInitialize()
+        {
+            Logger.Context = DebugContext.ConsoleListener;
+        }
         [TestCleanup]
-        public void TestCleanup() => Logger.Context = DebugContext.None;
-
+        public void TestCleanup()
+        {
+            Logger.Context = DebugContext.None;
+        }
     }
 }
