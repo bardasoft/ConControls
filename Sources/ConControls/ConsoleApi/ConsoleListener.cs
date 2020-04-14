@@ -8,7 +8,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Pipes;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using ConControls.Logging;
@@ -21,6 +20,7 @@ namespace ConControls.ConsoleApi
     sealed class ConsoleListener : IConsoleListener
     {
         const DebugContext dbgctx = DebugContext.ConsoleApi | DebugContext.ConsoleListener;
+        readonly object syncLock = new object();
         readonly INativeCalls api;
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
         readonly Thread thread;
@@ -79,7 +79,6 @@ namespace ConControls.ConsoleApi
             thread.Start();
         }
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public void Dispose()
         {
             if (Interlocked.CompareExchange(ref disposed, 1, 0) != 0) return;
@@ -87,10 +86,14 @@ namespace ConControls.ConsoleApi
             stopEvent.Set();
             api.SetErrorHandle(OriginalErrorHandle);
             api.SetOutputHandle(OriginalOutputHandle);
-            stdoutWriteStream.Dispose();
-            stderrWriteStream.Dispose();
-            stdoutReadStream.Dispose();
-            stderrReadStream.Dispose();
+            lock (syncLock)
+            {
+                stdoutWriteStream.Dispose();
+                stderrWriteStream.Dispose();
+                stdoutReadStream.Dispose();
+                stderrReadStream.Dispose();
+            }
+
             thread.Join();
             Logger.Log(dbgctx, "Thread finally finished.");
             stopEvent.Dispose();
@@ -169,50 +172,57 @@ namespace ConControls.ConsoleApi
                 throw;
             }
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
         void StartReadingStdout()
         {
             Logger.Log(dbgctx, "Start reading from stdout.");
             stdoutReadStream.BeginRead(stdoutBuffer, 0, stdoutBuffer.Length, OnStdoutRead, null);
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
         [SuppressMessage("Design", "CA1031", Justification = "Catch client handler exceptions.")]
         void OnStdoutRead(IAsyncResult ar)
         {
-            Logger.Log(dbgctx, $"Received stdout signal ({(disposed > 0 ? "dead" : "alive")}).");
-            if (disposed > 0) return;
-            int read = stdoutReadStream.EndRead(ar);
-            if (read <= 0)
+            int read;
+            lock (syncLock)
             {
-                Logger.Log(dbgctx, "Read zero bytes, stream seems closed!");
-                return;
+                Logger.Log(dbgctx, $"Received stdout signal ({(disposed > 0 ? "dead" : "alive")}).");
+
+                if (disposed > 0) return;
+                read = stdoutReadStream.EndRead(ar);
+                if (read <= 0)
+                {
+                    Logger.Log(dbgctx, "Read zero bytes, stream seems closed!");
+                    return;
+                }
+
+                StartReadingStdout();
             }
 
-            StartReadingStdout();
             string msg = Encoding.Default.GetString(stdoutBuffer, 0, read);
             Logger.Log(dbgctx, $"Read {read} bytes from stdout: [{msg}]");
             OutputReceived?.Invoke(this, new ConsoleOutputReceivedEventArgs(msg));
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
         void StartReadingError()
         {
             stderrReadStream.BeginRead(errorBuffer, 0, errorBuffer.Length, OnErrorRead, null);
             Logger.Log(dbgctx, "Start reading from stderr.");
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
         [SuppressMessage("Design", "CA1031", Justification = "Catch client handler exceptions.")]
         void OnErrorRead(IAsyncResult ar)
         {
-            Logger.Log(dbgctx, $"Received error signal ({(disposed > 0 ? "dead" : "alive")}).");
-            if (disposed > 0) return;
-            int read = stderrReadStream.EndRead(ar);
-            if (read <= 0)
+            int read;
+            lock (syncLock)
             {
-                Logger.Log(dbgctx, "Read zero bytes, stream seems closed!");
-                return;
+                Logger.Log(dbgctx, $"Received error signal ({(disposed > 0 ? "dead" : "alive")}).");
+                if (disposed > 0) return;
+                read = stderrReadStream.EndRead(ar);
+                if (read <= 0)
+                {
+                    Logger.Log(dbgctx, "Read zero bytes, stream seems closed!");
+                    return;
+                }
+
+                StartReadingError();
             }
 
-            StartReadingError();
             if (stopEvent.WaitOne(0)) return;
             string msg = Encoding.Default.GetString(errorBuffer, 0, read);
             Logger.Log(dbgctx, $"Read {read} bytes from stderr: [{msg}]");
