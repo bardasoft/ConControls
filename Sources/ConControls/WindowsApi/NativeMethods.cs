@@ -22,6 +22,9 @@ namespace ConControls.WindowsApi
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetConsoleCursorInfo(ConsoleOutputHandle consoleOutputHandle, out CONSOLE_CURSOR_INFO cursorInfo);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool GetConsoleMode(IntPtr consoleInputHandle, out ConsoleInputModes inputMode);
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -52,6 +55,12 @@ namespace ConControls.WindowsApi
             COORD buffersize,
             COORD offset,
             ref SMALL_RECT useRegion);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool SetConsoleCursorInfo(ConsoleOutputHandle consoleOutputHandle, ref CONSOLE_CURSOR_INFO cursorInfo);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool SetConsoleCursorPosition(ConsoleOutputHandle consoleOutputHandle, COORD position);
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SetConsoleMode(ConsoleInputHandle consoleInputHandle, ConsoleInputModes inputMode);

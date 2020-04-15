@@ -7,6 +7,7 @@
 
 using System;
 using System.Drawing;
+using System.Text;
 using ConControls.Controls.Drawing;
 
 namespace ConControls.Controls
@@ -39,6 +40,11 @@ namespace ConControls.Controls
         event EventHandler? Disposed;
 
         /// <summary>
+        /// Gets the original console output encoding
+        /// </summary>
+        Encoding OutputEncoding { get; }
+
+        /// <summary>
         /// The title of the console window.
         /// </summary>
         string Title { get; set; }
@@ -46,6 +52,10 @@ namespace ConControls.Controls
         /// Gets the maximum size of the console window based on the current font and the size of the display.
         /// </summary>
         Size MaximumSize { get; }
+        /// <summary>
+        /// Gets the default cursor size to use (0-100).
+        /// </summary>
+        int CursorSize { get; set; }
         /// <summary>
         /// Gets or sets the default foreground color.
         /// </summary>

@@ -8,7 +8,6 @@
 #nullable enable
 
 using System;
-using ConControls.Controls;
 using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -28,7 +27,7 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
             differentWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(differentWindow);
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            sut.AddRange(new Panel(stubbedWindow), new Panel(differentWindow), new Panel(stubbedWindow));
+            sut.AddRange(new TestControl(stubbedWindow), new TestControl(differentWindow), new TestControl(stubbedWindow));
         }
         [TestMethod]
         public void AddRange_Mutliple_Distinct()
@@ -38,10 +37,10 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new Panel(stubbedWindow);
-            var control2 = new Panel(stubbedWindow);
-            var control3 = new Panel(stubbedWindow);
-            var control4 = new Panel(stubbedWindow);
+            var control1 = new TestControl(stubbedWindow);
+            var control2 = new TestControl(stubbedWindow);
+            var control3 = new TestControl(stubbedWindow);
+            var control4 = new TestControl(stubbedWindow);
             sut.AddRange(control1, null!, control2);
             sut.Count.Should().Be(2);
             sut[0].Should().BeSameAs(control1);
@@ -61,10 +60,10 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new Panel(stubbedWindow);
-            var control2 = new Panel(stubbedWindow);
-            var control3 = new Panel(stubbedWindow);
-            var control4 = new Panel(stubbedWindow);
+            var control1 = new TestControl(stubbedWindow);
+            var control2 = new TestControl(stubbedWindow);
+            var control3 = new TestControl(stubbedWindow);
+            var control4 = new TestControl(stubbedWindow);
 
             int fired = 0;
             sut.ControlCollectionChanged += (sender, e) =>
@@ -97,7 +96,7 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
                 fired = true;
                 Assert.Fail();
             };
-            sut.AddRange((ConsoleControl)null!);
+            sut.AddRange((ConControls.Controls.ConsoleControl)null!);
             fired.Should().BeFalse();
         }
     }

@@ -8,6 +8,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Text;
 using System.Threading;
 using ConControls.ConsoleApi;
 using ConControls.Controls.Drawing;
@@ -26,6 +27,7 @@ namespace ConControls.Controls
     /// may be instantiated at a time. Make sure to dispose of any previously
     /// instantiated contexts before creating a new one.
     /// </remarks>
+    /// <threadsafety static="true" instance="true"/>
     public sealed class ConsoleWindow : IConsoleWindow
     {
         static int instancesCreated;
@@ -59,6 +61,8 @@ namespace ConControls.Controls
 
         /// <inheritdoc />
         public IConsoleWindow Window => this;
+        /// <inheritdoc />
+        public Encoding OutputEncoding { get; } = Console.OutputEncoding;
         /// <inheritdoc />
         public string Title
         {
@@ -97,6 +101,8 @@ namespace ConControls.Controls
                 return new Size(size.X, size.Y);
             }
         }
+        /// <inheritdoc />
+        public int CursorSize { get; set; }
         /// <inheritdoc />
         public ConsoleColor ForegroundColor { get; set; } = ConsoleColor.Gray;
         /// <inheritdoc />
@@ -172,7 +178,8 @@ namespace ConControls.Controls
 
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             this.api = api ?? new NativeCalls();
-            this.consoleListener = consoleListener ?? new ConsoleListener(this.api);
+            this.consoleListener = consoleListener ?? new ConsoleListener(OutputEncoding, this.api);
+            CursorSize = this.api.GetCursorSize(this.consoleListener.OriginalOutputHandle);
 
             this.consoleListener.OutputReceived += OnConsoleListenerOutputReceived;
             this.consoleListener.ErrorReceived += OnConsoleListenerErrorReceived;

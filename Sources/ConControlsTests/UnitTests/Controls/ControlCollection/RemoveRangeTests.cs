@@ -7,7 +7,6 @@
 
 #nullable enable
 
-using ConControls.Controls;
 using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -24,10 +23,10 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new Panel(stubbedWindow);
-            var control2 = new Panel(stubbedWindow);
-            var control3 = new Panel(stubbedWindow);
-            var control4 = new Panel(stubbedWindow);
+            var control1 = new TestControl(stubbedWindow);
+            var control2 = new TestControl(stubbedWindow);
+            var control3 = new TestControl(stubbedWindow);
+            var control4 = new TestControl(stubbedWindow);
             sut.AddRange(control1, control2, control3);
             sut.RemoveRange(control1, null!, control4);
             sut.Should().Equal(control2, control3);
@@ -40,10 +39,10 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new Panel(stubbedWindow);
-            var control2 = new Panel(stubbedWindow);
-            var control3 = new Panel(stubbedWindow);
-            var control4 = new Panel(stubbedWindow);
+            var control1 = new TestControl(stubbedWindow);
+            var control2 = new TestControl(stubbedWindow);
+            var control3 = new TestControl(stubbedWindow);
+            var control4 = new TestControl(stubbedWindow);
             sut.AddRange(control1, control2, control3);
 
             int fired = 0;
@@ -71,7 +70,7 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
                 fired = true;
                 Assert.Fail();
             };
-            sut.RemoveRange(null!, new Panel(stubbedWindow));
+            sut.RemoveRange(null!, new TestControl(stubbedWindow));
             fired.Should().BeFalse();
         }
 

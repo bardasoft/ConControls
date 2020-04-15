@@ -18,6 +18,7 @@ namespace ConControls.Controls
     /// <summary>
     /// Base class for all console controls.
     /// </summary>
+    /// <threadsafety static="true" instance="true"/>
     [SuppressMessage("Design", "CA1001", Justification = "The DisposableBlock does not need to be disposed, its Dispose method has a different purpose.")]
     public abstract class ConsoleControl : IControlContainer
     {
@@ -29,6 +30,9 @@ namespace ConControls.Controls
         string name;
         bool enabled = true;
         bool visible = true;
+        Point cursorPosition;
+        int cursorSize;
+        bool cursorVisible;
 
         ConsoleColor foregroundColor;
         ConsoleColor? focusedForegroundColor;
@@ -68,10 +72,27 @@ namespace ConControls.Controls
         /// </summary>
         public event EventHandler? ParentChanged;
         /// <summary>
+        /// The <see cref="Name"/> of the control has been changed.
+        /// </summary>
+        public event EventHandler? NameChanged;
+        /// <summary>
         /// One or more <see cref="ConsoleControl"/> instances have been added to or
         /// removed from the <see cref="Controls"/> collection of this control.
         /// </summary>
         public event EventHandler<ControlCollectionChangedEventArgs>? ControlCollectionChanged;
+
+        /// <summary>
+        /// The <see cref="CursorPosition"/> of the control has been changed.
+        /// </summary>
+        public event EventHandler? CursorPositionChanged;
+        /// <summary>
+        /// The <see cref="CursorSize"/> of the control has been changed.
+        /// </summary>
+        public event EventHandler? CursorSizeChanged;
+        /// <summary>
+        /// The <see cref="CursorVisible"/> of the control has been changed.
+        /// </summary>
+        public event EventHandler? CursorVisibleChanged;
 
         /// <summary>
         /// The name of this control (merely for debug identification).
@@ -81,8 +102,12 @@ namespace ConControls.Controls
             get { lock(Window.SynchronizationLock) return name; }
             set
             {
-                lock(Window.SynchronizationLock)
+                lock (Window.SynchronizationLock)
+                {
+                    if (name == value) return;
                     name = string.IsNullOrWhiteSpace(value) ? GetType().Name : value.Trim();
+                    OnNameChanged();
+                }
             }
         }
         /// <summary>
@@ -247,7 +272,82 @@ namespace ConControls.Controls
         /// to this control or its parents.
         /// </summary>
         public bool DrawingInhibited => !visible || inhibitDrawing > 0 || parent.DrawingInhibited;
-
+        /// <summary>
+        /// Gets or sets the cursor position for this control in character coordinates of the console
+        /// screen buffer.
+        /// </summary>
+        /// <remarks>
+        /// This property is only used by the <see cref="IConsoleWindow"/> if this control is currently
+        /// focused.
+        /// </remarks>
+        public virtual Point CursorPosition
+        {
+            get
+            {
+                lock (Window.SynchronizationLock) return cursorPosition;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (value == cursorPosition) return;
+                    cursorPosition = value;
+                    OnCursorPositionChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the cursor size for this control.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This value describes the size of the text cursor. It should be between <c>zero</c> and <c>100</c>.
+        /// </para>
+        /// <para>
+        /// This property is only used by the <see cref="IConsoleWindow"/> if this control is
+        /// currently focused.
+        /// </para>
+        /// </remarks>
+        public virtual int CursorSize
+        {
+            get
+            {
+                lock (Window.SynchronizationLock) return cursorSize;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (value == cursorSize) return;
+                    cursorSize = value;
+                    OnCursorSizeChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets wether the cursor is visible on this control.
+        /// screen buffer.
+        /// </summary>
+        /// <remarks>
+        /// This property is only used by the <see cref="IConsoleWindow"/> if this control is
+        /// currently focused.
+        /// </remarks>
+        public virtual bool CursorVisible
+        {
+            get
+            {
+                lock (Window.SynchronizationLock) return cursorVisible;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (value == cursorVisible) return;
+                    cursorVisible = value;
+                    OnCursorVisibleChanged();
+                }
+            }
+        }
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings.
         /// </summary>
@@ -465,6 +565,7 @@ namespace ConControls.Controls
             this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             name = GetType().Name;
+            cursorSize = Window.CursorSize;
 
             Window.KeyEvent += OnKeyEvent;
             Window.MouseEvent += OnMouseEvent;
@@ -480,12 +581,16 @@ namespace ConControls.Controls
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
             this.parent.Controls.Add(this);
         }
+
+
         /// <summary>
         /// Disposes of any used resources and disconnects from the <see cref="Window"/>.
         /// </summary>
+        [SuppressMessage("Design", "CA1063", Justification = "Analyzer mistake")]
         public void Dispose()
         {
-            Dispose(true);
+            lock(Window.SynchronizationLock)
+                Dispose(true);
             GC.SuppressFinalize(this);
         }
         /// <summary>
@@ -557,7 +662,7 @@ namespace ConControls.Controls
         /// <param name="graphics">An <see cref="IConsoleGraphics"/> that performs the drawing operations on
         /// the screen buffer.</param>
         /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
-        public virtual void Draw(IConsoleGraphics graphics)
+        public void Draw(IConsoleGraphics graphics)
         {
             if (graphics == null) throw new ArgumentNullException(nameof(graphics));
             Logger.Log(DebugContext.Control | DebugContext.Drawing, "with graphics called.");
@@ -722,11 +827,18 @@ namespace ConControls.Controls
         }
 
         /// <summary>
+        /// Called when the <see cref="Name"/> has changed.
+        /// </summary>
+        protected virtual void OnNameChanged()
+        {
+            NameChanged?.Invoke(this, EventArgs.Empty);
+        }
+        /// <summary>
         /// Called when the <see cref="Parent"/> has changed.
         /// </summary>
         protected virtual void OnParentChanged()
         {
-            using (DeferDrawing())            
+            using (DeferDrawing())
                 ParentChanged?.Invoke(this, EventArgs.Empty);
         }
         void OnControlCollectionChanged(object sender, ControlCollectionChangedEventArgs e)
@@ -750,6 +862,36 @@ namespace ConControls.Controls
         }
         void OnControlAreaChanged(object sender, EventArgs e) => Invalidate(true);
 
+        /// <summary>
+        /// Called when the <see cref="CursorPosition"/> property of this control has been changed.
+        /// </summary>
+        protected virtual void OnCursorPositionChanged()
+        {
+            using (DeferDrawing())
+            {
+                CursorPositionChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        /// <summary>
+        /// Called when the <see cref="CursorPosition"/> property of this control has been changed.
+        /// </summary>
+        protected virtual void OnCursorSizeChanged()
+        {
+            using (DeferDrawing())
+            {
+                CursorSizeChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        /// <summary>
+        /// Called when the <see cref="CursorPosition"/> property of this control has been changed.
+        /// </summary>
+        protected virtual void OnCursorVisibleChanged()
+        {
+            using (DeferDrawing())
+            {
+                CursorVisibleChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
         /// <summary>
         /// Called when the <see cref="Focused"/> property of this control has been changed.
         /// </summary>

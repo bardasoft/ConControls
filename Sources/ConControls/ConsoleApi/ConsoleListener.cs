@@ -22,6 +22,7 @@ namespace ConControls.ConsoleApi
         const DebugContext dbgctx = DebugContext.ConsoleApi | DebugContext.ConsoleListener;
         readonly object syncLock = new object();
         readonly INativeCalls api;
+        readonly Encoding outputEncoding;
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
         readonly ConsoleOutputModes originalOutputMode;
         readonly ConsoleInputModes originalInputMode;
@@ -47,8 +48,9 @@ namespace ConControls.ConsoleApi
         public ConsoleInputHandle OriginalInputHandle { get; }
         public ConsoleOutputHandle OriginalOutputHandle { get; }
 
-        internal ConsoleListener(INativeCalls? api = null)
+        internal ConsoleListener(Encoding outputEncoding, INativeCalls? api = null)
         {
+            this.outputEncoding = outputEncoding;
             this.api = api ?? new NativeCalls();
             OriginalErrorHandle = this.api.GetErrorHandle();
             OriginalOutputHandle = this.api.GetOutputHandle();
@@ -191,7 +193,7 @@ namespace ConControls.ConsoleApi
                 StartReadingStdout();
             }
 
-            string msg = Encoding.Default.GetString(stdoutBuffer, 0, read);
+            string msg = outputEncoding.GetString(stdoutBuffer, 0, read);
             Logger.Log(dbgctx, $"Read {read} bytes from stdout: [{msg}]");
             OutputReceived?.Invoke(this, new ConsoleOutputReceivedEventArgs(msg));
         }
@@ -218,7 +220,7 @@ namespace ConControls.ConsoleApi
                 StartReadingError();
             }
 
-            string msg = Encoding.Default.GetString(errorBuffer, 0, read);
+            string msg = outputEncoding.GetString(errorBuffer, 0, read);
             Logger.Log(dbgctx, $"Read {read} bytes from stderr: [{msg}]");
             ErrorReceived?.Invoke(this, new ConsoleOutputReceivedEventArgs(msg));
         }

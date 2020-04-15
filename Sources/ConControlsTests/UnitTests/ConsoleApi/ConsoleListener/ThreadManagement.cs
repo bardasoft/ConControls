@@ -36,7 +36,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                 GetInputHandle = () => new ConsoleInputHandle(stdin.SafeWaitHandle.DangerousGetHandle()),
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero)
             };
-            var sut = new ConControls.ConsoleApi.ConsoleListener(api);
+            var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
             (await Task.WhenAny(startTaskSource.Task, Task.Delay(2000)))
                 .Should()
                 .Be(startTaskSource.Task, "Thread start needed more than 2 seconds!");

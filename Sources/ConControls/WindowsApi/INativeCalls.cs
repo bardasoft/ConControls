@@ -16,6 +16,7 @@ namespace ConControls.WindowsApi
         ConsoleOutputModes GetConsoleMode(ConsoleOutputHandle consoleOutputHandle);
         CONSOLE_SCREEN_BUFFER_INFOEX GetConsoleScreenBufferInfo(ConsoleOutputHandle consoleOutputHandle);
         string GetConsoleTitle();
+        int GetCursorSize(ConsoleOutputHandle consoleOutputHandle);
         ConsoleErrorHandle GetErrorHandle();
         ConsoleInputHandle GetInputHandle();
         COORD GetLargestConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle);
@@ -27,6 +28,8 @@ namespace ConControls.WindowsApi
         void SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, COORD size);
         void SetConsoleTitle(string title);
         void SetConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle, Size size);
+        void SetCursorMode(ConsoleOutputHandle consoleOutputHandle, bool visible, int size);
+        void SetCursorPosition(ConsoleOutputHandle consoleOutputHandle, Point position);
         void SetErrorHandle(ConsoleErrorHandle errorHandle);
         void SetInputHandle(ConsoleInputHandle inputHandle);
         void SetOutputHandle(ConsoleOutputHandle outputHandle);

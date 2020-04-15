@@ -38,6 +38,9 @@ namespace ConControls.WindowsApi
                 throw Exceptions.Win32();
             return titleBuilder.ToString();
         }
+        public int GetCursorSize(ConsoleOutputHandle consoleOutputHandle) =>
+            NativeMethods.GetConsoleCursorInfo(consoleOutputHandle, out var info) ? info.Size : throw Exceptions.Win32();
+
         public ConsoleErrorHandle GetErrorHandle() =>
             new ConsoleErrorHandle(NativeMethods.GetStdHandle(NativeMethods.STDERR));
         public ConsoleInputHandle GetInputHandle() =>
@@ -87,6 +90,17 @@ namespace ConControls.WindowsApi
             if (!NativeMethods.SetConsoleWindowInfo(consoleOutputHandle,
                                                     true,
                                                     new SMALL_RECT(size)))
+                throw Exceptions.Win32();
+        }
+        public void SetCursorMode(ConsoleOutputHandle consoleOutputHandle, bool visible, int size)
+        {
+            var cursorInfo = new CONSOLE_CURSOR_INFO {Visible = visible, Size = size};
+            if (!NativeMethods.SetConsoleCursorInfo(consoleOutputHandle, ref cursorInfo))
+                throw Exceptions.Win32();
+        }
+        public void SetCursorPosition(ConsoleOutputHandle consoleOutputHandle, Point position)
+        {
+            if (!NativeMethods.SetConsoleCursorPosition(consoleOutputHandle, new COORD(position)))
                 throw Exceptions.Win32();
         }
         public void SetErrorHandle(ConsoleErrorHandle errorHandle)

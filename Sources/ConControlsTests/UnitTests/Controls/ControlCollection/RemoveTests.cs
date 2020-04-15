@@ -10,7 +10,6 @@
 // ReSharper disable AccessToDisposedClosure
 
 using System;
-using ConControls.Controls;
 using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -34,8 +33,8 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             stubbedWindow.WindowGet = () => stubbedWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             stubbedWindow.ControlsGet = () => sut;
-            var control1 = new Panel(stubbedWindow);
-            var control2 = new Panel(stubbedWindow);
+            var control1 = new TestControl(stubbedWindow);
+            var control2 = new TestControl(stubbedWindow);
             bool called = false;
             sut.Add(control1);
             sut.Add(control2);
@@ -56,13 +55,13 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             stubbedWindow.WindowGet = () => stubbedWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             stubbedWindow.ControlsGet = () => sut;
-            var control3 = new Panel(stubbedWindow);
+            var control3 = new TestControl(stubbedWindow);
             sut.Remove(control3);
             bool called = false;
             // ReSharper disable once UnusedVariable
-            var control1 = new Panel(stubbedWindow);
+            var control1 = new TestControl(stubbedWindow);
             // ReSharper disable once UnusedVariable
-            var control2 = new Panel(stubbedWindow);
+            var control2 = new TestControl(stubbedWindow);
             sut.ControlCollectionChanged += (sender, e) =>
             {
                 called = true;

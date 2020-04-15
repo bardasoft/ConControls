@@ -117,7 +117,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                     return records;
                 }
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(api);
+            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
             sut.KeyEvent += (sender, e) =>
             {
                 e.KeyDown.Should().Be(keyRecord.Event.KeyEvent.KeyDown != 0);
@@ -196,7 +196,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                     return records;
                 }
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(api);
+            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
             using var logger = new TestLogger(CheckInputLogForRecord);
             stdinEvent.Set();
             (await Task.WhenAny(tcs.Task, Task.Delay(2000)))
@@ -227,7 +227,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
                 ReadConsoleInputConsoleInputHandleInt32 = (handle, size) => throw new Exception(message)
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(api);
+            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
             using var logger = new TestLogger(CheckInputLogForException);
             stdinEvent.Set();
             (await Task.WhenAny(tcs.Task, Task.Delay(2000)))

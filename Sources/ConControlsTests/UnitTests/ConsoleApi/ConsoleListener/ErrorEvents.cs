@@ -11,7 +11,6 @@
 
 using System;
 using System.IO;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ConControls.WindowsApi;
@@ -38,7 +37,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
                 SetErrorHandleConsoleErrorHandle = handle => stderrHandle = handle
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(api);
+            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
             sut.ErrorReceived += (sender, e) =>
             {
                 if (e.Output == message)
@@ -46,7 +45,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
             };
             Assert.IsNotNull(stderrHandle);
             using var stderrStream = new FileStream(new SafeFileHandle(stderrHandle!.DangerousGetHandle(), false), FileAccess.Write);
-            var inbytes = Encoding.Default.GetBytes(message);
+            var inbytes = Console.OutputEncoding.GetBytes(message);
             await stderrStream.WriteAsync(inbytes, 0, inbytes.Length);
             await stderrStream.FlushAsync();
             (await Task.WhenAny(errorReceivedSource.Task, Task.Delay(2000)))
@@ -68,7 +67,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
                 SetErrorHandleConsoleErrorHandle = handle => stderrHandle = handle
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(api);
+            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
             Assert.IsNotNull(stderrHandle);
             var fileHandle = new SafeFileHandle(stderrHandle!.DangerousGetHandle(), true);
             fileHandle.Close();

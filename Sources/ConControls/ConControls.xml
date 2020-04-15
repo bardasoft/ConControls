@@ -34,6 +34,7 @@
             <summary>
             Base class for all console controls.
             </summary>
+            <threadsafety static="true" instance="true"/>
         </member>
         <member name="E:ConControls.Controls.ConsoleControl.EnabledChanged">
             <summary>
@@ -60,10 +61,30 @@
             The <see cref="P:ConControls.Controls.ConsoleControl.Parent"/> of the control has been changed.
             </summary>
         </member>
+        <member name="E:ConControls.Controls.ConsoleControl.NameChanged">
+            <summary>
+            The <see cref="P:ConControls.Controls.ConsoleControl.Name"/> of the control has been changed.
+            </summary>
+        </member>
         <member name="E:ConControls.Controls.ConsoleControl.ControlCollectionChanged">
             <summary>
             One or more <see cref="T:ConControls.Controls.ConsoleControl"/> instances have been added to or
             removed from the <see cref="P:ConControls.Controls.ConsoleControl.Controls"/> collection of this control.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleControl.CursorPositionChanged">
+            <summary>
+            The <see cref="P:ConControls.Controls.ConsoleControl.CursorPosition"/> of the control has been changed.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleControl.CursorSizeChanged">
+            <summary>
+            The <see cref="P:ConControls.Controls.ConsoleControl.CursorSize"/> of the control has been changed.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleControl.CursorVisibleChanged">
+            <summary>
+            The <see cref="P:ConControls.Controls.ConsoleControl.CursorVisible"/> of the control has been changed.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.Name">
@@ -131,6 +152,40 @@
             Determines if the control can currently be redrawn, depending on calls to <see cref="M:ConControls.Controls.ConsoleControl.DeferDrawing"/>
             to this control or its parents.
             </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.CursorPosition">
+            <summary>
+            Gets or sets the cursor position for this control in character coordinates of the console
+            screen buffer.
+            </summary>
+            <remarks>
+            This property is only used by the <see cref="T:ConControls.Controls.IConsoleWindow"/> if this control is currently
+            focused.
+            </remarks>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.CursorSize">
+            <summary>
+            Gets or sets the cursor size for this control.
+            </summary>
+            <remarks>
+            <para>
+            This value describes the size of the text cursor. It should be between <c>zero</c> and <c>100</c>.
+            </para>
+            <para>
+            This property is only used by the <see cref="T:ConControls.Controls.IConsoleWindow"/> if this control is
+            currently focused.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.CursorVisible">
+            <summary>
+            Gets or sets wether the cursor is visible on this control.
+            screen buffer.
+            </summary>
+            <remarks>
+            This property is only used by the <see cref="T:ConControls.Controls.IConsoleWindow"/> if this control is
+            currently focused.
+            </remarks>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.ForegroundColor">
             <summary>
@@ -323,9 +378,29 @@
             </summary>
             <returns>A <see cref="T:System.Drawing.Rectangle"/> representing the client area of this control.</returns>
         </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnNameChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Name"/> has changed.
+            </summary>
+        </member>
         <member name="M:ConControls.Controls.ConsoleControl.OnParentChanged">
             <summary>
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/> has changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnCursorPositionChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.CursorPosition"/> property of this control has been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnCursorSizeChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.CursorPosition"/> property of this control has been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnCursorVisibleChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.CursorPosition"/> property of this control has been changed.
             </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.OnFocusedChanged">
@@ -409,6 +484,7 @@
             may be instantiated at a time. Make sure to dispose of any previously
             instantiated contexts before creating a new one.
             </remarks>
+            <threadsafety static="true" instance="true"/>
         </member>
         <member name="E:ConControls.Controls.ConsoleWindow.AreaChanged">
             <inheritdoc />
@@ -431,6 +507,9 @@
         <member name="P:ConControls.Controls.ConsoleWindow.Window">
             <inheritdoc />
         </member>
+        <member name="P:ConControls.Controls.ConsoleWindow.OutputEncoding">
+            <inheritdoc />
+        </member>
         <member name="P:ConControls.Controls.ConsoleWindow.Title">
             <inheritdoc />
         </member>
@@ -444,6 +523,9 @@
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.MaximumSize">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.Controls.ConsoleWindow.CursorSize">
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.ForegroundColor">
@@ -924,6 +1006,11 @@
             Raised when this console window is disposed of.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.IConsoleWindow.OutputEncoding">
+            <summary>
+            Gets the original console output encoding
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.IConsoleWindow.Title">
             <summary>
             The title of the console window.
@@ -932,6 +1019,11 @@
         <member name="P:ConControls.Controls.IConsoleWindow.MaximumSize">
             <summary>
             Gets the maximum size of the console window based on the current font and the size of the display.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IConsoleWindow.CursorSize">
+            <summary>
+            Gets the default cursor size to use (0-100).
             </summary>
         </member>
         <member name="P:ConControls.Controls.IConsoleWindow.ForegroundColor">

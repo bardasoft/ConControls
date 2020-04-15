@@ -7,7 +7,6 @@
 
 #nullable enable
 
-using ConControls.Controls;
 using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,9 +22,9 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             stubbedWindow.WindowGet = () => stubbedWindow;
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             stubbedWindow.ControlsGet = () => sut;
-            var control1 = new Panel(stubbedWindow);
-            var control2 = new Panel(stubbedWindow);
-            var control3 = new Panel(stubbedWindow);
+            var control1 = new TestControl(stubbedWindow);
+            var control2 = new TestControl(stubbedWindow);
+            var control3 = new TestControl(stubbedWindow);
             sut.Should().Equal(control1, control2, control3);
         }
     }
