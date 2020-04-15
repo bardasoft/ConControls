@@ -171,5 +171,75 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                 .Be(allTasks, "events should be processed in less than 2 seconds!");
 
         }
+        [TestMethod]
+        // ReSharper disable once FunctionComplexityOverflow
+        public async Task InputEvents_InvalidRecordType_Logged()
+        {
+            var record = new INPUT_RECORD
+            {
+                EventType = (InputEventType)0xFFFF,
+            };
+            var records = new[] {record};
+            var tcs = new TaskCompletionSource<int>();
+
+            using var stdinEvent = new AutoResetEvent(false);
+            ConsoleInputHandle consoleInputHandle = new ConsoleInputHandle(stdinEvent.SafeWaitHandle.DangerousGetHandle());
+
+            var api = new StubINativeCalls
+            {
+                GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
+                GetInputHandle = () => consoleInputHandle,
+                GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
+                ReadConsoleInputConsoleInputHandleInt32 = (handle, size) =>
+                {
+                    handle.Should().Be(consoleInputHandle);
+                    return records;
+                }
+            };
+            using var sut = new ConControls.ConsoleApi.ConsoleListener(api);
+            using var logger = new TestLogger(CheckInputLogForRecord);
+            stdinEvent.Set();
+            (await Task.WhenAny(tcs.Task, Task.Delay(2000)))
+                .Should()
+                .Be(tcs.Task, "event should be processed in less than 2 seconds!");
+
+            void CheckInputLogForRecord(string msg)
+            {
+                if (msg.Contains("Unkown input record type "))
+                    tcs.SetResult(0);
+            }
+        }
+        [TestMethod]
+        // ReSharper disable once FunctionComplexityOverflow
+        public async Task InputEvents_Exception_Logged()
+        {
+            const string message = "--message--";
+            var tcs = new TaskCompletionSource<int>();
+            int exceptionCount = 0;
+
+            using var stdinEvent = new AutoResetEvent(false);
+            ConsoleInputHandle consoleInputHandle = new ConsoleInputHandle(stdinEvent.SafeWaitHandle.DangerousGetHandle());
+
+            var api = new StubINativeCalls
+            {
+                GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
+                GetInputHandle = () => consoleInputHandle,
+                GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
+                ReadConsoleInputConsoleInputHandleInt32 = (handle, size) => throw new Exception(message)
+            };
+            using var sut = new ConControls.ConsoleApi.ConsoleListener(api);
+            using var logger = new TestLogger(CheckInputLogForException);
+            stdinEvent.Set();
+            (await Task.WhenAny(tcs.Task, Task.Delay(2000)))
+                .Should()
+                .Be(tcs.Task, "event should be processed in less than 2 seconds!");
+
+            void CheckInputLogForException(string msg)
+            {
+                if (!msg.Contains(message)) return;
+                if (Interlocked.Increment(ref exceptionCount) == 2)
+                    tcs.SetResult(0);
+            }
+        }
     }
 }
