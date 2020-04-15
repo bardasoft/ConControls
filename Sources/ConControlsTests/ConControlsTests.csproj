@@ -94,6 +94,9 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\DisabledBorderColorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\DisabledBackgroundColorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\DisabledForegroundColorTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\EffectiveBackgroundColorTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\EffectiveBorderColorTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\EffectiveBorderStyleTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\FocusedBorderStyleTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\FocusedBorderColorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\FocusedBackgroundColorTests.cs" />
@@ -102,6 +105,7 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\ForegroundColorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\CursorVisibleTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\CursorSizeTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\EffectiveForegroundColorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\SizeTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\LocationTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\AreaTests.cs" />

@@ -7,6 +7,7 @@
 
 #nullable enable
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
@@ -20,6 +21,14 @@ namespace ConControlsTests.UnitTests.Controls
     [ExcludeFromCodeCoverage]
     sealed class TestControl : ConControls.Controls.ConsoleControl
     {
+        public bool Focusable { get; set; }
+        public override bool CanFocus => Focusable;
+
+        public ConsoleColor EffForeColor => EffectiveForegroundColor;
+        public ConsoleColor EffBackColor => EffectiveBackgroundColor;
+        public ConsoleColor EffBorderColor => EffectiveBorderColor;
+        public BorderStyle EffBorderStyle => EffectiveBorderStyle;
+
         public Dictionary<string, int> MethodCallCounts { get; } = new Dictionary<string, int>();
         internal TestControl()
             : base(null!) { }
