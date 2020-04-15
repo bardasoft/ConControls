@@ -24,7 +24,7 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             var stubbedWindow = new StubIConsoleWindow();
             stubbedWindow.WindowGet = () => stubbedWindow;
             var differentWindow = new StubIConsoleWindow();
-            stubbedWindow.WindowGet = () => differentWindow;
+            differentWindow.WindowGet = () => differentWindow;
             stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
             differentWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(differentWindow);
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);

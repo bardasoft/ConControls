@@ -177,7 +177,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
         {
             var record = new INPUT_RECORD
             {
-                EventType = (InputEventType)0xFFFF,
+                EventType = (InputEventType)0xFFFF
             };
             var records = new[] {record};
             var tcs = new TaskCompletionSource<int>();

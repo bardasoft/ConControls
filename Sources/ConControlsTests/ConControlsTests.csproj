@@ -97,6 +97,8 @@
     <Compile Include="UnitTests\Controls\ControlCollection\RemoveTests.cs" />
     <Compile Include="UnitTests\Controls\ControlCollection\AddTests.cs" />
     <Compile Include="UnitTests\Controls\ControlCollection\ControlCollectionTests.cs" />
+    <Compile Include="UnitTests\Controls\Drawing\ConsoleGraphics\DrawBackgroundtests.cs" />
+    <Compile Include="UnitTests\Controls\Drawing\ConsoleGraphics\ConsoleGraphicsTests.cs" />
     <Compile Include="UnitTests\Controls\Drawing\FrameCharSets\FrameCharSetsTests.cs" />
     <Compile Include="Examples\ProgressBarExample.cs" />
     <Compile Include="UnitTests\Helpers\DisposableBlock\DispoableBlockTests.cs" />
