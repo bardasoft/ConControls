@@ -23,7 +23,6 @@ namespace ConControls.ConsoleApi
         readonly object syncLock = new object();
         readonly INativeCalls api;
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
-        readonly Thread thread;
         readonly ConsoleOutputModes originalOutputMode;
         readonly ConsoleInputModes originalInputMode;
 
@@ -75,8 +74,7 @@ namespace ConControls.ConsoleApi
                                     ConsoleInputModes.EnableExtendedFlags);
             this.api.SetConsoleMode(OriginalOutputHandle, ConsoleOutputModes.None);
 
-            thread = new Thread(ListenerThread);
-            thread.Start();
+            new Thread(ListenerThread).Start();
         }
 
         public void Dispose()
@@ -93,9 +91,6 @@ namespace ConControls.ConsoleApi
                 stdoutReadStream.Dispose();
                 stderrReadStream.Dispose();
             }
-
-            thread.Join();
-            Logger.Log(dbgctx, "Thread finally finished.");
             stopEvent.Dispose();
             api.SetConsoleMode(OriginalInputHandle, originalInputMode);
             api.SetConsoleMode(OriginalOutputHandle, originalOutputMode);
@@ -155,7 +150,7 @@ namespace ConControls.ConsoleApi
                             SizeEvent?.Invoke(this, new ConsoleSizeEventArgs(record.Event.SizeEvent));
                             break;
                         case InputEventType.Menu:
-                            MenuEvent?.Invoke(this, new ConsoleMenuEventArgs(record.Event.MenuEent));
+                            MenuEvent?.Invoke(this, new ConsoleMenuEventArgs(record.Event.MenuEvent));
                             break;
                         case InputEventType.Focus:
                             FocusEvent?.Invoke(this, new ConsoleFocusEventArgs(record.Event.FocusEvent));

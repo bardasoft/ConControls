@@ -8,29 +8,32 @@
 #nullable enable
 
 using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using ConControls.Logging;
 
 namespace ConControlsTests 
 {
     [ExcludeFromCodeCoverage]
-    public sealed class FileLogger : IDisposable
+    public sealed class FileLogger : TraceListener
     {
         readonly string file;
         public FileLogger(string file)
         {
             this.file = file;
             File.WriteAllText(this.file, $"[{Thread.CurrentThread.ManagedThreadId}]{nameof(ConControls)} test starting.{Environment.NewLine}");
-            Logger.Logged += Write;
+            Debug.Listeners.Add(this);
         }
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            Logger.Logged -= Write;
+            Debug.Listeners.Remove(this);
+            base.Dispose(disposing);
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
-        void Write(string message) => File.AppendAllLines(file, new[] {message});
+        public override void Write(string message) => File.AppendAllText(file, message);
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public override void WriteLine(string message) => File.AppendAllLines(file, new[] {message});
     }
 }

@@ -24,7 +24,7 @@ namespace ConControls.WindowsApi.Types
             [FieldOffset(0)]
             public WINDOW_BUFFER_SIZE_RECORD SizeEvent;
             [FieldOffset(0)]
-            public MENU_EVENT_RECORD MenuEent;
+            public MENU_EVENT_RECORD MenuEvent;
             [FieldOffset(0)]
             public FOCUS_EVENT_RECORD FocusEvent;
         }

@@ -12,7 +12,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ConControls.Logging;
 using ConControls.WindowsApi;
 using ConControls.WindowsApi.Fakes;
 using FluentAssertions;
@@ -30,31 +29,24 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
             bool threadStartLogged = false, threadEndLogged = false;
 
             using var stdin = new ManualResetEvent(false);
-            Logger.Logged += CheckLog;
-            try
+            using var logger = new TestLogger(CheckLog);
+            var api = new StubINativeCalls
             {
-                var api = new StubINativeCalls
-                {
-                    GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
-                    GetInputHandle = () => new ConsoleInputHandle(stdin.SafeWaitHandle.DangerousGetHandle()),
-                    GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero)
-                };
-                var sut = new ConControls.ConsoleApi.ConsoleListener(api);
-                (await Task.WhenAny(startTaskSource.Task, Task.Delay(2000)))
-                    .Should()
-                    .Be(startTaskSource.Task, "Thread start needed more than 2 seconds!");
-                threadStartLogged.Should().BeTrue();
-                sut.Dispose();
-                (await Task.WhenAny(endTaskSource.Task, Task.Delay(2000)))
-                    .Should()
-                    .Be(endTaskSource.Task, "Thread stop needed more than 2 seconds!");
-                threadEndLogged.Should().BeTrue();
-                sut.Dispose(); // should not fail
-            }
-            finally
-            {
-                Logger.Logged -= CheckLog;
-            }
+                GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
+                GetInputHandle = () => new ConsoleInputHandle(stdin.SafeWaitHandle.DangerousGetHandle()),
+                GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero)
+            };
+            var sut = new ConControls.ConsoleApi.ConsoleListener(api);
+            (await Task.WhenAny(startTaskSource.Task, Task.Delay(2000)))
+                .Should()
+                .Be(startTaskSource.Task, "Thread start needed more than 2 seconds!");
+            threadStartLogged.Should().BeTrue();
+            sut.Dispose();
+            (await Task.WhenAny(endTaskSource.Task, Task.Delay(2000)))
+                .Should()
+                .Be(endTaskSource.Task, "Thread stop needed more than 2 seconds!");
+            threadEndLogged.Should().BeTrue();
+            sut.Dispose(); // should not fail
 
             void CheckLog(string msg)
             {

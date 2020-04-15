@@ -14,7 +14,6 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ConControls.Logging;
 using ConControls.WindowsApi;
 using ConControls.WindowsApi.Fakes;
 using FluentAssertions;
@@ -60,29 +59,22 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
         {
             TaskCompletionSource<int> closeLoggedSource = new TaskCompletionSource<int>();
             ConsoleOutputHandle? stdoutHandle = null;
-            Logger.Logged += CheckOutputLog;
-            try
+            using var logger = new TestLogger(CheckOutputLog);
+            using var stdin = new ManualResetEvent(false);
+            var api = new StubINativeCalls
             {
-                using var stdin = new ManualResetEvent(false);
-                var api = new StubINativeCalls
-                {
-                    GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
-                    GetInputHandle = () => new ConsoleInputHandle(stdin.SafeWaitHandle.DangerousGetHandle()),
-                    GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
-                    SetOutputHandleConsoleOutputHandle = handle => stdoutHandle = handle
-                };
-                using var sut = new ConControls.ConsoleApi.ConsoleListener(api);
-                Assert.IsNotNull(stdoutHandle);
-                var fileHandle = new SafeFileHandle(stdoutHandle!.DangerousGetHandle(), true);
-                fileHandle.Close();
-                (await Task.WhenAny(closeLoggedSource.Task, Task.Delay(5000)))
-                    .Should()
-                    .Be(closeLoggedSource.Task, "Closing should be done in less than 5 seconds!");
-            }
-            finally
-            {
-                Logger.Logged -= CheckOutputLog;
-            }
+                GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
+                GetInputHandle = () => new ConsoleInputHandle(stdin.SafeWaitHandle.DangerousGetHandle()),
+                GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
+                SetOutputHandleConsoleOutputHandle = handle => stdoutHandle = handle
+            };
+            using var sut = new ConControls.ConsoleApi.ConsoleListener(api);
+            Assert.IsNotNull(stdoutHandle);
+            var fileHandle = new SafeFileHandle(stdoutHandle!.DangerousGetHandle(), true);
+            fileHandle.Close();
+            (await Task.WhenAny(closeLoggedSource.Task, Task.Delay(5000)))
+                .Should()
+                .Be(closeLoggedSource.Task, "Closing should be done in less than 5 seconds!");
 
             void CheckOutputLog(string msg)
             {
