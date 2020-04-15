@@ -22,11 +22,12 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
     public partial class ConsoleGraphicsTests
     {
         [TestMethod]
-        public void DrawBackground_CorrectArea_FilledCorrectly()
+        public void FillArea_CorrectArea_FilledCorrectly()
         {
+            const ConsoleColor foreground = ConsoleColor.Blue;
             const ConsoleColor background = ConsoleColor.Green;
-            const char expectedCharacter = default;
-            ConCharAttributes attributes = background.ToForegroundColor() | background.ToBackgroundColor();
+            const char character = 'X';
+            ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
             CHAR_INFO cc = new CHAR_INFO
             {
@@ -37,7 +38,7 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
             CHAR_INFO c0 = new CHAR_INFO
             {
                 Attributes = attributes,
-                Char = expectedCharacter
+                Char = character
             };
             var expectedBuffer = new[]
             {
@@ -68,8 +69,10 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
             };
             var sut = new ConControls.Controls.Drawing.ConsoleGraphics(outputHanlde, stubbedApi, size,
                                                                        new ConControls.Controls.Drawing.FrameCharSets());
-            sut.DrawBackground(
-                color: background,
+            sut.FillArea(
+                background: background, 
+                foreColor: foreground,
+                c: character, 
                 area: new Rectangle(1, 1, 2, 2));
 
             written.Should().BeFalse();
@@ -79,11 +82,12 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
             successful.Should().BeTrue();
         }
         [TestMethod]
-        public void DrawBackground_AreaTooLarge_ClippedCorrectly()
+        public void FillArea_AreaTooLarge_ClippedCorrectly()
         {
+            const ConsoleColor foreground = ConsoleColor.Blue;
             const ConsoleColor background = ConsoleColor.Green;
-            const char expectedCharacter = default;
-            ConCharAttributes attributes = background.ToForegroundColor() | background.ToBackgroundColor();
+            const char character = 'X';
+            ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
             CHAR_INFO cc = new CHAR_INFO
             {
@@ -94,7 +98,7 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
             CHAR_INFO c0 = new CHAR_INFO
             {
                 Attributes = attributes,
-                Char = expectedCharacter
+                Char = character
             };
             var expectedBuffer = Enumerable.Repeat(c0, 16).ToArray();
 
@@ -119,8 +123,10 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
             };
             var sut = new ConControls.Controls.Drawing.ConsoleGraphics(outputHanlde, stubbedApi, size,
                                                                        new ConControls.Controls.Drawing.FrameCharSets());
-            sut.DrawBackground(
-                color: background,
+            sut.FillArea(
+                background: background,
+                foreColor: foreground,
+                c: character,
                 area: new Rectangle(-1, -1, 7, 7));
 
             written.Should().BeFalse();

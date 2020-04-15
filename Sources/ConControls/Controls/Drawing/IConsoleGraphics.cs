@@ -13,10 +13,12 @@ namespace ConControls.Controls.Drawing
     /// <summary>
     /// Provides methods to draw on the console.
     /// </summary>
-    /// <remarks>This interface represents an abstraction layer for <see cref="ConsoleControl"/> instances
+    /// <remarks>
+    /// This interface represents an abstraction layer for <see cref="ConsoleControl"/> instances
     /// to draw on the console screen buffer. It is implemented by the internal class <c>ConsoleGraphics</c>.<br/>
     /// An instance of this interface must be provided by <see cref="IConsoleWindow.GetGraphics">IConsoleWindow.GetGraphics</see>
-    /// to enable controls to draw themselves.</remarks>
+    /// to enable controls to draw themselves.
+    /// </remarks>
     public interface IConsoleGraphics
     {
         /// <summary>
@@ -41,6 +43,16 @@ namespace ConControls.Controls.Drawing
         /// <param name="foreColor">The foreground color to use.</param>
         /// <param name="c">The character to use.</param>
         /// <param name="area">The area to fill.</param>
+        /// <remarks>
+        /// <para>
+        /// Fills the specified rectangle of the cached buffer
+        /// with the given characters and colors. Character cells outside
+        /// of the boundaries of the cached buffer will be ignored.
+        /// </para>
+        /// <para>
+        /// The changed area will be written to the console screen buffer only when
+        /// <see cref="Flush"/> is called.
+        /// </para></remarks>
         void FillArea(ConsoleColor background, ConsoleColor foreColor, char c, Rectangle area);
         /// <summary>
         /// Flushes the internal buffer to the console screen buffer.

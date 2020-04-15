@@ -672,18 +672,6 @@
             The vertical line of a bold-lined frame.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.Drawing.ConsoleGraphics.DrawBackground(System.ConsoleColor,System.Drawing.Rectangle)">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.Controls.Drawing.ConsoleGraphics.DrawBorder(System.ConsoleColor,System.ConsoleColor,ConControls.Controls.BorderStyle,System.Drawing.Rectangle)">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.Controls.Drawing.ConsoleGraphics.FillArea(System.ConsoleColor,System.ConsoleColor,System.Char,System.Drawing.Rectangle)">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.Controls.Drawing.ConsoleGraphics.Flush">
-            <inheritdoc />
-        </member>
         <member name="T:ConControls.Controls.Drawing.DoubleLinedFrameCharSet">
             <summary>
             A <see cref="T:ConControls.Controls.Drawing.FrameCharSet"/> for double-lined frames.
@@ -813,10 +801,12 @@
             <summary>
             Provides methods to draw on the console.
             </summary>
-            <remarks>This interface represents an abstraction layer for <see cref="T:ConControls.Controls.ConsoleControl"/> instances
+            <remarks>
+            This interface represents an abstraction layer for <see cref="T:ConControls.Controls.ConsoleControl"/> instances
             to draw on the console screen buffer. It is implemented by the internal class <c>ConsoleGraphics</c>.<br/>
             An instance of this interface must be provided by <see cref="M:ConControls.Controls.IConsoleWindow.GetGraphics">IConsoleWindow.GetGraphics</see>
-            to enable controls to draw themselves.</remarks>
+            to enable controls to draw themselves.
+            </remarks>
         </member>
         <member name="M:ConControls.Controls.Drawing.IConsoleGraphics.DrawBackground(System.ConsoleColor,System.Drawing.Rectangle)">
             <summary>
@@ -843,6 +833,16 @@
             <param name="foreColor">The foreground color to use.</param>
             <param name="c">The character to use.</param>
             <param name="area">The area to fill.</param>
+            <remarks>
+            <para>
+            Fills the specified rectangle of the cached buffer
+            with the given characters and colors. Character cells outside
+            of the boundaries of the cached buffer will be ignored.
+            </para>
+            <para>
+            The changed area will be written to the console screen buffer only when
+            <see cref="M:ConControls.Controls.Drawing.IConsoleGraphics.Flush"/> is called.
+            </para></remarks>
         </member>
         <member name="M:ConControls.Controls.Drawing.IConsoleGraphics.Flush">
             <summary>
