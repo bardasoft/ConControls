@@ -19,7 +19,8 @@
     <AssemblyOriginatorKeyFile>René Vogt.pfx</AssemblyOriginatorKeyFile>
     <Company />
     <PackageOutputPath>..\..\nuget</PackageOutputPath>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageReleaseNotes>For complete release notes see https://github.com/ReneVogt/ConControls/blob/master/ReleaseNotes.md</PackageReleaseNotes>
     <PackageTags>windows console ui</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
