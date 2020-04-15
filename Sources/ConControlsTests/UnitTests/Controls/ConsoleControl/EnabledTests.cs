@@ -17,12 +17,13 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
     public partial class ConsoleControlTests
     {
         [TestMethod]
-        public void Name_Changed_ThreadSafeHandlerCall()
+        public void Enabled_Changed_ThreadSafeHandlerCall()
         {
             object syncLock = new object();
             var stubbedWindow = new StubIConsoleWindow
             {
                 SynchronizationLockGet = () => syncLock,
+                EnabledGet = () => true,
                 GetGraphics = () => new StubIConsoleGraphics()
             };
             stubbedWindow.WindowGet = () => stubbedWindow;
@@ -30,29 +31,29 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow);
-            sut.Name.Should().Be(nameof(TestControl));
+            sut.Enabled.Should().BeTrue();
             bool eventRaised = false;
-            sut.NameChanged += (sender, e) =>
+            sut.EnabledChanged += (sender, e) =>
             {
                 sender.Should().Be(sut);
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnNameChanged").Should().BeFalse();
+            sut.MethodCallCounts.ContainsKey("OnEnabledChanged").Should().BeFalse();
             eventRaised.Should().BeFalse();
-            const string alt = "alt";
-            sut.Name = alt;
-            sut.Name.Should().Be(alt);
-            sut.MethodCallCounts["OnNameChanged"].Should().Be(1);
+            sut.Enabled = false;
+            sut.Enabled.Should().BeFalse();
+            sut.MethodCallCounts["OnEnabledChanged"].Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
-        public void Name_NotChanged_NoEvent()
+        public void Enabled_NotChanged_NoEvent()
         {
             object syncLock = new object();
             var stubbedWindow = new StubIConsoleWindow
             {
                 SynchronizationLockGet = () => syncLock,
+                EnabledGet = () => true,
                 GetGraphics = () => new StubIConsoleGraphics()
             };
             stubbedWindow.WindowGet = () => stubbedWindow;
@@ -60,47 +61,18 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow);
-            sut.Name.Should().Be(nameof(TestControl));
             bool eventRaised = false;
-            sut.NameChanged += (sender, e) =>
+            sut.EnabledChanged += (sender, e) =>
             {
                 sender.Should().Be(sut);
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnNameChanged").Should().BeFalse();
-            sut.Name = sut.Name;
-            sut.Name.Should().Be(nameof(TestControl));
-            sut.MethodCallCounts.ContainsKey("OnNameChanged").Should().BeFalse();
+            sut.MethodCallCounts.ContainsKey("OnEnabledChanged").Should().BeFalse();
+            sut.Enabled = sut.Enabled;
+            sut.Enabled.Should().BeTrue();
+            sut.MethodCallCounts.ContainsKey("OnEnabledChanged").Should().BeFalse();
             eventRaised.Should().BeFalse();
-        }
-        [TestMethod]
-        public void Name_Null_Default()
-        {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
-
-            var sut = new TestControl(stubbedWindow);
-            sut.Name = "different";
-            bool eventRaised = false;
-            sut.NameChanged += (sender, e) =>
-            {
-                sender.Should().Be(sut);
-                eventRaised = true;
-            };
-
-            sut.MethodCallCounts.ContainsKey("OnNameChanged").Should().BeTrue();
-            sut.Name = null!;
-            sut.Name.Should().Be(nameof(TestControl));
-            sut.MethodCallCounts["OnNameChanged"].Should().Be(2);
-            eventRaised.Should().BeTrue();
         }
     }
 }

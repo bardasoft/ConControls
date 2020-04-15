@@ -8,13 +8,16 @@
 #nullable enable
 
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using ConControls.Controls;
 using ConControls.Controls.Drawing;
 using FluentAssertions;
 
-namespace ConControlsTests.UnitTests.Controls {
+namespace ConControlsTests.UnitTests.Controls 
+{
+    [ExcludeFromCodeCoverage]
     sealed class TestControl : ConControls.Controls.ConsoleControl
     {
         public Dictionary<string, int> MethodCallCounts { get; } = new Dictionary<string, int>();

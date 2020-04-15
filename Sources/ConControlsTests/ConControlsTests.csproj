@@ -87,6 +87,11 @@
     <Compile Include="UnitTests\ConsoleApi\ConsoleListener\OutputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleListener\InputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleListener\ConsoleListenerTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\SizeTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\LocationTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\AreaTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\VisibleTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\EnabledTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\NameTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConstructorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConsoleControlTests.cs" />
