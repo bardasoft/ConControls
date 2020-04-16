@@ -15,63 +15,33 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
     {
         [TestMethod]
         public void Controls_Inconclusive()
-        { }
-        //[TestMethod]
-        //public void Area_Changed_ThreadSafeHandlerCall()
-        //{
-        //    object syncLock = new object();
-        //    var stubbedWindow = new StubIConsoleWindow
-        //    {
-        //        SynchronizationLockGet = () => syncLock,
-        //        GetGraphics = () => new StubIConsoleGraphics()
-        //    };
-        //    stubbedWindow.WindowGet = () => stubbedWindow;
-        //    var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-        //    stubbedWindow.ControlsGet = () => controlsCollection;
+        {
+            //    object syncLock = new object();
+            //    var stubbedWindow = new StubIConsoleWindow
+            //    {
+            //        SynchronizationLockGet = () => syncLock,
+            //        GetGraphics = () => new StubIConsoleGraphics()
+            //    };
+            //    stubbedWindow.WindowGet = () => stubbedWindow;
+            //    var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
+            //    stubbedWindow.ControlsGet = () => controlsCollection;
 
-        //    var sut = new TestControl(stubbedWindow);
-        //    sut.Area.Should().Be(Rectangle.Empty);
-        //    bool eventRaised = false;
-        //    sut.AreaChanged += (sender, e) =>
-        //    {
-        //        sender.Should().Be(sut);
-        //        eventRaised = true;
-        //    };
+            //    var sut = new TestControl(stubbedWindow);
+            //    sut.Area.Should().Be(Rectangle.Empty);
+            //    bool eventRaised = false;
+            //    sut.AreaChanged += (sender, e) =>
+            //    {
+            //        sender.Should().Be(sut);
+            //        eventRaised = true;
+            //    };
 
-        //    sut.MethodCallCounts.ContainsKey("OnAreaChanged").Should().BeFalse();
-        //    eventRaised.Should().BeFalse();
-        //    var rect = new Rectangle(1, 2, 3, 4);
-        //    sut.Area = rect;
-        //    sut.Area.Should().Be(rect);
-        //    sut.MethodCallCounts["OnAreaChanged"].Should().Be(1);
-        //    eventRaised.Should().BeTrue();
-        //}
-        //[TestMethod]
-        //public void Area_NotChanged_NoEvent()
-        //{
-        //    object syncLock = new object();
-        //    var stubbedWindow = new StubIConsoleWindow
-        //    {
-        //        SynchronizationLockGet = () => syncLock,
-        //        GetGraphics = () => new StubIConsoleGraphics()
-        //    };
-        //    stubbedWindow.WindowGet = () => stubbedWindow;
-        //    var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-        //    stubbedWindow.ControlsGet = () => controlsCollection;
-
-        //    var sut = new TestControl(stubbedWindow);
-        //    bool eventRaised = false;
-        //    sut.AreaChanged += (sender, e) =>
-        //    {
-        //        sender.Should().Be(sut);
-        //        eventRaised = true;
-        //    };
-
-        //    sut.MethodCallCounts.ContainsKey("OnAreaChanged").Should().BeFalse();
-        //    sut.Area = sut.Area;
-        //    sut.Area.Should().Be(Rectangle.Empty);
-        //    sut.MethodCallCounts.ContainsKey("OnAreaChanged").Should().BeFalse();
-        //    eventRaised.Should().BeFalse();
-        //}
+            //    sut.MethodCallCounts.ContainsKey("OnAreaChanged").Should().BeFalse();
+            //    eventRaised.Should().BeFalse();
+            //    var rect = new Rectangle(1, 2, 3, 4);
+            //    sut.Area = rect;
+            //    sut.Area.Should().Be(rect);
+            //    sut.MethodCallCounts["OnAreaChanged"].Should().Be(1);
+            //    eventRaised.Should().BeTrue();
+        }
     }
 }
