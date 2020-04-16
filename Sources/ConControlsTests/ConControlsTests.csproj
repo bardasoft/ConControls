@@ -87,6 +87,12 @@
     <Compile Include="UnitTests\ConsoleApi\ConsoleListener\OutputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleListener\InputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleListener\ConsoleListenerTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\OnMouseEventTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\OnStdErrEventTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\OnStdOutEventTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\OnKeyEventTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\CheckDisposedTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\GetClientAreaTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\BorderStyleTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\BorderColorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\CursorPositionTests.cs" />

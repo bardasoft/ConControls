@@ -567,10 +567,10 @@ namespace ConControls.Controls
             name = GetType().Name;
             cursorSize = Window.CursorSize;
 
-            Window.KeyEvent += OnKeyEvent;
-            Window.MouseEvent += OnMouseEvent;
-            Window.StdOutEvent += OnStdOutEvent;
-            Window.StdErrEvent += OnStdErrEvent;
+            Window.KeyEvent += OnWindowKeyEvent;
+            Window.MouseEvent += OnWindowMouseEvent;
+            Window.StdOutEvent += OnWindowStdOutEvent;
+            Window.StdErrEvent += OnWindowStdErrEvent;
 
             foregroundColor = Window.ForegroundColor;
             backgroundColor = Window.BackgroundColor;
@@ -600,10 +600,10 @@ namespace ConControls.Controls
         {
             if (Interlocked.CompareExchange(ref disposed, 1, 0) != 0) return;
             if (!disposing) return;
-            Window.KeyEvent -= OnKeyEvent;
-            Window.MouseEvent -= OnMouseEvent;
-            Window.StdOutEvent -= OnStdOutEvent;
-            Window.StdErrEvent -= OnStdErrEvent;
+            Window.KeyEvent -= OnWindowKeyEvent;
+            Window.MouseEvent -= OnWindowMouseEvent;
+            Window.StdOutEvent -= OnWindowStdOutEvent;
+            Window.StdErrEvent -= OnWindowStdErrEvent;
         }
 
         /// <summary>
@@ -970,23 +970,43 @@ namespace ConControls.Controls
         /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
         /// <param name="e">The event details.</param>
         protected virtual void OnKeyEvent(object sender, KeyEventArgs e) { }
+        void OnWindowKeyEvent(object sender, KeyEventArgs e)
+        {
+            lock (Window.SynchronizationLock)
+                OnKeyEvent(sender, e);
+        }
         /// <summary>
         /// Called when a <see cref="IConsoleWindow.MouseEvent"/> has been received.
         /// </summary>
         /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
         /// <param name="e">The event details.</param>
         protected virtual void OnMouseEvent(object sender, MouseEventArgs e) { }
+        void OnWindowMouseEvent(object sender, MouseEventArgs e)
+        {
+            lock (Window.SynchronizationLock)
+                OnMouseEvent(sender, e);
+        }
         /// <summary>
         /// Called when a <see cref="IConsoleWindow.StdOutEvent"/> has been received.
         /// </summary>
         /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
         /// <param name="e">The event details.</param>
         protected virtual void OnStdOutEvent(object sender, StdOutEventArgs e) { }
+        void OnWindowStdOutEvent(object sender, StdOutEventArgs e)
+        {
+            lock (Window.SynchronizationLock)
+                OnStdOutEvent(sender, e);
+        }
         /// <summary>
         /// Called when a <see cref="IConsoleWindow.StdErrEvent"/> has been received.
         /// </summary>
         /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
         /// <param name="e">The event details.</param>
         protected virtual void OnStdErrEvent(object sender, StdErrEventArgs e) { }
+        void OnWindowStdErrEvent(object sender, StdErrEventArgs e)
+        {
+            lock (Window.SynchronizationLock)
+                OnStdErrEvent(sender, e);
+        }
     }
 }

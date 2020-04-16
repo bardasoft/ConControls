@@ -10,6 +10,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using ConControls.Controls;
@@ -21,8 +22,14 @@ namespace ConControlsTests.UnitTests.Controls
     [ExcludeFromCodeCoverage]
     sealed class TestControl : ConControls.Controls.ConsoleControl
     {
-        public bool Focusable { get; set; }
-        public override bool CanFocus => Focusable;
+        public bool? Focusable { get; set; }
+        public Rectangle ClientArea => GetClientArea();
+        public override bool CanFocus => Focusable ?? base.CanFocus;
+        public void DoCheckDisposed() => CheckDisposed();
+        public void DisposeInternal(bool disposing)
+        {
+            lock (Window.SynchronizationLock) Dispose(disposing);
+        }
 
         public ConsoleColor EffForeColor => EffectiveForegroundColor;
         public ConsoleColor EffBackColor => EffectiveBackgroundColor;
