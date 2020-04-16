@@ -254,8 +254,8 @@ namespace ConControls.Controls
                     { 
                         var oldparent = parent;
                         parent = value;
-                        oldparent?.Controls.Remove(this);
-                        parent?.Controls.Add(this);
+                        oldparent.Controls.Remove(this);
+                        parent.Controls.Add(this);
                     }
 
                     OnParentChanged();

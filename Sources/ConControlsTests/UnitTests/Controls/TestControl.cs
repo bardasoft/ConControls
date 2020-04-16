@@ -15,16 +15,18 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using ConControls.Controls;
 using ConControls.Controls.Drawing;
+using ConControls.Helpers;
 using FluentAssertions;
 
 namespace ConControlsTests.UnitTests.Controls 
 {
     [ExcludeFromCodeCoverage]
-    sealed class TestControl : ConControls.Controls.ConsoleControl
+    sealed class TestControl : ConControls.Controls.ConsoleControl, IControlContainer
     {
         public bool? Focusable { get; set; }
         public Rectangle ClientArea => GetClientArea();
         public override bool CanFocus => Focusable ?? base.CanFocus;
+        
         public void DoCheckDisposed() => CheckDisposed();
         public void DisposeInternal(bool disposing)
         {
@@ -38,9 +40,12 @@ namespace ConControlsTests.UnitTests.Controls
 
         public Dictionary<string, int> MethodCallCounts { get; } = new Dictionary<string, int>();
         internal TestControl()
-            : base(null!) { }
+            : this(null!) { }
         internal TestControl(IControlContainer parent)
-            : base(parent) { }
+            : base(parent)
+        {
+            deferrer = new DisposableBlock(() => OnDeferDrawingDisposed?.Invoke());
+        }
         protected override void Dispose(bool disposing)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
@@ -201,6 +206,12 @@ namespace ConControlsTests.UnitTests.Controls
                 MethodCallCounts[caller] = MethodCallCounts.TryGetValue(caller, out int v)
                                                ? v + 1
                                                : 1;
+        }
+        public event Action? OnDeferDrawingDisposed;
+        readonly DisposableBlock deferrer;
+        IDisposable IControlContainer.DeferDrawing()
+        {
+            return deferrer;
         }
     }
 }
