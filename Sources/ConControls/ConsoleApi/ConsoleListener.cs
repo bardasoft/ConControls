@@ -234,6 +234,7 @@ namespace ConControls.ConsoleApi
         void OnSizeDetectingTimer(object? state) => DetectSizeChange();
         void DetectSizeChange(bool forceEvent = false)
         {
+            ConsoleSizeEventArgs e;
             lock (syncLock)
             {
                 var record = api.GetConsoleScreenBufferInfo(OriginalOutputHandle);
@@ -247,8 +248,10 @@ namespace ConControls.ConsoleApi
                 if (!forceEvent && bufferSize == BufferSize && windowArea == WindowArea) return;
                 BufferSize = bufferSize;
                 WindowArea = windowArea;
-                SizeEvent?.Invoke(this, new ConsoleSizeEventArgs(WindowArea, BufferSize));
+                e = new ConsoleSizeEventArgs(WindowArea, BufferSize);
             }
+
+            SizeEvent?.Invoke(this, e);
         }
     }
 }

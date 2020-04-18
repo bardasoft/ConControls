@@ -626,10 +626,11 @@ namespace ConControls.Controls
         /// This avoids drawing the border and background.</param>
         public void Invalidate(bool onlyClientArea = false)
         {
-            if (onlyClientArea)
-                DrawClientArea(Window.GetGraphics());
-            else
-                Draw();
+            lock(Window.SynchronizationLock)
+                if (onlyClientArea)
+                    DrawClientArea(Window.GetGraphics());
+                else
+                    Draw();
         }
         /// <summary>
         /// Redraws the control.
