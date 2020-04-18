@@ -637,27 +637,6 @@ namespace ConControls.Controls
                     Draw();
         }
         /// <summary>
-        /// Redraws the control.
-        /// </summary>
-        protected virtual void Draw()
-        {
-            Logger.Log(DebugContext.Control | DebugContext.Drawing, "parameterless called.");
-            lock (Window.SynchronizationLock)
-            {
-                if (DrawingInhibited)
-                {
-                    Logger.Log(DebugContext.Control | DebugContext.Drawing, "drawing inhibited.");
-                    return;
-                }
-                Logger.Log(DebugContext.Control | DebugContext.Drawing, "Getting graphics object.");
-                var graphics = Window.GetGraphics();
-                Logger.Log(DebugContext.Control | DebugContext.Drawing, "Start drawing.");
-                Draw(graphics);
-                Logger.Log(DebugContext.Control | DebugContext.Drawing, "Flushing.");
-                graphics.Flush();
-            }
-        }
-        /// <summary>
         /// Draws the control onto the console screen buffer.
         /// When overwriting this method, make sure to use the <see cref="IConsoleWindow.SynchronizationLock"/>
         /// to synchronize threads and to call <see cref="CheckDisposed"/> to check if the window has not yet
@@ -667,11 +646,9 @@ namespace ConControls.Controls
         /// <param name="graphics">An <see cref="IConsoleGraphics"/> that performs the drawing operations on
         /// the screen buffer.</param>
         /// <exception cref="ObjectDisposedException">The containing <see cref="IConsoleWindow"/> has already been disposed of.</exception>
-        public void Draw(IConsoleGraphics graphics)
+        public void Draw(IConsoleGraphics? graphics = null)
         {
-            if (graphics == null) throw new ArgumentNullException(nameof(graphics));
-            Logger.Log(DebugContext.Control | DebugContext.Drawing, "with graphics called.");
-
+            Logger.Log(DebugContext.Control | DebugContext.Drawing, $"called {(graphics == null ? "without" : "with")} graphics.");
             lock (Window.SynchronizationLock)
             {
                 CheckDisposed();
@@ -681,12 +658,18 @@ namespace ConControls.Controls
                     return;
                 }
 
+                var usedGraphics = graphics ?? Window.GetGraphics();
                 Logger.Log(DebugContext.Control | DebugContext.Drawing, "Drawing background.");
-                DrawBackground(graphics);
+                DrawBackground(usedGraphics);
                 Logger.Log(DebugContext.Control | DebugContext.Drawing, "Drawing border.");
-                DrawBorder(graphics);
+                DrawBorder(usedGraphics);
                 Logger.Log(DebugContext.Control | DebugContext.Drawing, "Drawing client area.");
-                DrawClientArea(graphics);
+                DrawClientArea(usedGraphics);
+                if (usedGraphics != graphics)
+                {
+                    Logger.Log(DebugContext.Control | DebugContext.Drawing, "Flushing graphics.");
+                    usedGraphics.Flush();
+                }
             }
         }
         /// <summary>

@@ -239,11 +239,11 @@ namespace ConControls.ConsoleApi
             {
                 var record = api.GetConsoleScreenBufferInfo(OriginalOutputHandle);
                 Size bufferSize = new Size(record.BufferSize.X, record.BufferSize.Y);
-                Rectangle windowArea = new Rectangle(
-                    record.Window.Left,
-                    record.Window.Top,
-                    record.Window.Right - record.Window.Left,
-                    record.Window.Bottom - record.Window.Top);
+                Rectangle windowArea = Rectangle.FromLTRB(
+                    left:  record.Window.Left,
+                    top: record.Window.Top,
+                    right: record.Window.Right,
+                    bottom: record.Window.Bottom);
 
                 if (!forceEvent && bufferSize == BufferSize && windowArea == WindowArea) return;
                 BufferSize = bufferSize;

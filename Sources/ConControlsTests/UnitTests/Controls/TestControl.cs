@@ -63,13 +63,6 @@ namespace ConControlsTests.UnitTests.Controls
             base.Dispose(disposing);
             AddCount();
         }
-        internal const string MethodDraw = nameof(Draw);
-        protected override void Draw()
-        {
-            Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
-            base.Draw();
-            AddCount();
-        }
         internal const string MethodDrawBackground = nameof(DrawBackground);
         protected override void DrawBackground(IConsoleGraphics graphics)
         {

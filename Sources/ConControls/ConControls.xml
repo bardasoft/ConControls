@@ -294,11 +294,6 @@
             <param name="onlyClientArea">Set this to <c>true</c> if only the client area should be redrawn.
             This avoids drawing the border and background.</param>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.Draw">
-            <summary>
-            Redraws the control.
-            </summary>
-        </member>
         <member name="M:ConControls.Controls.ConsoleControl.Draw(ConControls.Controls.Drawing.IConsoleGraphics)">
             <summary>
             Draws the control onto the console screen buffer.

@@ -254,7 +254,7 @@ namespace ConControls.Controls
                     return;
                 }
                 var graphics = GetGraphics();
-                var rect = new Rectangle(0, 0, Size.Width, Size.Height);
+                var rect = new Rectangle(Point.Empty, Size);
                 Logger.Log(DebugContext.Window | DebugContext.Drawing, $"drawing background at {rect}.");
                 graphics.DrawBackground(BackgroundColor, rect);
                 Logger.Log(DebugContext.Window | DebugContext.Drawing, "drawing controls.");
