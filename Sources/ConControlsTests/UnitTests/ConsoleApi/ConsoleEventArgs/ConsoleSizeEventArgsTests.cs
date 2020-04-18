@@ -8,8 +8,8 @@
 #nullable enable
 
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using ConControls.ConsoleApi;
-using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,13 +22,11 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleEventArgs
         [TestMethod]
         public void ConsoleSizeEventArgs_ConstructorSetsCorrectValues()
         {
-            WINDOW_BUFFER_SIZE_RECORD record = new WINDOW_BUFFER_SIZE_RECORD
-            {
-                Size = new COORD(21, 42)
-            };
-            var sut = new ConsoleSizeEventArgs(record);
-            sut.Size.Width.Should().Be(21);
-            sut.Size.Height.Should().Be(42);
+            Rectangle window = new Rectangle(1, 2, 3, 4);
+            Size buffer = new Size(5, 6);
+            var sut = new ConsoleSizeEventArgs(window, buffer);
+            sut.WindowArea.Should().Be(window);
+            sut.BufferSize.Should().Be(buffer);
         }
     }
 }

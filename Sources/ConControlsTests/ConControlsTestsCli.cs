@@ -31,7 +31,7 @@ namespace ConControlsTests
         static void Main()
         {
             using var logger = new FileLogger("concontrols.log");
-            Logger.Context = DebugContext.ConsoleListener;
+            Logger.Context = DebugContext.None;
 
             try
             {

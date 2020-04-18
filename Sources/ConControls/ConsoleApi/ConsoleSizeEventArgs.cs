@@ -7,16 +7,17 @@
 
 using System;
 using System.Drawing;
-using ConControls.WindowsApi.Types;
 
 namespace ConControls.ConsoleApi 
 {
     sealed class ConsoleSizeEventArgs : EventArgs
     {
-        public Size Size { get; }
-        public ConsoleSizeEventArgs(WINDOW_BUFFER_SIZE_RECORD rec)
+        public Size BufferSize { get; }
+        public Rectangle WindowArea{ get; }
+        public ConsoleSizeEventArgs(Rectangle windowArea, Size bufferSize)
         {
-            Size = new Size(rec.Size.X, rec.Size.Y);
+            WindowArea = windowArea;
+            BufferSize = bufferSize;
         }
 
     }

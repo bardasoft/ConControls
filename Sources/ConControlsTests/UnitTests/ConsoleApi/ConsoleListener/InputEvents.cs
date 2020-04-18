@@ -10,6 +10,7 @@
 // ReSharper disable AccessToDisposedClosure
 
 using System;
+using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using ConControls.WindowsApi;
@@ -105,16 +106,26 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
 
             using var stdinEvent = new AutoResetEvent(false);
             ConsoleInputHandle consoleInputHandle = new ConsoleInputHandle(stdinEvent.SafeWaitHandle.DangerousGetHandle());
+            ConsoleOutputHandle consoleOutputHandle = new ConsoleOutputHandle(IntPtr.Zero);
 
             var api = new StubINativeCalls
             {
                 GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
                 GetInputHandle = () => consoleInputHandle,
-                GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
+                GetOutputHandle = () => consoleOutputHandle,
                 ReadConsoleInputConsoleInputHandleInt32 = (handle, size) =>
                 {
                     handle.Should().Be(consoleInputHandle);
                     return records;
+                },
+                GetConsoleScreenBufferInfoConsoleOutputHandle = handle =>
+                {
+                    handle.Should().Be(consoleOutputHandle);
+                    return new CONSOLE_SCREEN_BUFFER_INFOEX
+                    {
+                        Window = new SMALL_RECT(1, 2, 4, 6),
+                        BufferSize = sizeRecord.Event.SizeEvent.Size
+                    };
                 }
             };
             using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
@@ -140,9 +151,10 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
             };
             sut.SizeEvent += (sender, e) =>
             {
-                e.Size.Width.Should().Be(sizeRecord.Event.SizeEvent.Size.X);
-                e.Size.Height.Should().Be(sizeRecord.Event.SizeEvent.Size.Y);
-                sizeTcs.SetResult(0);
+                if (e.WindowArea == new Rectangle(1, 2, 3, 4) &&
+                    e.BufferSize.Width == sizeRecord.Event.SizeEvent.Size.X &&
+                    e.BufferSize.Height == sizeRecord.Event.SizeEvent.Size.Y)
+                    sizeTcs.TrySetResult(0);
             };
             sut.MenuEvent += (sender, e) =>
             {

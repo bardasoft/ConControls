@@ -381,7 +381,7 @@ namespace ConControls.Controls
             lock (SynchronizationLock)
             {
                 Logger.Log(DebugContext.Window,
-                           $"Received size event: Size {e.Size}");
+                           $"Received size event: Window {e.WindowArea} Buffer {e.BufferSize}");
                 SynchronizeConsoleSettings();
             }
 
