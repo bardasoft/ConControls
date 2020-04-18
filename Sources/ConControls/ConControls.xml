@@ -66,12 +66,6 @@
             The <see cref="P:ConControls.Controls.ConsoleControl.Name"/> of the control has been changed.
             </summary>
         </member>
-        <member name="E:ConControls.Controls.ConsoleControl.ControlCollectionChanged">
-            <summary>
-            One or more <see cref="T:ConControls.Controls.ConsoleControl"/> instances have been added to or
-            removed from the <see cref="P:ConControls.Controls.ConsoleControl.Controls"/> collection of this control.
-            </summary>
-        </member>
         <member name="E:ConControls.Controls.ConsoleControl.CursorPositionChanged">
             <summary>
             The <see cref="P:ConControls.Controls.ConsoleControl.CursorPosition"/> of the control has been changed.

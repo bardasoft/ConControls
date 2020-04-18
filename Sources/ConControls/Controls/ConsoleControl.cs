@@ -76,16 +76,6 @@ namespace ConControls.Controls
         /// </summary>
         public event EventHandler? NameChanged;
         /// <summary>
-        /// One or more <see cref="ConsoleControl"/> instances have been added to or
-        /// removed from the <see cref="Controls"/> collection of this control.
-        /// </summary>
-        public event EventHandler<ControlCollectionChangedEventArgs>? ControlCollectionChanged
-        {
-            add => Controls.ControlCollectionChanged += value;
-            remove => Controls.ControlCollectionChanged -= value;
-        }
-
-        /// <summary>
         /// The <see cref="CursorPosition"/> of the control has been changed.
         /// </summary>
         public event EventHandler? CursorPositionChanged;

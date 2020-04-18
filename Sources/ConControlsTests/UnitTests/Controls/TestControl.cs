@@ -32,6 +32,12 @@ namespace ConControlsTests.UnitTests.Controls
         {
             lock (Window.SynchronizationLock) Dispose(disposing);
         }
+        public void DoDrawBackground(IConsoleGraphics graphics)
+            => base.DrawBackground(graphics);
+        public void DoDrawBorder(IConsoleGraphics graphics)
+            => base.DrawBorder(graphics);
+        public void DoDrawClientArea(IConsoleGraphics graphics)
+            => base.DrawClientArea(graphics);
 
         public ConsoleColor EffForeColor => EffectiveForegroundColor;
         public ConsoleColor EffBackColor => EffectiveBackgroundColor;
