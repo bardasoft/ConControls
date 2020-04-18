@@ -38,11 +38,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnCursorVisibleChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnCursorVisibleChanged).Should().Be(0);
+            sut.GetMethodCount(TestControl.MethodOnCursorVisibleChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             sut.CursorVisible = true;
             sut.CursorVisible.Should().BeTrue();
-            sut.MethodCallCounts["OnCursorVisibleChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnCursorVisibleChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
@@ -66,10 +67,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnCursorVisibleChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnCursorVisibleChanged).Should().Be(0);
             sut.CursorVisible = sut.CursorVisible;
             sut.CursorVisible.Should().BeFalse();
-            sut.MethodCallCounts.ContainsKey("OnCursorVisibleChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnCursorVisibleChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
     }

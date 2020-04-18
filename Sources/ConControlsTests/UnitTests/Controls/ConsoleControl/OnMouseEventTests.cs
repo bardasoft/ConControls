@@ -33,7 +33,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new TestControl(stubbedWindow);
             stubbedWindow.MouseEventEvent(stubbedWindow, new MouseEventArgs(new ConsoleMouseEventArgs(default)));
-            sut.MethodCallCounts["OnMouseEvent"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnMouseEvent).Should().Be(1);
         }
     }
 }

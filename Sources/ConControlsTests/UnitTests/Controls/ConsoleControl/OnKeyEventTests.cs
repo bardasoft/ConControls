@@ -33,7 +33,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new TestControl(stubbedWindow);
             stubbedWindow.KeyEventEvent(stubbedWindow, new KeyEventArgs(new ConsoleKeyEventArgs(default)));
-            sut.MethodCallCounts["OnKeyEvent"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnKeyEvent).Should().Be(1);
         }
     }
 }

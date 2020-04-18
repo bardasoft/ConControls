@@ -33,10 +33,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var sut = new TestControl(stubbedWindow);
             sut.FocusedBorderStyle.Should().BeNull();
 
-            sut.MethodCallCounts.ContainsKey("OnBorderStyleChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(0);
             sut.FocusedBorderStyle = BorderStyle.DoubleLined;
             sut.FocusedBorderStyle.Should().Be(BorderStyle.DoubleLined);
-            sut.MethodCallCounts["OnBorderStyleChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(1);
         }
         [TestMethod]
         public void FocusedBorderStyle_NotChanged_NoEvent()
@@ -53,10 +53,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new TestControl(stubbedWindow);
 
-            sut.MethodCallCounts.ContainsKey("OnBorderStyleChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(0);
             sut.FocusedBorderStyle = sut.FocusedBorderStyle;
             sut.FocusedBorderStyle.Should().BeNull();
-            sut.MethodCallCounts.ContainsKey("OnBorderStyleChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(0);
         }
     }
 }

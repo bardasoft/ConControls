@@ -35,11 +35,11 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow);
-            sut.MethodCallCounts.ContainsKey("OnParentChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnParentChanged).Should().Be(0);
             sut.Parent.Should().Be(stubbedWindow);
 
             sut.Parent = stubbedWindow;
-            sut.MethodCallCounts.ContainsKey("OnParentChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnParentChanged).Should().Be(0);
             sut.Parent.Should().Be(stubbedWindow);
         }
         [TestMethod]
@@ -62,7 +62,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                .Which.ParamName.Should()
                .Be(nameof(sut.Parent));
 
-            sut.MethodCallCounts.ContainsKey("OnParentChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnParentChanged).Should().Be(0);
             sut.Parent.Should().Be(stubbedWindow);
         }
         [TestMethod]
@@ -92,7 +92,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             sut.Invoking(s => s.Parent = differentParent)
                .Should()
                .Throw<InvalidOperationException>();
-            sut.MethodCallCounts.ContainsKey("OnParentChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnParentChanged).Should().Be(0);
             sut.Parent.Should().Be(stubbedWindow);
         }
         [TestMethod]
@@ -128,7 +128,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             newParentDeferred.Should().BeTrue();
 
             sut.Parent.Should().Be(differentParent);
-            sut.MethodCallCounts["OnParentChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnParentChanged).Should().Be(1);
             controlsCollection.Should().Equal(differentParent);
             differentParent.Controls.Should().Equal(sut);
         }

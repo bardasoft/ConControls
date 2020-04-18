@@ -42,11 +42,11 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnFocusedChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnFocusedChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             sut.Focused = false;
             sut.Focused.Should().BeFalse();
-            sut.MethodCallCounts.ContainsKey("OnFocusedChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnFocusedChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
         [TestMethod]
@@ -75,13 +75,13 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnFocusedChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnFocusedChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             sut.Invoking(s => s.Focused = true)
                .Should()
                .Throw<InvalidOperationException>();
             sut.Focused.Should().BeFalse();
-            sut.MethodCallCounts.ContainsKey("OnFocusedChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnFocusedChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
         [TestMethod]
@@ -112,12 +112,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnFocusedChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnFocusedChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             sut.Focused = true;
             sut.Focused.Should().BeTrue();
             focusedControl.Should().Be(sut);
-            sut.MethodCallCounts["OnFocusedChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnFocusedChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
@@ -150,12 +150,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnFocusedChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnFocusedChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             sut.Focused = false;
             sut.Focused.Should().BeFalse();
             focusedControl.Should().BeNull();
-            sut.MethodCallCounts["OnFocusedChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnFocusedChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
     }

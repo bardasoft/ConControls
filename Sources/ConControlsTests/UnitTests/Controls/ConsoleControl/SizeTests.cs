@@ -39,12 +39,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnAreaChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnAreaChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             var size = new Size(1, 2);
             sut.Size = size;
             sut.Size.Should().Be(size);
-            sut.MethodCallCounts["OnAreaChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnAreaChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
@@ -68,10 +68,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnAreaChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnAreaChanged).Should().Be(0);
             sut.Size = sut.Size;
             sut.Size.Should().Be(Size.Empty);
-            sut.MethodCallCounts.ContainsKey("OnAreaChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnAreaChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
     }

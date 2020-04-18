@@ -7,6 +7,10 @@
 
 #nullable enable
 
+using System.Drawing;
+using ConControls.Controls.Drawing.Fakes;
+using ConControls.Controls.Fakes;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConControlsTests.UnitTests.Controls.ConsoleControl
@@ -14,34 +18,28 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
     public partial class ConsoleControlTests
     {
         [TestMethod]
-        public void Controls_Inconclusive()
+        public void Controls_ChildAreaChanged_Handled()
         {
-            //    object syncLock = new object();
-            //    var stubbedWindow = new StubIConsoleWindow
-            //    {
-            //        SynchronizationLockGet = () => syncLock,
-            //        GetGraphics = () => new StubIConsoleGraphics()
-            //    };
-            //    stubbedWindow.WindowGet = () => stubbedWindow;
-            //    var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            //    stubbedWindow.ControlsGet = () => controlsCollection;
+            object syncLock = new object();
+            var stubbedWindow = new StubIConsoleWindow
+            {
+                SynchronizationLockGet = () => syncLock,
+                GetGraphics = () => new StubIConsoleGraphics()
+            };
+            stubbedWindow.WindowGet = () => stubbedWindow;
+            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
+            stubbedWindow.ControlsGet = () => controlsCollection;
 
-            //    var sut = new TestControl(stubbedWindow);
-            //    sut.Area.Should().Be(Rectangle.Empty);
-            //    bool eventRaised = false;
-            //    sut.AreaChanged += (sender, e) =>
-            //    {
-            //        sender.Should().Be(sut);
-            //        eventRaised = true;
-            //    };
+            var sut = new TestControl(stubbedWindow);
+            var child = new TestControl(sut);
 
-            //    sut.MethodCallCounts.ContainsKey("OnAreaChanged").Should().BeFalse();
-            //    eventRaised.Should().BeFalse();
-            //    var rect = new Rectangle(1, 2, 3, 4);
-            //    sut.Area = rect;
-            //    sut.Area.Should().Be(rect);
-            //    sut.MethodCallCounts["OnAreaChanged"].Should().Be(1);
-            //    eventRaised.Should().BeTrue();
+            sut.ResetMethodCount();
+            child.Area = new Rectangle(1, 2, 3, 4);
+            sut.GetMethodCount(TestControl.MethodDrawClientArea).Should().Be(1);
+            sut.Controls.Remove(child);
+            sut.ResetMethodCount();
+            child.Area = new Rectangle(2, 3, 4, 5);
+            sut.GetMethodCount(TestControl.MethodDrawClientArea).Should().Be(0);
         }
     }
 }

@@ -34,10 +34,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var sut = new TestControl(stubbedWindow);
             sut.ForegroundColor.Should().Be(ConsoleColor.Cyan);
 
-            sut.MethodCallCounts.ContainsKey("OnForegroundColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnForegroundColorChanged).Should().Be(0);
             sut.ForegroundColor = ConsoleColor.DarkMagenta;
             sut.ForegroundColor.Should().Be(ConsoleColor.DarkMagenta);
-            sut.MethodCallCounts["OnForegroundColorChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnForegroundColorChanged).Should().Be(1);
         }
         [TestMethod]
         public void ForegroundColor_NotChanged_NoEvent()
@@ -55,10 +55,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new TestControl(stubbedWindow);
 
-            sut.MethodCallCounts.ContainsKey("OnForegroundColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnForegroundColorChanged).Should().Be(0);
             sut.ForegroundColor = sut.ForegroundColor;
             sut.ForegroundColor.Should().Be(ConsoleColor.Cyan);
-            sut.MethodCallCounts.ContainsKey("OnForegroundColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnForegroundColorChanged).Should().Be(0);
         }
     }
 }

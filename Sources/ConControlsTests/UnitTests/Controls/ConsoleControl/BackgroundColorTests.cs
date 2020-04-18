@@ -34,10 +34,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var sut = new TestControl(stubbedWindow);
             sut.BackgroundColor.Should().Be(ConsoleColor.Cyan);
 
-            sut.MethodCallCounts.ContainsKey("OnBackgroundColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBackgroundColorChanged).Should().Be(0);
             sut.BackgroundColor = ConsoleColor.DarkMagenta;
             sut.BackgroundColor.Should().Be(ConsoleColor.DarkMagenta);
-            sut.MethodCallCounts["OnBackgroundColorChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnBackgroundColorChanged).Should().Be(1);
         }
         [TestMethod]
         public void BackgroundColor_NotChanged_NoEvent()
@@ -55,10 +55,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new TestControl(stubbedWindow);
 
-            sut.MethodCallCounts.ContainsKey("OnBackgroundColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBackgroundColorChanged).Should().Be(0);
             sut.BackgroundColor = sut.BackgroundColor;
             sut.BackgroundColor.Should().Be(ConsoleColor.Cyan);
-            sut.MethodCallCounts.ContainsKey("OnBackgroundColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBackgroundColorChanged).Should().Be(0);
         }
     }
 }

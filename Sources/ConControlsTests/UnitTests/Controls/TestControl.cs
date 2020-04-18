@@ -38,7 +38,17 @@ namespace ConControlsTests.UnitTests.Controls
         public ConsoleColor EffBorderColor => EffectiveBorderColor;
         public BorderStyle EffBorderStyle => EffectiveBorderStyle;
 
-        public Dictionary<string, int> MethodCallCounts { get; } = new Dictionary<string, int>();
+        readonly Dictionary<string, int> methodCallCounts = new Dictionary<string, int>();
+        public int GetMethodCount(string method)
+        {
+            lock(methodCallCounts)
+                return methodCallCounts.TryGetValue(method, out var count) ? count : 0;
+        }
+        public void ResetMethodCount()
+        {
+            lock(methodCallCounts) methodCallCounts.Clear();
+        }
+
         internal TestControl()
             : this(null!) { }
         internal TestControl(IControlContainer parent)
@@ -46,153 +56,154 @@ namespace ConControlsTests.UnitTests.Controls
         {
             deferrer = new DisposableBlock(() => OnDeferDrawingDisposed?.Invoke());
         }
+        internal const string MethodDispose = nameof(Dispose);
         protected override void Dispose(bool disposing)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.Dispose(disposing);
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodDraw = nameof(Draw);
         protected override void Draw()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.Draw();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodDrawBackground = nameof(DrawBackground);
         protected override void DrawBackground(IConsoleGraphics graphics)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.DrawBackground(graphics);
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodDrawBorder= nameof(DrawBorder);
         protected override void DrawBorder(IConsoleGraphics graphics)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.DrawBorder(graphics);
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodDrawClientArea = nameof(DrawClientArea);
         protected override void DrawClientArea(IConsoleGraphics graphics)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.DrawClientArea(graphics);
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnParentChanged = nameof(OnParentChanged);
         protected override void OnParentChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnParentChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnNameChanged = nameof(OnNameChanged);
         protected override void OnNameChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnNameChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnCursorPositionChanged = nameof(OnCursorPositionChanged);
         protected override void OnCursorPositionChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnCursorPositionChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnCursorSizeChanged = nameof(OnCursorSizeChanged);
         protected override void OnCursorSizeChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnCursorSizeChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnCursorVisibleChanged = nameof(OnCursorVisibleChanged);
         protected override void OnCursorVisibleChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnCursorVisibleChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnFocusedChanged = nameof(OnFocusedChanged);
         protected override void OnFocusedChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnFocusedChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnEnabledChanged = nameof(OnEnabledChanged);
         protected override void OnEnabledChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnEnabledChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnVisibleChanged = nameof(OnVisibleChanged);
         protected override void OnVisibleChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnVisibleChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnForegroundColorChanged = nameof(OnForegroundColorChanged);
         protected override void OnForegroundColorChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnForegroundColorChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnBackgroundColorChanged = nameof(OnBackgroundColorChanged);
         protected override void OnBackgroundColorChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnBackgroundColorChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnBorderColorChanged = nameof(OnBorderColorChanged);
         protected override void OnBorderColorChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnBorderColorChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnBorderStyleChanged = nameof(OnBorderStyleChanged);
         protected override void OnBorderStyleChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnBorderStyleChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnAreaChanged = nameof(OnAreaChanged);
         protected override void OnAreaChanged()
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnAreaChanged();
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnKeyEvent = nameof(OnKeyEvent);
         protected override void OnKeyEvent(object sender, KeyEventArgs e)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnKeyEvent(sender, e);
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnMouseEvent = nameof(OnMouseEvent);
         protected override void OnMouseEvent(object sender, MouseEventArgs e)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnMouseEvent(sender, e);
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnStdOutEvent = nameof(OnStdOutEvent);
         protected override void OnStdOutEvent(object sender, StdOutEventArgs e)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnStdOutEvent(sender, e);
             AddCount();
         }
-        /// <inheritdoc />
+        internal const string MethodOnStdErrEvent = nameof(OnStdErrEvent);
         protected override void OnStdErrEvent(object sender, StdErrEventArgs e)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
@@ -202,8 +213,8 @@ namespace ConControlsTests.UnitTests.Controls
 
         void AddCount([CallerMemberName] string caller = "")
         {
-            lock (MethodCallCounts)
-                MethodCallCounts[caller] = MethodCallCounts.TryGetValue(caller, out int v)
+            lock (methodCallCounts)
+                methodCallCounts[caller] = methodCallCounts.TryGetValue(caller, out int v)
                                                ? v + 1
                                                : 1;
         }

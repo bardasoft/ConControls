@@ -38,12 +38,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnNameChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             const string alt = "alt";
             sut.Name = alt;
             sut.Name.Should().Be(alt);
-            sut.MethodCallCounts["OnNameChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
@@ -68,10 +68,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnNameChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(0);
             sut.Name = sut.Name;
             sut.Name.Should().Be(nameof(TestControl));
-            sut.MethodCallCounts.ContainsKey("OnNameChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
         [TestMethod]
@@ -98,10 +98,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnNameChanged").Should().BeTrue();
+            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(1);
             sut.Name = null!;
             sut.Name.Should().Be(nameof(TestControl));
-            sut.MethodCallCounts["OnNameChanged"].Should().Be(2);
+            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(2);
             eventRaised.Should().BeTrue();
         }
     }

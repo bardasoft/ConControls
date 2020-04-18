@@ -39,11 +39,11 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnEnabledChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnEnabledChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             sut.Enabled = false;
             sut.Enabled.Should().BeFalse();
-            sut.MethodCallCounts["OnEnabledChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnEnabledChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
@@ -68,10 +68,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnEnabledChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnEnabledChanged).Should().Be(0);
             sut.Enabled = sut.Enabled;
             sut.Enabled.Should().BeTrue();
-            sut.MethodCallCounts.ContainsKey("OnEnabledChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnEnabledChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
     }

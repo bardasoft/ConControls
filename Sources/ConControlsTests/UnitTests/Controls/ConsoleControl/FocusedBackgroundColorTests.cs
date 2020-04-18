@@ -33,10 +33,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var sut = new TestControl(stubbedWindow);
             sut.FocusedBackgroundColor.Should().BeNull();
 
-            sut.MethodCallCounts.ContainsKey("OnBackgroundColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBackgroundColorChanged).Should().Be(0);
             sut.FocusedBackgroundColor = ConsoleColor.DarkMagenta;
             sut.FocusedBackgroundColor.Should().Be(ConsoleColor.DarkMagenta);
-            sut.MethodCallCounts["OnBackgroundColorChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnBackgroundColorChanged).Should().Be(1);
         }
         [TestMethod]
         public void FocusedBackgroundColor_NotChanged_NoEvent()
@@ -53,10 +53,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new TestControl(stubbedWindow);
 
-            sut.MethodCallCounts.ContainsKey("OnBackgroundColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBackgroundColorChanged).Should().Be(0);
             sut.FocusedBackgroundColor = sut.FocusedBackgroundColor;
             sut.FocusedBackgroundColor.Should().BeNull();
-            sut.MethodCallCounts.ContainsKey("OnBackgroundColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBackgroundColorChanged).Should().Be(0);
         }
     }
 }

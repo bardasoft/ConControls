@@ -34,10 +34,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var sut = new TestControl(stubbedWindow);
             sut.BorderColor.Should().Be(ConsoleColor.Cyan);
 
-            sut.MethodCallCounts.ContainsKey("OnBorderColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBorderColorChanged).Should().Be(0);
             sut.BorderColor = ConsoleColor.DarkMagenta;
             sut.BorderColor.Should().Be(ConsoleColor.DarkMagenta);
-            sut.MethodCallCounts["OnBorderColorChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnBorderColorChanged).Should().Be(1);
         }
         [TestMethod]
         public void BorderColor_NotChanged_NoEvent()
@@ -55,10 +55,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new TestControl(stubbedWindow);
 
-            sut.MethodCallCounts.ContainsKey("OnBorderColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBorderColorChanged).Should().Be(0);
             sut.BorderColor = sut.BorderColor;
             sut.BorderColor.Should().Be(ConsoleColor.Cyan);
-            sut.MethodCallCounts.ContainsKey("OnBorderColorChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnBorderColorChanged).Should().Be(0);
         }
     }
 }

@@ -79,7 +79,11 @@ namespace ConControls.Controls
         /// One or more <see cref="ConsoleControl"/> instances have been added to or
         /// removed from the <see cref="Controls"/> collection of this control.
         /// </summary>
-        public event EventHandler<ControlCollectionChangedEventArgs>? ControlCollectionChanged;
+        public event EventHandler<ControlCollectionChangedEventArgs>? ControlCollectionChanged
+        {
+            add => Controls.ControlCollectionChanged += value;
+            remove => Controls.ControlCollectionChanged -= value;
+        }
 
         /// <summary>
         /// The <see cref="CursorPosition"/> of the control has been changed.
@@ -856,8 +860,6 @@ namespace ConControls.Controls
 
                     foreach (var removedControl in e.RemovedControls)
                         removedControl.AreaChanged -= OnControlAreaChanged;
-
-                    ControlCollectionChanged?.Invoke(this, e);
                 }
             }
         }

@@ -39,12 +39,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnCursorPositionChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnCursorPositionChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             var point = new Point(1, 2);
             sut.CursorPosition = point;
             sut.CursorPosition.Should().Be(point);
-            sut.MethodCallCounts["OnCursorPositionChanged"].Should().Be(1);
+            sut.GetMethodCount(TestControl.MethodOnCursorPositionChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
@@ -68,10 +68,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.MethodCallCounts.ContainsKey("OnCursorPositionChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnCursorPositionChanged).Should().Be(0);
             sut.CursorPosition = sut.CursorPosition;
             sut.CursorPosition.Should().Be(Point.Empty);
-            sut.MethodCallCounts.ContainsKey("OnCursorPositionChanged").Should().BeFalse();
+            sut.GetMethodCount(TestControl.MethodOnCursorPositionChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
     }
