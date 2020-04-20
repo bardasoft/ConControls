@@ -34,7 +34,12 @@
             <summary>
             Base class for all console controls.
             </summary>
-            <threadsafety static="true" instance="true"/>
+            <threadsafety>
+            All public properties and methods of this class are synchronized using the
+            <see cref="P:ConControls.Controls.IConsoleWindow.SynchronizationLock"/> of the control's <see cref="P:ConControls.Controls.ConsoleControl.Window"/>.<br/>
+            When inheriting custom controls, this pattern of synchronizing to the window's synchronization object
+            should be applied.
+            </threadsafety>
         </member>
         <member name="E:ConControls.Controls.ConsoleControl.EnabledChanged">
             <summary>
@@ -473,7 +478,9 @@
             may be instantiated at a time. Make sure to dispose of any previously
             instantiated contexts before creating a new one.
             </remarks>
-            <threadsafety static="true" instance="true"/>
+            <threadsafety>
+            All public properties and methods are sychronized using the window's <see cref="P:ConControls.Controls.ConsoleWindow.SynchronizationLock"/>.
+            </threadsafety>
         </member>
         <member name="E:ConControls.Controls.ConsoleWindow.AreaChanged">
             <inheritdoc />
@@ -1012,7 +1019,8 @@
         </member>
         <member name="P:ConControls.Controls.IConsoleWindow.CursorSize">
             <summary>
-            Gets the default cursor size to use (0-100).
+            Gets or sets the default cursor size to use (0-100) for
+            newly created focusable controls.
             </summary>
         </member>
         <member name="P:ConControls.Controls.IConsoleWindow.ForegroundColor">

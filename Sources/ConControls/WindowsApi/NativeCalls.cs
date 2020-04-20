@@ -38,8 +38,19 @@ namespace ConControls.WindowsApi
                 throw Exceptions.Win32();
             return titleBuilder.ToString();
         }
-        public int GetCursorSize(ConsoleOutputHandle consoleOutputHandle) =>
-            NativeMethods.GetConsoleCursorInfo(consoleOutputHandle, out var info) ? info.Size : throw Exceptions.Win32();
+        public (bool visible, int size, Point position) GetCursorInfo(ConsoleOutputHandle consoleOutputHandle)
+        {
+            if (!NativeMethods.GetConsoleCursorInfo(consoleOutputHandle, out var info)) 
+                throw Exceptions.Win32();
+            var infoEx = new CONSOLE_SCREEN_BUFFER_INFOEX
+            {
+                Size = Marshal.SizeOf<CONSOLE_SCREEN_BUFFER_INFOEX>()
+            };
+            if (!NativeMethods.GetConsoleScreenBufferInfoEx(consoleOutputHandle, ref infoEx))
+                throw Exceptions.Win32();
+
+            return (info.Visible, info.Size, new Point(infoEx.CursorPosition.X, infoEx.CursorPosition.Y));
+        }
 
         public ConsoleErrorHandle GetErrorHandle() =>
             new ConsoleErrorHandle(NativeMethods.GetStdHandle(NativeMethods.STDERR));
@@ -98,9 +109,16 @@ namespace ConControls.WindowsApi
             if (!NativeMethods.SetConsoleCursorInfo(consoleOutputHandle, ref cursorInfo))
                 throw Exceptions.Win32();
         }
-        public void SetCursorPosition(ConsoleOutputHandle consoleOutputHandle, Point position)
+        public void SetCursorInfo(ConsoleOutputHandle consoleOutputHandle, bool visible, int size, Point position)
         {
             if (!NativeMethods.SetConsoleCursorPosition(consoleOutputHandle, new COORD(position)))
+                throw Exceptions.Win32();
+            CONSOLE_CURSOR_INFO info = new CONSOLE_CURSOR_INFO
+            {
+                Size = size,
+                Visible = visible
+            };
+            if (!NativeMethods.SetConsoleCursorInfo(consoleOutputHandle, ref info))
                 throw Exceptions.Win32();
         }
         public void SetErrorHandle(ConsoleErrorHandle errorHandle)

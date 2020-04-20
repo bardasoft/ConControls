@@ -8,7 +8,6 @@
 #nullable enable
 
 using System;
-using ConControls.Controls;
 using ConControls.Controls.Drawing.Fakes;
 using ConControls.Controls.Fakes;
 using FluentAssertions;

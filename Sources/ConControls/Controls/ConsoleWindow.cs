@@ -27,7 +27,9 @@ namespace ConControls.Controls
     /// may be instantiated at a time. Make sure to dispose of any previously
     /// instantiated contexts before creating a new one.
     /// </remarks>
-    /// <threadsafety static="true" instance="true"/>
+    /// <threadsafety>
+    /// All public properties and methods are sychronized using the window's <see cref="SynchronizationLock"/>.
+    /// </threadsafety>
     public sealed class ConsoleWindow : IConsoleWindow
     {
         static int instancesCreated;
@@ -36,6 +38,8 @@ namespace ConControls.Controls
         readonly IConsoleListener consoleListener;
         readonly ConsoleInputHandle consoleInputHandle;
         readonly ConsoleOutputHandle consoleOutputHandle;
+        readonly bool originalCursorVisible;
+        readonly int originalCursorSize;
 #pragma warning disable CA2213
         readonly DisposableBlock drawingInhibiter;
 #pragma warning restore CA2213
@@ -128,10 +132,20 @@ namespace ConControls.Controls
                     if (value?.CanFocus == false) throw Exceptions.CannotFocusUnFocusableControl(value.GetType().Name);
                     var oldFocused = focusedControl;
                     focusedControl = null;
-                    if (oldFocused != null) oldFocused.Focused = false;
+                    if (oldFocused != null)
+                    {
+                        oldFocused.CursorPositionChanged -= OnFocusedControlCursorChanged;
+                        oldFocused.CursorSizeChanged -= OnFocusedControlCursorChanged;
+                        oldFocused.CursorVisibleChanged -= OnFocusedControlCursorChanged;
+                        oldFocused.Focused = false;
+                    }
                     focusedControl = value;
                     if (focusedControl == null) return;
                     focusedControl.Focused = true;
+                    api.SetCursorInfo(consoleOutputHandle, focusedControl.CursorVisible, focusedControl.CursorSize, focusedControl.CursorPosition);
+                    focusedControl.CursorPositionChanged += OnFocusedControlCursorChanged;
+                    focusedControl.CursorSizeChanged += OnFocusedControlCursorChanged;
+                    focusedControl.CursorVisibleChanged += OnFocusedControlCursorChanged;
                 }
             }
         }
@@ -179,7 +193,6 @@ namespace ConControls.Controls
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             this.api = api ?? new NativeCalls();
             this.consoleListener = consoleListener ?? new ConsoleListener(OutputEncoding, this.api);
-            CursorSize = this.api.GetCursorSize(this.consoleListener.OriginalOutputHandle);
 
             this.consoleListener.OutputReceived += OnConsoleListenerOutputReceived;
             this.consoleListener.ErrorReceived += OnConsoleListenerErrorReceived;
@@ -197,7 +210,11 @@ namespace ConControls.Controls
 
             Controls = new ControlCollection(this);
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
-            
+
+            (originalCursorVisible, originalCursorSize, _) = this.api.GetCursorInfo(consoleOutputHandle);
+            CursorSize = originalCursorSize;
+            this.api.SetCursorInfo(consoleOutputHandle, false, CursorSize, Point.Empty);
+
             SynchronizeConsoleSettings();
         }
         /// <summary>
@@ -232,10 +249,11 @@ namespace ConControls.Controls
                 consoleListener.MouseEvent -= OnConsoleListenerMouseReceived;
                 consoleListener.SizeEvent -= OnConsoleListenerSizeReceived;
                 consoleListener.Dispose();
-                consoleOutputHandle.Dispose();
-                consoleInputHandle.Dispose();
                 Console.ResetColor();
                 Console.Clear();
+                api.SetCursorInfo(consoleOutputHandle, originalCursorVisible, originalCursorSize, Point.Empty);
+                consoleOutputHandle.Dispose();
+                consoleInputHandle.Dispose();
             }
             Interlocked.Decrement(ref instancesCreated);
             Disposed?.Invoke(this, EventArgs.Empty);
@@ -326,7 +344,11 @@ namespace ConControls.Controls
             }
         }
         void OnControlAreaChanged(object sender, EventArgs e) => Invalidate();
-
+        void OnFocusedControlCursorChanged(object sender, EventArgs e)
+        {
+            var control = focusedControl;
+            api.SetCursorInfo(consoleOutputHandle, control?.CursorVisible ?? false, control?.CursorSize ?? CursorSize, control?.CursorPosition ?? Point.Empty);
+        }
         void OnConsoleListenerOutputReceived(object sender, ConsoleOutputReceivedEventArgs e)
         {
             lock (SynchronizationLock)

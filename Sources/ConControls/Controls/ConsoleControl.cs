@@ -18,7 +18,12 @@ namespace ConControls.Controls
     /// <summary>
     /// Base class for all console controls.
     /// </summary>
-    /// <threadsafety static="true" instance="true"/>
+    /// <threadsafety>
+    /// All public properties and methods of this class are synchronized using the
+    /// <see cref="IConsoleWindow.SynchronizationLock"/> of the control's <see cref="Window"/>.<br/>
+    /// When inheriting custom controls, this pattern of synchronizing to the window's synchronization object
+    /// should be applied.
+    /// </threadsafety>
     [SuppressMessage("Design", "CA1001", Justification = "The DisposableBlock does not need to be disposed, its Dispose method has a different purpose.")]
     public abstract class ConsoleControl : IControlContainer
     {

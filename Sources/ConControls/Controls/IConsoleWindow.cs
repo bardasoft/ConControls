@@ -53,7 +53,8 @@ namespace ConControls.Controls
         /// </summary>
         Size MaximumSize { get; }
         /// <summary>
-        /// Gets the default cursor size to use (0-100).
+        /// Gets or sets the default cursor size to use (0-100) for
+        /// newly created focusable controls.
         /// </summary>
         int CursorSize { get; set; }
         /// <summary>
