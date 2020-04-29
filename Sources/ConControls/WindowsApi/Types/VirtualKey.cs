@@ -13,6 +13,7 @@ namespace ConControls.WindowsApi.Types
     /// Windows API virtual key codes (VK_ constants).
     /// </summary>
     [SuppressMessage("Design", "CA1028", Justification = "Win32 API value")]
+    [SuppressMessage("Design", "CA1069", Justification = "Win32 API values")]
     public enum VirtualKey : short
     {
         /// <summary>
