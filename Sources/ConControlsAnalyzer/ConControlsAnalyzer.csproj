@@ -1,10 +1,29 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <RootNamespace>ConControls.Analyzer</RootNamespace>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <Author>René Vogt</Author>
+    <Copyright>(C) René Vogt</Copyright>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0.1</AssemblyVersion>
+    <FileVersion>0.1.0.2</FileVersion>
+    <Description>Code analyzer to guide usage of ConControls.</Description>
+    <NeutralLanguage>en-us</NeutralLanguage>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>René Vogt.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="bin\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <None Remove="bin\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.0.0" PrivateAssets="all" />
@@ -23,7 +42,11 @@
 
   <ItemGroup>
     <None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="" />
-    <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Update="C:\Privat\Sourcen\ConControls\Sources\.editorconfig" Link=".editorconfig" />
+    <None Include="..\.editorconfig" Link=".editorconfig" Pack="false" />
   </ItemGroup>
 
 </Project>

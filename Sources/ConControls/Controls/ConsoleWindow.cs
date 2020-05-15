@@ -36,7 +36,7 @@ namespace ConControls.Controls
         
         readonly INativeCalls api;
         readonly IConsoleListener consoleListener;
-        readonly ConsoleInputHandle consoleInputHandle;
+        readonly IProvideConsoleGraphics graphicsProvider;
         readonly ConsoleOutputHandle consoleOutputHandle;
         readonly bool originalCursorVisible;
         readonly int originalCursorSize;
@@ -110,7 +110,7 @@ namespace ConControls.Controls
         /// <inheritdoc />
         public ConsoleColor ForegroundColor { get; set; } = ConsoleColor.Gray;
         /// <inheritdoc />
-        public ConsoleColor BackgroundColor { get; set; } = ConsoleColor.DarkBlue;
+        public ConsoleColor BackgroundColor { get; set; } = ConsoleColor.Black;
         /// <inheritdoc />
         public ConsoleColor BorderColor { get; set; } = ConsoleColor.Yellow;
         /// <inheritdoc />
@@ -184,8 +184,8 @@ namespace ConControls.Controls
         /// <exception cref="InvalidOperationException">A previously instantiated <see cref="ConsoleWindow"/> has not yet been disposed of. Only a single window can exist at a time.</exception>
         [ExcludeFromCodeCoverage]
         public ConsoleWindow()
-            : this(null, null) { }
-        internal ConsoleWindow(INativeCalls? api, IConsoleListener? consoleListener)
+            : this(null, null, null) { }
+        internal ConsoleWindow(INativeCalls? api, IConsoleListener? consoleListener, IProvideConsoleGraphics? graphicsProvider)
         {
             if (Interlocked.CompareExchange(ref instancesCreated, 1, 0) != 0)
                 throw Exceptions.CanOnlyUseSingleContext();
@@ -193,6 +193,7 @@ namespace ConControls.Controls
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             this.api = api ?? new NativeCalls();
             this.consoleListener = consoleListener ?? new ConsoleListener(OutputEncoding, this.api);
+            this.graphicsProvider = graphicsProvider ?? new ConsoleGraphicsProvider();
 
             this.consoleListener.OutputReceived += OnConsoleListenerOutputReceived;
             this.consoleListener.ErrorReceived += OnConsoleListenerErrorReceived;
@@ -201,12 +202,7 @@ namespace ConControls.Controls
             this.consoleListener.MenuEvent += OnConsoleListenerMenuReceived;
             this.consoleListener.MouseEvent += OnConsoleListenerMouseReceived;
             this.consoleListener.SizeEvent += OnConsoleListenerSizeReceived;
-            consoleInputHandle = this.consoleListener.OriginalInputHandle;
-            if (consoleInputHandle.IsInvalid)
-                throw Exceptions.Win32();
             consoleOutputHandle = this.consoleListener.OriginalOutputHandle;
-            if (consoleOutputHandle.IsInvalid)
-                throw Exceptions.Win32();
 
             Controls = new ControlCollection(this);
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
@@ -249,18 +245,15 @@ namespace ConControls.Controls
                 consoleListener.MouseEvent -= OnConsoleListenerMouseReceived;
                 consoleListener.SizeEvent -= OnConsoleListenerSizeReceived;
                 consoleListener.Dispose();
-                Console.ResetColor();
-                Console.Clear();
                 api.SetCursorInfo(consoleOutputHandle, originalCursorVisible, originalCursorSize, Point.Empty);
                 consoleOutputHandle.Dispose();
-                consoleInputHandle.Dispose();
             }
             Interlocked.Decrement(ref instancesCreated);
             Disposed?.Invoke(this, EventArgs.Empty);
         }
 
         /// <inheritdoc />
-        public IConsoleGraphics GetGraphics() => new ConsoleGraphics(consoleOutputHandle, api, Size, frameCharSets);
+        public IConsoleGraphics GetGraphics() => graphicsProvider.Provide(consoleOutputHandle, api, Size, frameCharSets);
         void Draw()
         {
             Logger.Log(DebugContext.Window | DebugContext.Drawing, "called.");

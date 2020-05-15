@@ -25,6 +25,7 @@ namespace ConControls.ConsoleApi
         readonly INativeCalls api;
         readonly Encoding outputEncoding;
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
+        readonly ConsoleInputHandle inputHandle;
         readonly ConsoleOutputModes originalOutputMode;
         readonly ConsoleInputModes originalInputMode;
         readonly Timer sizeDetectingTimer;
@@ -50,7 +51,6 @@ namespace ConControls.ConsoleApi
         public Rectangle WindowArea { get; private set; }
 
         public ConsoleErrorHandle OriginalErrorHandle { get; }
-        public ConsoleInputHandle OriginalInputHandle { get; }
         public ConsoleOutputHandle OriginalOutputHandle { get; }
 
         internal ConsoleListener(Encoding outputEncoding, INativeCalls? api = null)
@@ -60,8 +60,8 @@ namespace ConControls.ConsoleApi
             OriginalErrorHandle = this.api.GetErrorHandle();
             OriginalOutputHandle = this.api.GetOutputHandle();
             originalOutputMode = this.api.GetConsoleMode(OriginalOutputHandle);
-            OriginalInputHandle = this.api.GetInputHandle();
-            originalInputMode = this.api.GetConsoleMode(OriginalInputHandle);
+            inputHandle = this.api.GetInputHandle();
+            originalInputMode = this.api.GetConsoleMode(inputHandle);
 
             stdoutWriteStream = new AnonymousPipeServerStream(PipeDirection.Out);
             stdoutReadStream = new AnonymousPipeClientStream(PipeDirection.In, stdoutWriteStream.ClientSafePipeHandle);
@@ -75,7 +75,7 @@ namespace ConControls.ConsoleApi
                 this.api.SetErrorHandle(tempHandle);
             StartReadingError();
 
-            this.api.SetConsoleMode(OriginalInputHandle,
+            this.api.SetConsoleMode(inputHandle,
                                     ConsoleInputModes.EnableWindowInput |
                                     ConsoleInputModes.EnableMouseInput |
                                     ConsoleInputModes.EnableExtendedFlags);
@@ -101,11 +101,11 @@ namespace ConControls.ConsoleApi
                 stderrReadStream.Dispose();
             }
             stopEvent.Dispose();
-            api.SetConsoleMode(OriginalInputHandle, originalInputMode);
+            api.SetConsoleMode(inputHandle, originalInputMode);
             api.SetConsoleMode(OriginalOutputHandle, originalOutputMode);
             OriginalOutputHandle.Dispose();
             OriginalErrorHandle.Dispose();
-            OriginalInputHandle.Dispose();
+            inputHandle.Dispose();
         }
 
         [SuppressMessage("Design", "CA1031", Justification = "Leave thread cleanly.")]
@@ -114,7 +114,7 @@ namespace ConControls.ConsoleApi
             try
             {
                 Logger.Log(dbgctx, "Starting thread.");
-                IntPtr stdin = OriginalInputHandle.DangerousGetHandle();
+                IntPtr stdin = inputHandle.DangerousGetHandle();
                 using var inputWaitHandle = new AutoResetEvent(false) {SafeWaitHandle = new SafeWaitHandle(stdin, false)};
                 WaitHandle[] waitHandles = {stopEvent, inputWaitHandle};
                 int index;
@@ -142,7 +142,7 @@ namespace ConControls.ConsoleApi
         {
             try
             {
-                var records = api.ReadConsoleInput(OriginalInputHandle);
+                var records = api.ReadConsoleInput(inputHandle);
                 Logger.Log(dbgctx, $"Read {records.Length} input records.");
                 foreach (var record in records)
                 {

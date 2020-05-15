@@ -11,6 +11,7 @@
 // ReSharper disable UnusedMember.Local
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using ConControls.Logging;

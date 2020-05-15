@@ -1,3 +1,6 @@
 ﻿[*.cs]
 # CA1707: Bezeichner dürfen keine Unterstriche enthalten
 dotnet_diagnostic.CA1707.severity = none
+
+# RS2008: Enable analyzer release tracking for the analyzer project containing rule 'ConControlsAnalyzer'
+dotnet_diagnostic.RS2008.severity = none

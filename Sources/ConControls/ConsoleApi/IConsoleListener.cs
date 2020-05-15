@@ -21,7 +21,6 @@ namespace ConControls.ConsoleApi
         event EventHandler<ConsoleMenuEventArgs>? MenuEvent;
 
         ConsoleErrorHandle OriginalErrorHandle { get; }
-        ConsoleInputHandle OriginalInputHandle { get; }
         ConsoleOutputHandle OriginalOutputHandle { get; }
     }
 }

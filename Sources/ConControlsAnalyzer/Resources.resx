@@ -117,16 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnalyzerDescription" xml:space="preserve">
-    <value>Type names should be all uppercase.</value>
-    <comment>An optional longer localizable description of the diagnostic.</comment>
+  <data name="Categories_ConControls" xml:space="preserve">
+    <value>ConControls</value>
   </data>
-  <data name="AnalyzerMessageFormat" xml:space="preserve">
-    <value>Type name '{0}' contains lowercase letters</value>
-    <comment>The format-able message the diagnostic displays.</comment>
+  <data name="CC1001_Description" xml:space="preserve">
+    <value>Changes to control properties trigger a redrawing of the control. Multiple changes to properties should therefor be done inside a "using"-block using the control's or (its paraent's) "DeferDrawing" method.</value>
   </data>
-  <data name="AnalyzerTitle" xml:space="preserve">
-    <value>Type name contains lowercase letters</value>
-    <comment>The title of the diagnostic.</comment>
+  <data name="CC1001_FixTitle" xml:space="preserve">
+    <value>Enclose in &lt;code&gt;using (control.DeferDrawing())&lt;/code&gt; block</value>
+  </data>
+  <data name="CC1001_MessageFormat" xml:space="preserve">
+    <value>Drawing should be defered when changing multiple ui properties or adding multiple controls.</value>
+  </data>
+  <data name="CC1001_Title" xml:space="preserve">
+    <value>Drawing should be deferred when changing multiple ui properties.</value>
   </data>
 </root>

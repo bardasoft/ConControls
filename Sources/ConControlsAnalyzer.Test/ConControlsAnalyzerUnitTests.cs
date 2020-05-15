@@ -3,6 +3,8 @@ using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using ConControls.Analyzer.Analyzer;
+using ConControls.Analyzer.Fixes;
 using TestHelper;
 using ConControlsAnalyzer;
 
@@ -71,12 +73,12 @@ namespace ConControlsAnalyzer.Test
 
         protected override CodeFixProvider GetCSharpCodeFixProvider()
         {
-            return new ConControlsAnalyzerCodeFixProvider();
+            return new DeferDrawingFixProvider();
         }
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
-            return new ConControlsAnalyzerAnalyzer();
+            return new DeferedDrawingAnalyzer();
         }
     }
 }
