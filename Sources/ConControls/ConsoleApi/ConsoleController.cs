@@ -18,14 +18,13 @@ using Microsoft.Win32.SafeHandles;
 
 namespace ConControls.ConsoleApi
 {
-    sealed class ConsoleListener : IConsoleListener
+    sealed class ConsoleController : IConsoleController
     {
         const DebugContext dbgctx = DebugContext.ConsoleApi | DebugContext.ConsoleListener;
         readonly object syncLock = new object();
         readonly INativeCalls api;
         readonly Encoding outputEncoding;
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
-        readonly ConsoleInputHandle inputHandle;
         readonly ConsoleOutputModes originalOutputMode;
         readonly ConsoleInputModes originalInputMode;
         readonly Timer sizeDetectingTimer;
@@ -53,14 +52,14 @@ namespace ConControls.ConsoleApi
         public ConsoleErrorHandle OriginalErrorHandle { get; }
         public ConsoleOutputHandle OriginalOutputHandle { get; }
 
-        internal ConsoleListener(Encoding outputEncoding, INativeCalls? api = null)
+        internal ConsoleController(Encoding outputEncoding, INativeCalls? api = null)
         {
             this.outputEncoding = outputEncoding;
             this.api = api ?? new NativeCalls();
             OriginalErrorHandle = this.api.GetErrorHandle();
             OriginalOutputHandle = this.api.GetOutputHandle();
             originalOutputMode = this.api.GetConsoleMode(OriginalOutputHandle);
-            inputHandle = this.api.GetInputHandle();
+            using var inputHandle = this.api.GetInputHandle();
             originalInputMode = this.api.GetConsoleMode(inputHandle);
 
             stdoutWriteStream = new AnonymousPipeServerStream(PipeDirection.Out);
@@ -101,11 +100,9 @@ namespace ConControls.ConsoleApi
                 stderrReadStream.Dispose();
             }
             stopEvent.Dispose();
+            using var inputHandle = api.GetInputHandle();
             api.SetConsoleMode(inputHandle, originalInputMode);
             api.SetConsoleMode(OriginalOutputHandle, originalOutputMode);
-            OriginalOutputHandle.Dispose();
-            OriginalErrorHandle.Dispose();
-            inputHandle.Dispose();
         }
 
         [SuppressMessage("Design", "CA1031", Justification = "Leave thread cleanly.")]
@@ -114,6 +111,7 @@ namespace ConControls.ConsoleApi
             try
             {
                 Logger.Log(dbgctx, "Starting thread.");
+                using var inputHandle = api.GetInputHandle();
                 IntPtr stdin = inputHandle.DangerousGetHandle();
                 using var inputWaitHandle = new AutoResetEvent(false) {SafeWaitHandle = new SafeWaitHandle(stdin, false)};
                 WaitHandle[] waitHandles = {stopEvent, inputWaitHandle};
@@ -142,6 +140,7 @@ namespace ConControls.ConsoleApi
         {
             try
             {
+                using var inputHandle = api.GetInputHandle();
                 var records = api.ReadConsoleInput(inputHandle);
                 Logger.Log(dbgctx, $"Read {records.Length} input records.");
                 foreach (var record in records)

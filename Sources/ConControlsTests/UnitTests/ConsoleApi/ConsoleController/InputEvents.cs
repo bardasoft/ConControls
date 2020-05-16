@@ -19,9 +19,9 @@ using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
+namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 {
-    public partial class ConsoleListenerTests
+    public partial class ConsoleControllerTests
     {
         [TestMethod]
         // ReSharper disable once FunctionComplexityOverflow
@@ -128,7 +128,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                     };
                 }
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
+            using var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
             sut.KeyEvent += (sender, e) =>
             {
                 e.KeyDown.Should().Be(keyRecord.Event.KeyEvent.KeyDown != 0);
@@ -208,7 +208,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                     return records;
                 }
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
+            using var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
             using var logger = new TestLogger(CheckInputLogForRecord);
             stdinEvent.Set();
             (await Task.WhenAny(tcs.Task, Task.Delay(2000)))
@@ -239,7 +239,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
                 ReadConsoleInputConsoleInputHandleInt32 = (handle, size) => throw new Exception(message)
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
+            using var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
             using var logger = new TestLogger(CheckInputLogForException);
             stdinEvent.Set();
             (await Task.WhenAny(tcs.Task, Task.Delay(2000)))

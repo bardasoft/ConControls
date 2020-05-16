@@ -1,7 +1,7 @@
-using Microsoft.CodeAnalysis;
 using System;
+using Microsoft.CodeAnalysis;
 
-namespace TestHelper
+namespace ConControlsAnalyzer.Test.Helpers
 {
     /// <summary>
     /// Location where the diagnostic appears, as determined by path, line number, and column number.
@@ -20,9 +20,9 @@ namespace TestHelper
                 throw new ArgumentOutOfRangeException(nameof(column), "column must be >= -1");
             }
 
-            this.Path = path;
-            this.Line = line;
-            this.Column = column;
+            Path = path;
+            Line = line;
+            Column = column;
         }
 
         public string Path { get; }
@@ -39,19 +39,9 @@ namespace TestHelper
 
         public DiagnosticResultLocation[] Locations
         {
-            get
-            {
-                if (this.locations == null)
-                {
-                    this.locations = new DiagnosticResultLocation[] { };
-                }
-                return this.locations;
-            }
+            get { return locations ?? (locations = new DiagnosticResultLocation[] { }); }
 
-            set
-            {
-                this.locations = value;
-            }
+            set => locations = value;
         }
 
         public DiagnosticSeverity Severity { get; set; }
@@ -60,28 +50,10 @@ namespace TestHelper
 
         public string Message { get; set; }
 
-        public string Path
-        {
-            get
-            {
-                return this.Locations.Length > 0 ? this.Locations[0].Path : "";
-            }
-        }
+        public string Path => Locations.Length > 0 ? Locations[0].Path : "";
 
-        public int Line
-        {
-            get
-            {
-                return this.Locations.Length > 0 ? this.Locations[0].Line : -1;
-            }
-        }
+        public int Line => Locations.Length > 0 ? Locations[0].Line : -1;
 
-        public int Column
-        {
-            get
-            {
-                return this.Locations.Length > 0 ? this.Locations[0].Column : -1;
-            }
-        }
+        public int Column => Locations.Length > 0 ? Locations[0].Column : -1;
     }
 }

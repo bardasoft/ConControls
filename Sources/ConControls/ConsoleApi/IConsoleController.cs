@@ -10,7 +10,7 @@ using ConControls.WindowsApi;
 
 namespace ConControls.ConsoleApi
 {
-    interface IConsoleListener : IDisposable
+    interface IConsoleController : IDisposable
     {
         event EventHandler<ConsoleOutputReceivedEventArgs>? OutputReceived;
         event EventHandler<ConsoleOutputReceivedEventArgs>? ErrorReceived;

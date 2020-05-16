@@ -10,11 +10,11 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
+namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public partial class ConsoleListenerTests
+    public partial class ConsoleControllerTests
     {
     }
 }

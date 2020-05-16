@@ -1,13 +1,13 @@
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Text;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Text;
 
-namespace TestHelper
+namespace ConControlsAnalyzer.Test.Verifiers
 {
     /// <summary>
     /// Class for turning strings into documents and getting the diagnostics on them
@@ -55,28 +55,19 @@ namespace TestHelper
             }
 
             var diagnostics = new List<Diagnostic>();
-            foreach (var project in projects)
+            foreach (Diagnostic diag in projects.Select(project => project.GetCompilationAsync().Result.WithAnalyzers(ImmutableArray.Create(analyzer))).Select(compilationWithAnalyzers => compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync().Result).SelectMany(diags => diags))
             {
-                var compilationWithAnalyzers = project.GetCompilationAsync().Result.WithAnalyzers(ImmutableArray.Create(analyzer));
-                var diags = compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync().Result;
-                foreach (var diag in diags)
+                if (diag.Location == Location.None || diag.Location.IsInMetadata)
                 {
-                    if (diag.Location == Location.None || diag.Location.IsInMetadata)
-                    {
-                        diagnostics.Add(diag);
-                    }
-                    else
-                    {
-                        for (int i = 0; i < documents.Length; i++)
-                        {
-                            var document = documents[i];
-                            var tree = document.GetSyntaxTreeAsync().Result;
-                            if (tree == diag.Location.SourceTree)
-                            {
-                                diagnostics.Add(diag);
-                            }
-                        }
-                    }
+                    diagnostics.Add(diag);
+                }
+                else
+                {
+                    diagnostics.AddRange(from document in documents
+                                         select document.GetSyntaxTreeAsync().Result
+                                         into tree
+                                         where tree == diag.Location.SourceTree
+                                         select diag);
                 }
             }
 

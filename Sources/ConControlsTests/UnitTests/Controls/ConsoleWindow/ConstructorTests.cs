@@ -25,13 +25,14 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         [TestMethod]
         public void Constructor_WindowInitialized()
         {
-            var outputHandle = new ConsoleOutputHandle(IntPtr.Zero);
-            var consoleListener = new StubIConsoleListener
-            {
-                OriginalOutputHandleGet = () => outputHandle
-            };
             bool cursorSet = false, sizeSet = false, cursorReset = false;
-            bool disposing = false;
+            bool disposing = false, listenerDisposed = false;
+            var outputHandle = new ConsoleOutputHandle(IntPtr.Zero);
+            var consoleListener = new StubIConsoleController
+            {
+                OriginalOutputHandleGet = () => outputHandle,
+                Dispose = () => listenerDisposed = true
+            };
             const int originalCursorSize = 10;
             Size windowSize = new Size(12, 42);
             var api = new StubINativeCalls
@@ -115,6 +116,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
 
             drawn.Should().BeTrue();
 
+            listenerDisposed.Should().BeFalse();
             disposing = true;
             sut.Dispose();
             consoleListener.OutputReceivedEvent.Should().BeNull();
@@ -125,7 +127,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             consoleListener.MouseEventEvent.Should().BeNull();
             consoleListener.SizeEventEvent.Should().BeNull();
             cursorReset.Should().BeTrue();
-            outputHandle.IsClosed.Should().BeTrue();
+            listenerDisposed.Should().BeTrue();
         }
     }
 }

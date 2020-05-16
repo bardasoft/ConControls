@@ -19,9 +19,9 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Win32.SafeHandles;
 
-namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
+namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 {
-    public partial class ConsoleListenerTests
+    public partial class ConsoleControllerTests
     {
         [TestMethod]
         public async Task ErrorEvents_ReceivedCorrectEvents()
@@ -37,7 +37,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
                 SetErrorHandleConsoleErrorHandle = handle => stderrHandle = handle
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
+            using var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
             sut.ErrorReceived += (sender, e) =>
             {
                 if (e.Output == message)
@@ -67,7 +67,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
                 SetErrorHandleConsoleErrorHandle = handle => stderrHandle = handle
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
+            using var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
             Assert.IsNotNull(stderrHandle);
             var fileHandle = new SafeFileHandle(stderrHandle!.DangerousGetHandle(), true);
             fileHandle.Close();

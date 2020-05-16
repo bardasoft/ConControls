@@ -7,11 +7,9 @@
 
 using System;
 using System.Collections.Immutable;
-using System.Linq;
 using ConControls.Analyzer.Constants;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace ConControls.Analyzer.Analyzer
@@ -31,10 +29,10 @@ namespace ConControls.Analyzer.Analyzer
         }
         private static void AnalyseSyntaxNode(SyntaxNodeAnalysisContext context)
         {
-            if (!(context.Node is AssignmentExpressionSyntax assignment)) return;
-            var symbol = context.SemanticModel.GetSymbolInfo(assignment.Left);
-            var typeInfo = context.SemanticModel.GetTypeInfo(assignment.Left);
-            Console.WriteLine(typeInfo);
+            //if (!(context.Node is AssignmentExpressionSyntax assignment)) return;
+            //var symbol = context.SemanticModel.GetSymbolInfo(assignment.Left);
+            //var typeInfo = context.SemanticModel.GetTypeInfo(assignment.Left);
+            //Console.WriteLine(typeInfo);
             //var namedTypeSymbol = context.Compilation.;
             //if (namedTypeSymbol.Name.ToCharArray().Any(char.IsLower))
             //{

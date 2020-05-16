@@ -18,9 +18,9 @@ using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
+namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 {
-    public partial class ConsoleListenerTests
+    public partial class ConsoleControllerTests
     {
         [TestMethod]
         // ReSharper disable once FunctionComplexityOverflow
@@ -49,7 +49,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                     };
                 }
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
+            using var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
             sut.SizeEvent += (sender, e) =>
             {
                 lock(syncLock)

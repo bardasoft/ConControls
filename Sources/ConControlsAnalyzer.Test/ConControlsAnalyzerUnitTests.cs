@@ -2,11 +2,10 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using ConControls.Analyzer.Analyzer;
 using ConControls.Analyzer.Fixes;
-using TestHelper;
-using ConControlsAnalyzer;
+using ConControlsAnalyzer.Test.Helpers;
+using CodeFixVerifier = ConControlsAnalyzer.Test.Verifiers.CodeFixVerifier;
 
 namespace ConControlsAnalyzer.Test
 {
@@ -18,7 +17,7 @@ namespace ConControlsAnalyzer.Test
         [TestMethod]
         public void TestMethod1()
         {
-            var test = @"";
+            const string test = @"";
 
             VerifyCSharpDiagnostic(test);
         }
@@ -27,7 +26,7 @@ namespace ConControlsAnalyzer.Test
         [TestMethod]
         public void TestMethod2()
         {
-            var test = @"
+            const string test = @"
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -44,7 +43,7 @@ namespace ConControlsAnalyzer.Test
             var expected = new DiagnosticResult
             {
                 Id = "ConControlsAnalyzer",
-                Message = String.Format("Type name '{0}' contains lowercase letters", "TypeName"),
+                Message = "Type name 'TypeName' contains lowercase letters",
                 Severity = DiagnosticSeverity.Warning,
                 Locations =
                     new[] {
@@ -54,7 +53,7 @@ namespace ConControlsAnalyzer.Test
 
             VerifyCSharpDiagnostic(test, expected);
 
-            var fixtest = @"
+            const string fixtest = @"
     using System;
     using System.Collections.Generic;
     using System.Linq;

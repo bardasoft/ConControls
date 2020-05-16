@@ -17,9 +17,9 @@ using ConControls.WindowsApi.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
+namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 {
-    public partial class ConsoleListenerTests
+    public partial class ConsoleControllerTests
     {
         [TestMethod]
         public async Task ThreadManagement_ThreadStartedAndStoppedCorrectly()
@@ -36,7 +36,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleListener
                 GetInputHandle = () => new ConsoleInputHandle(stdin.SafeWaitHandle.DangerousGetHandle()),
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero)
             };
-            var sut = new ConControls.ConsoleApi.ConsoleListener(Console.OutputEncoding, api);
+            var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
             (await Task.WhenAny(startTaskSource.Task, Task.Delay(2000)))
                 .Should()
                 .Be(startTaskSource.Task, "Thread start needed more than 2 seconds!");

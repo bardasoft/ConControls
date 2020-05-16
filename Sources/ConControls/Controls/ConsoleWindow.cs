@@ -35,7 +35,7 @@ namespace ConControls.Controls
         static int instancesCreated;
         
         readonly INativeCalls api;
-        readonly IConsoleListener consoleListener;
+        readonly IConsoleController consoleController;
         readonly IProvideConsoleGraphics graphicsProvider;
         readonly ConsoleOutputHandle consoleOutputHandle;
         readonly bool originalCursorVisible;
@@ -185,24 +185,24 @@ namespace ConControls.Controls
         [ExcludeFromCodeCoverage]
         public ConsoleWindow()
             : this(null, null, null) { }
-        internal ConsoleWindow(INativeCalls? api, IConsoleListener? consoleListener, IProvideConsoleGraphics? graphicsProvider)
+        internal ConsoleWindow(INativeCalls? api, IConsoleController? consoleController, IProvideConsoleGraphics? graphicsProvider)
         {
             if (Interlocked.CompareExchange(ref instancesCreated, 1, 0) != 0)
                 throw Exceptions.CanOnlyUseSingleContext();
 
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             this.api = api ?? new NativeCalls();
-            this.consoleListener = consoleListener ?? new ConsoleListener(OutputEncoding, this.api);
+            this.consoleController = consoleController ?? new ConsoleController(OutputEncoding, this.api);
             this.graphicsProvider = graphicsProvider ?? new ConsoleGraphicsProvider();
 
-            this.consoleListener.OutputReceived += OnConsoleListenerOutputReceived;
-            this.consoleListener.ErrorReceived += OnConsoleListenerErrorReceived;
-            this.consoleListener.FocusEvent += OnConsoleListenerFocusReceived;
-            this.consoleListener.KeyEvent += OnConsoleListenerKeyReceived;
-            this.consoleListener.MenuEvent += OnConsoleListenerMenuReceived;
-            this.consoleListener.MouseEvent += OnConsoleListenerMouseReceived;
-            this.consoleListener.SizeEvent += OnConsoleListenerSizeReceived;
-            consoleOutputHandle = this.consoleListener.OriginalOutputHandle;
+            this.consoleController.OutputReceived += OnConsoleControllerOutputReceived;
+            this.consoleController.ErrorReceived += OnConsoleControllerErrorReceived;
+            this.consoleController.FocusEvent += OnConsoleControllerFocusReceived;
+            this.consoleController.KeyEvent += OnConsoleControllerKeyReceived;
+            this.consoleController.MenuEvent += OnConsoleControllerMenuReceived;
+            this.consoleController.MouseEvent += OnConsoleControllerMouseReceived;
+            this.consoleController.SizeEvent += OnConsoleControllerSizeReceived;
+            consoleOutputHandle = this.consoleController.OriginalOutputHandle;
 
             Controls = new ControlCollection(this);
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
@@ -237,16 +237,15 @@ namespace ConControls.Controls
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
             if (disposing)
             {
-                consoleListener.OutputReceived -= OnConsoleListenerOutputReceived;
-                consoleListener.ErrorReceived -= OnConsoleListenerErrorReceived;
-                consoleListener.FocusEvent -= OnConsoleListenerFocusReceived;
-                consoleListener.KeyEvent -= OnConsoleListenerKeyReceived;
-                consoleListener.MenuEvent -= OnConsoleListenerMenuReceived;
-                consoleListener.MouseEvent -= OnConsoleListenerMouseReceived;
-                consoleListener.SizeEvent -= OnConsoleListenerSizeReceived;
-                consoleListener.Dispose();
                 api.SetCursorInfo(consoleOutputHandle, originalCursorVisible, originalCursorSize, Point.Empty);
-                consoleOutputHandle.Dispose();
+                consoleController.OutputReceived -= OnConsoleControllerOutputReceived;
+                consoleController.ErrorReceived -= OnConsoleControllerErrorReceived;
+                consoleController.FocusEvent -= OnConsoleControllerFocusReceived;
+                consoleController.KeyEvent -= OnConsoleControllerKeyReceived;
+                consoleController.MenuEvent -= OnConsoleControllerMenuReceived;
+                consoleController.MouseEvent -= OnConsoleControllerMouseReceived;
+                consoleController.SizeEvent -= OnConsoleControllerSizeReceived;
+                consoleController.Dispose();
             }
             Interlocked.Decrement(ref instancesCreated);
             Disposed?.Invoke(this, EventArgs.Empty);
@@ -342,7 +341,7 @@ namespace ConControls.Controls
             var control = focusedControl;
             api.SetCursorInfo(consoleOutputHandle, control?.CursorVisible ?? false, control?.CursorSize ?? CursorSize, control?.CursorPosition ?? Point.Empty);
         }
-        void OnConsoleListenerOutputReceived(object sender, ConsoleOutputReceivedEventArgs e)
+        void OnConsoleControllerOutputReceived(object sender, ConsoleOutputReceivedEventArgs e)
         {
             lock (SynchronizationLock)
             {
@@ -350,7 +349,7 @@ namespace ConControls.Controls
                 StdOutEvent?.Invoke(this, new StdOutEventArgs(e));
             }
         }
-        void OnConsoleListenerErrorReceived(object sender, ConsoleOutputReceivedEventArgs e)
+        void OnConsoleControllerErrorReceived(object sender, ConsoleOutputReceivedEventArgs e)
         {
             lock (SynchronizationLock)
             {
@@ -358,14 +357,14 @@ namespace ConControls.Controls
                 StdErrEvent?.Invoke(this, new StdErrEventArgs(e));
             }
         }
-        void OnConsoleListenerFocusReceived(object sender, ConsoleFocusEventArgs e)
+        void OnConsoleControllerFocusReceived(object sender, ConsoleFocusEventArgs e)
         {
             lock (SynchronizationLock)
             {
                 Logger.Log(DebugContext.Window, $"Received focus event: SetFocus: {e.SetFocus}");
             }
         }
-        void OnConsoleListenerKeyReceived(object sender, ConsoleKeyEventArgs e)
+        void OnConsoleControllerKeyReceived(object sender, ConsoleKeyEventArgs e)
         {
             lock (SynchronizationLock)
             {
@@ -374,7 +373,7 @@ namespace ConControls.Controls
                 KeyEvent?.Invoke(this, new KeyEventArgs(e));
             }
         }
-        void OnConsoleListenerMenuReceived(object sender, ConsoleMenuEventArgs e)
+        void OnConsoleControllerMenuReceived(object sender, ConsoleMenuEventArgs e)
         {
             lock (SynchronizationLock)
             {
@@ -382,7 +381,7 @@ namespace ConControls.Controls
             }
         }
 
-        void OnConsoleListenerMouseReceived(object sender, ConsoleMouseEventArgs e)
+        void OnConsoleControllerMouseReceived(object sender, ConsoleMouseEventArgs e)
         {
             lock (SynchronizationLock)
             {
@@ -391,7 +390,7 @@ namespace ConControls.Controls
                 MouseEvent?.Invoke(this, new MouseEventArgs(e));
             }
         }
-        void OnConsoleListenerSizeReceived(object sender, ConsoleSizeEventArgs e)
+        void OnConsoleControllerSizeReceived(object sender, ConsoleSizeEventArgs e)
         {
             lock (SynchronizationLock)
             {
