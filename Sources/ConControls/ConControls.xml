@@ -374,9 +374,10 @@
         <member name="M:ConControls.Controls.ConsoleControl.GetClientArea">
             <summary>
             Determines the area of the control that can be used as "client" area.
-            This base method e.g. remove the border from the total control area.
+            This base method e.g. removes the border from the total control area.
+            The resulting coordinates are client coordinates (not console coordinates)
             </summary>
-            <returns>A <see cref="T:System.Drawing.Rectangle"/> representing the client area of this control.</returns>
+            <returns>A <see cref="T:System.Drawing.Rectangle"/> representing the client area (in client coordinates) of this control.</returns>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.OnNameChanged">
             <summary>
@@ -474,6 +475,14 @@
             </summary>
             <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
             <param name="e">The event details.</param>
+        </member>
+        <member name="T:ConControls.Controls.ConsolePanel">
+            <summary>
+            A console panel that can contain other console controls.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsolePanel.#ctor(ConControls.Controls.IControlContainer)">
+            <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.ConsoleWindow">
             <summary>
@@ -1313,7 +1322,7 @@
         </member>
         <member name="P:ConControls.Controls.ProgressBar.Percentage">
             <summary>
-            Gets or sets the percentage value of this progress bar.
+            Gets or sets the percentage value of this progress bar (between 0 and 1 inclusive).
             </summary>
             <exception cref="T:System.ArgumentOutOfRangeException">The value was less than zero or greater than 1.</exception>
         </member>

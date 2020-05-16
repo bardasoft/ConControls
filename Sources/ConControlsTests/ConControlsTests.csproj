@@ -88,6 +88,8 @@
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\OutputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\InputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ConsoleControllerTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\PointToClient.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\PointToConsole.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\DrawClientAreaTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\DrawBorderTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\DrawingInhibitetTests.cs" />

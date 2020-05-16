@@ -696,7 +696,7 @@ namespace ConControls.Controls
 
                 var color = EffectiveBackgroundColor;
                 Logger.Log(DebugContext.Control | DebugContext.Drawing, $"drawing background ({color}.");
-                graphics.DrawBackground(color, area);
+                graphics.DrawBackground(color, new Rectangle(Parent.PointToConsole(Location), Size));
             }
         }
         /// <summary>
@@ -727,7 +727,7 @@ namespace ConControls.Controls
                 var effectiveBackgroundColor = EffectiveBackgroundColor;
 
                 Logger.Log(DebugContext.Control | DebugContext.Drawing, $"drawing border ({effectiveBorderColor} on {effectiveBackgroundColor}, {effectiveBorderStyle}).");
-                graphics.DrawBorder(effectiveBackgroundColor, effectiveBorderColor, effectiveBorderStyle, area);
+                graphics.DrawBorder(effectiveBackgroundColor, effectiveBorderColor, effectiveBorderStyle, new Rectangle(Parent.PointToConsole(Location), Size));
             }
         }
         /// <summary>
@@ -804,9 +804,10 @@ namespace ConControls.Controls
                                                                        : disabledBorderStyle ?? borderStyle;
         /// <summary>
         /// Determines the area of the control that can be used as "client" area.
-        /// This base method e.g. remove the border from the total control area.
+        /// This base method e.g. removes the border from the total control area.
+        /// The resulting coordinates are client coordinates (not console coordinates)
         /// </summary>
-        /// <returns>A <see cref="Rectangle"/> representing the client area of this control.</returns>
+        /// <returns>A <see cref="Rectangle"/> representing the client area (in client coordinates) of this control.</returns>
         protected virtual Rectangle GetClientArea()
         {
             return EffectiveBorderStyle == BorderStyle.None

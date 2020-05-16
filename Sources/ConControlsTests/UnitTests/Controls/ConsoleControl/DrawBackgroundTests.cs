@@ -98,7 +98,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             {
                 SynchronizationLockGet = () => syncLock,
                 GetGraphics = () => new StubIConsoleGraphics(),
-                BackgroundColorGet = () => Color
+                BackgroundColorGet = () => Color,
+                PointToClientPoint = p => p,
+                PointToConsolePoint = p => p
             };
             stubbedWindow.WindowGet = () => stubbedWindow;
             var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);

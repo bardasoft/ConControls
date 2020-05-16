@@ -64,7 +64,7 @@ namespace ConControls.Controls
         public event EventHandler? OrientationChanged;
 
         /// <summary>
-        /// Gets or sets the percentage value of this progress bar.
+        /// Gets or sets the percentage value of this progress bar (between 0 and 1 inclusive).
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">The value was less than zero or greater than 1.</exception>
         public double Percentage
@@ -148,6 +148,7 @@ namespace ConControls.Controls
         Rectangle GetRectangleToFill()
         {
             var clientArea = GetClientArea();
+            clientArea = new Rectangle(Parent.PointToConsole(clientArea.Location), clientArea.Size);
             return orientation switch
             {
                 ProgressOrientation.RightToLeft => GetRightToLeftRectangle(clientArea),

@@ -102,7 +102,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 GetGraphics = () => new StubIConsoleGraphics(),
                 BackgroundColorGet = () => ConsoleColor.DarkMagenta,
                 BorderColorGet = () => ConsoleColor.Cyan,
-                BorderStyleGet = () => BorderStyle.None
+                BorderStyleGet = () => BorderStyle.None,
+                PointToClientPoint = p => p,
+                PointToConsolePoint = p => p
             };
             stubbedWindow.WindowGet = () => stubbedWindow;
             var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
