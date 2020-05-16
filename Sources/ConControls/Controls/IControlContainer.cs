@@ -71,5 +71,18 @@ namespace ConControls.Controls
         /// <returns>An <see cref="IDisposable"/> that on calling <see cref="IDisposable.Dispose"/> releases
         /// the drawing barriere of this window.</returns>
         IDisposable DeferDrawing();
+
+        /// <summary>
+        /// Converts a <see cref="Point"/> from console coordinates to client coordinates.
+        /// </summary>
+        /// <param name="consolePoint">The <see cref="Point"/> in console coordinates to convert to client coordinates.</param>
+        /// <returns>The converted <see cref="Point"/> in client coordinates.</returns>
+        Point PointToClient(Point consolePoint);
+        /// <summary>
+        /// Converts a <see cref="Point"/> from client coordinates to console coordinates.
+        /// </summary>
+        /// <param name="clientPoint">The <see cref="Point"/> in client coordinates to convert to console coordinates.</param>
+        /// <returns>The converted <see cref="Point"/> in console coordinates.</returns>
+        Point PointToConsole(Point clientPoint);
     }
 }

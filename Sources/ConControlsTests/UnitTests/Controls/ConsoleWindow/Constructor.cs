@@ -25,13 +25,13 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         [TestMethod]
         public void Constructor_WindowInitialized()
         {
-            bool cursorSet = false, sizeSet = false, cursorReset = false;
-            bool disposing = false, listenerDisposed = false;
+            bool cursorSet = false, cursorReset = false;
+            bool disposing = false, controllerDisposed = false;
             var outputHandle = new ConsoleOutputHandle(IntPtr.Zero);
-            var consoleListener = new StubIConsoleController
+            var consoleController = new StubIConsoleController
             {
                 OriginalOutputHandleGet = () => outputHandle,
-                Dispose = () => listenerDisposed = true
+                Dispose = () => controllerDisposed = true
             };
             const int originalCursorSize = 10;
             Size windowSize = new Size(12, 42);
@@ -50,14 +50,6 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                     handle.Should().Be(outputHandle);
                     return (true, originalCursorSize, Point.Empty);
                 },
-                SetConsoleScreenBufferSizeConsoleOutputHandleCOORD = (handle, size) =>
-                {
-                    sizeSet.Should().BeFalse();
-                    handle.Should().Be(outputHandle);
-                    size.Should().Be(new COORD(windowSize));
-                    sizeSet = true;
-                }
-                ,
                 SetCursorInfoConsoleOutputHandleBooleanInt32Point = (handle, visible, size, position) =>
                 {
                     handle.Should().Be(outputHandle);
@@ -101,33 +93,32 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                 }
             };
 
-            var sut = new ConControls.Controls.ConsoleWindow(api, consoleListener, graphicsProvider);
-            consoleListener.OutputReceivedEvent.Should().NotBeNull();
-            consoleListener.ErrorReceivedEvent.Should().NotBeNull();
-            consoleListener.FocusEventEvent.Should().NotBeNull();
-            consoleListener.KeyEventEvent.Should().NotBeNull();
-            consoleListener.MenuEventEvent.Should().NotBeNull();
-            consoleListener.MouseEventEvent.Should().NotBeNull();
-            consoleListener.SizeEventEvent.Should().NotBeNull();
+            var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
+            consoleController.OutputReceivedEvent.Should().NotBeNull();
+            consoleController.ErrorReceivedEvent.Should().NotBeNull();
+            consoleController.FocusEventEvent.Should().NotBeNull();
+            consoleController.KeyEventEvent.Should().NotBeNull();
+            consoleController.MenuEventEvent.Should().NotBeNull();
+            consoleController.MouseEventEvent.Should().NotBeNull();
+            consoleController.SizeEventEvent.Should().BeNull();
 
             sut.Controls.Should().NotBeNull();
             cursorSet.Should().BeTrue();
-            sizeSet.Should().BeTrue();
 
             drawn.Should().BeTrue();
 
-            listenerDisposed.Should().BeFalse();
+            controllerDisposed.Should().BeFalse();
             disposing = true;
             sut.Dispose();
-            consoleListener.OutputReceivedEvent.Should().BeNull();
-            consoleListener.ErrorReceivedEvent.Should().BeNull();
-            consoleListener.FocusEventEvent.Should().BeNull();
-            consoleListener.KeyEventEvent.Should().BeNull();
-            consoleListener.MenuEventEvent.Should().BeNull();
-            consoleListener.MouseEventEvent.Should().BeNull();
-            consoleListener.SizeEventEvent.Should().BeNull();
+            consoleController.OutputReceivedEvent.Should().BeNull();
+            consoleController.ErrorReceivedEvent.Should().BeNull();
+            consoleController.FocusEventEvent.Should().BeNull();
+            consoleController.KeyEventEvent.Should().BeNull();
+            consoleController.MenuEventEvent.Should().BeNull();
+            consoleController.MouseEventEvent.Should().BeNull();
+            consoleController.SizeEventEvent.Should().BeNull();
             cursorReset.Should().BeTrue();
-            listenerDisposed.Should().BeTrue();
+            controllerDisposed.Should().BeTrue();
         }
     }
 }

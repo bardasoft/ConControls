@@ -32,5 +32,6 @@ namespace ConControls
         internal static InvalidOperationException CannotFocusUnFocusableControl(string controlType) =>
             new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_CannotFocusUnFocusableControl, controlType));
         internal static ArgumentNullException ControlsMustBeContained([CallerMemberName] string paramName = "Parent") => new ArgumentNullException(paramName: paramName, message: Resources.Exception_ControlsMustBeContained);
+        internal static NotSupportedException WindowSizeNotSupported() => new NotSupportedException(Resources.Exception_WindowSizeNotSupported);
     }
 }

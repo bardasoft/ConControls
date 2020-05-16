@@ -6,7 +6,6 @@
  */
 
 using System;
-using System.Drawing;
 using System.Text;
 using ConControls.Controls.Drawing;
 
@@ -48,10 +47,6 @@ namespace ConControls.Controls
         /// The title of the console window.
         /// </summary>
         string Title { get; set; }
-        /// <summary>
-        /// Gets the maximum size of the console window based on the current font and the size of the display.
-        /// </summary>
-        Size MaximumSize { get; }
         /// <summary>
         /// Gets or sets the default cursor size to use (0-100) for
         /// newly created focusable controls.

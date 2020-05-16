@@ -129,7 +129,10 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\NameTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConstructorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConsoleControlTests.cs" />
-    <Compile Include="UnitTests\Controls\ConsoleWindow\ConstructorTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\Size.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\PointToClient.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\PointToConsole.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\Constructor.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\ConsoleWindowTests.cs" />
     <Compile Include="UnitTests\Controls\TestControl.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\StdErrEventArgsTests.cs" />

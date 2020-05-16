@@ -140,5 +140,14 @@ namespace ConControls.Properties {
                 return ResourceManager.GetString("Exception_WindowDisposed", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Changing the console window&apos;s size is currently not supported! ähnelt.
+        /// </summary>
+        internal static string Exception_WindowSizeNotSupported {
+            get {
+                return ResourceManager.GetString("Exception_WindowSizeNotSupported", resourceCulture);
+            }
+        }
     }
 }

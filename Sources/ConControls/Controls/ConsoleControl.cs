@@ -616,6 +616,11 @@ namespace ConControls.Controls
             if (disposed > 0) throw Exceptions.ControlDisposed(name);
         }
 
+        /// <inheritdoc />
+        public Point PointToConsole(Point clientPoint) => Parent.PointToConsole(Point.Add(clientPoint, (Size)Location));
+        /// <inheritdoc />
+        public Point PointToClient(Point consolePoint) => Point.Subtract(Parent.PointToClient(consolePoint), (Size)Location);
+
         /// <summary>
         /// Invalidates this control to trigger redrawing.
         /// If <paramref name="onlyClientArea"/> is <c>true</c>, only

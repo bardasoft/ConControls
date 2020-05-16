@@ -284,6 +284,12 @@
             </summary>
             <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.Controls.IConsoleWindow"/> has already been disposed of.</exception>
         </member>
+        <member name="M:ConControls.Controls.ConsoleControl.PointToConsole(System.Drawing.Point)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.PointToClient(System.Drawing.Point)">
+            <inheritdoc />
+        </member>
         <member name="M:ConControls.Controls.ConsoleControl.Invalidate(System.Boolean)">
             <summary>
             Invalidates this control to trigger redrawing.
@@ -518,9 +524,6 @@
         <member name="P:ConControls.Controls.ConsoleWindow.Area">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.MaximumSize">
-            <inheritdoc />
-        </member>
         <member name="P:ConControls.Controls.ConsoleWindow.CursorSize">
             <inheritdoc />
         </member>
@@ -580,6 +583,12 @@
             The <see cref="M:ConControls.Controls.ConsoleWindow.Dispose"/> method releases any resources used by this instance.
             It allows to create a new instance (only one <see cref="T:ConControls.Controls.ConsoleWindow"/> instance can be alive
             at a time) and tries to reset the console to the state before the creation of this instacne.</remarks>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleWindow.PointToClient(System.Drawing.Point)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.ConsoleWindow.PointToConsole(System.Drawing.Point)">
+            <inheritdoc />
         </member>
         <member name="M:ConControls.Controls.ConsoleWindow.GetGraphics">
             <inheritdoc />
@@ -1012,11 +1021,6 @@
             The title of the console window.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.IConsoleWindow.MaximumSize">
-            <summary>
-            Gets the maximum size of the console window based on the current font and the size of the display.
-            </summary>
-        </member>
         <member name="P:ConControls.Controls.IConsoleWindow.CursorSize">
             <summary>
             Gets or sets the default cursor size to use (0-100) for
@@ -1142,6 +1146,20 @@
             </remarks>
             <returns>An <see cref="T:System.IDisposable"/> that on calling <see cref="M:System.IDisposable.Dispose"/> releases
             the drawing barriere of this window.</returns>
+        </member>
+        <member name="M:ConControls.Controls.IControlContainer.PointToClient(System.Drawing.Point)">
+            <summary>
+            Converts a <see cref="T:System.Drawing.Point"/> from console coordinates to client coordinates.
+            </summary>
+            <param name="consolePoint">The <see cref="T:System.Drawing.Point"/> in console coordinates to convert to client coordinates.</param>
+            <returns>The converted <see cref="T:System.Drawing.Point"/> in client coordinates.</returns>
+        </member>
+        <member name="M:ConControls.Controls.IControlContainer.PointToConsole(System.Drawing.Point)">
+            <summary>
+            Converts a <see cref="T:System.Drawing.Point"/> from client coordinates to console coordinates.
+            </summary>
+            <param name="clientPoint">The <see cref="T:System.Drawing.Point"/> in client coordinates to convert to console coordinates.</param>
+            <returns>The converted <see cref="T:System.Drawing.Point"/> in console coordinates.</returns>
         </member>
         <member name="T:ConControls.Controls.KeyEventArgs">
             <summary>
@@ -1394,6 +1412,11 @@
         <member name="P:ConControls.Properties.Resources.Exception_WindowDisposed">
             <summary>
               Sucht eine lokalisierte Zeichenfolge, die The console window used by this control has already been disposed of! ähnelt.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_WindowSizeNotSupported">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Changing the console window&apos;s size is currently not supported! ähnelt.
             </summary>
         </member>
         <member name="T:ConControls.WindowsApi.ConsoleErrorHandle">

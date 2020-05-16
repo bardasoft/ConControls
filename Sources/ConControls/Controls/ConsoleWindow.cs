@@ -15,7 +15,6 @@ using ConControls.Controls.Drawing;
 using ConControls.Helpers;
 using ConControls.Logging;
 using ConControls.WindowsApi;
-using ConControls.WindowsApi.Types;
 
 namespace ConControls.Controls
 {
@@ -46,7 +45,6 @@ namespace ConControls.Controls
 
         int isDisposed;
         int inhibitDrawing;
-        Size lastKnownSize;
         FrameCharSets frameCharSets = new FrameCharSets();
         ConsoleControl? focusedControl;
 
@@ -83,28 +81,11 @@ namespace ConControls.Controls
                 var info = api.GetConsoleScreenBufferInfo(consoleOutputHandle);
                 return new Size(info.Window.Right - info.Window.Left + 1, info.Window.Bottom - info.Window.Top + 1);
             }
-            set
-            {
-                lock (SynchronizationLock)
-                {
-                    if (value == Size) return;
-                    api.SetConsoleWindowSize(consoleOutputHandle, value);
-                    SynchronizeConsoleSettings();
-                }
-            }
+            set => throw Exceptions.WindowSizeNotSupported();
         }
         /// <inheritdoc />
         public Rectangle Area => new Rectangle(Point.Empty, Size);
         
-        /// <inheritdoc />
-        public Size MaximumSize
-        {
-            get
-            {
-                var size = api.GetLargestConsoleWindowSize(consoleOutputHandle);
-                return new Size(size.X, size.Y);
-            }
-        }
         /// <inheritdoc />
         public int CursorSize { get; set; }
         /// <inheritdoc />
@@ -201,7 +182,6 @@ namespace ConControls.Controls
             this.consoleController.KeyEvent += OnConsoleControllerKeyReceived;
             this.consoleController.MenuEvent += OnConsoleControllerMenuReceived;
             this.consoleController.MouseEvent += OnConsoleControllerMouseReceived;
-            this.consoleController.SizeEvent += OnConsoleControllerSizeReceived;
             consoleOutputHandle = this.consoleController.OriginalOutputHandle;
 
             Controls = new ControlCollection(this);
@@ -211,7 +191,7 @@ namespace ConControls.Controls
             CursorSize = originalCursorSize;
             this.api.SetCursorInfo(consoleOutputHandle, false, CursorSize, Point.Empty);
 
-            SynchronizeConsoleSettings();
+            Invalidate();
         }
         /// <summary>
         /// Cleans up native resources.
@@ -244,12 +224,16 @@ namespace ConControls.Controls
                 consoleController.KeyEvent -= OnConsoleControllerKeyReceived;
                 consoleController.MenuEvent -= OnConsoleControllerMenuReceived;
                 consoleController.MouseEvent -= OnConsoleControllerMouseReceived;
-                consoleController.SizeEvent -= OnConsoleControllerSizeReceived;
                 consoleController.Dispose();
             }
             Interlocked.Decrement(ref instancesCreated);
             Disposed?.Invoke(this, EventArgs.Empty);
         }
+
+        /// <inheritdoc />
+        public Point PointToClient(Point consolePoint) => consolePoint;
+        /// <inheritdoc />
+        public Point PointToConsole(Point clientPoint) => clientPoint;
 
         /// <inheritdoc />
         public IConsoleGraphics GetGraphics() => graphicsProvider.Provide(consoleOutputHandle, api, Size, frameCharSets);
@@ -296,31 +280,6 @@ namespace ConControls.Controls
         void OnFrameCharSetsChanged()
         {
             Invalidate();
-        }
-        void OnSizeChanged()
-        {
-            using(DeferDrawing())
-                AreaChanged?.Invoke(this, EventArgs.Empty);
-        }
-        void SynchronizeConsoleSettings()
-        {
-            lock (SynchronizationLock)
-            {
-                using(DeferDrawing())
-                {
-                    var size = Size;
-                    if (size != lastKnownSize)
-                    {
-                        Logger.Log(DebugContext.Window, "Window size has changed since last synchronization.");
-                        lastKnownSize = size;
-                        OnSizeChanged();
-                    }
-
-                    var bufferSize = new COORD(size);
-                    Logger.Log(DebugContext.Window, $"Setting screen buffer size to {bufferSize}.");
-                    api.SetConsoleScreenBufferSize(consoleOutputHandle, bufferSize);
-                }
-            }
         }
         void OnControlCollectionChanged(object sender, ControlCollectionChangedEventArgs e)
         {
@@ -389,16 +348,6 @@ namespace ConControls.Controls
                            $"Received mouse event: [{e.EventFlags}] at {e.MousePosition} button '{e.ButtonState}' CK {e.ControlKeys} Scroll: {e.Scroll}");
                 MouseEvent?.Invoke(this, new MouseEventArgs(e));
             }
-        }
-        void OnConsoleControllerSizeReceived(object sender, ConsoleSizeEventArgs e)
-        {
-            lock (SynchronizationLock)
-            {
-                Logger.Log(DebugContext.Window,
-                           $"Received size event: Window {e.WindowArea} Buffer {e.BufferSize}");
-                SynchronizeConsoleSettings();
-            }
-
         }
     }
 }
