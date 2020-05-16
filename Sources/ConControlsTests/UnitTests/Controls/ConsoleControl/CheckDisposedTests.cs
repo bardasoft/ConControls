@@ -67,8 +67,6 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             sut.DisposeInternal(false);
             stubbedWindow.KeyEventEvent.Should().NotBeNull();
             stubbedWindow.MouseEventEvent.Should().NotBeNull();
-            stubbedWindow.StdOutEventEvent.Should().NotBeNull();
-            stubbedWindow.StdErrEventEvent.Should().NotBeNull();
             sut.Dispose();
             sut.Invoking(c => c.DoCheckDisposed())
                .Should().Throw<ObjectDisposedException>()

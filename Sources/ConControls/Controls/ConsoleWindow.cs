@@ -8,7 +8,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Text;
 using System.Threading;
 using ConControls.ConsoleApi;
 using ConControls.Controls.Drawing;
@@ -36,7 +35,6 @@ namespace ConControls.Controls
         readonly INativeCalls api;
         readonly IConsoleController consoleController;
         readonly IProvideConsoleGraphics graphicsProvider;
-        readonly ConsoleOutputHandle consoleOutputHandle;
         readonly bool originalCursorVisible;
         readonly int originalCursorSize;
 #pragma warning disable CA2213
@@ -55,16 +53,10 @@ namespace ConControls.Controls
         /// <inheritdoc />
         public event EventHandler<MouseEventArgs>? MouseEvent;
         /// <inheritdoc />
-        public event EventHandler<StdOutEventArgs>? StdOutEvent;
-        /// <inheritdoc />
-        public event EventHandler<StdErrEventArgs>? StdErrEvent;
-        /// <inheritdoc />
         public event EventHandler? Disposed;
 
         /// <inheritdoc />
         public IConsoleWindow Window => this;
-        /// <inheritdoc />
-        public Encoding OutputEncoding { get; } = Console.OutputEncoding;
         /// <inheritdoc />
         public string Title
         {
@@ -78,7 +70,8 @@ namespace ConControls.Controls
         {
             get
             {
-                var info = api.GetConsoleScreenBufferInfo(consoleOutputHandle);
+                using var outputHandle = api.GetOutputHandle();
+                var info = api.GetConsoleScreenBufferInfo(outputHandle);
                 return new Size(info.Window.Right - info.Window.Left + 1, info.Window.Bottom - info.Window.Top + 1);
             }
             set => throw Exceptions.WindowSizeNotSupported();
@@ -123,7 +116,8 @@ namespace ConControls.Controls
                     focusedControl = value;
                     if (focusedControl == null) return;
                     focusedControl.Focused = true;
-                    api.SetCursorInfo(consoleOutputHandle, focusedControl.CursorVisible, focusedControl.CursorSize, focusedControl.CursorPosition);
+                    using var outputHandle = api.GetOutputHandle();
+                    api.SetCursorInfo(outputHandle, focusedControl.CursorVisible, focusedControl.CursorSize, focusedControl.CursorPosition);
                     focusedControl.CursorPositionChanged += OnFocusedControlCursorChanged;
                     focusedControl.CursorSizeChanged += OnFocusedControlCursorChanged;
                     focusedControl.CursorVisibleChanged += OnFocusedControlCursorChanged;
@@ -173,24 +167,22 @@ namespace ConControls.Controls
 
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             this.api = api ?? new NativeCalls();
-            this.consoleController = consoleController ?? new ConsoleController(OutputEncoding, this.api);
+            this.consoleController = consoleController ?? new ConsoleController(this.api);
             this.graphicsProvider = graphicsProvider ?? new ConsoleGraphicsProvider();
 
-            this.consoleController.OutputReceived += OnConsoleControllerOutputReceived;
-            this.consoleController.ErrorReceived += OnConsoleControllerErrorReceived;
             this.consoleController.FocusEvent += OnConsoleControllerFocusReceived;
             this.consoleController.KeyEvent += OnConsoleControllerKeyReceived;
             this.consoleController.MenuEvent += OnConsoleControllerMenuReceived;
             this.consoleController.MouseEvent += OnConsoleControllerMouseReceived;
             this.consoleController.SizeEvent += OnConsoleControllerSizeReceived;
-            consoleOutputHandle = this.consoleController.OriginalOutputHandle;
 
             Controls = new ControlCollection(this);
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
 
-            (originalCursorVisible, originalCursorSize, _) = this.api.GetCursorInfo(consoleOutputHandle);
+            using var outputHandle = this.api.GetOutputHandle();
+            (originalCursorVisible, originalCursorSize, _) = this.api.GetCursorInfo(outputHandle);
             CursorSize = originalCursorSize;
-            this.api.SetCursorInfo(consoleOutputHandle, false, CursorSize, Point.Empty);
+            this.api.SetCursorInfo(outputHandle, false, CursorSize, Point.Empty);
 
             Invalidate();
         }
@@ -218,9 +210,8 @@ namespace ConControls.Controls
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
             if (disposing)
             {
-                api.SetCursorInfo(consoleOutputHandle, originalCursorVisible, originalCursorSize, Point.Empty);
-                consoleController.OutputReceived -= OnConsoleControllerOutputReceived;
-                consoleController.ErrorReceived -= OnConsoleControllerErrorReceived;
+                using var outputHandle = api.GetOutputHandle();
+                api.SetCursorInfo(outputHandle, originalCursorVisible, originalCursorSize, Point.Empty);
                 consoleController.FocusEvent -= OnConsoleControllerFocusReceived;
                 consoleController.KeyEvent -= OnConsoleControllerKeyReceived;
                 consoleController.MenuEvent -= OnConsoleControllerMenuReceived;
@@ -238,7 +229,11 @@ namespace ConControls.Controls
         public Point PointToConsole(Point clientPoint) => clientPoint;
 
         /// <inheritdoc />
-        public IConsoleGraphics GetGraphics() => graphicsProvider.Provide(consoleOutputHandle, api, Size, frameCharSets);
+        public IConsoleGraphics GetGraphics()
+        {
+            using var outputHandle = api.GetOutputHandle();
+            return graphicsProvider.Provide(outputHandle, api, Size, frameCharSets);
+        }
         void Draw()
         {
             Logger.Log(DebugContext.Window | DebugContext.Drawing, "called.");
@@ -300,23 +295,8 @@ namespace ConControls.Controls
         void OnFocusedControlCursorChanged(object sender, EventArgs e)
         {
             var control = focusedControl;
-            api.SetCursorInfo(consoleOutputHandle, control?.CursorVisible ?? false, control?.CursorSize ?? CursorSize, control?.CursorPosition ?? Point.Empty);
-        }
-        void OnConsoleControllerOutputReceived(object sender, ConsoleOutputReceivedEventArgs e)
-        {
-            lock (SynchronizationLock)
-            {
-                Logger.Log(DebugContext.Window, $"Received stdout: [{e.Output}]");
-                StdOutEvent?.Invoke(this, new StdOutEventArgs(e));
-            }
-        }
-        void OnConsoleControllerErrorReceived(object sender, ConsoleOutputReceivedEventArgs e)
-        {
-            lock (SynchronizationLock)
-            {
-                Logger.Log(DebugContext.Window, $"Received stderr: [{e.Output}]");
-                StdErrEvent?.Invoke(this, new StdErrEventArgs(e));
-            }
+            using var outputHandle = api.GetOutputHandle();
+            api.SetCursorInfo(outputHandle, control?.CursorVisible ?? false, control?.CursorSize ?? CursorSize, control?.CursorPosition ?? Point.Empty);
         }
         void OnConsoleControllerFocusReceived(object sender, ConsoleFocusEventArgs e)
         {

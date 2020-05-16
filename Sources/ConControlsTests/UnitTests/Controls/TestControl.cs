@@ -195,20 +195,6 @@ namespace ConControlsTests.UnitTests.Controls
             base.OnMouseEvent(sender, e);
             AddCount();
         }
-        internal const string MethodOnStdOutEvent = nameof(OnStdOutEvent);
-        protected override void OnStdOutEvent(object sender, StdOutEventArgs e)
-        {
-            Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
-            base.OnStdOutEvent(sender, e);
-            AddCount();
-        }
-        internal const string MethodOnStdErrEvent = nameof(OnStdErrEvent);
-        protected override void OnStdErrEvent(object sender, StdErrEventArgs e)
-        {
-            Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
-            base.OnStdErrEvent(sender, e);
-            AddCount();
-        }
 
         void AddCount([CallerMemberName] string caller = "")
         {

@@ -18,7 +18,6 @@ namespace ConControls.WindowsApi
     {
         internal const int STDIN = -10;
         internal const int STDOUT = -11;
-        internal const int STDERR = -12;
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -36,8 +35,6 @@ namespace ConControls.WindowsApi
         internal static extern int GetConsoleTitle(
             StringBuilder titleBuilder,
             int size);
-        [DllImport("kernel32", SetLastError = true)]
-        internal static extern COORD GetLargestConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle);
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern IntPtr GetStdHandle(int stdHandle);
         [DllImport("kernel32.dll", EntryPoint = "ReadConsoleInputW", CharSet = CharSet.Unicode, SetLastError = true)]
@@ -67,15 +64,9 @@ namespace ConControls.WindowsApi
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SetConsoleMode(ConsoleOutputHandle consoleOutputHandle, ConsoleOutputModes outputMode);
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, COORD size);
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SetConsoleTitle(string title);
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool SetConsoleWindowInfo(ConsoleOutputHandle consoleOutputHandle, bool absolute, SMALL_RECT area);
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SetStdHandle(int stdHandle, IntPtr handle);

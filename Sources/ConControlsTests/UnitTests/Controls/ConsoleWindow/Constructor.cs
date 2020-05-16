@@ -30,7 +30,6 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             var outputHandle = new ConsoleOutputHandle(IntPtr.Zero);
             var consoleController = new StubIConsoleController
             {
-                OriginalOutputHandleGet = () => outputHandle,
                 Dispose = () => controllerDisposed = true
             };
             const int originalCursorSize = 10;
@@ -50,6 +49,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                     handle.Should().Be(outputHandle);
                     return (true, originalCursorSize, Point.Empty);
                 },
+                GetOutputHandle = () => outputHandle,
                 SetCursorInfoConsoleOutputHandleBooleanInt32Point = (handle, visible, size, position) =>
                 {
                     handle.Should().Be(outputHandle);
@@ -94,8 +94,6 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             };
 
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
-            consoleController.OutputReceivedEvent.Should().NotBeNull();
-            consoleController.ErrorReceivedEvent.Should().NotBeNull();
             consoleController.FocusEventEvent.Should().NotBeNull();
             consoleController.KeyEventEvent.Should().NotBeNull();
             consoleController.MenuEventEvent.Should().NotBeNull();
@@ -110,8 +108,6 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             controllerDisposed.Should().BeFalse();
             disposing = true;
             sut.Dispose();
-            consoleController.OutputReceivedEvent.Should().BeNull();
-            consoleController.ErrorReceivedEvent.Should().BeNull();
             consoleController.FocusEventEvent.Should().BeNull();
             consoleController.KeyEventEvent.Should().BeNull();
             consoleController.MenuEventEvent.Should().BeNull();

@@ -110,7 +110,6 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 
             var api = new StubINativeCalls
             {
-                GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
                 GetInputHandle = () => consoleInputHandle,
                 GetOutputHandle = () => consoleOutputHandle,
                 ReadConsoleInputConsoleInputHandleInt32 = (handle, size) =>
@@ -128,7 +127,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
                     };
                 }
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
+            using var sut = new ConControls.ConsoleApi.ConsoleController(api);
             sut.KeyEvent += (sender, e) =>
             {
                 e.KeyDown.Should().Be(keyRecord.Event.KeyEvent.KeyDown != 0);
@@ -199,7 +198,6 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 
             var api = new StubINativeCalls
             {
-                GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
                 GetInputHandle = () => consoleInputHandle,
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
                 ReadConsoleInputConsoleInputHandleInt32 = (handle, size) =>
@@ -208,7 +206,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
                     return records;
                 }
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
+            using var sut = new ConControls.ConsoleApi.ConsoleController(api);
             using var logger = new TestLogger(CheckInputLogForRecord);
             stdinEvent.Set();
             (await Task.WhenAny(tcs.Task, Task.Delay(2000)))
@@ -234,12 +232,11 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 
             var api = new StubINativeCalls
             {
-                GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
                 GetInputHandle = () => consoleInputHandle,
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
                 ReadConsoleInputConsoleInputHandleInt32 = (handle, size) => throw new Exception(message)
             };
-            using var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
+            using var sut = new ConControls.ConsoleApi.ConsoleController(api);
             using var logger = new TestLogger(CheckInputLogForException);
             stdinEvent.Set();
             (await Task.WhenAny(tcs.Task, Task.Delay(2000)))

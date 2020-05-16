@@ -462,28 +462,6 @@
             <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
             <param name="e">The event details.</param>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.OnStdOutEvent(System.Object,ConControls.Controls.StdOutEventArgs)">
-            <summary>
-            Called when a <see cref="E:ConControls.Controls.IConsoleWindow.StdOutEvent"/> has been received.
-            </summary>
-            <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
-            <param name="e">The event details.</param>
-        </member>
-        <member name="M:ConControls.Controls.ConsoleControl.OnStdErrEvent(System.Object,ConControls.Controls.StdErrEventArgs)">
-            <summary>
-            Called when a <see cref="E:ConControls.Controls.IConsoleWindow.StdErrEvent"/> has been received.
-            </summary>
-            <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
-            <param name="e">The event details.</param>
-        </member>
-        <member name="T:ConControls.Controls.ConsolePanel">
-            <summary>
-            A console panel that can contain other console controls.
-            </summary>
-        </member>
-        <member name="M:ConControls.Controls.ConsolePanel.#ctor(ConControls.Controls.IControlContainer)">
-            <inheritdoc />
-        </member>
         <member name="T:ConControls.Controls.ConsoleWindow">
             <summary>
             The window for a console UI session.
@@ -506,19 +484,10 @@
         <member name="E:ConControls.Controls.ConsoleWindow.MouseEvent">
             <inheritdoc />
         </member>
-        <member name="E:ConControls.Controls.ConsoleWindow.StdOutEvent">
-            <inheritdoc />
-        </member>
-        <member name="E:ConControls.Controls.ConsoleWindow.StdErrEvent">
-            <inheritdoc />
-        </member>
         <member name="E:ConControls.Controls.ConsoleWindow.Disposed">
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.Window">
-            <inheritdoc />
-        </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.OutputEncoding">
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.Title">
@@ -1005,24 +974,9 @@
             Raised when a console input mouse event has been received.
             </summary>
         </member>
-        <member name="E:ConControls.Controls.IConsoleWindow.StdOutEvent">
-            <summary>
-            Raised when an output to stdout has been received.
-            </summary>
-        </member>
-        <member name="E:ConControls.Controls.IConsoleWindow.StdErrEvent">
-            <summary>
-            Raised when an output to stdout has been received.
-            </summary>
-        </member>
         <member name="E:ConControls.Controls.IConsoleWindow.Disposed">
             <summary>
             Raised when this console window is disposed of.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.IConsoleWindow.OutputEncoding">
-            <summary>
-            Gets the original console output encoding
             </summary>
         </member>
         <member name="P:ConControls.Controls.IConsoleWindow.Title">
@@ -1342,26 +1296,6 @@
         <member name="M:ConControls.Controls.ProgressBar.DrawClientArea(ConControls.Controls.Drawing.IConsoleGraphics)">
             <inheritdoc />
         </member>
-        <member name="T:ConControls.Controls.StdErrEventArgs">
-            <summary>
-            Arguments for the <see cref="E:ConControls.Controls.IConsoleWindow.StdErrEvent">IConsoleWindow.StdErrEvent</see>.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.StdErrEventArgs.Error">
-            <summary>
-            The received error output converted into a string.
-            </summary>
-        </member>
-        <member name="T:ConControls.Controls.StdOutEventArgs">
-            <summary>
-            Arguments for the <see cref="E:ConControls.Controls.IConsoleWindow.StdOutEvent">IConsoleWindow.StdOutEvent</see>.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.StdOutEventArgs.Output">
-            <summary>
-            The received output converted into a string.
-            </summary>
-        </member>
         <member name="T:ConControls.Properties.Resources">
             <summary>
               Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
@@ -1426,11 +1360,6 @@
         <member name="P:ConControls.Properties.Resources.Exception_WindowSizeNotSupported">
             <summary>
               Sucht eine lokalisierte Zeichenfolge, die Changing the console window&apos;s size is currently not supported! ähnelt.
-            </summary>
-        </member>
-        <member name="T:ConControls.WindowsApi.ConsoleErrorHandle">
-            <summary>
-            A console standard error handle.
             </summary>
         </member>
         <member name="T:ConControls.WindowsApi.ConsoleInputHandle">

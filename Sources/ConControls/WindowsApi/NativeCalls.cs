@@ -52,15 +52,11 @@ namespace ConControls.WindowsApi
             return (info.Visible, info.Size, new Point(infoEx.CursorPosition.X, infoEx.CursorPosition.Y));
         }
 
-        public ConsoleErrorHandle GetErrorHandle() =>
-            new ConsoleErrorHandle(NativeMethods.GetStdHandle(NativeMethods.STDERR));
         public ConsoleInputHandle GetInputHandle() =>
             new ConsoleInputHandle(NativeMethods.GetStdHandle(NativeMethods.STDIN));
         public ConsoleOutputHandle GetOutputHandle() =>
             new ConsoleOutputHandle(NativeMethods.GetStdHandle(NativeMethods.STDOUT));
 
-        public COORD GetLargestConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle) =>
-            NativeMethods.GetLargestConsoleWindowSize(consoleOutputHandle);
         public INPUT_RECORD[] ReadConsoleInput(ConsoleInputHandle consoleInputHandle, int maxElements = 1028)
         {
             INPUT_RECORD[] result = new INPUT_RECORD[maxElements];
@@ -86,27 +82,9 @@ namespace ConControls.WindowsApi
             if (!NativeMethods.SetConsoleMode(consoleOutputHandle, outputMode))
                 throw Exceptions.Win32();
         }
-        public void SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, COORD size)
-        {
-            if (!NativeMethods.SetConsoleScreenBufferSize(consoleOutputHandle, size))
-                throw Exceptions.Win32();
-        }
         public void SetConsoleTitle(string title)
         {
             if (!NativeMethods.SetConsoleTitle(title))
-                throw Exceptions.Win32();
-        }
-        public void SetConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle, Size size)
-        {
-            if (!NativeMethods.SetConsoleWindowInfo(consoleOutputHandle,
-                                                    true,
-                                                    new SMALL_RECT(size)))
-                throw Exceptions.Win32();
-        }
-        public void SetCursorMode(ConsoleOutputHandle consoleOutputHandle, bool visible, int size)
-        {
-            var cursorInfo = new CONSOLE_CURSOR_INFO {Visible = visible, Size = size};
-            if (!NativeMethods.SetConsoleCursorInfo(consoleOutputHandle, ref cursorInfo))
                 throw Exceptions.Win32();
         }
         public void SetCursorInfo(ConsoleOutputHandle consoleOutputHandle, bool visible, int size, Point position)
@@ -119,11 +97,6 @@ namespace ConControls.WindowsApi
                 Visible = visible
             };
             if (!NativeMethods.SetConsoleCursorInfo(consoleOutputHandle, ref info))
-                throw Exceptions.Win32();
-        }
-        public void SetErrorHandle(ConsoleErrorHandle errorHandle)
-        {
-            if (!NativeMethods.SetStdHandle(NativeMethods.STDERR, errorHandle.DangerousGetHandle()))
                 throw Exceptions.Win32();
         }
         public void SetInputHandle(ConsoleInputHandle inputHandle)

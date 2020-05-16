@@ -568,8 +568,6 @@ namespace ConControls.Controls
 
             Window.KeyEvent += OnWindowKeyEvent;
             Window.MouseEvent += OnWindowMouseEvent;
-            Window.StdOutEvent += OnWindowStdOutEvent;
-            Window.StdErrEvent += OnWindowStdErrEvent;
 
             foregroundColor = Window.ForegroundColor;
             backgroundColor = Window.BackgroundColor;
@@ -601,8 +599,6 @@ namespace ConControls.Controls
             if (!disposing) return;
             Window.KeyEvent -= OnWindowKeyEvent;
             Window.MouseEvent -= OnWindowMouseEvent;
-            Window.StdOutEvent -= OnWindowStdOutEvent;
-            Window.StdErrEvent -= OnWindowStdErrEvent;
         }
 
         /// <summary>
@@ -972,28 +968,6 @@ namespace ConControls.Controls
         {
             lock (Window.SynchronizationLock)
                 OnMouseEvent(sender, e);
-        }
-        /// <summary>
-        /// Called when a <see cref="IConsoleWindow.StdOutEvent"/> has been received.
-        /// </summary>
-        /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
-        /// <param name="e">The event details.</param>
-        protected virtual void OnStdOutEvent(object sender, StdOutEventArgs e) { }
-        void OnWindowStdOutEvent(object sender, StdOutEventArgs e)
-        {
-            lock (Window.SynchronizationLock)
-                OnStdOutEvent(sender, e);
-        }
-        /// <summary>
-        /// Called when a <see cref="IConsoleWindow.StdErrEvent"/> has been received.
-        /// </summary>
-        /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
-        /// <param name="e">The event details.</param>
-        protected virtual void OnStdErrEvent(object sender, StdErrEventArgs e) { }
-        void OnWindowStdErrEvent(object sender, StdErrEventArgs e)
-        {
-            lock (Window.SynchronizationLock)
-                OnStdErrEvent(sender, e);
         }
     }
 }

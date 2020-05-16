@@ -6,7 +6,6 @@
  */
 
 using System;
-using System.Text;
 using ConControls.Controls.Drawing;
 
 namespace ConControls.Controls
@@ -24,24 +23,11 @@ namespace ConControls.Controls
         /// Raised when a console input mouse event has been received.
         /// </summary>
         event EventHandler<MouseEventArgs>? MouseEvent;
-        /// <summary>
-        /// Raised when an output to stdout has been received.
-        /// </summary>
-        event EventHandler<StdOutEventArgs>? StdOutEvent;
-        /// <summary>
-        /// Raised when an output to stdout has been received.
-        /// </summary>
-        event EventHandler<StdErrEventArgs>? StdErrEvent;
         
         /// <summary>
         /// Raised when this console window is disposed of.
         /// </summary>
         event EventHandler? Disposed;
-
-        /// <summary>
-        /// Gets the original console output encoding
-        /// </summary>
-        Encoding OutputEncoding { get; }
 
         /// <summary>
         /// The title of the console window.

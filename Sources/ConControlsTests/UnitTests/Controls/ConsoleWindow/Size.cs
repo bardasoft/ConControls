@@ -11,7 +11,6 @@ using System;
 using System.Drawing;
 using ConControls.ConsoleApi.Fakes;
 using ConControls.Controls.Drawing.Fakes;
-using ConControls.WindowsApi;
 using ConControls.WindowsApi.Fakes;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
@@ -24,11 +23,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         [TestMethod]
         public void Size_Get_BufferSize()
         {
-            var outputHandle = new ConsoleOutputHandle(IntPtr.Zero);
-            var consoleListener = new StubIConsoleController
-            {
-                OriginalOutputHandleGet = () => outputHandle
-            };
+            var consoleListener = new StubIConsoleController();
             var windowSize = new Size(12, 34);
             var api = new StubINativeCalls
             {
@@ -45,11 +40,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         [TestMethod]
         public void Size_Set_NotSupportedException()
         {
-            var outputHandle = new ConsoleOutputHandle(IntPtr.Zero);
-            var consoleListener = new StubIConsoleController
-            {
-                OriginalOutputHandleGet = () => outputHandle
-            };
+            var consoleListener = new StubIConsoleController();
             var windowSize = new Size(12, 34);
             var api = new StubINativeCalls
             {

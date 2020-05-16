@@ -76,15 +76,14 @@
     <Compile Include="ConControlsTestsCli.cs" />
     <Compile Include="UnitTests\AssemblySettings.cs" />
     <Compile Include="UnitTests\ConsoleApi\CharInfoExtensions\CharInfoExtensionsTests.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleController\ConstructAndDispose.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleMouseEventArgsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleKeyEventArgsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleOutputReceivedEventArgsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleMenuEventArgsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleFocusEventArgsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleSizeEventArgsTests.cs" />
-    <Compile Include="UnitTests\ConsoleApi\ConsoleController\ErrorEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ThreadManagement.cs" />
-    <Compile Include="UnitTests\ConsoleApi\ConsoleController\OutputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\InputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ConsoleControllerTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\PointToClient.cs" />
@@ -98,8 +97,6 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\ParentTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\FocusedTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\OnMouseEventTests.cs" />
-    <Compile Include="UnitTests\Controls\ConsoleControl\OnStdErrEventTests.cs" />
-    <Compile Include="UnitTests\Controls\ConsoleControl\OnStdOutEventTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\OnKeyEventTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\CheckDisposedTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\GetClientAreaTests.cs" />
@@ -136,8 +133,6 @@
     <Compile Include="UnitTests\Controls\ConsoleWindow\Constructor.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\ConsoleWindowTests.cs" />
     <Compile Include="UnitTests\Controls\TestControl.cs" />
-    <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\StdErrEventArgsTests.cs" />
-    <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\StdOutEventArgsTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\MouseEventArgsTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\KeyEventArgsTests.cs" />
     <Compile Include="UnitTests\Controls\ControlCollection\GetEnumeratorTests.cs" />

@@ -30,21 +30,21 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 
             using var stdin = new ManualResetEvent(false);
             using var logger = new TestLogger(CheckLog);
+
             var api = new StubINativeCalls
             {
-                GetErrorHandle = () => new ConsoleErrorHandle(IntPtr.Zero),
                 GetInputHandle = () => new ConsoleInputHandle(stdin.SafeWaitHandle.DangerousGetHandle()),
                 GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero)
             };
-            var sut = new ConControls.ConsoleApi.ConsoleController(Console.OutputEncoding, api);
+            var sut = new ConControls.ConsoleApi.ConsoleController(api);
             (await Task.WhenAny(startTaskSource.Task, Task.Delay(2000)))
                 .Should()
-                .Be(startTaskSource.Task, "Thread start needed more than 2 seconds!");
+                .Be(startTaskSource.Task, "Thread should be started in less than 2 seconds!");
             threadStartLogged.Should().BeTrue();
             sut.Dispose();
             (await Task.WhenAny(endTaskSource.Task, Task.Delay(2000)))
                 .Should()
-                .Be(endTaskSource.Task, "Thread stop needed more than 2 seconds!");
+                .Be(endTaskSource.Task, "Thread should be stopped in less than 2 seconds!");
             threadEndLogged.Should().BeTrue();
             sut.Dispose(); // should not fail
 

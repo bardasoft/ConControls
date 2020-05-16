@@ -59,15 +59,11 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             sut.Parent.Should().Be(stubbedWindow);
             stubbedWindow.KeyEventEvent.Should().NotBeNull();
             stubbedWindow.MouseEventEvent.Should().NotBeNull();
-            stubbedWindow.StdOutEventEvent.Should().NotBeNull();
-            stubbedWindow.StdErrEventEvent.Should().NotBeNull();
             controlsCollection.Should().Contain(sut);
 
             sut.Dispose();
             stubbedWindow.KeyEventEvent.Should().BeNull();
             stubbedWindow.MouseEventEvent.Should().BeNull();
-            stubbedWindow.StdOutEventEvent.Should().BeNull();
-            stubbedWindow.StdErrEventEvent.Should().BeNull();
             sut.Dispose(); // should not throw
         }
     }

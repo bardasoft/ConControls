@@ -7,11 +7,9 @@
 
 #nullable enable
 
-using System;
 using System.Drawing;
 using ConControls.ConsoleApi.Fakes;
 using ConControls.Controls.Drawing.Fakes;
-using ConControls.WindowsApi;
 using ConControls.WindowsApi.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,11 +21,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         [TestMethod]
         public void PointToClient_Identity()
         {
-            var outputHandle = new ConsoleOutputHandle(IntPtr.Zero);
-            var consoleListener = new StubIConsoleController
-            {
-                OriginalOutputHandleGet = () => outputHandle
-            };
+            var consoleListener = new StubIConsoleController();
             var api = new StubINativeCalls();
             var graphicsProvider = new StubIProvideConsoleGraphics
             {

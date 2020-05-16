@@ -16,7 +16,6 @@ using System.Diagnostics.CodeAnalysis;
 using ConControls.Logging;
 using ConControlsTests.Examples;
 
-
 namespace ConControlsTests
 {
     [ExcludeFromCodeCoverage]
@@ -25,7 +24,6 @@ namespace ConControlsTests
         static void RunTest()
         {
             ProgressBarExample.Run();
-            Console.ReadLine();
         }
 
         static void Main()

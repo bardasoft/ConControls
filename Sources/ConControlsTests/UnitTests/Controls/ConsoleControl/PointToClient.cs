@@ -36,11 +36,11 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var l1 = new Point(12, 34);
             var l2 = new Point(23, 42);
 
-            var sut1 = new ConsolePanel(stubbedWindow)
+            var sut1 = new Panel(stubbedWindow)
             {
                 Location = l1
             };
-            var sut2 = new ConsolePanel(sut1)
+            var sut2 = new Panel(sut1)
             {
                 Location = l2
             };
