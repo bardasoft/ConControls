@@ -83,7 +83,6 @@
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleFocusEventArgsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleSizeEventArgsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ErrorEvents.cs" />
-    <Compile Include="UnitTests\ConsoleApi\ConsoleController\SizeEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ThreadManagement.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\OutputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\InputEvents.cs" />

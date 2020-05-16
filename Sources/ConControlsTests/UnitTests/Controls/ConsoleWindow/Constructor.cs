@@ -93,14 +93,14 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                 }
             };
 
-            var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
+            using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
             consoleController.OutputReceivedEvent.Should().NotBeNull();
             consoleController.ErrorReceivedEvent.Should().NotBeNull();
             consoleController.FocusEventEvent.Should().NotBeNull();
             consoleController.KeyEventEvent.Should().NotBeNull();
             consoleController.MenuEventEvent.Should().NotBeNull();
             consoleController.MouseEventEvent.Should().NotBeNull();
-            consoleController.SizeEventEvent.Should().BeNull();
+            consoleController.SizeEventEvent.Should().NotBeNull();
 
             sut.Controls.Should().NotBeNull();
             cursorSet.Should().BeTrue();

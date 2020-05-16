@@ -27,7 +27,6 @@ namespace ConControls.ConsoleApi
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
         readonly ConsoleOutputModes originalOutputMode;
         readonly ConsoleInputModes originalInputMode;
-        readonly Timer sizeDetectingTimer;
 
         readonly AnonymousPipeServerStream stdoutWriteStream;
         readonly AnonymousPipeClientStream stdoutReadStream;
@@ -45,9 +44,6 @@ namespace ConControls.ConsoleApi
         public event EventHandler<ConsoleMouseEventArgs>? MouseEvent;
         public event EventHandler<ConsoleSizeEventArgs>? SizeEvent;
         public event EventHandler<ConsoleMenuEventArgs>? MenuEvent;
-
-        public Size BufferSize { get; private set; }
-        public Rectangle WindowArea { get; private set; }
 
         public ConsoleErrorHandle OriginalErrorHandle { get; }
         public ConsoleOutputHandle OriginalOutputHandle { get; }
@@ -80,7 +76,6 @@ namespace ConControls.ConsoleApi
                                     ConsoleInputModes.EnableExtendedFlags);
             this.api.SetConsoleMode(OriginalOutputHandle, ConsoleOutputModes.None);
 
-            sizeDetectingTimer = new Timer(OnSizeDetectingTimer, null, 0, 500);
             new Thread(ListenerThread).Start();
         }
 
@@ -88,7 +83,6 @@ namespace ConControls.ConsoleApi
         {
             if (Interlocked.CompareExchange(ref disposed, 1, 0) != 0) return;
             Logger.Log(dbgctx, "Disposing.");
-            sizeDetectingTimer.Dispose();
             stopEvent.Set();
             api.SetErrorHandle(OriginalErrorHandle);
             api.SetOutputHandle(OriginalOutputHandle);
@@ -155,7 +149,7 @@ namespace ConControls.ConsoleApi
                             MouseEvent?.Invoke(this, new ConsoleMouseEventArgs(record.Event.MouseEvent));
                             break;
                         case InputEventType.WindowBufferSize:
-                            DetectSizeChange(true);
+                            OnSizeEvent();
                             break;
                         case InputEventType.Menu:
                             MenuEvent?.Invoke(this, new ConsoleMenuEventArgs(record.Event.MenuEvent));
@@ -230,27 +224,17 @@ namespace ConControls.ConsoleApi
             Logger.Log(dbgctx, $"Read {read} bytes from stderr: [{msg}]");
             ErrorReceived?.Invoke(this, new ConsoleOutputReceivedEventArgs(msg));
         }
-        void OnSizeDetectingTimer(object? state) => DetectSizeChange();
-        void DetectSizeChange(bool forceEvent = false)
+        void OnSizeEvent()
         {
-            ConsoleSizeEventArgs e;
-            lock (syncLock)
-            {
-                var record = api.GetConsoleScreenBufferInfo(OriginalOutputHandle);
-                Size bufferSize = new Size(record.BufferSize.X, record.BufferSize.Y);
-                Rectangle windowArea = Rectangle.FromLTRB(
-                    left:  record.Window.Left,
-                    top: record.Window.Top,
-                    right: record.Window.Right,
-                    bottom: record.Window.Bottom);
+            var record = api.GetConsoleScreenBufferInfo(OriginalOutputHandle);
+            Size bufferSize = new Size(record.BufferSize.X, record.BufferSize.Y);
+            Rectangle windowArea = Rectangle.FromLTRB(
+                left:  record.Window.Left,
+                top: record.Window.Top,
+                right: record.Window.Right,
+                bottom: record.Window.Bottom);
 
-                if (!forceEvent && bufferSize == BufferSize && windowArea == WindowArea) return;
-                BufferSize = bufferSize;
-                WindowArea = windowArea;
-                e = new ConsoleSizeEventArgs(WindowArea, BufferSize);
-            }
-
-            SizeEvent?.Invoke(this, e);
+            SizeEvent?.Invoke(this, new ConsoleSizeEventArgs(windowArea, bufferSize));
         }
     }
 }

@@ -29,7 +29,7 @@ namespace ConControls.Controls
     /// <threadsafety>
     /// All public properties and methods are sychronized using the window's <see cref="SynchronizationLock"/>.
     /// </threadsafety>
-    public sealed class ConsoleWindow : IConsoleWindow
+    public sealed class ConsoleWindow : IConsoleWindow, IControlContainer, IDisposable
     {
         static int instancesCreated;
         
@@ -182,6 +182,7 @@ namespace ConControls.Controls
             this.consoleController.KeyEvent += OnConsoleControllerKeyReceived;
             this.consoleController.MenuEvent += OnConsoleControllerMenuReceived;
             this.consoleController.MouseEvent += OnConsoleControllerMouseReceived;
+            this.consoleController.SizeEvent += OnConsoleControllerSizeReceived;
             consoleOutputHandle = this.consoleController.OriginalOutputHandle;
 
             Controls = new ControlCollection(this);
@@ -224,6 +225,7 @@ namespace ConControls.Controls
                 consoleController.KeyEvent -= OnConsoleControllerKeyReceived;
                 consoleController.MenuEvent -= OnConsoleControllerMenuReceived;
                 consoleController.MouseEvent -= OnConsoleControllerMouseReceived;
+                consoleController.SizeEvent -= OnConsoleControllerSizeReceived;
                 consoleController.Dispose();
             }
             Interlocked.Decrement(ref instancesCreated);
@@ -339,7 +341,6 @@ namespace ConControls.Controls
                 Logger.Log(DebugContext.Window, $"Received menu event: command: {e.CommandId}");
             }
         }
-
         void OnConsoleControllerMouseReceived(object sender, ConsoleMouseEventArgs e)
         {
             lock (SynchronizationLock)
@@ -347,6 +348,15 @@ namespace ConControls.Controls
                 Logger.Log(DebugContext.Window,
                            $"Received mouse event: [{e.EventFlags}] at {e.MousePosition} button '{e.ButtonState}' CK {e.ControlKeys} Scroll: {e.Scroll}");
                 MouseEvent?.Invoke(this, new MouseEventArgs(e));
+            }
+        }
+        void OnConsoleControllerSizeReceived(object sender, ConsoleSizeEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                Logger.Log(DebugContext.Window,
+                           $"Received size event: Window = {e.WindowArea} Buffer = {e.BufferSize}");
+                AreaChanged?.Invoke(this, EventArgs.Empty);
             }
         }
     }
