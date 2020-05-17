@@ -85,7 +85,11 @@ namespace ConControls.ConsoleApi
                     }
                 }
 
-                Logger.Log(dbgctx, "Stopping thread.");
+                Logger.Log(dbgctx, "Stopping thread (stop event received).");
+            }
+            catch (ObjectDisposedException)
+            {
+                Logger.Log(dbgctx, "Stopping thread (stop event disposed).");
             }
             catch (Exception e)
             {
