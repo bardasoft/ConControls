@@ -117,6 +117,15 @@ namespace ConControls.Controls
         }
 
         /// <summary>
+        /// Determines the index (position) of the <paramref name="control"/> in this collection.
+        /// </summary>
+        /// <param name="control">The control to look for.</param>
+        /// <returns>The index of the <paramref name="control"/> in the collection, or <c>-1</c> if this collection does not contain the control.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="control"/> is <c>null</c>.</exception>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public int IndexOf(ConsoleControl control) => controls.IndexOf(control ?? throw new ArgumentNullException(paramName: nameof(control)));
+
+        /// <summary>
         /// Gets an <see cref="IEnumerator{ConsoleControl}"/> that can enumerate the <see cref="ConsoleControl"/>
         /// instances contained in this <see cref="ControlCollection"/>.
         /// </summary>

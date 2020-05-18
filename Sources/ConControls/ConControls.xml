@@ -666,6 +666,14 @@
             <param name="controlsToRemove">The sequence of <see cref="T:ConControls.Controls.ConsoleControl"/> instances
             to remove.</param>
         </member>
+        <member name="M:ConControls.Controls.ControlCollection.IndexOf(ConControls.Controls.ConsoleControl)">
+            <summary>
+            Determines the index (position) of the <paramref name="control"/> in this collection.
+            </summary>
+            <param name="control">The control to look for.</param>
+            <returns>The index of the <paramref name="control"/> in the collection, or <c>-1</c> if this collection does not contain the control.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="control"/> is <c>null</c>.</exception>
+        </member>
         <member name="M:ConControls.Controls.ControlCollection.GetEnumerator">
             <summary>
             Gets an <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can enumerate the <see cref="T:ConControls.Controls.ConsoleControl"/>
@@ -1301,13 +1309,36 @@
             A console control to display a scrollable block of text.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.TextBlock.CanFocus">
+        <member name="M:ConControls.Controls.TextBlock.#ctor(ConControls.Controls.IControlContainer)">
+            <inheritdoc />
+        </member>
+        <member name="T:ConControls.Controls.TextControl">
+            <summary>
+            An abstract base class for console controls that display a scrollable block of text.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.TextControl.TextChanged">
+            <summary>
+            Raised when the <see cref="P:ConControls.Controls.TextControl.Text"/> property has been changed.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.TextControl.CanFocus">
             <summary>
             Returns <c>true</c> for a <see cref="T:ConControls.Controls.TextBlock"/>. This control can be focused.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.TextBlock.#ctor(ConControls.Controls.IControlContainer)">
+        <member name="P:ConControls.Controls.TextControl.Text">
+            <summary>
+            Gets or sets the text displayed in this <see cref="T:ConControls.Controls.TextBlock"/> control.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.TextControl.#ctor(ConControls.Controls.IControlContainer)">
             <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.TextControl.OnTextChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.TextControl.Text"/> property has been changed.
+            </summary>
         </member>
         <member name="T:ConControls.Properties.Resources">
             <summary>
@@ -1407,6 +1438,11 @@
         <member name="T:ConControls.WindowsApi.Types.ControlKeyStates">
             <summary>
             The state of the control keys.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.None">
+            <summary>
+            No modifier key is pressed.
             </summary>
         </member>
         <member name="F:ConControls.WindowsApi.Types.ControlKeyStates.RIGHT_ALT_PRESSED">

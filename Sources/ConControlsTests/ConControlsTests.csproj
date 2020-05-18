@@ -74,6 +74,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConControlsTestsCli.cs" />
+    <Compile Include="Examples\Example.cs" />
+    <Compile Include="Examples\TextBlockExample.cs" />
     <Compile Include="UnitTests\AssemblySettings.cs" />
     <Compile Include="UnitTests\ConsoleApi\CharInfoExtensions\CharInfoExtensionsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ConstructAndDispose.cs" />
@@ -132,6 +134,7 @@
     <Compile Include="UnitTests\Controls\ConsoleWindow\PointToConsole.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\Constructor.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\ConsoleWindowTests.cs" />
+    <Compile Include="UnitTests\Controls\ControlCollection\IndexOf.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Drawing.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Orientation.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressChar.cs" />
@@ -152,6 +155,8 @@
     <Compile Include="UnitTests\Controls\Drawing\ConsoleGraphics\ConsoleGraphicsTests.cs" />
     <Compile Include="UnitTests\Controls\Drawing\FrameCharSets\FrameCharSetsTests.cs" />
     <Compile Include="Examples\ProgressBarExample.cs" />
+    <Compile Include="UnitTests\Helpers\ControlKeyStatesExtensions\WithoutSwitches.cs" />
+    <Compile Include="UnitTests\Helpers\ControlKeyStatesExtensions\ControlKeyStatesExtensionsTests.cs" />
     <Compile Include="UnitTests\StubbedConsoleController.cs" />
     <Compile Include="UnitTests\StubbedNativeCalls.cs" />
     <Compile Include="UnitTests\StubbedWindow.cs" />

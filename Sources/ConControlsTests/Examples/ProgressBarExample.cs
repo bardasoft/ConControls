@@ -10,28 +10,30 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Threading;
+using System.Threading.Tasks;
 using ConControls.Controls;
+using ConControls.Logging;
 using ConControls.WindowsApi.Types;
 
 namespace ConControlsTests.Examples
 {
     [ExcludeFromCodeCoverage]
-    static class ProgressBarExample
+    class ProgressBarExample : Example
     {
-        public static void Run()
+        public override DebugContext DebugContext => DebugContext.ProgressBar;
+        public override async Task RunAsync()
         {
             using var window = new ConsoleWindow
             {
+                Title = "ConControls: ProgressBar example", 
                 BackgroundColor = ConsoleColor.Blue
             };
-            bool stop = false;
+            TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
             window.KeyEvent += (sender, e) =>
             {
                 if (e.KeyDown && e.VirtualKey == VirtualKey.Escape)
-                    stop = true;
+                    tcs.SetResult(0);
             };
-
             var l2r = new ProgressBar(window)
             {
                 Name = "l2r",
@@ -73,14 +75,15 @@ namespace ConControlsTests.Examples
                 Orientation = ProgressBar.ProgressOrientation.BottomToTop
             };
 
-            for (int i = 0; i < 2000000 && !stop; i++)
+            int i = 0;
+            while(await Task.WhenAny(tcs.Task, Task.Delay(50)) != tcs.Task)
             {
+                i += 1;
                 double p = (double)(i % 101) / 100;
                 using (window.DeferDrawing())
                     l2r.Percentage = r2l.Percentage = t2b.Percentage = b2t.Percentage = p;
                 if (i % 10 == 0)
                     Console.WriteLine($"Output at {i}");
-                Thread.Sleep(50);
             }
         }
     }

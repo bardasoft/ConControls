@@ -47,6 +47,7 @@ namespace ConControls.Controls
         /// of <see cref="ControlKeyStates"/> values.
         /// </summary>
         public ControlKeyStates ControlKeys { get; }
+
         internal KeyEventArgs(ConsoleKeyEventArgs e)
         {
             UnicodeChar = e.UnicodeChar;

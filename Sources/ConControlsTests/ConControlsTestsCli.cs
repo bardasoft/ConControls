@@ -12,39 +12,38 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using ConControls.Logging;
-using ConControls.WindowsApi;
 using ConControlsTests.Examples;
+using ConControlsTests.UnitTests;
 
 namespace ConControlsTests
 {
     [ExcludeFromCodeCoverage]
     static class ConControlsTestsCli
     {
-        static void RunTest()
+        static async Task RunExampleAsync<T>() where T : Example, new()
         {
-            ProgressBarExample.Run();
+            var example = new T();
+            Logger.Context = example.DebugContext;
+            await example.RunAsync();
         }
-
-        static void Main()
+        static async Task Main()
         {
-            using var logger = new FileLogger("concontrols.log");
-            Logger.Context = DebugContext.None;
+            using var fileLogger = new FileLogger("concontrols.log");
+            using var consoleLogger = new TestLogger(Console.WriteLine);
 
             Console.WriteLine("Starting test.");
-            var api = new NativeCalls();
-            Console.WriteLine(api.GetConsoleMode(api.GetOutputHandle()));
             try
             {
-                RunTest();
+                //await RunExampleAsync<ProgressBarExample>();
+                await RunExampleAsync<TextBlockExample>();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-
             Console.WriteLine("Test finished.");
-            Console.WriteLine(api.GetConsoleMode(api.GetOutputHandle()));
         }
     }
 }

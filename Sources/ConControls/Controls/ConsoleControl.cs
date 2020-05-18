@@ -279,7 +279,7 @@ namespace ConControls.Controls
         /// This property is only used by the <see cref="IConsoleWindow"/> if this control is currently
         /// focused.
         /// </remarks>
-        public virtual Point CursorPosition
+        public Point CursorPosition
         {
             get
             {
@@ -307,7 +307,7 @@ namespace ConControls.Controls
         /// currently focused.
         /// </para>
         /// </remarks>
-        public virtual int CursorSize
+        public int CursorSize
         {
             get
             {
@@ -331,7 +331,7 @@ namespace ConControls.Controls
         /// This property is only used by the <see cref="IConsoleWindow"/> if this control is
         /// currently focused.
         /// </remarks>
-        public virtual bool CursorVisible
+        public bool CursorVisible
         {
             get
             {

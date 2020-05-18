@@ -6,14 +6,17 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using ConControls.ConsoleApi;
 using ConControls.Controls.Drawing;
 using ConControls.Helpers;
 using ConControls.Logging;
 using ConControls.WindowsApi;
+using ConControls.WindowsApi.Types;
 
 namespace ConControls.Controls
 {
@@ -303,7 +306,55 @@ namespace ConControls.Controls
             {
                 Logger.Log(DebugContext.Window,
                            $"Received key event: VK {e.VirtualKeyCode} UC '{e.UnicodeChar}' Down: {e.KeyDown} CK {e.ControlKeys} RC {e.RepeatCount}");
-                KeyEvent?.Invoke(this, new KeyEventArgs(e));
+
+                var eventArgs = new KeyEventArgs(e);
+                KeyEvent?.Invoke(this, eventArgs);
+                if (eventArgs.Handled) return;
+
+                if (eventArgs.KeyDown && eventArgs.VirtualKey == VirtualKey.Tab)
+                {
+                    var controlKeys = eventArgs.ControlKeys.WithoutSwitches();
+                    if (controlKeys == ControlKeyStates.SHIFT_PRESSED)
+                        MoveFocusBackward();
+                    else if (controlKeys == ControlKeyStates.None)
+                        MoveFocusForward();
+                }
+            }
+        }
+        void MoveFocusForward()
+        {
+            var focusableControls = GetFocusableControls(Controls).ToList();
+            if (focusedControl == null)
+            {
+                FocusedControl = focusableControls.FirstOrDefault();
+                return;
+            }
+
+            FocusedControl = focusableControls.Count > 0
+                                 ? focusableControls[(focusableControls.IndexOf(focusedControl) + 1) % focusableControls.Count]
+                                 : null;
+        }
+        void MoveFocusBackward()
+        {
+            var focusableControls = GetFocusableControls(Controls).ToList();
+            if (focusedControl == null)
+            {
+                FocusedControl = focusableControls.FirstOrDefault();
+                return;
+            }
+
+            FocusedControl = focusableControls.Count > 0
+                                 ? focusableControls[(focusableControls.IndexOf(focusedControl) + focusableControls.Count - 1) % focusableControls.Count]
+                                 : null;
+        }
+        static IEnumerable<ConsoleControl> GetFocusableControls(ControlCollection controls)
+        {
+            foreach (var control in controls)
+            {
+                if (control.Enabled && control.CanFocus)
+                    yield return control;
+                foreach (var focusableChild in GetFocusableControls(control.Controls))
+                    yield return focusableChild;
             }
         }
         void OnConsoleControllerMenuReceived(object sender, ConsoleMenuEventArgs e)

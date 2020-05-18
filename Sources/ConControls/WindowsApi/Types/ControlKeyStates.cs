@@ -16,6 +16,10 @@ namespace ConControls.WindowsApi.Types
     public enum ControlKeyStates
     {
         /// <summary>
+        /// No modifier key is pressed.
+        /// </summary>
+        None = 0,
+        /// <summary>
         /// The right ALT key is pressed.
         /// </summary>
         RIGHT_ALT_PRESSED = 1 << 0,

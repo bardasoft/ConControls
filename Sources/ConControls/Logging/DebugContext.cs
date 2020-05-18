@@ -21,6 +21,7 @@ namespace ConControls.Logging
         Drawing = 1 << 5,
 
         ProgressBar = 1 << 6,
+        Text = 1 << 7,
 
         Exception = 1 << 30,
         All = -1

@@ -5,27 +5,19 @@
  *
  */
 
-using System.Drawing;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ConControls.Controls
 {
     /// <summary>
     /// A console control to display a scrollable block of text.
     /// </summary>
-    public sealed class TextBlock : ConsoleControl
+    [ExcludeFromCodeCoverage]
+    public sealed class TextBlock : TextControl
     {
-        /// <summary>
-        /// Returns <c>true</c> for a <see cref="TextBlock"/>. This control can be focused.
-        /// </summary>
-        public override bool CanFocus => true;
-
         /// <inheritdoc />
         public TextBlock(IControlContainer parent)
             : base(parent)
-        {
-            CursorSize = Window.CursorSize;
-            CursorVisible = true;
-            CursorPosition = new Point(0, 0);
-        }
+        { }
     }
 }
