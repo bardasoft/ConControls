@@ -11,9 +11,9 @@
 // ReSharper disable UnusedMember.Local
 
 using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using ConControls.Logging;
+using ConControls.WindowsApi;
 using ConControlsTests.Examples;
 
 namespace ConControlsTests
@@ -31,17 +31,20 @@ namespace ConControlsTests
             using var logger = new FileLogger("concontrols.log");
             Logger.Context = DebugContext.None;
 
+            Console.WriteLine("Starting test.");
+            var api = new NativeCalls();
+            Console.WriteLine(api.GetConsoleMode(api.GetOutputHandle()));
             try
             {
                 RunTest();
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                Console.WriteLine(e);
             }
 
             Console.WriteLine("Test finished.");
-            Debug.WriteLine("Done.");
+            Console.WriteLine(api.GetConsoleMode(api.GetOutputHandle()));
         }
     }
 }

@@ -8,8 +8,6 @@
 #nullable enable
 
 using System.Drawing;
-using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,15 +18,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void Size_Changed_ThreadSafeHandlerCall()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
+            var stubbedWindow = new StubbedWindow();
 
             var sut = new TestControl(stubbedWindow);
             sut.Size.Should().Be(Size.Empty);
@@ -50,16 +40,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void Size_NotChanged_NoEvent()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
-
+            var stubbedWindow = new StubbedWindow();
             var sut = new TestControl(stubbedWindow);
             bool eventRaised = false;
             sut.AreaChanged += (sender, e) =>

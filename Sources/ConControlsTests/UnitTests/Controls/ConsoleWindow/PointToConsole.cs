@@ -10,7 +10,6 @@
 using System.Drawing;
 using ConControls.ConsoleApi.Fakes;
 using ConControls.Controls.Drawing.Fakes;
-using ConControls.WindowsApi.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,8 +20,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         [TestMethod]
         public void PointToConsole_Identity()
         {
-            var consoleListener = new StubIConsoleController();
-            var api = new StubINativeCalls();
+            var consoleListener = new StubbedConsoleController();
+            using var api = new StubbedNativeCalls();
             var graphicsProvider = new StubIProvideConsoleGraphics
             {
                 ProvideConsoleOutputHandleINativeCallsSizeFrameCharSets = (handle, consoleApi, size, frameCharSets) => new StubIConsoleGraphics()

@@ -21,16 +21,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void OnMouseEvent_CalledThreadSafe()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
-
+            var stubbedWindow = new StubbedWindow();
             var sut = new TestControl(stubbedWindow);
             stubbedWindow.MouseEventEvent(stubbedWindow, new MouseEventArgs(new ConsoleMouseEventArgs(default)));
             sut.GetMethodCount(TestControl.MethodOnMouseEvent).Should().Be(1);

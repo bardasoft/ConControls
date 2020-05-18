@@ -21,7 +21,7 @@ namespace ConControls.ConsoleApi
         const DebugContext dbgctx = DebugContext.ConsoleApi | DebugContext.ConsoleListener;
         readonly INativeCalls api;
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
-        readonly ConsoleOutputModes originalOutputMode;
+        readonly ConsoleOutputHandle originalOutputHandle;
         readonly ConsoleInputModes originalInputMode;
         
         int disposed;
@@ -32,11 +32,18 @@ namespace ConControls.ConsoleApi
         public event EventHandler<ConsoleSizeEventArgs>? SizeEvent;
         public event EventHandler<ConsoleMenuEventArgs>? MenuEvent;
 
+        public ConsoleOutputHandle OutputHandle { get; }
+
         internal ConsoleController(INativeCalls? api = null)
         {
             this.api = api ?? new NativeCalls();
-            using var outputHandle = this.api.GetOutputHandle();
-            originalOutputMode = this.api.GetConsoleMode(outputHandle);
+            originalOutputHandle = this.api.GetOutputHandle();
+            OutputHandle = this.api.CreateConsoleScreenBuffer();
+            if (OutputHandle.IsInvalid)
+                throw Exceptions.CouldNotCreateScreenBuffer();
+            if (!this.api.SetActiveConsoleScreenBuffer(OutputHandle))
+                throw Exceptions.CouldNotSetScreenBuffer();
+
             using var inputHandle = this.api.GetInputHandle();
             originalInputMode = this.api.GetConsoleMode(inputHandle);
 
@@ -44,7 +51,7 @@ namespace ConControls.ConsoleApi
                                     ConsoleInputModes.EnableWindowInput |
                                     ConsoleInputModes.EnableMouseInput |
                                     ConsoleInputModes.EnableExtendedFlags);
-            this.api.SetConsoleMode(outputHandle, ConsoleOutputModes.None);
+            this.api.SetConsoleMode(OutputHandle, ConsoleOutputModes.None);
 
             new Thread(ListenerThread).Start();
         }
@@ -57,8 +64,8 @@ namespace ConControls.ConsoleApi
             stopEvent.Dispose();
             using var inputHandle = api.GetInputHandle();
             api.SetConsoleMode(inputHandle, originalInputMode);
-            using var outputHandle = api.GetOutputHandle();
-            api.SetConsoleMode(outputHandle, originalOutputMode);
+            api.SetActiveConsoleScreenBuffer(originalOutputHandle);
+            originalOutputHandle.Dispose();
         }
 
         [SuppressMessage("Design", "CA1031", Justification = "Leave thread cleanly.")]
@@ -137,8 +144,7 @@ namespace ConControls.ConsoleApi
         }
         void OnSizeEvent()
         {
-            using var outputHandle = api.GetOutputHandle();
-            var record = api.GetConsoleScreenBufferInfo(outputHandle);
+            var record = api.GetConsoleScreenBufferInfo(OutputHandle);
             Size bufferSize = new Size(record.BufferSize.X, record.BufferSize.Y);
             Rectangle windowArea = Rectangle.FromLTRB(
                 left:  record.Window.Left,

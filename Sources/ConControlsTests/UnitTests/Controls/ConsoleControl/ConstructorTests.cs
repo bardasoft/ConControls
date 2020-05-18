@@ -9,7 +9,6 @@
 
 using System;
 using ConControls.Controls;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -32,10 +31,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             const ConsoleColor background = ConsoleColor.Cyan;
             const ConsoleColor borderColor = ConsoleColor.DarkMagenta;
             const BorderStyle borderStyle = BorderStyle.DoubleLined;
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 VisibleGet = () => true,
                 CursorSizeGet = () => cursorSize,
                 ForegroundColorGet = () => foreground,
@@ -43,9 +40,6 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 BorderColorGet = () => borderColor,
                 BorderStyleGet = () => borderStyle
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow);
             sut.Visible.Should().BeTrue();
@@ -59,7 +53,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             sut.Parent.Should().Be(stubbedWindow);
             stubbedWindow.KeyEventEvent.Should().NotBeNull();
             stubbedWindow.MouseEventEvent.Should().NotBeNull();
-            controlsCollection.Should().Contain(sut);
+            stubbedWindow.Controls.Should().Contain(sut);
 
             sut.Dispose();
             stubbedWindow.KeyEventEvent.Should().BeNull();

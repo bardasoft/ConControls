@@ -7,8 +7,6 @@
 
 #nullable enable
 
-using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -19,16 +17,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void CursorSize_Changed_ThreadSafeHandlerCall()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
-                CursorSizeGet = () => 12,
-                GetGraphics = () => new StubIConsoleGraphics()
+                CursorSizeGet = () => 12
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow);
             sut.CursorSize.Should().Be(12);
@@ -49,16 +41,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void CursorSize_NotChanged_NoEvent()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
-                CursorSizeGet = () => 12,
-                GetGraphics = () => new StubIConsoleGraphics()
+                CursorSizeGet = () => 12
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow);
             bool eventRaised = false;

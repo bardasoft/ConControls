@@ -9,9 +9,7 @@
 
 using System;
 using System.Drawing;
-using ConControls.ConsoleApi.Fakes;
 using ConControls.Controls.Drawing.Fakes;
-using ConControls.WindowsApi.Fakes;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,9 +21,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         [TestMethod]
         public void Size_Get_BufferSize()
         {
-            var consoleListener = new StubIConsoleController();
+            var consoleListener = new StubbedConsoleController();
             var windowSize = new Size(12, 34);
-            var api = new StubINativeCalls
+            using var api = new StubbedNativeCalls
             {
                 GetConsoleScreenBufferInfoConsoleOutputHandle = handle => new CONSOLE_SCREEN_BUFFER_INFOEX { Window = new SMALL_RECT(windowSize) }
             };
@@ -40,9 +38,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         [TestMethod]
         public void Size_Set_NotSupportedException()
         {
-            var consoleListener = new StubIConsoleController();
+            var consoleListener = new StubbedConsoleController();
             var windowSize = new Size(12, 34);
-            var api = new StubINativeCalls
+            using var api = new StubbedNativeCalls
             {
                 GetConsoleScreenBufferInfoConsoleOutputHandle = handle => new CONSOLE_SCREEN_BUFFER_INFOEX { Window = new SMALL_RECT(windowSize) }
             };

@@ -11,7 +11,6 @@
 
 using System;
 using System.Linq;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         [ExpectedException(typeof(ArgumentNullException))]
         public void Add_Null_ArgumentNullException()
         {
-            using var stubbedWindow = new StubIConsoleWindow();
+            using var stubbedWindow = new StubbedWindow();
             // ReSharper disable once AssignmentIsFullyDiscarded
             _ = new ConControls.Controls.ControlCollection(stubbedWindow)
             {
@@ -34,35 +33,22 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         [ExpectedException(typeof(InvalidOperationException))]
         public void Add_WrongWindow_InvalidOperationException()
         {
-            using var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            using var differentWindow = new StubIConsoleWindow();
-            differentWindow.WindowGet = () => differentWindow;
-            var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var differentCollection = new ConControls.Controls.ControlCollection(differentWindow);
-            differentWindow.ControlsGet = () => differentCollection;
-            stubbedWindow.ControlsGet = () => sut;
-            sut.Add(new TestControl(differentWindow));
+            using var stubbedWindow = new StubbedWindow();
+            using var differentWindow = new StubbedWindow();
+            stubbedWindow.Controls!.Add(new TestControl(differentWindow));
         }
         [TestMethod]
         public void Add_Control_Added()
         {
-            using var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => sut;
+            using var stubbedWindow = new StubbedWindow();
             var control = new TestControl(stubbedWindow);
-            sut.Count.Should().Be(1);
-            sut[0].Should().BeSameAs(control);
+            stubbedWindow.Controls.Count.Should().Be(1);
+            stubbedWindow.Controls[0].Should().BeSameAs(control);
         }
         [TestMethod]
         public void Add_ControlsTwice_AddedOnceAndEventsRaised()
         {
-            using var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            // for the window, to not interfer with sut
-            var stubbedCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => stubbedCollection;
+            using var stubbedWindow = new StubbedWindow();
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             ConControls.Controls.ConsoleControl? control1 = new TestControl(stubbedWindow);

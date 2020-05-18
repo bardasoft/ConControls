@@ -11,11 +11,10 @@ using System;
 using System.Drawing;
 using System.Linq;
 using ConControls.ConsoleApi;
-using ConControls.WindowsApi;
-using ConControls.WindowsApi.Fakes;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable AccessToDisposedClosure
 
 namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
 {
@@ -48,26 +47,23 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
                 cc, cc, cc, cc
             };
 
-            ConsoleOutputHandle outputHanlde = new ConsoleOutputHandle(IntPtr.Zero);
             bool written = false, successful = false;
-            var stubbedApi = new StubINativeCalls
+            using var stubbedApi = new StubbedNativeCalls();
+            stubbedApi.ReadConsoleOutputConsoleOutputHandleRectangle = (handle, rectangle) =>
             {
-                ReadConsoleOutputConsoleOutputHandleRectangle = (handle, rectangle) =>
-                {
-                    rectangle.Size.Should().Be(size);
-                    handle.Should().Be(outputHanlde);
-                    return mainBuffer;
-                },
-                WriteConsoleOutputConsoleOutputHandleCHAR_INFOArrayRectangle = (handle, buffer, area) =>
-                {
-                    written = true;
-                    handle.Should().Be(outputHanlde);
-                    area.Size.Should().Be(size);
-                    buffer.Should().Equal(expectedBuffer);
-                    successful = true;
-                }
+                rectangle.Size.Should().Be(size);
+                handle.Should().Be(stubbedApi.ScreenHandle);
+                return mainBuffer;
             };
-            var sut = new ConControls.Controls.Drawing.ConsoleGraphics(outputHanlde, stubbedApi, size,
+            stubbedApi.WriteConsoleOutputConsoleOutputHandleCHAR_INFOArrayRectangle = (handle, buffer, area) =>
+            {
+                written = true;
+                handle.Should().Be(stubbedApi.ScreenHandle);
+                area.Size.Should().Be(size);
+                buffer.Should().Equal(expectedBuffer);
+                successful = true;
+            };
+            var sut = new ConControls.Controls.Drawing.ConsoleGraphics(stubbedApi.ScreenHandle, stubbedApi, size,
                                                                        new ConControls.Controls.Drawing.FrameCharSets());
             sut.FillArea(
                 background: background, 
@@ -102,26 +98,23 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
             };
             var expectedBuffer = Enumerable.Repeat(c0, 16).ToArray();
 
-            ConsoleOutputHandle outputHanlde = new ConsoleOutputHandle(IntPtr.Zero);
             bool written = false, successful = false;
-            var stubbedApi = new StubINativeCalls
+            using var stubbedApi = new StubbedNativeCalls();
+            stubbedApi.ReadConsoleOutputConsoleOutputHandleRectangle = (handle, rectangle) =>
             {
-                ReadConsoleOutputConsoleOutputHandleRectangle = (handle, rectangle) =>
-                {
-                    rectangle.Size.Should().Be(size);
-                    handle.Should().Be(outputHanlde);
-                    return mainBuffer;
-                },
-                WriteConsoleOutputConsoleOutputHandleCHAR_INFOArrayRectangle = (handle, buffer, area) =>
-                {
-                    written = true;
-                    handle.Should().Be(outputHanlde);
-                    area.Size.Should().Be(size);
-                    buffer.Should().Equal(expectedBuffer);
-                    successful = true;
-                }
+                rectangle.Size.Should().Be(size);
+                handle.Should().Be(stubbedApi.ScreenHandle);
+                return mainBuffer;
             };
-            var sut = new ConControls.Controls.Drawing.ConsoleGraphics(outputHanlde, stubbedApi, size,
+            stubbedApi.WriteConsoleOutputConsoleOutputHandleCHAR_INFOArrayRectangle = (handle, buffer, area) =>
+            {
+                written = true;
+                handle.Should().Be(stubbedApi.ScreenHandle);
+                area.Size.Should().Be(size);
+                buffer.Should().Equal(expectedBuffer);
+                successful = true;
+            };
+            var sut = new ConControls.Controls.Drawing.ConsoleGraphics(stubbedApi.ScreenHandle, stubbedApi, size,
                                                                        new ConControls.Controls.Drawing.FrameCharSets());
             sut.FillArea(
                 background: background,

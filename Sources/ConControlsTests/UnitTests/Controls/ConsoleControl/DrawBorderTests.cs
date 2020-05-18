@@ -22,15 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void DrawBorder_Disposed_ObjectDisposedException()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
+            var stubbedWindow = new StubbedWindow();
 
             var sut = new TestControl(stubbedWindow);
             sut.Dispose();
@@ -41,15 +33,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void DrawBorder_GraphicsNull_ArgumentNullException()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
+            var stubbedWindow = new StubbedWindow();
 
             var sut = new TestControl(stubbedWindow);
             sut.Invoking(s => s.DoDrawBorder(null!))
@@ -61,18 +45,13 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void DrawBorder_DrawingInhibited_LoggedNotDrawn()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 DrawingInhibitedGet = () => true,
                 BackgroundColorGet = () => ConsoleColor.DarkMagenta,
                 BorderColorGet = () => ConsoleColor.Cyan,
                 BorderStyleGet = () => BorderStyle.SingleLined
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             bool borderDrawn = false;
             var graphics = new StubIConsoleGraphics
@@ -95,20 +74,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void DrawBorder_BorderDrawn()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics(),
                 BackgroundColorGet = () => ConsoleColor.DarkMagenta,
                 BorderColorGet = () => ConsoleColor.Cyan,
-                BorderStyleGet = () => BorderStyle.None,
-                PointToClientPoint = p => p,
-                PointToConsolePoint = p => p
+                BorderStyleGet = () => BorderStyle.None
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow)
             {

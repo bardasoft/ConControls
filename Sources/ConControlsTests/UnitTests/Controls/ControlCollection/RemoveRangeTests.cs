@@ -7,7 +7,6 @@
 
 #nullable enable
 
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -18,25 +17,20 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         [TestMethod]
         public void RemoveRange_Removed()
         {
-            var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
+            using var stubbedWindow = new StubbedWindow();
 
-            var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             var control1 = new TestControl(stubbedWindow);
             var control2 = new TestControl(stubbedWindow);
             var control3 = new TestControl(stubbedWindow);
             var control4 = new TestControl(stubbedWindow);
-            sut.AddRange(control1, control2, control3);
-            sut.RemoveRange(control1, null!, control4);
-            sut.Should().Equal(control2, control3);
+            stubbedWindow.Controls.AddRange(control1, control2, control3);
+            stubbedWindow.Controls.RemoveRange(control1, null!, control4);
+            stubbedWindow.Controls.Should().Equal(control2, control3);
         }
         [TestMethod]
         public void RemoveRange_RemovedAndEventFired()
         {
-            var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
+            using var stubbedWindow = new StubbedWindow();
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             var control1 = new TestControl(stubbedWindow);
@@ -59,9 +53,7 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         [TestMethod]
         public void RemoveRange_EmptyRange_NotFired()
         {
-            var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            stubbedWindow.ControlsGet = () => new ConControls.Controls.ControlCollection(stubbedWindow);
+            using var stubbedWindow = new StubbedWindow();
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
             bool fired = false;

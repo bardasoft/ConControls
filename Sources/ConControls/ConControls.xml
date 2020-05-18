@@ -1296,6 +1296,19 @@
         <member name="M:ConControls.Controls.ProgressBar.DrawClientArea(ConControls.Controls.Drawing.IConsoleGraphics)">
             <inheritdoc />
         </member>
+        <member name="T:ConControls.Controls.TextBlock">
+            <summary>
+            A console control to display a scrollable block of text.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.TextBlock.CanFocus">
+            <summary>
+            Returns <c>true</c> for a <see cref="T:ConControls.Controls.TextBlock"/>. This control can be focused.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.TextBlock.#ctor(ConControls.Controls.IControlContainer)">
+            <inheritdoc />
+        </member>
         <member name="T:ConControls.Properties.Resources">
             <summary>
               Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
@@ -1330,6 +1343,16 @@
         <member name="P:ConControls.Properties.Resources.Exception_ControlsMustBeContained">
             <summary>
               Sucht eine lokalisierte Zeichenfolge, die ConsoleControl instances must be contained in an IConsoleContainer! Please provide a valid parent. ähnelt.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_CouldNotCreateScreenBuffer">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Failed to create a separate console screen buffer! ähnelt.
+            </summary>
+        </member>
+        <member name="P:ConControls.Properties.Resources.Exception_CouldNotSetScreenBuffer">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Failed to set separate console screen buffer! ähnelt.
             </summary>
         </member>
         <member name="P:ConControls.Properties.Resources.Exception_DifferentWindow">

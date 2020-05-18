@@ -21,17 +21,11 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void PointToClient_CorrectResult()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics(),
                 PointToClientPoint = p => p,
                 PointToConsolePoint = p => p
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var l1 = new Point(12, 34);
             var l2 = new Point(23, 42);

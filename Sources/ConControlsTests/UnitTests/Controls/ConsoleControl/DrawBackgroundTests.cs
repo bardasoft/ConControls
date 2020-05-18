@@ -10,7 +10,6 @@
 using System;
 using System.Drawing;
 using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,15 +20,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void DrawBackground_Disposed_ObjectDisposedException()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
+            var stubbedWindow = new StubbedWindow();
 
             var sut = new TestControl(stubbedWindow);
             sut.Dispose();
@@ -40,15 +31,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void DrawBackground_GraphicsNull_ArgumentNullException()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
+            var stubbedWindow = new StubbedWindow();
 
             var sut = new TestControl(stubbedWindow);
             sut.Invoking(s => s.DoDrawBackground(null!))
@@ -60,17 +43,11 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void DrawBackground_DrawingInhibited_LoggedNotDrawn()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 DrawingInhibitedGet = () => true
 
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
-
             bool backgroundDrawn = false;
             var graphics = new StubIConsoleGraphics
             {
@@ -93,18 +70,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         public void DrawBackground_BackgroundDrawn()
         {
             const ConsoleColor Color = ConsoleColor.DarkBlue;
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics(),
-                BackgroundColorGet = () => Color,
-                PointToClientPoint = p => p,
-                PointToConsolePoint = p => p
+                BackgroundColorGet = () => Color
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow)
             {

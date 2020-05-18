@@ -20,6 +20,10 @@ namespace ConControls.WindowsApi
         internal const int STDOUT = -11;
 
         [DllImport("kernel32.dll", SetLastError = true)]
+        internal static extern IntPtr CreateConsoleScreenBuffer(AccessRights desiredAccess, FileShare shareMode,
+                                                                             IntPtr securityAttributes, ConsoleBufferMode bufferMode,
+                                                                             IntPtr reserved);
+        [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool GetConsoleCursorInfo(ConsoleOutputHandle consoleOutputHandle, out CONSOLE_CURSOR_INFO cursorInfo);
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -52,6 +56,9 @@ namespace ConControls.WindowsApi
             COORD buffersize,
             COORD offset,
             ref SMALL_RECT useRegion);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool SetConsoleActiveScreenBuffer(ConsoleOutputHandle handle);
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SetConsoleCursorInfo(ConsoleOutputHandle consoleOutputHandle, ref CONSOLE_CURSOR_INFO cursorInfo);

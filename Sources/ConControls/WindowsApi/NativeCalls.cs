@@ -5,6 +5,7 @@
  *
  */
 
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
@@ -17,6 +18,10 @@ namespace ConControls.WindowsApi
     [ExcludeFromCodeCoverage]
     sealed class NativeCalls : INativeCalls
     {
+        public ConsoleOutputHandle CreateConsoleScreenBuffer() => new ConsoleOutputHandle(NativeMethods.CreateConsoleScreenBuffer(
+                                                                                              AccessRights.GenericRead | AccessRights.GenericWrite,
+                                                                                              FileShare.Read | FileShare.Write, IntPtr.Zero,
+                                                                                              ConsoleBufferMode.Text, IntPtr.Zero));
         public ConsoleInputModes GetConsoleMode(ConsoleInputHandle consoleInputHandle) =>
             NativeMethods.GetConsoleMode(consoleInputHandle.DangerousGetHandle(), out ConsoleInputModes mode) ? mode : throw Exceptions.Win32();
         public ConsoleOutputModes GetConsoleMode(ConsoleOutputHandle consoleOutputHandle) =>
@@ -72,6 +77,7 @@ namespace ConControls.WindowsApi
                 throw Exceptions.Win32();
             return buffer;
         }
+        public bool SetActiveConsoleScreenBuffer(ConsoleOutputHandle handle) => NativeMethods.SetConsoleActiveScreenBuffer(handle);
         public void SetConsoleMode(ConsoleInputHandle consoleInputHandle, ConsoleInputModes inputMode)
         {
             if (!NativeMethods.SetConsoleMode(consoleInputHandle, inputMode))

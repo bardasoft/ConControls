@@ -8,8 +8,6 @@
 #nullable enable
 
 using System;
-using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,16 +18,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void BorderColor_Changed_ThreadSafeHandlerCall()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
-                BorderColorGet = () => ConsoleColor.Cyan,
-                GetGraphics = () => new StubIConsoleGraphics()
+                BorderColorGet = () => ConsoleColor.Cyan
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow);
             sut.BorderColor.Should().Be(ConsoleColor.Cyan);
@@ -42,16 +34,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void BorderColor_NotChanged_NoEvent()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
-                BorderColorGet = () => ConsoleColor.Cyan,
-                GetGraphics = () => new StubIConsoleGraphics()
+                BorderColorGet = () => ConsoleColor.Cyan
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow);
 

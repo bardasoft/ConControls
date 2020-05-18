@@ -70,8 +70,7 @@ namespace ConControls.Controls
         {
             get
             {
-                using var outputHandle = api.GetOutputHandle();
-                var info = api.GetConsoleScreenBufferInfo(outputHandle);
+                var info = api.GetConsoleScreenBufferInfo(consoleController.OutputHandle);
                 return new Size(info.Window.Right - info.Window.Left + 1, info.Window.Bottom - info.Window.Top + 1);
             }
             set => throw Exceptions.WindowSizeNotSupported();
@@ -116,8 +115,7 @@ namespace ConControls.Controls
                     focusedControl = value;
                     if (focusedControl == null) return;
                     focusedControl.Focused = true;
-                    using var outputHandle = api.GetOutputHandle();
-                    api.SetCursorInfo(outputHandle, focusedControl.CursorVisible, focusedControl.CursorSize, focusedControl.CursorPosition);
+                    api.SetCursorInfo(consoleController.OutputHandle, focusedControl.CursorVisible, focusedControl.CursorSize, focusedControl.PointToConsole(focusedControl.CursorPosition));
                     focusedControl.CursorPositionChanged += OnFocusedControlCursorChanged;
                     focusedControl.CursorSizeChanged += OnFocusedControlCursorChanged;
                     focusedControl.CursorVisibleChanged += OnFocusedControlCursorChanged;
@@ -179,10 +177,9 @@ namespace ConControls.Controls
             Controls = new ControlCollection(this);
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
 
-            using var outputHandle = this.api.GetOutputHandle();
-            (originalCursorVisible, originalCursorSize, _) = this.api.GetCursorInfo(outputHandle);
+            (originalCursorVisible, originalCursorSize, _) = this.api.GetCursorInfo(this.consoleController.OutputHandle);
             CursorSize = originalCursorSize;
-            this.api.SetCursorInfo(outputHandle, false, CursorSize, Point.Empty);
+            this.api.SetCursorInfo(this.consoleController.OutputHandle, false, CursorSize, Point.Empty);
 
             Invalidate();
         }
@@ -210,8 +207,7 @@ namespace ConControls.Controls
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
             if (disposing)
             {
-                using var outputHandle = api.GetOutputHandle();
-                api.SetCursorInfo(outputHandle, originalCursorVisible, originalCursorSize, Point.Empty);
+                api.SetCursorInfo(consoleController.OutputHandle, originalCursorVisible, originalCursorSize, Point.Empty);
                 consoleController.FocusEvent -= OnConsoleControllerFocusReceived;
                 consoleController.KeyEvent -= OnConsoleControllerKeyReceived;
                 consoleController.MenuEvent -= OnConsoleControllerMenuReceived;
@@ -229,11 +225,8 @@ namespace ConControls.Controls
         public Point PointToConsole(Point clientPoint) => clientPoint;
 
         /// <inheritdoc />
-        public IConsoleGraphics GetGraphics()
-        {
-            using var outputHandle = api.GetOutputHandle();
-            return graphicsProvider.Provide(outputHandle, api, Size, frameCharSets);
-        }
+        public IConsoleGraphics GetGraphics() => graphicsProvider.Provide(consoleController.OutputHandle, api, Size, frameCharSets);
+        
         void Draw()
         {
             Logger.Log(DebugContext.Window | DebugContext.Drawing, "called.");
@@ -295,8 +288,7 @@ namespace ConControls.Controls
         void OnFocusedControlCursorChanged(object sender, EventArgs e)
         {
             var control = focusedControl;
-            using var outputHandle = api.GetOutputHandle();
-            api.SetCursorInfo(outputHandle, control?.CursorVisible ?? false, control?.CursorSize ?? CursorSize, control?.CursorPosition ?? Point.Empty);
+            api.SetCursorInfo(consoleController.OutputHandle, control?.CursorVisible ?? false, control?.CursorSize ?? CursorSize, control?.CursorPosition ?? Point.Empty);
         }
         void OnConsoleControllerFocusReceived(object sender, ConsoleFocusEventArgs e)
         {

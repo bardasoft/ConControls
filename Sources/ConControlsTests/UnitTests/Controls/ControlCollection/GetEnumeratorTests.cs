@@ -7,7 +7,6 @@
 
 #nullable enable
 
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -18,14 +17,11 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         [TestMethod]
         public void GetEnumerator_WorksCorrectly()
         {
-            var stubbedWindow = new StubIConsoleWindow();
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => sut;
+            using var stubbedWindow = new StubbedWindow();
             var control1 = new TestControl(stubbedWindow);
             var control2 = new TestControl(stubbedWindow);
             var control3 = new TestControl(stubbedWindow);
-            sut.Should().Equal(control1, control2, control3);
+            stubbedWindow.Controls.Should().Equal(control1, control2, control3);
         }
     }
 }

@@ -7,8 +7,6 @@
 
 #nullable enable
 
-using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -19,32 +17,14 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void DrawingInhibited_DrawingAllowed_False()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
-
+            var stubbedWindow = new StubbedWindow();
             var sut = new TestControl(stubbedWindow);
             sut.DrawingInhibited.Should().BeFalse();
         }
         [TestMethod]
         public void DrawingInhibited_NotVisible_True()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
-
+            var stubbedWindow = new StubbedWindow();
             var sut = new TestControl(stubbedWindow)
             {
                 Visible = false
@@ -54,33 +34,14 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void DrawingInhibited_ParentInhibited_True()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics(),
-                DrawingInhibitedGet = () => true
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
-
+            var stubbedWindow = new StubbedWindow {DrawingInhibitedGet = () => true};
             var sut = new TestControl(stubbedWindow);
             sut.DrawingInhibited.Should().BeTrue();
         }
         [TestMethod]
         public void DrawingInhibited_DrawingDeferred_Correct()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
-
+            var stubbedWindow = new StubbedWindow();
             var sut = new TestControl(stubbedWindow);
             var deferrer1 = sut.DeferDrawing();
             sut.DrawingInhibited.Should().BeTrue();

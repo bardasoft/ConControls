@@ -12,6 +12,7 @@ namespace ConControls.WindowsApi
 {
     interface INativeCalls
     {
+        ConsoleOutputHandle CreateConsoleScreenBuffer();
         ConsoleInputModes GetConsoleMode(ConsoleInputHandle consoleInputHandle);
         ConsoleOutputModes GetConsoleMode(ConsoleOutputHandle consoleOutputHandle);
         CONSOLE_SCREEN_BUFFER_INFOEX GetConsoleScreenBufferInfo(ConsoleOutputHandle consoleOutputHandle);
@@ -21,6 +22,7 @@ namespace ConControls.WindowsApi
         ConsoleOutputHandle GetOutputHandle();
         INPUT_RECORD[] ReadConsoleInput(ConsoleInputHandle consoleInputHandle, int maxElements = 1028);
         CHAR_INFO[] ReadConsoleOutput(ConsoleOutputHandle consoleOutputHandle, Rectangle region);
+        bool SetActiveConsoleScreenBuffer(ConsoleOutputHandle handle);
         void SetConsoleMode(ConsoleInputHandle consoleInputHandle, ConsoleInputModes inputMode);
         void SetConsoleMode(ConsoleOutputHandle consoleOutputHandle, ConsoleOutputModes outputMode);
         void SetConsoleTitle(string title);

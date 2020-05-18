@@ -13,8 +13,6 @@ using System;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
-using ConControls.WindowsApi;
-using ConControls.WindowsApi.Fakes;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -104,28 +102,20 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
             var menuTcs = new TaskCompletionSource<int>();
             var focusTcs = new TaskCompletionSource<int>();
 
-            using var stdinEvent = new AutoResetEvent(false);
-            ConsoleInputHandle consoleInputHandle = new ConsoleInputHandle(stdinEvent.SafeWaitHandle.DangerousGetHandle());
-            ConsoleOutputHandle consoleOutputHandle = new ConsoleOutputHandle(IntPtr.Zero);
-
-            var api = new StubINativeCalls
+            using var api = new StubbedNativeCalls();
+            api.ReadConsoleInputConsoleInputHandleInt32 = (handle, size) =>
             {
-                GetInputHandle = () => consoleInputHandle,
-                GetOutputHandle = () => consoleOutputHandle,
-                ReadConsoleInputConsoleInputHandleInt32 = (handle, size) =>
+                handle.Should().Be(api.StdIn);
+                return records;
+            };
+            api.GetConsoleScreenBufferInfoConsoleOutputHandle = handle =>
+            {
+                handle.Should().Be(api.ScreenHandle);
+                return new CONSOLE_SCREEN_BUFFER_INFOEX
                 {
-                    handle.Should().Be(consoleInputHandle);
-                    return records;
-                },
-                GetConsoleScreenBufferInfoConsoleOutputHandle = handle =>
-                {
-                    handle.Should().Be(consoleOutputHandle);
-                    return new CONSOLE_SCREEN_BUFFER_INFOEX
-                    {
-                        Window = new SMALL_RECT(1, 2, 4, 6),
-                        BufferSize = sizeRecord.Event.SizeEvent.Size
-                    };
-                }
+                    Window = new SMALL_RECT(1, 2, 4, 6),
+                    BufferSize = sizeRecord.Event.SizeEvent.Size
+                };
             };
             using var sut = new ConControls.ConsoleApi.ConsoleController(api);
             sut.KeyEvent += (sender, e) =>
@@ -175,7 +165,7 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
                 menuTcs.Task,
                 focusTcs.Task
             });
-            stdinEvent.Set();
+            api.StdInEvent.Set();
             //await allTasks;
             (await Task.WhenAny(allTasks, Task.Delay(2000)))
                 .Should()
@@ -193,22 +183,15 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
             var records = new[] {record};
             var tcs = new TaskCompletionSource<int>();
 
-            using var stdinEvent = new AutoResetEvent(false);
-            ConsoleInputHandle consoleInputHandle = new ConsoleInputHandle(stdinEvent.SafeWaitHandle.DangerousGetHandle());
-
-            var api = new StubINativeCalls
+            using var api = new StubbedNativeCalls();
+            api.ReadConsoleInputConsoleInputHandleInt32 = (handle, size) =>
             {
-                GetInputHandle = () => consoleInputHandle,
-                GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
-                ReadConsoleInputConsoleInputHandleInt32 = (handle, size) =>
-                {
-                    handle.Should().Be(consoleInputHandle);
-                    return records;
-                }
+                handle.Should().Be(api.StdIn);
+                return records;
             };
             using var sut = new ConControls.ConsoleApi.ConsoleController(api);
             using var logger = new TestLogger(CheckInputLogForRecord);
-            stdinEvent.Set();
+            api.StdInEvent.Set();
             (await Task.WhenAny(tcs.Task, Task.Delay(2000)))
                 .Should()
                 .Be(tcs.Task, "event should be processed in less than 2 seconds!");
@@ -227,18 +210,13 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
             var tcs = new TaskCompletionSource<int>();
             int exceptionCount = 0;
 
-            using var stdinEvent = new AutoResetEvent(false);
-            ConsoleInputHandle consoleInputHandle = new ConsoleInputHandle(stdinEvent.SafeWaitHandle.DangerousGetHandle());
-
-            var api = new StubINativeCalls
+            using var api = new StubbedNativeCalls
             {
-                GetInputHandle = () => consoleInputHandle,
-                GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero),
                 ReadConsoleInputConsoleInputHandleInt32 = (handle, size) => throw new Exception(message)
             };
             using var sut = new ConControls.ConsoleApi.ConsoleController(api);
             using var logger = new TestLogger(CheckInputLogForException);
-            stdinEvent.Set();
+            api.StdInEvent.Set();
             (await Task.WhenAny(tcs.Task, Task.Delay(2000)))
                 .Should()
                 .Be(tcs.Task, "event should be processed in less than 2 seconds!");

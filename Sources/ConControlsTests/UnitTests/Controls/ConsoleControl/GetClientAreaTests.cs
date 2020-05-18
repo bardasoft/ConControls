@@ -21,15 +21,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void GetClientArea_BorderStyleNone_FullArea()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
+            var stubbedWindow = new StubbedWindow();
 
             Rectangle area = new Rectangle(5, 5, 10, 10);
             Rectangle expectedClientArea = area;
@@ -43,15 +35,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void GetClientArea_BorderStyleSingleLined_ClientArea()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
+            var stubbedWindow = new StubbedWindow();
 
             Rectangle area = new Rectangle(5, 5, 10, 10);
             Rectangle expectedClientArea = new Rectangle(6, 6, 8, 8);
@@ -65,15 +49,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void GetClientArea_BorderStyleDoubleLined_ClientArea()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
+            var stubbedWindow = new StubbedWindow();
 
             Rectangle area = new Rectangle(5, 5, 10, 10);
             Rectangle expectedClientArea = new Rectangle(6, 6, 8, 8);
@@ -87,16 +63,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void GetClientArea_BorderStyleBold_ClientArea()
         {
-            object syncLock = new object();
-            var stubbedWindow = new StubIConsoleWindow
-            {
-                SynchronizationLockGet = () => syncLock,
-                GetGraphics = () => new StubIConsoleGraphics()
-            };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
-
+            var stubbedWindow = new StubbedWindow();
             Rectangle area = new Rectangle(5, 5, 10, 10);
             Rectangle expectedClientArea = new Rectangle(6, 6, 8, 8);
             var sut = new TestControl(stubbedWindow)

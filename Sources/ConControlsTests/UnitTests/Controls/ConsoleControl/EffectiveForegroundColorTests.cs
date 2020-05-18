@@ -8,8 +8,6 @@
 #nullable enable
 
 using System;
-using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,22 +18,16 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void EffectiveForegroundColor_NoExtraValues_DefaultValues()
         {
-            object syncLock = new object();
             ConControls.Controls.ConsoleControl? focused = null;
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 ForegroundColorGet = () => ConsoleColor.Cyan,
                 BackgroundColorGet = () => ConsoleColor.DarkRed,
                 BorderColorGet = () => ConsoleColor.DarkYellow,
                 EnabledGet = () => true,
-                GetGraphics = () => new StubIConsoleGraphics(),
                 FocusedControlGet = () => focused,
                 FocusedControlSetConsoleControl = c => focused = c
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow)
             {
@@ -53,22 +45,16 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void EffectiveForegroundColor_ExtraValues_CorrectValues()
         {
-            object syncLock = new object();
             ConControls.Controls.ConsoleControl? focused = null;
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 ForegroundColorGet = () => ConsoleColor.Cyan,
                 BackgroundColorGet = () => ConsoleColor.DarkRed,
                 BorderColorGet = () => ConsoleColor.DarkYellow,
-                GetGraphics = () => new StubIConsoleGraphics(),
                 FocusedControlGet = () => focused,
                 EnabledGet = () => true,
                 FocusedControlSetConsoleControl = c => focused = c
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow)
             {

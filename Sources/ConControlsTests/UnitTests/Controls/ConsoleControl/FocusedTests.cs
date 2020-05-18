@@ -20,18 +20,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void Focused_Unchanged_Nothing()
         {
-            object syncLock = new object();
             ConControls.Controls.ConsoleControl? focusedControl = null;
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 FocusedControlGet = () => focusedControl,
-                FocusedControlSetConsoleControl = ctrl => focusedControl = ctrl,
-                GetGraphics = () => new StubIConsoleGraphics()
+                FocusedControlSetConsoleControl = ctrl => focusedControl = ctrl
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow);
             sut.Focused.Should().BeFalse();
@@ -52,19 +46,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void Focused_CannotFocus_InvalidOperationException()
         {
-            object syncLock = new object();
             ConControls.Controls.ConsoleControl? focusedControl = null;
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 FocusedControlGet = () => focusedControl,
-                FocusedControlSetConsoleControl = ctrl => focusedControl = ctrl,
-                GetGraphics = () => new StubIConsoleGraphics()
+                FocusedControlSetConsoleControl = ctrl => focusedControl = ctrl
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
-
             var sut = new TestControl(stubbedWindow);
             sut.Focused.Should().BeFalse();
             sut.CanFocus.Should().BeFalse();
@@ -87,18 +74,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void Focused_CanFocus_SetFocus()
         {
-            object syncLock = new object();
             ConControls.Controls.ConsoleControl? focusedControl = null;
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 FocusedControlGet = () => focusedControl,
-                FocusedControlSetConsoleControl = ctrl => focusedControl = ctrl,
-                GetGraphics = () => new StubIConsoleGraphics()
+                FocusedControlSetConsoleControl = ctrl => focusedControl = ctrl
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow)
             {
@@ -123,18 +104,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void Focused_CanFocus_UnsetFocus()
         {
-            object syncLock = new object();
             ConControls.Controls.ConsoleControl? focusedControl = null;
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 FocusedControlGet = () => focusedControl,
-                FocusedControlSetConsoleControl = ctrl => focusedControl = ctrl,
-                GetGraphics = () => new StubIConsoleGraphics()
+                FocusedControlSetConsoleControl = ctrl => focusedControl = ctrl
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow)
             {

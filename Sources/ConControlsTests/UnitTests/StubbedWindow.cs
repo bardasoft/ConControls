@@ -8,6 +8,7 @@
 #nullable enable
 
 using System.Diagnostics.CodeAnalysis;
+using ConControls.Controls;
 using ConControls.Controls.Drawing.Fakes;
 using ConControls.Controls.Fakes;
 
@@ -16,7 +17,8 @@ namespace ConControlsTests.UnitTests
     [ExcludeFromCodeCoverage]
     sealed class StubbedWindow : StubIConsoleWindow
     {
-        public StubIConsoleGraphics Graphics { get; set; } = new StubIConsoleGraphics();
+        public StubIConsoleGraphics Graphics { get; } = new StubIConsoleGraphics();
+        public ControlCollection Controls { get; }
 
         internal StubbedWindow()
         {
@@ -26,8 +28,8 @@ namespace ConControlsTests.UnitTests
             PointToClientPoint = p => p;
             PointToConsolePoint = p => p;
             WindowGet = () => this;
-            var controls = new ConControls.Controls.ControlCollection(this);
-            ControlsGet = () => controls;
+            Controls = new ControlCollection(this);
+            ControlsGet = () => Controls;
         }
     }
 }

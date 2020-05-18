@@ -20,20 +20,14 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void EffectiveBorderStyle_NoExtraValues_DefaultValues()
         {
-            object syncLock = new object();
             ConControls.Controls.ConsoleControl? focused = null;
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 BorderStyleGet = () => BorderStyle.None,
                 EnabledGet = () => true,
-                GetGraphics = () => new StubIConsoleGraphics(),
                 FocusedControlGet = () => focused,
                 FocusedControlSetConsoleControl = c => focused = c
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow)
             {
@@ -51,20 +45,15 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void EffectiveBorderStyle_ExtraValues_CorrectValues()
         {
-            object syncLock = new object();
             ConControls.Controls.ConsoleControl? focused = null;
-            var stubbedWindow = new StubIConsoleWindow
+            var stubbedWindow = new StubbedWindow
             {
-                SynchronizationLockGet = () => syncLock,
                 BorderStyleGet = () => BorderStyle.None,
                 GetGraphics = () => new StubIConsoleGraphics(),
                 FocusedControlGet = () => focused,
                 EnabledGet = () => true,
                 FocusedControlSetConsoleControl = c => focused = c
             };
-            stubbedWindow.WindowGet = () => stubbedWindow;
-            var controlsCollection = new ConControls.Controls.ControlCollection(stubbedWindow);
-            stubbedWindow.ControlsGet = () => controlsCollection;
 
             var sut = new TestControl(stubbedWindow)
             {

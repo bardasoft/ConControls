@@ -129,6 +129,12 @@
   <data name="Exception_ControlsMustBeContained" xml:space="preserve">
     <value>ConsoleControl instances must be contained in an IConsoleContainer! Please provide a valid parent.</value>
   </data>
+  <data name="Exception_CouldNotCreateScreenBuffer" xml:space="preserve">
+    <value>Failed to create a separate console screen buffer!</value>
+  </data>
+  <data name="Exception_CouldNotSetScreenBuffer" xml:space="preserve">
+    <value>Failed to set separate console screen buffer!</value>
+  </data>
   <data name="Exception_DifferentWindow" xml:space="preserve">
     <value>The controls cannot be part of different conosle windows!</value>
   </data>

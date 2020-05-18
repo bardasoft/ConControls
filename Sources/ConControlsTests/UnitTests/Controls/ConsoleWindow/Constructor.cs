@@ -9,14 +9,12 @@
 
 using System;
 using System.Drawing;
-using ConControls.ConsoleApi.Fakes;
 using ConControls.Controls.Drawing;
 using ConControls.Controls.Drawing.Fakes;
-using ConControls.WindowsApi;
-using ConControls.WindowsApi.Fakes;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable AccessToDisposedClosure
 
 namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
 {
@@ -27,18 +25,17 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         {
             bool cursorSet = false, cursorReset = false;
             bool disposing = false, controllerDisposed = false;
-            var outputHandle = new ConsoleOutputHandle(IntPtr.Zero);
-            var consoleController = new StubIConsoleController
+            var consoleController = new StubbedConsoleController
             {
                 Dispose = () => controllerDisposed = true
             };
             const int originalCursorSize = 10;
             Size windowSize = new Size(12, 42);
-            var api = new StubINativeCalls
+            using var api = new StubbedNativeCalls
             {
                 GetConsoleScreenBufferInfoConsoleOutputHandle = handle =>
                 {
-                    handle.Should().Be(outputHandle);
+                    handle.Should().Be(consoleController.OutputHandle);
                     return new CONSOLE_SCREEN_BUFFER_INFOEX
                     {
                         Window = new SMALL_RECT(windowSize)
@@ -46,13 +43,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                 },
                 GetCursorInfoConsoleOutputHandle = handle =>
                 {
-                    handle.Should().Be(outputHandle);
+                    handle.Should().Be(consoleController.OutputHandle);
                     return (true, originalCursorSize, Point.Empty);
                 },
-                GetOutputHandle = () => outputHandle,
                 SetCursorInfoConsoleOutputHandleBooleanInt32Point = (handle, visible, size, position) =>
                 {
-                    handle.Should().Be(outputHandle);
+                    handle.Should().Be(consoleController.OutputHandle);
                     if (disposing)
                     {
                         cursorSet.Should().BeTrue();
@@ -63,6 +59,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                         cursorReset = true;
                         return;
                     }
+
                     cursorSet.Should().BeFalse();
                     visible.Should().BeFalse();
                     size.Should().Be(originalCursorSize);
@@ -85,7 +82,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             {
                 ProvideConsoleOutputHandleINativeCallsSizeFrameCharSets = (handle, consoleApi, size, frameCharSets) =>
                 {
-                    handle.Should().Be(outputHandle);
+                    handle.Should().Be(consoleController.OutputHandle);
                     consoleApi.Should().Be(api);
                     size.Should().Be(windowSize);
                     frameCharSets.Should().BeOfType<FrameCharSets>();

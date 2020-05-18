@@ -9,11 +9,7 @@
 
 // ReSharper disable AccessToDisposedClosure
 
-using System;
-using System.Threading;
 using System.Threading.Tasks;
-using ConControls.WindowsApi;
-using ConControls.WindowsApi.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -28,14 +24,9 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
             TaskCompletionSource<int> endTaskSource = new TaskCompletionSource<int>();
             bool threadStartLogged = false, threadEndLogged = false;
 
-            using var stdin = new ManualResetEvent(false);
             using var logger = new TestLogger(CheckLog);
 
-            var api = new StubINativeCalls
-            {
-                GetInputHandle = () => new ConsoleInputHandle(stdin.SafeWaitHandle.DangerousGetHandle()),
-                GetOutputHandle = () => new ConsoleOutputHandle(IntPtr.Zero)
-            };
+            using var api = new StubbedNativeCalls();
             var sut = new ConControls.ConsoleApi.ConsoleController(api);
             (await Task.WhenAny(startTaskSource.Task, Task.Delay(2000)))
                 .Should()

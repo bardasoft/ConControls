@@ -33,5 +33,9 @@ namespace ConControls
             new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Resources.Exception_CannotFocusUnFocusableControl, controlType));
         internal static ArgumentNullException ControlsMustBeContained([CallerMemberName] string paramName = "Parent") => new ArgumentNullException(paramName: paramName, message: Resources.Exception_ControlsMustBeContained);
         internal static NotSupportedException WindowSizeNotSupported() => new NotSupportedException(Resources.Exception_WindowSizeNotSupported);
+        internal static Win32Exception CouldNotCreateScreenBuffer() =>
+            new Win32Exception(Resources.Exception_CouldNotCreateScreenBuffer, new Win32Exception(Marshal.GetLastWin32Error()));
+        internal static Win32Exception CouldNotSetScreenBuffer() =>
+            new Win32Exception(Resources.Exception_CouldNotSetScreenBuffer, new Win32Exception(Marshal.GetLastWin32Error()));
     }
 }

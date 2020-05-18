@@ -97,6 +97,24 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Failed to create a separate console screen buffer! ähnelt.
+        /// </summary>
+        internal static string Exception_CouldNotCreateScreenBuffer {
+            get {
+                return ResourceManager.GetString("Exception_CouldNotCreateScreenBuffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Failed to set separate console screen buffer! ähnelt.
+        /// </summary>
+        internal static string Exception_CouldNotSetScreenBuffer {
+            get {
+                return ResourceManager.GetString("Exception_CouldNotSetScreenBuffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The controls cannot be part of different conosle windows! ähnelt.
         /// </summary>
         internal static string Exception_DifferentWindow {

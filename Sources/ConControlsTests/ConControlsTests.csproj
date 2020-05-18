@@ -152,7 +152,9 @@
     <Compile Include="UnitTests\Controls\Drawing\ConsoleGraphics\ConsoleGraphicsTests.cs" />
     <Compile Include="UnitTests\Controls\Drawing\FrameCharSets\FrameCharSetsTests.cs" />
     <Compile Include="Examples\ProgressBarExample.cs" />
-    <Compile Include="UnitTests\DummyWindow.cs" />
+    <Compile Include="UnitTests\StubbedConsoleController.cs" />
+    <Compile Include="UnitTests\StubbedNativeCalls.cs" />
+    <Compile Include="UnitTests\StubbedWindow.cs" />
     <Compile Include="UnitTests\Helpers\DisposableBlock\DispoableBlockTests.cs" />
     <Compile Include="FileLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
