@@ -20,25 +20,25 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.DisabledBorderStyle.Should().BeNull();
 
-            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
             sut.DisabledBorderStyle = BorderStyle.SingleLined;
             sut.DisabledBorderStyle.Should().Be(BorderStyle.SingleLined);
-            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(1);
         }
         [TestMethod]
         public void DisabledBorderStyle_NotChanged_NoEvent()
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
 
-            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
             sut.DisabledBorderStyle = sut.DisabledBorderStyle;
             sut.DisabledBorderStyle.Should().BeNull();
-            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
         }
     }
 }

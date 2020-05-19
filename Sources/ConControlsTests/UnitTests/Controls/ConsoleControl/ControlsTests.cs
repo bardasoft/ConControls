@@ -20,16 +20,16 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
-            var child = new TestControl(sut);
+            var sut = new StubbedConsoleControl(stubbedWindow);
+            var child = new StubbedConsoleControl(sut);
 
             sut.ResetMethodCount();
             child.Area = new Rectangle(1, 2, 3, 4);
-            sut.GetMethodCount(TestControl.MethodDrawClientArea).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawClientArea).Should().Be(1);
             sut.Controls.Remove(child);
             sut.ResetMethodCount();
             child.Area = new Rectangle(2, 3, 4, 5);
-            sut.GetMethodCount(TestControl.MethodDrawClientArea).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawClientArea).Should().Be(0);
         }
     }
 }

@@ -19,10 +19,10 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         {
             using var stubbedWindow = new StubbedWindow();
 
-            var control1 = new TestControl(stubbedWindow);
-            var control2 = new TestControl(stubbedWindow);
-            var control3 = new TestControl(stubbedWindow);
-            var control4 = new TestControl(stubbedWindow);
+            var control1 = new StubbedConsoleControl(stubbedWindow);
+            var control2 = new StubbedConsoleControl(stubbedWindow);
+            var control3 = new StubbedConsoleControl(stubbedWindow);
+            var control4 = new StubbedConsoleControl(stubbedWindow);
             stubbedWindow.Controls.AddRange(control1, control2, control3);
             stubbedWindow.Controls.RemoveRange(control1, null!, control4);
             stubbedWindow.Controls.Should().Equal(control2, control3);
@@ -33,10 +33,10 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             using var stubbedWindow = new StubbedWindow();
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new TestControl(stubbedWindow);
-            var control2 = new TestControl(stubbedWindow);
-            var control3 = new TestControl(stubbedWindow);
-            var control4 = new TestControl(stubbedWindow);
+            var control1 = new StubbedConsoleControl(stubbedWindow);
+            var control2 = new StubbedConsoleControl(stubbedWindow);
+            var control3 = new StubbedConsoleControl(stubbedWindow);
+            var control4 = new StubbedConsoleControl(stubbedWindow);
             sut.AddRange(control1, control2, control3);
 
             int fired = 0;
@@ -62,7 +62,7 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
                 fired = true;
                 Assert.Fail();
             };
-            sut.RemoveRange(null!, new TestControl(stubbedWindow));
+            sut.RemoveRange(null!, new StubbedConsoleControl(stubbedWindow));
             fired.Should().BeFalse();
         }
 

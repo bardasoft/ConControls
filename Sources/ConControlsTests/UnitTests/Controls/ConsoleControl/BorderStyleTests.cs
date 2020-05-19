@@ -23,13 +23,13 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 BorderStyleGet = () => BorderStyle.SingleLined
             };
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.BorderStyle.Should().Be(BorderStyle.SingleLined);
 
-            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
             sut.BorderStyle = BorderStyle.DoubleLined;
             sut.BorderStyle.Should().Be(BorderStyle.DoubleLined);
-            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(1);
         }
         [TestMethod]
         public void BorderStyle_NotChanged_NoEvent()
@@ -39,12 +39,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 BorderStyleGet = () => BorderStyle.SingleLined
             };
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
 
-            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
             sut.BorderStyle = sut.BorderStyle;
             sut.BorderStyle.Should().Be(BorderStyle.SingleLined);
-            sut.GetMethodCount(TestControl.MethodOnBorderStyleChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
         }
     }
 }

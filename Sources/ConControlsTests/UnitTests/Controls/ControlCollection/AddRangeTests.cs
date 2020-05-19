@@ -22,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             var stubbedWindow = new StubbedWindow();
             var differentWindow = new StubbedWindow();
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            sut.AddRange(new TestControl(stubbedWindow), new TestControl(differentWindow), new TestControl(stubbedWindow));
+            sut.AddRange(new StubbedConsoleControl(stubbedWindow), new StubbedConsoleControl(differentWindow), new StubbedConsoleControl(stubbedWindow));
         }
         [TestMethod]
         public void AddRange_Mutliple_Distinct()
@@ -30,10 +30,10 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             var stubbedWindow = new StubbedWindow();
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new TestControl(stubbedWindow);
-            var control2 = new TestControl(stubbedWindow);
-            var control3 = new TestControl(stubbedWindow);
-            var control4 = new TestControl(stubbedWindow);
+            var control1 = new StubbedConsoleControl(stubbedWindow);
+            var control2 = new StubbedConsoleControl(stubbedWindow);
+            var control3 = new StubbedConsoleControl(stubbedWindow);
+            var control4 = new StubbedConsoleControl(stubbedWindow);
             sut.AddRange(control1, null!, control2);
             sut.Count.Should().Be(2);
             sut[0].Should().BeSameAs(control1);
@@ -51,10 +51,10 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
             var stubbedWindow = new StubbedWindow();
 
             var sut = new ConControls.Controls.ControlCollection(stubbedWindow);
-            var control1 = new TestControl(stubbedWindow);
-            var control2 = new TestControl(stubbedWindow);
-            var control3 = new TestControl(stubbedWindow);
-            var control4 = new TestControl(stubbedWindow);
+            var control1 = new StubbedConsoleControl(stubbedWindow);
+            var control2 = new StubbedConsoleControl(stubbedWindow);
+            var control3 = new StubbedConsoleControl(stubbedWindow);
+            var control4 = new StubbedConsoleControl(stubbedWindow);
 
             int fired = 0;
             sut.ControlCollectionChanged += (sender, e) =>

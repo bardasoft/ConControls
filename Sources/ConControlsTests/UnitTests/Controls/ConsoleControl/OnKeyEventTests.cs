@@ -22,9 +22,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         public void OnKeyEvent_CalledThreadSafe()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             stubbedWindow.KeyEventEvent(stubbedWindow, new KeyEventArgs(new ConsoleKeyEventArgs(default)));
-            sut.GetMethodCount(TestControl.MethodOnKeyEvent).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnKeyEvent).Should().Be(1);
         }
     }
 }

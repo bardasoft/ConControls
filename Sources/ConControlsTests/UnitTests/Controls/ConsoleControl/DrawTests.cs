@@ -26,7 +26,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 IsDisposedGet = () => true
             };
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.Invoking(s => s.Draw())
                .Should()
                .Throw<ObjectDisposedException>()
@@ -38,7 +38,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
             const string name = "testname";
-            var sut = new TestControl(stubbedWindow)
+            var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Name = name,
                 Area = new Rectangle(1, 1, 10, 10)
@@ -58,14 +58,14 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 DrawingInhibitedGet = () => true
             };
             bool inhibitLogged = false;
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             using var logger  = new TestLogger(CheckDrawLog);
             sut.ResetMethodCount();
             sut.Draw();
             inhibitLogged.Should().BeTrue();
-            sut.GetMethodCount(TestControl.MethodDrawBackground).Should().Be(0);
-            sut.GetMethodCount(TestControl.MethodDrawBorder).Should().Be(0);
-            sut.GetMethodCount(TestControl.MethodDrawClientArea).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawBackground).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawBorder).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawClientArea).Should().Be(0);
 
             void CheckDrawLog(string msg)
             {
@@ -85,13 +85,13 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             {
                 GetGraphics = () => graphics
             };
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             stubbedWindow.GetGraphics = () => null;
             sut.ResetMethodCount();
             sut.Draw(graphics);
-            sut.GetMethodCount(TestControl.MethodDrawBackground).Should().Be(1);
-            sut.GetMethodCount(TestControl.MethodDrawBorder).Should().Be(1);
-            sut.GetMethodCount(TestControl.MethodDrawClientArea).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawBackground).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawBorder).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawClientArea).Should().Be(1);
             flushed.Should().BeFalse();
         }
         [TestMethod]
@@ -106,13 +106,13 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             {
                 GetGraphics = () => graphics
             };
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.ResetMethodCount();
             flushed = false;
             sut.Draw();
-            sut.GetMethodCount(TestControl.MethodDrawBackground).Should().Be(1);
-            sut.GetMethodCount(TestControl.MethodDrawBorder).Should().Be(1);
-            sut.GetMethodCount(TestControl.MethodDrawClientArea).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawBackground).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawBorder).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodDrawClientArea).Should().Be(1);
             flushed.Should().BeTrue();
         }
     }

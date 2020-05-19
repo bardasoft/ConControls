@@ -20,7 +20,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.CursorPosition.Should().Be(Point.Empty);
             bool eventRaised = false;
             sut.CursorPositionChanged += (sender, e) =>
@@ -29,12 +29,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnCursorPositionChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorPositionChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             var point = new Point(1, 2);
             sut.CursorPosition = point;
             sut.CursorPosition.Should().Be(point);
-            sut.GetMethodCount(TestControl.MethodOnCursorPositionChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorPositionChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
@@ -42,7 +42,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             bool eventRaised = false;
             sut.CursorPositionChanged += (sender, e) =>
             {
@@ -50,10 +50,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnCursorPositionChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorPositionChanged).Should().Be(0);
             sut.CursorPosition = sut.CursorPosition;
             sut.CursorPosition.Should().Be(Point.Empty);
-            sut.GetMethodCount(TestControl.MethodOnCursorPositionChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorPositionChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
     }

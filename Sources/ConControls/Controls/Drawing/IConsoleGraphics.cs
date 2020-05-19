@@ -55,6 +55,20 @@ namespace ConControls.Controls.Drawing
         /// </para></remarks>
         void FillArea(ConsoleColor background, ConsoleColor foreColor, char c, Rectangle area);
         /// <summary>
+        /// Copies an array of characters into the buffer and applies the given background and
+        /// foreground colors.
+        /// </summary>
+        /// <remarks>
+        /// The method tries to copy the characters at the position given by <paramref name="topLeft"/>.
+        /// It only copies characters that fit into the boundaries of the target buffer.
+        /// </remarks>
+        /// <param name="background">The <see cref="ConsoleColor"/> to use for the background.</param>
+        /// <param name="foreColor">The <see cref="ConsoleColor"/> to use for the foreground.</param>
+        /// <param name="topLeft">The top left <see cref="Point"/> of the target area.</param>
+        /// <param name="characters">An array of characters to copy to the buffer.</param>
+        /// <param name="size">The size of the <paramref name="characters"/> array.</param>
+        void CopyCharacters(ConsoleColor background, ConsoleColor foreColor, Point topLeft, char[] characters, Size size);
+        /// <summary>
         /// Flushes the internal buffer to the console screen buffer.
         /// </summary>
         void Flush();

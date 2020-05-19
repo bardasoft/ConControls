@@ -28,8 +28,8 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         public void Remove_Control_RemovedAndEventCalled()
         {
             using var stubbedWindow = new StubbedWindow();
-            var control1 = new TestControl(stubbedWindow);
-            var control2 = new TestControl(stubbedWindow);
+            var control1 = new StubbedConsoleControl(stubbedWindow);
+            var control2 = new StubbedConsoleControl(stubbedWindow);
             bool called = false;
             stubbedWindow.Controls.Add(control1);
             stubbedWindow.Controls.Add(control2);
@@ -47,13 +47,13 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         public void Remove_ForeignControl_Nothing()
         {
             using var stubbedWindow = new StubbedWindow();
-            var control3 = new TestControl(stubbedWindow);
+            var control3 = new StubbedConsoleControl(stubbedWindow);
             stubbedWindow.Controls.Remove(control3);
             bool called = false;
             // ReSharper disable once UnusedVariable
-            var control1 = new TestControl(stubbedWindow);
+            var control1 = new StubbedConsoleControl(stubbedWindow);
             // ReSharper disable once UnusedVariable
-            var control2 = new TestControl(stubbedWindow);
+            var control2 = new StubbedConsoleControl(stubbedWindow);
             stubbedWindow.Controls.ControlCollectionChanged += (sender, e) =>
             {
                 called = true;

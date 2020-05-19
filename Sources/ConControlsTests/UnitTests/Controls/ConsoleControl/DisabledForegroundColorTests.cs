@@ -20,25 +20,25 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.DisabledForegroundColor.Should().BeNull();
 
-            sut.GetMethodCount(TestControl.MethodOnForegroundColorChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnForegroundColorChanged).Should().Be(0);
             sut.DisabledForegroundColor = ConsoleColor.DarkMagenta;
             sut.DisabledForegroundColor.Should().Be(ConsoleColor.DarkMagenta);
-            sut.GetMethodCount(TestControl.MethodOnForegroundColorChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnForegroundColorChanged).Should().Be(1);
         }
         [TestMethod]
         public void DisabledForegroundColor_NotChanged_NoEvent()
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
 
-            sut.GetMethodCount(TestControl.MethodOnForegroundColorChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnForegroundColorChanged).Should().Be(0);
             sut.DisabledForegroundColor = sut.DisabledForegroundColor;
             sut.DisabledForegroundColor.Should().BeNull();
-            sut.GetMethodCount(TestControl.MethodOnForegroundColorChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnForegroundColorChanged).Should().Be(0);
         }
     }
 }

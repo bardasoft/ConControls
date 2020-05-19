@@ -22,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 CursorSizeGet = () => 12
             };
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.CursorSize.Should().Be(12);
             bool eventRaised = false;
             sut.CursorSizeChanged += (sender, e) =>
@@ -31,11 +31,11 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnCursorSizeChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorSizeChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             sut.CursorSize = 23;
             sut.CursorSize.Should().Be(23);
-            sut.GetMethodCount(TestControl.MethodOnCursorSizeChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorSizeChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
@@ -46,7 +46,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 CursorSizeGet = () => 12
             };
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             bool eventRaised = false;
             sut.CursorSizeChanged += (sender, e) =>
             {
@@ -54,10 +54,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnCursorSizeChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorSizeChanged).Should().Be(0);
             sut.CursorSize = sut.CursorSize;
             sut.CursorSize.Should().Be(12);
-            sut.GetMethodCount(TestControl.MethodOnCursorSizeChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorSizeChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
     }

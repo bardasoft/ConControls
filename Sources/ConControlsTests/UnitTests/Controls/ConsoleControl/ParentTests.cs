@@ -23,26 +23,26 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         public void Parent_SameParent_Nothing()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
-            sut.GetMethodCount(TestControl.MethodOnParentChanged).Should().Be(0);
+            var sut = new StubbedConsoleControl(stubbedWindow);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnParentChanged).Should().Be(0);
             sut.Parent.Should().Be(stubbedWindow);
 
             sut.Parent = stubbedWindow;
-            sut.GetMethodCount(TestControl.MethodOnParentChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnParentChanged).Should().Be(0);
             sut.Parent.Should().Be(stubbedWindow);
         }
         [TestMethod]
         public void Parent_Null_ArgumentNullException()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.Invoking(s => s.Parent = null!)
                .Should()
                .Throw<ArgumentNullException>()
                .Which.ParamName.Should()
                .Be(nameof(sut.Parent));
 
-            sut.GetMethodCount(TestControl.MethodOnParentChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnParentChanged).Should().Be(0);
             sut.Parent.Should().Be(stubbedWindow);
         }
         [TestMethod]
@@ -51,12 +51,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var stubbedWindow = new StubbedWindow();
             var differentWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
-            var differentParent = new TestControl(differentWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
+            var differentParent = new StubbedConsoleControl(differentWindow);
             sut.Invoking(s => s.Parent = differentParent)
                .Should()
                .Throw<InvalidOperationException>();
-            sut.GetMethodCount(TestControl.MethodOnParentChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnParentChanged).Should().Be(0);
             sut.Parent.Should().Be(stubbedWindow);
         }
         [TestMethod]
@@ -73,8 +73,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 }
             };
 
-            var sut = new TestControl(stubbedWindow);
-            var differentParent = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
+            var differentParent = new StubbedConsoleControl(stubbedWindow);
 
             differentParent.OnDeferDrawingDisposed += () => newParentDeferred = true;
 
@@ -86,7 +86,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             newParentDeferred.Should().BeTrue();
 
             sut.Parent.Should().Be(differentParent);
-            sut.GetMethodCount(TestControl.MethodOnParentChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnParentChanged).Should().Be(1);
             stubbedWindow.Controls.Should().Equal(differentParent);
             differentParent.Controls.Should().Equal(sut);
         }

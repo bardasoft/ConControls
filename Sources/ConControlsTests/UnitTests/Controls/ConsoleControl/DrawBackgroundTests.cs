@@ -22,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.Dispose();
             sut.Invoking(s => s.DoDrawBackground(new StubIConsoleGraphics()))
                .Should()
@@ -33,7 +33,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.Invoking(s => s.DoDrawBackground(null!))
                .Should()
                .Throw<ArgumentNullException>()
@@ -54,7 +54,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 DrawBackgroundConsoleColorRectangle = (color, rect) => backgroundDrawn = true
             };
             bool inhibitLogged = false;
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             using var logger = new TestLogger(CheckDrawLog);
             sut.DoDrawBackground(graphics);
             inhibitLogged.Should().BeTrue();
@@ -75,7 +75,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 BackgroundColorGet = () => Color
             };
 
-            var sut = new TestControl(stubbedWindow)
+            var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Area = new Rectangle(1, 2, 3, 4)
             };

@@ -18,10 +18,10 @@ using ConControls.Controls.Drawing;
 using ConControls.Helpers;
 using FluentAssertions;
 
-namespace ConControlsTests.UnitTests.Controls 
+namespace ConControlsTests.UnitTests 
 {
     [ExcludeFromCodeCoverage]
-    sealed class TestControl : ConControls.Controls.ConsoleControl, IControlContainer
+    sealed class StubbedConsoleControl : ConsoleControl, IControlContainer
     {
         public bool? Focusable { get; set; }
         public Rectangle ClientArea => GetClientArea();
@@ -55,9 +55,9 @@ namespace ConControlsTests.UnitTests.Controls
             lock(methodCallCounts) methodCallCounts.Clear();
         }
 
-        internal TestControl()
+        internal StubbedConsoleControl()
             : this(null!) { }
-        internal TestControl(IControlContainer parent)
+        internal StubbedConsoleControl(IControlContainer parent)
             : base(parent)
         {
             deferrer = new DisposableBlock(() => OnDeferDrawingDisposed?.Invoke());

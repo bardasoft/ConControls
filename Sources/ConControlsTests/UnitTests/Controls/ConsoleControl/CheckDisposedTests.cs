@@ -19,14 +19,14 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         public void CheckDisposed_NotDisposed_Nothing()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.DoCheckDisposed();
         }
         [TestMethod]
         public void CheckDisposed_WindowDisposed_ObjectDisposedException()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             stubbedWindow.IsDisposedGet = () => true;
             sut.Invoking(c => c.DoCheckDisposed()).Should().Throw<ObjectDisposedException>().Which.ObjectName.Should().Be(nameof(ConsoleWindow));
         }
@@ -34,7 +34,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         public void CheckDisposed_ControlDisposed_ObjectDisposedException()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.DisposeInternal(false);
             stubbedWindow.KeyEventEvent.Should().NotBeNull();
             stubbedWindow.MouseEventEvent.Should().NotBeNull();
@@ -43,7 +43,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                .Should().Throw<ObjectDisposedException>()
                .Which
                .ObjectName
-               .Should().Be(nameof(TestControl));
+               .Should().Be(nameof(StubbedConsoleControl));
         }
     }
 }

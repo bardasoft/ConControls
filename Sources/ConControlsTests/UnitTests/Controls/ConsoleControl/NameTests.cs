@@ -19,8 +19,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
-            sut.Name.Should().Be(nameof(TestControl));
+            var sut = new StubbedConsoleControl(stubbedWindow);
+            sut.Name.Should().Be(nameof(StubbedConsoleControl));
             bool eventRaised = false;
             sut.NameChanged += (sender, e) =>
             {
@@ -28,20 +28,20 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnNameChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             const string alt = "alt";
             sut.Name = alt;
             sut.Name.Should().Be(alt);
-            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnNameChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
         public void Name_NotChanged_NoEvent()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
-            sut.Name.Should().Be(nameof(TestControl));
+            var sut = new StubbedConsoleControl(stubbedWindow);
+            sut.Name.Should().Be(nameof(StubbedConsoleControl));
             bool eventRaised = false;
             sut.NameChanged += (sender, e) =>
             {
@@ -49,17 +49,17 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnNameChanged).Should().Be(0);
             sut.Name = sut.Name;
-            sut.Name.Should().Be(nameof(TestControl));
-            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(0);
+            sut.Name.Should().Be(nameof(StubbedConsoleControl));
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnNameChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
         [TestMethod]
         public void Name_Null_Default()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow)
+            var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Name = "different"
             };
@@ -70,10 +70,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnNameChanged).Should().Be(1);
             sut.Name = null!;
-            sut.Name.Should().Be(nameof(TestControl));
-            sut.GetMethodCount(TestControl.MethodOnNameChanged).Should().Be(2);
+            sut.Name.Should().Be(nameof(StubbedConsoleControl));
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnNameChanged).Should().Be(2);
             eventRaised.Should().BeTrue();
         }
     }

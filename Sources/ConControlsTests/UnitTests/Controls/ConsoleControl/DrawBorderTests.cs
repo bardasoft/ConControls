@@ -24,7 +24,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.Dispose();
             sut.Invoking(s => s.DoDrawBorder(new StubIConsoleGraphics()))
                .Should()
@@ -35,7 +35,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.Invoking(s => s.DoDrawBorder(null!))
                .Should()
                .Throw<ArgumentNullException>()
@@ -59,7 +59,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 DrawBorderConsoleColorConsoleColorBorderStyleRectangle = (bg, fg, style, rect) => borderDrawn = true
             };
             bool inhibitLogged = false;
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             using var logger = new TestLogger(CheckDrawLog);
             sut.DoDrawBorder(graphics);
             inhibitLogged.Should().BeTrue();
@@ -81,7 +81,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 BorderStyleGet = () => BorderStyle.None
             };
 
-            var sut = new TestControl(stubbedWindow)
+            var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Area = new Rectangle(1, 2, 3, 4)
             };

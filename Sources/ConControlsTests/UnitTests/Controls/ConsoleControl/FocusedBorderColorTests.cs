@@ -22,25 +22,25 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.FocusedBorderColor.Should().BeNull();
 
-            sut.GetMethodCount(TestControl.MethodOnBorderColorChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderColorChanged).Should().Be(0);
             sut.FocusedBorderColor = ConsoleColor.DarkMagenta;
             sut.FocusedBorderColor.Should().Be(ConsoleColor.DarkMagenta);
-            sut.GetMethodCount(TestControl.MethodOnBorderColorChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderColorChanged).Should().Be(1);
         }
         [TestMethod]
         public void FocusedBorderColor_NotChanged_NoEvent()
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
 
-            sut.GetMethodCount(TestControl.MethodOnBorderColorChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderColorChanged).Should().Be(0);
             sut.FocusedBorderColor = sut.FocusedBorderColor;
             sut.FocusedBorderColor.Should().BeNull();
-            sut.GetMethodCount(TestControl.MethodOnBorderColorChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderColorChanged).Should().Be(0);
         }
     }
 }

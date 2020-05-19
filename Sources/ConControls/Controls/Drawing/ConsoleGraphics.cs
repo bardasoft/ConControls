@@ -100,6 +100,18 @@ namespace ConControls.Controls.Drawing
             foreach (var index in indices)
                 buffer[index] = char_info;
         }
+        public void CopyCharacters(ConsoleColor background, ConsoleColor foreColor, Point topLeft, char[] characters, Size arraySize)
+        {
+            Logger.Log(DebugContext.ConsoleApi | DebugContext.Graphics, $"Copying characters to {topLeft}, size: {arraySize} in {foreColor} on {background}.");
+            var attributes = background.ToBackgroundColor() | foreColor.ToForegroundColor();
+            for(int sourceX = 0, targetX = topLeft.X; 
+                sourceX < arraySize.Width && targetX < size.Width;
+                sourceX++, targetX++)
+                for (int sourceY = 0, targetY = topLeft.Y;
+                     sourceY < arraySize.Height && targetY < size.Height;
+                    sourceY++, targetY++)
+                    buffer[GetIndex(targetX, targetY)] = new CHAR_INFO(characters[sourceY * arraySize.Width + sourceY], attributes);
+        }
         public void Flush()
         {
             Logger.Log(DebugContext.ConsoleApi | DebugContext.Graphics, $"flushing buffer ({size}).");

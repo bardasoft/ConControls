@@ -18,14 +18,14 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         public void DrawingInhibited_DrawingAllowed_False()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.DrawingInhibited.Should().BeFalse();
         }
         [TestMethod]
         public void DrawingInhibited_NotVisible_True()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow)
+            var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Visible = false
             };
@@ -35,14 +35,14 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         public void DrawingInhibited_ParentInhibited_True()
         {
             var stubbedWindow = new StubbedWindow {DrawingInhibitedGet = () => true};
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.DrawingInhibited.Should().BeTrue();
         }
         [TestMethod]
         public void DrawingInhibited_DrawingDeferred_Correct()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             var deferrer1 = sut.DeferDrawing();
             sut.DrawingInhibited.Should().BeTrue();
             var deferrer2 = sut.DeferDrawing();

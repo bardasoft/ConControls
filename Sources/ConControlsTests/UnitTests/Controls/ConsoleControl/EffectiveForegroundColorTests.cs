@@ -29,7 +29,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 FocusedControlSetConsoleControl = c => focused = c
             };
 
-            var sut = new TestControl(stubbedWindow)
+            var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Focusable = true
             };
@@ -56,7 +56,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 FocusedControlSetConsoleControl = c => focused = c
             };
 
-            var sut = new TestControl(stubbedWindow)
+            var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Focusable = true,
                 DisabledForegroundColor = ConsoleColor.Blue,

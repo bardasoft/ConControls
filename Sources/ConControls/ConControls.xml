@@ -928,6 +928,21 @@
             <see cref="M:ConControls.Controls.Drawing.IConsoleGraphics.Flush"/> is called.
             </para></remarks>
         </member>
+        <member name="M:ConControls.Controls.Drawing.IConsoleGraphics.CopyCharacters(System.ConsoleColor,System.ConsoleColor,System.Drawing.Point,System.Char[],System.Drawing.Size)">
+            <summary>
+            Copies an array of characters into the buffer and applies the given background and
+            foreground colors.
+            </summary>
+            <remarks>
+            The method tries to copy the characters at the position given by <paramref name="topLeft"/>.
+            It only copies characters that fit into the boundaries of the target buffer.
+            </remarks>
+            <param name="background">The <see cref="T:System.ConsoleColor"/> to use for the background.</param>
+            <param name="foreColor">The <see cref="T:System.ConsoleColor"/> to use for the foreground.</param>
+            <param name="topLeft">The top left <see cref="T:System.Drawing.Point"/> of the target area.</param>
+            <param name="characters">An array of characters to copy to the buffer.</param>
+            <param name="size">The size of the <paramref name="characters"/> array.</param>
+        </member>
         <member name="M:ConControls.Controls.Drawing.IConsoleGraphics.Flush">
             <summary>
             Flushes the internal buffer to the console screen buffer.
@@ -1356,6 +1371,12 @@
             </summary>
         </member>
         <member name="M:ConControls.Controls.TextControl.#ctor(ConControls.Controls.IControlContainer)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.TextControl.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.TextControl.DrawClientArea(ConControls.Controls.Drawing.IConsoleGraphics)">
             <inheritdoc />
         </member>
         <member name="M:ConControls.Controls.TextControl.OnTextChanged">

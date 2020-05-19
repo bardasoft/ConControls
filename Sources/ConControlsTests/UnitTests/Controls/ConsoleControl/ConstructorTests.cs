@@ -21,7 +21,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         public void ConsoleControl_NullParent_ArgumentNullException()
         {
             // ReSharper disable once AssignmentIsFullyDiscarded
-            _ = new TestControl();
+            _ = new StubbedConsoleControl();
         }
         [TestMethod]
         public void ConsoleControl_CompletelyInitialized_AddedToParent()
@@ -41,10 +41,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 BorderStyleGet = () => borderStyle
             };
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.Visible.Should().BeTrue();
             sut.CanFocus.Should().BeFalse();
-            sut.Name.Should().Be(nameof(TestControl));
+            sut.Name.Should().Be(nameof(StubbedConsoleControl));
             sut.CursorSize.Should().Be(cursorSize);
             sut.ForegroundColor.Should().Be(foreground);
             sut.BackgroundColor.Should().Be(background);

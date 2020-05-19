@@ -22,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 EnabledGet = () => true
             };
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.Enabled.Should().BeTrue();
             bool eventRaised = false;
             sut.EnabledChanged += (sender, e) =>
@@ -31,11 +31,11 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnEnabledChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnEnabledChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             sut.Enabled = false;
             sut.Enabled.Should().BeFalse();
-            sut.GetMethodCount(TestControl.MethodOnEnabledChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnEnabledChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
@@ -46,7 +46,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 EnabledGet = () => true
             };
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             bool eventRaised = false;
             sut.EnabledChanged += (sender, e) =>
             {
@@ -54,10 +54,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnEnabledChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnEnabledChanged).Should().Be(0);
             sut.Enabled = sut.Enabled;
             sut.Enabled.Should().BeTrue();
-            sut.GetMethodCount(TestControl.MethodOnEnabledChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnEnabledChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
     }

@@ -20,7 +20,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.Location.Should().Be(Point.Empty);
             bool eventRaised = false;
             sut.AreaChanged += (sender, e) =>
@@ -29,19 +29,19 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnAreaChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnAreaChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             var point = new Point(1, 2);
             sut.Location = point;
             sut.Location.Should().Be(point);
-            sut.GetMethodCount(TestControl.MethodOnAreaChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnAreaChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
         public void Location_NotChanged_NoEvent()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             bool eventRaised = false;
             sut.AreaChanged += (sender, e) =>
             {
@@ -49,10 +49,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnAreaChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnAreaChanged).Should().Be(0);
             sut.Location = sut.Location;
             sut.Location.Should().Be(Point.Empty);
-            sut.GetMethodCount(TestControl.MethodOnAreaChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnAreaChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
     }

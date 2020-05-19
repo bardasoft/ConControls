@@ -19,7 +19,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             sut.CursorVisible.Should().BeFalse();
             bool eventRaised = false;
             sut.CursorVisibleChanged += (sender, e) =>
@@ -28,19 +28,19 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnCursorVisibleChanged).Should().Be(0);
-            sut.GetMethodCount(TestControl.MethodOnCursorVisibleChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorVisibleChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorVisibleChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
             sut.CursorVisible = true;
             sut.CursorVisible.Should().BeTrue();
-            sut.GetMethodCount(TestControl.MethodOnCursorVisibleChanged).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorVisibleChanged).Should().Be(1);
             eventRaised.Should().BeTrue();
         }
         [TestMethod]
         public void CursorVisible_NotChanged_NoEvent()
         {
             var stubbedWindow = new StubbedWindow();
-            var sut = new TestControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow);
             bool eventRaised = false;
             sut.CursorVisibleChanged += (sender, e) =>
             {
@@ -48,10 +48,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 eventRaised = true;
             };
 
-            sut.GetMethodCount(TestControl.MethodOnCursorVisibleChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorVisibleChanged).Should().Be(0);
             sut.CursorVisible = sut.CursorVisible;
             sut.CursorVisible.Should().BeFalse();
-            sut.GetMethodCount(TestControl.MethodOnCursorVisibleChanged).Should().Be(0);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorVisibleChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }
     }
