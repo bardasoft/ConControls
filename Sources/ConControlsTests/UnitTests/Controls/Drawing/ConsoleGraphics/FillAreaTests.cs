@@ -7,10 +7,8 @@
 
 #nullable enable
 
-using System;
 using System.Drawing;
 using System.Linq;
-using ConControls.ConsoleApi;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -23,16 +21,8 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void FillArea_CorrectArea_FilledCorrectly()
         {
-            const ConsoleColor foreground = ConsoleColor.Blue;
-            const ConsoleColor background = ConsoleColor.Green;
             const char character = 'X';
-            ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             var mainBuffer = Enumerable.Repeat(cc, 16).ToArray();
             CHAR_INFO c0 = new CHAR_INFO
             {
@@ -80,16 +70,8 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void FillArea_AreaTooLarge_ClippedCorrectly()
         {
-            const ConsoleColor foreground = ConsoleColor.Blue;
-            const ConsoleColor background = ConsoleColor.Green;
             const char character = 'X';
-            ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             var mainBuffer = Enumerable.Repeat(cc, 16).ToArray();
             CHAR_INFO c0 = new CHAR_INFO
             {

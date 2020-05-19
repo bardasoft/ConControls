@@ -7,7 +7,6 @@
 
 #nullable enable
 
-using System;
 using System.Drawing;
 using System.Linq;
 using ConControls.ConsoleApi;
@@ -23,19 +22,12 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void DrawBackground_CorrectArea_FilledCorrectly()
         {
-            const ConsoleColor background = ConsoleColor.Green;
             const char expectedCharacter = default;
-            ConCharAttributes attributes = background.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             var mainBuffer = Enumerable.Repeat(cc, 16).ToArray();
             CHAR_INFO c0 = new CHAR_INFO
             {
-                Attributes = attributes,
+                Attributes = background.ToBackgroundColor() | background.ToForegroundColor(),
                 Char = expectedCharacter
             };
             var expectedBuffer = new[]
@@ -77,19 +69,12 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void DrawBackground_AreaTooLarge_ClippedCorrectly()
         {
-            const ConsoleColor background = ConsoleColor.Green;
             const char expectedCharacter = default;
-            ConCharAttributes attributes = background.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             var mainBuffer = Enumerable.Repeat(cc, 16).ToArray();
             CHAR_INFO c0 = new CHAR_INFO
             {
-                Attributes = attributes,
+                Attributes = background.ToBackgroundColor() | background.ToForegroundColor(),
                 Char = expectedCharacter
             };
             var expectedBuffer = Enumerable.Repeat(c0, 16).ToArray();

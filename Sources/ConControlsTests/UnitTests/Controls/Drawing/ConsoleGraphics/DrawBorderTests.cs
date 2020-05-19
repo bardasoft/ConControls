@@ -7,10 +7,8 @@
 
 #nullable enable
 
-using System;
 using System.Drawing;
 using System.Linq;
-using ConControls.ConsoleApi;
 using ConControls.Controls;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
@@ -24,15 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void DrawBorder_CorrectArea_FilledCorrectly()
         {
-            const ConsoleColor foreground = ConsoleColor.Blue;
-            const ConsoleColor background = ConsoleColor.Green;
-            ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(5, 5);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             const BorderStyle borderStyle = BorderStyle.DoubleLined;
             var frameCharSets = new ConControls.Controls.Drawing.FrameCharSets();
             var frameCharSet = frameCharSets[borderStyle];
@@ -109,14 +99,7 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void DrawBorder_BorderStyleNone_Unchanged()
         {
-            const ConsoleColor foreground = ConsoleColor.Blue;
-            const ConsoleColor background = ConsoleColor.Green;
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             const BorderStyle borderStyle = BorderStyle.None;
             var frameCharSets = new ConControls.Controls.Drawing.FrameCharSets();
 
@@ -155,15 +138,7 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void DrawBorder_OutOfBoundsUpperLeft_ClippedCorrectly()
         {
-            const ConsoleColor foreground = ConsoleColor.Blue;
-            const ConsoleColor background = ConsoleColor.Green;
-            ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             const BorderStyle borderStyle = BorderStyle.DoubleLined;
             var frameCharSets = new ConControls.Controls.Drawing.FrameCharSets();
             var frameCharSet = frameCharSets[borderStyle];
@@ -224,15 +199,7 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void DrawBorder_OutOfBoundsUpperRight_ClippedCorrectly()
         {
-            const ConsoleColor foreground = ConsoleColor.Blue;
-            const ConsoleColor background = ConsoleColor.Green;
-            ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             const BorderStyle borderStyle = BorderStyle.DoubleLined;
             var frameCharSets = new ConControls.Controls.Drawing.FrameCharSets();
             var frameCharSet = frameCharSets[borderStyle];
@@ -293,15 +260,7 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void DrawBorder_OutOfBoundsLowerLeft_ClippedCorrectly()
         {
-            const ConsoleColor foreground = ConsoleColor.Blue;
-            const ConsoleColor background = ConsoleColor.Green;
-            ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             const BorderStyle borderStyle = BorderStyle.DoubleLined;
             var frameCharSets = new ConControls.Controls.Drawing.FrameCharSets();
             var frameCharSet = frameCharSets[borderStyle];
@@ -362,15 +321,7 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void DrawBorder_OutOfBoundsLowerRight_ClippedCorrectly()
         {
-            const ConsoleColor foreground = ConsoleColor.Blue;
-            const ConsoleColor background = ConsoleColor.Green;
-            ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             const BorderStyle borderStyle = BorderStyle.DoubleLined;
             var frameCharSets = new ConControls.Controls.Drawing.FrameCharSets();
             var frameCharSet = frameCharSets[borderStyle];
@@ -431,15 +382,7 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void DrawBorder_NoClientArea_FilledCorrectly()
         {
-            const ConsoleColor foreground = ConsoleColor.Blue;
-            const ConsoleColor background = ConsoleColor.Green;
-            ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             const BorderStyle borderStyle = BorderStyle.DoubleLined;
             var frameCharSets = new ConControls.Controls.Drawing.FrameCharSets();
             var frameCharSet = frameCharSets[borderStyle];
@@ -505,14 +448,7 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
         [TestMethod]
         public void DrawBorder_CompletelyOutside_NoChange()
         {
-            const ConsoleColor foreground = ConsoleColor.Blue;
-            const ConsoleColor background = ConsoleColor.Green;
             Size size = new Size(4, 4);
-            CHAR_INFO cc = new CHAR_INFO
-            {
-                Attributes = (ConCharAttributes)0xFFFF,
-                Char = (char)0xFFFF
-            };
             const BorderStyle borderStyle = BorderStyle.DoubleLined;
             var frameCharSets = new ConControls.Controls.Drawing.FrameCharSets();
 

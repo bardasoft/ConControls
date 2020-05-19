@@ -7,6 +7,9 @@
 
 #nullable enable
 
+using System.Drawing;
+using System.Linq;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 // ReSharper disable AccessToDisposedClosure
 
@@ -15,118 +18,100 @@ namespace ConControlsTests.UnitTests.Controls.Drawing.ConsoleGraphics
     public partial class ConsoleGraphicsTests
     {
         [TestMethod]
-        public void CopyCharacters_Inconclusive()
+        public void CopyCharacters_CorrectArea_CopiedCorrectly()
         {
-            Assert.Inconclusive();
+            Size size = new Size(4, 4);
+            var mainBuffer = Enumerable.Repeat(cc, 16).ToArray();
+            char[] characters = { cc1, cc2, cc3, cc4 };
+            var expectedBuffer = new[]
+            {
+                cc, cc, cc, cc,
+                cc, cA, cB, cc,
+                cc, cC, cD, cc,
+                cc, cc, cc, cc
+            };
+
+            bool written = false, successful = false;
+            using var stubbedApi = new StubbedNativeCalls();
+            stubbedApi.ReadConsoleOutputConsoleOutputHandleRectangle = (handle, rectangle) =>
+            {
+                rectangle.Size.Should().Be(size);
+                handle.Should().Be(stubbedApi.ScreenHandle);
+                return mainBuffer;
+            };
+            stubbedApi.WriteConsoleOutputConsoleOutputHandleCHAR_INFOArrayRectangle = (handle, buffer, area) =>
+            {
+                written = true;
+                handle.Should().Be(stubbedApi.ScreenHandle);
+                area.Size.Should().Be(size);
+                buffer.Should().Equal(expectedBuffer);
+                successful = true;
+            };
+            var sut = new ConControls.Controls.Drawing.ConsoleGraphics(stubbedApi.ScreenHandle, stubbedApi, size,
+                                                                       new ConControls.Controls.Drawing.FrameCharSets());
+            sut.CopyCharacters(
+                background: background,
+                foreColor: foreground,
+                topLeft: new Point(1, 1),
+                characters: characters,
+                arraySize: new Size(2, 2));
+
+            written.Should().BeFalse();
+            mainBuffer.Should().Equal(expectedBuffer);
+            sut.Flush();
+            written.Should().BeTrue();
+            successful.Should().BeTrue();
         }
+        [TestMethod]
+        public void CopyCharacters_AreaTooLarge_ClippedCorrectly()
+        {
+            Size size = new Size(4, 4);
+            var mainBuffer = Enumerable.Repeat(cc, 16).ToArray();
+            char[] characters =
+            {
+                cc1, cc2, cc3, cc4, cc1,
+                cc2, cc3, cc4, cc1, cc2,
+                cc3, cc4, cc1, cc2, cc3,
+                cc4, cc1, cc2, cc3, cc4,
+                cc1, cc2, cc3, cc4, cc1 };
+            var expectedBuffer = new[]
+            {
+                cA, cB, cC, cD,
+                cB, cC, cD, cA,
+                cC, cD, cA, cB,
+                cD, cA, cB, cC
+            };
 
-        //[TestMethod]
-        //public void FillArea_CorrectArea_FilledCorrectly()
-        //{
-        //    const ConsoleColor foreground = ConsoleColor.Blue;
-        //    const ConsoleColor background = ConsoleColor.Green;
-        //    const char character = 'X';
-        //    ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
-        //    Size size = new Size(4, 4);
-        //    CHAR_INFO cc = new CHAR_INFO
-        //    {
-        //        Attributes = (ConCharAttributes)0xFFFF,
-        //        Char = (char)0xFFFF
-        //    };
-        //    var mainBuffer = Enumerable.Repeat(cc, 16).ToArray();
-        //    CHAR_INFO c0 = new CHAR_INFO
-        //    {
-        //        Attributes = attributes,
-        //        Char = character
-        //    };
-        //    var expectedBuffer = new[]
-        //    {
-        //        cc, cc, cc, cc,
-        //        cc, c0, c0, cc,
-        //        cc, c0, c0, cc,
-        //        cc, cc, cc, cc
-        //    };
+            bool written = false, successful = false;
+            using var stubbedApi = new StubbedNativeCalls();
+            stubbedApi.ReadConsoleOutputConsoleOutputHandleRectangle = (handle, rectangle) =>
+            {
+                rectangle.Size.Should().Be(size);
+                handle.Should().Be(stubbedApi.ScreenHandle);
+                return mainBuffer;
+            };
+            stubbedApi.WriteConsoleOutputConsoleOutputHandleCHAR_INFOArrayRectangle = (handle, buffer, area) =>
+            {
+                written = true;
+                handle.Should().Be(stubbedApi.ScreenHandle);
+                area.Size.Should().Be(size);
+                buffer.Should().Equal(expectedBuffer);
+                successful = true;
+            };
+            var sut = new ConControls.Controls.Drawing.ConsoleGraphics(stubbedApi.ScreenHandle, stubbedApi, size,
+                                                                       new ConControls.Controls.Drawing.FrameCharSets());
+            sut.CopyCharacters(
+                background: background,
+                foreColor: foreground,
+                topLeft: Point.Empty,
+                characters: characters,
+                arraySize: new Size(5, 5));
 
-        //    bool written = false, successful = false;
-        //    using var stubbedApi = new StubbedNativeCalls();
-        //    stubbedApi.ReadConsoleOutputConsoleOutputHandleRectangle = (handle, rectangle) =>
-        //    {
-        //        rectangle.Size.Should().Be(size);
-        //        handle.Should().Be(stubbedApi.ScreenHandle);
-        //        return mainBuffer;
-        //    };
-        //    stubbedApi.WriteConsoleOutputConsoleOutputHandleCHAR_INFOArrayRectangle = (handle, buffer, area) =>
-        //    {
-        //        written = true;
-        //        handle.Should().Be(stubbedApi.ScreenHandle);
-        //        area.Size.Should().Be(size);
-        //        buffer.Should().Equal(expectedBuffer);
-        //        successful = true;
-        //    };
-        //    var sut = new ConControls.Controls.Drawing.ConsoleGraphics(stubbedApi.ScreenHandle, stubbedApi, size,
-        //                                                               new ConControls.Controls.Drawing.FrameCharSets());
-        //    sut.FillArea(
-        //        background: background, 
-        //        foreColor: foreground,
-        //        c: character, 
-        //        area: new Rectangle(1, 1, 2, 2));
-
-        //    written.Should().BeFalse();
-        //    mainBuffer.Should().Equal(expectedBuffer);
-        //    sut.Flush();
-        //    written.Should().BeTrue();
-        //    successful.Should().BeTrue();
-        //}
-        //[TestMethod]
-        //public void FillArea_AreaTooLarge_ClippedCorrectly()
-        //{
-        //    const ConsoleColor foreground = ConsoleColor.Blue;
-        //    const ConsoleColor background = ConsoleColor.Green;
-        //    const char character = 'X';
-        //    ConCharAttributes attributes = foreground.ToForegroundColor() | background.ToBackgroundColor();
-        //    Size size = new Size(4, 4);
-        //    CHAR_INFO cc = new CHAR_INFO
-        //    {
-        //        Attributes = (ConCharAttributes)0xFFFF,
-        //        Char = (char)0xFFFF
-        //    };
-        //    var mainBuffer = Enumerable.Repeat(cc, 16).ToArray();
-        //    CHAR_INFO c0 = new CHAR_INFO
-        //    {
-        //        Attributes = attributes,
-        //        Char = character
-        //    };
-        //    var expectedBuffer = Enumerable.Repeat(c0, 16).ToArray();
-
-        //    bool written = false, successful = false;
-        //    using var stubbedApi = new StubbedNativeCalls();
-        //    stubbedApi.ReadConsoleOutputConsoleOutputHandleRectangle = (handle, rectangle) =>
-        //    {
-        //        rectangle.Size.Should().Be(size);
-        //        handle.Should().Be(stubbedApi.ScreenHandle);
-        //        return mainBuffer;
-        //    };
-        //    stubbedApi.WriteConsoleOutputConsoleOutputHandleCHAR_INFOArrayRectangle = (handle, buffer, area) =>
-        //    {
-        //        written = true;
-        //        handle.Should().Be(stubbedApi.ScreenHandle);
-        //        area.Size.Should().Be(size);
-        //        buffer.Should().Equal(expectedBuffer);
-        //        successful = true;
-        //    };
-        //    var sut = new ConControls.Controls.Drawing.ConsoleGraphics(stubbedApi.ScreenHandle, stubbedApi, size,
-        //                                                               new ConControls.Controls.Drawing.FrameCharSets());
-        //    sut.FillArea(
-        //        background: background,
-        //        foreColor: foreground,
-        //        c: character,
-        //        area: new Rectangle(-1, -1, 7, 7));
-
-        //    written.Should().BeFalse();
-        //    mainBuffer.Should().Equal(expectedBuffer);
-        //    sut.Flush();
-        //    written.Should().BeTrue();
-        //    successful.Should().BeTrue();
-        //}
+            written.Should().BeFalse();
+            mainBuffer.Should().Equal(expectedBuffer);
+            sut.Flush();
+            written.Should().BeTrue();
+            successful.Should().BeTrue();
+        }
     }
 }

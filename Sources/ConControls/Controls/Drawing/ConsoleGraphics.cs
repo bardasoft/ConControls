@@ -110,7 +110,7 @@ namespace ConControls.Controls.Drawing
                 for (int sourceY = 0, targetY = topLeft.Y;
                      sourceY < arraySize.Height && targetY < size.Height;
                     sourceY++, targetY++)
-                    buffer[GetIndex(targetX, targetY)] = new CHAR_INFO(characters[sourceY * arraySize.Width + sourceY], attributes);
+                    buffer[GetIndex(targetX, targetY)] = new CHAR_INFO(characters[sourceY * arraySize.Width + sourceX], attributes);
         }
         public void Flush()
         {
