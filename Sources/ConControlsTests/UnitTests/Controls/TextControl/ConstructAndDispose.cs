@@ -7,6 +7,8 @@
 
 #nullable enable
 
+using System.Drawing;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConControlsTests.UnitTests.Controls.TextControl
@@ -16,7 +18,25 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
         [TestMethod]
         public void ConstructAndDispsoed_EventsWired_EventsUnwired()
         {
-            Assert.Inconclusive();
+            const int cursorSize = 42;
+            using var window = new StubbedWindow
+            {
+                CursorSizeGet = () => cursorSize
+            };
+            var textController = new StubbedConsoleTextController();
+
+            using var sut = new StubbedTextControl(window, textController);
+            sut.CursorSize.Should().Be(cursorSize);
+            sut.CursorVisible.Should().BeTrue();
+            sut.CursorPosition.Should().Be(Point.Empty);
+
+            textController.BufferChangedEvent.Should().NotBeNull();
+            textController.CaretPositionChangedEvent.Should().NotBeNull();
+            
+            sut.Dispose();
+
+            textController.BufferChangedEvent.Should().BeNull();
+            textController.CaretPositionChangedEvent.Should().BeNull();
         }
     }
 }

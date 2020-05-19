@@ -59,14 +59,13 @@ namespace ConControls.Controls
             this.textController.CaretPositionChanged += OnTextControllerCaretPositionChanged;
             CursorSize = Window.CursorSize;
             CursorVisible = true;
-            CursorPosition = new Point(0, 0);
         }
 
         /// <inheritdoc />
         protected override void Dispose(bool disposing)
         {
             textController.CaretPositionChanged -= OnTextControllerCaretPositionChanged;
-            textController.BufferChanged -= OnTextControllerCaretPositionChanged;
+            textController.BufferChanged -= OnTextControllerBufferChanged;
             base.Dispose(disposing);
         }
 
