@@ -77,7 +77,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new StubbedConsoleControl(stubbedWindow)
             {
-                Area = new Rectangle(1, 2, 3, 4)
+                Area = new Rectangle(1, 2, 3, 4),
+                Parent = stubbedWindow
             };
 
             bool backgroundDrawn = false;

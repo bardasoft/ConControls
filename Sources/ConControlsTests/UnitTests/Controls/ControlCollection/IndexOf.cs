@@ -34,10 +34,10 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         public void IndexOf_ControlFound_Index()
         {
             var stubbedWindow = new StubbedWindow();
-            var control1 = new StubbedConsoleControl(stubbedWindow);
-            var control2 = new StubbedConsoleControl(stubbedWindow);
-            var control3 = new StubbedConsoleControl(stubbedWindow);
-            var control4 = new StubbedConsoleControl(stubbedWindow);
+            var control1 = new StubbedConsoleControl(stubbedWindow) { Parent = stubbedWindow };
+            var control2 = new StubbedConsoleControl(stubbedWindow) { Parent = stubbedWindow };
+            var control3 = new StubbedConsoleControl(stubbedWindow) { Parent = stubbedWindow };
+            var control4 = new StubbedConsoleControl(stubbedWindow) { Parent = stubbedWindow };
             stubbedWindow.Controls.IndexOf(control1).Should().Be(0);
             stubbedWindow.Controls.IndexOf(control2).Should().Be(1);
             stubbedWindow.Controls.IndexOf(control3).Should().Be(2);

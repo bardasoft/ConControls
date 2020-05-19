@@ -142,9 +142,9 @@
             <summary>
             The parent <see cref="T:ConControls.Controls.ConsoleControl"/> that contains this control.
             The parent must be contained by the same <see cref="T:ConControls.Controls.IConsoleWindow"/>.
+            If this propery is <c>null</c>, the control is not displayed.
             </summary>
             <exception cref="T:System.InvalidOperationException">The parent is not part of the same <see cref="T:ConControls.Controls.IConsoleWindow"/> or this control is the root element of the window..</exception>
-            <exception cref="T:System.ArgumentNullException">The parent is <c>null</c>.</exception>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.Controls">
             <summary>
@@ -265,12 +265,12 @@
             If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> value will be used.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.#ctor(ConControls.Controls.IControlContainer)">
+        <member name="M:ConControls.Controls.ConsoleControl.#ctor(ConControls.Controls.IConsoleWindow)">
             <summary>
             Initializes an instance of <see cref="T:ConControls.Controls.ConsoleControl"/>.
             </summary>
-            <param name="parent">The parent <see cref="T:ConControls.Controls.ConsoleControl"/> this control should be placed on.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="parent"/> is <c>null</c>.</exception>
+            <param name="window">The parent <see cref="T:ConControls.Controls.IConsoleWindow"/> this control should belong to.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="window"/> is <c>null</c>.</exception>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.Dispose">
             <summary>
@@ -1267,7 +1267,7 @@
             for other controls.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.Panel.#ctor(ConControls.Controls.IControlContainer)">
+        <member name="M:ConControls.Controls.Panel.#ctor(ConControls.Controls.IConsoleWindow)">
             <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.ProgressBar">
@@ -1336,7 +1336,7 @@
             Gets or sets the orientation of this progressbar (default is <see cref="F:ConControls.Controls.ProgressBar.ProgressOrientation.LeftToRight"/>).
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ProgressBar.#ctor(ConControls.Controls.IControlContainer)">
+        <member name="M:ConControls.Controls.ProgressBar.#ctor(ConControls.Controls.IConsoleWindow)">
             <inheritdoc />
         </member>
         <member name="M:ConControls.Controls.ProgressBar.DrawClientArea(ConControls.Controls.Drawing.IConsoleGraphics)">
@@ -1347,7 +1347,7 @@
             A console control to display a scrollable block of text.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.TextBlock.#ctor(ConControls.Controls.IControlContainer)">
+        <member name="M:ConControls.Controls.TextBlock.#ctor(ConControls.Controls.IConsoleWindow)">
             <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.TextControl">
@@ -1370,7 +1370,7 @@
             Gets or sets the text displayed in this <see cref="T:ConControls.Controls.TextBlock"/> control.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.TextControl.#ctor(ConControls.Controls.IControlContainer)">
+        <member name="M:ConControls.Controls.TextControl.#ctor(ConControls.Controls.IConsoleWindow)">
             <inheritdoc />
         </member>
         <member name="M:ConControls.Controls.TextControl.Dispose(System.Boolean)">

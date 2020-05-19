@@ -124,8 +124,8 @@ namespace ConControls.Controls
             }
         }
         /// <inheritdoc />
-        public ProgressBar(IControlContainer parent)
-            : base(parent) { }
+        public ProgressBar(IConsoleWindow window)
+            : base(window) { }
 
         /// <inheritdoc />
         protected override void DrawClientArea(IConsoleGraphics graphics)
@@ -148,7 +148,7 @@ namespace ConControls.Controls
         Rectangle GetRectangleToFill()
         {
             var clientArea = GetClientArea();
-            clientArea = new Rectangle(Parent.PointToConsole(clientArea.Location), clientArea.Size);
+            clientArea = new Rectangle(Parent?.PointToConsole(clientArea.Location) ?? clientArea.Location, clientArea.Size);
             return orientation switch
             {
                 ProgressOrientation.RightToLeft => GetRightToLeftRectangle(clientArea),

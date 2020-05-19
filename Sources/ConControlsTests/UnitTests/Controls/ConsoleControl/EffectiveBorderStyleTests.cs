@@ -9,7 +9,6 @@
 
 using ConControls.Controls;
 using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -59,7 +58,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             {
                 Focusable = true,
                 DisabledBorderStyle = BorderStyle.SingleLined,
-                FocusedBorderStyle = BorderStyle.Bold
+                FocusedBorderStyle = BorderStyle.Bold,
+                Parent = stubbedWindow
             };
 
             sut.EffBorderStyle.Should().Be(BorderStyle.None);

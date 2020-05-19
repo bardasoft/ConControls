@@ -9,8 +9,6 @@
 
 using System.Drawing;
 using ConControls.Controls;
-using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -32,11 +30,13 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut1 = new Panel(stubbedWindow)
             {
-                Location = l1
+                Location = l1,
+                Parent = stubbedWindow
             };
-            var sut2 = new Panel(sut1)
+            var sut2 = new Panel(stubbedWindow)
             {
-                Location = l2
+                Location = l2,
+                Parent = sut1
             };
 
             var clientPoint = new Point(123, 456);

@@ -11,7 +11,6 @@ using System;
 using System.Drawing;
 using ConControls.Controls;
 using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -83,7 +82,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new StubbedConsoleControl(stubbedWindow)
             {
-                Area = new Rectangle(1, 2, 3, 4)
+                Area = new Rectangle(1, 2, 3, 4),
+                Parent = stubbedWindow
             };
 
             bool borderDrawn = false;

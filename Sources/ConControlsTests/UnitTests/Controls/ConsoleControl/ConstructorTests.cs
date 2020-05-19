@@ -24,7 +24,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             _ = new StubbedConsoleControl();
         }
         [TestMethod]
-        public void ConsoleControl_CompletelyInitialized_AddedToParent()
+        public void ConsoleControl_CompletelyInitialized_NoParentYet()
         {
             const int cursorSize = 50;
             const ConsoleColor foreground = ConsoleColor.Magenta;
@@ -42,7 +42,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             };
 
             var sut = new StubbedConsoleControl(stubbedWindow);
-            sut.Visible.Should().BeTrue();
+            sut.Visible.Should().BeFalse();
+            sut.Enabled.Should().BeFalse();
             sut.CanFocus.Should().BeFalse();
             sut.Name.Should().Be(nameof(StubbedConsoleControl));
             sut.CursorSize.Should().Be(cursorSize);
@@ -50,7 +51,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             sut.BackgroundColor.Should().Be(background);
             sut.BorderColor.Should().Be(borderColor);
             sut.BorderStyle.Should().Be(borderStyle);
-            sut.Parent.Should().Be(stubbedWindow);
+            sut.Parent.Should().BeNull();
+
+            sut.Parent = stubbedWindow;
             stubbedWindow.KeyEventEvent.Should().NotBeNull();
             stubbedWindow.MouseEventEvent.Should().NotBeNull();
             stubbedWindow.Controls.Should().Contain(sut);

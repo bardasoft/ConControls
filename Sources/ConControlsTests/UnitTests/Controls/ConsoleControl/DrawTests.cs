@@ -10,7 +10,6 @@
 using System;
 using System.Drawing;
 using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -85,7 +84,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             {
                 GetGraphics = () => graphics
             };
-            var sut = new StubbedConsoleControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow) {Parent = stubbedWindow};
+            flushed = false;
             stubbedWindow.GetGraphics = () => null;
             sut.ResetMethodCount();
             sut.Draw(graphics);
@@ -106,7 +106,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             {
                 GetGraphics = () => graphics
             };
-            var sut = new StubbedConsoleControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow) {Parent = stubbedWindow};
             sut.ResetMethodCount();
             flushed = false;
             sut.Draw();

@@ -25,7 +25,7 @@ namespace ConControlsTests.UnitTests.Controls.ProgressBar
                 if (character == ConControls.Controls.ProgressBar.DefaultProgressChar) drawn += 1;
             };
 
-            var sut = new ConControls.Controls.ProgressBar(window) {Size = new Size(10,10)};
+            var sut = new ConControls.Controls.ProgressBar(window) {Parent = window, Size = new Size(10,10)};
             int raised = 0;
             sut.OrientationChanged += (sender, e) =>
             {

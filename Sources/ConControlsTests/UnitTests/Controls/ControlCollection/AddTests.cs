@@ -42,6 +42,7 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         {
             using var stubbedWindow = new StubbedWindow();
             var control = new StubbedConsoleControl(stubbedWindow);
+            stubbedWindow.Controls.Add(control);
             stubbedWindow.Controls.Count.Should().Be(1);
             stubbedWindow.Controls[0].Should().BeSameAs(control);
         }

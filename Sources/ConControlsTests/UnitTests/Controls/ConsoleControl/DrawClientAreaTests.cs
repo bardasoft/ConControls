@@ -49,9 +49,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             };
 
             bool inhibitLogged = false;
-            var sut = new StubbedConsoleControl(stubbedWindow);
-            var child1 = new StubbedConsoleControl(sut);
-            var child2 = new StubbedConsoleControl(sut);
+            var sut = new StubbedConsoleControl(stubbedWindow){ Parent = stubbedWindow};
+            var child1 = new StubbedConsoleControl(stubbedWindow){ Parent = sut};
+            var child2 = new StubbedConsoleControl(stubbedWindow){ Parent = sut};
             child1.ResetMethodCount();
             child2.ResetMethodCount();
             using var logger = new TestLogger(CheckDrawLog);
@@ -72,11 +72,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new StubbedConsoleControl(stubbedWindow)
             {
-                Area = new Rectangle(1, 2, 3, 4)
+                Area = new Rectangle(1, 2, 3, 4),
+                Parent = stubbedWindow
             };
 
-            var child1 = new StubbedConsoleControl(sut);
-            var child2 = new StubbedConsoleControl(sut);
+            var child1 = new StubbedConsoleControl(stubbedWindow) { Parent = sut};
+            var child2 = new StubbedConsoleControl(stubbedWindow){ Parent = sut};
             child1.ResetMethodCount();
             child2.ResetMethodCount();
             sut.DoDrawClientArea(new StubIConsoleGraphics());

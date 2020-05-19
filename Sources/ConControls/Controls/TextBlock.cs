@@ -16,7 +16,7 @@ namespace ConControls.Controls
     public sealed class TextBlock : TextControl
     {
         /// <inheritdoc />
-        public TextBlock(IControlContainer parent)
+        public TextBlock(IConsoleWindow parent)
             : base(parent)
         { }
     }

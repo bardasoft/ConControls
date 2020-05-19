@@ -14,6 +14,6 @@ namespace ConControls.Controls
     public sealed class Panel : ConsoleControl
     {
         /// <inheritdoc />
-        public Panel(IControlContainer parent) : base(parent) { }
+        public Panel(IConsoleWindow window) : base(window) { }
     }
 }

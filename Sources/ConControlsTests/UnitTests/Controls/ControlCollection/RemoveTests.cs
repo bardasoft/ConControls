@@ -47,13 +47,13 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         public void Remove_ForeignControl_Nothing()
         {
             using var stubbedWindow = new StubbedWindow();
-            var control3 = new StubbedConsoleControl(stubbedWindow);
+            var control3 = new StubbedConsoleControl(stubbedWindow) {Parent = stubbedWindow};
             stubbedWindow.Controls.Remove(control3);
             bool called = false;
             // ReSharper disable once UnusedVariable
-            var control1 = new StubbedConsoleControl(stubbedWindow);
+            var control1 = new StubbedConsoleControl(stubbedWindow) { Parent = stubbedWindow };
             // ReSharper disable once UnusedVariable
-            var control2 = new StubbedConsoleControl(stubbedWindow);
+            var control2 = new StubbedConsoleControl(stubbedWindow) { Parent = stubbedWindow };
             stubbedWindow.Controls.ControlCollectionChanged += (sender, e) =>
             {
                 called = true;

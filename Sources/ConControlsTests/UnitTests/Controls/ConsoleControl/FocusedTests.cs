@@ -8,8 +8,6 @@
 #nullable enable
 
 using System;
-using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -43,24 +43,25 @@ namespace ConControlsTests.Examples
                     Area = new Rectangle(1, 1, 50, 20),
                     BorderStyle = BorderStyle.Bold
                 };
+                window.Controls.Add(panel);
 
-                _ = new TextBlock(panel)
+                panel.Controls.Add(new TextBlock(window)
                 {
                     Area = new Rectangle(2, 2, 20, 8),
                     BorderStyle = BorderStyle.DoubleLined,
                     BackgroundColor = ConsoleColor.Blue,
                     ForegroundColor = ConsoleColor.White,
                     Text = $"First block of text.{Environment.NewLine}New line of text."
-                };
-                _ = new TextBlock(panel)
+                });
+                panel.Controls.Add(new TextBlock(window)
                 {
                     Area = new Rectangle(25, 2, 10, 6),
                     BorderStyle = BorderStyle.SingleLined,
                     BackgroundColor = ConsoleColor.DarkGreen,
                     ForegroundColor = ConsoleColor.White,
                     Text = $"Second block of text.{Environment.NewLine}New line of text."
-                };
-                _ = new TextBlock(panel)
+                });
+                panel.Controls.Add(new TextBlock(window)
                 {
                     Area = new Rectangle(2, 11, 46, 7),
                     BorderStyle = BorderStyle.SingleLined,
@@ -69,7 +70,7 @@ namespace ConControlsTests.Examples
                     ForegroundColor = ConsoleColor.Black,
                     Text = $"Disabled bottom block with a longer line and ...{Environment.NewLine}New line of text.",
                     Enabled = false
-                };
+                });
 
                 window.FocusedControl = panel.Controls[0];
             }

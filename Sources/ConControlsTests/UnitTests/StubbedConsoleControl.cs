@@ -57,8 +57,8 @@ namespace ConControlsTests.UnitTests
 
         internal StubbedConsoleControl()
             : this(null!) { }
-        internal StubbedConsoleControl(IControlContainer parent)
-            : base(parent)
+        internal StubbedConsoleControl(IConsoleWindow window)
+            : base(window)
         {
             deferrer = new DisposableBlock(() => OnDeferDrawingDisposed?.Invoke());
         }

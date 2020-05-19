@@ -17,10 +17,10 @@ namespace ConControlsTests.UnitTests
     sealed class StubbedTextControl : TextControl
     {
         /// <inheritdoc />
-        internal StubbedTextControl(IControlContainer parent)
-            : this(parent, null) { }
+        internal StubbedTextControl(IConsoleWindow window)
+            : this(window, null) { }
         /// <inheritdoc />
-        internal StubbedTextControl(IControlContainer parent, IConsoleTextController? textController)
-            : base(parent, textController ?? new StubbedConsoleTextController()) { }
+        internal StubbedTextControl(IConsoleWindow window, IConsoleTextController? textController)
+            : base(window, textController ?? new StubbedConsoleTextController()) { }
     }
 }

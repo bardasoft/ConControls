@@ -53,7 +53,7 @@ namespace ConControls.Controls
         ConsoleColor? disabledBorderColor;
 
         Rectangle area;
-        IControlContainer parent;
+        IControlContainer? parent;
         int inhibitDrawing;
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace ConControls.Controls
         /// </summary>
         public virtual bool Enabled
         {
-            get { lock (Window.SynchronizationLock) return enabled && parent.Enabled; }
+            get { lock (Window.SynchronizationLock) return enabled && (parent?.Enabled ?? false); }
             set
             {
                 lock (Window.SynchronizationLock)
@@ -130,7 +130,7 @@ namespace ConControls.Controls
         /// </summary>
         public virtual bool Visible
         {
-            get { lock (Window.SynchronizationLock) return visible && parent.Visible; }
+            get { lock (Window.SynchronizationLock) return visible && (parent?.Visible ?? false); }
             set
             {
                 lock (Window.SynchronizationLock)
@@ -236,14 +236,14 @@ namespace ConControls.Controls
         /// <summary>
         /// The <see cref="IConsoleWindow"/> that contains this control.
         /// </summary>
-        public IConsoleWindow Window => parent.Window;
+        public IConsoleWindow Window { get; }
         /// <summary>
         /// The parent <see cref="ConsoleControl"/> that contains this control.
         /// The parent must be contained by the same <see cref="IConsoleWindow"/>.
+        /// If this propery is <c>null</c>, the control is not displayed.
         /// </summary>
         /// <exception cref="InvalidOperationException">The parent is not part of the same <see cref="IConsoleWindow"/> or this control is the root element of the window..</exception>
-        /// <exception cref="ArgumentNullException">The parent is <c>null</c>.</exception>
-        public IControlContainer Parent
+        public IControlContainer? Parent
         {
             get { lock(Window.SynchronizationLock) return parent; }
             set
@@ -251,16 +251,13 @@ namespace ConControls.Controls
                 lock (Window.SynchronizationLock)
                 {
                     if (parent == value) return;
-                    if (value == null) throw Exceptions.ControlsMustBeContained();
-                    if (value.Window != Window) throw Exceptions.DifferentWindow();
-                    using (parent.DeferDrawing())
-                    using (value.DeferDrawing())
-                    { 
-                        var oldparent = parent;
-                        parent = value;
-                        oldparent.Controls.Remove(this);
-                        parent.Controls.Add(this);
-                    }
+                    if (value != null && value.Window != Window) throw Exceptions.DifferentWindow();
+
+                    var oldparent = parent;
+                    parent = value;
+
+                    oldparent?.Controls.Remove(this);
+                    parent?.Controls.Add(this);
 
                     OnParentChanged();
                 }
@@ -275,7 +272,7 @@ namespace ConControls.Controls
         /// Determines if the control can currently be redrawn, depending on calls to <see cref="DeferDrawing"/>
         /// to this control or its parents.
         /// </summary>
-        public bool DrawingInhibited => !visible || inhibitDrawing > 0 || parent.DrawingInhibited;
+        public bool DrawingInhibited => !visible || inhibitDrawing > 0 || (parent?.DrawingInhibited ?? true);
         /// <summary>
         /// Gets or sets the cursor position for this control in character coordinates of the console
         /// screen buffer.
@@ -562,11 +559,11 @@ namespace ConControls.Controls
         /// <summary>
         /// Initializes an instance of <see cref="ConsoleControl"/>.
         /// </summary>
-        /// <param name="parent">The parent <see cref="ConsoleControl"/> this control should be placed on.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="parent"/> is <c>null</c>.</exception>
-        private protected ConsoleControl(IControlContainer parent)
+        /// <param name="window">The parent <see cref="IConsoleWindow"/> this control should belong to.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="window"/> is <c>null</c>.</exception>
+        private protected ConsoleControl(IConsoleWindow window)
         {
-            this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
+            Window = window ?? throw new ArgumentNullException(nameof(window));
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             name = GetType().Name;
             cursorSize = Window.CursorSize;
@@ -579,11 +576,9 @@ namespace ConControls.Controls
             borderColor = Window.BorderColor;
             borderStyle = Window.BorderStyle;
 
-            Controls = new ControlCollection(Window);
+            Controls = new ControlCollection(this);
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
-            this.parent.Controls.Add(this);
         }
-
 
         /// <summary>
         /// Disposes of any used resources and disconnects from the <see cref="Window"/>.
@@ -618,9 +613,9 @@ namespace ConControls.Controls
         }
 
         /// <inheritdoc />
-        public Point PointToConsole(Point clientPoint) => Parent.PointToConsole(Point.Add(clientPoint, (Size)Location));
+        public Point PointToConsole(Point clientPoint) => Parent?.PointToConsole(Point.Add(clientPoint, (Size)Location)) ?? clientPoint;
         /// <inheritdoc />
-        public Point PointToClient(Point consolePoint) => Point.Subtract(Parent.PointToClient(consolePoint), (Size)Location);
+        public Point PointToClient(Point consolePoint) => Point.Subtract(Parent?.PointToClient(consolePoint) ?? consolePoint, (Size)Location);
 
         /// <summary>
         /// Invalidates this control to trigger redrawing.
@@ -697,7 +692,7 @@ namespace ConControls.Controls
 
                 var color = EffectiveBackgroundColor;
                 Logger.Log(DebugContext.Control | DebugContext.Drawing, $"drawing background ({color}.");
-                graphics.DrawBackground(color, new Rectangle(Parent.PointToConsole(Location), Size));
+                graphics.DrawBackground(color, new Rectangle(Parent!.PointToConsole(Location), Size));
             }
         }
         /// <summary>
@@ -728,7 +723,7 @@ namespace ConControls.Controls
                 var effectiveBackgroundColor = EffectiveBackgroundColor;
 
                 Logger.Log(DebugContext.Control | DebugContext.Drawing, $"drawing border ({effectiveBorderColor} on {effectiveBackgroundColor}, {effectiveBorderStyle}).");
-                graphics.DrawBorder(effectiveBackgroundColor, effectiveBorderColor, effectiveBorderStyle, new Rectangle(Parent.PointToConsole(Location), Size));
+                graphics.DrawBorder(effectiveBackgroundColor, effectiveBorderColor, effectiveBorderStyle, new Rectangle(Parent!.PointToConsole(Location), Size));
             }
         }
         /// <summary>
@@ -838,10 +833,7 @@ namespace ConControls.Controls
                 using(DeferDrawing())
                 {
                     foreach (var addedControl in e.AddedControls)
-                    {
-                        addedControl.Parent = this;
                         addedControl.AreaChanged += OnControlAreaChanged;
-                    }
 
                     foreach (var removedControl in e.RemovedControls)
                         removedControl.AreaChanged -= OnControlAreaChanged;

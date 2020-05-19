@@ -9,7 +9,6 @@
 
 using System;
 using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -63,7 +62,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             {
                 Focusable = true,
                 DisabledBorderColor = ConsoleColor.Blue,
-                FocusedBorderColor = ConsoleColor.Green
+                FocusedBorderColor = ConsoleColor.Green,
+                Parent = stubbedWindow
             };
 
             sut.EffBorderColor.Should().Be(ConsoleColor.Cyan);

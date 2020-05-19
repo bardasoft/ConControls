@@ -60,7 +60,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             {
                 Focusable = true,
                 DisabledForegroundColor = ConsoleColor.Blue,
-                FocusedForegroundColor = ConsoleColor.Green
+                FocusedForegroundColor = ConsoleColor.Green,
+                Parent = stubbedWindow
             };
 
             sut.EffForeColor.Should().Be(ConsoleColor.Cyan);

@@ -43,7 +43,8 @@ namespace ConControlsTests.UnitTests.Controls.ProgressBar
             var sut = new ConControls.Controls.ProgressBar(window)
             {
                 Orientation = ConControls.Controls.ProgressBar.ProgressOrientation.LeftToRight,
-                Size = new Size(10, 3)
+                Size = new Size(10, 3),
+                Parent = window
             };
             int raised = 0;
             sut.PercentageChanged += (sender, e) =>

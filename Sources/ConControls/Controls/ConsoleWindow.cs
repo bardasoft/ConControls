@@ -282,6 +282,7 @@ namespace ConControls.Controls
                 {
                     foreach (var control in e.AddedControls)
                         control.AreaChanged += OnControlAreaChanged;
+
                     foreach (var control in e.RemovedControls)
                         control.AreaChanged -= OnControlAreaChanged;
                 }

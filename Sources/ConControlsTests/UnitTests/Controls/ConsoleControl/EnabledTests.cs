@@ -22,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 EnabledGet = () => true
             };
 
-            var sut = new StubbedConsoleControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow) {Parent = stubbedWindow};
             sut.Enabled.Should().BeTrue();
             bool eventRaised = false;
             sut.EnabledChanged += (sender, e) =>
@@ -46,7 +46,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                 EnabledGet = () => true
             };
 
-            var sut = new StubbedConsoleControl(stubbedWindow);
+            var sut = new StubbedConsoleControl(stubbedWindow) {Parent = stubbedWindow};
             bool eventRaised = false;
             sut.EnabledChanged += (sender, e) =>
             {

@@ -8,8 +8,6 @@
 #nullable enable
 
 using System;
-using ConControls.Controls.Drawing.Fakes;
-using ConControls.Controls.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -61,7 +59,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             {
                 Focusable = true,
                 DisabledBackgroundColor = ConsoleColor.Blue,
-                FocusedBackgroundColor = ConsoleColor.Green
+                FocusedBackgroundColor = ConsoleColor.Green,
+                Parent = stubbedWindow
             };
 
             sut.EffBackColor.Should().Be(ConsoleColor.Cyan);

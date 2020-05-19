@@ -28,10 +28,11 @@ namespace ConControlsTests.UnitTests.Controls.ProgressBar
                     lastdrawnRect = rect;
             };
 
-            var panel = new Panel(window) {Location = new Point(5, 5)};
-            var sut = new ConControls.Controls.ProgressBar(panel)
+            var panel = new Panel(window) {Location = new Point(5, 5), Parent = window};
+            var sut = new ConControls.Controls.ProgressBar(window)
             {
-                Area = new Rectangle(new Point(5,5), new Size(10, 10))
+                Area = new Rectangle(new Point(5,5), new Size(10, 10)),
+                Parent = panel
             };
 
             sut.Percentage = 0.4;

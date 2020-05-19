@@ -27,7 +27,11 @@ namespace ConControlsTests.UnitTests.Controls.ProgressBar
                 if (character == testChar) drawn += 1;
             };
 
-            var sut = new ConControls.Controls.ProgressBar(window) { Size = new Size(10, 3), Orientation = ConControls.Controls.ProgressBar.ProgressOrientation.LeftToRight};
+            var sut = new ConControls.Controls.ProgressBar(window)
+            {
+                Size = new Size(10, 3), Orientation = ConControls.Controls.ProgressBar.ProgressOrientation.LeftToRight,
+                Parent = window
+            };
             int raised = 0;
             sut.ProgressCharChanged += (sender, e) =>
             {

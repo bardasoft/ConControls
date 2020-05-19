@@ -49,8 +49,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             var graphicsProvider = new StubbedGraphicsProvider();
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
 
-            var t1 = new StubbedTextControl(sut);
-            var t2 = new StubbedTextControl(sut);
+            var t1 = new StubbedTextControl(sut) { Parent = sut };
+            var t2 = new StubbedTextControl(sut) { Parent = sut };
             var eventArgs = new ConsoleKeyEventArgs(new KEY_EVENT_RECORD
             {
                 ControlKeys = ControlKeyStates.NUMLOCK_ON,
@@ -78,8 +78,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             var graphicsProvider = new StubbedGraphicsProvider();
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
 
-            var t1 = new StubbedTextControl(sut);
-            var t2 = new StubbedTextControl(sut);
+            var t1 = new StubbedTextControl(sut) { Parent = sut };
+            var t2 = new StubbedTextControl(sut) { Parent = sut };
             var eventArgs = new ConsoleKeyEventArgs(new KEY_EVENT_RECORD
             {
                 ControlKeys = ControlKeyStates.SCROLLLOCK_ON | ControlKeyStates.SHIFT_PRESSED,

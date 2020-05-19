@@ -18,9 +18,9 @@ namespace ConControlsTests.UnitTests.Controls.ControlCollection
         public void GetEnumerator_WorksCorrectly()
         {
             using var stubbedWindow = new StubbedWindow();
-            var control1 = new StubbedConsoleControl(stubbedWindow);
-            var control2 = new StubbedConsoleControl(stubbedWindow);
-            var control3 = new StubbedConsoleControl(stubbedWindow);
+            var control1 = new StubbedConsoleControl(stubbedWindow) {Parent = stubbedWindow};
+            var control2 = new StubbedConsoleControl(stubbedWindow) { Parent = stubbedWindow };
+            var control3 = new StubbedConsoleControl(stubbedWindow) { Parent = stubbedWindow };
             stubbedWindow.Controls.Should().Equal(control1, control2, control3);
         }
     }

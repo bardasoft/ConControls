@@ -20,8 +20,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
 
-            var sut = new StubbedConsoleControl(stubbedWindow);
-            var child = new StubbedConsoleControl(sut);
+            var sut = new StubbedConsoleControl(stubbedWindow) {Parent = stubbedWindow};
+            var child = new StubbedConsoleControl(stubbedWindow) {Parent = sut};
 
             sut.ResetMethodCount();
             child.Area = new Rectangle(1, 2, 3, 4);

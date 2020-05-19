@@ -50,9 +50,9 @@ namespace ConControls.Controls
         }
 
         /// <inheritdoc />
-        private protected TextControl(IControlContainer parent)
-            : this(parent, null) { }
-        private protected TextControl(IControlContainer parent, IConsoleTextController? textController) : base(parent)
+        private protected TextControl(IConsoleWindow window)
+            : this(window, null) { }
+        private protected TextControl(IConsoleWindow window, IConsoleTextController? textController) : base(window)
         {
             this.textController = textController ?? new ConsoleTextController();
             this.textController.BufferChanged += OnTextControllerBufferChanged;
@@ -91,7 +91,7 @@ namespace ConControls.Controls
                 graphics.CopyCharacters(
                     effectiveBackgroundColor,
                     effectiveForegroundColor,
-                    Parent.PointToConsole(clientArea.Location),
+                    Parent!.PointToConsole(clientArea.Location),
                     textController.Buffer,
                     textController.Size);
             }

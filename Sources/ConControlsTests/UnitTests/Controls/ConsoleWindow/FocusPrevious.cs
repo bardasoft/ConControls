@@ -35,9 +35,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             var graphicsProvider = new StubbedGraphicsProvider();
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
 
-            var c0 = new Panel(sut);
-            var f00 = new StubbedTextControl(c0);
-            _ = new Panel(sut);
+            var c0 = new Panel(sut){Parent = sut};
+            var f00 = new StubbedTextControl(sut) {Parent = c0};
+            sut.Controls.Add(new Panel(sut));
 
             sut.FocusedControl.Should().BeNull();
             sut.FocusPrevious().Should().Be(f00);
@@ -52,7 +52,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             var graphicsProvider = new StubbedGraphicsProvider();
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
 
-            var f0 = new StubbedTextControl(sut);
+            var f0 = new StubbedTextControl(sut) {Parent = sut};
             sut.FocusedControl.Should().BeNull();
             sut.FocusPrevious().Should().Be(f0);
             f0.Enabled = false;
@@ -66,10 +66,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             var graphicsProvider = new StubbedGraphicsProvider();
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
 
-            var c0 = new Panel(sut);
-            var f00 = new StubbedTextControl(c0);
-            var c1 = new Panel(sut);
-            var f10 = new StubbedTextControl(c1);
+            var c0 = new Panel(sut) {Parent = sut};
+            var f00 = new StubbedTextControl(sut) {Parent = c0};
+            var c1 = new Panel(sut) {Parent = sut};
+            var f10 = new StubbedTextControl(sut) {Parent = c1};
 
             sut.FocusedControl.Should().BeNull();
             sut.FocusPrevious().Should().Be(f10);
@@ -85,16 +85,16 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             var graphicsProvider = new StubbedGraphicsProvider();
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
 
-            var c0 = new Panel(sut) { TabOrder = 10 };
-            var f00 = new StubbedTextControl(c0) { TabOrder = 20 };
-            var f01 = new StubbedTextControl(c0) { TabOrder = 10 };
-            var c02 = new Panel(c0) { TabOrder = 15 };
-            var f020 = new StubbedTextControl(c02);
-            _ = new StubbedTextControl(c02) { Enabled = false };
-            var c1 = new Panel(sut) { TabOrder = 5 };
-            var f10 = new StubbedTextControl(c1);
-            var f100 = new StubbedTextControl(f10) { TabOrder = 10 };
-            var f101 = new StubbedTextControl(f10) { TabOrder = 10 };
+            var c0 = new Panel(sut) { Parent = sut, TabOrder = 10 };
+            var f00 = new StubbedTextControl(sut) { Parent = c0, TabOrder = 20 };
+            var f01 = new StubbedTextControl(sut) { Parent = c0, TabOrder = 10 };
+            var c02 = new Panel(sut) { Parent = c0, TabOrder = 15 };
+            var f020 = new StubbedTextControl(sut){ Parent = c02};
+            c02.Controls.Add(new StubbedTextControl(sut) {Enabled = false });
+            var c1 = new Panel(sut) { Parent = sut, TabOrder = 5 };
+            var f10 = new StubbedTextControl(sut){ Parent = c1};
+            var f100 = new StubbedTextControl(sut) { Parent = f10, TabOrder = 10 };
+            var f101 = new StubbedTextControl(sut) { Parent = f10, TabOrder = 10 };
 
             sut.FocusedControl.Should().BeNull();
             sut.FocusPrevious().Should().Be(f00);
