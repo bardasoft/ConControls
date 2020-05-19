@@ -78,7 +78,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                     drawn = true;
                 }
             };
-            var graphicsProvider = new StubIProvideConsoleGraphics
+            var graphicsProvider = new StubbedGraphicsProvider
             {
                 ProvideConsoleOutputHandleINativeCallsSizeFrameCharSets = (handle, consoleApi, size, frameCharSets) =>
                 {

@@ -78,5 +78,16 @@ namespace ConControls.Controls
         /// </summary>
         /// <returns>An <see cref="IConsoleGraphics"/> iterface to draw on this window.</returns>
         IConsoleGraphics GetGraphics();
+
+        /// <summary>
+        /// Selects the next focusable control.
+        /// </summary>
+        /// <returns>The focused control, or <c>null</c> if no control could be focused.</returns>
+        ConsoleControl? FocusNext();
+        /// <summary>
+        /// Selects the previous focusable control.
+        /// </summary>
+        /// <returns>The focused control, or <c>null</c> if no control could be focused.</returns>
+        ConsoleControl? FocusPrevious();
     }
 }

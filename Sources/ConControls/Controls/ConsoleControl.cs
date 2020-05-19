@@ -172,6 +172,11 @@ namespace ConControls.Controls
         public virtual bool CanFocus => false;
 
         /// <summary>
+        /// Gets or sets a number indicating the control's position in the Tab order.
+        /// </summary>
+        public int TabOrder { get; set; }
+
+        /// <summary>
         /// The effective total area of the control.
         /// This is the area the control effectivly fills in the console screen buffer
         /// after applying layout and including borders.

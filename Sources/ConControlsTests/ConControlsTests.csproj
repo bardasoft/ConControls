@@ -129,6 +129,9 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\NameTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConstructorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConsoleControlTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\KeyEventHandling.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\FocusPrevious.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\FocusNext.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\Size.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\PointToClient.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\PointToConsole.cs" />
@@ -159,6 +162,7 @@
     <Compile Include="UnitTests\Helpers\ControlKeyStatesExtensions\ControlKeyStatesExtensionsTests.cs" />
     <Compile Include="UnitTests\StubbedConsoleController.cs" />
     <Compile Include="UnitTests\StubbedNativeCalls.cs" />
+    <Compile Include="UnitTests\StubbedGraphicsProvider.cs" />
     <Compile Include="UnitTests\StubbedWindow.cs" />
     <Compile Include="UnitTests\Helpers\DisposableBlock\DispoableBlockTests.cs" />
     <Compile Include="FileLogger.cs" />

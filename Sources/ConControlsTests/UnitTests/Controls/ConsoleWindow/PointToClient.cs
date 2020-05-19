@@ -8,7 +8,6 @@
 #nullable enable
 
 using System.Drawing;
-using ConControls.Controls.Drawing.Fakes;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,10 +20,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         {
             var consoleListener = new StubbedConsoleController();
             using var api = new StubbedNativeCalls();
-            var graphicsProvider = new StubIProvideConsoleGraphics
-            {
-                ProvideConsoleOutputHandleINativeCallsSizeFrameCharSets = (handle, consoleApi, size, frameCharSets) => new StubIConsoleGraphics()
-            };
+            var graphicsProvider = new StubbedGraphicsProvider();
 
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleListener, graphicsProvider);
             Point p = new Point(12, 34);

@@ -115,6 +115,11 @@
             </summary>
             <returns><c>true</c> if this control can take focues, <c>false</c> if not.</returns>
         </member>
+        <member name="P:ConControls.Controls.ConsoleControl.TabOrder">
+            <summary>
+            Gets or sets a number indicating the control's position in the Tab order.
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.ConsoleControl.Area">
             <summary>
             The effective total area of the control.
@@ -580,6 +585,12 @@
         <member name="M:ConControls.Controls.ConsoleWindow.DeferDrawing">
             <inheritdoc />
         </member>
+        <member name="M:ConControls.Controls.ConsoleWindow.FocusNext">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.ConsoleWindow.FocusPrevious">
+            <inheritdoc />
+        </member>
         <member name="T:ConControls.Controls.ConsoleWindowEventArgs">
             <summary>
             Abstract base class for <see cref="T:System.EventArgs"/> used by the events fired by <see cref="T:ConControls.Controls.IConsoleWindow"/>.
@@ -1043,6 +1054,18 @@
             Provides a <see cref="T:ConControls.Controls.Drawing.IConsoleGraphics"/> to draw on this console window.
             </summary>
             <returns>An <see cref="T:ConControls.Controls.Drawing.IConsoleGraphics"/> iterface to draw on this window.</returns>
+        </member>
+        <member name="M:ConControls.Controls.IConsoleWindow.FocusNext">
+            <summary>
+            Selects the next focusable control.
+            </summary>
+            <returns>The focused control, or <c>null</c> if no control could be focused.</returns>
+        </member>
+        <member name="M:ConControls.Controls.IConsoleWindow.FocusPrevious">
+            <summary>
+            Selects the previous focusable control.
+            </summary>
+            <returns>The focused control, or <c>null</c> if no control could be focused.</returns>
         </member>
         <member name="T:ConControls.Controls.IControlContainer">
             <summary>

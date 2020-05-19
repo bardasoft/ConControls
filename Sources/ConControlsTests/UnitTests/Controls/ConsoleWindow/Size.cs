@@ -9,7 +9,6 @@
 
 using System;
 using System.Drawing;
-using ConControls.Controls.Drawing.Fakes;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -27,10 +26,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             {
                 GetConsoleScreenBufferInfoConsoleOutputHandle = handle => new CONSOLE_SCREEN_BUFFER_INFOEX { Window = new SMALL_RECT(windowSize) }
             };
-            var graphicsProvider = new StubIProvideConsoleGraphics
-            {
-                ProvideConsoleOutputHandleINativeCallsSizeFrameCharSets = (handle, consoleApi, size, frameCharSets) => new StubIConsoleGraphics()
-            };
+            var graphicsProvider = new StubbedGraphicsProvider();
 
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleListener, graphicsProvider);
             sut.Size.Should().Be(windowSize);
@@ -44,10 +40,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             {
                 GetConsoleScreenBufferInfoConsoleOutputHandle = handle => new CONSOLE_SCREEN_BUFFER_INFOEX { Window = new SMALL_RECT(windowSize) }
             };
-            var graphicsProvider = new StubIProvideConsoleGraphics
-            {
-                ProvideConsoleOutputHandleINativeCallsSizeFrameCharSets = (handle, consoleApi, size, frameCharSets) => new StubIConsoleGraphics()
-            };
+            var graphicsProvider = new StubbedGraphicsProvider();
 
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleListener, graphicsProvider);
             sut.Invoking(s => s.Size = new Size(10, 10)).Should().Throw<NotSupportedException>();

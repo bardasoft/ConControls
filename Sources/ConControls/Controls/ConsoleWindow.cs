@@ -315,41 +315,51 @@ namespace ConControls.Controls
                 {
                     var controlKeys = eventArgs.ControlKeys.WithoutSwitches();
                     if (controlKeys == ControlKeyStates.SHIFT_PRESSED)
-                        MoveFocusBackward();
+                        FocusPrevious();
                     else if (controlKeys == ControlKeyStates.None)
-                        MoveFocusForward();
+                        FocusNext();
                 }
             }
         }
-        void MoveFocusForward()
+        /// <inheritdoc />
+        public ConsoleControl? FocusNext()
         {
             var focusableControls = GetFocusableControls(Controls).ToList();
             if (focusedControl == null)
             {
                 FocusedControl = focusableControls.FirstOrDefault();
-                return;
+                return FocusedControl;
             }
 
             FocusedControl = focusableControls.Count > 0
                                  ? focusableControls[(focusableControls.IndexOf(focusedControl) + 1) % focusableControls.Count]
                                  : null;
+            return FocusedControl;
         }
-        void MoveFocusBackward()
+        /// <inheritdoc />
+        public ConsoleControl? FocusPrevious()
         {
             var focusableControls = GetFocusableControls(Controls).ToList();
             if (focusedControl == null)
             {
-                FocusedControl = focusableControls.FirstOrDefault();
-                return;
+                FocusedControl = focusableControls.LastOrDefault();
+                return FocusedControl;
             }
 
             FocusedControl = focusableControls.Count > 0
                                  ? focusableControls[(focusableControls.IndexOf(focusedControl) + focusableControls.Count - 1) % focusableControls.Count]
                                  : null;
+            return FocusedControl;
         }
         static IEnumerable<ConsoleControl> GetFocusableControls(ControlCollection controls)
         {
-            foreach (var control in controls)
+            var orderedControls = controls
+                                  .Select((control, index) => (control, index))
+                                  .OrderBy(x => x.control.TabOrder)
+                                  .ThenBy(x => x.index)
+                                  .Select(x => x.control);
+
+            foreach (var control in orderedControls)
             {
                 if (control.Enabled && control.CanFocus)
                     yield return control;
