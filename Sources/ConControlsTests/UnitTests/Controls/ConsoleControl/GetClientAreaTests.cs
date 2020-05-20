@@ -22,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var stubbedWindow = new StubbedWindow();
 
             Rectangle area = new Rectangle(5, 5, 10, 10);
-            Rectangle expectedClientArea = area;
+            Rectangle expectedClientArea = new Rectangle(0, 0, 10, 10);
             var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Area = area,
@@ -36,7 +36,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var stubbedWindow = new StubbedWindow();
 
             Rectangle area = new Rectangle(5, 5, 10, 10);
-            Rectangle expectedClientArea = new Rectangle(6, 6, 8, 8);
+            Rectangle expectedClientArea = new Rectangle(1, 1, 8, 8);
             var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Area = area,
@@ -50,7 +50,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var stubbedWindow = new StubbedWindow();
 
             Rectangle area = new Rectangle(5, 5, 10, 10);
-            Rectangle expectedClientArea = new Rectangle(6, 6, 8, 8);
+            Rectangle expectedClientArea = new Rectangle(1, 1, 8, 8);
             var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Area = area,
@@ -63,7 +63,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         {
             var stubbedWindow = new StubbedWindow();
             Rectangle area = new Rectangle(5, 5, 10, 10);
-            Rectangle expectedClientArea = new Rectangle(6, 6, 8, 8);
+            Rectangle expectedClientArea = new Rectangle(1, 1, 8, 8);
             var sut = new StubbedConsoleControl(stubbedWindow)
             {
                 Area = area,

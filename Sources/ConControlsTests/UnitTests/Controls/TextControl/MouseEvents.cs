@@ -9,11 +9,12 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
+namespace ConControlsTests.UnitTests.Controls.TextControl
 {
-    public partial class ConsoleTextControllerTests
+    public partial class TextControlTests
     {
-        public void AppendLine_Inconclusive()
+        [TestMethod]
+        public void MouseEvents_Inconclusive()
         {
             Assert.Inconclusive();
         }

@@ -29,14 +29,6 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             sut.CursorSize.Should().Be(cursorSize);
             sut.CursorVisible.Should().BeTrue();
             sut.CursorPosition.Should().Be(Point.Empty);
-
-            textController.BufferChangedEvent.Should().NotBeNull();
-            textController.CaretChangedEvent.Should().NotBeNull();
-            
-            sut.Dispose();
-
-            textController.BufferChangedEvent.Should().BeNull();
-            textController.CaretChangedEvent.Should().BeNull();
         }
     }
 }

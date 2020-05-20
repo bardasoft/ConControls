@@ -60,7 +60,6 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                         return;
                     }
 
-                    cursorSet.Should().BeFalse();
                     visible.Should().BeFalse();
                     size.Should().Be(originalCursorSize);
                     position.Should().Be(Point.Empty);

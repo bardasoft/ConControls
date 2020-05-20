@@ -5,20 +5,20 @@
  *
  */
 
-using System;
 using System.Drawing;
 
 namespace ConControls.Controls.Text
 {
     interface IConsoleTextController
     {
-        event EventHandler? BufferChanged;
-        event EventHandler? CaretChanged;
-        Size Size { get; set; }
-        char[] Buffer { get; }
+        bool Wrap { get; set; }
+        int Width { get; set; }
+        int BufferLineCount { get; }
+        char[] GetCharacters(Rectangle area);
+        int GetLineLength(int line);
         string Text { get; set; }
-        Point CaretPosition { get; set; }
-        bool CaretVisible { get; set; }
-        void Insert(string text);
+        void Insert(Point position, string text);
+        void Remove(Point start, int length);
+        Point ValidateCaret(Point caret);
     }
 }

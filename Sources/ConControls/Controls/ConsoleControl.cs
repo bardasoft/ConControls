@@ -807,8 +807,8 @@ namespace ConControls.Controls
         protected virtual Rectangle GetClientArea()
         {
             return EffectiveBorderStyle == BorderStyle.None
-                       ? Area
-                       : new Rectangle(Area.X + 1, Area.Y + 1, Area.Width - 2, Area.Height - 2);
+                       ? new Rectangle(Point.Empty, Size)
+                       : new Rectangle(1, 1, Area.Width - 2, Area.Height - 2);
         }
 
         /// <summary>

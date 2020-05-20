@@ -1370,10 +1370,29 @@
             Gets or sets the text displayed in this <see cref="T:ConControls.Controls.TextBlock"/> control.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.TextControl.Caret">
+            <summary>
+            Gets or sets the caret position.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.TextControl.Wrap">
+            <summary>
+            Gets or sets wether lines are wrapped or not.
+            </summary>
+        </member>
         <member name="M:ConControls.Controls.TextControl.#ctor(ConControls.Controls.IConsoleWindow)">
             <inheritdoc />
         </member>
-        <member name="M:ConControls.Controls.TextControl.Dispose(System.Boolean)">
+        <member name="M:ConControls.Controls.TextControl.OnAreaChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.TextControl.OnBorderStyleChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.TextControl.OnKeyEvent(System.Object,ConControls.Controls.KeyEventArgs)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.TextControl.OnMouseEvent(System.Object,ConControls.Controls.MouseEventArgs)">
             <inheritdoc />
         </member>
         <member name="M:ConControls.Controls.TextControl.DrawClientArea(ConControls.Controls.Drawing.IConsoleGraphics)">
@@ -1383,6 +1402,12 @@
             <summary>
             Called when the <see cref="P:ConControls.Controls.TextControl.Text"/> property has been changed.
             </summary>
+        </member>
+        <member name="P:ConControls.Controls.Text.ConsoleTextController.Width">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.Text.ConsoleTextController.Remove(System.Drawing.Point,System.Int32)">
+            <inheritdoc />
         </member>
         <member name="T:ConControls.Properties.Resources">
             <summary>

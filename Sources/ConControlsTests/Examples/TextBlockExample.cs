@@ -24,6 +24,16 @@ namespace ConControlsTests.Examples
         public override DebugContext DebugContext => DebugContext.Text;
         public override async Task RunAsync()
         {
+            const string text = @"sample text with some longer
+and
+some shorter
+lines. empty line:
+
+a
+b
+c
+
+end.";
             using var window = new ConsoleWindow
             {
                 Title = "ConControls: TextBlock example"
@@ -45,33 +55,42 @@ namespace ConControlsTests.Examples
                 };
                 window.Controls.Add(panel);
 
-                panel.Controls.Add(new TextBlock(window)
-                {
-                    Area = new Rectangle(2, 2, 20, 8),
-                    BorderStyle = BorderStyle.DoubleLined,
-                    BackgroundColor = ConsoleColor.Blue,
-                    ForegroundColor = ConsoleColor.White,
-                    Text = $"First block of text.{Environment.NewLine}New line of text."
-                });
-                panel.Controls.Add(new TextBlock(window)
-                {
-                    Area = new Rectangle(25, 2, 10, 6),
-                    BorderStyle = BorderStyle.SingleLined,
-                    BackgroundColor = ConsoleColor.DarkGreen,
-                    ForegroundColor = ConsoleColor.White,
-                    Text = $"Second block of text.{Environment.NewLine}New line of text."
-                });
-                panel.Controls.Add(new TextBlock(window)
-                {
-                    Area = new Rectangle(2, 11, 46, 7),
-                    BorderStyle = BorderStyle.SingleLined,
-                    BorderColor = ConsoleColor.Blue,
-                    BackgroundColor = ConsoleColor.White,
-                    ForegroundColor = ConsoleColor.Black,
-                    Text = $"Disabled bottom block with a longer line and ...{Environment.NewLine}New line of text.",
-                    Enabled = false
-                });
-
+                panel.Controls.AddRange(
+                    new TextBlock(window)
+                    {
+                        Area = new Rectangle(2, 2, 10, 6),
+                        BorderStyle = BorderStyle.None,
+                        BackgroundColor = ConsoleColor.Blue,
+                        ForegroundColor = ConsoleColor.White,
+                        Text = text
+                    },
+                    new TextBlock(window)
+                    {
+                        Area = new Rectangle(16, 2, 10, 6),
+                        BorderStyle = BorderStyle.None,
+                        BackgroundColor = ConsoleColor.Blue,
+                        ForegroundColor = ConsoleColor.White,
+                        Wrap = true,
+                        Text = text
+                    },
+                    new TextBlock(window)
+                    {
+                        Area = new Rectangle(2, 10, 10, 6),
+                        BorderStyle = BorderStyle.SingleLined,
+                        BackgroundColor = ConsoleColor.Blue,
+                        ForegroundColor = ConsoleColor.White,
+                        Text = text
+                    },
+                    new TextBlock(window)
+                    {
+                        Area = new Rectangle(14, 10, 10, 6),
+                        BorderStyle = BorderStyle.SingleLined,
+                        Wrap = true,
+                        BackgroundColor = ConsoleColor.Blue,
+                        ForegroundColor = ConsoleColor.White,
+                        Text = text
+                    }
+                );
                 window.FocusedControl = panel.Controls[0];
             }
 

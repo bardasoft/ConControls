@@ -10,6 +10,7 @@ using System.Drawing;
 using ConControls.Controls.Drawing;
 using ConControls.Controls.Text;
 using ConControls.Logging;
+using ConControls.WindowsApi.Types;
 
 namespace ConControls.Controls
 {
@@ -18,9 +19,10 @@ namespace ConControls.Controls
     /// </summary>
     public abstract class TextControl : ConsoleControl
     {
-        string text = string.Empty;
-
         readonly IConsoleTextController textController;
+
+        Point scroll = Point.Empty;
+        Point caret;
 
         /// <summary>
         /// Raised when the <see cref="Text"/> property has been changed.
@@ -37,14 +39,56 @@ namespace ConControls.Controls
         /// </summary>
         public string Text
         {
-            get => text;
+            get
+            {
+                lock (Window.SynchronizationLock) return textController.Text;
+            }
             set
             {
                 lock (Window.SynchronizationLock)
                 {
-                    if (value == text) return;
-                    text = value;
+                    if (value == textController.Text) return;
+                    textController.Text = value;
                     OnTextChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the caret position.
+        /// </summary>
+        public Point Caret
+        {
+            get
+            {
+                lock (Window.SynchronizationLock) return caret;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    var tmp = textController.ValidateCaret(value);
+                    if (value == caret) return;
+                    caret = tmp;
+                    UpdateCursorPosition();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets wether lines are wrapped or not.
+        /// </summary>
+        public bool Wrap
+        {
+            get
+            {
+                lock(Window.SynchronizationLock) return textController.Wrap;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (value == textController.Wrap) return;
+                    textController.Wrap= value;
                 }
             }
         }
@@ -55,18 +99,97 @@ namespace ConControls.Controls
         private protected TextControl(IConsoleWindow window, IConsoleTextController? textController) : base(window)
         {
             this.textController = textController ?? new ConsoleTextController();
-            this.textController.BufferChanged += OnTextControllerBufferChanged;
-            this.textController.CaretChanged += OnTextControllerCaretChanged;
             CursorSize = Window.CursorSize;
             CursorVisible = true;
         }
 
         /// <inheritdoc />
-        protected override void Dispose(bool disposing)
+        protected override void OnAreaChanged()
         {
-            textController.CaretChanged -= OnTextControllerCaretChanged;
-            textController.BufferChanged -= OnTextControllerBufferChanged;
-            base.Dispose(disposing);
+            lock (Window.SynchronizationLock)
+            {
+                textController.Width = GetClientArea().Width;
+                UpdateCursorPosition();
+            }
+
+            base.OnAreaChanged();
+        }
+        /// <inheritdoc />
+        protected override void OnBorderStyleChanged()
+        {
+            lock (Window.SynchronizationLock)
+            {
+                textController.Width = GetClientArea().Width;
+                UpdateCursorPosition();
+            }
+
+            base.OnBorderStyleChanged();
+        }
+
+        /// <inheritdoc />
+        protected override void OnKeyEvent(object sender, KeyEventArgs e)
+        {
+            _ = e ?? throw new ArgumentNullException(nameof(e));
+            if (!(Focused && e.KeyDown))
+            {
+                base.OnKeyEvent(sender, e);
+                return;
+            }
+
+            switch (e.VirtualKey)
+            {
+                case VirtualKey.Up:
+                    MoveCaretUp();
+                    e.Handled = true;
+                    break;
+                case VirtualKey.Down:
+                    MoveCaretDown();
+                    e.Handled = true;
+                    break;
+                case VirtualKey.Left:
+                    MoveCaretLeft();
+                    e.Handled = true;
+                    break;
+                case VirtualKey.Right:
+                    MoveCaretRight();
+                    e.Handled = true;
+                    break;
+                case VirtualKey.Home:
+                    MoveCaretHome(e.ControlKeys.HasFlag(ControlKeyStates.LEFT_CTRL_PRESSED) | e.ControlKeys.HasFlag(ControlKeyStates.RIGHT_CTRL_PRESSED));
+                    e.Handled = true;
+                    break;
+                case VirtualKey.End:
+                    MoveCaretEnd(e.ControlKeys.HasFlag(ControlKeyStates.LEFT_CTRL_PRESSED) | e.ControlKeys.HasFlag(ControlKeyStates.RIGHT_CTRL_PRESSED));
+                    e.Handled = true;
+                    break;
+                case VirtualKey.Prior:
+                    MoveCaretPageUp();
+                    e.Handled = true;
+                    break;
+                case VirtualKey.Next:
+                    MoveCaretPageDown();
+                    e.Handled = true;
+                    break;
+            }
+
+            base.OnKeyEvent(sender, e);
+        }
+        /// <inheritdoc />
+        protected override void OnMouseEvent(object sender, MouseEventArgs e)
+        {
+            _ = e ?? throw new ArgumentNullException(nameof(e));
+
+            if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
+            {
+                var clientArea = GetClientArea();
+                var clientPoint = PointToClient(e.Position);
+                if (clientArea.Contains(clientPoint))
+                {
+                    e.Handled = true;
+                    Caret = Point.Add(Point.Subtract(clientPoint, (Size)clientArea.Location), (Size)scroll);
+                    Focused = true;
+                }
+            }
         }
 
         /// <inheritdoc />
@@ -90,9 +213,9 @@ namespace ConControls.Controls
                 graphics.CopyCharacters(
                     effectiveBackgroundColor,
                     effectiveForegroundColor,
-                    Parent!.PointToConsole(clientArea.Location),
-                    textController.Buffer,
-                    textController.Size);
+                    PointToConsole(clientArea.Location),
+                    textController.GetCharacters(new Rectangle(scroll.X, scroll.Y, clientArea.Width, clientArea.Height)),
+                    clientArea.Size);
             }
         }
 
@@ -104,14 +227,92 @@ namespace ConControls.Controls
             TextChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        void OnTextControllerCaretChanged(object sender, EventArgs e)
+        void UpdateCursorPosition()
         {
-            var rect = GetClientArea();
-            CursorPosition = Point.Add(rect.Location, (Size)textController.CaretPosition);
+            Point caretPosition = Point.Subtract(caret, (Size)scroll);
+            var clientArea = GetClientArea();
+            var cursorPos = Point.Add(caretPosition, (Size)clientArea.Location);
+            if (clientArea.Contains(cursorPos))
+            {
+                CursorPosition = Point.Add(caretPosition, (Size)clientArea.Location);
+                CursorVisible = true;
+
+            }
+            else
+                CursorVisible = false;
         }
-        void OnTextControllerBufferChanged(object sender, EventArgs e)
+        void MoveCaretUp()
         {
-            Invalidate();
+            Caret = new Point(caret.X, caret.Y - 1);
+            ScrollToCaret();
+        }
+        void MoveCaretDown()
+        {
+            Caret = new Point(caret.X, caret.Y + 1);
+            ScrollToCaret();
+        }
+        void MoveCaretLeft()
+        {
+            if (caret == Point.Empty) return;
+            if (caret.X == 0)
+                Caret = new Point(textController.GetLineLength(caret.Y - 1), caret.Y - 1);
+            else
+                Caret = new Point(caret.X - 1, caret.Y);
+            ScrollToCaret();
+        }
+        void MoveCaretRight()
+        {
+            int length = textController.GetLineLength(caret.Y);
+            if (caret.X == length)
+                Caret = new Point(0, caret.Y + 1);
+            else
+                Caret = new Point(caret.X + 1, caret.Y);
+            ScrollToCaret();
+        }
+        void MoveCaretHome(bool ctrl)
+        {
+            Caret = new Point(0, ctrl ? 0 : caret.Y);
+            ScrollToCaret();
+        }
+        void MoveCaretEnd(bool ctrl)
+        {
+            int y = ctrl ? textController.BufferLineCount - 1 : caret.Y;
+            Caret = new Point(textController.GetLineLength(y), y);
+            ScrollToCaret();
+        }
+        void MoveCaretPageUp()
+        {
+            var clientArea = GetClientArea();
+            Caret = new Point(caret.X, caret.Y - clientArea.Height);
+            ScrollToCaret();
+        }
+        void MoveCaretPageDown()
+        {
+            var clientArea = GetClientArea();
+            Caret = new Point(caret.X, caret.Y + clientArea.Height);
+            ScrollToCaret();
+        }
+        void ScrollToCaret()
+        {
+            var clientArea = GetClientArea();
+            int x = scroll.X;
+            if (caret.X - x < 0)
+                x = caret.X;
+            else if (caret.X - x >= clientArea.Width)
+                x = caret.X - clientArea.Width + 1;
+            int y = scroll.Y;
+            if (caret.Y - y < 0)
+                y = caret.Y;
+            else if (caret.Y - y >= clientArea.Height)
+                y = caret.Y - clientArea.Height + 1;
+
+            var nextScroll = new Point(x, y);
+            if (nextScroll != scroll)
+            {
+                scroll = nextScroll;
+                UpdateCursorPosition();
+                Invalidate();
+            }
         }
     }
 }

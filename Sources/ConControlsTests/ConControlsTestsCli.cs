@@ -11,6 +11,7 @@
 // ReSharper disable UnusedMember.Local
 
 using System;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using ConControls.Logging;
@@ -32,6 +33,13 @@ namespace ConControlsTests
         {
             using var fileLogger = new FileLogger("concontrols.log");
             using var consoleLogger = new TestLogger(Console.WriteLine);
+
+            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
+            {
+                string msg = $"Unhandled exception: {e.ExceptionObject}";
+                Console.WriteLine(msg);
+                Debug.WriteLine(msg);
+            };
 
             Console.WriteLine("Starting test.");
             try
