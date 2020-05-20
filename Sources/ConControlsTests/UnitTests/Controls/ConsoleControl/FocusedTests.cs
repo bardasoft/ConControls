@@ -111,7 +111,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             var sut = new StubbedConsoleControl(stubbedWindow)
             {
-                Focusable = true
+                Focusable = true,
+                Parent = stubbedWindow
             };
             focusedControl = sut;
 
@@ -128,8 +129,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             sut.Focused = false;
             sut.Focused.Should().BeFalse();
             focusedControl.Should().BeNull();
-            sut.GetMethodCount(StubbedConsoleControl.MethodOnFocusedChanged).Should().Be(1);
-            eventRaised.Should().BeTrue();
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnFocusedChanged).Should().Be(0);
+            eventRaised.Should().BeFalse();
         }
     }
 }

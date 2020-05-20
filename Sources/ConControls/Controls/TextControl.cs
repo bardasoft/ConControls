@@ -49,7 +49,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the text displayed in this <see cref="TextBlock"/> control.
         /// </summary>
-        public string Text
+        public virtual string Text
         {
             get
             {
@@ -139,7 +139,7 @@ namespace ConControls.Controls
         protected override void OnKeyEvent(object sender, KeyEventArgs e)
         {
             _ = e ?? throw new ArgumentNullException(nameof(e));
-            if (!(Focused && e.KeyDown))
+            if (!(Focused && Enabled && Visible && e.KeyDown) || e.Handled)
             {
                 base.OnKeyEvent(sender, e);
                 return;
@@ -188,6 +188,12 @@ namespace ConControls.Controls
         {
             _ = e ?? throw new ArgumentNullException(nameof(e));
 
+            if (e.Handled || !(Enabled && Visible))
+            {
+                base.OnMouseEvent(sender, e);
+                return;
+            }
+
             if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
             {
                 var clientArea = GetClientArea();
@@ -199,6 +205,8 @@ namespace ConControls.Controls
                     Focused = true;
                 }
             }
+
+            base.OnMouseEvent(sender, e);
         }
 
         /// <inheritdoc />

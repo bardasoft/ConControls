@@ -30,6 +30,37 @@
             The control has a bold-lined border.
             </summary>
         </member>
+        <member name="T:ConControls.Controls.Button">
+            <summary>
+            A button control.
+            </summary>
+        </member>
+        <member name="E:ConControls.Controls.Button.Click">
+            <summary>
+            Raised when the button gets clicked.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.Button.Text">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.Controls.Button.CursorVisible">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.Button.#ctor(ConControls.Controls.IConsoleWindow)">
+            <summary>
+            Creates a new instance of a <see cref="T:ConControls.Controls.Button"/>.
+            </summary>
+            <param name="window">The parent <see cref="T:ConControls.Controls.IConsoleWindow"/> this control should belong to.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="window"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:ConControls.Controls.Button.PerformClick">
+            <summary>
+            Performs a button click (if the control is <see cref="P:ConControls.Controls.ConsoleControl.Enabled"/>).
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.Button.OnKeyEvent(System.Object,ConControls.Controls.KeyEventArgs)">
+            <inheritdoc />
+        </member>
         <member name="T:ConControls.Controls.ConsoleControl">
             <summary>
             Base class for all console controls.
@@ -1348,7 +1379,11 @@
             </summary>
         </member>
         <member name="M:ConControls.Controls.TextBlock.#ctor(ConControls.Controls.IConsoleWindow)">
-            <inheritdoc />
+            <summary>
+            Creates a new <see cref="T:ConControls.Controls.TextBlock"/> instance.
+            </summary>
+            <param name="window">The parent <see cref="T:ConControls.Controls.IConsoleWindow"/> this control should belong to.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="window"/> is <c>null</c>.</exception>
         </member>
         <member name="T:ConControls.Controls.TextControl">
             <summary>

@@ -13,7 +13,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using ConControls.Controls;
 using ConControls.Logging;
-using ConControls.WindowsApi.Types;
+
 // ReSharper disable AssignmentIsFullyDiscarded
 
 namespace ConControlsTests.Examples
@@ -39,12 +39,6 @@ end.";
                 Title = "ConControls: TextBlock example"
             };
             TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
-            window.KeyEvent += (sender, e) =>
-            {
-                if (e.KeyDown && e.VirtualKey == VirtualKey.Escape)
-                    tcs.SetResult(0);
-            };
-
             using(window.DeferDrawing())
             {
                 var panel = new Panel(window)
@@ -55,6 +49,12 @@ end.";
                 };
                 window.Controls.Add(panel);
 
+                var button = new Button(window)
+                    {
+                        Area = new Rectangle(8, 16, 9, 3),
+                        Text = "Close"
+                    };
+                button.Click += (sender, e) => tcs.SetResult(0);
                 panel.Controls.AddRange(
                     new TextBlock(window)
                     {
@@ -90,7 +90,8 @@ end.";
                         ForegroundColor = ConsoleColor.White,
                         Text = text,
                         CursorVisible = false
-                    }
+                    },
+                    button
                 );
                 window.FocusedControl = panel.Controls[0];
             }

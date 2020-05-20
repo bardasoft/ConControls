@@ -38,6 +38,7 @@ namespace ConControls.Controls
         Point cursorPosition;
         int cursorSize;
         bool cursorVisible;
+        bool lastKnownFocused;
 
         ConsoleColor foregroundColor;
         ConsoleColor? focusedForegroundColor;
@@ -151,17 +152,19 @@ namespace ConControls.Controls
         {
             get
             {
-                lock (Window.SynchronizationLock) return Window.FocusedControl == this;
+                lock (Window.SynchronizationLock)
+                    return Window.FocusedControl == this;
             }
             set
             {
                 lock (Window.SynchronizationLock)
                 {
-                    if (value == Focused) return;
                     if (value && !CanFocus)
                         throw Exceptions.CannotFocusUnFocusableControl(GetType().Name);
                     Window.FocusedControl = value ? this : null;
-                    OnFocusedChanged();
+                    if (Focused != lastKnownFocused)
+                        OnFocusedChanged();
+                    lastKnownFocused = Focused;
                 }
             }
         }

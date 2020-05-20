@@ -88,6 +88,11 @@
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ThreadManagement.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\InputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ConsoleControllerTests.cs" />
+    <Compile Include="UnitTests\Controls\Button\PerformClick.cs" />
+    <Compile Include="UnitTests\Controls\Button\MouseEvents.cs" />
+    <Compile Include="UnitTests\Controls\Button\KeyEvents.cs" />
+    <Compile Include="UnitTests\Controls\Button\Constructor.cs" />
+    <Compile Include="UnitTests\Controls\Button\ButtonTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\PointToClient.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\PointToConsole.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\DrawClientAreaTests.cs" />

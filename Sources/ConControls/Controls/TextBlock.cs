@@ -5,6 +5,7 @@
  *
  */
 
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ConControls.Controls
@@ -15,9 +16,13 @@ namespace ConControls.Controls
     [ExcludeFromCodeCoverage]
     public sealed class TextBlock : TextControl
     {
-        /// <inheritdoc />
-        public TextBlock(IConsoleWindow parent)
-            : base(parent)
+        /// <summary>
+        /// Creates a new <see cref="TextBlock"/> instance.
+        /// </summary>
+        /// <param name="window">The parent <see cref="IConsoleWindow"/> this control should belong to.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="window"/> is <c>null</c>.</exception>
+        public TextBlock(IConsoleWindow window)
+            : base(window)
         { }
     }
 }
