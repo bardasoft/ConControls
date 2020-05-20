@@ -18,7 +18,9 @@ namespace ConControlsTests.UnitTests
     sealed class StubbedConsoleTextController : StubIConsoleTextController
     {
         Size size;
-        Point caret;
+        Point caretPosition;
+        bool caretVisible;
+
         internal StubbedConsoleTextController()
         {
             SizeGet = () => size;
@@ -28,12 +30,19 @@ namespace ConControlsTests.UnitTests
                 size = value;
                 BufferChangedEvent?.Invoke(this, EventArgs.Empty);
             };
-            CaretPositionGet = () => caret;
+            CaretPositionGet = () => caretPosition;
             CaretPositionSetPoint = value =>
             {
-                if (value == caret) return;
-                caret = value;
-                CaretPositionChangedEvent?.Invoke(this, EventArgs.Empty);
+                if (value == caretPosition) return;
+                caretPosition = value;
+                CaretChangedEvent?.Invoke(this, EventArgs.Empty);
+            };
+            CaretVisibleGet = () => caretVisible;
+            CaretVisibleSetBoolean = value =>
+            {
+                if (value == caretVisible) return;
+                caretVisible = value;
+                CaretChangedEvent?.Invoke(this, EventArgs.Empty);
             };
             BufferGet = () => new char[size.Width + size.Height];
         }

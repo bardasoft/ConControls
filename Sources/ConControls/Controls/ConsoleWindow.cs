@@ -249,6 +249,7 @@ namespace ConControls.Controls
                     control.Draw(graphics);
                 Logger.Log(DebugContext.Window | DebugContext.Drawing, "flushing.");
                 graphics.Flush();
+                UpdateCursor();
             }
         }
         /// <summary>
@@ -291,8 +292,13 @@ namespace ConControls.Controls
         void OnControlAreaChanged(object sender, EventArgs e) => Invalidate();
         void OnFocusedControlCursorChanged(object sender, EventArgs e)
         {
+            UpdateCursor();
+        }
+        void UpdateCursor()
+        {
             var control = focusedControl;
-            api.SetCursorInfo(consoleController.OutputHandle, control?.CursorVisible ?? false, control?.CursorSize ?? CursorSize, control?.CursorPosition ?? Point.Empty);
+            api.SetCursorInfo(consoleController.OutputHandle, control?.CursorVisible ?? false, control?.CursorSize ?? CursorSize,
+                              control?.PointToConsole(control.CursorPosition) ?? Point.Empty);
         }
         void OnConsoleControllerFocusReceived(object sender, ConsoleFocusEventArgs e)
         {
@@ -390,7 +396,8 @@ namespace ConControls.Controls
             {
                 Logger.Log(DebugContext.Window,
                            $"Received size event: Window = {e.WindowArea} Buffer = {e.BufferSize}");
-                AreaChanged?.Invoke(this, EventArgs.Empty);
+                using(DeferDrawing())
+                    AreaChanged?.Invoke(this, EventArgs.Empty);
             }
         }
     }

@@ -56,7 +56,7 @@ namespace ConControls.Controls
         {
             this.textController = textController ?? new ConsoleTextController();
             this.textController.BufferChanged += OnTextControllerBufferChanged;
-            this.textController.CaretPositionChanged += OnTextControllerCaretPositionChanged;
+            this.textController.CaretChanged += OnTextControllerCaretChanged;
             CursorSize = Window.CursorSize;
             CursorVisible = true;
         }
@@ -64,7 +64,7 @@ namespace ConControls.Controls
         /// <inheritdoc />
         protected override void Dispose(bool disposing)
         {
-            textController.CaretPositionChanged -= OnTextControllerCaretPositionChanged;
+            textController.CaretChanged -= OnTextControllerCaretChanged;
             textController.BufferChanged -= OnTextControllerBufferChanged;
             base.Dispose(disposing);
         }
@@ -104,7 +104,7 @@ namespace ConControls.Controls
             TextChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        void OnTextControllerCaretPositionChanged(object sender, EventArgs e)
+        void OnTextControllerCaretChanged(object sender, EventArgs e)
         {
             var rect = GetClientArea();
             CursorPosition = Point.Add(rect.Location, (Size)textController.CaretPosition);

@@ -13,28 +13,21 @@ namespace ConControls.Controls.Text
     sealed class ConsoleTextController : IConsoleTextController
     {
         public event EventHandler? BufferChanged;
-        public event EventHandler? CaretPositionChanged;
+        public event EventHandler? CaretChanged;
         public Size Size
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get;
+            set;
         }
-        public char[] Buffer => throw new NotImplementedException();
-        public string Text
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
+        public char[] Buffer => new char[Size.Height * Size.Width];
+        public string Text { get; set; } = string.Empty;
         public Point CaretPosition
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get;
+            set;
         }
-        public void Append(string text)
-        {
-            throw new NotImplementedException();
-        }
-        public void AppendLine(string text)
+        public bool CaretVisible { get; set; }
+        public void Insert(string text)
         {
             throw new NotImplementedException();
         }

@@ -31,12 +31,12 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             sut.CursorPosition.Should().Be(Point.Empty);
 
             textController.BufferChangedEvent.Should().NotBeNull();
-            textController.CaretPositionChangedEvent.Should().NotBeNull();
+            textController.CaretChangedEvent.Should().NotBeNull();
             
             sut.Dispose();
 
             textController.BufferChangedEvent.Should().BeNull();
-            textController.CaretPositionChangedEvent.Should().BeNull();
+            textController.CaretChangedEvent.Should().BeNull();
         }
     }
 }

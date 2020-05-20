@@ -160,7 +160,7 @@
     <Compile Include="UnitTests\Controls\Drawing\ConsoleGraphics\ConsoleGraphicsTests.cs" />
     <Compile Include="UnitTests\Controls\Drawing\FrameCharSets\FrameCharSetsTests.cs" />
     <Compile Include="Examples\ProgressBarExample.cs" />
-    <Compile Include="UnitTests\Controls\TextControl\CaretPositionChangedEvent.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\CaretChangedEvent.cs" />
     <Compile Include="UnitTests\Controls\TextControl\BufferChangedEvent.cs" />
     <Compile Include="UnitTests\Controls\TextControl\ConstructAndDispose.cs" />
     <Compile Include="UnitTests\Controls\TextControl\DrawClientAreaTests.cs" />

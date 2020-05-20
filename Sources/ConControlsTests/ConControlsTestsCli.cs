@@ -25,7 +25,7 @@ namespace ConControlsTests
         static async Task RunExampleAsync<T>() where T : Example, new()
         {
             var example = new T();
-            Logger.Context = example.DebugContext;
+            Logger.Context = example.DebugContext | DebugContext.Window;
             await example.RunAsync();
         }
         static async Task Main()

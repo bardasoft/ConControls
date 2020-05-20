@@ -13,12 +13,12 @@ namespace ConControls.Controls.Text
     interface IConsoleTextController
     {
         event EventHandler? BufferChanged;
-        event EventHandler? CaretPositionChanged;
+        event EventHandler? CaretChanged;
         Size Size { get; set; }
         char[] Buffer { get; }
         string Text { get; set; }
         Point CaretPosition { get; set; }
-        void Append(string text);
-        void AppendLine(string text);
+        bool CaretVisible { get; set; }
+        void Insert(string text);
     }
 }
