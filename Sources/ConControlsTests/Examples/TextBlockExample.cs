@@ -88,7 +88,8 @@ end.";
                         Wrap = true,
                         BackgroundColor = ConsoleColor.Blue,
                         ForegroundColor = ConsoleColor.White,
-                        Text = text
+                        Text = text,
+                        CursorVisible = false
                     }
                 );
                 window.FocusedControl = panel.Controls[0];

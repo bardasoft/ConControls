@@ -1365,6 +1365,9 @@
             Returns <c>true</c> for a <see cref="T:ConControls.Controls.TextBlock"/>. This control can be focused.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.TextControl.CursorVisible">
+            <inheritdoc />
+        </member>
         <member name="P:ConControls.Controls.TextControl.Text">
             <summary>
             Gets or sets the text displayed in this <see cref="T:ConControls.Controls.TextBlock"/> control.

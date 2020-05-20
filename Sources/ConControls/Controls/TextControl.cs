@@ -21,6 +21,7 @@ namespace ConControls.Controls
     {
         readonly IConsoleTextController textController;
 
+        bool caretVisible = true, initCursorVisibility = true;
         Point scroll = Point.Empty;
         Point caret;
 
@@ -33,6 +34,17 @@ namespace ConControls.Controls
         /// Returns <c>true</c> for a <see cref="TextBlock"/>. This control can be focused.
         /// </summary>
         public override bool CanFocus => true;
+
+        /// <inheritdoc />
+        public override bool CursorVisible
+        {
+            get => (base.CursorVisible || initCursorVisibility) && caretVisible;
+            set
+            {
+                initCursorVisibility = false;
+                base.CursorVisible = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the text displayed in this <see cref="TextBlock"/> control.
@@ -96,12 +108,9 @@ namespace ConControls.Controls
         /// <inheritdoc />
         private protected TextControl(IConsoleWindow window)
             : this(window, null) { }
-        private protected TextControl(IConsoleWindow window, IConsoleTextController? textController) : base(window)
-        {
+        private protected TextControl(IConsoleWindow window, IConsoleTextController? textController)
+            : base(window) =>
             this.textController = textController ?? new ConsoleTextController();
-            CursorSize = Window.CursorSize;
-            CursorVisible = true;
-        }
 
         /// <inheritdoc />
         protected override void OnAreaChanged()
@@ -235,11 +244,18 @@ namespace ConControls.Controls
             if (clientArea.Contains(cursorPos))
             {
                 CursorPosition = Point.Add(caretPosition, (Size)clientArea.Location);
-                CursorVisible = true;
+                if (!caretVisible)
+                {
+                    caretVisible = true;
+                    OnCursorVisibleChanged();
+                }
 
             }
-            else
-                CursorVisible = false;
+            else if (caretVisible)
+            {
+                caretVisible = false;
+                OnCursorVisibleChanged();
+            }
         }
         void MoveCaretUp()
         {

@@ -145,6 +145,7 @@
     <Compile Include="UnitTests\Controls\ProgressBar\Percentage.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressBarTests.cs" />
     <Compile Include="UnitTests\Controls\TextControl\KeyEvents.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\CursorVisible.cs" />
     <Compile Include="UnitTests\Controls\TextControl\MouseEvents.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\GetLineLength.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ValidateCaret.cs" />
