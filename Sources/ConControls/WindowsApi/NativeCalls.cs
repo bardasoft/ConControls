@@ -88,6 +88,19 @@ namespace ConControls.WindowsApi
             if (!NativeMethods.SetConsoleMode(consoleOutputHandle, outputMode))
                 throw Exceptions.Win32();
         }
+        public void SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, Size size)
+        {
+            if (!NativeMethods.SetConsoleScreenBufferSize(consoleOutputHandle, new COORD(size)))
+                throw Exceptions.Win32();
+        }
+
+        public void SetConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle, Size size)
+        {
+            SMALL_RECT rect = new SMALL_RECT(size);
+            if (!NativeMethods.SetConsoleWindowInfo(consoleOutputHandle, true, ref rect))
+                throw Exceptions.Win32();
+        }
+
         public void SetConsoleTitle(string title)
         {
             if (!NativeMethods.SetConsoleTitle(title))

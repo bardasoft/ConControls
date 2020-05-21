@@ -13,6 +13,8 @@ using System.Drawing;
 using System.Threading.Tasks;
 using ConControls.Controls;
 using ConControls.Logging;
+using ConControls.WindowsApi.Types;
+// ReSharper disable AccessToDisposedClosure
 
 // ReSharper disable AssignmentIsFullyDiscarded
 
@@ -48,6 +50,11 @@ end.";
                     BorderStyle = BorderStyle.Bold
                 };
                 window.Controls.Add(panel);
+                window.KeyEvent += (sender, e) =>
+                {
+                    if (e.VirtualKey == VirtualKey.Escape)
+                        tcs.SetResult(0);
+                };
 
                 var button = new Button(window)
                     {

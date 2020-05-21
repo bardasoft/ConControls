@@ -7,7 +7,6 @@
 
 #nullable enable
 
-using System;
 using System.Drawing;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
@@ -32,18 +31,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             sut.Size.Should().Be(windowSize);
         }
         [TestMethod]
-        public void Size_Set_NotSupportedException()
+        public void Size_Set_Inconclusive()
         {
-            var consoleListener = new StubbedConsoleController();
-            var windowSize = new Size(12, 34);
-            using var api = new StubbedNativeCalls
-            {
-                GetConsoleScreenBufferInfoConsoleOutputHandle = handle => new CONSOLE_SCREEN_BUFFER_INFOEX { Window = new SMALL_RECT(windowSize) }
-            };
-            var graphicsProvider = new StubbedGraphicsProvider();
-
-            using var sut = new ConControls.Controls.ConsoleWindow(api, consoleListener, graphicsProvider);
-            sut.Invoking(s => s.Size = new Size(10, 10)).Should().Throw<NotSupportedException>();
+            Assert.Inconclusive();
         }
     }
 }

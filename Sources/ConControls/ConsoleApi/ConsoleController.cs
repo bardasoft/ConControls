@@ -103,6 +103,8 @@ namespace ConControls.ConsoleApi
                 Logger.Log(dbgctx | DebugContext.Exception, $"Thread failed: {e}");
             }
         }
+
+        [SuppressMessage("Design", "CA1031", Justification = "Listening thread should survive, shouldn't it?")]
         void ReadConsoleInput()
         {
             try
@@ -138,8 +140,7 @@ namespace ConControls.ConsoleApi
             }
             catch (Exception e)
             {
-                Logger.Log(dbgctx, e.ToString());
-                throw;
+                Logger.Log(dbgctx | DebugContext.Exception, e.ToString());
             }
         }
         void OnSizeEvent()

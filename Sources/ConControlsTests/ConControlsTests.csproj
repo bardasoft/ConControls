@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="ConControlsTestsCli.cs" />
     <Compile Include="Examples\Example.cs" />
+    <Compile Include="Examples\WindowSizeExample.cs" />
     <Compile Include="Examples\TextBlockExample.cs" />
     <Compile Include="UnitTests\AssemblySettings.cs" />
     <Compile Include="UnitTests\ConsoleApi\CharInfoExtensions\CharInfoExtensionsTests.cs" />

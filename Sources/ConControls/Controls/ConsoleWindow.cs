@@ -76,7 +76,22 @@ namespace ConControls.Controls
                 var info = api.GetConsoleScreenBufferInfo(consoleController.OutputHandle);
                 return new Size(info.Window.Right - info.Window.Left + 1, info.Window.Bottom - info.Window.Top + 1);
             }
-            set => throw Exceptions.WindowSizeNotSupported();
+            set
+            {
+                lock (SynchronizationLock)
+                {
+                    // temporarily set the window size to the smaller buffer size to avoid errors
+                    var info = api.GetConsoleScreenBufferInfo(consoleController.OutputHandle);
+                    var size = new Size(Math.Min(Math.Min(value.Width, info.BufferSize.X), info.MaximumWindowSize.X),
+                                        Math.Min(Math.Min(value.Height, info.BufferSize.Y), info.MaximumWindowSize.Y));
+                    api.SetConsoleWindowSize(consoleController.OutputHandle, size);
+                    api.SetConsoleScreenBufferSize(consoleController.OutputHandle, value);
+                    info = api.GetConsoleScreenBufferInfo(consoleController.OutputHandle);
+                    size = new Size(Math.Max(0, Math.Min(value.Width, info.MaximumWindowSize.X)), Math.Max(0, Math.Min(value.Height, info.MaximumWindowSize.Y)));
+                    api.SetConsoleWindowSize(consoleController.OutputHandle, size);
+                    Invalidate();
+                }
+            }
         }
         /// <inheritdoc />
         public Rectangle Area => new Rectangle(Point.Empty, Size);

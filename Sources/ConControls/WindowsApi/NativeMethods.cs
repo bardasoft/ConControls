@@ -74,6 +74,12 @@ namespace ConControls.WindowsApi
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SetConsoleTitle(string title);
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool SetConsoleScreenBufferSize(ConsoleOutputHandle outputHandle, [In] COORD size);
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool SetConsoleWindowInfo(ConsoleOutputHandle outputHandle, bool absolute, [In] ref SMALL_RECT rect);
         [DllImport("kernel32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SetStdHandle(int stdHandle, IntPtr handle);

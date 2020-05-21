@@ -25,6 +25,8 @@ namespace ConControls.WindowsApi
         bool SetActiveConsoleScreenBuffer(ConsoleOutputHandle handle);
         void SetConsoleMode(ConsoleInputHandle consoleInputHandle, ConsoleInputModes inputMode);
         void SetConsoleMode(ConsoleOutputHandle consoleOutputHandle, ConsoleOutputModes outputMode);
+        void SetConsoleScreenBufferSize(ConsoleOutputHandle consoleOutputHandle, Size size);
+        void SetConsoleWindowSize(ConsoleOutputHandle consoleOutputHandle, Size size);
         void SetConsoleTitle(string title);
         void SetCursorInfo(ConsoleOutputHandle consoleOutputHandle, bool visible, int size, Point position);
         void SetInputHandle(ConsoleInputHandle inputHandle);
