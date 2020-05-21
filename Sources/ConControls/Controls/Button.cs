@@ -94,5 +94,23 @@ namespace ConControls.Controls {
             }
             base.OnKeyEvent(sender, e);
         }
+
+        /// <inheritdoc />
+        protected override void OnMouseEvent(object sender, MouseEventArgs e)
+        {
+            _ = e ?? throw new ArgumentNullException(paramName: nameof(e));
+
+            var clientPoint = Parent?.PointToClient(e.Position) ?? e.Position;
+            if (!Area.Contains(clientPoint))
+            {
+                base.OnMouseEvent(sender, e);
+                return;
+            }
+
+            if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
+                PerformClick();
+
+            base.OnMouseEvent(sender, e);
+        }
     }
 }

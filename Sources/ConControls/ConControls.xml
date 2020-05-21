@@ -61,6 +61,9 @@
         <member name="M:ConControls.Controls.Button.OnKeyEvent(System.Object,ConControls.Controls.KeyEventArgs)">
             <inheritdoc />
         </member>
+        <member name="M:ConControls.Controls.Button.OnMouseEvent(System.Object,ConControls.Controls.MouseEventArgs)">
+            <inheritdoc />
+        </member>
         <member name="T:ConControls.Controls.ConsoleControl">
             <summary>
             Base class for all console controls.

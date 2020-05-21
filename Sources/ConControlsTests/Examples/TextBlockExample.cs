@@ -58,14 +58,14 @@ end.";
 
                 var button = new Button(window)
                     {
-                        Area = new Rectangle(8, 16, 9, 3),
+                        Area = new Rectangle(0, 15, 9, 3),
                         Text = "Close"
                     };
                 button.Click += (sender, e) => tcs.SetResult(0);
                 panel.Controls.AddRange(
                     new TextBlock(window)
                     {
-                        Area = new Rectangle(2, 2, 10, 6),
+                        Area = new Rectangle(0, 0, 10, 6),
                         BorderStyle = BorderStyle.None,
                         BackgroundColor = ConsoleColor.Blue,
                         ForegroundColor = ConsoleColor.White,
@@ -73,7 +73,7 @@ end.";
                     },
                     new TextBlock(window)
                     {
-                        Area = new Rectangle(16, 2, 10, 6),
+                        Area = new Rectangle(12, 0, 10, 6),
                         BorderStyle = BorderStyle.None,
                         BackgroundColor = ConsoleColor.Blue,
                         ForegroundColor = ConsoleColor.White,
@@ -82,7 +82,7 @@ end.";
                     },
                     new TextBlock(window)
                     {
-                        Area = new Rectangle(2, 10, 10, 6),
+                        Area = new Rectangle(0, 8, 10, 6),
                         BorderStyle = BorderStyle.SingleLined,
                         BackgroundColor = ConsoleColor.Blue,
                         ForegroundColor = ConsoleColor.White,
@@ -90,7 +90,7 @@ end.";
                     },
                     new TextBlock(window)
                     {
-                        Area = new Rectangle(14, 10, 10, 6),
+                        Area = new Rectangle(12, 8, 10, 6),
                         BorderStyle = BorderStyle.SingleLined,
                         Wrap = true,
                         BackgroundColor = ConsoleColor.Blue,

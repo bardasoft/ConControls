@@ -23,12 +23,13 @@ namespace ConControlsTests
     [ExcludeFromCodeCoverage]
     static class ConControlsTestsCli
     {
-        static async Task RunExampleAsync<T>() where T : Example, new()
+        static async Task RunExampleAsync<T>(DebugContext extraContext = DebugContext.None) where T : Example, new()
         {
             var example = new T();
-            Logger.Context = example.DebugContext | DebugContext.Exception | DebugContext.Window;
+            Logger.Context = example.DebugContext | DebugContext.Exception | extraContext;
             await example.RunAsync();
         }
+
         static async Task Main()
         {
             using var fileLogger = new FileLogger("concontrols.log");
@@ -45,8 +46,8 @@ namespace ConControlsTests
             try
             {
                 //await RunExampleAsync<ProgressBarExample>();
-                await RunExampleAsync<TextBlockExample>();
-                //await RunExampleAsync<WindowSizeExample>();
+                //await RunExampleAsync<TextBlockExample>();
+                await RunExampleAsync<WindowSizeExample>();
             }
             catch (Exception e)
             {
