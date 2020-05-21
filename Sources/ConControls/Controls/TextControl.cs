@@ -22,7 +22,7 @@ namespace ConControls.Controls
         readonly IConsoleTextController textController;
 
         bool caretVisible = true, initCursorVisibility = true;
-        Point scroll = Point.Empty;
+        Point scroll;
         Point caret;
 
         /// <summary>
@@ -34,6 +34,29 @@ namespace ConControls.Controls
         /// Returns <c>true</c> for a <see cref="TextBlock"/>. This control can be focused.
         /// </summary>
         public override bool CanFocus => true;
+
+        /// <summary>
+        /// Gets or sets the scroll dimension. The <see cref="Point.X"/> part of this <see cref="Point"/> defines
+        /// the number of character columns scrolled to the right, and the <see cref="Point.Y"/> part defines the
+        /// number of character rows scrolled down.
+        /// </summary>
+        public virtual Point Scroll
+        {
+            get
+            {
+                lock (Window.SynchronizationLock) return scroll;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (value == scroll) return;
+                    scroll = value;
+                    UpdateCursorPosition();
+                    Invalidate();
+                }
+            }
+        }
 
         /// <inheritdoc />
         public override bool CursorVisible
@@ -190,16 +213,28 @@ namespace ConControls.Controls
 
             if (e.Handled || !(Enabled && Visible)) return;
 
-            if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
+            var clientArea = GetClientArea();
+            var clientPoint = PointToClient(e.Position);
+            if (!new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
             {
-                var clientArea = GetClientArea();
-                var clientPoint = PointToClient(e.Position);
-                if (new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
-                {
+                base.OnMouseEvent(sender, e);
+                return;
+            }
+
+            switch (e.Kind)
+            {
+                case MouseEventFlags.Wheeled:
+                    ScrollVertically(e.Scroll);
+                    break;
+                case MouseEventFlags.WheeledHorizontally:
+                    ScrollHoritzontically(e.Scroll);
+                    break;
+                default:
+                    if (e.ButtonState != MouseButtonStates.LeftButtonPressed) break;
                     e.Handled = true;
                     Caret = Point.Add(clientPoint, (Size)scroll);
                     Focused = true;
-                }
+                    break;
             }
 
             base.OnMouseEvent(sender, e);
@@ -259,6 +294,20 @@ namespace ConControls.Controls
                 caretVisible = false;
                 OnCursorVisibleChanged();
             }
+        }
+        void ScrollVertically(int delta)
+        {
+            int y = scroll.Y - delta / 120;
+            y = Math.Max(0, y);
+            y = Math.Min(textController.BufferLineCount - 1, y);
+            Scroll = new Point(scroll.X, y);
+        }
+        void ScrollHoritzontically(int delta)
+        {
+            int x = scroll.X - delta / 120;
+            x = Math.Max(0, x);
+            x = Math.Min(textController.MaxLineLength - 1, x);
+            Scroll = new Point(x, scroll.Y);
         }
         void MoveCaretUp()
         {
@@ -325,13 +374,7 @@ namespace ConControls.Controls
             else if (caret.Y - y >= clientArea.Height)
                 y = caret.Y - clientArea.Height + 1;
 
-            var nextScroll = new Point(x, y);
-            if (nextScroll != scroll)
-            {
-                scroll = nextScroll;
-                UpdateCursorPosition();
-                Invalidate();
-            }
+            Scroll = new Point(x, y);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ConControlsTests
         static async Task RunExampleAsync<T>() where T : Example, new()
         {
             var example = new T();
-            Logger.Context = example.DebugContext | DebugContext.Exception;
+            Logger.Context = example.DebugContext | DebugContext.Exception | DebugContext.Window;
             await example.RunAsync();
         }
         static async Task Main()
@@ -45,8 +45,8 @@ namespace ConControlsTests
             try
             {
                 //await RunExampleAsync<ProgressBarExample>();
-                //await RunExampleAsync<TextBlockExample>();
-                await RunExampleAsync<WindowSizeExample>();
+                await RunExampleAsync<TextBlockExample>();
+                //await RunExampleAsync<WindowSizeExample>();
             }
             catch (Exception e)
             {

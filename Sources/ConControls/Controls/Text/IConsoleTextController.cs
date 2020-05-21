@@ -14,6 +14,7 @@ namespace ConControls.Controls.Text
         bool Wrap { get; set; }
         int Width { get; set; }
         int BufferLineCount { get; }
+        int MaxLineLength { get; }
         char[] GetCharacters(Rectangle area);
         int GetLineLength(int line);
         string Text { get; set; }

@@ -1400,6 +1400,13 @@
             Returns <c>true</c> for a <see cref="T:ConControls.Controls.TextBlock"/>. This control can be focused.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.TextControl.Scroll">
+            <summary>
+            Gets or sets the scroll dimension. The <see cref="P:System.Drawing.Point.X"/> part of this <see cref="T:System.Drawing.Point"/> defines
+            the number of character columns scrolled to the right, and the <see cref="P:System.Drawing.Point.Y"/> part defines the
+            number of character rows scrolled down.
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.TextControl.CursorVisible">
             <inheritdoc />
         </member>
@@ -1600,6 +1607,11 @@
         <member name="T:ConControls.WindowsApi.Types.MouseButtonStates">
             <summary>
             The states of the mouse buttons.
+            </summary>
+        </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseButtonStates.None">
+            <summary>
+            No mouse button pressed.
             </summary>
         </member>
         <member name="F:ConControls.WindowsApi.Types.MouseButtonStates.LeftButtonPressed">

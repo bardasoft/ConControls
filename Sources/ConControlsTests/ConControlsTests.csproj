@@ -153,6 +153,8 @@
     <Compile Include="UnitTests\Controls\TextControl\KeyEvents.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CursorVisible.cs" />
     <Compile Include="UnitTests\Controls\TextControl\MouseEvents.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\BufferLineCount.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MaxLineLength.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\GetLineLength.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ValidateCaret.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Width.cs" />

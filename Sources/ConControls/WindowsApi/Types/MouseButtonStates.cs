@@ -16,6 +16,10 @@ namespace ConControls.WindowsApi.Types
     public enum MouseButtonStates
     {
         /// <summary>
+        /// No mouse button pressed.
+        /// </summary>
+        None = 0,
+        /// <summary>
         /// The leftmost mouse button.
         /// </summary>
         LeftButtonPressed = 1 << 0,

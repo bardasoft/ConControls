@@ -39,7 +39,7 @@ namespace ConControls.Controls.Text
         int width;
 
         public int BufferLineCount => allLines.Count;
-
+        public int MaxLineLength { get; private set; }
 
         public bool Wrap
         {
@@ -115,6 +115,7 @@ namespace ConControls.Controls.Text
             lines.AddRange(unwrappedLines.Select(l => new Line(l, wrap, width)));
 
             allLines.AddRange(lines.SelectMany(l => l.BufferLines));
+            MaxLineLength = allLines.Count > 0 ? allLines.Max(l => l.Length) : 0;
         }
     }
 }
