@@ -87,12 +87,11 @@ namespace ConControls.Controls.Text
                   .Take(area.Width);
         }
         public int GetLineLength(int line) => allLines.Count > line && line >= 0 ? allLines[line].Length : 0;
-        public void Insert(Point position, string text)
+        public void Append(string text)
         {
             throw new NotImplementedException();
         }
-        /// <inheritdoc />
-        public void Remove(Point start, int length)
+        public void AppendLine(string line)
         {
             throw new NotImplementedException();
         }

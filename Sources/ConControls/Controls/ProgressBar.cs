@@ -147,8 +147,7 @@ namespace ConControls.Controls
         }
         Rectangle GetRectangleToFill()
         {
-            var clientArea = GetClientArea();
-            clientArea = new Rectangle(PointToConsole(clientArea.Location), clientArea.Size);
+            var clientArea = new Rectangle(PointToConsole(Point.Empty), GetClientArea().Size);
             return orientation switch
             {
                 ProgressOrientation.RightToLeft => GetRightToLeftRectangle(clientArea),

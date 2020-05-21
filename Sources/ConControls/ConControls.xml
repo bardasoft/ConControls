@@ -1444,9 +1444,6 @@
         <member name="P:ConControls.Controls.Text.ConsoleTextController.Width">
             <inheritdoc />
         </member>
-        <member name="M:ConControls.Controls.Text.ConsoleTextController.Remove(System.Drawing.Point,System.Int32)">
-            <inheritdoc />
-        </member>
         <member name="T:ConControls.Properties.Resources">
             <summary>
               Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.

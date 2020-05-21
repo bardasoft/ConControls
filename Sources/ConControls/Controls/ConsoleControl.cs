@@ -12,6 +12,7 @@ using System.Threading;
 using ConControls.Controls.Drawing;
 using ConControls.Helpers;
 using ConControls.Logging;
+using ConControls.WindowsApi.Types;
 
 namespace ConControls.Controls
 {
@@ -616,9 +617,9 @@ namespace ConControls.Controls
         }
 
         /// <inheritdoc />
-        public Point PointToConsole(Point clientPoint) => Parent?.PointToConsole(Point.Add(clientPoint, (Size)Location)) ?? clientPoint;
+        public Point PointToConsole(Point clientPoint) => Parent?.PointToConsole(Point.Add(clientPoint, (Size)Point.Add(Location, (Size)GetClientArea().Location))) ?? clientPoint;
         /// <inheritdoc />
-        public Point PointToClient(Point consolePoint) => Point.Subtract(Parent?.PointToClient(consolePoint) ?? consolePoint, (Size)Location);
+        public Point PointToClient(Point consolePoint) => Point.Subtract(Parent?.PointToClient(consolePoint) ?? consolePoint, (Size)Point.Add(Location, (Size)GetClientArea().Location));
 
         /// <summary>
         /// Invalidates this control to trigger redrawing.
@@ -963,7 +964,23 @@ namespace ConControls.Controls
         /// </summary>
         /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
         /// <param name="e">The event details.</param>
-        protected virtual void OnMouseEvent(object sender, MouseEventArgs e) { }
+        protected virtual void OnMouseEvent(object sender, MouseEventArgs e)
+        {
+            _ = e ?? throw new ArgumentNullException(nameof(e));
+
+            if (e.Handled || !(Enabled && Visible && CanFocus)) return;
+
+            if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
+            {
+                var clientArea = GetClientArea();
+                var clientPoint = PointToClient(e.Position);
+                if (new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
+                {
+                    e.Handled = true;
+                    Focused = true;
+                }
+            }
+        }
         void OnWindowMouseEvent(object sender, MouseEventArgs e)
         {
             lock (Window.SynchronizationLock)

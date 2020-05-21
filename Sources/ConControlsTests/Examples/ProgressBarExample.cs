@@ -75,6 +75,8 @@ namespace ConControlsTests.Examples
                 Orientation = ProgressBar.ProgressOrientation.BottomToTop
             };
 
+            window.Controls.AddRange(l2r, r2l, t2b, b2t);
+
             int i = 0;
             while(await Task.WhenAny(tcs.Task, Task.Delay(50)) != tcs.Task)
             {

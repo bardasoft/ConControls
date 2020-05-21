@@ -188,20 +188,16 @@ namespace ConControls.Controls
         {
             _ = e ?? throw new ArgumentNullException(nameof(e));
 
-            if (e.Handled || !(Enabled && Visible))
-            {
-                base.OnMouseEvent(sender, e);
-                return;
-            }
+            if (e.Handled || !(Enabled && Visible)) return;
 
             if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
             {
                 var clientArea = GetClientArea();
                 var clientPoint = PointToClient(e.Position);
-                if (clientArea.Contains(clientPoint))
+                if (new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
                 {
                     e.Handled = true;
-                    Caret = Point.Add(Point.Subtract(clientPoint, (Size)clientArea.Location), (Size)scroll);
+                    Caret = Point.Add(clientPoint, (Size)scroll);
                     Focused = true;
                 }
             }
@@ -230,7 +226,7 @@ namespace ConControls.Controls
                 graphics.CopyCharacters(
                     effectiveBackgroundColor,
                     effectiveForegroundColor,
-                    PointToConsole(clientArea.Location),
+                    PointToConsole(Point.Empty),
                     textController.GetCharacters(new Rectangle(scroll.X, scroll.Y, clientArea.Width, clientArea.Height)),
                     clientArea.Size);
             }
@@ -247,11 +243,10 @@ namespace ConControls.Controls
         void UpdateCursorPosition()
         {
             Point caretPosition = Point.Subtract(caret, (Size)scroll);
-            var clientArea = GetClientArea();
-            var cursorPos = Point.Add(caretPosition, (Size)clientArea.Location);
-            if (clientArea.Contains(cursorPos))
+            var clientArea = new Rectangle(Point.Empty, GetClientArea().Size);
+            if (clientArea.Contains(caretPosition))
             {
-                CursorPosition = Point.Add(caretPosition, (Size)clientArea.Location);
+                CursorPosition = caretPosition;
                 if (!caretVisible)
                 {
                     caretVisible = true;

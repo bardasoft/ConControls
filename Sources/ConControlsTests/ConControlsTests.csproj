@@ -157,8 +157,7 @@
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ValidateCaret.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Width.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Text.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Insert.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Remove.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\AppendLine.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\GetCharacters.cs" />
     <Compile Include="UnitTests\StubbedTextControl.cs" />
     <Compile Include="UnitTests\StubbedConsoleControl.cs" />
@@ -180,7 +179,7 @@
     <Compile Include="UnitTests\Controls\TextControl\DrawClientAreaTests.cs" />
     <Compile Include="UnitTests\Controls\TextControl\TextControlTests.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Wrap.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Refresh.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Append.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ConsoleTextControllerTests.cs" />
     <Compile Include="UnitTests\Helpers\ControlKeyStatesExtensions\WithoutSwitches.cs" />
     <Compile Include="UnitTests\Helpers\ControlKeyStatesExtensions\ControlKeyStatesExtensionsTests.cs" />

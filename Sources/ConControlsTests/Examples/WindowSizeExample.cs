@@ -54,22 +54,22 @@ namespace ConControlsTests.Examples
                 };
                 var btLarge = new Button(window)
                 {
-                    Area = new Rectangle(8, 0, 11, 3),
+                    Area = new Rectangle(0, 0, 11, 3),
                     Text = " Large "
                 };
                 var btSmall = new Button(window)
                 {
-                    Area = new Rectangle(8, 3, 11, 3),
+                    Area = new Rectangle(0, 3, 11, 3),
                     Text = " Small "
                 };
                 var btWide= new Button(window)
                 {
-                    Area = new Rectangle(8, 6, 11, 3),
+                    Area = new Rectangle(0, 6, 11, 3),
                     Text = " Wide  "
                 };
                 var btLong = new Button(window)
                 {
-                    Area = new Rectangle(8, 9, 11, 3),
+                    Area = new Rectangle(0, 9, 11, 3),
                     Text = " Long  "
                 };
 

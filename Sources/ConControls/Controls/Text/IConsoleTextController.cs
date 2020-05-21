@@ -17,8 +17,8 @@ namespace ConControls.Controls.Text
         char[] GetCharacters(Rectangle area);
         int GetLineLength(int line);
         string Text { get; set; }
-        void Insert(Point position, string text);
-        void Remove(Point start, int length);
+        void Append(string text);
+        void AppendLine(string line);
         Point ValidateCaret(Point caret);
     }
 }

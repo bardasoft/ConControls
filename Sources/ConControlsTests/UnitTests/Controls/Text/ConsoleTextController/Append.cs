@@ -14,7 +14,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
     public partial class ConsoleTextControllerTests
     {
         [TestMethod]
-        public void Insert_Inconclusive()
+        public void Append_Inconclusive()
         {
             Assert.Inconclusive();
         }
