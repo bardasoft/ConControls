@@ -15,17 +15,19 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
     public partial class ConsoleTextControllerTests
     {
         [TestMethod]
-        public void Text_Changed()
+        public void Clear_Cleared()
         {
-            const string text = "hello world!\ngood bye!";
-            var sut = new ConControls.Controls.Text.ConsoleTextController();
+            const string text = "hello world!";
+            var sut = new ConControls.Controls.Text.ConsoleTextController
+            {
+                Width = 5,
+                Wrap = true,
+                Text = text
+            };
+
+            sut.Text.Should().Be(text);
+            sut.Clear();
             sut.Text.Should().BeEmpty();
-            sut.Text = text;
-            sut.Text.Should().Be(text);
-            sut.BufferLineCount.Should().Be(2);
-            sut.Text = text;
-            sut.Text.Should().Be(text);
-            sut.BufferLineCount.Should().Be(2);
         }
     }
 }

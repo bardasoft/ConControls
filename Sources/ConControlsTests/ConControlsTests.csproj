@@ -156,13 +156,12 @@
     <Compile Include="UnitTests\Controls\TextControl\KeyEvents.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CursorVisible.cs" />
     <Compile Include="UnitTests\Controls\TextControl\MouseEvents.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\BufferLineCount.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MaxLineLength.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\GetLineLength.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ValidateCaret.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Append.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Width.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Wrap.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Text.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\GetCharacters.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Clear.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ValidateCaret.cs" />
     <Compile Include="UnitTests\StubbedTextControl.cs" />
     <Compile Include="UnitTests\StubbedConsoleControl.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\MouseEventArgsTests.cs" />
@@ -182,8 +181,7 @@
     <Compile Include="UnitTests\Controls\TextControl\ConstructAndDispose.cs" />
     <Compile Include="UnitTests\Controls\TextControl\DrawClientAreaTests.cs" />
     <Compile Include="UnitTests\Controls\TextControl\TextControlTests.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Wrap.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Append.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\TextProcessingTests.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ConsoleTextControllerTests.cs" />
     <Compile Include="UnitTests\Helpers\ControlKeyStatesExtensions\WithoutSwitches.cs" />
     <Compile Include="UnitTests\Helpers\ControlKeyStatesExtensions\ControlKeyStatesExtensionsTests.cs" />

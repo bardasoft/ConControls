@@ -26,8 +26,16 @@ namespace ConControls.Controls.Text
                     return;
                 }
 
+                if (line.Length == 0)
+                {
+                    BufferLines.Add(string.Empty);
+                    return;
+                }
+
                 for (int i = 0; i < line.Length; i += width)
                     BufferLines.Add(new string(line.Skip(i).Take(width).ToArray()));
+                if (BufferLines[BufferLines.Count - 1].Length == width)
+                    BufferLines.Add(string.Empty);
             }
         }
 
@@ -74,6 +82,7 @@ namespace ConControls.Controls.Text
         }
         public void Clear()
         {
+            text = string.Empty;
             lines.Clear();
             allLines.Clear();
         }
@@ -94,6 +103,7 @@ namespace ConControls.Controls.Text
         public int GetLineLength(int line) => allLines.Count > line && line >= 0 ? allLines[line].Length : 0;
         public void Append(string content)
         {
+            if (string.IsNullOrEmpty(content)) return;
             text += content;
 
             if (lines.Count > 0)
@@ -108,25 +118,24 @@ namespace ConControls.Controls.Text
             var unwrappedLines = content.Split(new[] { "\r\n" }, StringSplitOptions.None)
                                      .SelectMany(s => s.Split(new[] { "\n" }, StringSplitOptions.None))
                                      .ToArray();
-            lines.AddRange(unwrappedLines.Select(l => new Line(l, wrap, width)));
-            allLines.AddRange(lines.SelectMany(l => l.BufferLines));
-            MaxLineLength = allLines.Count > 0 ? allLines.Max(l => l.Length) : 0;
+            var addedLines = unwrappedLines.Select(l => new Line(l, wrap, width)).ToArray();
+            lines.AddRange(addedLines);
+            allLines.AddRange(addedLines.SelectMany(l => l.BufferLines));
+            MaxLineLength = allLines.Max(l => l.Length);
         }
         public Point ValidateCaret(Point caret)
         {
             int y = Math.Min(Math.Max(0, caret.Y), allLines.Count);
-            if (y >= allLines.Count)
+            if (y == allLines.Count)
                 return new Point(0, allLines.Count);
-            int x = Math.Min(Math.Max(0, caret.X), GetLineLength(y));
+            int x = Math.Min(Math.Max(0, caret.X), GetLineLength(y)-1);
             return new Point(x, y);
         }
         
         void Refresh()
         {
-            lines.Clear();
-            allLines.Clear();
             string content = text;
-            text = string.Empty;
+            Clear();
             Append(content);
         }
     }
