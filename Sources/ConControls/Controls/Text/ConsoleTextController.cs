@@ -72,6 +72,11 @@ namespace ConControls.Controls.Text
                 Refresh();
             }
         }
+        public void Clear()
+        {
+            lines.Clear();
+            allLines.Clear();
+        }
         public char[] GetCharacters(Rectangle area)
         {
             char[] buffer = Enumerable.Repeat('\0', area.Height * area.Width).ToArray();
@@ -87,13 +92,25 @@ namespace ConControls.Controls.Text
                   .Take(area.Width);
         }
         public int GetLineLength(int line) => allLines.Count > line && line >= 0 ? allLines[line].Length : 0;
-        public void Append(string text)
+        public void Append(string content)
         {
-            throw new NotImplementedException();
-        }
-        public void AppendLine(string line)
-        {
-            throw new NotImplementedException();
+            text += content;
+
+            if (lines.Count > 0)
+            {
+                var lastLineEntry= lines[lines.Count - 1];
+                lines.RemoveAt(lines.Count-1);
+                allLines.RemoveRange(allLines.Count - lastLineEntry.BufferLines.Count, lastLineEntry.BufferLines.Count);
+                string lastLine = string.Concat(lastLineEntry.BufferLines);
+                content = lastLine + content;
+            }
+            
+            var unwrappedLines = content.Split(new[] { "\r\n" }, StringSplitOptions.None)
+                                     .SelectMany(s => s.Split(new[] { "\n" }, StringSplitOptions.None))
+                                     .ToArray();
+            lines.AddRange(unwrappedLines.Select(l => new Line(l, wrap, width)));
+            allLines.AddRange(lines.SelectMany(l => l.BufferLines));
+            MaxLineLength = allLines.Count > 0 ? allLines.Max(l => l.Length) : 0;
         }
         public Point ValidateCaret(Point caret)
         {
@@ -108,14 +125,9 @@ namespace ConControls.Controls.Text
         {
             lines.Clear();
             allLines.Clear();
-
-            var unwrappedLines = text.Split(new[] {"\r\n"}, StringSplitOptions.None)
-                                     .SelectMany(s => s.Split(new[] {"\n"}, StringSplitOptions.None))
-                                     .ToArray();
-            lines.AddRange(unwrappedLines.Select(l => new Line(l, wrap, width)));
-
-            allLines.AddRange(lines.SelectMany(l => l.BufferLines));
-            MaxLineLength = allLines.Count > 0 ? allLines.Max(l => l.Length) : 0;
+            string content = text;
+            text = string.Empty;
+            Append(content);
         }
     }
 }

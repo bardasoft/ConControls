@@ -79,6 +79,7 @@
     <Compile Include="Examples\TextBlockExample.cs" />
     <Compile Include="UnitTests\AssemblySettings.cs" />
     <Compile Include="UnitTests\ConsoleApi\CharInfoExtensions\CharInfoExtensionsTests.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleController\SetActiveScreen.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ConstructAndDispose.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleMouseEventArgsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleKeyEventArgsTests.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\NameTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConstructorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConsoleControlTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\SetActiveScreen.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\KeyEventHandling.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FocusPrevious.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FocusNext.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressChar.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Percentage.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressBarTests.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\Append.cs" />
     <Compile Include="UnitTests\Controls\TextControl\KeyEvents.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CursorVisible.cs" />
     <Compile Include="UnitTests\Controls\TextControl\MouseEvents.cs" />
@@ -159,7 +162,6 @@
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ValidateCaret.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Width.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Text.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\AppendLine.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\GetCharacters.cs" />
     <Compile Include="UnitTests\StubbedTextControl.cs" />
     <Compile Include="UnitTests\StubbedConsoleControl.cs" />

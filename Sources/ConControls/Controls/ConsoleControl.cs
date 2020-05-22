@@ -616,6 +616,11 @@ namespace ConControls.Controls
             if (disposed > 0) throw Exceptions.ControlDisposed(name);
         }
 
+        /// <summary>
+        /// Clears (resets states) in derived controls.
+        /// </summary>
+        public virtual void Clear() { }
+
         /// <inheritdoc />
         public Point PointToConsole(Point clientPoint) => Parent?.PointToConsole(Point.Add(clientPoint, (Size)Point.Add(Location, (Size)GetClientArea().Location))) ?? clientPoint;
         /// <inheritdoc />

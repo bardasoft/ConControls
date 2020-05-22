@@ -40,10 +40,18 @@ namespace ConControlsTests.Examples
                     longer = new Size(smallX, largeY),
                     wider = new Size(largeX, smallY);
 
+                bool active = true;
+
                 window.KeyEvent += (sender, e) =>
                 {
+                    if (!e.KeyDown) return;
                     if (e.VirtualKey == VirtualKey.Escape)
                         tcs.SetResult(0);
+                    if (e.VirtualKey == VirtualKey.F1)
+                    {
+                        active = !active;
+                        window.SetActiveScreen(active);
+                    }
                 };
 
                 var panel = new Panel(window)

@@ -18,8 +18,8 @@ namespace ConControls.Controls.Text
         char[] GetCharacters(Rectangle area);
         int GetLineLength(int line);
         string Text { get; set; }
-        void Append(string text);
-        void AppendLine(string line);
+        void Clear();
+        void Append(string content);
         Point ValidateCaret(Point caret);
     }
 }

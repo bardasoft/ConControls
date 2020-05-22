@@ -74,6 +74,15 @@ namespace ConControls.Controls
         object SynchronizationLock { get; }
 
         /// <summary>
+        /// Sets the active screen buffer.
+        /// If <paramref name="show"/> is <c>true</c>, this window is set
+        /// as active screen buffer. If <paramref name="show"/> is <c>false</c>, the
+        /// original console screen buffer will be activated.
+        /// </summary>
+        /// <param name="show"><c>true</c> to show this window, <c>false</c> to display the original console screen buffer of the process.</param>
+        void SetActiveScreen(bool show);
+
+        /// <summary>
         /// Provides a <see cref="IConsoleGraphics"/> to draw on this console window.
         /// </summary>
         /// <returns>An <see cref="IConsoleGraphics"/> iterface to draw on this window.</returns>

@@ -244,7 +244,12 @@ namespace ConControls.Controls
 
         /// <inheritdoc />
         public IConsoleGraphics GetGraphics() => graphicsProvider.Provide(consoleController.OutputHandle, api, Size, frameCharSets);
-        
+
+        /// <inheritdoc />
+        public void SetActiveScreen(bool show)
+        {
+            lock (SynchronizationLock) consoleController.SetActiveScreen(show);
+        }
         void Draw()
         {
             Logger.Log(DebugContext.Window | DebugContext.Drawing, "called.");

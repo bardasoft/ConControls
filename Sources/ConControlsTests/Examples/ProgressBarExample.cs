@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using ConControls.Controls;
 using ConControls.Logging;
 using ConControls.WindowsApi.Types;
+// ReSharper disable AccessToDisposedClosure
 
 namespace ConControlsTests.Examples
 {
@@ -29,10 +30,17 @@ namespace ConControlsTests.Examples
                 BackgroundColor = ConsoleColor.Blue
             };
             TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
+            bool active = true;
             window.KeyEvent += (sender, e) =>
             {
+                if (!e.KeyDown) return;
                 if (e.KeyDown && e.VirtualKey == VirtualKey.Escape)
                     tcs.SetResult(0);
+                if (e.VirtualKey == VirtualKey.F1)
+                {
+                    active = !active;
+                    window.SetActiveScreen(active);
+                }
             };
             var l2r = new ProgressBar(window)
             {

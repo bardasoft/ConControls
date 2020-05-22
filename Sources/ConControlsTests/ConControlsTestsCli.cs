@@ -46,8 +46,8 @@ namespace ConControlsTests
             try
             {
                 //await RunExampleAsync<ProgressBarExample>();
-                //await RunExampleAsync<TextBlockExample>();
-                await RunExampleAsync<WindowSizeExample>();
+                await RunExampleAsync<TextBlockExample>();
+                //await RunExampleAsync<WindowSizeExample>();
             }
             catch (Exception e)
             {

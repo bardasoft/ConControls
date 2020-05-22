@@ -23,6 +23,7 @@ namespace ConControls.ConsoleApi
         readonly ManualResetEvent stopEvent = new ManualResetEvent(false);
         readonly ConsoleOutputHandle originalOutputHandle;
         readonly ConsoleInputModes originalInputMode;
+        readonly string originalTitle;
         
         int disposed;
 
@@ -46,6 +47,7 @@ namespace ConControls.ConsoleApi
 
             using var inputHandle = this.api.GetInputHandle();
             originalInputMode = this.api.GetConsoleMode(inputHandle);
+            originalTitle = this.api.GetConsoleTitle();
 
             this.api.SetConsoleMode(inputHandle,
                                     ConsoleInputModes.EnableWindowInput |
@@ -65,7 +67,13 @@ namespace ConControls.ConsoleApi
             using var inputHandle = api.GetInputHandle();
             api.SetConsoleMode(inputHandle, originalInputMode);
             api.SetActiveConsoleScreenBuffer(originalOutputHandle);
+            api.SetConsoleTitle(originalTitle);
             originalOutputHandle.Dispose();
+        }
+
+        public void SetActiveScreen(bool set)
+        {
+            api.SetActiveConsoleScreenBuffer(set ? OutputHandle : originalOutputHandle);
         }
 
         [SuppressMessage("Design", "CA1031", Justification = "Leave thread cleanly.")]

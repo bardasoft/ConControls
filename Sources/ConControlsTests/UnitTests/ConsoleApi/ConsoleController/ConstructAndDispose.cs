@@ -43,11 +43,25 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
         public void ConstructAndDispose_BufferAndModeSetCorrectly()
         {
             const ConsoleInputModes originalInputMode = ConsoleInputModes.EnableInsertMode | ConsoleInputModes.EnableAutoPosition;
+            const string originalTitle = "original console title string";
 
-            bool inputSet = false, outputSet = false, outputModeSet = false;
-            bool inputReset = false, outputReset = false;
+            bool inputSet = false, outputSet = false, outputModeSet = false, titleGet = false;
+            bool inputReset = false, outputReset = false, titleSet = false;
 
-            using var api = new StubbedNativeCalls();
+            using var api = new StubbedNativeCalls
+            {
+                GetConsoleTitle = () =>
+                {
+                    titleGet = true;
+                    return originalTitle;
+                },
+                SetConsoleTitleString = t =>
+                {
+                    t.Should().Be(originalTitle);
+                    titleSet = true;
+                }
+            };
+            
             api.GetConsoleModeConsoleInputHandle = handle =>
             {
                 inputSet.Should().BeFalse();
@@ -98,10 +112,12 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
             inputSet.Should().BeTrue();
             outputSet.Should().BeTrue();
             outputModeSet.Should().BeTrue();
+            titleGet.Should().BeTrue();
 
             sut.Dispose();
             inputReset.Should().BeTrue();
             outputReset.Should().BeTrue();
+            titleSet.Should().BeTrue();
         }
     }
 }

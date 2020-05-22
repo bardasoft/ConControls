@@ -323,6 +323,11 @@
             </summary>
             <exception cref="T:System.ObjectDisposedException">The containing <see cref="T:ConControls.Controls.IConsoleWindow"/> has already been disposed of.</exception>
         </member>
+        <member name="M:ConControls.Controls.ConsoleControl.Clear">
+            <summary>
+            Clears (resets states) in derived controls.
+            </summary>
+        </member>
         <member name="M:ConControls.Controls.ConsoleControl.PointToConsole(System.Drawing.Point)">
             <inheritdoc />
         </member>
@@ -608,6 +613,9 @@
             <inheritdoc />
         </member>
         <member name="M:ConControls.Controls.ConsoleWindow.GetGraphics">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.ConsoleWindow.SetActiveScreen(System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:ConControls.Controls.ConsoleWindow.Invalidate">
@@ -1098,6 +1106,15 @@
             A synchronization object to synchronize conosle operations.
             </summary>
         </member>
+        <member name="M:ConControls.Controls.IConsoleWindow.SetActiveScreen(System.Boolean)">
+            <summary>
+            Sets the active screen buffer.
+            If <paramref name="show"/> is <c>true</c>, this window is set
+            as active screen buffer. If <paramref name="show"/> is <c>false</c>, the
+            original console screen buffer will be activated.
+            </summary>
+            <param name="show"><c>true</c> to show this window, <c>false</c> to display the original console screen buffer of the process.</param>
+        </member>
         <member name="M:ConControls.Controls.IConsoleWindow.GetGraphics">
             <summary>
             Provides a <see cref="T:ConControls.Controls.Drawing.IConsoleGraphics"/> to draw on this console window.
@@ -1430,6 +1447,27 @@
         </member>
         <member name="M:ConControls.Controls.TextControl.#ctor(ConControls.Controls.IConsoleWindow)">
             <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.TextControl.Append(System.String)">
+            <summary>
+            Appends the given <paramref name="text"/> to the current text.
+            If the caret is positioned at the end of the current text, it will
+            be placed at the end of the appended text and <see cref="M:ConControls.Controls.TextControl.ScrollToCaret"/>
+            will be called after to make sure the appended text is shown.
+            </summary>
+            <param name="text">The string to append to the current text.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="text"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:ConControls.Controls.TextControl.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.TextControl.ScrollToCaret">
+            <summary>
+            Scrolls the content so that the caret (cursor) becomes visible.
+            If the caret already is inside the displayed text, the scrolling will not be changed.
+            If the caret is outside the displayed text, scrolling is adjusted so that the caret
+            just appears in the client area.
+            </summary>
         </member>
         <member name="M:ConControls.Controls.TextControl.OnAreaChanged">
             <inheritdoc />

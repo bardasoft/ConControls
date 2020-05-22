@@ -135,6 +135,67 @@ namespace ConControls.Controls
             : base(window) =>
             this.textController = textController ?? new ConsoleTextController();
 
+        /// <summary>
+        /// Appends the given <paramref name="text"/> to the current text.
+        /// If the caret is positioned at the end of the current text, it will
+        /// be placed at the end of the appended text and <see cref="ScrollToCaret"/>
+        /// will be called after to make sure the appended text is shown.
+        /// </summary>
+        /// <param name="text">The string to append to the current text.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="text"/> is <c>null</c>.</exception>
+        public void Append(string text)
+        {
+            _ = text ?? throw new ArgumentNullException(paramName: nameof(text));
+            lock (Window.SynchronizationLock)
+            {
+                bool caretAtEnd = caret.Y >= textController.BufferLineCount && caret.X == textController.GetLineLength(caret.Y);
+                textController.Append(text);
+                if (!caretAtEnd) return;
+                Caret = new Point(textController.GetLineLength(textController.BufferLineCount), textController.BufferLineCount);
+                ScrollToCaret();
+            }
+        }
+        /// <inheritdoc />
+        public override void Clear()
+        {
+            lock (Window.SynchronizationLock)
+            {
+                using(DeferDrawing())
+                {
+                    textController.Clear();
+                    Caret = Point.Empty;
+                    Scroll = Point.Empty;
+                }
+            }
+            base.Clear();
+        }
+        /// <summary>
+        /// Scrolls the content so that the caret (cursor) becomes visible.
+        /// If the caret already is inside the displayed text, the scrolling will not be changed.
+        /// If the caret is outside the displayed text, scrolling is adjusted so that the caret
+        /// just appears in the client area.
+        /// </summary>
+        public void ScrollToCaret()
+        {
+            lock (Window.SynchronizationLock)
+            {
+                var clientArea = GetClientArea();
+                int x = scroll.X;
+                if (caret.X - x < 0)
+                    x = caret.X;
+                else if (caret.X - x >= clientArea.Width)
+                    x = caret.X - clientArea.Width + 1;
+                int y = scroll.Y;
+                if (caret.Y - y < 0)
+                    y = caret.Y;
+                else if (caret.Y - y >= clientArea.Height)
+                    y = caret.Y - clientArea.Height + 1;
+
+                Scroll = new Point(x, y);
+            }
+        }
+
+
         /// <inheritdoc />
         protected override void OnAreaChanged()
         {
@@ -359,22 +420,6 @@ namespace ConControls.Controls
             var clientArea = GetClientArea();
             Caret = new Point(caret.X, caret.Y + clientArea.Height);
             ScrollToCaret();
-        }
-        void ScrollToCaret()
-        {
-            var clientArea = GetClientArea();
-            int x = scroll.X;
-            if (caret.X - x < 0)
-                x = caret.X;
-            else if (caret.X - x >= clientArea.Width)
-                x = caret.X - clientArea.Width + 1;
-            int y = scroll.Y;
-            if (caret.Y - y < 0)
-                y = caret.Y;
-            else if (caret.Y - y >= clientArea.Height)
-                y = caret.Y - clientArea.Height + 1;
-
-            Scroll = new Point(x, y);
         }
     }
 }

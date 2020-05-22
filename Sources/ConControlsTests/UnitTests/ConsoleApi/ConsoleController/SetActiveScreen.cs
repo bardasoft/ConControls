@@ -7,14 +7,16 @@
 
 #nullable enable
 
+// ReSharper disable AccessToDisposedClosure
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
+namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 {
-    public partial class ConsoleTextControllerTests
+    public partial class ConsoleControllerTests
     {
         [TestMethod]
-        public void AppendLIne_Inconclusive()
+        public void SetActiveScreen_Inconclusive()
         {
             Assert.Inconclusive();
         }
