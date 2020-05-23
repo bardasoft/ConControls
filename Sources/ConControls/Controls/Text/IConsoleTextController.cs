@@ -20,6 +20,7 @@ namespace ConControls.Controls.Text
         string Text { get; set; }
         void Clear();
         void Append(string content);
+        Point EndCaret { get; }
         Point ValidateCaret(Point caret);
         Point MoveCaretLeft(Point caret);
         Point MoveCaretUp(Point caret);

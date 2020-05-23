@@ -80,6 +80,7 @@ namespace ConControls.Controls
             }
             set
             {
+                _ = value ?? throw new ArgumentNullException(paramName: nameof(value));
                 lock (Window.SynchronizationLock)
                 {
                     if (value == textController.Text) return;
@@ -148,10 +149,10 @@ namespace ConControls.Controls
             _ = text ?? throw new ArgumentNullException(paramName: nameof(text));
             lock (Window.SynchronizationLock)
             {
-                bool caretAtEnd = caret.Y >= textController.BufferLineCount && caret.X == textController.GetLineLength(caret.Y);
+                bool caretAtEnd = caret == textController.EndCaret;
                 textController.Append(text);
                 if (!caretAtEnd) return;
-                Caret = new Point(textController.GetLineLength(textController.BufferLineCount), textController.BufferLineCount);
+                Caret = textController.EndCaret;
                 ScrollToCaret();
             }
         }

@@ -152,11 +152,15 @@
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressChar.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Percentage.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressBarTests.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\Text.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\Caret.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\Scroll.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Append.cs" />
     <Compile Include="UnitTests\Controls\TextControl\KeyEvents.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CursorVisible.cs" />
     <Compile Include="UnitTests\Controls\TextControl\MouseEvents.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Append.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\EndCaret.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MoveCaretPageDown.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MoveCaretPageUp.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MoveCaret.cs" />

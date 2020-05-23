@@ -48,7 +48,7 @@ namespace ConControls.Controls.Text
 
         public int BufferLineCount => allLines.Count;
         public int MaxLineLength { get; private set; }
-        Point EndCaret
+        public Point EndCaret
         {
             get
             {

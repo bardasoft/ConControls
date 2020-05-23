@@ -16,13 +16,10 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
     public partial class TextControlTests
     {
         [TestMethod]
-        public void CursorVisible_Dependency()
+        public void Scroll_Scrolled()
         {
             using var stubbedWindow = new StubbedWindow();
-            var stubbedTextController = new StubbedConsoleTextController
-            {
-                ValidateCaretPoint = p => p
-            };
+            var stubbedTextController = new StubbedConsoleTextController();
             var size = new Size(10, 10);
             using var sut = new StubbedTextControl(stubbedWindow, stubbedTextController)
             {
@@ -30,17 +27,20 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 Area = new Rectangle(Point.Empty, size)
             };
 
-            sut.CursorVisible.Should().BeTrue();
-            sut.CursorVisible = false;
-            sut.CursorVisible.Should().BeFalse();
+            sut.Scroll.Should().Be(Point.Empty);
 
-            sut.Scroll = new Point(0, 5);
-            sut.CursorVisible.Should().BeFalse();
-            sut.CursorVisible = true;
-            sut.CursorVisible.Should().BeFalse();
-            sut.Caret = new Point(1, 7);
-            sut.CursorVisible.Should().BeTrue();
+            Point scroll = new Point(3, 4);
+            bool charactersRequestedCorrectly = false;
+            stubbedTextController.GetCharactersRectangle = rectangle =>
+            {
+                rectangle.Should().Be(new Rectangle(scroll, size));
+                charactersRequestedCorrectly = true;
+                return new char[100];
+            };
+
+            sut.Scroll = scroll;
+            charactersRequestedCorrectly.Should().BeTrue();
+            sut.Scroll.Should().Be(scroll);
         }
-
     }
 }
