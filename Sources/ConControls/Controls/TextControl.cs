@@ -196,7 +196,6 @@ namespace ConControls.Controls
             }
         }
 
-
         /// <inheritdoc />
         protected override void OnAreaChanged()
         {
