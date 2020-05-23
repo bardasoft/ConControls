@@ -157,6 +157,8 @@
     <Compile Include="UnitTests\Controls\TextControl\CursorVisible.cs" />
     <Compile Include="UnitTests\Controls\TextControl\MouseEvents.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Append.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MoveCaretPageDown.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MoveCaretPageUp.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MoveCaret.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Width.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Wrap.cs" />

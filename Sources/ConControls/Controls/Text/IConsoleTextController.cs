@@ -26,7 +26,7 @@ namespace ConControls.Controls.Text
         Point MoveCaretRight(Point caret);
         Point MoveCaretDown(Point caret);
         Point MoveCaretToBeginOfLine(Point caret);
-        Point MoveCaretEndOfLIne(Point caret);
+        Point MoveCaretToEndOfLIne(Point caret);
         Point MoveCaretHome(Point caret);
         Point MoveCaretEnd(Point caret);
         Point MoveCaretPageUp(Point caret, int pageSize);

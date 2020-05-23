@@ -397,7 +397,7 @@ namespace ConControls.Controls
         }
         void MoveCaretEnd(bool ctrl)
         {
-            Caret = ctrl ? textController.MoveCaretEnd(caret) : textController.MoveCaretEndOfLIne(caret);
+            Caret = ctrl ? textController.MoveCaretEnd(caret) : textController.MoveCaretToEndOfLIne(caret);
             ScrollToCaret();
         }
         void MoveCaretPageUp()

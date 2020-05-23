@@ -44,7 +44,7 @@ namespace ConControls.Controls.Text
 
         bool wrap;
         string text = string.Empty;
-        int width;
+        int width = 1;
 
         public int BufferLineCount => allLines.Count;
         public int MaxLineLength { get; private set; }
@@ -74,8 +74,9 @@ namespace ConControls.Controls.Text
             get => width;
             set
             {
-                if (width == value) return;
-                width = value;
+                int tmp = Math.Max(1, value);
+                if (width == tmp) return;
+                width = tmp;
                 Refresh();
             }
         }
@@ -135,9 +136,7 @@ namespace ConControls.Controls.Text
         }
         public Point ValidateCaret(Point caret)
         {
-            int y = Math.Min(Math.Max(0, caret.Y), allLines.Count);
-            if (y == allLines.Count)
-                return new Point(0, allLines.Count);
+            int y = Math.Min(Math.Max(0, caret.Y), allLines.Count-1);
             int x = Math.Max(0, NormalizeX(caret.X, y));
             return new Point(x, y);
         }
@@ -166,7 +165,7 @@ namespace ConControls.Controls.Text
             return new Point(NormalizeX(caret.X, caret.Y + 1), caret.Y + 1);
         }
         public Point MoveCaretToBeginOfLine(Point caret) => new Point(0, caret.Y);
-        public Point MoveCaretEndOfLIne(Point caret) => new Point(EndOfLine(caret.Y), caret.Y);
+        public Point MoveCaretToEndOfLIne(Point caret) => new Point(EndOfLine(caret.Y), caret.Y);
         public Point MoveCaretHome(Point caret) => Point.Empty;
         public Point MoveCaretEnd(Point caret) => EndCaret;
         public Point MoveCaretPageUp(Point caret, int pageSize)
@@ -176,7 +175,7 @@ namespace ConControls.Controls.Text
         }
         public Point MoveCaretPageDown(Point caret, int pageSize)
         {
-            int y = Math.Min(caret.Y + pageSize, BufferLineCount - 1);
+            int y = Math.Max(0, Math.Min(caret.Y + pageSize, BufferLineCount - 1));
             return new Point(NormalizeX(caret.X, y), y);
         }
 
@@ -190,7 +189,7 @@ namespace ConControls.Controls.Text
         {
             int length = GetLineLength(line);
             return Wrap && line < BufferLineCount - 1
-                       ? Math.Min(x, length - 1)
+                       ? Math.Min(x, Math.Min(length, width - 1))
                        : Math.Min(x, length);
         }
         bool ExceedsLine(int x, int y)
@@ -201,7 +200,7 @@ namespace ConControls.Controls.Text
         int EndOfLine(int line)
         {
             int length = GetLineLength(line);
-            return Wrap && line < BufferLineCount - 1 ? length - 1 : length;
+            return Wrap && line < BufferLineCount - 1 ? Math.Min(length, width - 1) : length;
         }
     }
 }
