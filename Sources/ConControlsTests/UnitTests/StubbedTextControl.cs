@@ -22,5 +22,7 @@ namespace ConControlsTests.UnitTests
         /// <inheritdoc />
         internal StubbedTextControl(IConsoleWindow window, IConsoleTextController? textController)
             : base(window, textController ?? new StubbedConsoleTextController()) { }
+
+        internal void CallDrawClientAreaWithNull() => DrawClientArea(null!);
     }
 }

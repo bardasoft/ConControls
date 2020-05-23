@@ -152,6 +152,7 @@
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressChar.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Percentage.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressBarTests.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\ScrollToCaret.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Text.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Caret.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Scroll.cs" />
