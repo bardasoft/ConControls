@@ -48,6 +48,15 @@ namespace ConControls.Controls.Text
 
         public int BufferLineCount => allLines.Count;
         public int MaxLineLength { get; private set; }
+        Point EndCaret
+        {
+            get
+            {
+                int y = Math.Max(0, BufferLineCount - 1);
+                int x = EndOfLine(y);
+                return new Point(x, y);
+            }
+        }
 
         public bool Wrap
         {
@@ -80,6 +89,7 @@ namespace ConControls.Controls.Text
                 Refresh();
             }
         }
+        internal ConsoleTextController() => Clear();
         public void Clear()
         {
             text = string.Empty;
@@ -128,15 +138,70 @@ namespace ConControls.Controls.Text
             int y = Math.Min(Math.Max(0, caret.Y), allLines.Count);
             if (y == allLines.Count)
                 return new Point(0, allLines.Count);
-            int x = Math.Min(Math.Max(0, caret.X), GetLineLength(y)-1);
+            int x = Math.Max(0, NormalizeX(caret.X, y));
             return new Point(x, y);
         }
-        
+        public Point MoveCaretLeft(Point caret)
+        {
+            if (caret == Point.Empty) return caret;
+            if (caret.X > 0) return new Point(caret.X - 1, caret.Y);
+            return new Point(EndOfLine(caret.Y - 1), caret.Y - 1);
+        }
+        public Point MoveCaretUp(Point caret)
+        {
+            if (caret.Y == 0) return caret;
+            return new Point(NormalizeX(caret.X, caret.Y - 1), caret.Y - 1);
+        }
+        public Point MoveCaretRight(Point caret)
+        {
+            if (caret == EndCaret) return caret;
+            return ExceedsLine(caret.X + 1, caret.Y)
+                ? new Point(0, caret.Y + 1)
+                : new Point(caret.X + 1, caret.Y);
+        }
+        public Point MoveCaretDown(Point caret)
+        {
+            int y = caret.Y + 1;
+            if (y >= BufferLineCount) return caret;
+            return new Point(NormalizeX(caret.X, caret.Y + 1), caret.Y + 1);
+        }
+        public Point MoveCaretToBeginOfLine(Point caret) => new Point(0, caret.Y);
+        public Point MoveCaretEndOfLIne(Point caret) => new Point(EndOfLine(caret.Y), caret.Y);
+        public Point MoveCaretHome(Point caret) => Point.Empty;
+        public Point MoveCaretEnd(Point caret) => EndCaret;
+        public Point MoveCaretPageUp(Point caret, int pageSize)
+        {
+            int y = Math.Max(0, caret.Y - pageSize);
+            return new Point(NormalizeX(caret.X, y), y);
+        }
+        public Point MoveCaretPageDown(Point caret, int pageSize)
+        {
+            int y = Math.Min(caret.Y + pageSize, BufferLineCount - 1);
+            return new Point(NormalizeX(caret.X, y), y);
+        }
+
         void Refresh()
         {
             string content = text;
             Clear();
             Append(content);
+        }
+        int NormalizeX(int x, int line)
+        {
+            int length = GetLineLength(line);
+            return Wrap && line < BufferLineCount - 1
+                       ? Math.Min(x, length - 1)
+                       : Math.Min(x, length);
+        }
+        bool ExceedsLine(int x, int y)
+        {
+            int length = GetLineLength(y);
+            return Wrap && y < BufferLineCount - 1 && x > length - 1 || x > length;
+        }
+        int EndOfLine(int line)
+        {
+            int length = GetLineLength(line);
+            return Wrap && line < BufferLineCount - 1 ? length - 1 : length;
         }
     }
 }

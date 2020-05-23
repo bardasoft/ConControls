@@ -73,5 +73,23 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
                    '3', '4', '5', '6', '7', '8', '9', '\0', '\0', '\0',
                    '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0');
         }
+        [TestMethod]
+        public void TextProcessing_TestCase_002()
+        {
+            const string text = "01234\r\n01234";
+            var sut = new ConControls.Controls.Text.ConsoleTextController
+            {
+                Width = 5,
+                Wrap = true,
+                Text = text
+            };
+            sut.GetCharacters(new Rectangle(Point.Empty, new Size(6, 4)))
+               .Should()
+               .Equal(
+                   '0', '1', '2', '3', '4', '\0',
+                   '\0', '\0', '\0', '\0', '\0', '\0',
+                   '0', '1', '2', '3', '4', '\0',
+                   '\0', '\0', '\0', '\0', '\0', '\0');
+        }
     }
 }

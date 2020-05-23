@@ -1720,6 +1720,11 @@
             Windows API virtual key codes (VK_ constants).
             </summary>
         </member>
+        <member name="F:ConControls.WindowsApi.Types.VirtualKey.None">
+            <summary>
+            None.
+            </summary>
+        </member>
         <member name="F:ConControls.WindowsApi.Types.VirtualKey.LeftButton">
             <summary>
             Left mouse button.

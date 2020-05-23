@@ -21,5 +21,15 @@ namespace ConControls.Controls.Text
         void Clear();
         void Append(string content);
         Point ValidateCaret(Point caret);
+        Point MoveCaretLeft(Point caret);
+        Point MoveCaretUp(Point caret);
+        Point MoveCaretRight(Point caret);
+        Point MoveCaretDown(Point caret);
+        Point MoveCaretToBeginOfLine(Point caret);
+        Point MoveCaretEndOfLIne(Point caret);
+        Point MoveCaretHome(Point caret);
+        Point MoveCaretEnd(Point caret);
+        Point MoveCaretPageUp(Point caret, int pageSize);
+        Point MoveCaretPageDown(Point caret, int pageSize);
     }
 }

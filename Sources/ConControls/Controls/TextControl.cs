@@ -372,53 +372,44 @@ namespace ConControls.Controls
         }
         void MoveCaretUp()
         {
-            Caret = new Point(caret.X, caret.Y - 1);
+            Caret = textController.MoveCaretUp(caret);
             ScrollToCaret();
         }
         void MoveCaretDown()
         {
-            Caret = new Point(caret.X, caret.Y + 1);
+            Caret = textController.MoveCaretDown(caret);
             ScrollToCaret();
         }
         void MoveCaretLeft()
         {
-            if (caret == Point.Empty) return;
-            if (caret.X == 0)
-                Caret = new Point(textController.GetLineLength(caret.Y - 1), caret.Y - 1);
-            else
-                Caret = new Point(caret.X - 1, caret.Y);
+            Caret = textController.MoveCaretLeft(caret);
             ScrollToCaret();
         }
         void MoveCaretRight()
         {
-            int length = textController.GetLineLength(caret.Y);
-            if (caret.X == length)
-                Caret = new Point(0, caret.Y + 1);
-            else
-                Caret = new Point(caret.X + 1, caret.Y);
+            Caret = textController.MoveCaretRight(caret);
             ScrollToCaret();
         }
         void MoveCaretHome(bool ctrl)
         {
-            Caret = new Point(0, ctrl ? 0 : caret.Y);
+            Caret = ctrl ? textController.MoveCaretHome(caret) : textController.MoveCaretToBeginOfLine(caret);
             ScrollToCaret();
         }
         void MoveCaretEnd(bool ctrl)
         {
-            int y = ctrl ? textController.BufferLineCount - 1 : caret.Y;
-            Caret = new Point(textController.GetLineLength(y), y);
+            Caret = ctrl ? textController.MoveCaretEnd(caret) : textController.MoveCaretEndOfLIne(caret);
             ScrollToCaret();
         }
         void MoveCaretPageUp()
         {
             var clientArea = GetClientArea();
-            Caret = new Point(caret.X, caret.Y - clientArea.Height);
+            Caret = textController.MoveCaretPageUp(caret, clientArea.Height);
             ScrollToCaret();
         }
         void MoveCaretPageDown()
         {
             var clientArea = GetClientArea();
-            Caret = new Point(caret.X, caret.Y + clientArea.Height);
+            Caret = textController.MoveCaretPageDown(caret, clientArea.Height);
             ScrollToCaret();
         }
     }

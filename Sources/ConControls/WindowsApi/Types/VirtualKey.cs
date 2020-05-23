@@ -17,6 +17,10 @@ namespace ConControls.WindowsApi.Types
     public enum VirtualKey : short
     {
         /// <summary>
+        /// None.
+        /// </summary>
+        None = 0,
+        /// <summary>
         /// Left mouse button.
         /// </summary>
         LeftButton = 0x01,
