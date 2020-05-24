@@ -74,7 +74,7 @@ namespace ConControls.Controls
             get
             {
                 var info = api.GetConsoleScreenBufferInfo(consoleController.OutputHandle);
-                return new Size(info.Window.Right - info.Window.Left + 1, info.Window.Bottom - info.Window.Top + 1);
+                return new Size(info.BufferSize.X, info.BufferSize.Y);
             }
             set
             {
