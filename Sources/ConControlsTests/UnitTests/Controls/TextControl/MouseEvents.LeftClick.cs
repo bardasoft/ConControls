@@ -157,7 +157,12 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
         [TestMethod]
         public void MouseEvents_LeftClicked_FocusedAndCaretSet()
         {
-            using var stubbedWindow = new StubbedWindow();
+            ConControls.Controls.ConsoleControl? focused = null;
+            using var stubbedWindow = new StubbedWindow
+            {
+                FocusedControlGet = () => focused,
+                FocusedControlSetConsoleControl = c => focused = c
+            };
             var stubbedController = new StubbedConsoleTextController
             {
                 BufferLineCountGet = () => 20,
@@ -176,9 +181,12 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 MousePosition = new COORD(10, 10),
                 ButtonState = MouseButtonStates.LeftButtonPressed
             }));
+            sut.Focused.Should().BeFalse();
+            focused.Should().BeNull();
             stubbedWindow.MouseEventEvent(stubbedWindow, e);
             sut.Caret.Should().Be(new Point(8, 7));
             sut.Focused.Should().BeTrue();
+            focused.Should().Be(sut);
             e.Handled.Should().BeTrue();
         }
     }

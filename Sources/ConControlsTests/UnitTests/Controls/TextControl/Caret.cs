@@ -40,6 +40,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             };
 
             sut.Caret = caret;
+            sut.Caret = caret; // just to cover this case
             caretValidated.Should().BeTrue();
             sut.Caret.Should().Be(caret);
             sut.CursorVisible.Should().BeTrue();
@@ -75,7 +76,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             sut.CursorVisible.Should().BeFalse();
         }
         [TestMethod]
-        public void Caret_SetAbive_ValidatedAndCursorInvisible()
+        public void Caret_SetAbove_ValidatedAndCursorInvisible()
         {
             using var stubbedWindow = new StubbedWindow();
             var stubbedTextController = new StubbedConsoleTextController();

@@ -53,5 +53,37 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             sut.Caret.Should().Be(endCaret);
             sut.Scroll.Should().Be(new Point(8, 14));
         }
+        [TestMethod]
+        public void Append_CaretNotAtEnd_DontScroll()
+        {
+            using var stubbedWindow = new StubbedWindow();
+            bool appended = false;
+            const string text = "hello";
+            var endCaret = (5, 0).Pt();
+            var stubbedTextController = new StubbedConsoleTextController
+            {
+                AppendString = s =>
+                {
+                    s.Should().Be(text);
+                    appended = true;
+                    endCaret = new Point(17, 23);
+                },
+                ValidateCaretPoint = p => p,
+                EndCaretGet = () => endCaret
+            };
+            var size = new Size(10, 10);
+            using var sut = new StubbedTextControl(stubbedWindow, stubbedTextController)
+            {
+                Parent = stubbedWindow,
+                Area = new Rectangle(Point.Empty, size),
+                Text = text,
+                Caret = (1,0).Pt()
+            };
+
+            sut.Append(text);
+            appended.Should().BeTrue();
+            sut.Caret.Should().Be((1,0).Pt());
+            sut.Scroll.Should().Be(Point.Empty);
+        }
     }
 }

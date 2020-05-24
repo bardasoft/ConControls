@@ -152,6 +152,8 @@
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressChar.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Percentage.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressBarTests.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\Clear.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\Wrap.cs" />
     <Compile Include="UnitTests\Controls\TextControl\MouseEvents.LeftClick.cs">
       <DependentUpon>MouseEvents.cs</DependentUpon>
     </Compile>

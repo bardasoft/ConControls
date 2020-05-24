@@ -9,6 +9,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using ConControls.Controls;
+using ConControls.Controls.Drawing;
 using ConControls.Controls.Text;
 
 namespace ConControlsTests.UnitTests 
@@ -26,6 +27,6 @@ namespace ConControlsTests.UnitTests
         {
         }
 
-        internal void CallDrawClientAreaWithNull() => DrawClientArea(null!);
+        internal void CallDrawClientArea(IConsoleGraphics? graphics = null) => DrawClientArea(graphics!);
     }
 }

@@ -248,11 +248,11 @@ namespace ConControls.Controls
                     e.Handled = true;
                     break;
                 case VirtualKey.Home:
-                    MoveCaretHome(e.ControlKeys.HasFlag(ControlKeyStates.LEFT_CTRL_PRESSED) | e.ControlKeys.HasFlag(ControlKeyStates.RIGHT_CTRL_PRESSED));
+                    MoveCaretHome(e.ControlKeys.HasFlag(ControlKeyStates.LEFT_CTRL_PRESSED) || e.ControlKeys.HasFlag(ControlKeyStates.RIGHT_CTRL_PRESSED));
                     e.Handled = true;
                     break;
                 case VirtualKey.End:
-                    MoveCaretEnd(e.ControlKeys.HasFlag(ControlKeyStates.LEFT_CTRL_PRESSED) | e.ControlKeys.HasFlag(ControlKeyStates.RIGHT_CTRL_PRESSED));
+                    MoveCaretEnd(e.ControlKeys.HasFlag(ControlKeyStates.LEFT_CTRL_PRESSED) || e.ControlKeys.HasFlag(ControlKeyStates.RIGHT_CTRL_PRESSED));
                     e.Handled = true;
                     break;
                 case VirtualKey.Prior:

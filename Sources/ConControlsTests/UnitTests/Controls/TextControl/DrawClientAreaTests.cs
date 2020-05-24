@@ -23,7 +23,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController();
             using var sut = new StubbedTextControl(stubbedWindow, stubbedController);
-            sut.Invoking(s => s.CallDrawClientAreaWithNull()).Should().Throw<ArgumentNullException>();
+            sut.Invoking(s => s.CallDrawClientArea()).Should().Throw<ArgumentNullException>();
         }
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 Parent = stubbedWindow
             };
            
-            sut.Draw();
+            sut.CallDrawClientArea(stubbedWindow.Graphics);
             drawn.Should().BeFalse();
         }
         [TestMethod]
