@@ -25,7 +25,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
         {
             bool cursorSet = false, cursorReset = false;
             bool disposing = false, controllerDisposed = false;
-            var consoleController = new StubbedConsoleController
+            using var consoleController = new StubbedConsoleController
             {
                 Dispose = () => controllerDisposed = true
             };
@@ -38,7 +38,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                     handle.Should().Be(consoleController.OutputHandle);
                     return new CONSOLE_SCREEN_BUFFER_INFOEX
                     {
-                        Window = new SMALL_RECT(windowSize)
+                        BufferSize = new COORD(windowSize)
                     };
                 },
                 GetCursorInfoConsoleOutputHandle = handle =>

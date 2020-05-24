@@ -27,7 +27,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             {
                 SetActiveScreenBoolean = b =>
                 {
-                    Assert.IsTrue(Monitor.IsEntered(window.SynchronizationLock));
+                    Assert.IsTrue(Monitor.IsEntered(window!.SynchronizationLock));
                     active = b;
                 }
             };
