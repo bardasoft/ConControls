@@ -77,5 +77,28 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
                         consolePoint.X - l1.X - l2.X - 1,
                         consolePoint.Y - l1.Y - l2.Y - 1));
         }
+        [TestMethod]
+        public void PointToClient_NoParent_CorrectResult()
+        {
+            var stubbedWindow = new StubbedWindow
+            {
+                PointToClientPoint = p => p,
+                PointToConsolePoint = p => p
+            };
+
+            var l2 = new Point(23, 42);
+
+            var sut = new Panel(stubbedWindow)
+            {
+                Location = l2
+            };
+
+            var consolePoint = new Point(123, 456);
+            sut.PointToClient(consolePoint)
+                .Should()
+                .Be(new Point(
+                        consolePoint.X - l2.X,
+                        consolePoint.Y - l2.Y));
+        }
     }
 }
