@@ -152,6 +152,18 @@
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressChar.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Percentage.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressBarTests.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\MouseEvents.LeftClick.cs">
+      <DependentUpon>MouseEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\Controls\TextControl\BorderStyleChanged.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\AreaChanged.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\MouseEvents.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\MouseEvents.ScrollHorizontically.cs">
+      <DependentUpon>MouseEvents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests\Controls\TextControl\MouseEvents.ScrollVertically.cs">
+      <DependentUpon>MouseEvents.cs</DependentUpon>
+    </Compile>
     <Compile Include="UnitTests\Controls\TextControl\ScrollToCaret.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Text.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Caret.cs" />
@@ -159,7 +171,6 @@
     <Compile Include="UnitTests\Controls\TextControl\Append.cs" />
     <Compile Include="UnitTests\Controls\TextControl\KeyEvents.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CursorVisible.cs" />
-    <Compile Include="UnitTests\Controls\TextControl\MouseEvents.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Append.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\EndCaret.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MoveCaretPageDown.cs" />
@@ -197,6 +208,7 @@
     <Compile Include="UnitTests\StubbedNativeCalls.cs" />
     <Compile Include="UnitTests\StubbedGraphicsProvider.cs" />
     <Compile Include="UnitTests\StubbedConsoleTextControoler.cs" />
+    <Compile Include="UnitTests\PointExtensions.cs" />
     <Compile Include="UnitTests\StubbedWindow.cs" />
     <Compile Include="UnitTests\Helpers\DisposableBlock\DispoableBlockTests.cs" />
     <Compile Include="FileLogger.cs" />

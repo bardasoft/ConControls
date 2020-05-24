@@ -103,7 +103,7 @@ namespace ConControls.Controls
                 lock (Window.SynchronizationLock)
                 {
                     var tmp = textController.ValidateCaret(value);
-                    if (value == caret) return;
+                    if (tmp == caret) return;
                     caret = tmp;
                     UpdateCursorPosition();
                 }
@@ -286,9 +286,11 @@ namespace ConControls.Controls
             {
                 case MouseEventFlags.Wheeled:
                     ScrollVertically(e.Scroll);
+                    e.Handled = true;
                     break;
                 case MouseEventFlags.WheeledHorizontally:
                     ScrollHoritzontically(e.Scroll);
+                    e.Handled = true;
                     break;
                 default:
                     if (e.ButtonState != MouseButtonStates.LeftButtonPressed) break;
@@ -359,8 +361,9 @@ namespace ConControls.Controls
         void ScrollVertically(int delta)
         {
             int y = scroll.Y - delta / 120;
+            int maxLineIndex = Math.Max(0, textController.BufferLineCount - 1);
             y = Math.Max(0, y);
-            y = Math.Min(textController.BufferLineCount - 1, y);
+            y = Math.Min(maxLineIndex, y);
             Scroll = new Point(scroll.X, y);
         }
         void ScrollHoritzontically(int delta)

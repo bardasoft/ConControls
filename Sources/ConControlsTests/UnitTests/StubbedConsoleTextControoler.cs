@@ -15,5 +15,9 @@ namespace ConControlsTests.UnitTests
     [ExcludeFromCodeCoverage]
     sealed class StubbedConsoleTextController : StubIConsoleTextController
     {
+        internal StubbedConsoleTextController()
+        {
+            ValidateCaretPoint = p => p;
+        }
     }
 }

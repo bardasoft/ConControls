@@ -7,16 +7,21 @@
 
 #nullable enable
 
+using System;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+// ReSharper disable AccessToDisposedClosure
 
 namespace ConControlsTests.UnitTests.Controls.TextControl
 {
     public partial class TextControlTests
     {
         [TestMethod]
-        public void MouseEvents_Inconclusive()
+        public void MouseEvents_EventArgsNull_ArgumentNullException()
         {
-            Assert.Inconclusive();
+            using var stubbedWindow = new StubbedWindow();
+            using var sut = new StubbedTextControl(stubbedWindow);
+            sut.Invoking(s => stubbedWindow.MouseEventEvent(stubbedWindow, null!)).Should().Throw<ArgumentNullException>();
         }
     }
 }

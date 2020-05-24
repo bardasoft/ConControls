@@ -30,6 +30,8 @@ namespace ConControlsTests.UnitTests
             WindowGet = () => this;
             Controls = new ControlCollection(this);
             ControlsGet = () => Controls;
+            EnabledGet = () => true;
+            VisibleGet = () => true;
         }
     }
 }

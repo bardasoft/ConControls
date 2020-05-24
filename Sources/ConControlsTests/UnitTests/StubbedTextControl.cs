@@ -16,12 +16,15 @@ namespace ConControlsTests.UnitTests
     [ExcludeFromCodeCoverage]
     sealed class StubbedTextControl : TextControl
     {
+        internal StubbedTextControl() : this(null) { }
         /// <inheritdoc />
-        internal StubbedTextControl(IConsoleWindow window)
+        internal StubbedTextControl(IConsoleWindow? window)
             : this(window, null) { }
         /// <inheritdoc />
-        internal StubbedTextControl(IConsoleWindow window, IConsoleTextController? textController)
-            : base(window, textController ?? new StubbedConsoleTextController()) { }
+        internal StubbedTextControl(IConsoleWindow? window, IConsoleTextController? textController)
+            : base(window ?? new StubbedWindow(), textController ?? new StubbedConsoleTextController())
+        {
+        }
 
         internal void CallDrawClientAreaWithNull() => DrawClientArea(null!);
     }
