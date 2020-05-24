@@ -70,7 +70,7 @@ namespace ConControls.Controls {
         /// </summary>
         public void PerformClick()
         {
-            lock (Window.SynchronizationLock) if (Enabled) OnClick();
+            lock (Window.SynchronizationLock) if (Enabled && Visible) OnClick();
         }
 
         void OnClick()
@@ -81,7 +81,8 @@ namespace ConControls.Controls {
         /// <inheritdoc />
         protected override void OnKeyEvent(object sender, KeyEventArgs e)
         {
-            if (!(Focused && Visible && Enabled && e.KeyDown))
+            _ = e ?? throw new ArgumentNullException(nameof(e));
+            if (e.Handled || !(Focused && Visible && Enabled && e.KeyDown))
             {
                 base.OnKeyEvent(sender, e);
                 return;
@@ -99,9 +100,8 @@ namespace ConControls.Controls {
         protected override void OnMouseEvent(object sender, MouseEventArgs e)
         {
             _ = e ?? throw new ArgumentNullException(paramName: nameof(e));
-
-            var clientPoint = Parent?.PointToClient(e.Position) ?? e.Position;
-            if (!Area.Contains(clientPoint))
+            var clientPoint = Parent?.PointToClient(e.Position);
+            if (e.Handled || !(clientPoint.HasValue && Area.Contains(clientPoint.Value)))
             {
                 base.OnMouseEvent(sender, e);
                 return;
