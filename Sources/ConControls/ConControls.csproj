@@ -21,7 +21,7 @@
     <PackageOutputPath>..\..\nuget</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageReleaseNotes>For complete release notes see https://github.com/ReneVogt/ConControls/blob/master/ReleaseNotes.md</PackageReleaseNotes>
+    <PackageReleaseNotes>For complete release notes see https://github.com/ReneVogt/ConControls/blob/master/docs/ReleaseNotes.md</PackageReleaseNotes>
     <PackageTags>windows console ui</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <DocumentationFile>ConControls.xml</DocumentationFile>
@@ -54,7 +54,7 @@
     <None Include="..\..\LICENSE.md" Pack="true" PackagePath="" />
     <None Include="..\.editorconfig" Link=".editorconfig" Pack="false" />
     <None Include="..\..\README.md" Pack="true" PackagePath="." />
-    <None Include="..\..\ReleaseNotes.md" Pack="true" PackagePath="." />
+    <None Include="..\..\docs\ReleaseNotes.md" Pack="true" PackagePath="." />
   </ItemGroup>
 
   <ItemGroup>

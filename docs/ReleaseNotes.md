@@ -3,6 +3,9 @@
 René Vogt, Dresden 2020/05/25
 
 ---
+### Version 0.1.0-beta-2 (tbd)
+
+List changes here...
 
 ### Version 0.1.0-beta-1 (2020/05/25)
 
