@@ -15,7 +15,7 @@
     <!-- SHFB properties -->
     <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
     <OutputPath>Help\</OutputPath>
-    <HtmlHelpName>ConControls API documentation</HtmlHelpName>
+    <HtmlHelpName>ConControls</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
       <Argument Key="logoFile" Value="Help.png" xmlns="" />

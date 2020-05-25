@@ -8,9 +8,9 @@ René Vogt, Dresden 2020/05/25
 This library provides easy to use console UI controls. You can use it to quickly visualize results or progress
 of a console application without the overhead of creating a UI with frameworks like Windows Forms or WPF etc.
 
-An introduction/manual/howto can be found [here](docs/001%20Intro.md).  
+A manual can be found [here](docs/Manual.md).  
 
-The api documentation is a [Sandcastle](https://github.com/EWSoftware/SHFB) compiled html help file: [ConControls API documentation.chm](docs/ConControls%20API%20documentation.chm).
+The api documentation is a [Sandcastle](https://github.com/EWSoftware/SHFB) compiled html help file: [ConControls API documentation.chm](docs/ConControls.chm).
 
 ---
 
