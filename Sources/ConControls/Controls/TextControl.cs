@@ -218,7 +218,12 @@ namespace ConControls.Controls
 
             base.OnBorderStyleChanged();
         }
-
+        /// <inheritdoc />
+        protected override void OnCursorPositionChanged()
+        {
+            base.OnCursorPositionChanged();
+            Caret = Point.Add(CursorPosition, (Size)scroll);
+        }
         /// <inheritdoc />
         protected override void OnKeyEvent(object sender, KeyEventArgs e)
         {

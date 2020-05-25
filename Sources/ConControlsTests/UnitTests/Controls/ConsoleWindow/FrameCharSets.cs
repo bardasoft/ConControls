@@ -7,6 +7,7 @@
 
 #nullable enable
 
+using System;
 using ConControls.Controls.Drawing;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -42,6 +43,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             graphicsRequested.Should().BeFalse();
             sut.FrameCharSets = new FrameCharSets();
             graphicsRequested.Should().BeTrue();
+
+            sut.Invoking(s => s.FrameCharSets = null!).Should().Throw<ArgumentNullException>();
         }
     }
 }

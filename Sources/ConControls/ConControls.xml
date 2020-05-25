@@ -1475,6 +1475,9 @@
         <member name="M:ConControls.Controls.TextControl.OnBorderStyleChanged">
             <inheritdoc />
         </member>
+        <member name="M:ConControls.Controls.TextControl.OnCursorPositionChanged">
+            <inheritdoc />
+        </member>
         <member name="M:ConControls.Controls.TextControl.OnKeyEvent(System.Object,ConControls.Controls.KeyEventArgs)">
             <inheritdoc />
         </member>

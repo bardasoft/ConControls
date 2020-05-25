@@ -20,5 +20,6 @@ namespace ConControlsTests.UnitTests
         internal static Rectangle Rect(this (int left, int top, int width, int height) r) => new Rectangle(r.left, r.top, r.width, r.height);
         internal static Rectangle Rect(this (int left, int top, Size size) r) => new Rectangle((r.left, r.top).Pt(), r.size);
         internal static Rectangle Rect(this (Point location, int width, int height) r) => new Rectangle(r.location, (r.width, r.height).Sz());
+        internal static Rectangle Rect(this (Point location, Size size) r) => new Rectangle(r.location, r.size);
     }
 }

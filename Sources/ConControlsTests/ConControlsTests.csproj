@@ -138,8 +138,10 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\NameTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConstructorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConsoleControlTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\DrawingInhibited.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FocusedControl.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\ControlManagement.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\Area.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\Title.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FrameCharSets.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\SizeEvents.cs" />
@@ -162,6 +164,7 @@
     <Compile Include="UnitTests\Controls\ProgressBar\Percentage.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressBarTests.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Clear.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\CursorPosition.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Wrap.cs" />
     <Compile Include="UnitTests\Controls\TextControl\MouseEvents.LeftClick.cs">
       <DependentUpon>MouseEvents.cs</DependentUpon>
