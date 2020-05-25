@@ -1,6 +1,6 @@
 # ConControls
 
-René Vogt, Dresden 2020/05/25
+RenÃ© Vogt, Dresden 2020/05/25
 
 ---
 
