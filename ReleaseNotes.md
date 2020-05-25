@@ -1,9 +1,9 @@
 # ConControls - Release notes
 
-René Vogt, Dresden 2020/04/05
+René Vogt, Dresden 2020/05/25
 
 ---
 
-### Version 0.1.0 - to be released
+### Version 0.1.0-beta-1 (2020/05/25)
 
-The first preview version is yet to be released.
+This is the first published version of ConControls. There is still a lot missing for a 1.0, but tests can begin.

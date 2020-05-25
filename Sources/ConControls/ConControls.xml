@@ -299,6 +299,11 @@
             If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> value will be used.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Tag">
+            <summary>
+            Gets or sets a tag object for this control.
+            </summary>
+        </member>
         <member name="M:ConControls.Controls.ConsoleControl.#ctor(ConControls.Controls.IConsoleWindow)">
             <summary>
             Initializes an instance of <see cref="T:ConControls.Controls.ConsoleControl"/>.

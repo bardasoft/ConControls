@@ -1,10 +1,11 @@
 # ConControls - Manual
 
-René Vogt, Dresden 2020/04/13
+René Vogt, Dresden 2020/05/25
 
 ---
 
 ## 1. Introduction
 
 This manual has still to be written.  
-The API documentation is availalbe as a [Sandcastle](https://github.com/EWSoftware/SHFB) compiled html help file: [ConControls API documentation.chm](ConControls%20API%20documentation.chm).
+The API documentation is availalbe as a [Sandcastle](https://github.com/EWSoftware/SHFB) compiled html help file: [ConControls API documentation.chm](ConControls%20API%20documentation.chm).  
+Examples can be found in the "ConControlsExamples" project in the sources.

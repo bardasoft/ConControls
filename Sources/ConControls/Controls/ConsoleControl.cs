@@ -559,6 +559,11 @@ namespace ConControls.Controls
                 }
             }
         }
+        /// <summary>
+        /// Gets or sets a tag object for this control.
+        /// </summary>
+        [ExcludeFromCodeCoverage]
+        public object? Tag { get; set; }
 
         /// <summary>
         /// Initializes an instance of <see cref="ConsoleControl"/>.

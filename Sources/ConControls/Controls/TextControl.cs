@@ -149,11 +149,14 @@ namespace ConControls.Controls
             _ = text ?? throw new ArgumentNullException(paramName: nameof(text));
             lock (Window.SynchronizationLock)
             {
-                bool caretAtEnd = caret == textController.EndCaret;
-                textController.Append(text);
-                if (!caretAtEnd) return;
-                Caret = textController.EndCaret;
-                ScrollToCaret();
+                using(DeferDrawing())
+                {
+                    bool caretAtEnd = caret == textController.EndCaret;
+                    textController.Append(text);
+                    if (!caretAtEnd) return;
+                    Caret = textController.EndCaret;
+                    ScrollToCaret();
+                }
             }
         }
         /// <inheritdoc />
