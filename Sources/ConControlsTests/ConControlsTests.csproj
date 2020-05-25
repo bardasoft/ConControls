@@ -138,14 +138,15 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\NameTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConstructorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConsoleControlTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\FocusedControl.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\ControlManagement.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\Title.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FrameCharSets.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\SizeEvents.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\MouseEvents.cs" />
-    <Compile Include="UnitTests\Controls\ConsoleWindow\KeyEvents.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\Draw.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\SetActiveScreen.cs" />
-    <Compile Include="UnitTests\Controls\ConsoleWindow\KeyEventHandling.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\KeyEvents.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FocusPrevious.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FocusNext.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\Size.cs" />

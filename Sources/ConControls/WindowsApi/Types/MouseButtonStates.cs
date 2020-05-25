@@ -13,7 +13,8 @@ namespace ConControls.WindowsApi.Types
     /// The states of the mouse buttons.
     /// </summary>
     [Flags]
-    public enum MouseButtonStates
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1028", Justification = "Marshalling")]
+    public enum MouseButtonStates : short
     {
         /// <summary>
         /// No mouse button pressed.

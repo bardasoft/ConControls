@@ -67,6 +67,7 @@ namespace ConControls.Controls
             set => api.SetConsoleTitle(value ?? string.Empty);
         }
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage]
         public Point Location { get; } = Point.Empty;
         /// <inheritdoc />
         public Size Size
@@ -97,14 +98,19 @@ namespace ConControls.Controls
         public Rectangle Area => new Rectangle(Point.Empty, Size);
         
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage]
         public int CursorSize { get; set; }
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage]
         public ConsoleColor ForegroundColor { get; set; } = ConsoleColor.Gray;
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage]
         public ConsoleColor BackgroundColor { get; set; } = ConsoleColor.Black;
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage]
         public ConsoleColor BorderColor { get; set; } = ConsoleColor.Yellow;
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage]
         public BorderStyle BorderStyle { get; set; } = BorderStyle.None;
         /// <inheritdoc />
         public ControlCollection Controls { get; }
@@ -204,6 +210,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Cleans up native resources.
         /// </summary>
+        [ExcludeFromCodeCoverage]
         ~ConsoleWindow()
         {
             Dispose(false);
@@ -320,34 +327,6 @@ namespace ConControls.Controls
             api.SetCursorInfo(consoleController.OutputHandle, control?.CursorVisible ?? false, control?.CursorSize ?? CursorSize,
                               control?.PointToConsole(control.CursorPosition) ?? Point.Empty);
         }
-        void OnConsoleControllerFocusReceived(object sender, ConsoleFocusEventArgs e)
-        {
-            lock (SynchronizationLock)
-            {
-                Logger.Log(DebugContext.Window, $"Received focus event: SetFocus: {e.SetFocus}");
-            }
-        }
-        void OnConsoleControllerKeyReceived(object sender, ConsoleKeyEventArgs e)
-        {
-            lock (SynchronizationLock)
-            {
-                Logger.Log(DebugContext.Window,
-                           $"Received key event: VK {e.VirtualKeyCode} UC '{e.UnicodeChar}' Down: {e.KeyDown} CK {e.ControlKeys} RC {e.RepeatCount}");
-
-                var eventArgs = new KeyEventArgs(e);
-                KeyEvent?.Invoke(this, eventArgs);
-                if (eventArgs.Handled) return;
-
-                if (eventArgs.KeyDown && eventArgs.VirtualKey == VirtualKey.Tab)
-                {
-                    var controlKeys = eventArgs.ControlKeys.WithoutSwitches();
-                    if (controlKeys == ControlKeyStates.SHIFT_PRESSED)
-                        FocusPrevious();
-                    else if (controlKeys == ControlKeyStates.None)
-                        FocusNext();
-                }
-            }
-        }
         /// <inheritdoc />
         public ConsoleControl? FocusNext()
         {
@@ -394,6 +373,36 @@ namespace ConControls.Controls
                     yield return focusableChild;
             }
         }
+        [ExcludeFromCodeCoverage]
+        void OnConsoleControllerFocusReceived(object sender, ConsoleFocusEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                Logger.Log(DebugContext.Window, $"Received focus event: SetFocus: {e.SetFocus}");
+            }
+        }
+        void OnConsoleControllerKeyReceived(object sender, ConsoleKeyEventArgs e)
+        {
+            lock (SynchronizationLock)
+            {
+                Logger.Log(DebugContext.Window,
+                           $"Received key event: VK {e.VirtualKeyCode} UC '{e.UnicodeChar}' Down: {e.KeyDown} CK {e.ControlKeys} RC {e.RepeatCount}");
+
+                var eventArgs = new KeyEventArgs(e);
+                KeyEvent?.Invoke(this, eventArgs);
+                if (eventArgs.Handled) return;
+
+                if (eventArgs.KeyDown && eventArgs.VirtualKey == VirtualKey.Tab)
+                {
+                    var controlKeys = eventArgs.ControlKeys.WithoutSwitches();
+                    if (controlKeys == ControlKeyStates.SHIFT_PRESSED)
+                        FocusPrevious();
+                    else if (controlKeys == ControlKeyStates.None)
+                        FocusNext();
+                }
+            }
+        }
+        [ExcludeFromCodeCoverage]
         void OnConsoleControllerMenuReceived(object sender, ConsoleMenuEventArgs e)
         {
             lock (SynchronizationLock)
