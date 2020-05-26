@@ -74,12 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConControlsTestsCli.cs" />
-    <Compile Include="Examples\Example.cs" />
-    <Compile Include="Examples\WindowSizeExample.cs" />
-    <Compile Include="Examples\TextBlockExample.cs" />
     <Compile Include="UnitTests\AssemblySettings.cs" />
     <Compile Include="UnitTests\ConsoleApi\CharInfoExtensions\CharInfoExtensionsTests.cs" />
-    <Compile Include="UnitTests\ConsoleApi\ConsoleController\SetActiveScreen.cs" />
+    <Compile Include="UnitTests\ConsoleApi\ConsoleController\ActiveScreen.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ConstructAndDispose.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleMouseEventArgsTests.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleEventArgs\ConsoleKeyEventArgsTests.cs" />
@@ -138,6 +135,7 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\NameTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConstructorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConsoleControlTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\WaitForCloseAsync.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\DrawingInhibited.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FocusedControl.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\ControlManagement.cs" />
@@ -147,7 +145,7 @@
     <Compile Include="UnitTests\Controls\ConsoleWindow\SizeEvents.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\MouseEvents.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\Draw.cs" />
-    <Compile Include="UnitTests\Controls\ConsoleWindow\SetActiveScreen.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\ActiveScreen.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\KeyEvents.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FocusPrevious.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FocusNext.cs" />
@@ -158,6 +156,10 @@
     <Compile Include="UnitTests\Controls\ConsoleWindow\ConsoleWindowTests.cs" />
     <Compile Include="UnitTests\Controls\ControlCollection\IndexOf.cs" />
     <Compile Include="UnitTests\Controls\Drawing\ConsoleGraphics\CopyCharacters.cs" />
+    <Compile Include="UnitTests\Controls\KeyCombination\Without.cs" />
+    <Compile Include="UnitTests\Controls\KeyCombination\With.cs" />
+    <Compile Include="UnitTests\Controls\KeyCombination\Construction.cs" />
+    <Compile Include="UnitTests\Controls\KeyCombination\KeyCombinationTests.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Drawing.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Orientation.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressChar.cs" />
@@ -195,6 +197,7 @@
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Text.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Clear.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ValidateCaret.cs" />
+    <Compile Include="UnitTests\Helpers\KeyHandlingExtensions\Matches.cs" />
     <Compile Include="UnitTests\StubbedTextControl.cs" />
     <Compile Include="UnitTests\StubbedConsoleControl.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindowEventArgs\MouseEventArgsTests.cs" />
@@ -210,14 +213,13 @@
     <Compile Include="UnitTests\Controls\Drawing\ConsoleGraphics\DrawBackgroundTests.cs" />
     <Compile Include="UnitTests\Controls\Drawing\ConsoleGraphics\ConsoleGraphicsTests.cs" />
     <Compile Include="UnitTests\Controls\Drawing\FrameCharSets\FrameCharSetsTests.cs" />
-    <Compile Include="Examples\ProgressBarExample.cs" />
     <Compile Include="UnitTests\Controls\TextControl\ConstructAndDispose.cs" />
     <Compile Include="UnitTests\Controls\TextControl\DrawClientAreaTests.cs" />
     <Compile Include="UnitTests\Controls\TextControl\TextControlTests.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\TextProcessingTests.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ConsoleTextControllerTests.cs" />
-    <Compile Include="UnitTests\Helpers\ControlKeyStatesExtensions\WithoutSwitches.cs" />
-    <Compile Include="UnitTests\Helpers\ControlKeyStatesExtensions\ControlKeyStatesExtensionsTests.cs" />
+    <Compile Include="UnitTests\Helpers\KeyHandlingExtensions\WithoutSwitches.cs" />
+    <Compile Include="UnitTests\Helpers\KeyHandlingExtensions\KeyHandlingExtensionsTests.cs" />
     <Compile Include="UnitTests\StubbedConsoleController.cs" />
     <Compile Include="UnitTests\StubbedNativeCalls.cs" />
     <Compile Include="UnitTests\StubbedGraphicsProvider.cs" />

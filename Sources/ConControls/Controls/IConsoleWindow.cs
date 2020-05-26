@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Threading.Tasks;
 using ConControls.Controls.Drawing;
 
 namespace ConControls.Controls
@@ -65,6 +66,21 @@ namespace ConControls.Controls
         FrameCharSets FrameCharSets { get; set; }
 
         /// <summary>
+        /// The key combination to switch between the window and the original console screen buffer.
+        /// </summary>
+        KeyCombination? SwitchConsoleBuffersKey { get; set; }
+        /// <summary>
+        /// The key combination to close the window.
+        /// </summary>
+        KeyCombination? CloseWindowKey { get; set; }
+        /// <summary>
+        /// Gets or sets wether this window is the active console screen buffer.
+        /// If set to <c>true</c> this window is the active screen. If set to <c>false</c> the
+        ///  original console screen buffer will be activated.
+        /// </summary>
+        bool ActiveScreen { get; set; }
+
+        /// <summary>
         /// The window has been disposed of.
         /// </summary>
         bool IsDisposed { get; }
@@ -72,15 +88,6 @@ namespace ConControls.Controls
         /// A synchronization object to synchronize conosle operations.
         /// </summary>
         object SynchronizationLock { get; }
-
-        /// <summary>
-        /// Sets the active screen buffer.
-        /// If <paramref name="show"/> is <c>true</c>, this window is set
-        /// as active screen buffer. If <paramref name="show"/> is <c>false</c>, the
-        /// original console screen buffer will be activated.
-        /// </summary>
-        /// <param name="show"><c>true</c> to show this window, <c>false</c> to display the original console screen buffer of the process.</param>
-        void SetActiveScreen(bool show);
 
         /// <summary>
         /// Provides a <see cref="IConsoleGraphics"/> to draw on this console window.
@@ -98,5 +105,22 @@ namespace ConControls.Controls
         /// </summary>
         /// <returns>The focused control, or <c>null</c> if no control could be focused.</returns>
         ConsoleControl? FocusPrevious();
+
+        /// <summary>
+        /// The exit code the window was closed with.
+        /// </summary>
+        int ExitCode { get; }
+
+        /// <summary>
+        /// Closes (and diposes) the window and sets the given exit code.
+        /// </summary>
+        /// <param name="exitCode">The exit code for the window.</param>
+        void Close(int exitCode = 0);
+
+        /// <summary>
+        /// Waits asynchronously for the window to be closed/disposed.
+        /// </summary>
+        /// <returns>A task that is completed when the window is closed and returns the exit code.</returns>
+        Task<int> WaitForCloseAsync();
     }
 }

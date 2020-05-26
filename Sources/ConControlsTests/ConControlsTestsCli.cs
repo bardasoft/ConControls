@@ -11,11 +11,10 @@
 // ReSharper disable UnusedMember.Local
 
 using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using ConControls.Controls;
 using ConControls.Logging;
-using ConControlsTests.Examples;
 using ConControlsTests.UnitTests;
 
 namespace ConControlsTests
@@ -23,31 +22,20 @@ namespace ConControlsTests
     [ExcludeFromCodeCoverage]
     static class ConControlsTestsCli
     {
-        static async Task RunExampleAsync<T>(DebugContext extraContext = DebugContext.None) where T : Example, new()
-        {
-            var example = new T();
-            Logger.Context = example.DebugContext | DebugContext.Exception | extraContext;
-            await example.RunAsync();
-        }
-
         static async Task Main()
         {
-            using var fileLogger = new FileLogger("concontrols.log");
             using var consoleLogger = new TestLogger(Console.WriteLine);
-
-            AppDomain.CurrentDomain.UnhandledException += (sender, e) =>
-            {
-                string msg = $"Unhandled exception: {e.ExceptionObject}";
-                Console.WriteLine(msg);
-                Debug.WriteLine(msg);
-            };
+            Logger.Context = DebugContext.Window;
 
             Console.WriteLine("Starting test.");
             try
             {
-                //await RunExampleAsync<ProgressBarExample>();
-                await RunExampleAsync<TextBlockExample>();
-                //await RunExampleAsync<WindowSizeExample>();
+                using var window = new ConsoleWindow
+                {
+                    SwitchConsoleBuffersKey = KeyCombination.F11,
+                    CloseWindowKey = KeyCombination.AltF4
+                };
+                await window.WaitForCloseAsync();
             }
             catch (Exception e)
             {

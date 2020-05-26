@@ -11,6 +11,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using ConControls.ConsoleApi;
 using ConControls.Controls.Drawing;
 using ConControls.Helpers;
@@ -43,6 +44,7 @@ namespace ConControls.Controls
 #pragma warning disable CA2213
         readonly DisposableBlock drawingInhibiter;
 #pragma warning restore CA2213
+        readonly TaskCompletionSource<int> taskCompletionSource = new TaskCompletionSource<int>();
 
         int isDisposed;
         int inhibitDrawing;
@@ -96,6 +98,9 @@ namespace ConControls.Controls
         }
         /// <inheritdoc />
         public Rectangle Area => new Rectangle(Point.Empty, Size);
+
+        /// <inheritdoc />
+        public int ExitCode { get; private set; }
         
         /// <inheritdoc />
         [ExcludeFromCodeCoverage]
@@ -163,6 +168,23 @@ namespace ConControls.Controls
                 }
             }
         }
+        /// <inheritdoc />
+        public KeyCombination? SwitchConsoleBuffersKey { get; set; }
+        /// <inheritdoc />
+        public KeyCombination? CloseWindowKey { get; set; }
+        /// <inheritdoc />
+        public bool ActiveScreen
+        {
+            get
+            {
+                lock (SynchronizationLock) return consoleController.ActiveScreen;
+            }
+            set
+            {
+                lock (SynchronizationLock) consoleController.ActiveScreen = value;
+            }
+        }
+
         /// <inheritdoc />
         public bool DrawingInhibited => !Visible || inhibitDrawing > 0;
         /// <inheritdoc />
@@ -232,6 +254,7 @@ namespace ConControls.Controls
             if (Interlocked.CompareExchange(ref isDisposed, 1, 0) != 0) return;
             if (disposing)
             {
+                taskCompletionSource.SetResult(ExitCode);
                 api.SetCursorInfo(consoleController.OutputHandle, originalCursorVisible, originalCursorSize, Point.Empty);
                 consoleController.FocusEvent -= OnConsoleControllerFocusReceived;
                 consoleController.KeyEvent -= OnConsoleControllerKeyReceived;
@@ -245,6 +268,18 @@ namespace ConControls.Controls
         }
 
         /// <inheritdoc />
+        public void Close(int exitCode = 0)
+        {
+            lock (SynchronizationLock)
+            {
+                ExitCode = exitCode;
+                Dispose();
+            }
+        }
+        /// <inheritdoc />
+        public async Task<int> WaitForCloseAsync() => await taskCompletionSource.Task.ConfigureAwait(false);
+
+        /// <inheritdoc />
         public Point PointToClient(Point consolePoint) => consolePoint;
         /// <inheritdoc />
         public Point PointToConsole(Point clientPoint) => clientPoint;
@@ -252,11 +287,6 @@ namespace ConControls.Controls
         /// <inheritdoc />
         public IConsoleGraphics GetGraphics() => graphicsProvider.Provide(consoleController.OutputHandle, api, Size, frameCharSets);
 
-        /// <inheritdoc />
-        public void SetActiveScreen(bool show)
-        {
-            lock (SynchronizationLock) consoleController.SetActiveScreen(show);
-        }
         void Draw()
         {
             Logger.Log(DebugContext.Window | DebugContext.Drawing, "called.");
@@ -390,9 +420,9 @@ namespace ConControls.Controls
 
                 var eventArgs = new KeyEventArgs(e);
                 KeyEvent?.Invoke(this, eventArgs);
-                if (eventArgs.Handled) return;
+                if (eventArgs.Handled || !eventArgs.KeyDown) return;
 
-                if (eventArgs.KeyDown && eventArgs.VirtualKey == VirtualKey.Tab)
+                if (eventArgs.VirtualKey == VirtualKey.Tab)
                 {
                     var controlKeys = eventArgs.ControlKeys.WithoutSwitches();
                     if (controlKeys == ControlKeyStates.SHIFT_PRESSED)
@@ -400,6 +430,11 @@ namespace ConControls.Controls
                     else if (controlKeys == ControlKeyStates.None)
                         FocusNext();
                 }
+
+                if (e.Matches(CloseWindowKey))
+                    Close();
+                if (e.Matches(SwitchConsoleBuffersKey))
+                    ActiveScreen = !ActiveScreen;
             }
         }
         [ExcludeFromCodeCoverage]

@@ -135,5 +135,15 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                                             }));
             sut.FocusedControl.Should().BeNull();
         }
+        [TestMethod]
+        public void KeyEvent_SwitchBuffersKey_BuffersSwitched()
+        {
+            Assert.Inconclusive();
+        }
+        [TestMethod]
+        public void KeyEvent_CloseWindowKey_WindowClosed()
+        {
+            Assert.Inconclusive();
+        }
     }
 }

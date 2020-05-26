@@ -26,6 +26,7 @@ namespace ConControls.ConsoleApi
         readonly string originalTitle;
         
         int disposed;
+        bool activeScreen = true;
 
         public event EventHandler<ConsoleFocusEventArgs>? FocusEvent;
         public event EventHandler<ConsoleKeyEventArgs>? KeyEvent;
@@ -34,6 +35,16 @@ namespace ConControls.ConsoleApi
         public event EventHandler<ConsoleMenuEventArgs>? MenuEvent;
 
         public ConsoleOutputHandle OutputHandle { get; }
+        public bool ActiveScreen
+        {
+            get => activeScreen;
+            set
+            {
+                if (value == activeScreen) return;
+                if (api.SetActiveConsoleScreenBuffer(value ? OutputHandle : originalOutputHandle))
+                    activeScreen = value;
+            }
+        }
 
         internal ConsoleController(INativeCalls? api = null)
         {
@@ -69,11 +80,6 @@ namespace ConControls.ConsoleApi
             api.SetActiveConsoleScreenBuffer(originalOutputHandle);
             api.SetConsoleTitle(originalTitle);
             originalOutputHandle.Dispose();
-        }
-
-        public void SetActiveScreen(bool set)
-        {
-            api.SetActiveConsoleScreenBuffer(set ? OutputHandle : originalOutputHandle);
         }
 
         [SuppressMessage("Design", "CA1031", Justification = "Leave thread cleanly.")]

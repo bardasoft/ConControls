@@ -12,9 +12,9 @@ using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ConControlsTests.UnitTests.Helpers.ControlKeyStatesExtensions
+namespace ConControlsTests.UnitTests.Helpers.KeyHandlingExtensions
 {
-    public partial class ControlKeyStatesExtensionsTests
+    public partial class KeyHandlingExtensionsTests
     {
         [TestMethod]
         public void WithoutSwitches_CorrectResults()

@@ -10,7 +10,6 @@
 using System.Drawing;
 using System.Threading.Tasks;
 using ConControls.Controls;
-using ConControls.WindowsApi.Types;
 
 // ReSharper disable AccessToDisposedClosure
 
@@ -24,9 +23,10 @@ namespace ConControlsExamples.Examples
         {
             using var window = new ConsoleWindow
             {
-                Title = "ConControls: WindowSize example"
+                Title = "ConControls: WindowSize example",
+                CloseWindowKey = KeyCombination.Escape,
+                SwitchConsoleBuffersKey = KeyCombination.F11
             };
-            TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
             using(window.DeferDrawing())
             {
                 const int smallX = 50, largeX = 150;
@@ -36,20 +36,6 @@ namespace ConControlsExamples.Examples
                     large = new Size(largeX, largeY),
                     longer = new Size(smallX, largeY),
                     wider = new Size(largeX, smallY);
-
-                bool active = true;
-
-                window.KeyEvent += (sender, e) =>
-                {
-                    if (!e.KeyDown) return;
-                    if (e.VirtualKey == VirtualKey.Escape)
-                        tcs.SetResult(0);
-                    if (e.VirtualKey == VirtualKey.F1)
-                    {
-                        active = !active;
-                        window.SetActiveScreen(active);
-                    }
-                };
 
                 var panel = new Panel(window)
                 {
@@ -96,7 +82,7 @@ namespace ConControlsExamples.Examples
 
             }
 
-            await tcs.Task;
+            await window.WaitForCloseAsync();
         }
     }
 }
