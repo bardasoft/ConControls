@@ -14,7 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.gitignore = ..\.gitignore
 		..\LICENSE.md = ..\LICENSE.md
 		..\README.md = ..\README.md
-		..\ReleaseNotes.md = ..\ReleaseNotes.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConControlsTests", "ConControlsTests\ConControlsTests.csproj", "{5920A0BB-2D33-453D-91D1-B01870F7F1A7}"
@@ -23,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{DD210605-D
 	ProjectSection(SolutionItems) = preProject
 		..\docs\index.md = ..\docs\index.md
 		..\docs\Manual.md = ..\docs\Manual.md
+		..\docs\ReleaseNotes.md = ..\docs\ReleaseNotes.md
 	EndProjectSection
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "ConControlsDocs", "ConControlsDocs\ConControlsDocs.shfbproj", "{22A4E861-6769-4E69-AF53-1807FC280C6E}"

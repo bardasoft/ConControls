@@ -10,7 +10,7 @@ of a console application without the overhead of creating a UI with frameworks l
 
 A manual can be found [here](docs/Manual.md).  
 
-The api documentation is a [Sandcastle](https://github.com/EWSoftware/SHFB) compiled html help file: [ConControls.chm](docs/ConControls.chm).
+The api documentation is a [Sandcastle](https://github.com/EWSoftware/SHFB) compiled html help file: [ConControls.chm](docs/api/ConControls.chm).
 
 ---
 
