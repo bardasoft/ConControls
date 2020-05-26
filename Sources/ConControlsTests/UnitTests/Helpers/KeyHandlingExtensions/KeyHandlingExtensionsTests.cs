@@ -10,11 +10,11 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ConControlsTests.UnitTests.Helpers.ControlKeyStatesExtensions
+namespace ConControlsTests.UnitTests.Helpers.KeyHandlingExtensions
 {
     [TestClass]
     [ExcludeFromCodeCoverage]
-    public partial class ControlKeyStatesExtensionsTests
+    public partial class KeyHandlingExtensionsTests
     {
     }
 }

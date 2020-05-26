@@ -20,8 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConControlsTests", "ConCont
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{DD210605-D2E4-4A9F-9B78-FA6E77663A96}"
 	ProjectSection(SolutionItems) = preProject
-		..\docs\001 Intro.md = ..\docs\001 Intro.md
-		..\docs\Index.md = ..\docs\Index.md
+		..\docs\index.md = ..\docs\index.md
+		..\docs\Manual.md = ..\docs\Manual.md
 		..\docs\ReleaseNotes.md = ..\docs\ReleaseNotes.md
 	EndProjectSection
 EndProject

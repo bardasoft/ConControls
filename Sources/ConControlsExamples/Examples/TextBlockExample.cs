@@ -12,7 +12,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using ConControls.Controls;
-using ConControls.WindowsApi.Types;
 
 // ReSharper disable AccessToDisposedClosure
 
@@ -30,9 +29,11 @@ some shorter
 lines.";
             using var window = new ConsoleWindow
             {
-                Title = "ConControls: TextBlock example"
+                Title = "ConControls: TextBlock example",
+                CloseWindowKey = KeyCombination.Escape,
+                SwitchConsoleBuffersKey = KeyCombination.F11
+
             };
-            TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
             using(window.DeferDrawing())
             {
                 var panel = new Panel(window)
@@ -42,25 +43,13 @@ lines.";
                     BorderStyle = BorderStyle.Bold
                 };
                 window.Controls.Add(panel);
-                bool active = true;
-                window.KeyEvent += (sender, e) =>
-                {
-                    if (!e.KeyDown) return;
-                    if (e.VirtualKey == VirtualKey.Escape)
-                        tcs.SetResult(0);
-                    if (e.VirtualKey == VirtualKey.F1)
-                    {
-                        active = !active;
-                        window.SetActiveScreen(active);
-                    }
-                };
 
                 var btClose = new Button(window)
                 {
                     Area = new Rectangle(39, 15, 9, 3),
                     Text = "Close"
                 };
-                btClose.Click += (sender, e) => tcs.SetResult(0);
+                btClose.Click += (sender, e) => window.Close();
                 var btAppend = new Button(window)
                 {
                     Area = new Rectangle(0, 15, 10, 3),
@@ -122,7 +111,7 @@ lines.";
                 window.FocusedControl = panel.Controls[0];
             }
 
-            await tcs.Task;
+            await window.WaitForCloseAsync();
         }
     }
 }

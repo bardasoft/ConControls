@@ -15,7 +15,7 @@
     <!-- SHFB properties -->
     <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
     <OutputPath>Help\</OutputPath>
-    <HtmlHelpName>ConControls API documentation</HtmlHelpName>
+    <HtmlHelpName>ConControls</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
       <Argument Key="logoFile" Value="Help.png" xmlns="" />
@@ -87,7 +87,7 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>copy "Help\ConControls API documentation.chm" ..\..\docs</PostBuildEvent>
+    <PostBuildEvent>copy "Help\ConControls.chm" ..\..\docs\api</PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -19,6 +19,6 @@ namespace ConControls.ConsoleApi
         event EventHandler<ConsoleMenuEventArgs>? MenuEvent;
 
         ConsoleOutputHandle OutputHandle { get; }
-        void SetActiveScreen(bool set);
+        bool ActiveScreen { get; set; }
     }
 }

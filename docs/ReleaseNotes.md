@@ -1,11 +1,13 @@
 # ConControls - Release notes
 
-René Vogt, Dresden 2020/05/25
+René Vogt, Dresden 2020/05/26
 
 ---
-### Version 0.1.0-beta-2 (tbd)
+### Version 0.1.0-beta-2 (2020/05/26)
 
-List changes here...
+Added WaitForCloseAsync to wait for the ConsoleWindow to be closed.  
+Added KeyCombination and default keys for switching console buffers and closing the ConsoleWindow.  
+Fixed TextControl: redraw after Text changed.
 
 ### Version 0.1.0-beta-1 (2020/05/25)
 

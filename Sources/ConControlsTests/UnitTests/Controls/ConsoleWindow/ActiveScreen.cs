@@ -25,7 +25,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             IConsoleWindow? window = null;
             using var controller = new StubbedConsoleController
             {
-                SetActiveScreenBoolean = b =>
+                ActiveScreenSetBoolean = b =>
                 {
                     Assert.IsTrue(Monitor.IsEntered(window!.SynchronizationLock));
                     active = b;
@@ -35,9 +35,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             using var sut = new ConControls.Controls.ConsoleWindow(api, controller, new StubbedGraphicsProvider());
             window = sut;
             active.Should().BeFalse();
-            sut.SetActiveScreen(true);
+            sut.ActiveScreen = true;
             active.Should().BeTrue();
-            sut.SetActiveScreen(false);
+            sut.ActiveScreen = false;
             active.Should().BeFalse();
         }
     }

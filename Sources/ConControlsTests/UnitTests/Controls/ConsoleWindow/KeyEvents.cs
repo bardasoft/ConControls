@@ -135,5 +135,53 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
                                             }));
             sut.FocusedControl.Should().BeNull();
         }
+        [TestMethod]
+        public void KeyEvent_SwitchBuffersKey_BuffersSwitched()
+        {
+            bool active = true;
+            using var consoleController = new StubbedConsoleController
+            {
+                ActiveScreenGet = () => active,
+                ActiveScreenSetBoolean = b => active = b
+            };
+            using var api = new StubbedNativeCalls();
+            var graphicsProvider = new StubbedGraphicsProvider();
+            using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider)
+            {
+                SwitchConsoleBuffersKey = ConControls.Controls.KeyCombination.F11
+            };
+
+            var e = new ConsoleKeyEventArgs(new KEY_EVENT_RECORD
+            {
+                KeyDown = 1,
+                VirtualKeyCode = VirtualKey.F11
+            });
+            consoleController.KeyEventEvent(consoleController, e);
+            active.Should().BeFalse();
+            consoleController.KeyEventEvent(consoleController, e);
+            active.Should().BeTrue();
+            consoleController.KeyEventEvent(consoleController, e);
+            active.Should().BeFalse();
+        }
+        [TestMethod]
+        public void KeyEvent_CloseWindowKey_WindowClosed()
+        {
+            using var consoleController = new StubbedConsoleController();
+            using var api = new StubbedNativeCalls();
+            var graphicsProvider = new StubbedGraphicsProvider();
+            using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider)
+            {
+                CloseWindowKey = ConControls.Controls.KeyCombination.AltF4
+            };
+            consoleController.KeyEventEvent(consoleController,
+                                            new ConsoleKeyEventArgs(new KEY_EVENT_RECORD
+                                            {
+                                                ControlKeys = ControlKeyStates.LEFT_ALT_PRESSED,
+                                                KeyDown = 1,
+                                                VirtualKeyCode = VirtualKey.F4
+                                            }));
+
+            sut.IsDisposed.Should().BeTrue();
+        }
     }
 }

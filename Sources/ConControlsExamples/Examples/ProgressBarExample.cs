@@ -11,7 +11,6 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using ConControls.Controls;
-using ConControls.WindowsApi.Types;
 
 // ReSharper disable AccessToDisposedClosure
 
@@ -24,20 +23,9 @@ namespace ConControlsExamples.Examples
             using var window = new ConsoleWindow
             {
                 Title = "ConControls: ProgressBar example", 
-                BackgroundColor = ConsoleColor.Blue
-            };
-            TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
-            bool active = true;
-            window.KeyEvent += (sender, e) =>
-            {
-                if (!e.KeyDown) return;
-                if (e.KeyDown && e.VirtualKey == VirtualKey.Escape)
-                    tcs.SetResult(0);
-                if (e.VirtualKey == VirtualKey.F1)
-                {
-                    active = !active;
-                    window.SetActiveScreen(active);
-                }
+                BackgroundColor = ConsoleColor.Blue,
+                CloseWindowKey = KeyCombination.Escape,
+                SwitchConsoleBuffersKey = KeyCombination.F11
             };
             var l2r = new ProgressBar(window)
             {
@@ -83,7 +71,8 @@ namespace ConControlsExamples.Examples
             window.Controls.AddRange(l2r, r2l, t2b, b2t);
 
             int i = 0;
-            while(await Task.WhenAny(tcs.Task, Task.Delay(50)) != tcs.Task)
+            var closeTask = window.WaitForCloseAsync();
+            while(await Task.WhenAny(closeTask, Task.Delay(50)) != closeTask)
             {
                 i += 1;
                 double p = (double)(i % 101) / 100;

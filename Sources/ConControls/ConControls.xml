@@ -551,6 +551,9 @@
         <member name="P:ConControls.Controls.ConsoleWindow.Area">
             <inheritdoc />
         </member>
+        <member name="P:ConControls.Controls.ConsoleWindow.ExitCode">
+            <inheritdoc />
+        </member>
         <member name="P:ConControls.Controls.ConsoleWindow.CursorSize">
             <inheritdoc />
         </member>
@@ -573,6 +576,15 @@
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.FrameCharSets">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.Controls.ConsoleWindow.SwitchConsoleBuffersKey">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.Controls.ConsoleWindow.CloseWindowKey">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.Controls.ConsoleWindow.ActiveScreen">
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.DrawingInhibited">
@@ -611,6 +623,12 @@
             It allows to create a new instance (only one <see cref="T:ConControls.Controls.ConsoleWindow"/> instance can be alive
             at a time) and tries to reset the console to the state before the creation of this instacne.</remarks>
         </member>
+        <member name="M:ConControls.Controls.ConsoleWindow.Close(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:ConControls.Controls.ConsoleWindow.WaitForCloseAsync">
+            <inheritdoc />
+        </member>
         <member name="M:ConControls.Controls.ConsoleWindow.PointToClient(System.Drawing.Point)">
             <inheritdoc />
         </member>
@@ -618,9 +636,6 @@
             <inheritdoc />
         </member>
         <member name="M:ConControls.Controls.ConsoleWindow.GetGraphics">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.Controls.ConsoleWindow.SetActiveScreen(System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:ConControls.Controls.ConsoleWindow.Invalidate">
@@ -1101,6 +1116,23 @@
             The <see cref="P:ConControls.Controls.IConsoleWindow.FrameCharSets"/> provider to use to draw frames.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.IConsoleWindow.SwitchConsoleBuffersKey">
+            <summary>
+            The key combination to switch between the window and the original console screen buffer.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IConsoleWindow.CloseWindowKey">
+            <summary>
+            The key combination to close the window.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IConsoleWindow.ActiveScreen">
+            <summary>
+            Gets or sets wether this window is the active console screen buffer.
+            If set to <c>true</c> this window is the active screen. If set to <c>false</c> the
+             original console screen buffer will be activated.
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.IConsoleWindow.IsDisposed">
             <summary>
             The window has been disposed of.
@@ -1110,15 +1142,6 @@
             <summary>
             A synchronization object to synchronize conosle operations.
             </summary>
-        </member>
-        <member name="M:ConControls.Controls.IConsoleWindow.SetActiveScreen(System.Boolean)">
-            <summary>
-            Sets the active screen buffer.
-            If <paramref name="show"/> is <c>true</c>, this window is set
-            as active screen buffer. If <paramref name="show"/> is <c>false</c>, the
-            original console screen buffer will be activated.
-            </summary>
-            <param name="show"><c>true</c> to show this window, <c>false</c> to display the original console screen buffer of the process.</param>
         </member>
         <member name="M:ConControls.Controls.IConsoleWindow.GetGraphics">
             <summary>
@@ -1137,6 +1160,23 @@
             Selects the previous focusable control.
             </summary>
             <returns>The focused control, or <c>null</c> if no control could be focused.</returns>
+        </member>
+        <member name="P:ConControls.Controls.IConsoleWindow.ExitCode">
+            <summary>
+            The exit code the window was closed with.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.IConsoleWindow.Close(System.Int32)">
+            <summary>
+            Closes (and diposes) the window and sets the given exit code.
+            </summary>
+            <param name="exitCode">The exit code for the window.</param>
+        </member>
+        <member name="M:ConControls.Controls.IConsoleWindow.WaitForCloseAsync">
+            <summary>
+            Waits asynchronously for the window to be closed/disposed.
+            </summary>
+            <returns>A task that is completed when the window is closed and returns the exit code.</returns>
         </member>
         <member name="T:ConControls.Controls.IControlContainer">
             <summary>
@@ -1225,6 +1265,133 @@
             </summary>
             <param name="clientPoint">The <see cref="T:System.Drawing.Point"/> in client coordinates to convert to console coordinates.</param>
             <returns>The converted <see cref="T:System.Drawing.Point"/> in console coordinates.</returns>
+        </member>
+        <member name="T:ConControls.Controls.KeyCombination">
+            <summary>
+            Represents a key combination with modifier keys.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyCombination.Escape">
+            <summary>
+            Escape.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyCombination.AltF4">
+            <summary>
+            Alt + F4.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyCombination.F11">
+            <summary>
+            F11.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyCombination.Alt">
+            <summary>
+            Gets wether an Alt key needs to be pressed.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyCombination.Ctrl">
+            <summary>
+            Gets wether a Control key needs to be pressed.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyCombination.Shift">
+            <summary>
+            Gets wether a shiftkey needs to be pressed.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.KeyCombination.Key">
+            <summary>
+            Gets the <see cref="T:ConControls.WindowsApi.Types.VirtualKey"/> of this <see cref="T:ConControls.Controls.KeyCombination"/>.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.#ctor(ConControls.WindowsApi.Types.VirtualKey)">
+            <summary>
+            Creates a new <see cref="T:ConControls.Controls.KeyCombination"/> with the given <paramref name="key"/> and no modifier keys.
+            </summary>
+            <param name="key">The key for the new <see cref="T:ConControls.Controls.KeyCombination"/>.</param>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.#ctor(ConControls.WindowsApi.Types.VirtualKey,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Creates a new <see cref="T:ConControls.Controls.KeyCombination"/> with the given <paramref name="key"/> and modifier keys.
+            </summary>
+            <param name="key">The key for the new <see cref="T:ConControls.Controls.KeyCombination"/>.</param>
+            <param name="alt"><c>true</c> if an Alt key should be pressed for this combination.</param>
+            <param name="ctrl"><c>true</c> if a Control key should be pressed for this combination.</param>
+            <param name="shift"><c>true</c> if a shift key should be pressed for this combination.</param>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.WithAlt">
+            <summary>
+            Creates a new <see cref="T:ConControls.Controls.KeyCombination"/> with the current settings but an Alt key pressed.
+            </summary>
+            <returns>A new <see cref="T:ConControls.Controls.KeyCombination"/> with the same values as the current instance but see <see cref="P:ConControls.Controls.KeyCombination.Alt"/> pressed.</returns>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.WithCtrl">
+            <summary>
+            Creates a new <see cref="T:ConControls.Controls.KeyCombination"/> with the current settings but a Control key pressed.
+            </summary>
+            <returns>A new <see cref="T:ConControls.Controls.KeyCombination"/> with the same values as the current instance but see <see cref="P:ConControls.Controls.KeyCombination.Ctrl"/> pressed.</returns>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.WithShift">
+            <summary>
+            Creates a new <see cref="T:ConControls.Controls.KeyCombination"/> with the current settings but a shift key pressed.
+            </summary>
+            <returns>A new <see cref="T:ConControls.Controls.KeyCombination"/> with the same values as the current instance but see <see cref="P:ConControls.Controls.KeyCombination.Shift"/> pressed.</returns>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.WithoutAlt">
+            <summary>
+            Creates a new <see cref="T:ConControls.Controls.KeyCombination"/> with the current settings but no Alt key pressed.
+            </summary>
+            <returns>A new <see cref="T:ConControls.Controls.KeyCombination"/> with the same values as the current instance but not see <see cref="P:ConControls.Controls.KeyCombination.Alt"/> pressed.</returns>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.WithoutCtrl">
+            <summary>
+            Creates a new <see cref="T:ConControls.Controls.KeyCombination"/> with the current settings but no Control key pressed.
+            </summary>
+            <returns>A new <see cref="T:ConControls.Controls.KeyCombination"/> with the same values as the current instance but not see <see cref="P:ConControls.Controls.KeyCombination.Ctrl"/> pressed.</returns>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.WithoutShift">
+            <summary>
+            Creates a new <see cref="T:ConControls.Controls.KeyCombination"/> with the current settings but no shift key pressed.
+            </summary>
+            <returns>A new <see cref="T:ConControls.Controls.KeyCombination"/> with the same values as the current instance but not see <see cref="P:ConControls.Controls.KeyCombination.Shift"/> pressed.</returns>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.Equals(System.Object)">
+            <summary>
+            Tests a value or reference for equality.
+            </summary>
+            <param name="obj">The instance to check for equality.</param>
+            <returns><c>true</c> if <paramref name="obj"/> is a <see cref="T:ConControls.Controls.KeyCombination"/> and has the same properties as the current instance.</returns>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.Equals(ConControls.Controls.KeyCombination)">
+            <summary>
+            Tests a <see cref="T:ConControls.Controls.KeyCombination"/> instance for equality.
+            </summary>
+            <param name="other">The other <see cref="T:ConControls.Controls.KeyCombination"/> to check for equality.</param>
+            <returns><c>true</c> if <paramref name="other"/> has the same properties as the current instance.</returns>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.GetHashCode">
+            <summary>
+            Calculates a hash code for this instance.
+            </summary>
+            <returns>The hash code for this instance.</returns>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.op_Equality(ConControls.Controls.KeyCombination,ConControls.Controls.KeyCombination)">
+            <summary>
+            Tests two <see cref="T:ConControls.Controls.KeyCombination"/> instances for equality.
+            </summary>
+            <param name="left">The left operand.</param>
+            <param name="right">The right operand.</param>
+            <returns><c>true</c> if the two instances have the same property values, <c>false</c> if not.</returns>
+        </member>
+        <member name="M:ConControls.Controls.KeyCombination.op_Inequality(ConControls.Controls.KeyCombination,ConControls.Controls.KeyCombination)">
+            <summary>
+            Tests two <see cref="T:ConControls.Controls.KeyCombination"/> instances for inequality.
+            </summary>
+            <param name="left">The left operand.</param>
+            <param name="right">The right operand.</param>
+            <returns><c>false</c> if the two instances have the same property values, <c>true</c> if not.</returns>
         </member>
         <member name="T:ConControls.Controls.KeyEventArgs">
             <summary>

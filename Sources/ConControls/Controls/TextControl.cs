@@ -343,7 +343,8 @@ namespace ConControls.Controls
         /// </summary>
         protected virtual void OnTextChanged()
         {
-            TextChanged?.Invoke(this, EventArgs.Empty);
+            using (DeferDrawing())
+                TextChanged?.Invoke(this, EventArgs.Empty);
         }
 
         void UpdateCursorPosition()
