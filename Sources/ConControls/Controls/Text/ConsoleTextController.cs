@@ -99,6 +99,12 @@ namespace ConControls.Controls.Text
         }
         public char[] GetCharacters(Rectangle area)
         {
+            area = new Rectangle(
+                x: Math.Max(0, area.Left),
+                y: Math.Max(0, area.Top),
+                width: Math.Max(0, area.Width),
+                height: Math.Max(0, area.Height));
+            
             char[] buffer = Enumerable.Repeat('\0', area.Height * area.Width).ToArray();
             var bufferLines = allLines.Skip(area.Top).Take(area.Height);
             char[] result = bufferLines.SelectMany(MakeBufferLine).ToArray();

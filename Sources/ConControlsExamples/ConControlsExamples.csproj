@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ConControls, Version=0.1.0.0, Culture=neutral, PublicKeyToken=0c748459a7cbda03, processorArchitecture=MSIL">
-      <HintPath>..\packages\ConControls.0.1.0-beta-2\lib\netstandard2.0\ConControls.dll</HintPath>
+      <HintPath>..\packages\ConControls.0.1.0-beta-3\lib\netstandard2.0\ConControls.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

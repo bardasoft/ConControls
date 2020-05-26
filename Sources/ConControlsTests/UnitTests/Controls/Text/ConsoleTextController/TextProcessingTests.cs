@@ -91,5 +91,25 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
                    '0', '1', '2', '3', '4', '\0',
                    '\0', '\0', '\0', '\0', '\0', '\0');
         }
+        [TestMethod]
+        public void TextProcessing_RequestingAreaWithNegativeSize_Empty()
+        {
+            const string text = "01234\r\n01234";
+            var sut = new ConControls.Controls.Text.ConsoleTextController
+            {
+                Width = 5,
+                Wrap = true,
+                Text = text
+            };
+            sut.GetCharacters(new Rectangle(Point.Empty, new Size(-1, 1)))
+               .Should()
+               .BeEmpty();
+            sut.GetCharacters(new Rectangle(Point.Empty, new Size(1, -1)))
+               .Should()
+               .BeEmpty();
+            sut.GetCharacters(new Rectangle(Point.Empty, new Size(-1, -1)))
+               .Should()
+               .BeEmpty();
+        }
     }
 }

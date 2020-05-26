@@ -3,6 +3,10 @@
 René Vogt, Dresden 2020/05/26
 
 ---
+### Version 0.1.0-beta-3 (tba)
+
+Fixed exception for too small areas in TextControl.
+
 ### Version 0.1.0-beta-2 (2020/05/26)
 
 Added WaitForCloseAsync to wait for the ConsoleWindow to be closed.  
