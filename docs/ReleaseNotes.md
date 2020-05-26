@@ -1,6 +1,6 @@
 # ConControls - Release notes
 
-René Vogt, Dresden 2020/05/26
+Ren&eacute; Vogt, Dresden 2020/05/26
 
 ---
 ### Version 0.1.0-beta-2 (2020/05/26)

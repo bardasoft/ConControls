@@ -1,7 +1,7 @@
 # ConControls 
 ### A class library for console UI controls.
 
-René Vogt, Dresden 2020/05/25
+Ren&eacute; Vogt, Dresden 2020/05/26
 
 ---
 
