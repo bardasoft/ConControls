@@ -22,7 +22,7 @@ namespace ConControls.Helpers
             if (e.ControlKeys.HasFlag(ControlKeyStates.LEFT_ALT_PRESSED) || e.ControlKeys.HasFlag(ControlKeyStates.RIGHT_ALT_PRESSED)) combi = combi.WithAlt();
             if (e.ControlKeys.HasFlag(ControlKeyStates.LEFT_CTRL_PRESSED) || e.ControlKeys.HasFlag(ControlKeyStates.RIGHT_CTRL_PRESSED)) combi = combi.WithCtrl();
             if (e.ControlKeys.HasFlag(ControlKeyStates.SHIFT_PRESSED)) combi = combi.WithShift();
-            return combi == combination;
+            return combi == combination.Value;
         }
     }
 }
