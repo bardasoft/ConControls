@@ -1301,6 +1301,11 @@
             Gets wether a shiftkey needs to be pressed.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.KeyCombination.Key">
+            <summary>
+            Gets the <see cref="T:ConControls.WindowsApi.Types.VirtualKey"/> of this <see cref="T:ConControls.Controls.KeyCombination"/>.
+            </summary>
+        </member>
         <member name="M:ConControls.Controls.KeyCombination.#ctor(ConControls.WindowsApi.Types.VirtualKey)">
             <summary>
             Creates a new <see cref="T:ConControls.Controls.KeyCombination"/> with the given <paramref name="key"/> and no modifier keys.

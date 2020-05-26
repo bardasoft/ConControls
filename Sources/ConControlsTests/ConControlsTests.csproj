@@ -156,6 +156,7 @@
     <Compile Include="UnitTests\Controls\ConsoleWindow\ConsoleWindowTests.cs" />
     <Compile Include="UnitTests\Controls\ControlCollection\IndexOf.cs" />
     <Compile Include="UnitTests\Controls\Drawing\ConsoleGraphics\CopyCharacters.cs" />
+    <Compile Include="UnitTests\Controls\KeyCombination\Equals.cs" />
     <Compile Include="UnitTests\Controls\KeyCombination\Without.cs" />
     <Compile Include="UnitTests\Controls\KeyCombination\With.cs" />
     <Compile Include="UnitTests\Controls\KeyCombination\Construction.cs" />

@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using ConControls.WindowsApi.Types;
 
 namespace ConControls.Controls
@@ -18,14 +19,17 @@ namespace ConControls.Controls
         /// <summary>
         /// Escape.
         /// </summary>
+        [ExcludeFromCodeCoverage]
         public static KeyCombination Escape { get; } = new KeyCombination(VirtualKey.Escape);
         /// <summary>
         /// Alt + F4.
         /// </summary>
+        [ExcludeFromCodeCoverage]
         public static KeyCombination AltF4 { get; } = new KeyCombination(VirtualKey.F4).WithAlt();
         /// <summary>
         /// F11.
         /// </summary>
+        [ExcludeFromCodeCoverage]
         public static KeyCombination F11 { get; } = new KeyCombination(VirtualKey.F11);
         /// <summary>
         /// Gets wether an Alt key needs to be pressed.
@@ -39,7 +43,10 @@ namespace ConControls.Controls
         /// Gets wether a shiftkey needs to be pressed.
         /// </summary>
         public bool Shift { get; }
-        VirtualKey Key { get; }
+        /// <summary>
+        /// Gets the <see cref="VirtualKey"/> of this <see cref="KeyCombination"/>.
+        /// </summary>
+        public VirtualKey Key { get; }
         /// <summary>
         /// Creates a new <see cref="KeyCombination"/> with the given <paramref name="key"/> and no modifier keys.
         /// </summary>
@@ -52,7 +59,7 @@ namespace ConControls.Controls
         /// <param name="alt"><c>true</c> if an Alt key should be pressed for this combination.</param>
         /// <param name="ctrl"><c>true</c> if a Control key should be pressed for this combination.</param>
         /// <param name="shift"><c>true</c> if a shift key should be pressed for this combination.</param>
-        public KeyCombination(VirtualKey key, bool alt, bool ctrl, bool shift) => (Key, Alt, Ctrl, Shift) = (key, alt, ctrl, shift);
+        public KeyCombination(VirtualKey key, bool alt, bool ctrl, bool shift) : this(key) => (Alt, Ctrl, Shift) = (alt, ctrl, shift);
         /// <summary>
         /// Creates a new <see cref="KeyCombination"/> with the current settings but an Alt key pressed.
         /// </summary>
@@ -94,6 +101,7 @@ namespace ConControls.Controls
         /// <returns><c>true</c> if <paramref name="other"/> has the same properties as the current instance.</returns>
         public bool Equals(KeyCombination other) => this == other;
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage]
         public override int GetHashCode()
         {
             unchecked
