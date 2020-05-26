@@ -11,7 +11,7 @@
     <Copyright>René Vogt</Copyright>
     <PackageLicenseExpression></PackageLicenseExpression>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/ReneVogt/ConControls</PackageProjectUrl>
+    <PackageProjectUrl>https://renevogt.github.io/ConControls/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ReneVogt/ConControls</RepositoryUrl>
     <SignAssembly>true</SignAssembly>
     <LangVersion>latest</LangVersion>
@@ -21,7 +21,7 @@
     <PackageOutputPath>..\..\nuget</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageReleaseNotes>For complete release notes see https://github.com/ReneVogt/ConControls/blob/master/docs/ReleaseNotes.md</PackageReleaseNotes>
+    <PackageReleaseNotes>For complete release notes see https://renevogt.github.io/ConControls/ReleaseNotes</PackageReleaseNotes>
     <PackageTags>windows console ui</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <DocumentationFile>ConControls.xml</DocumentationFile>
