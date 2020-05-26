@@ -1,4 +1,4 @@
-theme: jekyll-theme-minimal
+theme: jekyll-theme-slate
 title: Welcome to ConControls!
 author: René Vogt
 description: ConControls is a library for Windows console ui controls.
