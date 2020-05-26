@@ -87,7 +87,7 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>copy "Help\ConControls API documentation.chm" ..\..\docs\api</PostBuildEvent>
+    <PostBuildEvent>copy "Help\ConControls.chm" ..\..\docs\api</PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -91,7 +91,11 @@ namespace ConControls.Controls
         /// <returns>A new <see cref="KeyCombination"/> with the same values as the current instance but not see <see cref="Shift"/> pressed.</returns>
         public KeyCombination WithoutShift() => new KeyCombination(Key, Alt, Ctrl, false);
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Tests a value or reference for equality.
+        /// </summary>
+        /// <param name="obj">The instance to check for equality.</param>
+        /// <returns><c>true</c> if <paramref name="obj"/> is a <see cref="KeyCombination"/> and has the same properties as the current instance.</returns>
         public override bool Equals(object obj) => obj is KeyCombination kc && this == kc;
 
         /// <summary>
@@ -100,7 +104,10 @@ namespace ConControls.Controls
         /// <param name="other">The other <see cref="KeyCombination"/> to check for equality.</param>
         /// <returns><c>true</c> if <paramref name="other"/> has the same properties as the current instance.</returns>
         public bool Equals(KeyCombination other) => this == other;
-        /// <inheritdoc />
+        /// <summary>
+        /// Calculates a hash code for this instance.
+        /// </summary>
+        /// <returns>The hash code for this instance.</returns>
         [ExcludeFromCodeCoverage]
         public override int GetHashCode()
         {

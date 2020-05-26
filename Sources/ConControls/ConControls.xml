@@ -1358,7 +1358,11 @@
             <returns>A new <see cref="T:ConControls.Controls.KeyCombination"/> with the same values as the current instance but not see <see cref="P:ConControls.Controls.KeyCombination.Shift"/> pressed.</returns>
         </member>
         <member name="M:ConControls.Controls.KeyCombination.Equals(System.Object)">
-            <inheritdoc />
+            <summary>
+            Tests a value or reference for equality.
+            </summary>
+            <param name="obj">The instance to check for equality.</param>
+            <returns><c>true</c> if <paramref name="obj"/> is a <see cref="T:ConControls.Controls.KeyCombination"/> and has the same properties as the current instance.</returns>
         </member>
         <member name="M:ConControls.Controls.KeyCombination.Equals(ConControls.Controls.KeyCombination)">
             <summary>
@@ -1368,7 +1372,10 @@
             <returns><c>true</c> if <paramref name="other"/> has the same properties as the current instance.</returns>
         </member>
         <member name="M:ConControls.Controls.KeyCombination.GetHashCode">
-            <inheritdoc />
+            <summary>
+            Calculates a hash code for this instance.
+            </summary>
+            <returns>The hash code for this instance.</returns>
         </member>
         <member name="M:ConControls.Controls.KeyCombination.op_Equality(ConControls.Controls.KeyCombination,ConControls.Controls.KeyCombination)">
             <summary>

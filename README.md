@@ -14,8 +14,4 @@ The api documentation is a [Sandcastle](https://github.com/EWSoftware/SHFB) comp
 
 ---
 
-This package is available at https://www.nuget.org/packages/ConControls/ and can be installed like this:
-- PackageManager: `PM> Install-Package ConControls -Version 0.1.0-beta-1`
-- .NET CLI: `> dotnet add package ConControls --version 0.1.0-beta-1`
-- PackageReference: `<PackageReference Include="ConControls" Version="0.1.0-beta-1" />`
-- Paket CLI: `> paket add ConControls --version 0.1.0-beta-1`
+This package is available at https://www.nuget.org/packages/ConControls.
