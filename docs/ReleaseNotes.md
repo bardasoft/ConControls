@@ -1,8 +1,5 @@
 # ConControls - Release notes
 
-René Vogt, Dresden 2020/05/26
-
----
 ### Version 0.1.0-beta-3 (tba)
 
 Fixed exception for too small areas in TextControl.
@@ -16,3 +13,7 @@ Fixed TextControl: redraw after Text changed.
 ### Version 0.1.0-beta-1 (2020/05/25)
 
 This is the first published version of ConControls. There is still a lot missing for a 1.0, but tests can begin.
+
+---
+Ren&eacute; Vogt  
+Dresden 2020/05/27
