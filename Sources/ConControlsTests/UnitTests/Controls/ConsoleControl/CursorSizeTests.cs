@@ -17,13 +17,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void CursorSize_Changed_ThreadSafeHandlerCall()
         {
-            var stubbedWindow = new StubbedWindow
-            {
-                CursorSizeGet = () => 12
-            };
+            var stubbedWindow = new StubbedWindow();
 
             var sut = new StubbedConsoleControl(stubbedWindow);
-            sut.CursorSize.Should().Be(12);
+            sut.CursorSize.Should().BeNull();
             bool eventRaised = false;
             sut.CursorSizeChanged += (sender, e) =>
             {
@@ -41,10 +38,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void CursorSize_NotChanged_NoEvent()
         {
-            var stubbedWindow = new StubbedWindow
-            {
-                CursorSizeGet = () => 12
-            };
+            var stubbedWindow = new StubbedWindow();
 
             var sut = new StubbedConsoleControl(stubbedWindow);
             bool eventRaised = false;
@@ -56,7 +50,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorSizeChanged).Should().Be(0);
             sut.CursorSize = sut.CursorSize;
-            sut.CursorSize.Should().Be(12);
+            sut.CursorSize.Should().BeNull();
             sut.GetMethodCount(StubbedConsoleControl.MethodOnCursorSizeChanged).Should().Be(0);
             eventRaised.Should().BeFalse();
         }

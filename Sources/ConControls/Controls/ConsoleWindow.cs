@@ -55,7 +55,7 @@ namespace ConControls.Controls
         ConsoleColor defaultBackgroundColor = ConsoleColor.Black;
         ConsoleColor defaultBorderColor = ConsoleColor.Yellow;
         BorderStyle defaultBorderStyle = ConControls.Controls.BorderStyle.None;
-        int defaultCursorSize = 1;
+        int defaultCursorSize;
 
         /// <inheritdoc />
         public event EventHandler? AreaChanged;
@@ -68,8 +68,7 @@ namespace ConControls.Controls
 
         /// <inheritdoc />
         public IConsoleWindow Window => this;
-        /// <inheritdoc />
-        public IControlContainer? Parent => throw Exceptions.WindowHasNoParent();
+        IControlContainer? IControlContainer.Parent => null;
         /// <inheritdoc />
         public string Title
         {
@@ -314,7 +313,7 @@ namespace ConControls.Controls
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
 
             (originalCursorVisible, originalCursorSize, _) = this.api.GetCursorInfo(this.consoleController.OutputHandle);
-            DefaultCursorSize = originalCursorSize;
+            defaultCursorSize = originalCursorSize;
             this.api.SetCursorInfo(this.consoleController.OutputHandle, false, DefaultCursorSize, Point.Empty);
 
             Invalidate();

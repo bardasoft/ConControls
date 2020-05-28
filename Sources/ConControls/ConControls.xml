@@ -546,9 +546,6 @@
         <member name="P:ConControls.Controls.ConsoleWindow.Window">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.Parent">
-            <inheritdoc />
-        </member>
         <member name="P:ConControls.Controls.ConsoleWindow.Title">
             <inheritdoc />
         </member>
@@ -1813,11 +1810,6 @@
         <member name="P:ConControls.Properties.Resources.Exception_WindowDisposed">
             <summary>
               Sucht eine lokalisierte Zeichenfolge, die The console window used by this control has already been disposed of! ähnelt.
-            </summary>
-        </member>
-        <member name="P:ConControls.Properties.Resources.Exception_WindowHasNoParent">
-            <summary>
-              Sucht eine lokalisierte Zeichenfolge, die A console window does not have a parent! ähnelt.
             </summary>
         </member>
         <member name="P:ConControls.Properties.Resources.Exception_WindowSizeNotSupported">

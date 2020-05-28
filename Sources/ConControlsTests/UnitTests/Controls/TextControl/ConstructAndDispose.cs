@@ -18,15 +18,10 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
         [TestMethod]
         public void ConstructAndDispsoed_EventsWired_EventsUnwired()
         {
-            const int cursorSize = 42;
-            using var window = new StubbedWindow
-            {
-                CursorSizeGet = () => cursorSize
-            };
+            using var window = new StubbedWindow();
             var textController = new StubbedConsoleTextController();
 
             using var sut = new StubbedTextControl(window, textController);
-            sut.CursorSize.Should().Be(cursorSize);
             sut.CursorVisible.Should().BeTrue();
             sut.CursorPosition.Should().Be(Point.Empty);
         }

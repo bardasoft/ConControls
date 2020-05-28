@@ -150,9 +150,6 @@
   <data name="Exception_WindowDisposed" xml:space="preserve">
     <value>The console window used by this control has already been disposed of!</value>
   </data>
-  <data name="Exception_WindowHasNoParent" xml:space="preserve">
-    <value>A console window does not have a parent!</value>
-  </data>
   <data name="Exception_WindowSizeNotSupported" xml:space="preserve">
     <value>Changing the console window's size is currently not supported!</value>
   </data>
