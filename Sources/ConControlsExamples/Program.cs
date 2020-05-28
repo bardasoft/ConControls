@@ -45,7 +45,9 @@ namespace ConControlsExamples
                     return button;
                 });
                 window.Controls.AddRange(buttons.Cast<ConsoleControl>().ToArray());
-                window.Controls.Add(new Button(window){Text = "Close", Area=new Rectangle(0, 3 * window.Controls.Count, 9, 3)});
+                var btClose = new Button(window) {Text = "Close", Area = new Rectangle(0, 3 * window.Controls.Count, 9, 3)};
+                btClose.Click += (sender, e) => windowCompletion.SetResult(0);
+                window.Controls.Add(btClose);
             }
 
             await windowCompletion.Task;

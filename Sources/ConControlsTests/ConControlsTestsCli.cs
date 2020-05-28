@@ -45,7 +45,7 @@ namespace ConControlsTests
                     {
                         Parent = window,
                         Area = window.Area,
-                        BorderStyle = BorderStyle.DoubleLined,
+                        BorderStyle = BorderStyle.DoubleLined
                     };
                     _ = new TextBlock(window)
                     {

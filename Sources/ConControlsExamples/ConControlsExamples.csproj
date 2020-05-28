@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ConControls, Version=0.1.0.0, Culture=neutral, PublicKeyToken=0c748459a7cbda03, processorArchitecture=MSIL">
-      <HintPath>..\packages\ConControls.0.1.0-beta-3\lib\netstandard2.0\ConControls.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -57,7 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConControls\ConControls.csproj">
+      <Project>{7c62650c-7394-4d27-9985-1f78228c15e7}</Project>
+      <Name>ConControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
