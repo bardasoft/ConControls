@@ -38,23 +38,23 @@ namespace ConControls.Controls
         /// Gets or sets the default cursor size to use (0-100) for
         /// newly created focusable controls.
         /// </summary>
-        int CursorSize { get; set; }
+        int DefaultCursorSize { get; set; }
         /// <summary>
         /// Gets or sets the default foreground color.
         /// </summary>
-        ConsoleColor ForegroundColor { get; set; }
+        ConsoleColor DefaultForegroundColor { get; set; }
         /// <summary>
         /// Gets or sets the default background color.
         /// </summary>
-        ConsoleColor BackgroundColor { get; set; }
+        ConsoleColor DefaultBackgroundColor { get; set; }
         /// <summary>
         /// Gets or sets the default border color.
         /// </summary>
-        ConsoleColor BorderColor { get; set; }
+        ConsoleColor DefaultBorderColor { get; set; }
         /// <summary>
         /// Gets or sets the default border style.
         /// </summary>
-        BorderStyle BorderStyle { get; set; }
+        BorderStyle DefaultBorderStyle { get; set; }
         /// <summary>
         /// Gets or sets the currently focused control on this window.
         /// </summary>

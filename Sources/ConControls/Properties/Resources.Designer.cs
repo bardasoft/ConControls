@@ -160,6 +160,15 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die A console window does not have a parent! ähnelt.
+        /// </summary>
+        internal static string Exception_WindowHasNoParent {
+            get {
+                return ResourceManager.GetString("Exception_WindowHasNoParent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Changing the console window&apos;s size is currently not supported! ähnelt.
         /// </summary>
         internal static string Exception_WindowSizeNotSupported {

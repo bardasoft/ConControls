@@ -37,5 +37,6 @@ namespace ConControls
             new Win32Exception(Resources.Exception_CouldNotCreateScreenBuffer, new Win32Exception(Marshal.GetLastWin32Error()));
         internal static Win32Exception CouldNotSetScreenBuffer() =>
             new Win32Exception(Resources.Exception_CouldNotSetScreenBuffer, new Win32Exception(Marshal.GetLastWin32Error()));
+        internal static InvalidOperationException WindowHasNoParent() => new InvalidOperationException(Resources.Exception_WindowHasNoParent);
     }
 }

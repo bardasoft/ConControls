@@ -58,11 +58,11 @@ namespace ConControls.Controls {
             DisabledBackgroundColor = ConsoleColor.DarkBlue;
             DisabledForegroundColor = ConsoleColor.Gray;
             BorderColor = ConsoleColor.DarkYellow;
-            BorderStyle = BorderStyle.SingleLined;
+            BorderStyle = ConControls.Controls.BorderStyle.SingleLined;
             FocusedBackgroundColor = ConsoleColor.Blue;
             FocusedForegroundColor = ConsoleColor.Yellow;
             FocusedBorderColor = ConsoleColor.Yellow;
-            FocusedBorderStyle = BorderStyle.DoubleLined;
+            FocusedBorderStyle = ConControls.Controls.BorderStyle.DoubleLined;
         }
 
         /// <summary>
