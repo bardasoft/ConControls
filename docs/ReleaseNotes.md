@@ -1,5 +1,10 @@
 # ConControls - Release notes
 
+### Version 0.1.0-beta-4 (2020/05/29)
+
+Thank god it's beta! Letting the `BorderStyle` default to the parent's value is such a nonsense...  
+Removed it.
+
 ### Version 0.1.0-beta-3 (2020/05/29)
 
 Changed control behaviour to default the

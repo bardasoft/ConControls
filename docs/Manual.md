@@ -70,7 +70,7 @@ a constructor parameter, but has to be set as a property. The control is not eve
 - the `SwitchConsoleBufferKey` can be used (when set) to switch between the original console screen buffer and the buffer for the instantiated window
 - the `CloseWindowKey` (when set) will close the window and set the state of the `Tàsk` returned by `WaitForCloseAsync()` to `Completed`. You can also add [`Button`](controls/Button.md)s
 to the window and use their `Click` event, or subscribe to the window's `KeyEvent` to call `window.Close()` yourself instead.
-- the appearance properties (`BackgroundColor`, `ForegroundColor`, `BorderColor`, `BorderStyle` and `CursorSize`) are nullable values and always default to the
+- the appearance properties (`BackgroundColor`, `ForegroundColor`, `BorderColor` and `CursorSize`) are nullable values and always default to the
 parent's values or finally to the window's respective `Default*` properties. Inherited controls may overwrite this behaviour or initialize their properties to a non-null value.
 
 That's basically it, at least for the current (beta-)versions. Check the [ConControlsExample](https://github.com/ReneVogt/ConControls/tree/master/Sources/ConControlsExamples) project in the sources
