@@ -40,6 +40,9 @@
             Raised when the button gets clicked.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.Button.TabStop">
+            <inheritdoc />
+        </member>
         <member name="P:ConControls.Controls.Button.Text">
             <inheritdoc />
         </member>
@@ -561,12 +564,6 @@
         <member name="P:ConControls.Controls.ConsoleWindow.ExitCode">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.BorderStyle">
-            <inheritdoc />
-        </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.CursorSize">
-            <inheritdoc />
-        </member>
         <member name="P:ConControls.Controls.ConsoleWindow.DefaultForegroundColor">
             <inheritdoc />
         </member>
@@ -607,15 +604,6 @@
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.Visible">
-            <inheritdoc />
-        </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.ForegroundColor">
-            <inheritdoc />
-        </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.BackgroundColor">
-            <inheritdoc />
-        </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.BorderColor">
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.IsDisposed">
@@ -1674,6 +1662,9 @@
             </summary>
         </member>
         <member name="P:ConControls.Controls.TextControl.CursorVisible">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.Controls.TextControl.TabStop">
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.TextControl.Text">

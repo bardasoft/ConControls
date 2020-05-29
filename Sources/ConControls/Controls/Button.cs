@@ -16,10 +16,23 @@ namespace ConControls.Controls {
     /// </summary>
     public sealed class Button : TextControl
     {
+        bool initialTabStop = true;
+
         /// <summary>
         /// Raised when the button gets clicked.
         /// </summary>
         public event EventHandler? Click;
+
+        /// <inheritdoc />
+        public override bool TabStop
+        {
+            get => base.TabStop || initialTabStop;
+            set
+            {
+                initialTabStop = false;
+                base.TabStop = value;
+            }
+        }
 
         /// <inheritdoc />
         public override string Text

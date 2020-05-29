@@ -23,7 +23,7 @@ namespace ConControlsExamples.Examples
             using var window = new ConsoleWindow
             {
                 Title = "ConControls: ProgressBar example", 
-                BackgroundColor = ConsoleColor.Blue,
+                DefaultBackgroundColor = ConsoleColor.Blue,
                 CloseWindowKey = KeyCombination.Escape,
                 SwitchConsoleBuffersKey = KeyCombination.F11
             };

@@ -54,7 +54,7 @@ namespace ConControls.Controls
         ConsoleColor defaultForegroundColor = ConsoleColor.Gray;
         ConsoleColor defaultBackgroundColor = ConsoleColor.Black;
         ConsoleColor defaultBorderColor = ConsoleColor.Yellow;
-        BorderStyle defaultBorderStyle = ConControls.Controls.BorderStyle.None;
+        BorderStyle defaultBorderStyle = BorderStyle.None;
         int defaultCursorSize;
 
         /// <inheritdoc />
@@ -68,7 +68,6 @@ namespace ConControls.Controls
 
         /// <inheritdoc />
         public IConsoleWindow Window => this;
-        IControlContainer? IControlContainer.Parent => null;
         /// <inheritdoc />
         public string Title
         {
@@ -110,19 +109,6 @@ namespace ConControls.Controls
         public int ExitCode { get; private set; }
 
         /// <inheritdoc />
-        public BorderStyle? BorderStyle
-        {
-            get => DefaultBorderStyle;
-            set => DefaultBorderStyle = value ?? DefaultBorderStyle;
-        }
-        /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        public int? CursorSize
-        {
-            get => DefaultCursorSize;
-            set => DefaultCursorSize = value ?? DefaultCursorSize;
-        }
-        /// <inheritdoc />
         public ConsoleColor DefaultForegroundColor
         {
             get => defaultForegroundColor;
@@ -130,6 +116,7 @@ namespace ConControls.Controls
             {
                 lock (SynchronizationLock)
                 {
+                    if (value == defaultForegroundColor) return;
                     defaultForegroundColor = value;
                     Invalidate();
                 }
@@ -143,6 +130,7 @@ namespace ConControls.Controls
             {
                 lock (SynchronizationLock)
                 {
+                    if (value == defaultBackgroundColor) return;
                     defaultBackgroundColor = value;
                     Invalidate();
                 }
@@ -156,6 +144,7 @@ namespace ConControls.Controls
             {
                 lock (SynchronizationLock)
                 {
+                    if (value == defaultBorderColor) return;
                     defaultBorderColor = value;
                     Invalidate();
                 }
@@ -169,6 +158,7 @@ namespace ConControls.Controls
             {
                 lock (SynchronizationLock)
                 {
+                    if (value == defaultBorderStyle) return;
                     defaultBorderStyle = value;
                     Invalidate();
                 }
@@ -182,7 +172,8 @@ namespace ConControls.Controls
             {
                 lock (SynchronizationLock)
                 {
-                    defaultCursorSize= value;
+                    if (value == defaultCursorSize) return;
+                    defaultCursorSize = value;
                     Invalidate();
                 }
             }
@@ -262,24 +253,6 @@ namespace ConControls.Controls
         public bool Enabled => !IsDisposed;
         /// <inheritdoc />
         public bool Visible => !IsDisposed;
-        /// <inheritdoc />
-        public ConsoleColor? ForegroundColor
-        {
-            get => DefaultForegroundColor;
-            set => DefaultForegroundColor = value ?? DefaultForegroundColor;
-        }
-        /// <inheritdoc />
-        public ConsoleColor? BackgroundColor
-        {
-            get => DefaultBackgroundColor;
-            set => DefaultBackgroundColor = value ?? DefaultBackgroundColor;
-        }
-        /// <inheritdoc />
-        public ConsoleColor? BorderColor
-        {
-            get => DefaultBorderColor;
-            set => DefaultBorderColor = value ?? DefaultBorderColor;
-        }
         /// <inheritdoc />
         public bool IsDisposed => isDisposed != 0;
         /// <inheritdoc />
@@ -569,5 +542,31 @@ namespace ConControls.Controls
             return size ?? DefaultCursorSize;
         }
 
+        IControlContainer? IControlContainer.Parent => null;
+        ConsoleColor? IControlContainer.ForegroundColor
+        {
+            get => DefaultForegroundColor;
+            set => DefaultForegroundColor = value ?? DefaultForegroundColor;
+        }
+        ConsoleColor? IControlContainer.BackgroundColor
+        {
+            get => DefaultBackgroundColor;
+            set => DefaultBackgroundColor = value ?? DefaultBackgroundColor;
+        }
+        ConsoleColor? IControlContainer.BorderColor
+        {
+            get => DefaultBorderColor;
+            set => DefaultBorderColor = value ?? DefaultBorderColor;
+        }
+        BorderStyle? IControlContainer.BorderStyle
+        {
+            get => DefaultBorderStyle;
+            set => DefaultBorderStyle = value ?? DefaultBorderStyle;
+        }
+        int? IControlContainer.CursorSize
+        {
+            get => DefaultCursorSize;
+            set => DefaultCursorSize = value ?? DefaultCursorSize;
+        }
     }
 }
