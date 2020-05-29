@@ -12,6 +12,8 @@ The api documentation is available as a [Sandcastle](https://github.com/EWSoftwa
 
 The NuGet package is available at https://www.nuget.org/packages/ConControls.
 
+[Release notes](https://renevogt.github.io/ConControls/ReleaseNotes)
+
 ---
-Ren&eacute; Vogt
-Dresden 2020/05/27
+Ren&eacute; Vogt  
+Dresden 2020/05/29
