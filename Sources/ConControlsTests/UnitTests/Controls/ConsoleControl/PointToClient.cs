@@ -74,8 +74,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             sut2.PointToClient(consolePoint)
                 .Should()
                 .Be(new Point(
-                        consolePoint.X - l1.X - l2.X - 1,
-                        consolePoint.Y - l1.Y - l2.Y - 1));
+                        consolePoint.X - l1.X - l2.X - 2,
+                        consolePoint.Y - l1.Y - l2.Y - 2));
         }
         [TestMethod]
         public void PointToClient_NoParent_CorrectResult()

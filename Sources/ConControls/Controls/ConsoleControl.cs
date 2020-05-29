@@ -28,36 +28,40 @@ namespace ConControls.Controls
     [SuppressMessage("Design", "CA1001", Justification = "The DisposableBlock does not need to be disposed, its Dispose method has a different purpose.")]
     public abstract class ConsoleControl : IControlContainer
     {
+        #region Backing fields
 #pragma warning disable CA2213
         readonly DisposableBlock drawingInhibiter;
 #pragma warning restore CA2213
 
         int disposed;
-        string name;
-        bool enabled = true;
-        bool visible = true;
-        Point cursorPosition;
-        int cursorSize;
-        bool cursorVisible;
-        bool lastKnownFocused;
-
-        ConsoleColor foregroundColor;
-        ConsoleColor? focusedForegroundColor;
-        ConsoleColor? disabledForegroundColor;
-        ConsoleColor backgroundColor;
-        ConsoleColor? focusedBackgroundColor;
-        ConsoleColor? disabledBackgroundColor;
-        BorderStyle borderStyle;
-        BorderStyle? focusedBorderStyle;
-        BorderStyle? disabledBorderStyle;
-        ConsoleColor borderColor;
-        ConsoleColor? focusedBorderColor;
-        ConsoleColor? disabledBorderColor;
-
-        Rectangle area;
-        IControlContainer? parent;
         int inhibitDrawing;
 
+        IControlContainer? parent;
+        string name;
+        Rectangle area;
+        bool enabled = true;
+        bool visible = true;
+
+        bool lastKnownFocused;
+
+        Point cursorPosition;
+        int? cursorSize;
+        bool cursorVisible;
+
+        ConsoleColor? foregroundColor;
+        ConsoleColor? focusedForegroundColor;
+        ConsoleColor? disabledForegroundColor;
+        ConsoleColor? backgroundColor;
+        ConsoleColor? focusedBackgroundColor;
+        ConsoleColor? disabledBackgroundColor;
+        BorderStyle? borderStyle;
+        BorderStyle? focusedBorderStyle;
+        BorderStyle? disabledBorderStyle;
+        ConsoleColor? borderColor;
+        ConsoleColor? focusedBorderColor;
+        ConsoleColor? disabledBorderColor;
+        #endregion
+        #region Events
         /// <summary>
         /// Raised when the <see cref="Enabled"/> property has been changed.
         /// </summary>
@@ -94,9 +98,46 @@ namespace ConControls.Controls
         /// The <see cref="CursorVisible"/> of the control has been changed.
         /// </summary>
         public event EventHandler? CursorVisibleChanged;
-
+        #endregion
+        #region Basic infrastructure properties
         /// <summary>
-        /// The name of this control (merely for debug identification).
+        /// The <see cref="IConsoleWindow"/> that contains this control.
+        /// </summary>
+        public IConsoleWindow Window { get; }
+        /// <summary>
+        /// The parent <see cref="ConsoleControl"/> that contains this control.
+        /// The parent must be contained by the same <see cref="IConsoleWindow"/>.
+        /// If this propery is <c>null</c>, the control is not displayed.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">The parent is not part of the same <see cref="IConsoleWindow"/> or this control is the root element of the window..</exception>
+        public IControlContainer? Parent
+        {
+            get { lock (Window.SynchronizationLock) return parent; }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (parent == value) return;
+                    if (value != null && value.Window != Window) throw Exceptions.DifferentWindow();
+
+                    var oldparent = parent;
+                    parent = value;
+
+                    oldparent?.Controls.Remove(this);
+
+                    parent?.Controls.Add(this);
+                    OnParentChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// The collection of <see cref="ConsoleControl"/>s contained by this control.
+        /// </summary>
+        public ControlCollection Controls { get; }
+        /// <summary>
+        /// Gets or sets the name of this control.
+        /// If this is set to <c>null</c> or an empty or whitespace-only string, the name will
+        /// be set to the name of the control's type.
         /// </summary>
         public string Name
         {
@@ -111,6 +152,18 @@ namespace ConControls.Controls
                 }
             }
         }
+        /// <summary>
+        /// Gets or sets a tag object for this control.
+        /// </summary>
+        [ExcludeFromCodeCoverage]
+        public object? Tag { get; set; }
+        #endregion
+        #region General state properties
+        /// <summary>
+        /// Determines if the control can currently be redrawn, depending on calls to <see cref="DeferDrawing"/>
+        /// to this control or its parents.
+        /// </summary>
+        public bool DrawingInhibited => !visible || inhibitDrawing > 0 || (parent?.DrawingInhibited ?? true);
         /// <summary>
         /// Gets or sets wether the control is enabled or not.
         /// </summary>
@@ -174,12 +227,16 @@ namespace ConControls.Controls
         /// </summary>
         /// <returns><c>true</c> if this control can take focues, <c>false</c> if not.</returns>
         public virtual bool CanFocus => false;
-
         /// <summary>
         /// Gets or sets a number indicating the control's position in the Tab order.
         /// </summary>
-        public int TabOrder { get; set; }
-
+        public virtual int TabOrder { get; set; }
+        /// <summary>
+        /// Gets or sets wether this control will be focused when using the Tab key to step through the window.
+        /// </summary>
+        public virtual bool TabStop { get; set; }
+        #endregion
+        #region Layout/appearence properties
         /// <summary>
         /// The effective total area of the control.
         /// This is the area the control effectivly fills in the console screen buffer
@@ -238,125 +295,9 @@ namespace ConControls.Controls
             }
         }
         /// <summary>
-        /// The <see cref="IConsoleWindow"/> that contains this control.
-        /// </summary>
-        public IConsoleWindow Window { get; }
-        /// <summary>
-        /// The parent <see cref="ConsoleControl"/> that contains this control.
-        /// The parent must be contained by the same <see cref="IConsoleWindow"/>.
-        /// If this propery is <c>null</c>, the control is not displayed.
-        /// </summary>
-        /// <exception cref="InvalidOperationException">The parent is not part of the same <see cref="IConsoleWindow"/> or this control is the root element of the window..</exception>
-        public IControlContainer? Parent
-        {
-            get { lock(Window.SynchronizationLock) return parent; }
-            set
-            {
-                lock (Window.SynchronizationLock)
-                {
-                    if (parent == value) return;
-                    if (value != null && value.Window != Window) throw Exceptions.DifferentWindow();
-
-                    var oldparent = parent;
-                    parent = value;
-
-                    oldparent?.Controls.Remove(this);
-                    parent?.Controls.Add(this);
-
-                    OnParentChanged();
-                }
-            }
-        }
-        /// <summary>
-        /// The collection of <see cref="ConsoleControl"/>s contained by this control.
-        /// </summary>
-        public ControlCollection Controls { get; }
-
-        /// <summary>
-        /// Determines if the control can currently be redrawn, depending on calls to <see cref="DeferDrawing"/>
-        /// to this control or its parents.
-        /// </summary>
-        public bool DrawingInhibited => !visible || inhibitDrawing > 0 || (parent?.DrawingInhibited ?? true);
-        /// <summary>
-        /// Gets or sets the cursor position for this control in character coordinates of the console
-        /// screen buffer.
-        /// </summary>
-        /// <remarks>
-        /// This property is only used by the <see cref="IConsoleWindow"/> if this control is currently
-        /// focused.
-        /// </remarks>
-        public virtual Point CursorPosition
-        {
-            get
-            {
-                lock (Window.SynchronizationLock) return cursorPosition;
-            }
-            set
-            {
-                lock (Window.SynchronizationLock)
-                {
-                    if (value == cursorPosition) return;
-                    cursorPosition = value;
-                    OnCursorPositionChanged();
-                }
-            }
-        }
-        /// <summary>
-        /// Gets or sets the cursor size for this control.
-        /// </summary>
-        /// <remarks>
-        /// <para>
-        /// This value describes the size of the text cursor. It should be between <c>zero</c> and <c>100</c>.
-        /// </para>
-        /// <para>
-        /// This property is only used by the <see cref="IConsoleWindow"/> if this control is
-        /// currently focused.
-        /// </para>
-        /// </remarks>
-        public virtual int CursorSize
-        {
-            get
-            {
-                lock (Window.SynchronizationLock) return cursorSize;
-            }
-            set
-            {
-                lock (Window.SynchronizationLock)
-                {
-                    if (value == cursorSize) return;
-                    cursorSize = value;
-                    OnCursorSizeChanged();
-                }
-            }
-        }
-        /// <summary>
-        /// Gets or sets wether the cursor is visible on this control.
-        /// screen buffer.
-        /// </summary>
-        /// <remarks>
-        /// This property is only used by the <see cref="IConsoleWindow"/> if this control is
-        /// currently focused.
-        /// </remarks>
-        public virtual bool CursorVisible
-        {
-            get
-            {
-                lock (Window.SynchronizationLock) return cursorVisible;
-            }
-            set
-            {
-                lock (Window.SynchronizationLock)
-                {
-                    if (value == cursorVisible) return;
-                    cursorVisible = value;
-                    OnCursorVisibleChanged();
-                }
-            }
-        }
-        /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings.
         /// </summary>
-        public virtual ConsoleColor ForegroundColor
+        public virtual ConsoleColor? ForegroundColor
         {
             get { lock (Window.SynchronizationLock) return foregroundColor; }
             set
@@ -406,7 +347,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for the background of this control.
         /// </summary>
-        public virtual ConsoleColor BackgroundColor
+        public virtual ConsoleColor? BackgroundColor
         {
             get { lock (Window.SynchronizationLock) return backgroundColor; }
             set
@@ -458,7 +399,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for the border of this control.
         /// </summary>
-        public virtual ConsoleColor BorderColor
+        public virtual ConsoleColor? BorderColor
         {
             get { lock (Window.SynchronizationLock) return borderColor; }
             set
@@ -510,7 +451,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="BorderStyle"/> of this control.
         /// </summary>
-        public virtual BorderStyle BorderStyle
+        public virtual BorderStyle? BorderStyle
         {
             get { lock (Window.SynchronizationLock) return borderStyle; }
             set
@@ -559,12 +500,86 @@ namespace ConControls.Controls
                 }
             }
         }
+        #endregion
+        #region Cursor properties
         /// <summary>
-        /// Gets or sets a tag object for this control.
+        /// Gets or sets the cursor position for this control in character coordinates of the console
+        /// screen buffer.
         /// </summary>
-        [ExcludeFromCodeCoverage]
-        public object? Tag { get; set; }
-
+        /// <remarks>
+        /// This property is only used by the <see cref="IConsoleWindow"/> if this control is currently
+        /// focused.
+        /// </remarks>
+        public virtual Point CursorPosition
+        {
+            get
+            {
+                lock (Window.SynchronizationLock) return cursorPosition;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (value == cursorPosition) return;
+                    cursorPosition = value;
+                    OnCursorPositionChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets the cursor size for this control.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This value describes the size of the text cursor. It should be between <c>zero</c> and <c>100</c>.
+        /// </para>
+        /// <para>
+        /// This property is only used by the <see cref="IConsoleWindow"/> if this control is
+        /// currently focused.
+        /// </para>
+        /// </remarks>
+        public virtual int? CursorSize
+        {
+            get
+            {
+                lock (Window.SynchronizationLock) return cursorSize;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (value == cursorSize) return;
+                    cursorSize = value;
+                    OnCursorSizeChanged();
+                }
+            }
+        }
+        /// <summary>
+        /// Gets or sets wether the cursor is visible on this control.
+        /// screen buffer.
+        /// </summary>
+        /// <remarks>
+        /// This property is only used by the <see cref="IConsoleWindow"/> if this control is
+        /// currently focused.
+        /// </remarks>
+        public virtual bool CursorVisible
+        {
+            get
+            {
+                lock (Window.SynchronizationLock) return cursorVisible;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (value == cursorVisible) return;
+                    cursorVisible = value;
+                    OnCursorVisibleChanged();
+                }
+            }
+        }
+        #endregion
+        #region Construction/Disposing
         /// <summary>
         /// Initializes an instance of <see cref="ConsoleControl"/>.
         /// </summary>
@@ -575,15 +590,9 @@ namespace ConControls.Controls
             Window = window ?? throw new ArgumentNullException(nameof(window));
             drawingInhibiter = new DisposableBlock(EndDeferDrawing);
             name = GetType().Name;
-            cursorSize = Window.CursorSize;
 
             Window.KeyEvent += OnWindowKeyEvent;
             Window.MouseEvent += OnWindowMouseEvent;
-
-            foregroundColor = Window.ForegroundColor;
-            backgroundColor = Window.BackgroundColor;
-            borderColor = Window.BorderColor;
-            borderStyle = Window.BorderStyle;
 
             Controls = new ControlCollection(this);
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
@@ -620,12 +629,12 @@ namespace ConControls.Controls
             if (Window.IsDisposed) throw Exceptions.WindowDisposed();
             if (disposed > 0) throw Exceptions.ControlDisposed(name);
         }
-
         /// <summary>
         /// Clears (resets states) in derived controls.
         /// </summary>
         public virtual void Clear() { }
-
+        #endregion
+        #region Drawing
         /// <inheritdoc />
         public Point PointToConsole(Point clientPoint) => Parent?.PointToConsole(Point.Add(clientPoint, (Size)Point.Add(Location, (Size)GetClientArea().Location))) ?? clientPoint;
         /// <inheritdoc />
@@ -783,35 +792,96 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets the current foreground color based on the state of <see cref="Enabled"/> and <see cref="Focused"/> properties.
         /// </summary>
-        protected virtual ConsoleColor EffectiveForegroundColor => Enabled
-                                                                       ? Focused
-                                                                             ? focusedForegroundColor ?? foregroundColor
-                                                                             : foregroundColor
-                                                                       : disabledForegroundColor ?? foregroundColor;
+        protected virtual ConsoleColor EffectiveForegroundColor
+        {
+            get
+            {
+                var tmpfg = foregroundColor;
+                var p = parent;
+                while (p != null && tmpfg == null)
+                {
+                    tmpfg = p.ForegroundColor;
+                    p = p.Parent;
+                }
+
+                var fg = tmpfg ?? Window.DefaultForegroundColor;
+                return Enabled
+                           ? Focused
+                                 ? focusedForegroundColor ?? fg
+                                 : fg
+                           : disabledForegroundColor ?? fg;
+            }
+        }
         /// <summary>
         /// Gets the current background color based on the state of <see cref="Enabled"/> and <see cref="Focused"/> properties.
         /// </summary>
-        protected virtual ConsoleColor EffectiveBackgroundColor => Enabled
-                                                                       ? Focused
-                                                                             ? focusedBackgroundColor ?? backgroundColor
-                                                                             : backgroundColor
-                                                                       : disabledBackgroundColor ?? backgroundColor;
+        protected virtual ConsoleColor EffectiveBackgroundColor
+        {
+            get
+            {
+                var tmpbg = backgroundColor;
+                var p = parent;
+                while (p != null && tmpbg == null)
+                {
+                    tmpbg = p.BackgroundColor;
+                    p = p.Parent;
+                }
+
+                var bg = tmpbg ?? Window.DefaultBackgroundColor;
+                return Enabled
+                           ? Focused
+                                 ? focusedBackgroundColor ?? bg
+                                 : bg
+                           : disabledBackgroundColor ?? bg;
+            }
+        }
         /// <summary>
         /// Gets the current border color based on the state of <see cref="Enabled"/> and <see cref="Focused"/> properties.
         /// </summary>
-        protected virtual ConsoleColor EffectiveBorderColor => Enabled
-                                                                       ? Focused
-                                                                             ? focusedBorderColor ?? borderColor
-                                                                             : borderColor
-                                                                       : disabledBorderColor ?? borderColor;
+        protected virtual ConsoleColor EffectiveBorderColor
+        {
+            get
+            {
+                var tmpbc = borderColor;
+                var p = parent;
+                while (p != null && tmpbc == null)
+                {
+                    tmpbc = p.BorderColor;
+                    p = p.Parent;
+                }
+
+                var bc = tmpbc ?? Window.DefaultBorderColor;
+
+                return Enabled
+                           ? Focused
+                                 ? focusedBorderColor ?? bc
+                                 : bc
+                           : disabledBorderColor ?? bc;
+            }
+        }
         /// <summary>
         /// Gets the current border style based on the state of <see cref="Enabled"/> and <see cref="Focused"/> properties.
         /// </summary>
-        protected virtual BorderStyle EffectiveBorderStyle => Enabled
-                                                                       ? Focused
-                                                                             ? focusedBorderStyle ?? borderStyle
-                                                                             : borderStyle
-                                                                       : disabledBorderStyle ?? borderStyle;
+        protected virtual BorderStyle EffectiveBorderStyle
+        {
+            get
+            {
+                var tmpbs = borderStyle;
+                var p = parent;
+                while (p != null && tmpbs == null)
+                {
+                    tmpbs = p.BorderStyle;
+                    p = p.Parent;
+                }
+
+                var bs = tmpbs ?? Window.DefaultBorderStyle;
+                return Enabled
+                           ? Focused
+                                 ? focusedBorderStyle ?? bs
+                                 : bs
+                           : disabledBorderStyle ?? bs;
+            }
+        }
         /// <summary>
         /// Determines the area of the control that can be used as "client" area.
         /// This base method e.g. removes the border from the total control area.
@@ -820,31 +890,17 @@ namespace ConControls.Controls
         /// <returns>A <see cref="Rectangle"/> representing the client area (in client coordinates) of this control.</returns>
         protected virtual Rectangle GetClientArea()
         {
-            return EffectiveBorderStyle == BorderStyle.None
+            return EffectiveBorderStyle == ConControls.Controls.BorderStyle.None
                        ? new Rectangle(Point.Empty, Size)
                        : new Rectangle(1, 1, Area.Width - 2, Area.Height - 2);
         }
-
-        /// <summary>
-        /// Called when the <see cref="Name"/> has changed.
-        /// </summary>
-        protected virtual void OnNameChanged()
-        {
-            NameChanged?.Invoke(this, EventArgs.Empty);
-        }
-        /// <summary>
-        /// Called when the <see cref="Parent"/> has changed.
-        /// </summary>
-        protected virtual void OnParentChanged()
-        {
-            using (DeferDrawing())
-                ParentChanged?.Invoke(this, EventArgs.Empty);
-        }
+        #endregion
+        #region Child management
         void OnControlCollectionChanged(object sender, ControlCollectionChangedEventArgs e)
         {
             lock (Window.SynchronizationLock)
             {
-                using(DeferDrawing())
+                using (DeferDrawing())
                 {
                     foreach (var addedControl in e.AddedControls)
                         addedControl.AreaChanged += OnControlAreaChanged;
@@ -855,7 +911,43 @@ namespace ConControls.Controls
             }
         }
         void OnControlAreaChanged(object sender, EventArgs e) => Invalidate(true);
-
+        #endregion
+        #region Property changed handlers
+        /// <summary>
+        /// Called when the <see cref="Parent"/> has changed.
+        /// </summary>
+        protected virtual void OnParentChanged()
+        {
+            using (DeferDrawing())
+                ParentChanged?.Invoke(this, EventArgs.Empty);
+        }
+        /// <summary>
+        /// Called when the <see cref="Name"/> has changed.
+        /// </summary>
+        protected virtual void OnNameChanged()
+        {
+            NameChanged?.Invoke(this, EventArgs.Empty);
+        }
+        /// <summary>
+        /// Called when the <see cref="Enabled"/> property of this control has been changed.
+        /// </summary>
+        protected virtual void OnEnabledChanged()
+        {
+            using (DeferDrawing())
+            {
+                EnabledChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
+        /// <summary>
+        /// Called when the <see cref="Visible"/> property of this control has been changed.
+        /// </summary>
+        protected virtual void OnVisibleChanged()
+        {
+            using (DeferDrawing())
+            {
+                VisibleChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
         /// <summary>
         /// Called when the <see cref="CursorPosition"/> property of this control has been changed.
         /// </summary>
@@ -894,26 +986,6 @@ namespace ConControls.Controls
             using (DeferDrawing())
             {
                 FocusedChanged?.Invoke(this, EventArgs.Empty);
-            }
-        }
-        /// <summary>
-        /// Called when the <see cref="Enabled"/> property of this control has been changed.
-        /// </summary>
-        protected virtual void OnEnabledChanged()
-        {
-            using(DeferDrawing())
-            {
-                EnabledChanged?.Invoke(this, EventArgs.Empty);
-            }
-        }
-        /// <summary>
-        /// Called when the <see cref="Visible"/> property of this control has been changed.
-        /// </summary>
-        protected virtual void OnVisibleChanged()
-        {
-            using (DeferDrawing())
-            {
-                VisibleChanged?.Invoke(this, EventArgs.Empty);
             }
         }
         /// <summary>
@@ -958,16 +1030,23 @@ namespace ConControls.Controls
                 AreaChanged?.Invoke(this, EventArgs.Empty);
             }
         }
+        #endregion
+        #region Window events
+        void OnWindowKeyEvent(object sender, KeyEventArgs e)
+        {
+            lock (Window.SynchronizationLock)
+                OnKeyEvent(sender, e);
+        }
         /// <summary>
         /// Called when a <see cref="IConsoleWindow.KeyEvent"/> has been received.
         /// </summary>
         /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
         /// <param name="e">The event details.</param>
         protected virtual void OnKeyEvent(object sender, KeyEventArgs e) { }
-        void OnWindowKeyEvent(object sender, KeyEventArgs e)
+        void OnWindowMouseEvent(object sender, MouseEventArgs e)
         {
             lock (Window.SynchronizationLock)
-                OnKeyEvent(sender, e);
+                OnMouseEvent(sender, e);
         }
         /// <summary>
         /// Called when a <see cref="IConsoleWindow.MouseEvent"/> has been received.
@@ -991,10 +1070,6 @@ namespace ConControls.Controls
                 }
             }
         }
-        void OnWindowMouseEvent(object sender, MouseEventArgs e)
-        {
-            lock (Window.SynchronizationLock)
-                OnMouseEvent(sender, e);
-        }
+        #endregion
     }
 }

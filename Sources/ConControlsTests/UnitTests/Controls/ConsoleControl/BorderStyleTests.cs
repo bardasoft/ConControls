@@ -18,13 +18,10 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void BorderStyle_Changed_ThreadSafeHandlerCall()
         {
-            var stubbedWindow = new StubbedWindow
-            {
-                BorderStyleGet = () => BorderStyle.SingleLined
-            };
+            var stubbedWindow = new StubbedWindow();
 
             var sut = new StubbedConsoleControl(stubbedWindow);
-            sut.BorderStyle.Should().Be(BorderStyle.SingleLined);
+            sut.BorderStyle.Should().BeNull();
 
             sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
             sut.BorderStyle = BorderStyle.DoubleLined;
@@ -34,16 +31,13 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void BorderStyle_NotChanged_NoEvent()
         {
-            var stubbedWindow = new StubbedWindow
-            {
-                BorderStyleGet = () => BorderStyle.SingleLined
-            };
+            var stubbedWindow = new StubbedWindow();
 
             var sut = new StubbedConsoleControl(stubbedWindow);
 
             sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
             sut.BorderStyle = sut.BorderStyle;
-            sut.BorderStyle.Should().Be(BorderStyle.SingleLined);
+            sut.BorderStyle.Should().BeNull();
             sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
         }
     }

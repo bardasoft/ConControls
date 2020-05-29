@@ -51,6 +51,12 @@ namespace ConControls.Controls
         FrameCharSets frameCharSets = new FrameCharSets();
         ConsoleControl? focusedControl;
 
+        ConsoleColor defaultForegroundColor = ConsoleColor.Gray;
+        ConsoleColor defaultBackgroundColor = ConsoleColor.Black;
+        ConsoleColor defaultBorderColor = ConsoleColor.Yellow;
+        BorderStyle defaultBorderStyle = BorderStyle.None;
+        int defaultCursorSize;
+
         /// <inheritdoc />
         public event EventHandler? AreaChanged;
         /// <inheritdoc />
@@ -101,22 +107,77 @@ namespace ConControls.Controls
 
         /// <inheritdoc />
         public int ExitCode { get; private set; }
-        
+
         /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        public int CursorSize { get; set; }
+        public ConsoleColor DefaultForegroundColor
+        {
+            get => defaultForegroundColor;
+            set
+            {
+                lock (SynchronizationLock)
+                {
+                    if (value == defaultForegroundColor) return;
+                    defaultForegroundColor = value;
+                    Invalidate();
+                }
+            }
+        }
         /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        public ConsoleColor ForegroundColor { get; set; } = ConsoleColor.Gray;
+        public ConsoleColor DefaultBackgroundColor
+        {
+            get => defaultBackgroundColor;
+            set
+            {
+                lock (SynchronizationLock)
+                {
+                    if (value == defaultBackgroundColor) return;
+                    defaultBackgroundColor = value;
+                    Invalidate();
+                }
+            }
+        }
         /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        public ConsoleColor BackgroundColor { get; set; } = ConsoleColor.Black;
+        public ConsoleColor DefaultBorderColor
+        {
+            get => defaultBorderColor;
+            set
+            {
+                lock (SynchronizationLock)
+                {
+                    if (value == defaultBorderColor) return;
+                    defaultBorderColor = value;
+                    Invalidate();
+                }
+            }
+        }
         /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        public ConsoleColor BorderColor { get; set; } = ConsoleColor.Yellow;
+        public BorderStyle DefaultBorderStyle
+        {
+            get => defaultBorderStyle;
+            set
+            {
+                lock (SynchronizationLock)
+                {
+                    if (value == defaultBorderStyle) return;
+                    defaultBorderStyle = value;
+                    Invalidate();
+                }
+            }
+        }
         /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
-        public BorderStyle BorderStyle { get; set; } = BorderStyle.None;
+        public int DefaultCursorSize
+        {
+            get => defaultCursorSize;
+            set
+            {
+                lock (SynchronizationLock)
+                {
+                    if (value == defaultCursorSize) return;
+                    defaultCursorSize = value;
+                    Invalidate();
+                }
+            }
+        }
         /// <inheritdoc />
         public ControlCollection Controls { get; }
         /// <inheritdoc />
@@ -144,11 +205,12 @@ namespace ConControls.Controls
                     focusedControl = value;
                     if (focusedControl == null) return;
                     focusedControl.Focused = true;
-                    api.SetCursorInfo(consoleController.OutputHandle, focusedControl.CursorVisible, focusedControl.CursorSize, focusedControl.PointToConsole(focusedControl.CursorPosition));
+                    api.SetCursorInfo(consoleController.OutputHandle, focusedControl.CursorVisible, GetCursorSizeForControl(focusedControl), focusedControl.PointToConsole(focusedControl.CursorPosition));
                     focusedControl.CursorPositionChanged += OnFocusedControlCursorChanged;
                     focusedControl.CursorSizeChanged += OnFocusedControlCursorChanged;
                     focusedControl.CursorVisibleChanged += OnFocusedControlCursorChanged;
                 }
+
             }
         }
         /// <inheritdoc />
@@ -224,8 +286,8 @@ namespace ConControls.Controls
             Controls.ControlCollectionChanged += OnControlCollectionChanged;
 
             (originalCursorVisible, originalCursorSize, _) = this.api.GetCursorInfo(this.consoleController.OutputHandle);
-            CursorSize = originalCursorSize;
-            this.api.SetCursorInfo(this.consoleController.OutputHandle, false, CursorSize, Point.Empty);
+            defaultCursorSize = originalCursorSize;
+            this.api.SetCursorInfo(this.consoleController.OutputHandle, false, DefaultCursorSize, Point.Empty);
 
             Invalidate();
         }
@@ -300,7 +362,7 @@ namespace ConControls.Controls
                 var graphics = GetGraphics();
                 var rect = new Rectangle(Point.Empty, Size);
                 Logger.Log(DebugContext.Window | DebugContext.Drawing, $"drawing background at {rect}.");
-                graphics.DrawBackground(BackgroundColor, rect);
+                graphics.DrawBackground(DefaultBackgroundColor, rect);
                 Logger.Log(DebugContext.Window | DebugContext.Drawing, "drawing controls.");
                 foreach(var control in Controls)
                     control.Draw(graphics);
@@ -354,13 +416,14 @@ namespace ConControls.Controls
         void UpdateCursor()
         {
             var control = focusedControl;
-            api.SetCursorInfo(consoleController.OutputHandle, control?.CursorVisible ?? false, control?.CursorSize ?? CursorSize,
+            api.SetCursorInfo(consoleController.OutputHandle, control?.CursorVisible ?? false, GetCursorSizeForControl(control),
                               control?.PointToConsole(control.CursorPosition) ?? Point.Empty);
+
         }
         /// <inheritdoc />
         public ConsoleControl? FocusNext()
         {
-            var focusableControls = GetFocusableControls(Controls).ToList();
+            var focusableControls = GetTabFocusableControls(Controls).ToList();
             if (focusedControl == null)
             {
                 FocusedControl = focusableControls.FirstOrDefault();
@@ -375,7 +438,7 @@ namespace ConControls.Controls
         /// <inheritdoc />
         public ConsoleControl? FocusPrevious()
         {
-            var focusableControls = GetFocusableControls(Controls).ToList();
+            var focusableControls = GetTabFocusableControls(Controls).ToList();
             if (focusedControl == null)
             {
                 FocusedControl = focusableControls.LastOrDefault();
@@ -387,7 +450,7 @@ namespace ConControls.Controls
                                  : null;
             return FocusedControl;
         }
-        static IEnumerable<ConsoleControl> GetFocusableControls(ControlCollection controls)
+        static IEnumerable<ConsoleControl> GetTabFocusableControls(ControlCollection controls)
         {
             var orderedControls = controls
                                   .Select((control, index) => (control, index))
@@ -397,9 +460,9 @@ namespace ConControls.Controls
 
             foreach (var control in orderedControls)
             {
-                if (control.Enabled && control.CanFocus)
+                if (control.Enabled && control.CanFocus && control.TabStop)
                     yield return control;
-                foreach (var focusableChild in GetFocusableControls(control.Controls))
+                foreach (var focusableChild in GetTabFocusableControls(control.Controls))
                     yield return focusableChild;
             }
         }
@@ -463,6 +526,47 @@ namespace ConControls.Controls
                 using(DeferDrawing())
                     AreaChanged?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        int GetCursorSizeForControl(ConsoleControl? control)
+        {
+            int? size = control?.CursorSize;
+            if (size.HasValue) return size.Value;
+            var parent = control?.Parent;
+            while (parent != null && size == null)
+            {
+                size = parent.CursorSize;
+                parent = parent.Parent;
+            }
+
+            return size ?? DefaultCursorSize;
+        }
+
+        IControlContainer? IControlContainer.Parent => null;
+        ConsoleColor? IControlContainer.ForegroundColor
+        {
+            get => DefaultForegroundColor;
+            set => DefaultForegroundColor = value ?? DefaultForegroundColor;
+        }
+        ConsoleColor? IControlContainer.BackgroundColor
+        {
+            get => DefaultBackgroundColor;
+            set => DefaultBackgroundColor = value ?? DefaultBackgroundColor;
+        }
+        ConsoleColor? IControlContainer.BorderColor
+        {
+            get => DefaultBorderColor;
+            set => DefaultBorderColor = value ?? DefaultBorderColor;
+        }
+        BorderStyle? IControlContainer.BorderStyle
+        {
+            get => DefaultBorderStyle;
+            set => DefaultBorderStyle = value ?? DefaultBorderStyle;
+        }
+        int? IControlContainer.CursorSize
+        {
+            get => DefaultCursorSize;
+            set => DefaultCursorSize = value ?? DefaultCursorSize;
         }
     }
 }

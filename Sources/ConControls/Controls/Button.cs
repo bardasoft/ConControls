@@ -16,10 +16,23 @@ namespace ConControls.Controls {
     /// </summary>
     public sealed class Button : TextControl
     {
+        bool initialTabStop = true;
+
         /// <summary>
         /// Raised when the button gets clicked.
         /// </summary>
         public event EventHandler? Click;
+
+        /// <inheritdoc />
+        public override bool TabStop
+        {
+            get => base.TabStop || initialTabStop;
+            set
+            {
+                initialTabStop = false;
+                base.TabStop = value;
+            }
+        }
 
         /// <inheritdoc />
         public override string Text
@@ -58,11 +71,11 @@ namespace ConControls.Controls {
             DisabledBackgroundColor = ConsoleColor.DarkBlue;
             DisabledForegroundColor = ConsoleColor.Gray;
             BorderColor = ConsoleColor.DarkYellow;
-            BorderStyle = BorderStyle.SingleLined;
+            BorderStyle = ConControls.Controls.BorderStyle.SingleLined;
             FocusedBackgroundColor = ConsoleColor.Blue;
             FocusedForegroundColor = ConsoleColor.Yellow;
             FocusedBorderColor = ConsoleColor.Yellow;
-            FocusedBorderStyle = BorderStyle.DoubleLined;
+            FocusedBorderStyle = ConControls.Controls.BorderStyle.DoubleLined;
         }
 
         /// <summary>

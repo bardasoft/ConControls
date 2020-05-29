@@ -21,7 +21,7 @@ namespace ConControls.Controls
     {
         readonly IConsoleTextController textController;
 
-        bool caretVisible = true, initCursorVisibility = true;
+        bool caretVisible = true, initCursorVisibility = true, initTabStop = true;
         Point scroll;
         Point caret;
 
@@ -66,6 +66,16 @@ namespace ConControls.Controls
             {
                 initCursorVisibility = false;
                 base.CursorVisible = value;
+            }
+        }
+        /// <inheritdoc />
+        public override bool TabStop
+        {
+            get => base.TabStop || initTabStop;
+            set
+            {
+                initTabStop = false;
+                base.TabStop = value;
             }
         }
 

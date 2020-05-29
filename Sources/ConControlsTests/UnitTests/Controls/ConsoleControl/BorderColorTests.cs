@@ -18,13 +18,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void BorderColor_Changed_ThreadSafeHandlerCall()
         {
-            var stubbedWindow = new StubbedWindow
-            {
-                BorderColorGet = () => ConsoleColor.Cyan
-            };
-
+            var stubbedWindow = new StubbedWindow();
             var sut = new StubbedConsoleControl(stubbedWindow);
-            sut.BorderColor.Should().Be(ConsoleColor.Cyan);
+            sut.BorderColor.Should().BeNull();
 
             sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderColorChanged).Should().Be(0);
             sut.BorderColor = ConsoleColor.DarkMagenta;
@@ -34,16 +30,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void BorderColor_NotChanged_NoEvent()
         {
-            var stubbedWindow = new StubbedWindow
-            {
-                BorderColorGet = () => ConsoleColor.Cyan
-            };
-
+            var stubbedWindow = new StubbedWindow();
             var sut = new StubbedConsoleControl(stubbedWindow);
 
             sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderColorChanged).Should().Be(0);
             sut.BorderColor = sut.BorderColor;
-            sut.BorderColor.Should().Be(ConsoleColor.Cyan);
+            sut.BorderColor.Should().BeNull();
             sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderColorChanged).Should().Be(0);
         }
     }

@@ -7,6 +7,7 @@
 
 #nullable enable
 
+using System;
 using System.Diagnostics.CodeAnalysis;
 using ConControls.Controls;
 using ConControls.Controls.Drawing.Fakes;
@@ -32,6 +33,11 @@ namespace ConControlsTests.UnitTests
             ControlsGet = () => Controls;
             EnabledGet = () => true;
             VisibleGet = () => true;
+            DefaultForegroundColorGet = () => ConsoleColor.Gray;
+            DefaultBackgroundColorGet = () => ConsoleColor.Black;
+            DefaultBorderColorGet = () => ConsoleColor.Yellow;
+            DefaultBorderStyleGet = () => BorderStyle.None;
+            DefaultCursorSizeGet = () => 1;
         }
     }
 }

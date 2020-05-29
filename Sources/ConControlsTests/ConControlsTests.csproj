@@ -88,6 +88,7 @@
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\InputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ConsoleControllerTests.cs" />
     <Compile Include="UnitTests\Controls\Button\CursorVisible.cs" />
+    <Compile Include="UnitTests\Controls\Button\TabStop.cs" />
     <Compile Include="UnitTests\Controls\Button\Text.cs" />
     <Compile Include="UnitTests\Controls\Button\PerformClick.cs" />
     <Compile Include="UnitTests\Controls\Button\MouseEvents.cs" />
@@ -135,6 +136,11 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\NameTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConstructorTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ConsoleControlTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\DefaultBackgroundColor.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\DefaultBorderColor.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\DefaultBorderStyle.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\DefaultCursorSize.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleWindow\DefaultForegroundColor.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\WaitForCloseAsync.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\DrawingInhibited.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\FocusedControl.cs" />
@@ -166,6 +172,7 @@
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressChar.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Percentage.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressBarTests.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\TabStop.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Clear.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CursorPosition.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Wrap.cs" />
