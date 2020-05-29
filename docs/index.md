@@ -1,4 +1,4 @@
-## Welcome
+﻿## Welcome
 
 ![ConControls screenshot](screenshot.png)
 

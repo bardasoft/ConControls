@@ -1,4 +1,4 @@
-## Available console controls
+﻿## Available console controls
 
 To work with ConControls you need to instantiate a [ConsoleWindow](ConsoleWindow.md). You can then add controls like these:
 

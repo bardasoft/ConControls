@@ -1,4 +1,4 @@
-## What is ConControls?
+﻿## What is ConControls?
 - **[How does it work?](#howdoesitwork)**  
 - **[How to get started?](#howtogetstarted)**
 
@@ -68,7 +68,7 @@ The **important** things to notice are:
 - for several reasons (OOP and multithreading, I'll talk about that somewhere else), the `Parent` of a control cannot be
 a constructor parameter, but has to be set as a property. The control is not even added to the window's control collection on instantiation.
 - the `SwitchConsoleBufferKey` can be used (when set) to switch between the original console screen buffer and the buffer for the instantiated window
-- the `CloseWindowKey` (when set) will close the window and set the state of the `T�sk` returned by `WaitForCloseAsync()` to `Completed`. You can also add [`Button`](controls/Button.md)s
+- the `CloseWindowKey` (when set) will close the window and set the state of the `Tàsk` returned by `WaitForCloseAsync()` to `Completed`. You can also add [`Button`](controls/Button.md)s
 to the window and use their `Click` event, or subscribe to the window's `KeyEvent` to call `window.Close()` yourself instead.
 - the appearance properties (`BackgroundColor`, `ForegroundColor`, `BorderColor`, `BorderStyle` and `CursorSize`) are nullable values and always default to the
 parent's values or finally to the window's respective `Default*` properties. Inherited controls may overwrite this behaviour or initialize their properties to a non-null value.
