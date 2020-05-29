@@ -24,7 +24,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 Text = string.Empty.PadLeft(15, ' '),
                 Size = new Size(10, 10)
             };
-            sut.BorderStyle.Should().BeNull();
+            sut.BorderStyle.Should().Be(BorderStyle.None);
             sut.Caret = new Point(9, 0);
             sut.CursorPosition.Should().Be(new Point(9, 0));
             sut.BorderStyle = BorderStyle.Bold;

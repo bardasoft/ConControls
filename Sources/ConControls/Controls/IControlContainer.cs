@@ -76,13 +76,6 @@ namespace ConControls.Controls
         /// </remarks>
         ConsoleColor? BorderColor { get; set; }
         /// <summary>
-        /// Gets or sets the <see cref="BorderStyle"/> of this control.
-        /// </summary>
-        /// <remarks>
-        /// <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>
-        /// </remarks>
-        BorderStyle? BorderStyle { get; set; }
-        /// <summary>
         /// Gets or sets the cursor size for this control.
         /// </summary>
         /// <remarks>

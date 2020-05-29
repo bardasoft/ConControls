@@ -54,7 +54,6 @@ namespace ConControls.Controls
         ConsoleColor defaultForegroundColor = ConsoleColor.Gray;
         ConsoleColor defaultBackgroundColor = ConsoleColor.Black;
         ConsoleColor defaultBorderColor = ConsoleColor.Yellow;
-        BorderStyle defaultBorderStyle = BorderStyle.None;
         int defaultCursorSize;
 
         /// <inheritdoc />
@@ -146,20 +145,6 @@ namespace ConControls.Controls
                 {
                     if (value == defaultBorderColor) return;
                     defaultBorderColor = value;
-                    Invalidate();
-                }
-            }
-        }
-        /// <inheritdoc />
-        public BorderStyle DefaultBorderStyle
-        {
-            get => defaultBorderStyle;
-            set
-            {
-                lock (SynchronizationLock)
-                {
-                    if (value == defaultBorderStyle) return;
-                    defaultBorderStyle = value;
                     Invalidate();
                 }
             }
@@ -557,11 +542,6 @@ namespace ConControls.Controls
         {
             get => DefaultBorderColor;
             set => DefaultBorderColor = value ?? DefaultBorderColor;
-        }
-        BorderStyle? IControlContainer.BorderStyle
-        {
-            get => DefaultBorderStyle;
-            set => DefaultBorderStyle = value ?? DefaultBorderStyle;
         }
         int? IControlContainer.CursorSize
         {

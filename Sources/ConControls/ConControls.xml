@@ -210,6 +210,9 @@
             <summary>
             Gets or sets the <see cref="T:System.ConsoleColor"/> to use for foreground drawings.
             </summary>
+            <remarks>
+            <para>If this property is <c>null</c> it defaults to the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s value or finally to the windows <see cref="P:ConControls.Controls.IConsoleWindow.DefaultForegroundColor"/>.</para>
+            </remarks>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.FocusedForegroundColor">
             <summary>
@@ -227,6 +230,9 @@
             <summary>
             Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the background of this control.
             </summary>
+            <remarks>
+            <para>If this property is <c>null</c> it defaults to the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s value or finally to the windows <see cref="P:ConControls.Controls.IConsoleWindow.DefaultBackgroundColor"/>.</para>
+            </remarks>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.FocusedBackgroundColor">
             <summary>
@@ -246,6 +252,9 @@
             <summary>
             Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the border of this control.
             </summary>
+            <remarks>
+            <para>If this property is <c>null</c> it defaults to the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s value or finally to the windows <see cref="P:ConControls.Controls.IConsoleWindow.DefaultBorderColor"/>.</para>
+            </remarks>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.FocusedBorderColor">
             <summary>
@@ -302,6 +311,7 @@
             This property is only used by the <see cref="T:ConControls.Controls.IConsoleWindow"/> if this control is
             currently focused.
             </para>
+            <para>If this property is <c>null</c> it defaults to the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/>'s value or finally to the windows <see cref="P:ConControls.Controls.IConsoleWindow.DefaultCursorSize"/>.</para>
             </remarks>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.CursorVisible">
@@ -571,9 +581,6 @@
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.DefaultBorderColor">
-            <inheritdoc />
-        </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.DefaultBorderStyle">
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.DefaultCursorSize">
@@ -1111,11 +1118,6 @@
             Gets or sets the default border color.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.IConsoleWindow.DefaultBorderStyle">
-            <summary>
-            Gets or sets the default border style.
-            </summary>
-        </member>
         <member name="P:ConControls.Controls.IConsoleWindow.FocusedControl">
             <summary>
             Gets or sets the currently focused control on this window.
@@ -1265,14 +1267,6 @@
         <member name="P:ConControls.Controls.IControlContainer.BorderColor">
             <summary>
             Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the border of this control.
-            </summary>
-            <remarks>
-            <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>
-            </remarks>
-        </member>
-        <member name="P:ConControls.Controls.IControlContainer.BorderStyle">
-            <summary>
-            Gets or sets the <see cref="P:ConControls.Controls.IControlContainer.BorderStyle"/> of this control.
             </summary>
             <remarks>
             <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>

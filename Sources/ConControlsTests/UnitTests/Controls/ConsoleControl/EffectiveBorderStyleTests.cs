@@ -22,7 +22,6 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             ConControls.Controls.ConsoleControl? focused = null;
             var stubbedWindow = new StubbedWindow
             {
-                BorderStyleGet = () => BorderStyle.None,
                 EnabledGet = () => true,
                 FocusedControlGet = () => focused,
                 FocusedControlSetConsoleControl = c => focused = c
@@ -47,7 +46,6 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             ConControls.Controls.ConsoleControl? focused = null;
             var stubbedWindow = new StubbedWindow
             {
-                BorderStyleGet = () => BorderStyle.None,
                 GetGraphics = () => new StubIConsoleGraphics(),
                 FocusedControlGet = () => focused,
                 EnabledGet = () => true,

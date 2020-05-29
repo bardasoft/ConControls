@@ -52,10 +52,6 @@ namespace ConControls.Controls
         /// </summary>
         ConsoleColor DefaultBorderColor { get; set; }
         /// <summary>
-        /// Gets or sets the default border style.
-        /// </summary>
-        BorderStyle DefaultBorderStyle { get; set; }
-        /// <summary>
         /// Gets or sets the currently focused control on this window.
         /// </summary>
         ConsoleControl? FocusedControl { get; set; }

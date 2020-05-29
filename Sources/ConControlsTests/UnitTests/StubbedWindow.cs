@@ -36,7 +36,6 @@ namespace ConControlsTests.UnitTests
             DefaultForegroundColorGet = () => ConsoleColor.Gray;
             DefaultBackgroundColorGet = () => ConsoleColor.Black;
             DefaultBorderColorGet = () => ConsoleColor.Yellow;
-            DefaultBorderStyleGet = () => BorderStyle.None;
             DefaultCursorSizeGet = () => 1;
         }
     }

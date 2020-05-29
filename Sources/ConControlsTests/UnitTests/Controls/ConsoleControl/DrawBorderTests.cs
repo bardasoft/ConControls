@@ -48,8 +48,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             {
                 DrawingInhibitedGet = () => true,
                 BackgroundColorGet = () => ConsoleColor.DarkMagenta,
-                BorderColorGet = () => ConsoleColor.Cyan,
-                BorderStyleGet = () => BorderStyle.SingleLined
+                BorderColorGet = () => ConsoleColor.Cyan
             };
 
             bool borderDrawn = false;
@@ -76,8 +75,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var stubbedWindow = new StubbedWindow
             {
                 BackgroundColorGet = () => ConsoleColor.DarkMagenta,
-                BorderColorGet = () => ConsoleColor.Cyan,
-                BorderStyleGet = () => BorderStyle.None
+                BorderColorGet = () => ConsoleColor.Cyan
             };
 
             var sut = new StubbedConsoleControl(stubbedWindow)

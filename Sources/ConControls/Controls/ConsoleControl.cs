@@ -54,7 +54,7 @@ namespace ConControls.Controls
         ConsoleColor? backgroundColor;
         ConsoleColor? focusedBackgroundColor;
         ConsoleColor? disabledBackgroundColor;
-        BorderStyle? borderStyle;
+        BorderStyle borderStyle;
         BorderStyle? focusedBorderStyle;
         BorderStyle? disabledBorderStyle;
         ConsoleColor? borderColor;
@@ -297,6 +297,9 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings.
         /// </summary>
+        /// <remarks>
+        /// <para>If this property is <c>null</c> it defaults to the <see cref="Parent"/>'s value or finally to the windows <see cref="IConsoleWindow.DefaultForegroundColor"/>.</para>
+        /// </remarks>
         public virtual ConsoleColor? ForegroundColor
         {
             get { lock (Window.SynchronizationLock) return foregroundColor; }
@@ -347,6 +350,9 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for the background of this control.
         /// </summary>
+        /// <remarks>
+        /// <para>If this property is <c>null</c> it defaults to the <see cref="Parent"/>'s value or finally to the windows <see cref="IConsoleWindow.DefaultBackgroundColor"/>.</para>
+        /// </remarks>
         public virtual ConsoleColor? BackgroundColor
         {
             get { lock (Window.SynchronizationLock) return backgroundColor; }
@@ -399,6 +405,9 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="ConsoleColor"/> to use for the border of this control.
         /// </summary>
+        /// <remarks>
+        /// <para>If this property is <c>null</c> it defaults to the <see cref="Parent"/>'s value or finally to the windows <see cref="IConsoleWindow.DefaultBorderColor"/>.</para>
+        /// </remarks>
         public virtual ConsoleColor? BorderColor
         {
             get { lock (Window.SynchronizationLock) return borderColor; }
@@ -451,7 +460,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets the <see cref="BorderStyle"/> of this control.
         /// </summary>
-        public virtual BorderStyle? BorderStyle
+        public virtual BorderStyle BorderStyle
         {
             get { lock (Window.SynchronizationLock) return borderStyle; }
             set
@@ -537,6 +546,7 @@ namespace ConControls.Controls
         /// This property is only used by the <see cref="IConsoleWindow"/> if this control is
         /// currently focused.
         /// </para>
+        /// <para>If this property is <c>null</c> it defaults to the <see cref="Parent"/>'s value or finally to the windows <see cref="IConsoleWindow.DefaultCursorSize"/>.</para>
         /// </remarks>
         public virtual int? CursorSize
         {
@@ -862,26 +872,11 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets the current border style based on the state of <see cref="Enabled"/> and <see cref="Focused"/> properties.
         /// </summary>
-        protected virtual BorderStyle EffectiveBorderStyle
-        {
-            get
-            {
-                var tmpbs = borderStyle;
-                var p = parent;
-                while (p != null && tmpbs == null)
-                {
-                    tmpbs = p.BorderStyle;
-                    p = p.Parent;
-                }
-
-                var bs = tmpbs ?? Window.DefaultBorderStyle;
-                return Enabled
-                           ? Focused
-                                 ? focusedBorderStyle ?? bs
-                                 : bs
-                           : disabledBorderStyle ?? bs;
-            }
-        }
+        protected virtual BorderStyle EffectiveBorderStyle => Enabled
+                                                                  ? Focused
+                                                                        ? focusedBorderStyle ?? BorderStyle
+                                                                        : BorderStyle
+                                                                  : disabledBorderStyle ?? BorderStyle;
         /// <summary>
         /// Determines the area of the control that can be used as "client" area.
         /// This base method e.g. removes the border from the total control area.
@@ -890,7 +885,7 @@ namespace ConControls.Controls
         /// <returns>A <see cref="Rectangle"/> representing the client area (in client coordinates) of this control.</returns>
         protected virtual Rectangle GetClientArea()
         {
-            return EffectiveBorderStyle == ConControls.Controls.BorderStyle.None
+            return EffectiveBorderStyle == BorderStyle.None
                        ? new Rectangle(Point.Empty, Size)
                        : new Rectangle(1, 1, Area.Width - 2, Area.Height - 2);
         }

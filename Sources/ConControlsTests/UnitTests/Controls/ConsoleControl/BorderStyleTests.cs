@@ -21,7 +21,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var stubbedWindow = new StubbedWindow();
 
             var sut = new StubbedConsoleControl(stubbedWindow);
-            sut.BorderStyle.Should().BeNull();
+            sut.BorderStyle.Should().Be(BorderStyle.None);
 
             sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
             sut.BorderStyle = BorderStyle.DoubleLined;
@@ -37,7 +37,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
 
             sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
             sut.BorderStyle = sut.BorderStyle;
-            sut.BorderStyle.Should().BeNull();
+            sut.BorderStyle.Should().Be(BorderStyle.None);
             sut.GetMethodCount(StubbedConsoleControl.MethodOnBorderStyleChanged).Should().Be(0);
         }
     }

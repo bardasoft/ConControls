@@ -138,7 +138,6 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\ConsoleControlTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\DefaultBackgroundColor.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\DefaultBorderColor.cs" />
-    <Compile Include="UnitTests\Controls\ConsoleWindow\DefaultBorderStyle.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\DefaultCursorSize.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\DefaultForegroundColor.cs" />
     <Compile Include="UnitTests\Controls\ConsoleWindow\WaitForCloseAsync.cs" />

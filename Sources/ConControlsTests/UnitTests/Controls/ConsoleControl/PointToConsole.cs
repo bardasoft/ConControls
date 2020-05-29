@@ -75,8 +75,8 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             sut2.PointToConsole(clientPoint)
                 .Should()
                 .Be(new Point(
-                        clientPoint.X + l1.X + l2.X + 2,
-                        clientPoint.Y + l1.Y + l2.Y + 2));
+                        clientPoint.X + l1.X + l2.X + 1,
+                        clientPoint.Y + l1.Y + l2.Y + 1));
 
         }
         [TestMethod]
