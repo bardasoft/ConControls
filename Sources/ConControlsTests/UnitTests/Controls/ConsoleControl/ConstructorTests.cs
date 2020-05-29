@@ -8,7 +8,6 @@
 #nullable enable
 
 using System;
-using ConControls.Controls;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -26,19 +25,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void ConsoleControl_CompletelyInitialized_NoParentYet()
         {
-            const int cursorSize = 50;
-            const ConsoleColor foreground = ConsoleColor.Magenta;
-            const ConsoleColor background = ConsoleColor.Cyan;
-            const ConsoleColor borderColor = ConsoleColor.DarkMagenta;
-            const BorderStyle borderStyle = BorderStyle.DoubleLined;
             var stubbedWindow = new StubbedWindow
             {
-                VisibleGet = () => true,
-                CursorSizeGet = () => cursorSize,
-                ForegroundColorGet = () => foreground,
-                BackgroundColorGet = () => background,
-                BorderColorGet = () => borderColor,
-                BorderStyleGet = () => borderStyle
+                VisibleGet = () => true
             };
 
             var sut = new StubbedConsoleControl(stubbedWindow);
@@ -46,11 +35,6 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             sut.Enabled.Should().BeFalse();
             sut.CanFocus.Should().BeFalse();
             sut.Name.Should().Be(nameof(StubbedConsoleControl));
-            sut.CursorSize.Should().Be(cursorSize);
-            sut.ForegroundColor.Should().Be(foreground);
-            sut.BackgroundColor.Should().Be(background);
-            sut.BorderColor.Should().Be(borderColor);
-            sut.BorderStyle.Should().Be(borderStyle);
             sut.Parent.Should().BeNull();
 
             sut.Parent = stubbedWindow;

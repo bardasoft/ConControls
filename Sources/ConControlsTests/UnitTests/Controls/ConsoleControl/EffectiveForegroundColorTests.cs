@@ -21,9 +21,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             ConControls.Controls.ConsoleControl? focused = null;
             var stubbedWindow = new StubbedWindow
             {
-                ForegroundColorGet = () => ConsoleColor.Cyan,
-                BackgroundColorGet = () => ConsoleColor.DarkRed,
-                BorderColorGet = () => ConsoleColor.DarkYellow,
+                DefaultForegroundColorGet = () => ConsoleColor.Cyan,
+                DefaultBackgroundColorGet = () => ConsoleColor.DarkRed,
+                DefaultBorderColorGet = () => ConsoleColor.DarkYellow,
                 EnabledGet = () => true,
                 FocusedControlGet = () => focused,
                 FocusedControlSetConsoleControl = c => focused = c
@@ -48,9 +48,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             ConControls.Controls.ConsoleControl? focused = null;
             var stubbedWindow = new StubbedWindow
             {
-                ForegroundColorGet = () => ConsoleColor.Cyan,
-                BackgroundColorGet = () => ConsoleColor.DarkRed,
-                BorderColorGet = () => ConsoleColor.DarkYellow,
+                DefaultForegroundColorGet = () => ConsoleColor.Cyan,
+                DefaultBackgroundColorGet = () => ConsoleColor.DarkRed,
+                DefaultBorderColorGet = () => ConsoleColor.DarkYellow,
                 FocusedControlGet = () => focused,
                 EnabledGet = () => true,
                 FocusedControlSetConsoleControl = c => focused = c

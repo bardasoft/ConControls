@@ -18,13 +18,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void ForegroundColor_Changed_ThreadSafeHandlerCall()
         {
-            var stubbedWindow = new StubbedWindow
-            {
-                ForegroundColorGet = () => ConsoleColor.Cyan
-            };
-
+            var stubbedWindow = new StubbedWindow();
             var sut = new StubbedConsoleControl(stubbedWindow);
-            sut.ForegroundColor.Should().Be(ConsoleColor.Cyan);
+            sut.ForegroundColor.Should().BeNull();
 
             sut.GetMethodCount(StubbedConsoleControl.MethodOnForegroundColorChanged).Should().Be(0);
             sut.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -34,16 +30,12 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
         [TestMethod]
         public void ForegroundColor_NotChanged_NoEvent()
         {
-            var stubbedWindow = new StubbedWindow
-            {
-                ForegroundColorGet = () => ConsoleColor.Cyan
-            };
-
+            var stubbedWindow = new StubbedWindow();
             var sut = new StubbedConsoleControl(stubbedWindow);
 
             sut.GetMethodCount(StubbedConsoleControl.MethodOnForegroundColorChanged).Should().Be(0);
             sut.ForegroundColor = sut.ForegroundColor;
-            sut.ForegroundColor.Should().Be(ConsoleColor.Cyan);
+            sut.ForegroundColor.Should().BeNull();
             sut.GetMethodCount(StubbedConsoleControl.MethodOnForegroundColorChanged).Should().Be(0);
         }
     }

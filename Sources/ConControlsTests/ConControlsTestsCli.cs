@@ -36,7 +36,7 @@ namespace ConControlsTests
                 {
                     SwitchConsoleBuffersKey = KeyCombination.F11,
                     CloseWindowKey = KeyCombination.AltF4,
-                    BackgroundColor = ConsoleColor.DarkBlue,
+                    DefaultBackgroundColor = ConsoleColor.DarkBlue,
                     Title = "ConControls example"
                 };
                 using(window.DeferDrawing())
@@ -60,7 +60,8 @@ namespace ConControlsTests
                     {
                         Parent = frame,
                         Area = new Rectangle(2, 6, 9, 1),
-                        Text = "Progress:"
+                        Text = "Progress:",
+                        BorderStyle = BorderStyle.None
                     };
                     _ = new ProgressBar(window)
                     {
@@ -75,7 +76,8 @@ namespace ConControlsTests
                     {
                         Parent = frame,
                         Area = new Rectangle(2, 11, 6, 1),
-                        Text = "Output:"
+                        Text = "Output:",
+                        BorderStyle = BorderStyle.None
                     };
                     _ = new TextBlock(window)
                     {

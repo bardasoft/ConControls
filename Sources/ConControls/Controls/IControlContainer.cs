@@ -18,6 +18,13 @@ namespace ConControls.Controls
         /// </summary>
         IConsoleWindow Window { get; }
         /// <summary>
+        /// The parent <see cref="ConsoleControl"/> that contains this control.
+        /// The parent must be contained by the same <see cref="IConsoleWindow"/>.
+        /// If this propery is <c>null</c>, the control is not displayed.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">The parent is not part of the same <see cref="IConsoleWindow"/> or this control is the root element of the window..</exception>
+        IControlContainer? Parent { get; }
+        /// <summary>
         /// The location of this <see cref="IControlContainer"/> in character columns and rows
         /// from the upper left corner of the console screen buffer.
         /// </summary>
@@ -50,6 +57,45 @@ namespace ConControls.Controls
         /// Gets wether this control or <see cref="IControlContainer"/> is visible.
         /// </summary>
         bool Visible { get; }
+        /// <summary>
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for foreground drawings.
+        /// </summary>
+        ConsoleColor? ForegroundColor { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for the background of this control.
+        /// </summary>
+        /// <remarks>
+        /// <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>
+        /// </remarks>
+        ConsoleColor? BackgroundColor { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="ConsoleColor"/> to use for the border of this control.
+        /// </summary>
+        /// <remarks>
+        /// <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>
+        /// </remarks>
+        ConsoleColor? BorderColor { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="BorderStyle"/> of this control.
+        /// </summary>
+        /// <remarks>
+        /// <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>
+        /// </remarks>
+        BorderStyle? BorderStyle { get; set; }
+        /// <summary>
+        /// Gets or sets the cursor size for this control.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This value describes the size of the text cursor. It should be between <c>zero</c> and <c>100</c>.
+        /// </para>
+        /// <para>
+        /// This property is only used by the <see cref="Window"/> if this control is
+        /// currently focused.
+        /// </para>
+        /// <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>
+        /// </remarks>
+        int? CursorSize { get; set; }
 
         /// <summary>
         /// Defers any drawing operation until the return value has been disposed of again.

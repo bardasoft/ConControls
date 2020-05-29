@@ -40,6 +40,9 @@
             Raised when the button gets clicked.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.Button.TabStop">
+            <inheritdoc />
+        </member>
         <member name="P:ConControls.Controls.Button.Text">
             <inheritdoc />
         </member>
@@ -120,9 +123,40 @@
             The <see cref="P:ConControls.Controls.ConsoleControl.CursorVisible"/> of the control has been changed.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Window">
+            <summary>
+            The <see cref="T:ConControls.Controls.IConsoleWindow"/> that contains this control.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Parent">
+            <summary>
+            The parent <see cref="T:ConControls.Controls.ConsoleControl"/> that contains this control.
+            The parent must be contained by the same <see cref="T:ConControls.Controls.IConsoleWindow"/>.
+            If this propery is <c>null</c>, the control is not displayed.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The parent is not part of the same <see cref="T:ConControls.Controls.IConsoleWindow"/> or this control is the root element of the window..</exception>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Controls">
+            <summary>
+            The collection of <see cref="T:ConControls.Controls.ConsoleControl"/>s contained by this control.
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.ConsoleControl.Name">
             <summary>
-            The name of this control (merely for debug identification).
+            Gets or sets the name of this control.
+            If this is set to <c>null</c> or an empty or whitespace-only string, the name will
+            be set to the name of the control's type.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.Tag">
+            <summary>
+            Gets or sets a tag object for this control.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.DrawingInhibited">
+            <summary>
+            Determines if the control can currently be redrawn, depending on calls to <see cref="M:ConControls.Controls.ConsoleControl.DeferDrawing"/>
+            to this control or its parents.
             </summary>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.Enabled">
@@ -154,6 +188,11 @@
             Gets or sets a number indicating the control's position in the Tab order.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.ConsoleControl.TabStop">
+            <summary>
+            Gets or sets wether this control will be focused when using the Tab key to step through the window.
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.ConsoleControl.Area">
             <summary>
             The effective total area of the control.
@@ -166,64 +205,6 @@
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.Size">
             <inheritdoc />
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.Window">
-            <summary>
-            The <see cref="T:ConControls.Controls.IConsoleWindow"/> that contains this control.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.Parent">
-            <summary>
-            The parent <see cref="T:ConControls.Controls.ConsoleControl"/> that contains this control.
-            The parent must be contained by the same <see cref="T:ConControls.Controls.IConsoleWindow"/>.
-            If this propery is <c>null</c>, the control is not displayed.
-            </summary>
-            <exception cref="T:System.InvalidOperationException">The parent is not part of the same <see cref="T:ConControls.Controls.IConsoleWindow"/> or this control is the root element of the window..</exception>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.Controls">
-            <summary>
-            The collection of <see cref="T:ConControls.Controls.ConsoleControl"/>s contained by this control.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.DrawingInhibited">
-            <summary>
-            Determines if the control can currently be redrawn, depending on calls to <see cref="M:ConControls.Controls.ConsoleControl.DeferDrawing"/>
-            to this control or its parents.
-            </summary>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.CursorPosition">
-            <summary>
-            Gets or sets the cursor position for this control in character coordinates of the console
-            screen buffer.
-            </summary>
-            <remarks>
-            This property is only used by the <see cref="T:ConControls.Controls.IConsoleWindow"/> if this control is currently
-            focused.
-            </remarks>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.CursorSize">
-            <summary>
-            Gets or sets the cursor size for this control.
-            </summary>
-            <remarks>
-            <para>
-            This value describes the size of the text cursor. It should be between <c>zero</c> and <c>100</c>.
-            </para>
-            <para>
-            This property is only used by the <see cref="T:ConControls.Controls.IConsoleWindow"/> if this control is
-            currently focused.
-            </para>
-            </remarks>
-        </member>
-        <member name="P:ConControls.Controls.ConsoleControl.CursorVisible">
-            <summary>
-            Gets or sets wether the cursor is visible on this control.
-            screen buffer.
-            </summary>
-            <remarks>
-            This property is only used by the <see cref="T:ConControls.Controls.IConsoleWindow"/> if this control is
-            currently focused.
-            </remarks>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.ForegroundColor">
             <summary>
@@ -299,10 +280,39 @@
             If this is <c>null</c>, the <see cref="P:ConControls.Controls.ConsoleControl.BorderStyle"/> value will be used.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.ConsoleControl.Tag">
+        <member name="P:ConControls.Controls.ConsoleControl.CursorPosition">
             <summary>
-            Gets or sets a tag object for this control.
+            Gets or sets the cursor position for this control in character coordinates of the console
+            screen buffer.
             </summary>
+            <remarks>
+            This property is only used by the <see cref="T:ConControls.Controls.IConsoleWindow"/> if this control is currently
+            focused.
+            </remarks>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.CursorSize">
+            <summary>
+            Gets or sets the cursor size for this control.
+            </summary>
+            <remarks>
+            <para>
+            This value describes the size of the text cursor. It should be between <c>zero</c> and <c>100</c>.
+            </para>
+            <para>
+            This property is only used by the <see cref="T:ConControls.Controls.IConsoleWindow"/> if this control is
+            currently focused.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:ConControls.Controls.ConsoleControl.CursorVisible">
+            <summary>
+            Gets or sets wether the cursor is visible on this control.
+            screen buffer.
+            </summary>
+            <remarks>
+            This property is only used by the <see cref="T:ConControls.Controls.IConsoleWindow"/> if this control is
+            currently focused.
+            </remarks>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.#ctor(ConControls.Controls.IConsoleWindow)">
             <summary>
@@ -428,14 +438,24 @@
             </summary>
             <returns>A <see cref="T:System.Drawing.Rectangle"/> representing the client area (in client coordinates) of this control.</returns>
         </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnParentChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/> has changed.
+            </summary>
+        </member>
         <member name="M:ConControls.Controls.ConsoleControl.OnNameChanged">
             <summary>
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.Name"/> has changed.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.OnParentChanged">
+        <member name="M:ConControls.Controls.ConsoleControl.OnEnabledChanged">
             <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Parent"/> has changed.
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Enabled"/> property of this control has been changed.
+            </summary>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnVisibleChanged">
+            <summary>
+            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Visible"/> property of this control has been changed.
             </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.OnCursorPositionChanged">
@@ -456,16 +476,6 @@
         <member name="M:ConControls.Controls.ConsoleControl.OnFocusedChanged">
             <summary>
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.Focused"/> property of this control has been changed.
-            </summary>
-        </member>
-        <member name="M:ConControls.Controls.ConsoleControl.OnEnabledChanged">
-            <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Enabled"/> property of this control has been changed.
-            </summary>
-        </member>
-        <member name="M:ConControls.Controls.ConsoleControl.OnVisibleChanged">
-            <summary>
-            Called when the <see cref="P:ConControls.Controls.ConsoleControl.Visible"/> property of this control has been changed.
             </summary>
         </member>
         <member name="M:ConControls.Controls.ConsoleControl.OnForegroundColorChanged">
@@ -554,19 +564,19 @@
         <member name="P:ConControls.Controls.ConsoleWindow.ExitCode">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.CursorSize">
+        <member name="P:ConControls.Controls.ConsoleWindow.DefaultForegroundColor">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.ForegroundColor">
+        <member name="P:ConControls.Controls.ConsoleWindow.DefaultBackgroundColor">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.BackgroundColor">
+        <member name="P:ConControls.Controls.ConsoleWindow.DefaultBorderColor">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.BorderColor">
+        <member name="P:ConControls.Controls.ConsoleWindow.DefaultBorderStyle">
             <inheritdoc />
         </member>
-        <member name="P:ConControls.Controls.ConsoleWindow.BorderStyle">
+        <member name="P:ConControls.Controls.ConsoleWindow.DefaultCursorSize">
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.ConsoleWindow.Controls">
@@ -1080,28 +1090,28 @@
             The title of the console window.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.IConsoleWindow.CursorSize">
+        <member name="P:ConControls.Controls.IConsoleWindow.DefaultCursorSize">
             <summary>
             Gets or sets the default cursor size to use (0-100) for
             newly created focusable controls.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.IConsoleWindow.ForegroundColor">
+        <member name="P:ConControls.Controls.IConsoleWindow.DefaultForegroundColor">
             <summary>
             Gets or sets the default foreground color.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.IConsoleWindow.BackgroundColor">
+        <member name="P:ConControls.Controls.IConsoleWindow.DefaultBackgroundColor">
             <summary>
             Gets or sets the default background color.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.IConsoleWindow.BorderColor">
+        <member name="P:ConControls.Controls.IConsoleWindow.DefaultBorderColor">
             <summary>
             Gets or sets the default border color.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.IConsoleWindow.BorderStyle">
+        <member name="P:ConControls.Controls.IConsoleWindow.DefaultBorderStyle">
             <summary>
             Gets or sets the default border style.
             </summary>
@@ -1193,6 +1203,14 @@
             The main <see cref="T:ConControls.Controls.IConsoleWindow"/> this <see cref="T:ConControls.Controls.IControlContainer"/> belongs to.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.IControlContainer.Parent">
+            <summary>
+            The parent <see cref="T:ConControls.Controls.ConsoleControl"/> that contains this control.
+            The parent must be contained by the same <see cref="T:ConControls.Controls.IConsoleWindow"/>.
+            If this propery is <c>null</c>, the control is not displayed.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The parent is not part of the same <see cref="T:ConControls.Controls.IConsoleWindow"/> or this control is the root element of the window..</exception>
+        </member>
         <member name="P:ConControls.Controls.IControlContainer.Location">
             <summary>
             The location of this <see cref="T:ConControls.Controls.IControlContainer"/> in character columns and rows
@@ -1230,6 +1248,50 @@
             <summary>
             Gets wether this control or <see cref="T:ConControls.Controls.IControlContainer"/> is visible.
             </summary>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.ForegroundColor">
+            <summary>
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for foreground drawings.
+            </summary>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.BackgroundColor">
+            <summary>
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the background of this control.
+            </summary>
+            <remarks>
+            <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>
+            </remarks>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.BorderColor">
+            <summary>
+            Gets or sets the <see cref="T:System.ConsoleColor"/> to use for the border of this control.
+            </summary>
+            <remarks>
+            <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>
+            </remarks>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.BorderStyle">
+            <summary>
+            Gets or sets the <see cref="P:ConControls.Controls.IControlContainer.BorderStyle"/> of this control.
+            </summary>
+            <remarks>
+            <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>
+            </remarks>
+        </member>
+        <member name="P:ConControls.Controls.IControlContainer.CursorSize">
+            <summary>
+            Gets or sets the cursor size for this control.
+            </summary>
+            <remarks>
+            <para>
+            This value describes the size of the text cursor. It should be between <c>zero</c> and <c>100</c>.
+            </para>
+            <para>
+            This property is only used by the <see cref="P:ConControls.Controls.IControlContainer.Window"/> if this control is
+            currently focused.
+            </para>
+            <para>If this property is <c>null</c>, the parent's setting (or finally the <see cef="Window"/>'s default setting) will be used.</para>
+            </remarks>
         </member>
         <member name="M:ConControls.Controls.IControlContainer.DeferDrawing">
             <summary>
@@ -1600,6 +1662,9 @@
             </summary>
         </member>
         <member name="P:ConControls.Controls.TextControl.CursorVisible">
+            <inheritdoc />
+        </member>
+        <member name="P:ConControls.Controls.TextControl.TabStop">
             <inheritdoc />
         </member>
         <member name="P:ConControls.Controls.TextControl.Text">
