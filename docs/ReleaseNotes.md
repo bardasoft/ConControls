@@ -1,7 +1,5 @@
 # ConControls - Release notes
 
-### Version 0.1.0 (tba)
-
 ### Version 0.1.0-beta-3 (2020/05/29)
 
 Changed control behaviour to default the
