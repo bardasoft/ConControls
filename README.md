@@ -7,13 +7,12 @@ of a console application without the overhead of creating a UI with frameworks l
 
 The NuGet package is available at https://www.nuget.org/packages/ConControls.
 
-An introduction and tutorial can be found [here](https://renevogt.github.io/ConControls/Manual.html).  
-Examples can be found in the [ConControlsExamples](https://github.com/ReneVogt/ConControls/tree/master/Sources/ConControlsExamples) project in the sources.
+The official project site can be found [here](https://renevogt.github.io/ConControls). There you can also find an [introduction or manual](https://renevogt.github.io/ConControls/Manual.html) and the [api documentation](https://renevogt.github.io/ConControls/api).
 
-The api documentation is available as a [Sandcastle](https://github.com/EWSoftware/SHFB) compiled html help file: [ConControls.chm](docs/api/ConControls.chm).
+Examples can be found in the [ConControlsExamples](https://github.com/ReneVogt/ConControls/tree/master/Sources/ConControlsExamples) project in the sources.
 
 Release notes are [here](https://renevogt.github.io/ConControls/ReleaseNotes).
 
 ---
 Ren&eacute; Vogt  
-Dresden 2020/05/29
+Dresden 2020/06/13
