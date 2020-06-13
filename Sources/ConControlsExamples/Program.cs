@@ -54,7 +54,7 @@ namespace ConControlsExamples
 
             async void OnButtonClick(object sender, EventArgs e)
             {
-                window.Dispose();
+                window!.Dispose();
                 var button = (Button)sender;
                 if (button.Tag is Example example)
                     await example.RunAsync();

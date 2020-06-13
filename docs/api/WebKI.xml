@@ -1,0 +1,1023 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="A enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Accept enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ActiveScreen property">
+    <HelpKINode Title="ConsoleWindow.ActiveScreen Property " Url="html/P_ConControls_Controls_ConsoleWindow_ActiveScreen.htm" />
+    <HelpKINode Title="IConsoleWindow.ActiveScreen Property " Url="html/P_ConControls_Controls_IConsoleWindow_ActiveScreen.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Add enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Add method" Url="html/M_ConControls_Controls_ControlCollection_Add.htm" />
+  <HelpKINode Title="AddedControls property" Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_AddedControls.htm" />
+  <HelpKINode Title="AddRange method" Url="html/Overload_ConControls_Controls_ControlCollection_AddRange.htm" />
+  <HelpKINode Title="Alt property" Url="html/P_ConControls_Controls_KeyCombination_Alt.htm" />
+  <HelpKINode Title="AltF4 property" Url="html/P_ConControls_Controls_KeyCombination_AltF4.htm" />
+  <HelpKINode Title="Append method" Url="html/M_ConControls_Controls_TextControl_Append.htm" />
+  <HelpKINode Title="Application enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Area property">
+    <HelpKINode Title="ConsoleControl.Area Property " Url="html/P_ConControls_Controls_ConsoleControl_Area.htm" />
+    <HelpKINode Title="ConsoleWindow.Area Property " Url="html/P_ConControls_Controls_ConsoleWindow_Area.htm" />
+    <HelpKINode Title="IControlContainer.Area Property " Url="html/P_ConControls_Controls_IControlContainer_Area.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AreaChanged event">
+    <HelpKINode Title="ConsoleControl.AreaChanged Event" Url="html/E_ConControls_Controls_ConsoleControl_AreaChanged.htm" />
+    <HelpKINode Title="ConsoleWindow.AreaChanged Event" Url="html/E_ConControls_Controls_ConsoleWindow_AreaChanged.htm" />
+    <HelpKINode Title="IControlContainer.AreaChanged Event" Url="html/E_ConControls_Controls_IControlContainer_AreaChanged.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ATTN enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="B enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Back enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="BackgroundColor property">
+    <HelpKINode Title="ConsoleControl.BackgroundColor Property " Url="html/P_ConControls_Controls_ConsoleControl_BackgroundColor.htm" />
+    <HelpKINode Title="IControlContainer.BackgroundColor Property " Url="html/P_ConControls_Controls_IControlContainer_BackgroundColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Bold enumeration member" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="BoldLinedFrameCharSet class">
+    <HelpKINode Title="BoldLinedFrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_BoldLinedFrameCharSet.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_Drawing_BoldLinedFrameCharSet__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_Drawing_BoldLinedFrameCharSet.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_Drawing_BoldLinedFrameCharSet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BoldLinedFrameCharSet.BoldLinedFrameCharSet constructor" Url="html/M_ConControls_Controls_Drawing_BoldLinedFrameCharSet__ctor.htm" />
+  <HelpKINode Title="BoldLinedFrameCharSet.Horizontal property" Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_Horizontal.htm" />
+  <HelpKINode Title="BoldLinedFrameCharSet.LowerLeft property" Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_LowerLeft.htm" />
+  <HelpKINode Title="BoldLinedFrameCharSet.LowerRight property" Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_LowerRight.htm" />
+  <HelpKINode Title="BoldLinedFrameCharSet.UpperLeft property" Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_UpperLeft.htm" />
+  <HelpKINode Title="BoldLinedFrameCharSet.UpperRight property" Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_UpperRight.htm" />
+  <HelpKINode Title="BoldLinedFrameCharSet.Vertical property" Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_Vertical.htm" />
+  <HelpKINode Title="BorderColor property">
+    <HelpKINode Title="ConsoleControl.BorderColor Property " Url="html/P_ConControls_Controls_ConsoleControl_BorderColor.htm" />
+    <HelpKINode Title="IControlContainer.BorderColor Property " Url="html/P_ConControls_Controls_IControlContainer_BorderColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BorderStyle enumeration" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="BorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_BorderStyle.htm" />
+  <HelpKINode Title="BottomToTop enumeration member" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="BrowserBack enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="BrowserFavorites enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="BrowserForward enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="BrowserHome enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="BrowserRefresh enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="BrowserSearch enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="BrowserStop enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Button class">
+    <HelpKINode Title="Button Class" Url="html/T_ConControls_Controls_Button.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_Button__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_Button.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_Button.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_Button.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Button.Button constructor" Url="html/M_ConControls_Controls_Button__ctor.htm" />
+  <HelpKINode Title="Button.Click event" Url="html/E_ConControls_Controls_Button_Click.htm" />
+  <HelpKINode Title="Button.CursorVisible property" Url="html/P_ConControls_Controls_Button_CursorVisible.htm" />
+  <HelpKINode Title="Button.PerformClick method" Url="html/M_ConControls_Controls_Button_PerformClick.htm" />
+  <HelpKINode Title="Button.TabStop property" Url="html/P_ConControls_Controls_Button_TabStop.htm" />
+  <HelpKINode Title="Button.Text property" Url="html/P_ConControls_Controls_Button_Text.htm" />
+  <HelpKINode Title="ButtonState property" Url="html/P_ConControls_Controls_MouseEventArgs_ButtonState.htm" />
+  <HelpKINode Title="C enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Cancel enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="CanFocus property">
+    <HelpKINode Title="ConsoleControl.CanFocus Property " Url="html/P_ConControls_Controls_ConsoleControl_CanFocus.htm" />
+    <HelpKINode Title="TextControl.CanFocus Property " Url="html/P_ConControls_Controls_TextControl_CanFocus.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CapsLock enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="CAPSLOCK_ON enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="Caret property" Url="html/P_ConControls_Controls_TextControl_Caret.htm" />
+  <HelpKINode Title="CheckDisposed method" Url="html/M_ConControls_Controls_ConsoleControl_CheckDisposed.htm" />
+  <HelpKINode Title="Clear enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Clear method">
+    <HelpKINode Title="ConsoleControl.Clear Method " Url="html/M_ConControls_Controls_ConsoleControl_Clear.htm" />
+    <HelpKINode Title="TextControl.Clear Method " Url="html/M_ConControls_Controls_TextControl_Clear.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Click event" Url="html/E_ConControls_Controls_Button_Click.htm" />
+  <HelpKINode Title="Close method">
+    <HelpKINode Title="ConsoleWindow.Close Method " Url="html/M_ConControls_Controls_ConsoleWindow_Close.htm" />
+    <HelpKINode Title="IConsoleWindow.Close Method " Url="html/M_ConControls_Controls_IConsoleWindow_Close.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CloseWindowKey property">
+    <HelpKINode Title="ConsoleWindow.CloseWindowKey Property " Url="html/P_ConControls_Controls_ConsoleWindow_CloseWindowKey.htm" />
+    <HelpKINode Title="IConsoleWindow.CloseWindowKey Property " Url="html/P_ConControls_Controls_IConsoleWindow_CloseWindowKey.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConControls.Controls namespace" Url="html/N_ConControls_Controls.htm" />
+  <HelpKINode Title="ConControls.Controls.BorderStyle enumeration" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="ConControls.Controls.Button class" Url="html/T_ConControls_Controls_Button.htm" />
+  <HelpKINode Title="ConControls.Controls.ConsoleControl class" Url="html/T_ConControls_Controls_ConsoleControl.htm" />
+  <HelpKINode Title="ConControls.Controls.ConsoleWindow class" Url="html/T_ConControls_Controls_ConsoleWindow.htm" />
+  <HelpKINode Title="ConControls.Controls.ConsoleWindowEventArgs class" Url="html/T_ConControls_Controls_ConsoleWindowEventArgs.htm" />
+  <HelpKINode Title="ConControls.Controls.ControlCollection class" Url="html/T_ConControls_Controls_ControlCollection.htm" />
+  <HelpKINode Title="ConControls.Controls.ControlCollectionChangedEventArgs class" Url="html/T_ConControls_Controls_ControlCollectionChangedEventArgs.htm" />
+  <HelpKINode Title="ConControls.Controls.Drawing namespace" Url="html/N_ConControls_Controls_Drawing.htm" />
+  <HelpKINode Title="ConControls.Controls.Drawing.BoldLinedFrameCharSet class" Url="html/T_ConControls_Controls_Drawing_BoldLinedFrameCharSet.htm" />
+  <HelpKINode Title="ConControls.Controls.Drawing.DoubleLinedFrameCharSet class" Url="html/T_ConControls_Controls_Drawing_DoubleLinedFrameCharSet.htm" />
+  <HelpKINode Title="ConControls.Controls.Drawing.FrameCharSet class" Url="html/T_ConControls_Controls_Drawing_FrameCharSet.htm" />
+  <HelpKINode Title="ConControls.Controls.Drawing.FrameCharSets class" Url="html/T_ConControls_Controls_Drawing_FrameCharSets.htm" />
+  <HelpKINode Title="ConControls.Controls.Drawing.IConsoleGraphics interface" Url="html/T_ConControls_Controls_Drawing_IConsoleGraphics.htm" />
+  <HelpKINode Title="ConControls.Controls.Drawing.SingleLinedFrameCharSet class" Url="html/T_ConControls_Controls_Drawing_SingleLinedFrameCharSet.htm" />
+  <HelpKINode Title="ConControls.Controls.IConsoleWindow interface" Url="html/T_ConControls_Controls_IConsoleWindow.htm" />
+  <HelpKINode Title="ConControls.Controls.IControlContainer interface" Url="html/T_ConControls_Controls_IControlContainer.htm" />
+  <HelpKINode Title="ConControls.Controls.KeyCombination structure" Url="html/T_ConControls_Controls_KeyCombination.htm" />
+  <HelpKINode Title="ConControls.Controls.KeyEventArgs class" Url="html/T_ConControls_Controls_KeyEventArgs.htm" />
+  <HelpKINode Title="ConControls.Controls.MouseEventArgs class" Url="html/T_ConControls_Controls_MouseEventArgs.htm" />
+  <HelpKINode Title="ConControls.Controls.Panel class" Url="html/T_ConControls_Controls_Panel.htm" />
+  <HelpKINode Title="ConControls.Controls.ProgressBar class" Url="html/T_ConControls_Controls_ProgressBar.htm" />
+  <HelpKINode Title="ConControls.Controls.ProgressBar.ProgressOrientation enumeration" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="ConControls.Controls.TextBlock class" Url="html/T_ConControls_Controls_TextBlock.htm" />
+  <HelpKINode Title="ConControls.Controls.TextControl class" Url="html/T_ConControls_Controls_TextControl.htm" />
+  <HelpKINode Title="ConControls.WindowsApi.Types namespace" Url="html/N_ConControls_WindowsApi_Types.htm" />
+  <HelpKINode Title="ConControls.WindowsApi.Types.ControlKeyStates enumeration" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="ConControls.WindowsApi.Types.MouseButtonStates enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
+  <HelpKINode Title="ConControls.WindowsApi.Types.MouseEventFlags enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseEventFlags.htm" />
+  <HelpKINode Title="ConControls.WindowsApi.Types.VirtualKey enumeration" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ConsoleControl class">
+    <HelpKINode Title="ConsoleControl Class" Url="html/T_ConControls_Controls_ConsoleControl.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_ConsoleControl.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ConsoleControl.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ConsoleControl.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConsoleControl.Area property" Url="html/P_ConControls_Controls_ConsoleControl_Area.htm" />
+  <HelpKINode Title="ConsoleControl.AreaChanged event" Url="html/E_ConControls_Controls_ConsoleControl_AreaChanged.htm" />
+  <HelpKINode Title="ConsoleControl.BackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_BackgroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.BorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_BorderColor.htm" />
+  <HelpKINode Title="ConsoleControl.BorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_BorderStyle.htm" />
+  <HelpKINode Title="ConsoleControl.CanFocus property" Url="html/P_ConControls_Controls_ConsoleControl_CanFocus.htm" />
+  <HelpKINode Title="ConsoleControl.CheckDisposed method" Url="html/M_ConControls_Controls_ConsoleControl_CheckDisposed.htm" />
+  <HelpKINode Title="ConsoleControl.Clear method" Url="html/M_ConControls_Controls_ConsoleControl_Clear.htm" />
+  <HelpKINode Title="ConsoleControl.Controls property" Url="html/P_ConControls_Controls_ConsoleControl_Controls.htm" />
+  <HelpKINode Title="ConsoleControl.CursorPosition property" Url="html/P_ConControls_Controls_ConsoleControl_CursorPosition.htm" />
+  <HelpKINode Title="ConsoleControl.CursorPositionChanged event" Url="html/E_ConControls_Controls_ConsoleControl_CursorPositionChanged.htm" />
+  <HelpKINode Title="ConsoleControl.CursorSize property" Url="html/P_ConControls_Controls_ConsoleControl_CursorSize.htm" />
+  <HelpKINode Title="ConsoleControl.CursorSizeChanged event" Url="html/E_ConControls_Controls_ConsoleControl_CursorSizeChanged.htm" />
+  <HelpKINode Title="ConsoleControl.CursorVisible property" Url="html/P_ConControls_Controls_ConsoleControl_CursorVisible.htm" />
+  <HelpKINode Title="ConsoleControl.CursorVisibleChanged event" Url="html/E_ConControls_Controls_ConsoleControl_CursorVisibleChanged.htm" />
+  <HelpKINode Title="ConsoleControl.DeferDrawing method" Url="html/M_ConControls_Controls_ConsoleControl_DeferDrawing.htm" />
+  <HelpKINode Title="ConsoleControl.DisabledBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBackgroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.DisabledBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBorderColor.htm" />
+  <HelpKINode Title="ConsoleControl.DisabledBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBorderStyle.htm" />
+  <HelpKINode Title="ConsoleControl.DisabledForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledForegroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.Dispose method" Url="html/Overload_ConControls_Controls_ConsoleControl_Dispose.htm" />
+  <HelpKINode Title="ConsoleControl.Draw method" Url="html/M_ConControls_Controls_ConsoleControl_Draw.htm" />
+  <HelpKINode Title="ConsoleControl.DrawBackground method" Url="html/M_ConControls_Controls_ConsoleControl_DrawBackground.htm" />
+  <HelpKINode Title="ConsoleControl.DrawBorder method" Url="html/M_ConControls_Controls_ConsoleControl_DrawBorder.htm" />
+  <HelpKINode Title="ConsoleControl.DrawClientArea method" Url="html/M_ConControls_Controls_ConsoleControl_DrawClientArea.htm" />
+  <HelpKINode Title="ConsoleControl.DrawingInhibited property" Url="html/P_ConControls_Controls_ConsoleControl_DrawingInhibited.htm" />
+  <HelpKINode Title="ConsoleControl.EffectiveBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBackgroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.EffectiveBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBorderColor.htm" />
+  <HelpKINode Title="ConsoleControl.EffectiveBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBorderStyle.htm" />
+  <HelpKINode Title="ConsoleControl.EffectiveForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveForegroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.Enabled property" Url="html/P_ConControls_Controls_ConsoleControl_Enabled.htm" />
+  <HelpKINode Title="ConsoleControl.EnabledChanged event" Url="html/E_ConControls_Controls_ConsoleControl_EnabledChanged.htm" />
+  <HelpKINode Title="ConsoleControl.Focused property" Url="html/P_ConControls_Controls_ConsoleControl_Focused.htm" />
+  <HelpKINode Title="ConsoleControl.FocusedBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBackgroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.FocusedBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBorderColor.htm" />
+  <HelpKINode Title="ConsoleControl.FocusedBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBorderStyle.htm" />
+  <HelpKINode Title="ConsoleControl.FocusedChanged event" Url="html/E_ConControls_Controls_ConsoleControl_FocusedChanged.htm" />
+  <HelpKINode Title="ConsoleControl.FocusedForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedForegroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.ForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_ForegroundColor.htm" />
+  <HelpKINode Title="ConsoleControl.GetClientArea method" Url="html/M_ConControls_Controls_ConsoleControl_GetClientArea.htm" />
+  <HelpKINode Title="ConsoleControl.Invalidate method" Url="html/M_ConControls_Controls_ConsoleControl_Invalidate.htm" />
+  <HelpKINode Title="ConsoleControl.Location property" Url="html/P_ConControls_Controls_ConsoleControl_Location.htm" />
+  <HelpKINode Title="ConsoleControl.Name property" Url="html/P_ConControls_Controls_ConsoleControl_Name.htm" />
+  <HelpKINode Title="ConsoleControl.NameChanged event" Url="html/E_ConControls_Controls_ConsoleControl_NameChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnAreaChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnAreaChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnBackgroundColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBackgroundColorChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnBorderColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBorderColorChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnBorderStyleChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBorderStyleChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnCursorPositionChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnCursorPositionChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnCursorSizeChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnCursorSizeChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnCursorVisibleChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnCursorVisibleChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnEnabledChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnEnabledChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnFocusedChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnFocusedChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnForegroundColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnForegroundColorChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnKeyEvent method" Url="html/M_ConControls_Controls_ConsoleControl_OnKeyEvent.htm" />
+  <HelpKINode Title="ConsoleControl.OnMouseEvent method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseEvent.htm" />
+  <HelpKINode Title="ConsoleControl.OnNameChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnNameChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnParentChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnParentChanged.htm" />
+  <HelpKINode Title="ConsoleControl.OnVisibleChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnVisibleChanged.htm" />
+  <HelpKINode Title="ConsoleControl.Parent property" Url="html/P_ConControls_Controls_ConsoleControl_Parent.htm" />
+  <HelpKINode Title="ConsoleControl.ParentChanged event" Url="html/E_ConControls_Controls_ConsoleControl_ParentChanged.htm" />
+  <HelpKINode Title="ConsoleControl.PointToClient method" Url="html/M_ConControls_Controls_ConsoleControl_PointToClient.htm" />
+  <HelpKINode Title="ConsoleControl.PointToConsole method" Url="html/M_ConControls_Controls_ConsoleControl_PointToConsole.htm" />
+  <HelpKINode Title="ConsoleControl.Size property" Url="html/P_ConControls_Controls_ConsoleControl_Size.htm" />
+  <HelpKINode Title="ConsoleControl.TabOrder property" Url="html/P_ConControls_Controls_ConsoleControl_TabOrder.htm" />
+  <HelpKINode Title="ConsoleControl.TabStop property" Url="html/P_ConControls_Controls_ConsoleControl_TabStop.htm" />
+  <HelpKINode Title="ConsoleControl.Tag property" Url="html/P_ConControls_Controls_ConsoleControl_Tag.htm" />
+  <HelpKINode Title="ConsoleControl.Visible property" Url="html/P_ConControls_Controls_ConsoleControl_Visible.htm" />
+  <HelpKINode Title="ConsoleControl.VisibleChanged event" Url="html/E_ConControls_Controls_ConsoleControl_VisibleChanged.htm" />
+  <HelpKINode Title="ConsoleControl.Window property" Url="html/P_ConControls_Controls_ConsoleControl_Window.htm" />
+  <HelpKINode Title="ConsoleWindow class">
+    <HelpKINode Title="ConsoleWindow Class" Url="html/T_ConControls_Controls_ConsoleWindow.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_ConsoleWindow__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_ConsoleWindow.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ConsoleWindow.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ConsoleWindow.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConsoleWindow.ActiveScreen property" Url="html/P_ConControls_Controls_ConsoleWindow_ActiveScreen.htm" />
+  <HelpKINode Title="ConsoleWindow.Area property" Url="html/P_ConControls_Controls_ConsoleWindow_Area.htm" />
+  <HelpKINode Title="ConsoleWindow.AreaChanged event" Url="html/E_ConControls_Controls_ConsoleWindow_AreaChanged.htm" />
+  <HelpKINode Title="ConsoleWindow.Close method" Url="html/M_ConControls_Controls_ConsoleWindow_Close.htm" />
+  <HelpKINode Title="ConsoleWindow.CloseWindowKey property" Url="html/P_ConControls_Controls_ConsoleWindow_CloseWindowKey.htm" />
+  <HelpKINode Title="ConsoleWindow.ConsoleWindow constructor" Url="html/M_ConControls_Controls_ConsoleWindow__ctor.htm" />
+  <HelpKINode Title="ConsoleWindow.Controls property" Url="html/P_ConControls_Controls_ConsoleWindow_Controls.htm" />
+  <HelpKINode Title="ConsoleWindow.DefaultBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleWindow_DefaultBackgroundColor.htm" />
+  <HelpKINode Title="ConsoleWindow.DefaultBorderColor property" Url="html/P_ConControls_Controls_ConsoleWindow_DefaultBorderColor.htm" />
+  <HelpKINode Title="ConsoleWindow.DefaultCursorSize property" Url="html/P_ConControls_Controls_ConsoleWindow_DefaultCursorSize.htm" />
+  <HelpKINode Title="ConsoleWindow.DefaultForegroundColor property" Url="html/P_ConControls_Controls_ConsoleWindow_DefaultForegroundColor.htm" />
+  <HelpKINode Title="ConsoleWindow.DeferDrawing method" Url="html/M_ConControls_Controls_ConsoleWindow_DeferDrawing.htm" />
+  <HelpKINode Title="ConsoleWindow.Dispose method" Url="html/M_ConControls_Controls_ConsoleWindow_Dispose.htm" />
+  <HelpKINode Title="ConsoleWindow.Disposed event" Url="html/E_ConControls_Controls_ConsoleWindow_Disposed.htm" />
+  <HelpKINode Title="ConsoleWindow.DrawingInhibited property" Url="html/P_ConControls_Controls_ConsoleWindow_DrawingInhibited.htm" />
+  <HelpKINode Title="ConsoleWindow.Enabled property" Url="html/P_ConControls_Controls_ConsoleWindow_Enabled.htm" />
+  <HelpKINode Title="ConsoleWindow.ExitCode property" Url="html/P_ConControls_Controls_ConsoleWindow_ExitCode.htm" />
+  <HelpKINode Title="ConsoleWindow.Finalize method" Url="html/M_ConControls_Controls_ConsoleWindow_Finalize.htm" />
+  <HelpKINode Title="ConsoleWindow.FocusedControl property" Url="html/P_ConControls_Controls_ConsoleWindow_FocusedControl.htm" />
+  <HelpKINode Title="ConsoleWindow.FocusNext method" Url="html/M_ConControls_Controls_ConsoleWindow_FocusNext.htm" />
+  <HelpKINode Title="ConsoleWindow.FocusPrevious method" Url="html/M_ConControls_Controls_ConsoleWindow_FocusPrevious.htm" />
+  <HelpKINode Title="ConsoleWindow.FrameCharSets property" Url="html/P_ConControls_Controls_ConsoleWindow_FrameCharSets.htm" />
+  <HelpKINode Title="ConsoleWindow.GetGraphics method" Url="html/M_ConControls_Controls_ConsoleWindow_GetGraphics.htm" />
+  <HelpKINode Title="ConsoleWindow.IControlContainer.BackgroundColor explicitly implemented property" Url="html/P_ConControls_Controls_ConsoleWindow_ConControls_Controls_IControlContainer_BackgroundColor.htm" />
+  <HelpKINode Title="ConsoleWindow.IControlContainer.BorderColor explicitly implemented property" Url="html/P_ConControls_Controls_ConsoleWindow_ConControls_Controls_IControlContainer_BorderColor.htm" />
+  <HelpKINode Title="ConsoleWindow.IControlContainer.CursorSize explicitly implemented property" Url="html/P_ConControls_Controls_ConsoleWindow_ConControls_Controls_IControlContainer_CursorSize.htm" />
+  <HelpKINode Title="ConsoleWindow.IControlContainer.ForegroundColor explicitly implemented property" Url="html/P_ConControls_Controls_ConsoleWindow_ConControls_Controls_IControlContainer_ForegroundColor.htm" />
+  <HelpKINode Title="ConsoleWindow.IControlContainer.Parent explicitly implemented property" Url="html/P_ConControls_Controls_ConsoleWindow_ConControls_Controls_IControlContainer_Parent.htm" />
+  <HelpKINode Title="ConsoleWindow.Invalidate method" Url="html/M_ConControls_Controls_ConsoleWindow_Invalidate.htm" />
+  <HelpKINode Title="ConsoleWindow.IsDisposed property" Url="html/P_ConControls_Controls_ConsoleWindow_IsDisposed.htm" />
+  <HelpKINode Title="ConsoleWindow.KeyEvent event" Url="html/E_ConControls_Controls_ConsoleWindow_KeyEvent.htm" />
+  <HelpKINode Title="ConsoleWindow.Location property" Url="html/P_ConControls_Controls_ConsoleWindow_Location.htm" />
+  <HelpKINode Title="ConsoleWindow.MouseEvent event" Url="html/E_ConControls_Controls_ConsoleWindow_MouseEvent.htm" />
+  <HelpKINode Title="ConsoleWindow.PointToClient method" Url="html/M_ConControls_Controls_ConsoleWindow_PointToClient.htm" />
+  <HelpKINode Title="ConsoleWindow.PointToConsole method" Url="html/M_ConControls_Controls_ConsoleWindow_PointToConsole.htm" />
+  <HelpKINode Title="ConsoleWindow.Size property" Url="html/P_ConControls_Controls_ConsoleWindow_Size.htm" />
+  <HelpKINode Title="ConsoleWindow.SwitchConsoleBuffersKey property" Url="html/P_ConControls_Controls_ConsoleWindow_SwitchConsoleBuffersKey.htm" />
+  <HelpKINode Title="ConsoleWindow.SynchronizationLock property" Url="html/P_ConControls_Controls_ConsoleWindow_SynchronizationLock.htm" />
+  <HelpKINode Title="ConsoleWindow.Title property" Url="html/P_ConControls_Controls_ConsoleWindow_Title.htm" />
+  <HelpKINode Title="ConsoleWindow.Visible property" Url="html/P_ConControls_Controls_ConsoleWindow_Visible.htm" />
+  <HelpKINode Title="ConsoleWindow.WaitForCloseAsync method" Url="html/M_ConControls_Controls_ConsoleWindow_WaitForCloseAsync.htm" />
+  <HelpKINode Title="ConsoleWindow.Window property" Url="html/P_ConControls_Controls_ConsoleWindow_Window.htm" />
+  <HelpKINode Title="ConsoleWindowEventArgs class">
+    <HelpKINode Title="ConsoleWindowEventArgs Class" Url="html/T_ConControls_Controls_ConsoleWindowEventArgs.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ConsoleWindowEventArgs.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ConsoleWindowEventArgs.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ConsoleWindowEventArgs.Handled property" Url="html/P_ConControls_Controls_ConsoleWindowEventArgs_Handled.htm" />
+  <HelpKINode Title="Control enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ControlCollection class">
+    <HelpKINode Title="ControlCollection Class" Url="html/T_ConControls_Controls_ControlCollection.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_ControlCollection.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ControlCollection.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ControlCollection.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ControlCollection.Add method" Url="html/M_ConControls_Controls_ControlCollection_Add.htm" />
+  <HelpKINode Title="ControlCollection.AddRange method" Url="html/Overload_ConControls_Controls_ControlCollection_AddRange.htm" />
+  <HelpKINode Title="ControlCollection.ControlCollectionChanged event" Url="html/E_ConControls_Controls_ControlCollection_ControlCollectionChanged.htm" />
+  <HelpKINode Title="ControlCollection.Count property" Url="html/P_ConControls_Controls_ControlCollection_Count.htm" />
+  <HelpKINode Title="ControlCollection.GetEnumerator method" Url="html/M_ConControls_Controls_ControlCollection_GetEnumerator.htm" />
+  <HelpKINode Title="ControlCollection.IEnumerable.GetEnumerator explicitly implemented method" Url="html/M_ConControls_Controls_ControlCollection_System_Collections_IEnumerable_GetEnumerator.htm" />
+  <HelpKINode Title="ControlCollection.IndexOf method" Url="html/M_ConControls_Controls_ControlCollection_IndexOf.htm" />
+  <HelpKINode Title="ControlCollection.Item property" Url="html/P_ConControls_Controls_ControlCollection_Item.htm" />
+  <HelpKINode Title="ControlCollection.Remove method" Url="html/M_ConControls_Controls_ControlCollection_Remove.htm" />
+  <HelpKINode Title="ControlCollection.RemoveRange method" Url="html/Overload_ConControls_Controls_ControlCollection_RemoveRange.htm" />
+  <HelpKINode Title="ControlCollectionChanged event" Url="html/E_ConControls_Controls_ControlCollection_ControlCollectionChanged.htm" />
+  <HelpKINode Title="ControlCollectionChangedEventArgs class">
+    <HelpKINode Title="ControlCollectionChangedEventArgs Class" Url="html/T_ConControls_Controls_ControlCollectionChangedEventArgs.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ControlCollectionChangedEventArgs.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ControlCollectionChangedEventArgs.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ControlCollectionChangedEventArgs.AddedControls property" Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_AddedControls.htm" />
+  <HelpKINode Title="ControlCollectionChangedEventArgs.RemovedControls property" Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_RemovedControls.htm" />
+  <HelpKINode Title="ControlKeys property">
+    <HelpKINode Title="KeyEventArgs.ControlKeys Property " Url="html/P_ConControls_Controls_KeyEventArgs_ControlKeys.htm" />
+    <HelpKINode Title="MouseEventArgs.ControlKeys Property " Url="html/P_ConControls_Controls_MouseEventArgs_ControlKeys.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ControlKeyStates enumeration" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="Controls property">
+    <HelpKINode Title="ConsoleControl.Controls Property " Url="html/P_ConControls_Controls_ConsoleControl_Controls.htm" />
+    <HelpKINode Title="ConsoleWindow.Controls Property " Url="html/P_ConControls_Controls_ConsoleWindow_Controls.htm" />
+    <HelpKINode Title="IControlContainer.Controls Property " Url="html/P_ConControls_Controls_IControlContainer_Controls.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Convert enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="CopyCharacters method" Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_CopyCharacters.htm" />
+  <HelpKINode Title="Count property" Url="html/P_ConControls_Controls_ControlCollection_Count.htm" />
+  <HelpKINode Title="CRSel enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Ctrl property" Url="html/P_ConControls_Controls_KeyCombination_Ctrl.htm" />
+  <HelpKINode Title="CursorPosition property" Url="html/P_ConControls_Controls_ConsoleControl_CursorPosition.htm" />
+  <HelpKINode Title="CursorPositionChanged event" Url="html/E_ConControls_Controls_ConsoleControl_CursorPositionChanged.htm" />
+  <HelpKINode Title="CursorSize property">
+    <HelpKINode Title="ConsoleControl.CursorSize Property " Url="html/P_ConControls_Controls_ConsoleControl_CursorSize.htm" />
+    <HelpKINode Title="IControlContainer.CursorSize Property " Url="html/P_ConControls_Controls_IControlContainer_CursorSize.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CursorSizeChanged event" Url="html/E_ConControls_Controls_ConsoleControl_CursorSizeChanged.htm" />
+  <HelpKINode Title="CursorVisible property">
+    <HelpKINode Title="Button.CursorVisible Property " Url="html/P_ConControls_Controls_Button_CursorVisible.htm" />
+    <HelpKINode Title="ConsoleControl.CursorVisible Property " Url="html/P_ConControls_Controls_ConsoleControl_CursorVisible.htm" />
+    <HelpKINode Title="TextControl.CursorVisible Property " Url="html/P_ConControls_Controls_TextControl_CursorVisible.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CursorVisibleChanged event" Url="html/E_ConControls_Controls_ConsoleControl_CursorVisibleChanged.htm" />
+  <HelpKINode Title="D enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Decimal enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="DefaultBackgroundColor property">
+    <HelpKINode Title="ConsoleWindow.DefaultBackgroundColor Property " Url="html/P_ConControls_Controls_ConsoleWindow_DefaultBackgroundColor.htm" />
+    <HelpKINode Title="IConsoleWindow.DefaultBackgroundColor Property " Url="html/P_ConControls_Controls_IConsoleWindow_DefaultBackgroundColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DefaultBorderColor property">
+    <HelpKINode Title="ConsoleWindow.DefaultBorderColor Property " Url="html/P_ConControls_Controls_ConsoleWindow_DefaultBorderColor.htm" />
+    <HelpKINode Title="IConsoleWindow.DefaultBorderColor Property " Url="html/P_ConControls_Controls_IConsoleWindow_DefaultBorderColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DefaultCursorSize property">
+    <HelpKINode Title="ConsoleWindow.DefaultCursorSize Property " Url="html/P_ConControls_Controls_ConsoleWindow_DefaultCursorSize.htm" />
+    <HelpKINode Title="IConsoleWindow.DefaultCursorSize Property " Url="html/P_ConControls_Controls_IConsoleWindow_DefaultCursorSize.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DefaultForegroundColor property">
+    <HelpKINode Title="ConsoleWindow.DefaultForegroundColor Property " Url="html/P_ConControls_Controls_ConsoleWindow_DefaultForegroundColor.htm" />
+    <HelpKINode Title="IConsoleWindow.DefaultForegroundColor Property " Url="html/P_ConControls_Controls_IConsoleWindow_DefaultForegroundColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DefaultProgressChar field" Url="html/F_ConControls_Controls_ProgressBar_DefaultProgressChar.htm" />
+  <HelpKINode Title="DeferDrawing method">
+    <HelpKINode Title="ConsoleControl.DeferDrawing Method " Url="html/M_ConControls_Controls_ConsoleControl_DeferDrawing.htm" />
+    <HelpKINode Title="ConsoleWindow.DeferDrawing Method " Url="html/M_ConControls_Controls_ConsoleWindow_DeferDrawing.htm" />
+    <HelpKINode Title="IControlContainer.DeferDrawing Method " Url="html/M_ConControls_Controls_IControlContainer_DeferDrawing.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Delete enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="DisabledBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBackgroundColor.htm" />
+  <HelpKINode Title="DisabledBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBorderColor.htm" />
+  <HelpKINode Title="DisabledBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledBorderStyle.htm" />
+  <HelpKINode Title="DisabledForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_DisabledForegroundColor.htm" />
+  <HelpKINode Title="Dispose method">
+    <HelpKINode Title="ConsoleControl.Dispose Method " Url="html/Overload_ConControls_Controls_ConsoleControl_Dispose.htm" />
+    <HelpKINode Title="ConsoleWindow.Dispose Method " Url="html/M_ConControls_Controls_ConsoleWindow_Dispose.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Disposed event">
+    <HelpKINode Title="ConsoleWindow.Disposed Event" Url="html/E_ConControls_Controls_ConsoleWindow_Disposed.htm" />
+    <HelpKINode Title="IConsoleWindow.Disposed Event" Url="html/E_ConControls_Controls_IConsoleWindow_Disposed.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Divide enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="DoubleClick enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseEventFlags.htm" />
+  <HelpKINode Title="DoubleLined enumeration member" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet class">
+    <HelpKINode Title="DoubleLinedFrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_DoubleLinedFrameCharSet.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_Drawing_DoubleLinedFrameCharSet__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_Drawing_DoubleLinedFrameCharSet.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_Drawing_DoubleLinedFrameCharSet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DoubleLinedFrameCharSet.DoubleLinedFrameCharSet constructor" Url="html/M_ConControls_Controls_Drawing_DoubleLinedFrameCharSet__ctor.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.Horizontal property" Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_Horizontal.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.LowerLeft property" Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_LowerLeft.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.LowerRight property" Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_LowerRight.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.UpperLeft property" Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_UpperLeft.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.UpperRight property" Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_UpperRight.htm" />
+  <HelpKINode Title="DoubleLinedFrameCharSet.Vertical property" Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_Vertical.htm" />
+  <HelpKINode Title="Down enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Draw method" Url="html/M_ConControls_Controls_ConsoleControl_Draw.htm" />
+  <HelpKINode Title="DrawBackground method">
+    <HelpKINode Title="ConsoleControl.DrawBackground Method " Url="html/M_ConControls_Controls_ConsoleControl_DrawBackground.htm" />
+    <HelpKINode Title="IConsoleGraphics.DrawBackground Method " Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_DrawBackground.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DrawBorder method">
+    <HelpKINode Title="ConsoleControl.DrawBorder Method " Url="html/M_ConControls_Controls_ConsoleControl_DrawBorder.htm" />
+    <HelpKINode Title="IConsoleGraphics.DrawBorder Method " Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_DrawBorder.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DrawClientArea method">
+    <HelpKINode Title="ConsoleControl.DrawClientArea Method " Url="html/M_ConControls_Controls_ConsoleControl_DrawClientArea.htm" />
+    <HelpKINode Title="TextControl.DrawClientArea Method " Url="html/M_ConControls_Controls_TextControl_DrawClientArea.htm" />
+  </HelpKINode>
+  <HelpKINode Title="DrawingInhibited property">
+    <HelpKINode Title="ConsoleControl.DrawingInhibited Property " Url="html/P_ConControls_Controls_ConsoleControl_DrawingInhibited.htm" />
+    <HelpKINode Title="ConsoleWindow.DrawingInhibited Property " Url="html/P_ConControls_Controls_ConsoleWindow_DrawingInhibited.htm" />
+    <HelpKINode Title="IControlContainer.DrawingInhibited Property " Url="html/P_ConControls_Controls_IControlContainer_DrawingInhibited.htm" />
+  </HelpKINode>
+  <HelpKINode Title="E enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="EffectiveBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBackgroundColor.htm" />
+  <HelpKINode Title="EffectiveBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBorderColor.htm" />
+  <HelpKINode Title="EffectiveBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveBorderStyle.htm" />
+  <HelpKINode Title="EffectiveForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_EffectiveForegroundColor.htm" />
+  <HelpKINode Title="Enabled property">
+    <HelpKINode Title="ConsoleControl.Enabled Property " Url="html/P_ConControls_Controls_ConsoleControl_Enabled.htm" />
+    <HelpKINode Title="ConsoleWindow.Enabled Property " Url="html/P_ConControls_Controls_ConsoleWindow_Enabled.htm" />
+    <HelpKINode Title="IControlContainer.Enabled Property " Url="html/P_ConControls_Controls_IControlContainer_Enabled.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EnabledChanged event" Url="html/E_ConControls_Controls_ConsoleControl_EnabledChanged.htm" />
+  <HelpKINode Title="End enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ENHANCED_KEY enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="Equality operator" Url="html/M_ConControls_Controls_KeyCombination_op_Equality.htm" />
+  <HelpKINode Title="Equals method" Url="html/Overload_ConControls_Controls_KeyCombination_Equals.htm" />
+  <HelpKINode Title="EREOF enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Escape enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Escape property" Url="html/P_ConControls_Controls_KeyCombination_Escape.htm" />
+  <HelpKINode Title="Execute enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ExitCode property">
+    <HelpKINode Title="ConsoleWindow.ExitCode Property " Url="html/P_ConControls_Controls_ConsoleWindow_ExitCode.htm" />
+    <HelpKINode Title="IConsoleWindow.ExitCode Property " Url="html/P_ConControls_Controls_IConsoleWindow_ExitCode.htm" />
+  </HelpKINode>
+  <HelpKINode Title="EXSel enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ExtraButton1 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ExtraButton2 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F1 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F10 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F11 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F11 property" Url="html/P_ConControls_Controls_KeyCombination_F11.htm" />
+  <HelpKINode Title="F12 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F13 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F14 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F15 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F16 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F17 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F18 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F19 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F2 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F20 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F21 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F22 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F23 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F24 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F3 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F4 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F5 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F6 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F7 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F8 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="F9 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="FillArea method" Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_FillArea.htm" />
+  <HelpKINode Title="Final enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Finalize method" Url="html/M_ConControls_Controls_ConsoleWindow_Finalize.htm" />
+  <HelpKINode Title="Flush method" Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_Flush.htm" />
+  <HelpKINode Title="Focused property" Url="html/P_ConControls_Controls_ConsoleControl_Focused.htm" />
+  <HelpKINode Title="FocusedBackgroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBackgroundColor.htm" />
+  <HelpKINode Title="FocusedBorderColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBorderColor.htm" />
+  <HelpKINode Title="FocusedBorderStyle property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedBorderStyle.htm" />
+  <HelpKINode Title="FocusedChanged event" Url="html/E_ConControls_Controls_ConsoleControl_FocusedChanged.htm" />
+  <HelpKINode Title="FocusedControl property">
+    <HelpKINode Title="ConsoleWindow.FocusedControl Property " Url="html/P_ConControls_Controls_ConsoleWindow_FocusedControl.htm" />
+    <HelpKINode Title="IConsoleWindow.FocusedControl Property " Url="html/P_ConControls_Controls_IConsoleWindow_FocusedControl.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FocusedForegroundColor property" Url="html/P_ConControls_Controls_ConsoleControl_FocusedForegroundColor.htm" />
+  <HelpKINode Title="FocusNext method">
+    <HelpKINode Title="ConsoleWindow.FocusNext Method " Url="html/M_ConControls_Controls_ConsoleWindow_FocusNext.htm" />
+    <HelpKINode Title="IConsoleWindow.FocusNext Method " Url="html/M_ConControls_Controls_IConsoleWindow_FocusNext.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FocusPrevious method">
+    <HelpKINode Title="ConsoleWindow.FocusPrevious Method " Url="html/M_ConControls_Controls_ConsoleWindow_FocusPrevious.htm" />
+    <HelpKINode Title="IConsoleWindow.FocusPrevious Method " Url="html/M_ConControls_Controls_IConsoleWindow_FocusPrevious.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ForegroundColor property">
+    <HelpKINode Title="ConsoleControl.ForegroundColor Property " Url="html/P_ConControls_Controls_ConsoleControl_ForegroundColor.htm" />
+    <HelpKINode Title="IControlContainer.ForegroundColor Property " Url="html/P_ConControls_Controls_IControlContainer_ForegroundColor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FourthButtonPressed enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
+  <HelpKINode Title="FrameCharSet class">
+    <HelpKINode Title="FrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_FrameCharSet.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_Drawing_FrameCharSet__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_Drawing_FrameCharSet.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_Drawing_FrameCharSet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FrameCharSet.FrameCharSet constructor" Url="html/M_ConControls_Controls_Drawing_FrameCharSet__ctor.htm" />
+  <HelpKINode Title="FrameCharSet.Horizontal property" Url="html/P_ConControls_Controls_Drawing_FrameCharSet_Horizontal.htm" />
+  <HelpKINode Title="FrameCharSet.LowerLeft property" Url="html/P_ConControls_Controls_Drawing_FrameCharSet_LowerLeft.htm" />
+  <HelpKINode Title="FrameCharSet.LowerRight property" Url="html/P_ConControls_Controls_Drawing_FrameCharSet_LowerRight.htm" />
+  <HelpKINode Title="FrameCharSet.UpperLeft property" Url="html/P_ConControls_Controls_Drawing_FrameCharSet_UpperLeft.htm" />
+  <HelpKINode Title="FrameCharSet.UpperRight property" Url="html/P_ConControls_Controls_Drawing_FrameCharSet_UpperRight.htm" />
+  <HelpKINode Title="FrameCharSet.Vertical property" Url="html/P_ConControls_Controls_Drawing_FrameCharSet_Vertical.htm" />
+  <HelpKINode Title="FrameCharSets class">
+    <HelpKINode Title="FrameCharSets Class" Url="html/T_ConControls_Controls_Drawing_FrameCharSets.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_Drawing_FrameCharSets__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_Drawing_FrameCharSets.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_Drawing_FrameCharSets.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FrameCharSets property">
+    <HelpKINode Title="ConsoleWindow.FrameCharSets Property " Url="html/P_ConControls_Controls_ConsoleWindow_FrameCharSets.htm" />
+    <HelpKINode Title="IConsoleWindow.FrameCharSets Property " Url="html/P_ConControls_Controls_IConsoleWindow_FrameCharSets.htm" />
+  </HelpKINode>
+  <HelpKINode Title="FrameCharSets.FrameCharSets constructor" Url="html/M_ConControls_Controls_Drawing_FrameCharSets__ctor.htm" />
+  <HelpKINode Title="FrameCharSets.Item property" Url="html/P_ConControls_Controls_Drawing_FrameCharSets_Item.htm" />
+  <HelpKINode Title="G enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="GetClientArea method" Url="html/M_ConControls_Controls_ConsoleControl_GetClientArea.htm" />
+  <HelpKINode Title="GetEnumerator method" Url="html/M_ConControls_Controls_ControlCollection_GetEnumerator.htm" />
+  <HelpKINode Title="GetGraphics method">
+    <HelpKINode Title="ConsoleWindow.GetGraphics Method " Url="html/M_ConControls_Controls_ConsoleWindow_GetGraphics.htm" />
+    <HelpKINode Title="IConsoleWindow.GetGraphics Method " Url="html/M_ConControls_Controls_IConsoleWindow_GetGraphics.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetHashCode method" Url="html/M_ConControls_Controls_KeyCombination_GetHashCode.htm" />
+  <HelpKINode Title="H enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Handled property" Url="html/P_ConControls_Controls_ConsoleWindowEventArgs_Handled.htm" />
+  <HelpKINode Title="Hangeul enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Hangul enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Hanja enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Help enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Home enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Horizontal property">
+    <HelpKINode Title="BoldLinedFrameCharSet.Horizontal Property " Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_Horizontal.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.Horizontal Property " Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_Horizontal.htm" />
+    <HelpKINode Title="FrameCharSet.Horizontal Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSet_Horizontal.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.Horizontal Property " Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_Horizontal.htm" />
+  </HelpKINode>
+  <HelpKINode Title="I enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ICO00 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ICOClear enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ICOHelp enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="IConsoleGraphics interface">
+    <HelpKINode Title="IConsoleGraphics Interface" Url="html/T_ConControls_Controls_Drawing_IConsoleGraphics.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_Drawing_IConsoleGraphics.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IConsoleGraphics.CopyCharacters method" Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_CopyCharacters.htm" />
+  <HelpKINode Title="IConsoleGraphics.DrawBackground method" Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_DrawBackground.htm" />
+  <HelpKINode Title="IConsoleGraphics.DrawBorder method" Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_DrawBorder.htm" />
+  <HelpKINode Title="IConsoleGraphics.FillArea method" Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_FillArea.htm" />
+  <HelpKINode Title="IConsoleGraphics.Flush method" Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_Flush.htm" />
+  <HelpKINode Title="IConsoleWindow interface">
+    <HelpKINode Title="IConsoleWindow Interface" Url="html/T_ConControls_Controls_IConsoleWindow.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_IConsoleWindow.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_IConsoleWindow.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_IConsoleWindow.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IConsoleWindow.ActiveScreen property" Url="html/P_ConControls_Controls_IConsoleWindow_ActiveScreen.htm" />
+  <HelpKINode Title="IConsoleWindow.Close method" Url="html/M_ConControls_Controls_IConsoleWindow_Close.htm" />
+  <HelpKINode Title="IConsoleWindow.CloseWindowKey property" Url="html/P_ConControls_Controls_IConsoleWindow_CloseWindowKey.htm" />
+  <HelpKINode Title="IConsoleWindow.DefaultBackgroundColor property" Url="html/P_ConControls_Controls_IConsoleWindow_DefaultBackgroundColor.htm" />
+  <HelpKINode Title="IConsoleWindow.DefaultBorderColor property" Url="html/P_ConControls_Controls_IConsoleWindow_DefaultBorderColor.htm" />
+  <HelpKINode Title="IConsoleWindow.DefaultCursorSize property" Url="html/P_ConControls_Controls_IConsoleWindow_DefaultCursorSize.htm" />
+  <HelpKINode Title="IConsoleWindow.DefaultForegroundColor property" Url="html/P_ConControls_Controls_IConsoleWindow_DefaultForegroundColor.htm" />
+  <HelpKINode Title="IConsoleWindow.Disposed event" Url="html/E_ConControls_Controls_IConsoleWindow_Disposed.htm" />
+  <HelpKINode Title="IConsoleWindow.ExitCode property" Url="html/P_ConControls_Controls_IConsoleWindow_ExitCode.htm" />
+  <HelpKINode Title="IConsoleWindow.FocusedControl property" Url="html/P_ConControls_Controls_IConsoleWindow_FocusedControl.htm" />
+  <HelpKINode Title="IConsoleWindow.FocusNext method" Url="html/M_ConControls_Controls_IConsoleWindow_FocusNext.htm" />
+  <HelpKINode Title="IConsoleWindow.FocusPrevious method" Url="html/M_ConControls_Controls_IConsoleWindow_FocusPrevious.htm" />
+  <HelpKINode Title="IConsoleWindow.FrameCharSets property" Url="html/P_ConControls_Controls_IConsoleWindow_FrameCharSets.htm" />
+  <HelpKINode Title="IConsoleWindow.GetGraphics method" Url="html/M_ConControls_Controls_IConsoleWindow_GetGraphics.htm" />
+  <HelpKINode Title="IConsoleWindow.IsDisposed property" Url="html/P_ConControls_Controls_IConsoleWindow_IsDisposed.htm" />
+  <HelpKINode Title="IConsoleWindow.KeyEvent event" Url="html/E_ConControls_Controls_IConsoleWindow_KeyEvent.htm" />
+  <HelpKINode Title="IConsoleWindow.MouseEvent event" Url="html/E_ConControls_Controls_IConsoleWindow_MouseEvent.htm" />
+  <HelpKINode Title="IConsoleWindow.SwitchConsoleBuffersKey property" Url="html/P_ConControls_Controls_IConsoleWindow_SwitchConsoleBuffersKey.htm" />
+  <HelpKINode Title="IConsoleWindow.SynchronizationLock property" Url="html/P_ConControls_Controls_IConsoleWindow_SynchronizationLock.htm" />
+  <HelpKINode Title="IConsoleWindow.Title property" Url="html/P_ConControls_Controls_IConsoleWindow_Title.htm" />
+  <HelpKINode Title="IConsoleWindow.WaitForCloseAsync method" Url="html/M_ConControls_Controls_IConsoleWindow_WaitForCloseAsync.htm" />
+  <HelpKINode Title="IControlContainer interface">
+    <HelpKINode Title="IControlContainer Interface" Url="html/T_ConControls_Controls_IControlContainer.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_IControlContainer.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_IControlContainer.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_IControlContainer.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IControlContainer.Area property" Url="html/P_ConControls_Controls_IControlContainer_Area.htm" />
+  <HelpKINode Title="IControlContainer.AreaChanged event" Url="html/E_ConControls_Controls_IControlContainer_AreaChanged.htm" />
+  <HelpKINode Title="IControlContainer.BackgroundColor explicitly implemented property" Url="html/P_ConControls_Controls_ConsoleWindow_ConControls_Controls_IControlContainer_BackgroundColor.htm" />
+  <HelpKINode Title="IControlContainer.BackgroundColor property" Url="html/P_ConControls_Controls_IControlContainer_BackgroundColor.htm" />
+  <HelpKINode Title="IControlContainer.BorderColor explicitly implemented property" Url="html/P_ConControls_Controls_ConsoleWindow_ConControls_Controls_IControlContainer_BorderColor.htm" />
+  <HelpKINode Title="IControlContainer.BorderColor property" Url="html/P_ConControls_Controls_IControlContainer_BorderColor.htm" />
+  <HelpKINode Title="IControlContainer.Controls property" Url="html/P_ConControls_Controls_IControlContainer_Controls.htm" />
+  <HelpKINode Title="IControlContainer.CursorSize explicitly implemented property" Url="html/P_ConControls_Controls_ConsoleWindow_ConControls_Controls_IControlContainer_CursorSize.htm" />
+  <HelpKINode Title="IControlContainer.CursorSize property" Url="html/P_ConControls_Controls_IControlContainer_CursorSize.htm" />
+  <HelpKINode Title="IControlContainer.DeferDrawing method" Url="html/M_ConControls_Controls_IControlContainer_DeferDrawing.htm" />
+  <HelpKINode Title="IControlContainer.DrawingInhibited property" Url="html/P_ConControls_Controls_IControlContainer_DrawingInhibited.htm" />
+  <HelpKINode Title="IControlContainer.Enabled property" Url="html/P_ConControls_Controls_IControlContainer_Enabled.htm" />
+  <HelpKINode Title="IControlContainer.ForegroundColor explicitly implemented property" Url="html/P_ConControls_Controls_ConsoleWindow_ConControls_Controls_IControlContainer_ForegroundColor.htm" />
+  <HelpKINode Title="IControlContainer.ForegroundColor property" Url="html/P_ConControls_Controls_IControlContainer_ForegroundColor.htm" />
+  <HelpKINode Title="IControlContainer.Location property" Url="html/P_ConControls_Controls_IControlContainer_Location.htm" />
+  <HelpKINode Title="IControlContainer.Parent explicitly implemented property" Url="html/P_ConControls_Controls_ConsoleWindow_ConControls_Controls_IControlContainer_Parent.htm" />
+  <HelpKINode Title="IControlContainer.Parent property" Url="html/P_ConControls_Controls_IControlContainer_Parent.htm" />
+  <HelpKINode Title="IControlContainer.PointToClient method" Url="html/M_ConControls_Controls_IControlContainer_PointToClient.htm" />
+  <HelpKINode Title="IControlContainer.PointToConsole method" Url="html/M_ConControls_Controls_IControlContainer_PointToConsole.htm" />
+  <HelpKINode Title="IControlContainer.Size property" Url="html/P_ConControls_Controls_IControlContainer_Size.htm" />
+  <HelpKINode Title="IControlContainer.Visible property" Url="html/P_ConControls_Controls_IControlContainer_Visible.htm" />
+  <HelpKINode Title="IControlContainer.Window property" Url="html/P_ConControls_Controls_IControlContainer_Window.htm" />
+  <HelpKINode Title="IEnumerable.GetEnumerator explicitly implemented method" Url="html/M_ConControls_Controls_ControlCollection_System_Collections_IEnumerable_GetEnumerator.htm" />
+  <HelpKINode Title="ImeOff enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ImeOn enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="IndexOf method" Url="html/M_ConControls_Controls_ControlCollection_IndexOf.htm" />
+  <HelpKINode Title="Inequality operator" Url="html/M_ConControls_Controls_KeyCombination_op_Inequality.htm" />
+  <HelpKINode Title="Insert enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Invalidate method">
+    <HelpKINode Title="ConsoleControl.Invalidate Method " Url="html/M_ConControls_Controls_ConsoleControl_Invalidate.htm" />
+    <HelpKINode Title="ConsoleWindow.Invalidate Method " Url="html/M_ConControls_Controls_ConsoleWindow_Invalidate.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsDisposed property">
+    <HelpKINode Title="ConsoleWindow.IsDisposed Property " Url="html/P_ConControls_Controls_ConsoleWindow_IsDisposed.htm" />
+    <HelpKINode Title="IConsoleWindow.IsDisposed Property " Url="html/P_ConControls_Controls_IConsoleWindow_IsDisposed.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Item property">
+    <HelpKINode Title="ControlCollection.Item Property " Url="html/P_ConControls_Controls_ControlCollection_Item.htm" />
+    <HelpKINode Title="FrameCharSets.Item Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSets_Item.htm" />
+  </HelpKINode>
+  <HelpKINode Title="J enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Junja enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="K enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Kana enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Kanji enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Key property" Url="html/P_ConControls_Controls_KeyCombination_Key.htm" />
+  <HelpKINode Title="KeyCombination structure">
+    <HelpKINode Title="KeyCombination Structure" Url="html/T_ConControls_Controls_KeyCombination.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_ConControls_Controls_KeyCombination__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_KeyCombination.htm" />
+    <HelpKINode Title="operators" Url="html/Operators_T_ConControls_Controls_KeyCombination.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_KeyCombination.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KeyCombination.Alt property" Url="html/P_ConControls_Controls_KeyCombination_Alt.htm" />
+  <HelpKINode Title="KeyCombination.AltF4 property" Url="html/P_ConControls_Controls_KeyCombination_AltF4.htm" />
+  <HelpKINode Title="KeyCombination.Ctrl property" Url="html/P_ConControls_Controls_KeyCombination_Ctrl.htm" />
+  <HelpKINode Title="KeyCombination.Equality operator" Url="html/M_ConControls_Controls_KeyCombination_op_Equality.htm" />
+  <HelpKINode Title="KeyCombination.Equals method" Url="html/Overload_ConControls_Controls_KeyCombination_Equals.htm" />
+  <HelpKINode Title="KeyCombination.Escape property" Url="html/P_ConControls_Controls_KeyCombination_Escape.htm" />
+  <HelpKINode Title="KeyCombination.F11 property" Url="html/P_ConControls_Controls_KeyCombination_F11.htm" />
+  <HelpKINode Title="KeyCombination.GetHashCode method" Url="html/M_ConControls_Controls_KeyCombination_GetHashCode.htm" />
+  <HelpKINode Title="KeyCombination.Inequality operator" Url="html/M_ConControls_Controls_KeyCombination_op_Inequality.htm" />
+  <HelpKINode Title="KeyCombination.Key property" Url="html/P_ConControls_Controls_KeyCombination_Key.htm" />
+  <HelpKINode Title="KeyCombination.KeyCombination constructor" Url="html/Overload_ConControls_Controls_KeyCombination__ctor.htm" />
+  <HelpKINode Title="KeyCombination.Shift property" Url="html/P_ConControls_Controls_KeyCombination_Shift.htm" />
+  <HelpKINode Title="KeyCombination.WithAlt method" Url="html/M_ConControls_Controls_KeyCombination_WithAlt.htm" />
+  <HelpKINode Title="KeyCombination.WithCtrl method" Url="html/M_ConControls_Controls_KeyCombination_WithCtrl.htm" />
+  <HelpKINode Title="KeyCombination.WithoutAlt method" Url="html/M_ConControls_Controls_KeyCombination_WithoutAlt.htm" />
+  <HelpKINode Title="KeyCombination.WithoutCtrl method" Url="html/M_ConControls_Controls_KeyCombination_WithoutCtrl.htm" />
+  <HelpKINode Title="KeyCombination.WithoutShift method" Url="html/M_ConControls_Controls_KeyCombination_WithoutShift.htm" />
+  <HelpKINode Title="KeyCombination.WithShift method" Url="html/M_ConControls_Controls_KeyCombination_WithShift.htm" />
+  <HelpKINode Title="KeyDown property" Url="html/P_ConControls_Controls_KeyEventArgs_KeyDown.htm" />
+  <HelpKINode Title="KeyEvent event">
+    <HelpKINode Title="ConsoleWindow.KeyEvent Event" Url="html/E_ConControls_Controls_ConsoleWindow_KeyEvent.htm" />
+    <HelpKINode Title="IConsoleWindow.KeyEvent Event" Url="html/E_ConControls_Controls_IConsoleWindow_KeyEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KeyEventArgs class">
+    <HelpKINode Title="KeyEventArgs Class" Url="html/T_ConControls_Controls_KeyEventArgs.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_KeyEventArgs.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_KeyEventArgs.htm" />
+  </HelpKINode>
+  <HelpKINode Title="KeyEventArgs.ControlKeys property" Url="html/P_ConControls_Controls_KeyEventArgs_ControlKeys.htm" />
+  <HelpKINode Title="KeyEventArgs.KeyDown property" Url="html/P_ConControls_Controls_KeyEventArgs_KeyDown.htm" />
+  <HelpKINode Title="KeyEventArgs.RepeatCount property" Url="html/P_ConControls_Controls_KeyEventArgs_RepeatCount.htm" />
+  <HelpKINode Title="KeyEventArgs.UnicodeChar property" Url="html/P_ConControls_Controls_KeyEventArgs_UnicodeChar.htm" />
+  <HelpKINode Title="KeyEventArgs.VirtualKey property" Url="html/P_ConControls_Controls_KeyEventArgs_VirtualKey.htm" />
+  <HelpKINode Title="KeyEventArgs.VirtualScanCode property" Url="html/P_ConControls_Controls_KeyEventArgs_VirtualScanCode.htm" />
+  <HelpKINode Title="Kind property" Url="html/P_ConControls_Controls_MouseEventArgs_Kind.htm" />
+  <HelpKINode Title="L enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="LaunchApplication1 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="LaunchApplication2 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="LaunchMail enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="LaunchMediaSelect enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Left enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="LeftButton enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="LeftButtonPressed enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
+  <HelpKINode Title="LeftControl enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="LeftMenu enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="LeftShift enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="LeftToRight enumeration member" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="LeftWindows enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="LEFT_ALT_PRESSED enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="LEFT_CTRL_PRESSED enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="Location property">
+    <HelpKINode Title="ConsoleControl.Location Property " Url="html/P_ConControls_Controls_ConsoleControl_Location.htm" />
+    <HelpKINode Title="ConsoleWindow.Location Property " Url="html/P_ConControls_Controls_ConsoleWindow_Location.htm" />
+    <HelpKINode Title="IControlContainer.Location Property " Url="html/P_ConControls_Controls_IControlContainer_Location.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LowerLeft property">
+    <HelpKINode Title="BoldLinedFrameCharSet.LowerLeft Property " Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_LowerLeft.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.LowerLeft Property " Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_LowerLeft.htm" />
+    <HelpKINode Title="FrameCharSet.LowerLeft Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSet_LowerLeft.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.LowerLeft Property " Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_LowerLeft.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LowerRight property">
+    <HelpKINode Title="BoldLinedFrameCharSet.LowerRight Property " Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_LowerRight.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.LowerRight Property " Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_LowerRight.htm" />
+    <HelpKINode Title="FrameCharSet.LowerRight Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSet_LowerRight.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.LowerRight Property " Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_LowerRight.htm" />
+  </HelpKINode>
+  <HelpKINode Title="M enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="MediaNextTrack enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="MediaPlayPause enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="MediaPrevTrack enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="MediaStop enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Menu enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="MiddleButton enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ModeChange enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="MouseButtonStates enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
+  <HelpKINode Title="MouseEvent event">
+    <HelpKINode Title="ConsoleWindow.MouseEvent Event" Url="html/E_ConControls_Controls_ConsoleWindow_MouseEvent.htm" />
+    <HelpKINode Title="IConsoleWindow.MouseEvent Event" Url="html/E_ConControls_Controls_IConsoleWindow_MouseEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MouseEventArgs class">
+    <HelpKINode Title="MouseEventArgs Class" Url="html/T_ConControls_Controls_MouseEventArgs.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_MouseEventArgs.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_MouseEventArgs.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MouseEventArgs.ButtonState property" Url="html/P_ConControls_Controls_MouseEventArgs_ButtonState.htm" />
+  <HelpKINode Title="MouseEventArgs.ControlKeys property" Url="html/P_ConControls_Controls_MouseEventArgs_ControlKeys.htm" />
+  <HelpKINode Title="MouseEventArgs.Kind property" Url="html/P_ConControls_Controls_MouseEventArgs_Kind.htm" />
+  <HelpKINode Title="MouseEventArgs.Position property" Url="html/P_ConControls_Controls_MouseEventArgs_Position.htm" />
+  <HelpKINode Title="MouseEventArgs.Scroll property" Url="html/P_ConControls_Controls_MouseEventArgs_Scroll.htm" />
+  <HelpKINode Title="MouseEventFlags enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseEventFlags.htm" />
+  <HelpKINode Title="Moved enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseEventFlags.htm" />
+  <HelpKINode Title="Multiply enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N0 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N1 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N2 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N3 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N4 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N5 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N6 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N7 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N8 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="N9 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Name property" Url="html/P_ConControls_Controls_ConsoleControl_Name.htm" />
+  <HelpKINode Title="NameChanged event" Url="html/E_ConControls_Controls_ConsoleControl_NameChanged.htm" />
+  <HelpKINode Title="Next enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="NonConvert enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="None enumeration member">
+    <HelpKINode Title="BorderStyle Enumeration" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+    <HelpKINode Title="ControlKeyStates Enumeration" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+    <HelpKINode Title="MouseButtonStates Enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
+    <HelpKINode Title="VirtualKey Enumeration" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NumLock enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="NUMLOCK_ON enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="Numpad0 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Numpad1 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Numpad2 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Numpad3 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Numpad4 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Numpad5 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Numpad6 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Numpad7 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Numpad8 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Numpad9 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="O enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEM1 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEM102 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEM2 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEM3 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEM4 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEM5 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEM6 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEM7 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEM8 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMATTN enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMAuto enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMAX enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMBackTab enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMClear enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMComma enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMCopy enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMCUSel enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMENLW enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMFinish enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMJump enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMMinus enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMPA1 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMPA2 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMPA3 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMPeriod enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMPlus enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMReset enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OEMWSCtrl enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="OnAreaChanged method">
+    <HelpKINode Title="ConsoleControl.OnAreaChanged Method " Url="html/M_ConControls_Controls_ConsoleControl_OnAreaChanged.htm" />
+    <HelpKINode Title="TextControl.OnAreaChanged Method " Url="html/M_ConControls_Controls_TextControl_OnAreaChanged.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OnBackgroundColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBackgroundColorChanged.htm" />
+  <HelpKINode Title="OnBorderColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnBorderColorChanged.htm" />
+  <HelpKINode Title="OnBorderStyleChanged method">
+    <HelpKINode Title="ConsoleControl.OnBorderStyleChanged Method " Url="html/M_ConControls_Controls_ConsoleControl_OnBorderStyleChanged.htm" />
+    <HelpKINode Title="TextControl.OnBorderStyleChanged Method " Url="html/M_ConControls_Controls_TextControl_OnBorderStyleChanged.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OnCursorPositionChanged method">
+    <HelpKINode Title="ConsoleControl.OnCursorPositionChanged Method " Url="html/M_ConControls_Controls_ConsoleControl_OnCursorPositionChanged.htm" />
+    <HelpKINode Title="TextControl.OnCursorPositionChanged Method " Url="html/M_ConControls_Controls_TextControl_OnCursorPositionChanged.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OnCursorSizeChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnCursorSizeChanged.htm" />
+  <HelpKINode Title="OnCursorVisibleChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnCursorVisibleChanged.htm" />
+  <HelpKINode Title="OnEnabledChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnEnabledChanged.htm" />
+  <HelpKINode Title="OnFocusedChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnFocusedChanged.htm" />
+  <HelpKINode Title="OnForegroundColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnForegroundColorChanged.htm" />
+  <HelpKINode Title="OnKeyEvent method">
+    <HelpKINode Title="ConsoleControl.OnKeyEvent Method " Url="html/M_ConControls_Controls_ConsoleControl_OnKeyEvent.htm" />
+    <HelpKINode Title="TextControl.OnKeyEvent Method " Url="html/M_ConControls_Controls_TextControl_OnKeyEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OnMouseEvent method">
+    <HelpKINode Title="ConsoleControl.OnMouseEvent Method " Url="html/M_ConControls_Controls_ConsoleControl_OnMouseEvent.htm" />
+    <HelpKINode Title="TextControl.OnMouseEvent Method " Url="html/M_ConControls_Controls_TextControl_OnMouseEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OnNameChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnNameChanged.htm" />
+  <HelpKINode Title="OnParentChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnParentChanged.htm" />
+  <HelpKINode Title="OnTextChanged method" Url="html/M_ConControls_Controls_TextControl_OnTextChanged.htm" />
+  <HelpKINode Title="OnVisibleChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnVisibleChanged.htm" />
+  <HelpKINode Title="Orientation property" Url="html/P_ConControls_Controls_ProgressBar_Orientation.htm" />
+  <HelpKINode Title="OrientationChanged event" Url="html/E_ConControls_Controls_ProgressBar_OrientationChanged.htm" />
+  <HelpKINode Title="P enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="PA1 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Packet enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Panel class">
+    <HelpKINode Title="Panel Class" Url="html/T_ConControls_Controls_Panel.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_Panel__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_Panel.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_Panel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_Panel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Panel.Panel constructor" Url="html/M_ConControls_Controls_Panel__ctor.htm" />
+  <HelpKINode Title="Parent property">
+    <HelpKINode Title="ConsoleControl.Parent Property " Url="html/P_ConControls_Controls_ConsoleControl_Parent.htm" />
+    <HelpKINode Title="IControlContainer.Parent Property " Url="html/P_ConControls_Controls_IControlContainer_Parent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ParentChanged event" Url="html/E_ConControls_Controls_ConsoleControl_ParentChanged.htm" />
+  <HelpKINode Title="Pause enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Percentage property" Url="html/P_ConControls_Controls_ProgressBar_Percentage.htm" />
+  <HelpKINode Title="PercentageChanged event" Url="html/E_ConControls_Controls_ProgressBar_PercentageChanged.htm" />
+  <HelpKINode Title="PerformClick method" Url="html/M_ConControls_Controls_Button_PerformClick.htm" />
+  <HelpKINode Title="Play enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="PointToClient method">
+    <HelpKINode Title="ConsoleControl.PointToClient Method " Url="html/M_ConControls_Controls_ConsoleControl_PointToClient.htm" />
+    <HelpKINode Title="ConsoleWindow.PointToClient Method " Url="html/M_ConControls_Controls_ConsoleWindow_PointToClient.htm" />
+    <HelpKINode Title="IControlContainer.PointToClient Method " Url="html/M_ConControls_Controls_IControlContainer_PointToClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PointToConsole method">
+    <HelpKINode Title="ConsoleControl.PointToConsole Method " Url="html/M_ConControls_Controls_ConsoleControl_PointToConsole.htm" />
+    <HelpKINode Title="ConsoleWindow.PointToConsole Method " Url="html/M_ConControls_Controls_ConsoleWindow_PointToConsole.htm" />
+    <HelpKINode Title="IControlContainer.PointToConsole Method " Url="html/M_ConControls_Controls_IControlContainer_PointToConsole.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Position property" Url="html/P_ConControls_Controls_MouseEventArgs_Position.htm" />
+  <HelpKINode Title="Print enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Prior enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ProcessKey enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="ProgressBar class">
+    <HelpKINode Title="ProgressBar Class" Url="html/T_ConControls_Controls_ProgressBar.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_ProgressBar__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_ProgressBar.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_ConControls_Controls_ProgressBar.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_ProgressBar.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_ProgressBar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ProgressBar.DefaultProgressChar field" Url="html/F_ConControls_Controls_ProgressBar_DefaultProgressChar.htm" />
+  <HelpKINode Title="ProgressBar.Orientation property" Url="html/P_ConControls_Controls_ProgressBar_Orientation.htm" />
+  <HelpKINode Title="ProgressBar.OrientationChanged event" Url="html/E_ConControls_Controls_ProgressBar_OrientationChanged.htm" />
+  <HelpKINode Title="ProgressBar.Percentage property" Url="html/P_ConControls_Controls_ProgressBar_Percentage.htm" />
+  <HelpKINode Title="ProgressBar.PercentageChanged event" Url="html/E_ConControls_Controls_ProgressBar_PercentageChanged.htm" />
+  <HelpKINode Title="ProgressBar.ProgressBar constructor" Url="html/M_ConControls_Controls_ProgressBar__ctor.htm" />
+  <HelpKINode Title="ProgressBar.ProgressChar property" Url="html/P_ConControls_Controls_ProgressBar_ProgressChar.htm" />
+  <HelpKINode Title="ProgressBar.ProgressCharChanged event" Url="html/E_ConControls_Controls_ProgressBar_ProgressCharChanged.htm" />
+  <HelpKINode Title="ProgressBar.ProgressOrientation enumeration" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="ProgressChar property" Url="html/P_ConControls_Controls_ProgressBar_ProgressChar.htm" />
+  <HelpKINode Title="ProgressCharChanged event" Url="html/E_ConControls_Controls_ProgressBar_ProgressCharChanged.htm" />
+  <HelpKINode Title="Q enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="R enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Remove method" Url="html/M_ConControls_Controls_ControlCollection_Remove.htm" />
+  <HelpKINode Title="RemovedControls property" Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_RemovedControls.htm" />
+  <HelpKINode Title="RemoveRange method" Url="html/Overload_ConControls_Controls_ControlCollection_RemoveRange.htm" />
+  <HelpKINode Title="RepeatCount property" Url="html/P_ConControls_Controls_KeyEventArgs_RepeatCount.htm" />
+  <HelpKINode Title="Return enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Right enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="RightButton enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="RightButtonPressed enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
+  <HelpKINode Title="RightControl enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="RightMenu enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="RightShift enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="RightToLeft enumeration member" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="RightWindows enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="RIGHT_ALT_PRESSED enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="RIGHT_CTRL_PRESSED enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="S enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Scroll property">
+    <HelpKINode Title="MouseEventArgs.Scroll Property " Url="html/P_ConControls_Controls_MouseEventArgs_Scroll.htm" />
+    <HelpKINode Title="TextControl.Scroll Property " Url="html/P_ConControls_Controls_TextControl_Scroll.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ScrollLock enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="SCROLLLOCK_ON enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="ScrollToCaret method" Url="html/M_ConControls_Controls_TextControl_ScrollToCaret.htm" />
+  <HelpKINode Title="SecondButtonPressed enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
+  <HelpKINode Title="Select enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Separator enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Shift enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Shift property" Url="html/P_ConControls_Controls_KeyCombination_Shift.htm" />
+  <HelpKINode Title="SHIFT_PRESSED enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="SingleLined enumeration member" Url="html/T_ConControls_Controls_BorderStyle.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet class">
+    <HelpKINode Title="SingleLinedFrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_SingleLinedFrameCharSet.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_Drawing_SingleLinedFrameCharSet__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_Drawing_SingleLinedFrameCharSet.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_Drawing_SingleLinedFrameCharSet.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SingleLinedFrameCharSet.Horizontal property" Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_Horizontal.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.LowerLeft property" Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_LowerLeft.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.LowerRight property" Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_LowerRight.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.SingleLinedFrameCharSet constructor" Url="html/M_ConControls_Controls_Drawing_SingleLinedFrameCharSet__ctor.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.UpperLeft property" Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_UpperLeft.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.UpperRight property" Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_UpperRight.htm" />
+  <HelpKINode Title="SingleLinedFrameCharSet.Vertical property" Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_Vertical.htm" />
+  <HelpKINode Title="Size property">
+    <HelpKINode Title="ConsoleControl.Size Property " Url="html/P_ConControls_Controls_ConsoleControl_Size.htm" />
+    <HelpKINode Title="ConsoleWindow.Size Property " Url="html/P_ConControls_Controls_ConsoleWindow_Size.htm" />
+    <HelpKINode Title="IControlContainer.Size Property " Url="html/P_ConControls_Controls_IControlContainer_Size.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Sleep enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Snapshot enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Space enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Subtract enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="SwitchConsoleBuffersKey property">
+    <HelpKINode Title="ConsoleWindow.SwitchConsoleBuffersKey Property " Url="html/P_ConControls_Controls_ConsoleWindow_SwitchConsoleBuffersKey.htm" />
+    <HelpKINode Title="IConsoleWindow.SwitchConsoleBuffersKey Property " Url="html/P_ConControls_Controls_IConsoleWindow_SwitchConsoleBuffersKey.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SynchronizationLock property">
+    <HelpKINode Title="ConsoleWindow.SynchronizationLock Property " Url="html/P_ConControls_Controls_ConsoleWindow_SynchronizationLock.htm" />
+    <HelpKINode Title="IConsoleWindow.SynchronizationLock Property " Url="html/P_ConControls_Controls_IConsoleWindow_SynchronizationLock.htm" />
+  </HelpKINode>
+  <HelpKINode Title="T enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Tab enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="TabOrder property" Url="html/P_ConControls_Controls_ConsoleControl_TabOrder.htm" />
+  <HelpKINode Title="TabStop property">
+    <HelpKINode Title="Button.TabStop Property " Url="html/P_ConControls_Controls_Button_TabStop.htm" />
+    <HelpKINode Title="ConsoleControl.TabStop Property " Url="html/P_ConControls_Controls_ConsoleControl_TabStop.htm" />
+    <HelpKINode Title="TextControl.TabStop Property " Url="html/P_ConControls_Controls_TextControl_TabStop.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Tag property" Url="html/P_ConControls_Controls_ConsoleControl_Tag.htm" />
+  <HelpKINode Title="Text property">
+    <HelpKINode Title="Button.Text Property " Url="html/P_ConControls_Controls_Button_Text.htm" />
+    <HelpKINode Title="TextControl.Text Property " Url="html/P_ConControls_Controls_TextControl_Text.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextBlock class">
+    <HelpKINode Title="TextBlock Class" Url="html/T_ConControls_Controls_TextBlock.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_TextBlock__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_TextBlock.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_TextBlock.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_TextBlock.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextBlock.TextBlock constructor" Url="html/M_ConControls_Controls_TextBlock__ctor.htm" />
+  <HelpKINode Title="TextChanged event" Url="html/E_ConControls_Controls_TextControl_TextChanged.htm" />
+  <HelpKINode Title="TextControl class">
+    <HelpKINode Title="TextControl Class" Url="html/T_ConControls_Controls_TextControl.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_TextControl.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_TextControl.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_TextControl.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TextControl.Append method" Url="html/M_ConControls_Controls_TextControl_Append.htm" />
+  <HelpKINode Title="TextControl.CanFocus property" Url="html/P_ConControls_Controls_TextControl_CanFocus.htm" />
+  <HelpKINode Title="TextControl.Caret property" Url="html/P_ConControls_Controls_TextControl_Caret.htm" />
+  <HelpKINode Title="TextControl.Clear method" Url="html/M_ConControls_Controls_TextControl_Clear.htm" />
+  <HelpKINode Title="TextControl.CursorVisible property" Url="html/P_ConControls_Controls_TextControl_CursorVisible.htm" />
+  <HelpKINode Title="TextControl.DrawClientArea method" Url="html/M_ConControls_Controls_TextControl_DrawClientArea.htm" />
+  <HelpKINode Title="TextControl.OnAreaChanged method" Url="html/M_ConControls_Controls_TextControl_OnAreaChanged.htm" />
+  <HelpKINode Title="TextControl.OnBorderStyleChanged method" Url="html/M_ConControls_Controls_TextControl_OnBorderStyleChanged.htm" />
+  <HelpKINode Title="TextControl.OnCursorPositionChanged method" Url="html/M_ConControls_Controls_TextControl_OnCursorPositionChanged.htm" />
+  <HelpKINode Title="TextControl.OnKeyEvent method" Url="html/M_ConControls_Controls_TextControl_OnKeyEvent.htm" />
+  <HelpKINode Title="TextControl.OnMouseEvent method" Url="html/M_ConControls_Controls_TextControl_OnMouseEvent.htm" />
+  <HelpKINode Title="TextControl.OnTextChanged method" Url="html/M_ConControls_Controls_TextControl_OnTextChanged.htm" />
+  <HelpKINode Title="TextControl.Scroll property" Url="html/P_ConControls_Controls_TextControl_Scroll.htm" />
+  <HelpKINode Title="TextControl.ScrollToCaret method" Url="html/M_ConControls_Controls_TextControl_ScrollToCaret.htm" />
+  <HelpKINode Title="TextControl.TabStop property" Url="html/P_ConControls_Controls_TextControl_TabStop.htm" />
+  <HelpKINode Title="TextControl.Text property" Url="html/P_ConControls_Controls_TextControl_Text.htm" />
+  <HelpKINode Title="TextControl.TextChanged event" Url="html/E_ConControls_Controls_TextControl_TextChanged.htm" />
+  <HelpKINode Title="TextControl.Wrap property" Url="html/P_ConControls_Controls_TextControl_Wrap.htm" />
+  <HelpKINode Title="ThirdButtonPressed enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
+  <HelpKINode Title="Title property">
+    <HelpKINode Title="ConsoleWindow.Title Property " Url="html/P_ConControls_Controls_ConsoleWindow_Title.htm" />
+    <HelpKINode Title="IConsoleWindow.Title Property " Url="html/P_ConControls_Controls_IConsoleWindow_Title.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TopToBottom enumeration member" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="U enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="UnicodeChar property" Url="html/P_ConControls_Controls_KeyEventArgs_UnicodeChar.htm" />
+  <HelpKINode Title="Up enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="UpperLeft property">
+    <HelpKINode Title="BoldLinedFrameCharSet.UpperLeft Property " Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_UpperLeft.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.UpperLeft Property " Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_UpperLeft.htm" />
+    <HelpKINode Title="FrameCharSet.UpperLeft Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSet_UpperLeft.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.UpperLeft Property " Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_UpperLeft.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UpperRight property">
+    <HelpKINode Title="BoldLinedFrameCharSet.UpperRight Property " Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_UpperRight.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.UpperRight Property " Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_UpperRight.htm" />
+    <HelpKINode Title="FrameCharSet.UpperRight Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSet_UpperRight.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.UpperRight Property " Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_UpperRight.htm" />
+  </HelpKINode>
+  <HelpKINode Title="V enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Vertical property">
+    <HelpKINode Title="BoldLinedFrameCharSet.Vertical Property " Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_Vertical.htm" />
+    <HelpKINode Title="DoubleLinedFrameCharSet.Vertical Property " Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_Vertical.htm" />
+    <HelpKINode Title="FrameCharSet.Vertical Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSet_Vertical.htm" />
+    <HelpKINode Title="SingleLinedFrameCharSet.Vertical Property " Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_Vertical.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VirtualKey enumeration" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="VirtualKey property" Url="html/P_ConControls_Controls_KeyEventArgs_VirtualKey.htm" />
+  <HelpKINode Title="VirtualScanCode property" Url="html/P_ConControls_Controls_KeyEventArgs_VirtualScanCode.htm" />
+  <HelpKINode Title="Visible property">
+    <HelpKINode Title="ConsoleControl.Visible Property " Url="html/P_ConControls_Controls_ConsoleControl_Visible.htm" />
+    <HelpKINode Title="ConsoleWindow.Visible Property " Url="html/P_ConControls_Controls_ConsoleWindow_Visible.htm" />
+    <HelpKINode Title="IControlContainer.Visible Property " Url="html/P_ConControls_Controls_IControlContainer_Visible.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VisibleChanged event" Url="html/E_ConControls_Controls_ConsoleControl_VisibleChanged.htm" />
+  <HelpKINode Title="VolumeDown enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="VolumeMute enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="VolumeUp enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="W enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="WaitForCloseAsync method">
+    <HelpKINode Title="ConsoleWindow.WaitForCloseAsync Method " Url="html/M_ConControls_Controls_ConsoleWindow_WaitForCloseAsync.htm" />
+    <HelpKINode Title="IConsoleWindow.WaitForCloseAsync Method " Url="html/M_ConControls_Controls_IConsoleWindow_WaitForCloseAsync.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Wheeled enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseEventFlags.htm" />
+  <HelpKINode Title="WheeledHorizontally enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseEventFlags.htm" />
+  <HelpKINode Title="Window property">
+    <HelpKINode Title="ConsoleControl.Window Property " Url="html/P_ConControls_Controls_ConsoleControl_Window.htm" />
+    <HelpKINode Title="ConsoleWindow.Window Property " Url="html/P_ConControls_Controls_ConsoleWindow_Window.htm" />
+    <HelpKINode Title="IControlContainer.Window Property " Url="html/P_ConControls_Controls_IControlContainer_Window.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WithAlt method" Url="html/M_ConControls_Controls_KeyCombination_WithAlt.htm" />
+  <HelpKINode Title="WithCtrl method" Url="html/M_ConControls_Controls_KeyCombination_WithCtrl.htm" />
+  <HelpKINode Title="WithoutAlt method" Url="html/M_ConControls_Controls_KeyCombination_WithoutAlt.htm" />
+  <HelpKINode Title="WithoutCtrl method" Url="html/M_ConControls_Controls_KeyCombination_WithoutCtrl.htm" />
+  <HelpKINode Title="WithoutShift method" Url="html/M_ConControls_Controls_KeyCombination_WithoutShift.htm" />
+  <HelpKINode Title="WithShift method" Url="html/M_ConControls_Controls_KeyCombination_WithShift.htm" />
+  <HelpKINode Title="Wrap property" Url="html/P_ConControls_Controls_TextControl_Wrap.htm" />
+  <HelpKINode Title="X enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Y enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Z enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Zoom enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+</HelpKI>
