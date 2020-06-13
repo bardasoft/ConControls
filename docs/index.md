@@ -11,7 +11,7 @@ So we wanted something to create nice graphical outputs, but without needing to 
 Now: ConControls allows you to create things like labels and text blocks, progress bars and buttons in your conosle window.
 
 The manual/how-to can be found [here](Manual.md).  
-The API documentation is availalbe as a [Sandcastle](https://github.com/EWSoftware/SHFB) compiled html help file: [ConControls.chm](api/ConControls.chm).  
+The API documentation is availalbe [online, too](api/) (created with [Sandcastle](https://github.com/EWSoftware/SHFB)).  
 Examples can be found in the [ConControlsExamples](https://github.com/ReneVogt/ConControls/tree/master/Sources/ConControlsExamples) project in the sources.
 
 [Release notes](ReleaseNotes.md)
