@@ -74,6 +74,13 @@ namespace ConControls.Controls
         /// If set to <c>true</c> this window is the active screen. If set to <c>false</c> the
         ///  original console screen buffer will be activated.
         /// </summary>
+        /// <remarks>There seems to be no Windows API method to get the currently active console screen buffer.
+        /// So this property does not really determine if the window's buffer is currently active.
+        /// It rather returns the internal flag indicating wether this window instance tried to set it's buffer as active console buffer
+        /// or if it switched back to the original buffer.
+        /// <p/>
+        /// If someone changed the active conosle screen buffer since the last set of <c>ActiveScreen</c>, the return value of this property may be misleading.
+        /// </remarks>
         bool ActiveScreen { get; set; }
 
         /// <summary>
