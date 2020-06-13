@@ -73,10 +73,10 @@ namespace ConControlsExamples.Examples
 
                 void SetSize(Size s)
                 {
-                    using(window.DeferDrawing())
+                    using(window!.DeferDrawing())
                     {
                         window.Size = s;
-                        panel.Area = new Rectangle(Point.Empty, s);
+                        panel!.Area = new Rectangle(Point.Empty, s);
                     }
                 }
 

@@ -14,7 +14,7 @@
     <Name>ConControlsDocs</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>Cross-platform (.NET Core/.NET Standard)</FrameworkVersion>
-    <OutputPath>Help\</OutputPath>
+    <OutputPath>..\..\docs\api\</OutputPath>
     <HtmlHelpName>ConControls</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
@@ -29,7 +29,7 @@
     <DocumentationSources>
       <DocumentationSource sourceFile="..\ConControls\ConControls.csproj" xmlns="" />
     </DocumentationSources>
-    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
+    <HelpFileFormat>HtmlHelp1, Website</HelpFileFormat>
     <SyntaxFilters>C#</SyntaxFilters>
     <PresentationStyle>VS2013</PresentationStyle>
     <CleanIntermediates>True</CleanIntermediates>
@@ -87,7 +87,8 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>copy "Help\ConControls.chm" ..\..\docs\api</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
 </Project>
