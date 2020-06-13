@@ -29,7 +29,7 @@
     <DocumentationSources>
       <DocumentationSource sourceFile="..\ConControls\ConControls.csproj" xmlns="" />
     </DocumentationSources>
-    <HelpFileFormat>HtmlHelp1, Website</HelpFileFormat>
+    <HelpFileFormat>Website</HelpFileFormat>
     <SyntaxFilters>C#</SyntaxFilters>
     <PresentationStyle>VS2013</PresentationStyle>
     <CleanIntermediates>True</CleanIntermediates>
