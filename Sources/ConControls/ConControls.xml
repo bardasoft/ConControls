@@ -1542,7 +1542,8 @@
             This namespace provides the public console UI control classes
             </summary>
             <remarks>
-            This namespace contains the <see cref="T:ConControls.Controls.ConsoleControl"/> base class for console UI controls
+            This namespace contains the central base classes for creating ConControls user interfaces.<br/>
+            These include the main <see cref="T:ConControls.Controls.ConsoleWindow"/> (implementing the <see cref="T:ConControls.Controls.IConsoleWindow"/> interface), the <see cref="T:ConControls.Controls.ConsoleControl"/> base class for console UI controls
             and the <see cref="T:ConControls.Controls.IControlContainer"/> interface.<br/>
             It also provides the <see cref="T:ConControls.Controls.ControlCollection"/> that can keep the child controls of a <see cref="T:ConControls.Controls.IControlContainer"/>.
             </remarks>

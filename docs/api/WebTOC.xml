@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpTOC>
 
-  <HelpTOCNode Id="ae277e29-03cc-460f-bcaf-20a444ac0864" Title="ConControls.Controls" Url="html/N_ConControls_Controls.htm">
+  <HelpTOCNode Id="729950d7-3bf1-4882-8b15-68f6bb7a6e08" Title="ConControls.Controls" Url="html/N_ConControls_Controls.htm">
     <HelpTOCNode Title="BorderStyle Enumeration" Url="html/T_ConControls_Controls_BorderStyle.htm" />
-    <HelpTOCNode Id="baa3ea91-16b4-483f-8bf5-6bdab7f07ad4" Title="Button Class" Url="html/T_ConControls_Controls_Button.htm">
+    <HelpTOCNode Id="ae7429e0-ddbc-474d-bd96-c66636227d08" Title="Button Class" Url="html/T_ConControls_Controls_Button.htm">
       <HelpTOCNode Title="Button Constructor " Url="html/M_ConControls_Controls_Button__ctor.htm" />
-      <HelpTOCNode Id="8323c3ec-b728-412f-a90d-9e35cee8431a" Title="Button Properties" Url="html/Properties_T_ConControls_Controls_Button.htm">
+      <HelpTOCNode Id="bf9455a1-bb13-4bff-b659-49d9a895ecdc" Title="Button Properties" Url="html/Properties_T_ConControls_Controls_Button.htm">
         <HelpTOCNode Title="CursorVisible Property " Url="html/P_ConControls_Controls_Button_CursorVisible.htm" />
         <HelpTOCNode Title="TabStop Property " Url="html/P_ConControls_Controls_Button_TabStop.htm" />
         <HelpTOCNode Title="Text Property " Url="html/P_ConControls_Controls_Button_Text.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="97809a64-25a4-49ad-997d-15a4686135d3" Title="Button Methods" Url="html/Methods_T_ConControls_Controls_Button.htm">
+      <HelpTOCNode Id="617378e3-587e-4391-8967-db7b70658e5b" Title="Button Methods" Url="html/Methods_T_ConControls_Controls_Button.htm">
         <HelpTOCNode Title="PerformClick Method " Url="html/M_ConControls_Controls_Button_PerformClick.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="f196d802-566a-4590-a6f3-17460cc435e1" Title="Button Events" Url="html/Events_T_ConControls_Controls_Button.htm">
+      <HelpTOCNode Id="01461c04-b79e-4d2e-bf9c-adc162b7a6fc" Title="Button Events" Url="html/Events_T_ConControls_Controls_Button.htm">
         <HelpTOCNode Title="Click Event" Url="html/E_ConControls_Controls_Button_Click.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="cf76db9a-989d-4830-8a5b-c8a1daa86273" Title="ConsoleControl Class" Url="html/T_ConControls_Controls_ConsoleControl.htm">
-      <HelpTOCNode Id="388a60ca-16f6-4789-96fc-63e9da5b489a" Title="ConsoleControl Properties" Url="html/Properties_T_ConControls_Controls_ConsoleControl.htm">
+    <HelpTOCNode Id="204ecafc-b097-4724-9792-295ca6c7826b" Title="ConsoleControl Class" Url="html/T_ConControls_Controls_ConsoleControl.htm">
+      <HelpTOCNode Id="9858b306-3258-4b3d-9167-3443f7e5b6da" Title="ConsoleControl Properties" Url="html/Properties_T_ConControls_Controls_ConsoleControl.htm">
         <HelpTOCNode Title="Area Property " Url="html/P_ConControls_Controls_ConsoleControl_Area.htm" />
         <HelpTOCNode Title="BackgroundColor Property " Url="html/P_ConControls_Controls_ConsoleControl_BackgroundColor.htm" />
         <HelpTOCNode Title="BorderColor Property " Url="html/P_ConControls_Controls_ConsoleControl_BorderColor.htm" />
@@ -54,11 +54,11 @@
         <HelpTOCNode Title="Visible Property " Url="html/P_ConControls_Controls_ConsoleControl_Visible.htm" />
         <HelpTOCNode Title="Window Property " Url="html/P_ConControls_Controls_ConsoleControl_Window.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="30b356b9-7d82-485b-88e4-cd6cf3f26fde" Title="ConsoleControl Methods" Url="html/Methods_T_ConControls_Controls_ConsoleControl.htm">
+      <HelpTOCNode Id="f9d8b02d-85fa-4105-ab51-946e67789d79" Title="ConsoleControl Methods" Url="html/Methods_T_ConControls_Controls_ConsoleControl.htm">
         <HelpTOCNode Title="CheckDisposed Method " Url="html/M_ConControls_Controls_ConsoleControl_CheckDisposed.htm" />
         <HelpTOCNode Title="Clear Method " Url="html/M_ConControls_Controls_ConsoleControl_Clear.htm" />
         <HelpTOCNode Title="DeferDrawing Method " Url="html/M_ConControls_Controls_ConsoleControl_DeferDrawing.htm" />
-        <HelpTOCNode Id="1fcac358-6938-4e8c-94c4-5812a39eb41c" Title="Dispose Method " Url="html/Overload_ConControls_Controls_ConsoleControl_Dispose.htm">
+        <HelpTOCNode Id="6295f80f-ed2b-4124-b9ee-6626cfacca0c" Title="Dispose Method " Url="html/Overload_ConControls_Controls_ConsoleControl_Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M_ConControls_Controls_ConsoleControl_Dispose.htm" />
           <HelpTOCNode Title="Dispose Method (Boolean)" Url="html/M_ConControls_Controls_ConsoleControl_Dispose_1.htm" />
         </HelpTOCNode>
@@ -86,7 +86,7 @@
         <HelpTOCNode Title="PointToClient Method " Url="html/M_ConControls_Controls_ConsoleControl_PointToClient.htm" />
         <HelpTOCNode Title="PointToConsole Method " Url="html/M_ConControls_Controls_ConsoleControl_PointToConsole.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="554d77d5-9f92-47b8-9f34-ec6d8e951a1e" Title="ConsoleControl Events" Url="html/Events_T_ConControls_Controls_ConsoleControl.htm">
+      <HelpTOCNode Id="e653cbc0-13d0-4a1f-8635-a414fea70c08" Title="ConsoleControl Events" Url="html/Events_T_ConControls_Controls_ConsoleControl.htm">
         <HelpTOCNode Title="AreaChanged Event" Url="html/E_ConControls_Controls_ConsoleControl_AreaChanged.htm" />
         <HelpTOCNode Title="CursorPositionChanged Event" Url="html/E_ConControls_Controls_ConsoleControl_CursorPositionChanged.htm" />
         <HelpTOCNode Title="CursorSizeChanged Event" Url="html/E_ConControls_Controls_ConsoleControl_CursorSizeChanged.htm" />
@@ -98,9 +98,9 @@
         <HelpTOCNode Title="VisibleChanged Event" Url="html/E_ConControls_Controls_ConsoleControl_VisibleChanged.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="9d6a9479-e0e3-4e20-bb66-b64ac843d5fe" Title="ConsoleWindow Class" Url="html/T_ConControls_Controls_ConsoleWindow.htm">
+    <HelpTOCNode Id="1aebf5cc-8191-4a5a-8a53-af05afda9fbe" Title="ConsoleWindow Class" Url="html/T_ConControls_Controls_ConsoleWindow.htm">
       <HelpTOCNode Title="ConsoleWindow Constructor " Url="html/M_ConControls_Controls_ConsoleWindow__ctor.htm" />
-      <HelpTOCNode Id="87d24453-5f3a-448f-bef2-a4c0ce0e632a" Title="ConsoleWindow Properties" Url="html/Properties_T_ConControls_Controls_ConsoleWindow.htm">
+      <HelpTOCNode Id="3786f6bd-396a-4f9e-8e26-9e2ee833caeb" Title="ConsoleWindow Properties" Url="html/Properties_T_ConControls_Controls_ConsoleWindow.htm">
         <HelpTOCNode Title="ActiveScreen Property " Url="html/P_ConControls_Controls_ConsoleWindow_ActiveScreen.htm" />
         <HelpTOCNode Title="Area Property " Url="html/P_ConControls_Controls_ConsoleWindow_Area.htm" />
         <HelpTOCNode Title="CloseWindowKey Property " Url="html/P_ConControls_Controls_ConsoleWindow_CloseWindowKey.htm" />
@@ -128,7 +128,7 @@
         <HelpTOCNode Title="Visible Property " Url="html/P_ConControls_Controls_ConsoleWindow_Visible.htm" />
         <HelpTOCNode Title="Window Property " Url="html/P_ConControls_Controls_ConsoleWindow_Window.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="3929b036-6107-419a-a77d-249f7318f305" Title="ConsoleWindow Methods" Url="html/Methods_T_ConControls_Controls_ConsoleWindow.htm">
+      <HelpTOCNode Id="92261deb-ae7a-42a7-bd80-2d727a8efd20" Title="ConsoleWindow Methods" Url="html/Methods_T_ConControls_Controls_ConsoleWindow.htm">
         <HelpTOCNode Title="Close Method " Url="html/M_ConControls_Controls_ConsoleWindow_Close.htm" />
         <HelpTOCNode Title="DeferDrawing Method " Url="html/M_ConControls_Controls_ConsoleWindow_DeferDrawing.htm" />
         <HelpTOCNode Title="Dispose Method " Url="html/M_ConControls_Controls_ConsoleWindow_Dispose.htm" />
@@ -141,52 +141,52 @@
         <HelpTOCNode Title="PointToConsole Method " Url="html/M_ConControls_Controls_ConsoleWindow_PointToConsole.htm" />
         <HelpTOCNode Title="WaitForCloseAsync Method " Url="html/M_ConControls_Controls_ConsoleWindow_WaitForCloseAsync.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="5b9a511e-675c-4fbd-804f-61124f4a86f5" Title="ConsoleWindow Events" Url="html/Events_T_ConControls_Controls_ConsoleWindow.htm">
+      <HelpTOCNode Id="ac32f789-9857-48af-b53e-ffffa20c6994" Title="ConsoleWindow Events" Url="html/Events_T_ConControls_Controls_ConsoleWindow.htm">
         <HelpTOCNode Title="AreaChanged Event" Url="html/E_ConControls_Controls_ConsoleWindow_AreaChanged.htm" />
         <HelpTOCNode Title="Disposed Event" Url="html/E_ConControls_Controls_ConsoleWindow_Disposed.htm" />
         <HelpTOCNode Title="KeyEvent Event" Url="html/E_ConControls_Controls_ConsoleWindow_KeyEvent.htm" />
         <HelpTOCNode Title="MouseEvent Event" Url="html/E_ConControls_Controls_ConsoleWindow_MouseEvent.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="ce0660fc-4921-45aa-a8a5-d87b0c896261" Title="ConsoleWindowEventArgs Class" Url="html/T_ConControls_Controls_ConsoleWindowEventArgs.htm">
-      <HelpTOCNode Id="d747a833-e971-4e52-877f-b5784343084d" Title="ConsoleWindowEventArgs Properties" Url="html/Properties_T_ConControls_Controls_ConsoleWindowEventArgs.htm">
+    <HelpTOCNode Id="e7fe9366-e621-4203-bba8-c18e03d38adb" Title="ConsoleWindowEventArgs Class" Url="html/T_ConControls_Controls_ConsoleWindowEventArgs.htm">
+      <HelpTOCNode Id="03ad2e42-74f3-42e2-bd0f-1ede8b156ba6" Title="ConsoleWindowEventArgs Properties" Url="html/Properties_T_ConControls_Controls_ConsoleWindowEventArgs.htm">
         <HelpTOCNode Title="Handled Property " Url="html/P_ConControls_Controls_ConsoleWindowEventArgs_Handled.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ConsoleWindowEventArgs Methods" Url="html/Methods_T_ConControls_Controls_ConsoleWindowEventArgs.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="72d9f870-56cd-4715-b009-747ead3c856c" Title="ControlCollection Class" Url="html/T_ConControls_Controls_ControlCollection.htm">
-      <HelpTOCNode Id="b1b1eb34-2ba6-443e-86db-d8d278ac61d9" Title="ControlCollection Properties" Url="html/Properties_T_ConControls_Controls_ControlCollection.htm">
+    <HelpTOCNode Id="87b830c9-8130-4eb6-beee-5e1b54d018de" Title="ControlCollection Class" Url="html/T_ConControls_Controls_ControlCollection.htm">
+      <HelpTOCNode Id="9423beaf-3ca1-4d7f-ab15-bef2eb55ebd7" Title="ControlCollection Properties" Url="html/Properties_T_ConControls_Controls_ControlCollection.htm">
         <HelpTOCNode Title="Count Property " Url="html/P_ConControls_Controls_ControlCollection_Count.htm" />
         <HelpTOCNode Title="Item Property " Url="html/P_ConControls_Controls_ControlCollection_Item.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="8c703204-d58b-4cc0-bd7a-a317f2e91691" Title="ControlCollection Methods" Url="html/Methods_T_ConControls_Controls_ControlCollection.htm">
+      <HelpTOCNode Id="75a78843-7149-4dbb-865f-5378835eac6c" Title="ControlCollection Methods" Url="html/Methods_T_ConControls_Controls_ControlCollection.htm">
         <HelpTOCNode Title="IEnumerable.GetEnumerator Method " Url="html/M_ConControls_Controls_ControlCollection_System_Collections_IEnumerable_GetEnumerator.htm" />
         <HelpTOCNode Title="Add Method " Url="html/M_ConControls_Controls_ControlCollection_Add.htm" />
-        <HelpTOCNode Id="bb66ce81-cf49-4163-b806-c5b9fb48192b" Title="AddRange Method " Url="html/Overload_ConControls_Controls_ControlCollection_AddRange.htm">
+        <HelpTOCNode Id="f3c66d30-f668-4215-aa92-fb31d9a23f9c" Title="AddRange Method " Url="html/Overload_ConControls_Controls_ControlCollection_AddRange.htm">
           <HelpTOCNode Title="AddRange Method (ConsoleControl[])" Url="html/M_ConControls_Controls_ControlCollection_AddRange.htm" />
           <HelpTOCNode Title="AddRange Method (IEnumerable(ConsoleControl))" Url="html/M_ConControls_Controls_ControlCollection_AddRange_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="GetEnumerator Method " Url="html/M_ConControls_Controls_ControlCollection_GetEnumerator.htm" />
         <HelpTOCNode Title="IndexOf Method " Url="html/M_ConControls_Controls_ControlCollection_IndexOf.htm" />
         <HelpTOCNode Title="Remove Method " Url="html/M_ConControls_Controls_ControlCollection_Remove.htm" />
-        <HelpTOCNode Id="c9dac51c-a296-485d-a2ca-62f8007e706b" Title="RemoveRange Method " Url="html/Overload_ConControls_Controls_ControlCollection_RemoveRange.htm">
+        <HelpTOCNode Id="291ea592-04e1-4f2e-806b-28a8557af2bb" Title="RemoveRange Method " Url="html/Overload_ConControls_Controls_ControlCollection_RemoveRange.htm">
           <HelpTOCNode Title="RemoveRange Method (ConsoleControl[])" Url="html/M_ConControls_Controls_ControlCollection_RemoveRange.htm" />
           <HelpTOCNode Title="RemoveRange Method (IEnumerable(ConsoleControl))" Url="html/M_ConControls_Controls_ControlCollection_RemoveRange_1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="0e803fe8-c248-4737-ad7a-0622aed2a6e3" Title="ControlCollection Events" Url="html/Events_T_ConControls_Controls_ControlCollection.htm">
+      <HelpTOCNode Id="debe4b29-ccd6-4352-b8ed-ff13855f73e3" Title="ControlCollection Events" Url="html/Events_T_ConControls_Controls_ControlCollection.htm">
         <HelpTOCNode Title="ControlCollectionChanged Event" Url="html/E_ConControls_Controls_ControlCollection_ControlCollectionChanged.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="29b92bfd-cb14-4a8e-9cb0-5a9875ac73f9" Title="ControlCollectionChangedEventArgs Class" Url="html/T_ConControls_Controls_ControlCollectionChangedEventArgs.htm">
-      <HelpTOCNode Id="4034f5fd-8e58-46e8-8ca9-c17185c8a1f1" Title="ControlCollectionChangedEventArgs Properties" Url="html/Properties_T_ConControls_Controls_ControlCollectionChangedEventArgs.htm">
+    <HelpTOCNode Id="7ac4799d-1199-42f0-8c86-bb4d1a82f769" Title="ControlCollectionChangedEventArgs Class" Url="html/T_ConControls_Controls_ControlCollectionChangedEventArgs.htm">
+      <HelpTOCNode Id="935461e4-9745-4bc6-a25f-9d7340a4cdad" Title="ControlCollectionChangedEventArgs Properties" Url="html/Properties_T_ConControls_Controls_ControlCollectionChangedEventArgs.htm">
         <HelpTOCNode Title="AddedControls Property " Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_AddedControls.htm" />
         <HelpTOCNode Title="RemovedControls Property " Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_RemovedControls.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ControlCollectionChangedEventArgs Methods" Url="html/Methods_T_ConControls_Controls_ControlCollectionChangedEventArgs.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="1fc385c1-791b-47c4-a622-228b64427636" Title="IConsoleWindow Interface" Url="html/T_ConControls_Controls_IConsoleWindow.htm">
-      <HelpTOCNode Id="ff0e0110-3fff-41b6-833e-8be0c1ecd769" Title="IConsoleWindow Properties" Url="html/Properties_T_ConControls_Controls_IConsoleWindow.htm">
+    <HelpTOCNode Id="eea4f6be-b41e-4db4-9ac5-18d919f75f3c" Title="IConsoleWindow Interface" Url="html/T_ConControls_Controls_IConsoleWindow.htm">
+      <HelpTOCNode Id="3ed1363a-5d2e-428a-bef6-7f25ddea74da" Title="IConsoleWindow Properties" Url="html/Properties_T_ConControls_Controls_IConsoleWindow.htm">
         <HelpTOCNode Title="ActiveScreen Property " Url="html/P_ConControls_Controls_IConsoleWindow_ActiveScreen.htm" />
         <HelpTOCNode Title="CloseWindowKey Property " Url="html/P_ConControls_Controls_IConsoleWindow_CloseWindowKey.htm" />
         <HelpTOCNode Title="DefaultBackgroundColor Property " Url="html/P_ConControls_Controls_IConsoleWindow_DefaultBackgroundColor.htm" />
@@ -201,21 +201,21 @@
         <HelpTOCNode Title="SynchronizationLock Property " Url="html/P_ConControls_Controls_IConsoleWindow_SynchronizationLock.htm" />
         <HelpTOCNode Title="Title Property " Url="html/P_ConControls_Controls_IConsoleWindow_Title.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="498f5bb3-40bf-459f-a1a8-055951cc2c90" Title="IConsoleWindow Methods" Url="html/Methods_T_ConControls_Controls_IConsoleWindow.htm">
+      <HelpTOCNode Id="62ee5cae-67fc-4a08-b144-5bcc26d0a07b" Title="IConsoleWindow Methods" Url="html/Methods_T_ConControls_Controls_IConsoleWindow.htm">
         <HelpTOCNode Title="Close Method " Url="html/M_ConControls_Controls_IConsoleWindow_Close.htm" />
         <HelpTOCNode Title="FocusNext Method " Url="html/M_ConControls_Controls_IConsoleWindow_FocusNext.htm" />
         <HelpTOCNode Title="FocusPrevious Method " Url="html/M_ConControls_Controls_IConsoleWindow_FocusPrevious.htm" />
         <HelpTOCNode Title="GetGraphics Method " Url="html/M_ConControls_Controls_IConsoleWindow_GetGraphics.htm" />
         <HelpTOCNode Title="WaitForCloseAsync Method " Url="html/M_ConControls_Controls_IConsoleWindow_WaitForCloseAsync.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="00580516-ab0e-46d1-a55b-061b88dbadf3" Title="IConsoleWindow Events" Url="html/Events_T_ConControls_Controls_IConsoleWindow.htm">
+      <HelpTOCNode Id="20424f3b-7201-49ba-a631-7467baa695ce" Title="IConsoleWindow Events" Url="html/Events_T_ConControls_Controls_IConsoleWindow.htm">
         <HelpTOCNode Title="Disposed Event" Url="html/E_ConControls_Controls_IConsoleWindow_Disposed.htm" />
         <HelpTOCNode Title="KeyEvent Event" Url="html/E_ConControls_Controls_IConsoleWindow_KeyEvent.htm" />
         <HelpTOCNode Title="MouseEvent Event" Url="html/E_ConControls_Controls_IConsoleWindow_MouseEvent.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="425d0875-445d-4d0b-8e2e-48e291fdf883" Title="IControlContainer Interface" Url="html/T_ConControls_Controls_IControlContainer.htm">
-      <HelpTOCNode Id="efe7ff24-f7fe-4b23-82ad-7d7ac46f613a" Title="IControlContainer Properties" Url="html/Properties_T_ConControls_Controls_IControlContainer.htm">
+    <HelpTOCNode Id="61fa0c85-3f08-43d1-86ea-5895827e6f83" Title="IControlContainer Interface" Url="html/T_ConControls_Controls_IControlContainer.htm">
+      <HelpTOCNode Id="d8fa7781-6630-4f40-8def-3a0439d5620a" Title="IControlContainer Properties" Url="html/Properties_T_ConControls_Controls_IControlContainer.htm">
         <HelpTOCNode Title="Area Property " Url="html/P_ConControls_Controls_IControlContainer_Area.htm" />
         <HelpTOCNode Title="BackgroundColor Property " Url="html/P_ConControls_Controls_IControlContainer_BackgroundColor.htm" />
         <HelpTOCNode Title="BorderColor Property " Url="html/P_ConControls_Controls_IControlContainer_BorderColor.htm" />
@@ -230,21 +230,21 @@
         <HelpTOCNode Title="Visible Property " Url="html/P_ConControls_Controls_IControlContainer_Visible.htm" />
         <HelpTOCNode Title="Window Property " Url="html/P_ConControls_Controls_IControlContainer_Window.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="8ce5d1b5-ac13-4b8c-8c3a-8a9efdfa151f" Title="IControlContainer Methods" Url="html/Methods_T_ConControls_Controls_IControlContainer.htm">
+      <HelpTOCNode Id="a210c9e4-8d15-4401-81e9-ad3fa7f1464c" Title="IControlContainer Methods" Url="html/Methods_T_ConControls_Controls_IControlContainer.htm">
         <HelpTOCNode Title="DeferDrawing Method " Url="html/M_ConControls_Controls_IControlContainer_DeferDrawing.htm" />
         <HelpTOCNode Title="PointToClient Method " Url="html/M_ConControls_Controls_IControlContainer_PointToClient.htm" />
         <HelpTOCNode Title="PointToConsole Method " Url="html/M_ConControls_Controls_IControlContainer_PointToConsole.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="6a2f1e3b-8d9a-417b-9e90-67d8839d4629" Title="IControlContainer Events" Url="html/Events_T_ConControls_Controls_IControlContainer.htm">
+      <HelpTOCNode Id="131fc462-6d27-4469-9813-24c4c35d8efb" Title="IControlContainer Events" Url="html/Events_T_ConControls_Controls_IControlContainer.htm">
         <HelpTOCNode Title="AreaChanged Event" Url="html/E_ConControls_Controls_IControlContainer_AreaChanged.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="0436fd43-8db2-42f6-9032-b97136e75394" Title="KeyCombination Structure" Url="html/T_ConControls_Controls_KeyCombination.htm">
-      <HelpTOCNode Id="c4aa2dce-8fcb-4ade-9d1c-90003389eed6" Title="KeyCombination Constructor " Url="html/Overload_ConControls_Controls_KeyCombination__ctor.htm">
+    <HelpTOCNode Id="1e0cc752-45cf-41b9-98b7-7fc61976f244" Title="KeyCombination Structure" Url="html/T_ConControls_Controls_KeyCombination.htm">
+      <HelpTOCNode Id="f50e79fe-6efb-402f-86ef-f4e0420efab2" Title="KeyCombination Constructor " Url="html/Overload_ConControls_Controls_KeyCombination__ctor.htm">
         <HelpTOCNode Title="KeyCombination Constructor (VirtualKey)" Url="html/M_ConControls_Controls_KeyCombination__ctor.htm" />
         <HelpTOCNode Title="KeyCombination Constructor (VirtualKey, Boolean, Boolean, Boolean)" Url="html/M_ConControls_Controls_KeyCombination__ctor_1.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="40a0ba86-7789-4a77-84f9-00fe9c2a97f0" Title="KeyCombination Properties" Url="html/Properties_T_ConControls_Controls_KeyCombination.htm">
+      <HelpTOCNode Id="368fcd7f-88b4-4481-9fb6-2c1e6b344fca" Title="KeyCombination Properties" Url="html/Properties_T_ConControls_Controls_KeyCombination.htm">
         <HelpTOCNode Title="Alt Property " Url="html/P_ConControls_Controls_KeyCombination_Alt.htm" />
         <HelpTOCNode Title="AltF4 Property " Url="html/P_ConControls_Controls_KeyCombination_AltF4.htm" />
         <HelpTOCNode Title="Ctrl Property " Url="html/P_ConControls_Controls_KeyCombination_Ctrl.htm" />
@@ -253,8 +253,8 @@
         <HelpTOCNode Title="Key Property " Url="html/P_ConControls_Controls_KeyCombination_Key.htm" />
         <HelpTOCNode Title="Shift Property " Url="html/P_ConControls_Controls_KeyCombination_Shift.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="130e4260-ee31-4ec0-8390-fa50a83dd3e5" Title="KeyCombination Methods" Url="html/Methods_T_ConControls_Controls_KeyCombination.htm">
-        <HelpTOCNode Id="5773be4d-5a96-49e1-85af-8d346a93593e" Title="Equals Method " Url="html/Overload_ConControls_Controls_KeyCombination_Equals.htm">
+      <HelpTOCNode Id="123d2267-6ccb-4641-8c0e-f5b7d8d892c1" Title="KeyCombination Methods" Url="html/Methods_T_ConControls_Controls_KeyCombination.htm">
+        <HelpTOCNode Id="65282d9d-c07b-4b9e-9028-ff51b3a49e1a" Title="Equals Method " Url="html/Overload_ConControls_Controls_KeyCombination_Equals.htm">
           <HelpTOCNode Title="Equals Method (Object)" Url="html/M_ConControls_Controls_KeyCombination_Equals_1.htm" />
           <HelpTOCNode Title="Equals Method (KeyCombination)" Url="html/M_ConControls_Controls_KeyCombination_Equals.htm" />
         </HelpTOCNode>
@@ -266,13 +266,13 @@
         <HelpTOCNode Title="WithoutShift Method " Url="html/M_ConControls_Controls_KeyCombination_WithoutShift.htm" />
         <HelpTOCNode Title="WithShift Method " Url="html/M_ConControls_Controls_KeyCombination_WithShift.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="37172028-8704-478a-bda5-63818fb968a6" Title="KeyCombination Operators" Url="html/Operators_T_ConControls_Controls_KeyCombination.htm">
+      <HelpTOCNode Id="bd073251-8c8a-45bf-87bf-089b88603b07" Title="KeyCombination Operators" Url="html/Operators_T_ConControls_Controls_KeyCombination.htm">
         <HelpTOCNode Title="Equality Operator " Url="html/M_ConControls_Controls_KeyCombination_op_Equality.htm" />
         <HelpTOCNode Title="Inequality Operator " Url="html/M_ConControls_Controls_KeyCombination_op_Inequality.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="34307751-5584-40d7-852d-400bb6c3d4b0" Title="KeyEventArgs Class" Url="html/T_ConControls_Controls_KeyEventArgs.htm">
-      <HelpTOCNode Id="c2a5e72c-7aab-4ebb-8d7e-1fd9cddd668b" Title="KeyEventArgs Properties" Url="html/Properties_T_ConControls_Controls_KeyEventArgs.htm">
+    <HelpTOCNode Id="3bbd918f-a1a6-4c50-a223-4d45e3ee73ad" Title="KeyEventArgs Class" Url="html/T_ConControls_Controls_KeyEventArgs.htm">
+      <HelpTOCNode Id="98df807d-f14b-4e5f-b5fa-72c9fd9c0a00" Title="KeyEventArgs Properties" Url="html/Properties_T_ConControls_Controls_KeyEventArgs.htm">
         <HelpTOCNode Title="ControlKeys Property " Url="html/P_ConControls_Controls_KeyEventArgs_ControlKeys.htm" />
         <HelpTOCNode Title="KeyDown Property " Url="html/P_ConControls_Controls_KeyEventArgs_KeyDown.htm" />
         <HelpTOCNode Title="RepeatCount Property " Url="html/P_ConControls_Controls_KeyEventArgs_RepeatCount.htm" />
@@ -282,8 +282,8 @@
       </HelpTOCNode>
       <HelpTOCNode Title="KeyEventArgs Methods" Url="html/Methods_T_ConControls_Controls_KeyEventArgs.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="b22fab11-8fcf-4de7-b949-f4dd839bce5b" Title="MouseEventArgs Class" Url="html/T_ConControls_Controls_MouseEventArgs.htm">
-      <HelpTOCNode Id="228ce79e-337b-405d-9e8c-19c2d33ff9f3" Title="MouseEventArgs Properties" Url="html/Properties_T_ConControls_Controls_MouseEventArgs.htm">
+    <HelpTOCNode Id="2ee6642e-c35d-46e3-b384-f97b1d927b7d" Title="MouseEventArgs Class" Url="html/T_ConControls_Controls_MouseEventArgs.htm">
+      <HelpTOCNode Id="e69f33f5-ca07-40a8-97c0-f49e141864b8" Title="MouseEventArgs Properties" Url="html/Properties_T_ConControls_Controls_MouseEventArgs.htm">
         <HelpTOCNode Title="ButtonState Property " Url="html/P_ConControls_Controls_MouseEventArgs_ButtonState.htm" />
         <HelpTOCNode Title="ControlKeys Property " Url="html/P_ConControls_Controls_MouseEventArgs_ControlKeys.htm" />
         <HelpTOCNode Title="Kind Property " Url="html/P_ConControls_Controls_MouseEventArgs_Kind.htm" />
@@ -292,38 +292,38 @@
       </HelpTOCNode>
       <HelpTOCNode Title="MouseEventArgs Methods" Url="html/Methods_T_ConControls_Controls_MouseEventArgs.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="f134702f-e999-46b6-bea7-8ed1368c9ef2" Title="Panel Class" Url="html/T_ConControls_Controls_Panel.htm">
+    <HelpTOCNode Id="6f100609-6dc5-4c9e-9db7-52f64cbf0524" Title="Panel Class" Url="html/T_ConControls_Controls_Panel.htm">
       <HelpTOCNode Title="Panel Constructor " Url="html/M_ConControls_Controls_Panel__ctor.htm" />
       <HelpTOCNode Title="Panel Properties" Url="html/Properties_T_ConControls_Controls_Panel.htm" />
       <HelpTOCNode Title="Panel Methods" Url="html/Methods_T_ConControls_Controls_Panel.htm" />
       <HelpTOCNode Title="Panel Events" Url="html/Events_T_ConControls_Controls_Panel.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="26d12e17-d4ee-4906-8b37-7001ab6ab875" Title="ProgressBar Class" Url="html/T_ConControls_Controls_ProgressBar.htm">
+    <HelpTOCNode Id="71295c6a-a1f2-4f2b-baa8-798a38118b31" Title="ProgressBar Class" Url="html/T_ConControls_Controls_ProgressBar.htm">
       <HelpTOCNode Title="ProgressBar Constructor " Url="html/M_ConControls_Controls_ProgressBar__ctor.htm" />
-      <HelpTOCNode Id="1e9522ee-341a-40f2-95d9-aab14926cd40" Title="ProgressBar Properties" Url="html/Properties_T_ConControls_Controls_ProgressBar.htm">
+      <HelpTOCNode Id="fec1213e-4aed-4381-907b-515233671bc8" Title="ProgressBar Properties" Url="html/Properties_T_ConControls_Controls_ProgressBar.htm">
         <HelpTOCNode Title="Orientation Property " Url="html/P_ConControls_Controls_ProgressBar_Orientation.htm" />
         <HelpTOCNode Title="Percentage Property " Url="html/P_ConControls_Controls_ProgressBar_Percentage.htm" />
         <HelpTOCNode Title="ProgressChar Property " Url="html/P_ConControls_Controls_ProgressBar_ProgressChar.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ProgressBar Methods" Url="html/Methods_T_ConControls_Controls_ProgressBar.htm" />
-      <HelpTOCNode Id="36b7c35f-3e46-4625-852c-69d9320ebad7" Title="ProgressBar Events" Url="html/Events_T_ConControls_Controls_ProgressBar.htm">
+      <HelpTOCNode Id="35d8fea3-bf4e-4267-80c0-46822fc9708b" Title="ProgressBar Events" Url="html/Events_T_ConControls_Controls_ProgressBar.htm">
         <HelpTOCNode Title="OrientationChanged Event" Url="html/E_ConControls_Controls_ProgressBar_OrientationChanged.htm" />
         <HelpTOCNode Title="PercentageChanged Event" Url="html/E_ConControls_Controls_ProgressBar_PercentageChanged.htm" />
         <HelpTOCNode Title="ProgressCharChanged Event" Url="html/E_ConControls_Controls_ProgressBar_ProgressCharChanged.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="213025bd-5259-4990-90a9-bcfd25550343" Title="ProgressBar Fields" Url="html/Fields_T_ConControls_Controls_ProgressBar.htm">
+      <HelpTOCNode Id="c1b1cb1a-ef9b-4690-8ba9-892370f7a41c" Title="ProgressBar Fields" Url="html/Fields_T_ConControls_Controls_ProgressBar.htm">
         <HelpTOCNode Title="DefaultProgressChar Field" Url="html/F_ConControls_Controls_ProgressBar_DefaultProgressChar.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
     <HelpTOCNode Title="ProgressBar.ProgressOrientation Enumeration" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
-    <HelpTOCNode Id="d134fbd3-1b4f-42ce-90b5-5fe83fe1baf9" Title="TextBlock Class" Url="html/T_ConControls_Controls_TextBlock.htm">
+    <HelpTOCNode Id="21a61a7c-6605-426d-9d18-5a0d44583b3f" Title="TextBlock Class" Url="html/T_ConControls_Controls_TextBlock.htm">
       <HelpTOCNode Title="TextBlock Constructor " Url="html/M_ConControls_Controls_TextBlock__ctor.htm" />
       <HelpTOCNode Title="TextBlock Properties" Url="html/Properties_T_ConControls_Controls_TextBlock.htm" />
       <HelpTOCNode Title="TextBlock Methods" Url="html/Methods_T_ConControls_Controls_TextBlock.htm" />
       <HelpTOCNode Title="TextBlock Events" Url="html/Events_T_ConControls_Controls_TextBlock.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="f7c2d237-5c0a-448f-a0e1-cb39608be6c6" Title="TextControl Class" Url="html/T_ConControls_Controls_TextControl.htm">
-      <HelpTOCNode Id="0dfecacb-4e57-4b1c-8fe2-e7cd41e23033" Title="TextControl Properties" Url="html/Properties_T_ConControls_Controls_TextControl.htm">
+    <HelpTOCNode Id="d8c55aa1-7fdb-4e46-9173-08633997153f" Title="TextControl Class" Url="html/T_ConControls_Controls_TextControl.htm">
+      <HelpTOCNode Id="eaf701ca-3be1-477b-8b44-c9ff73090390" Title="TextControl Properties" Url="html/Properties_T_ConControls_Controls_TextControl.htm">
         <HelpTOCNode Title="CanFocus Property " Url="html/P_ConControls_Controls_TextControl_CanFocus.htm" />
         <HelpTOCNode Title="Caret Property " Url="html/P_ConControls_Controls_TextControl_Caret.htm" />
         <HelpTOCNode Title="CursorVisible Property " Url="html/P_ConControls_Controls_TextControl_CursorVisible.htm" />
@@ -332,7 +332,7 @@
         <HelpTOCNode Title="Text Property " Url="html/P_ConControls_Controls_TextControl_Text.htm" />
         <HelpTOCNode Title="Wrap Property " Url="html/P_ConControls_Controls_TextControl_Wrap.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="e8838841-326c-4b32-a970-3d249ba1baa5" Title="TextControl Methods" Url="html/Methods_T_ConControls_Controls_TextControl.htm">
+      <HelpTOCNode Id="9c511c6d-b58b-48fc-9aa0-f9c40acab753" Title="TextControl Methods" Url="html/Methods_T_ConControls_Controls_TextControl.htm">
         <HelpTOCNode Title="Append Method " Url="html/M_ConControls_Controls_TextControl_Append.htm" />
         <HelpTOCNode Title="Clear Method " Url="html/M_ConControls_Controls_TextControl_Clear.htm" />
         <HelpTOCNode Title="DrawClientArea Method " Url="html/M_ConControls_Controls_TextControl_DrawClientArea.htm" />
@@ -344,15 +344,15 @@
         <HelpTOCNode Title="OnTextChanged Method " Url="html/M_ConControls_Controls_TextControl_OnTextChanged.htm" />
         <HelpTOCNode Title="ScrollToCaret Method " Url="html/M_ConControls_Controls_TextControl_ScrollToCaret.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="f10413e4-aff3-405a-b032-461a58aa234a" Title="TextControl Events" Url="html/Events_T_ConControls_Controls_TextControl.htm">
+      <HelpTOCNode Id="99f48142-3c67-4206-b911-1ac47e88317c" Title="TextControl Events" Url="html/Events_T_ConControls_Controls_TextControl.htm">
         <HelpTOCNode Title="TextChanged Event" Url="html/E_ConControls_Controls_TextControl_TextChanged.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="895ead92-b26f-4ff0-97fb-31f4c0862238" Title="ConControls.Controls.Drawing" Url="html/N_ConControls_Controls_Drawing.htm">
-    <HelpTOCNode Id="ffd4843e-3988-46ef-be79-4dce4ad82935" Title="BoldLinedFrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_BoldLinedFrameCharSet.htm">
+  <HelpTOCNode Id="0b4880d0-6466-4e25-8ba7-cb6d634aeb99" Title="ConControls.Controls.Drawing" Url="html/N_ConControls_Controls_Drawing.htm">
+    <HelpTOCNode Id="04311aa5-cc4e-4c46-bafb-68eb2957fa64" Title="BoldLinedFrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_BoldLinedFrameCharSet.htm">
       <HelpTOCNode Title="BoldLinedFrameCharSet Constructor " Url="html/M_ConControls_Controls_Drawing_BoldLinedFrameCharSet__ctor.htm" />
-      <HelpTOCNode Id="e9e3d935-c019-4dd1-ad89-e2ffab69496b" Title="BoldLinedFrameCharSet Properties" Url="html/Properties_T_ConControls_Controls_Drawing_BoldLinedFrameCharSet.htm">
+      <HelpTOCNode Id="ad9e277b-0db3-4c0a-bab2-3d808e6ecac3" Title="BoldLinedFrameCharSet Properties" Url="html/Properties_T_ConControls_Controls_Drawing_BoldLinedFrameCharSet.htm">
         <HelpTOCNode Title="Horizontal Property " Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_Horizontal.htm" />
         <HelpTOCNode Title="LowerLeft Property " Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_LowerLeft.htm" />
         <HelpTOCNode Title="LowerRight Property " Url="html/P_ConControls_Controls_Drawing_BoldLinedFrameCharSet_LowerRight.htm" />
@@ -362,9 +362,9 @@
       </HelpTOCNode>
       <HelpTOCNode Title="BoldLinedFrameCharSet Methods" Url="html/Methods_T_ConControls_Controls_Drawing_BoldLinedFrameCharSet.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="b30cca2d-6933-48a8-a4e6-894dd744c0b5" Title="DoubleLinedFrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_DoubleLinedFrameCharSet.htm">
+    <HelpTOCNode Id="9c291a44-692d-4397-9a82-1f64f1ea77e3" Title="DoubleLinedFrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_DoubleLinedFrameCharSet.htm">
       <HelpTOCNode Title="DoubleLinedFrameCharSet Constructor " Url="html/M_ConControls_Controls_Drawing_DoubleLinedFrameCharSet__ctor.htm" />
-      <HelpTOCNode Id="3366bcbb-32ca-4711-b7f2-a763f5a002df" Title="DoubleLinedFrameCharSet Properties" Url="html/Properties_T_ConControls_Controls_Drawing_DoubleLinedFrameCharSet.htm">
+      <HelpTOCNode Id="b157432b-117b-494c-92fa-3709325565a1" Title="DoubleLinedFrameCharSet Properties" Url="html/Properties_T_ConControls_Controls_Drawing_DoubleLinedFrameCharSet.htm">
         <HelpTOCNode Title="Horizontal Property " Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_Horizontal.htm" />
         <HelpTOCNode Title="LowerLeft Property " Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_LowerLeft.htm" />
         <HelpTOCNode Title="LowerRight Property " Url="html/P_ConControls_Controls_Drawing_DoubleLinedFrameCharSet_LowerRight.htm" />
@@ -374,9 +374,9 @@
       </HelpTOCNode>
       <HelpTOCNode Title="DoubleLinedFrameCharSet Methods" Url="html/Methods_T_ConControls_Controls_Drawing_DoubleLinedFrameCharSet.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="5c461b76-8394-4886-8d4f-20eb144dd98b" Title="FrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_FrameCharSet.htm">
+    <HelpTOCNode Id="cfb39e3e-8f23-4c5d-a12b-f7b9edcd33f0" Title="FrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_FrameCharSet.htm">
       <HelpTOCNode Title="FrameCharSet Constructor " Url="html/M_ConControls_Controls_Drawing_FrameCharSet__ctor.htm" />
-      <HelpTOCNode Id="0a18e36f-62d4-446d-9660-cdd9474531ef" Title="FrameCharSet Properties" Url="html/Properties_T_ConControls_Controls_Drawing_FrameCharSet.htm">
+      <HelpTOCNode Id="21300282-6bbc-4811-8aa8-ba23135b59f0" Title="FrameCharSet Properties" Url="html/Properties_T_ConControls_Controls_Drawing_FrameCharSet.htm">
         <HelpTOCNode Title="Horizontal Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSet_Horizontal.htm" />
         <HelpTOCNode Title="LowerLeft Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSet_LowerLeft.htm" />
         <HelpTOCNode Title="LowerRight Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSet_LowerRight.htm" />
@@ -386,15 +386,15 @@
       </HelpTOCNode>
       <HelpTOCNode Title="FrameCharSet Methods" Url="html/Methods_T_ConControls_Controls_Drawing_FrameCharSet.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="32697810-34f0-4898-a0a5-e9ca275c427a" Title="FrameCharSets Class" Url="html/T_ConControls_Controls_Drawing_FrameCharSets.htm">
+    <HelpTOCNode Id="da9187c1-0f37-4a01-adae-39068ae5dcd5" Title="FrameCharSets Class" Url="html/T_ConControls_Controls_Drawing_FrameCharSets.htm">
       <HelpTOCNode Title="FrameCharSets Constructor " Url="html/M_ConControls_Controls_Drawing_FrameCharSets__ctor.htm" />
-      <HelpTOCNode Id="20d73aac-a014-4912-afd0-ab0d117717ff" Title="FrameCharSets Properties" Url="html/Properties_T_ConControls_Controls_Drawing_FrameCharSets.htm">
+      <HelpTOCNode Id="50d55f9a-908f-42d4-a620-0dd24730f8cb" Title="FrameCharSets Properties" Url="html/Properties_T_ConControls_Controls_Drawing_FrameCharSets.htm">
         <HelpTOCNode Title="Item Property " Url="html/P_ConControls_Controls_Drawing_FrameCharSets_Item.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="FrameCharSets Methods" Url="html/Methods_T_ConControls_Controls_Drawing_FrameCharSets.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="34a78b7a-f535-4365-9ffa-afdc57286c37" Title="IConsoleGraphics Interface" Url="html/T_ConControls_Controls_Drawing_IConsoleGraphics.htm">
-      <HelpTOCNode Id="29cbe566-0d80-4db0-9595-708b15e50867" Title="IConsoleGraphics Methods" Url="html/Methods_T_ConControls_Controls_Drawing_IConsoleGraphics.htm">
+    <HelpTOCNode Id="76e65dc1-c57c-4f9a-82a8-6c6b7371f739" Title="IConsoleGraphics Interface" Url="html/T_ConControls_Controls_Drawing_IConsoleGraphics.htm">
+      <HelpTOCNode Id="717226e1-b889-45fe-9572-a38f19afaa1b" Title="IConsoleGraphics Methods" Url="html/Methods_T_ConControls_Controls_Drawing_IConsoleGraphics.htm">
         <HelpTOCNode Title="CopyCharacters Method " Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_CopyCharacters.htm" />
         <HelpTOCNode Title="DrawBackground Method " Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_DrawBackground.htm" />
         <HelpTOCNode Title="DrawBorder Method " Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_DrawBorder.htm" />
@@ -402,9 +402,9 @@
         <HelpTOCNode Title="Flush Method " Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_Flush.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="06ef54c3-54b0-42f7-88d6-177fe3ea6f20" Title="SingleLinedFrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_SingleLinedFrameCharSet.htm">
+    <HelpTOCNode Id="10f68c75-05ba-4e80-bffd-30d795123fb6" Title="SingleLinedFrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_SingleLinedFrameCharSet.htm">
       <HelpTOCNode Title="SingleLinedFrameCharSet Constructor " Url="html/M_ConControls_Controls_Drawing_SingleLinedFrameCharSet__ctor.htm" />
-      <HelpTOCNode Id="0e1221a0-e90b-42c1-b1c0-d11ef8d8d1fd" Title="SingleLinedFrameCharSet Properties" Url="html/Properties_T_ConControls_Controls_Drawing_SingleLinedFrameCharSet.htm">
+      <HelpTOCNode Id="564a2ef2-a0d1-46b1-b28f-4fdccb13d77e" Title="SingleLinedFrameCharSet Properties" Url="html/Properties_T_ConControls_Controls_Drawing_SingleLinedFrameCharSet.htm">
         <HelpTOCNode Title="Horizontal Property " Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_Horizontal.htm" />
         <HelpTOCNode Title="LowerLeft Property " Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_LowerLeft.htm" />
         <HelpTOCNode Title="LowerRight Property " Url="html/P_ConControls_Controls_Drawing_SingleLinedFrameCharSet_LowerRight.htm" />
@@ -415,7 +415,7 @@
       <HelpTOCNode Title="SingleLinedFrameCharSet Methods" Url="html/Methods_T_ConControls_Controls_Drawing_SingleLinedFrameCharSet.htm" />
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="7ea41503-1cba-4ec3-9dbf-6b083de15701" Title="ConControls.WindowsApi.Types" Url="html/N_ConControls_WindowsApi_Types.htm">
+  <HelpTOCNode Id="ae45e8a8-a88f-4b6c-a6be-375fa1640b24" Title="ConControls.WindowsApi.Types" Url="html/N_ConControls_WindowsApi_Types.htm">
     <HelpTOCNode Title="ControlKeyStates Enumeration" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
     <HelpTOCNode Title="MouseButtonStates Enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
     <HelpTOCNode Title="MouseEventFlags Enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseEventFlags.htm" />
