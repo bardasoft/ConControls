@@ -151,6 +151,15 @@ namespace ConControls.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Setting the property &quot;{1}&quot; is not supported by control type &quot;{0}&quot;! ähnelt.
+        /// </summary>
+        internal static string Exception_PropertySetterNotSupported {
+            get {
+                return ResourceManager.GetString("Exception_PropertySetterNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The console window used by this control has already been disposed of! ähnelt.
         /// </summary>
         internal static string Exception_WindowDisposed {

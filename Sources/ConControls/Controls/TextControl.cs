@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using ConControls.Controls.Drawing;
 using ConControls.Controls.Text;
@@ -21,7 +22,7 @@ namespace ConControls.Controls
     {
         readonly IConsoleTextController textController;
 
-        bool caretVisible = true, initCursorVisibility = true, initTabStop = true;
+        bool caretVisible, canFocus;
         Point scroll;
         Point caret;
 
@@ -29,11 +30,40 @@ namespace ConControls.Controls
         /// Raised when the <see cref="Text"/> property has been changed.
         /// </summary>
         public event EventHandler? TextChanged;
+        /// <summary>
+        /// Raised when the <see cref="CanFocus"/> property has been changed.
+        /// </summary>
+        public event EventHandler? CanFocusChanged;
+
+        /// <summary>
+        /// Gets or sets wether this <see cref="TextControl"/> is read-only or can be edited.
+        /// </summary>
+        /// <exception cref="NotSupportedException">Setting this property is not supported by the current control's type.</exception>
+        public virtual bool CanEdit
+        {
+            get => false;
+            set => throw Exceptions.PropertySetterNotSupported(GetType().Name, nameof(CanEdit));
+        }
 
         /// <summary>
         /// Returns <c>true</c> for a <see cref="TextBlock"/>. This control can be focused.
         /// </summary>
-        public override bool CanFocus => true;
+        public override bool CanFocus
+        {
+            get
+            {
+                lock (Window.SynchronizationLock) return canFocus;
+            }
+            set
+            {
+                lock (Window.SynchronizationLock)
+                {
+                    if (canFocus == value) return;
+                    canFocus = value;
+                    OnCanFocusChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the scroll dimension. The <see cref="Point.X"/> part of this <see cref="Point"/> defines
@@ -61,22 +91,8 @@ namespace ConControls.Controls
         /// <inheritdoc />
         public override bool CursorVisible
         {
-            get => (base.CursorVisible || initCursorVisibility) && caretVisible;
-            set
-            {
-                initCursorVisibility = false;
-                base.CursorVisible = value;
-            }
-        }
-        /// <inheritdoc />
-        public override bool TabStop
-        {
-            get => base.TabStop || initTabStop;
-            set
-            {
-                initTabStop = false;
-                base.TabStop = value;
-            }
+            get => base.CursorVisible && caretVisible;
+            set => base.CursorVisible = value;
         }
 
         /// <summary>
@@ -140,6 +156,7 @@ namespace ConControls.Controls
         }
 
         /// <inheritdoc />
+        [ExcludeFromCodeCoverage]
         private protected TextControl(IConsoleWindow window)
             : this(window, null) { }
         private protected TextControl(IConsoleWindow window, IConsoleTextController? textController)
@@ -321,6 +338,12 @@ namespace ConControls.Controls
             base.OnMouseEvent(sender, e);
         }
 
+        /// <summary>
+        /// Called when the <see cref="CanFocus"/> property changed.<br/>
+        /// Raises the <see cref="CanFocusChanged"/> event.
+        /// </summary>
+        protected virtual void OnCanFocusChanged() => CanFocusChanged?.Invoke(this, EventArgs.Empty);
+
         /// <inheritdoc />
         protected override void DrawClientArea(IConsoleGraphics graphics)
         {
@@ -369,7 +392,6 @@ namespace ConControls.Controls
                     caretVisible = true;
                     OnCursorVisibleChanged();
                 }
-
             }
             else if (caretVisible)
             {

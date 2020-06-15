@@ -16,7 +16,7 @@ namespace ConControls.Controls {
     /// </summary>
     public sealed class Button : TextControl
     {
-        bool initialTabStop = true;
+        bool initialTabStop = true, initialCanFocus = true;
 
         /// <summary>
         /// Raised when the button gets clicked.
@@ -31,6 +31,16 @@ namespace ConControls.Controls {
             {
                 initialTabStop = false;
                 base.TabStop = value;
+            }
+        }
+        /// <inheritdoc />
+        public override bool CanFocus
+        {
+            get => base.CanFocus || initialCanFocus;
+            set
+            {
+                initialCanFocus = false;
+                base.CanFocus = value;
             }
         }
 
@@ -58,7 +68,7 @@ namespace ConControls.Controls {
         /// <summary>
         /// Creates a new instance of a <see cref="Button"/>.
         /// </summary>
-        /// <param name="window">The parent <see cref="IConsoleWindow"/> this control should belong to.</param>
+        /// <param name="window">The <see cref="IConsoleWindow"/> this control should belong to.</param>
         /// <exception cref="ArgumentNullException"><paramref name="window"/> is <c>null</c>.</exception>
         public Button(IConsoleWindow window)
             : this(window, null) { }

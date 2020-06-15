@@ -87,6 +87,7 @@
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ThreadManagement.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\InputEvents.cs" />
     <Compile Include="UnitTests\ConsoleApi\ConsoleController\ConsoleControllerTests.cs" />
+    <Compile Include="UnitTests\Controls\Button\CanFocus.cs" />
     <Compile Include="UnitTests\Controls\Button\CursorVisible.cs" />
     <Compile Include="UnitTests\Controls\Button\TabStop.cs" />
     <Compile Include="UnitTests\Controls\Button\Text.cs" />
@@ -171,6 +172,13 @@
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressChar.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\Percentage.cs" />
     <Compile Include="UnitTests\Controls\ProgressBar\ProgressBarTests.cs" />
+    <Compile Include="UnitTests\Controls\TextBlock\TabStop.cs" />
+    <Compile Include="UnitTests\Controls\TextBlock\CanFocus.cs" />
+    <Compile Include="UnitTests\Controls\TextBlock\CursorVisible.cs" />
+    <Compile Include="UnitTests\Controls\TextBlock\CanEdit.cs" />
+    <Compile Include="UnitTests\Controls\TextBlock\TextBlockTests.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\CanEdit.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\CanFocus.cs" />
     <Compile Include="UnitTests\Controls\TextControl\TabStop.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Clear.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CursorPosition.cs" />

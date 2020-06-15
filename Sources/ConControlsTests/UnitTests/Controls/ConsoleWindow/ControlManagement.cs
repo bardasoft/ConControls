@@ -44,7 +44,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             };
 
             using var sut = new ConControls.Controls.ConsoleWindow(api, controller, graphicsProvider);
-            using var c = new StubbedTextControl(sut, textController)
+            using var c = new ConControls.Controls.TextBlock(sut, textController)
                 {Area = (5, 5, 10, 10).Rect(), Parent = sut, CursorSize = 12, CursorVisible = false, CursorPosition = (1, 2).Pt()};
 
             sut.FocusedControl = c;

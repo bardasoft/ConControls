@@ -22,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             var textController = new StubbedConsoleTextController();
 
             using var sut = new StubbedTextControl(window, textController);
-            sut.CursorVisible.Should().BeTrue();
+            sut.CursorVisible.Should().BeFalse();
             sut.CursorPosition.Should().Be(Point.Empty);
         }
     }

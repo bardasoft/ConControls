@@ -147,6 +147,9 @@
   <data name="Exception_ProgressBarPercentageMustNotBeGreaterThan1" xml:space="preserve">
     <value>The percentage value of a proress bar cannot be greater than 1!</value>
   </data>
+  <data name="Exception_PropertySetterNotSupported" xml:space="preserve">
+    <value>Setting the property "{1}" is not supported by control type "{0}"!</value>
+  </data>
   <data name="Exception_WindowDisposed" xml:space="preserve">
     <value>The console window used by this control has already been disposed of!</value>
   </data>

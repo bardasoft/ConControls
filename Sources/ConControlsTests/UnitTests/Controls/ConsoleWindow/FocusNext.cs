@@ -36,7 +36,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
 
             var c0 = new Panel(sut) {Parent = sut};
-            var f00 = new StubbedTextControl(sut) {Parent = c0};
+            var f00 = new ConControls.Controls.TextBlock(sut) {Parent = c0};
             sut.Controls.Add(new Panel(sut));
 
             sut.FocusedControl.Should().BeNull();
@@ -52,7 +52,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             var graphicsProvider = new StubbedGraphicsProvider();
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
 
-            var f0 = new StubbedTextControl(sut) {Parent = sut};
+            var f0 = new ConControls.Controls.TextBlock(sut) {Parent = sut};
             sut.FocusedControl.Should().BeNull();
             sut.FocusNext().Should().Be(f0);
             f0.Enabled = false;
@@ -67,9 +67,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
 
             var c0 = new Panel(sut) {Parent = sut};
-            var f00 = new StubbedTextControl(sut) {Parent = c0};
+            var f00 = new ConControls.Controls.TextBlock(sut) {Parent = c0};
             var c1 = new Panel(sut) {Parent = sut};
-            var f10 = new StubbedTextControl(sut) {Parent = c1};
+            var f10 = new ConControls.Controls.TextBlock(sut) {Parent = c1};
 
             sut.FocusedControl.Should().BeNull();
             sut.FocusNext().Should().Be(f00);
@@ -86,15 +86,15 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleWindow
             using var sut = new ConControls.Controls.ConsoleWindow(api, consoleController, graphicsProvider);
 
             var c0 = new Panel(sut) {TabOrder = 10};
-            var f00 = new StubbedTextControl(sut) {TabOrder = 20};
-            var f01 = new StubbedTextControl(sut) {TabOrder = 10};
+            var f00 = new ConControls.Controls.TextBlock(sut) {TabOrder = 20};
+            var f01 = new ConControls.Controls.TextBlock(sut) {TabOrder = 10};
             var c02 = new Panel(sut) {TabOrder = 15};
-            var f020 = new StubbedTextControl(sut);
-            var c021 = new StubbedTextControl(sut) {Enabled = false};
+            var f020 = new ConControls.Controls.TextBlock(sut);
+            var c021 = new ConControls.Controls.TextBlock(sut) {Enabled = false};
             var c1 = new Panel(sut) {TabOrder = 5};
-            var f10 = new StubbedTextControl(sut);
-            var f100 = new StubbedTextControl(sut) { TabOrder = 10 };
-            var f101 = new StubbedTextControl(sut) { TabOrder = 10 };
+            var f10 = new ConControls.Controls.TextBlock(sut);
+            var f100 = new ConControls.Controls.TextBlock(sut) { TabOrder = 10 };
+            var f101 = new ConControls.Controls.TextBlock(sut) { TabOrder = 10 };
 
             sut.Controls.AddRange(c0, c1);
             

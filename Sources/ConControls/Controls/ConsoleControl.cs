@@ -223,10 +223,17 @@ namespace ConControls.Controls
             }
         }
         /// <summary>
-        /// Determines wether this control can be focused or not.
+        /// Gets or sets wether this control can be focused or not.
         /// </summary>
+        /// <remarks>
+        /// The setter of this property has no effect. It should be overwritten in derived controls that support focus.</remarks>
         /// <returns><c>true</c> if this control can take focues, <c>false</c> if not.</returns>
-        public virtual bool CanFocus => false;
+        /// <exception cref="NotSupportedException">This property cannot be set for this control type.</exception>
+        public virtual bool CanFocus
+        {
+            get => false;
+            set => throw Exceptions.PropertySetterNotSupported(GetType().Name, nameof(CanFocus));
+        }
         /// <summary>
         /// Gets or sets a number indicating the control's position in the Tab order.
         /// </summary>
@@ -593,7 +600,7 @@ namespace ConControls.Controls
         /// <summary>
         /// Initializes an instance of <see cref="ConsoleControl"/>.
         /// </summary>
-        /// <param name="window">The parent <see cref="IConsoleWindow"/> this control should belong to.</param>
+        /// <param name="window">The <see cref="IConsoleWindow"/> this control should belong to.</param>
         /// <exception cref="ArgumentNullException"><paramref name="window"/> is <c>null</c>.</exception>
         private protected ConsoleControl(IConsoleWindow window)
         {

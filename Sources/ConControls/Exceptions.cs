@@ -37,5 +37,6 @@ namespace ConControls
             new Win32Exception(Resources.Exception_CouldNotCreateScreenBuffer, new Win32Exception(Marshal.GetLastWin32Error()));
         internal static Win32Exception CouldNotSetScreenBuffer() =>
             new Win32Exception(Resources.Exception_CouldNotSetScreenBuffer, new Win32Exception(Marshal.GetLastWin32Error()));
+        internal static NotSupportedException PropertySetterNotSupported(string type, string property) => new NotSupportedException(message: string.Format(CultureInfo.CurrentCulture, Resources.Exception_PropertySetterNotSupported, type, property));
     }
 }

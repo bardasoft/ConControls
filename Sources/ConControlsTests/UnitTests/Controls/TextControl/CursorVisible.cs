@@ -30,7 +30,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 Area = new Rectangle(Point.Empty, size)
             };
 
-            sut.CursorVisible.Should().BeTrue();
+            sut.CursorVisible.Should().BeFalse();
             sut.CursorVisible = false;
             sut.CursorVisible.Should().BeFalse();
 

@@ -26,6 +26,9 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 Size = new Size(10, 10),
                 Caret = new Point(9, 9)
             };
+            
+            sut.CursorVisible.Should().BeFalse();
+            sut.CursorVisible = true;
 
             sut.Caret.Should().Be(new Point(9, 9));
             sut.CursorPosition.Should().Be(new Point(9, 9));

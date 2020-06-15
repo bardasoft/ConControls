@@ -170,7 +170,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 WidthGet = () => 20,
                 GetLineLengthInt32 = l => 20
             };
-            using var sut = new StubbedTextControl(stubbedWindow, stubbedController)
+            using var sut = new ConControls.Controls.TextBlock(stubbedWindow, stubbedController)
             {
                 Area = (5, 5, 10, 10).Rect(),
                 Parent = stubbedWindow,

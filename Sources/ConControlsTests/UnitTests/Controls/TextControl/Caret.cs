@@ -29,6 +29,9 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 Scroll = scroll
             };
 
+            sut.CursorVisible.Should().BeFalse();
+            sut.CursorVisible = true;
+
             sut.Caret.Should().Be(Point.Empty);
             bool caretValidated = false;
             Point caret = new Point(7, 8);

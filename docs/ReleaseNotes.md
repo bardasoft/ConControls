@@ -1,5 +1,12 @@
 # ConControls - Release notes
 
+### Version 0.1.0 tba
+
+The beta-time is over. There aren't any real beta testers anyway, and the nuget version has enough parts to
+track changes (semantically).
+
+Refactored `TextControl` properties and introduced the `Label` control.
+
 ### Version 0.1.0-beta-4 (2020/05/29)
 
 Thank god it's beta! Letting the `BorderStyle` default to the parent's value is such a nonsense...  
