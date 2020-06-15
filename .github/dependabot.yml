@@ -5,15 +5,15 @@
 
 version: 2
 updates:
-  - package-ecosystem: "NuGet" # See documentation for possible values
+  - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/Sources/ConControls/" # Location of package manifests
     schedule:
       interval: "daily"
-  - package-ecosystem: "NuGet" # See documentation for possible values
+  - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/Sources/ConControlsExamples/" # Location of package manifests
     schedule:
       interval: "daily"
-  - package-ecosystem: "NuGet" # See documentation for possible values
+  - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/Sources/ConControlsTests/" # Location of package manifests
     schedule:
       interval: "daily"
