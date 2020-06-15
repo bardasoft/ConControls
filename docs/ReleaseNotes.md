@@ -1,11 +1,13 @@
 # ConControls - Release notes
 
-### Version 0.1.0 tba
+### Version 0.1.0 (2020/06/15)
 
 The beta-time is over. There aren't any real beta testers anyway, and the nuget version has enough parts to
 track changes (semantically).
 
-Refactored `TextControl` properties and introduced the `Label` control.
+Introduced the `Label` control.  
+Refactored `TextControl` properties (not focusable and no tab stop by default,
+introduced `CanEdit` property and set to `false` per default).  
 
 ### Version 0.1.0-beta-4 (2020/05/29)
 
@@ -37,4 +39,4 @@ This is the first published version of ConControls. There is still a lot missing
 
 ---
 Ren&eacute; Vogt  
-Dresden 2020/05/29
+Dresden 2020/06/15

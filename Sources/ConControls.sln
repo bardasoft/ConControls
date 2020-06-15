@@ -39,6 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "controls", "controls", "{0B
 		..\docs\controls\Button.md = ..\docs\controls\Button.md
 		..\docs\controls\ConsoleWindow.md = ..\docs\controls\ConsoleWindow.md
 		..\docs\controls\index.md = ..\docs\controls\index.md
+		..\docs\controls\Label.md = ..\docs\controls\Label.md
 		..\docs\controls\Panel.md = ..\docs\controls\Panel.md
 		..\docs\controls\ProgressBar.md = ..\docs\controls\ProgressBar.md
 		..\docs\controls\TextBlock.md = ..\docs\controls\TextBlock.md

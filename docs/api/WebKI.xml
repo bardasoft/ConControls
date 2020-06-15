@@ -67,6 +67,7 @@
     <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_Button.htm" />
   </HelpKINode>
   <HelpKINode Title="Button.Button constructor" Url="html/M_ConControls_Controls_Button__ctor.htm" />
+  <HelpKINode Title="Button.CanFocus property" Url="html/P_ConControls_Controls_Button_CanFocus.htm" />
   <HelpKINode Title="Button.Click event" Url="html/E_ConControls_Controls_Button_Click.htm" />
   <HelpKINode Title="Button.CursorVisible property" Url="html/P_ConControls_Controls_Button_CursorVisible.htm" />
   <HelpKINode Title="Button.PerformClick method" Url="html/M_ConControls_Controls_Button_PerformClick.htm" />
@@ -75,10 +76,14 @@
   <HelpKINode Title="ButtonState property" Url="html/P_ConControls_Controls_MouseEventArgs_ButtonState.htm" />
   <HelpKINode Title="C enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="Cancel enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="CanEdit property" Url="html/P_ConControls_Controls_TextControl_CanEdit.htm" />
   <HelpKINode Title="CanFocus property">
+    <HelpKINode Title="Button.CanFocus Property " Url="html/P_ConControls_Controls_Button_CanFocus.htm" />
     <HelpKINode Title="ConsoleControl.CanFocus Property " Url="html/P_ConControls_Controls_ConsoleControl_CanFocus.htm" />
+    <HelpKINode Title="TextBlock.CanFocus Property " Url="html/P_ConControls_Controls_TextBlock_CanFocus.htm" />
     <HelpKINode Title="TextControl.CanFocus Property " Url="html/P_ConControls_Controls_TextControl_CanFocus.htm" />
   </HelpKINode>
+  <HelpKINode Title="CanFocusChanged event" Url="html/E_ConControls_Controls_TextControl_CanFocusChanged.htm" />
   <HelpKINode Title="CapsLock enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="CAPSLOCK_ON enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
   <HelpKINode Title="Caret property" Url="html/P_ConControls_Controls_TextControl_Caret.htm" />
@@ -116,6 +121,7 @@
   <HelpKINode Title="ConControls.Controls.IControlContainer interface" Url="html/T_ConControls_Controls_IControlContainer.htm" />
   <HelpKINode Title="ConControls.Controls.KeyCombination structure" Url="html/T_ConControls_Controls_KeyCombination.htm" />
   <HelpKINode Title="ConControls.Controls.KeyEventArgs class" Url="html/T_ConControls_Controls_KeyEventArgs.htm" />
+  <HelpKINode Title="ConControls.Controls.Label class" Url="html/T_ConControls_Controls_Label.htm" />
   <HelpKINode Title="ConControls.Controls.MouseEventArgs class" Url="html/T_ConControls_Controls_MouseEventArgs.htm" />
   <HelpKINode Title="ConControls.Controls.Panel class" Url="html/T_ConControls_Controls_Panel.htm" />
   <HelpKINode Title="ConControls.Controls.ProgressBar class" Url="html/T_ConControls_Controls_ProgressBar.htm" />
@@ -308,6 +314,7 @@
   <HelpKINode Title="CursorVisible property">
     <HelpKINode Title="Button.CursorVisible Property " Url="html/P_ConControls_Controls_Button_CursorVisible.htm" />
     <HelpKINode Title="ConsoleControl.CursorVisible Property " Url="html/P_ConControls_Controls_ConsoleControl_CursorVisible.htm" />
+    <HelpKINode Title="TextBlock.CursorVisible Property " Url="html/P_ConControls_Controls_TextBlock_CursorVisible.htm" />
     <HelpKINode Title="TextControl.CursorVisible Property " Url="html/P_ConControls_Controls_TextControl_CursorVisible.htm" />
   </HelpKINode>
   <HelpKINode Title="CursorVisibleChanged event" Url="html/E_ConControls_Controls_ConsoleControl_CursorVisibleChanged.htm" />
@@ -643,6 +650,14 @@
   <HelpKINode Title="KeyEventArgs.VirtualScanCode property" Url="html/P_ConControls_Controls_KeyEventArgs_VirtualScanCode.htm" />
   <HelpKINode Title="Kind property" Url="html/P_ConControls_Controls_MouseEventArgs_Kind.htm" />
   <HelpKINode Title="L enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Label class">
+    <HelpKINode Title="Label Class" Url="html/T_ConControls_Controls_Label.htm" />
+    <HelpKINode Title="constructor" Url="html/M_ConControls_Controls_Label__ctor.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_ConControls_Controls_Label.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_Label.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_Label.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Label.Label constructor" Url="html/M_ConControls_Controls_Label__ctor.htm" />
   <HelpKINode Title="LaunchApplication1 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="LaunchApplication2 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="LaunchMail enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
@@ -772,6 +787,7 @@
     <HelpKINode Title="ConsoleControl.OnBorderStyleChanged Method " Url="html/M_ConControls_Controls_ConsoleControl_OnBorderStyleChanged.htm" />
     <HelpKINode Title="TextControl.OnBorderStyleChanged Method " Url="html/M_ConControls_Controls_TextControl_OnBorderStyleChanged.htm" />
   </HelpKINode>
+  <HelpKINode Title="OnCanFocusChanged method" Url="html/M_ConControls_Controls_TextControl_OnCanFocusChanged.htm" />
   <HelpKINode Title="OnCursorPositionChanged method">
     <HelpKINode Title="ConsoleControl.OnCursorPositionChanged Method " Url="html/M_ConControls_Controls_ConsoleControl_OnCursorPositionChanged.htm" />
     <HelpKINode Title="TextControl.OnCursorPositionChanged Method " Url="html/M_ConControls_Controls_TextControl_OnCursorPositionChanged.htm" />
@@ -917,7 +933,7 @@
   <HelpKINode Title="TabStop property">
     <HelpKINode Title="Button.TabStop Property " Url="html/P_ConControls_Controls_Button_TabStop.htm" />
     <HelpKINode Title="ConsoleControl.TabStop Property " Url="html/P_ConControls_Controls_ConsoleControl_TabStop.htm" />
-    <HelpKINode Title="TextControl.TabStop Property " Url="html/P_ConControls_Controls_TextControl_TabStop.htm" />
+    <HelpKINode Title="TextBlock.TabStop Property " Url="html/P_ConControls_Controls_TextBlock_TabStop.htm" />
   </HelpKINode>
   <HelpKINode Title="Tag property" Url="html/P_ConControls_Controls_ConsoleControl_Tag.htm" />
   <HelpKINode Title="Text property">
@@ -931,6 +947,9 @@
     <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Controls_TextBlock.htm" />
     <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_TextBlock.htm" />
   </HelpKINode>
+  <HelpKINode Title="TextBlock.CanFocus property" Url="html/P_ConControls_Controls_TextBlock_CanFocus.htm" />
+  <HelpKINode Title="TextBlock.CursorVisible property" Url="html/P_ConControls_Controls_TextBlock_CursorVisible.htm" />
+  <HelpKINode Title="TextBlock.TabStop property" Url="html/P_ConControls_Controls_TextBlock_TabStop.htm" />
   <HelpKINode Title="TextBlock.TextBlock constructor" Url="html/M_ConControls_Controls_TextBlock__ctor.htm" />
   <HelpKINode Title="TextChanged event" Url="html/E_ConControls_Controls_TextControl_TextChanged.htm" />
   <HelpKINode Title="TextControl class">
@@ -940,20 +959,22 @@
     <HelpKINode Title="properties" Url="html/Properties_T_ConControls_Controls_TextControl.htm" />
   </HelpKINode>
   <HelpKINode Title="TextControl.Append method" Url="html/M_ConControls_Controls_TextControl_Append.htm" />
+  <HelpKINode Title="TextControl.CanEdit property" Url="html/P_ConControls_Controls_TextControl_CanEdit.htm" />
   <HelpKINode Title="TextControl.CanFocus property" Url="html/P_ConControls_Controls_TextControl_CanFocus.htm" />
+  <HelpKINode Title="TextControl.CanFocusChanged event" Url="html/E_ConControls_Controls_TextControl_CanFocusChanged.htm" />
   <HelpKINode Title="TextControl.Caret property" Url="html/P_ConControls_Controls_TextControl_Caret.htm" />
   <HelpKINode Title="TextControl.Clear method" Url="html/M_ConControls_Controls_TextControl_Clear.htm" />
   <HelpKINode Title="TextControl.CursorVisible property" Url="html/P_ConControls_Controls_TextControl_CursorVisible.htm" />
   <HelpKINode Title="TextControl.DrawClientArea method" Url="html/M_ConControls_Controls_TextControl_DrawClientArea.htm" />
   <HelpKINode Title="TextControl.OnAreaChanged method" Url="html/M_ConControls_Controls_TextControl_OnAreaChanged.htm" />
   <HelpKINode Title="TextControl.OnBorderStyleChanged method" Url="html/M_ConControls_Controls_TextControl_OnBorderStyleChanged.htm" />
+  <HelpKINode Title="TextControl.OnCanFocusChanged method" Url="html/M_ConControls_Controls_TextControl_OnCanFocusChanged.htm" />
   <HelpKINode Title="TextControl.OnCursorPositionChanged method" Url="html/M_ConControls_Controls_TextControl_OnCursorPositionChanged.htm" />
   <HelpKINode Title="TextControl.OnKeyEvent method" Url="html/M_ConControls_Controls_TextControl_OnKeyEvent.htm" />
   <HelpKINode Title="TextControl.OnMouseEvent method" Url="html/M_ConControls_Controls_TextControl_OnMouseEvent.htm" />
   <HelpKINode Title="TextControl.OnTextChanged method" Url="html/M_ConControls_Controls_TextControl_OnTextChanged.htm" />
   <HelpKINode Title="TextControl.Scroll property" Url="html/P_ConControls_Controls_TextControl_Scroll.htm" />
   <HelpKINode Title="TextControl.ScrollToCaret method" Url="html/M_ConControls_Controls_TextControl_ScrollToCaret.htm" />
-  <HelpKINode Title="TextControl.TabStop property" Url="html/P_ConControls_Controls_TextControl_TabStop.htm" />
   <HelpKINode Title="TextControl.Text property" Url="html/P_ConControls_Controls_TextControl_Text.htm" />
   <HelpKINode Title="TextControl.TextChanged event" Url="html/E_ConControls_Controls_TextControl_TextChanged.htm" />
   <HelpKINode Title="TextControl.Wrap property" Url="html/P_ConControls_Controls_TextControl_Wrap.htm" />
