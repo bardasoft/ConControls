@@ -303,41 +303,52 @@ namespace ConControls.Controls
 
             base.OnKeyEvent(e);
         }
-        //protected override void OnMouseEvent(object sender, MouseEventArgs e)
-        //{
-        //    _ = e ?? throw new ArgumentNullException(nameof(e));
+        /// <summary>
+        /// This method is called when the <see cref="TextControl"/> has been clicked on.
+        /// It sets the cursor position to the clicked location. If there is not enough
+        /// content to set the cursor to this position, the neares possible cursor position will be used.
+        /// </summary>
+        /// <param name="e">The <see cref="MouseEventArgs"/> containing the details of the event.</param>
+        /// <remarks>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+        /// </remarks>
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            _ = e ?? throw new ArgumentNullException(nameof(e));
+            base.OnMouseClick(e);
 
-        //    if (e.Handled || !(Enabled && Visible)) return;
+            if (e.Handled || !(Enabled && Visible) || e.ButtonState != MouseButtonStates.LeftButtonPressed) return;
+            e.Handled = true;
+            Caret = Point.Add(e.Position, (Size)scroll);
+            Focused = true;
+        }
+        /// <summary>
+        /// This method is called when the mouse wheel has been used above this <see cref="TextControl"/>.
+        /// It sets scrolls the content if necessary and possible.
+        /// </summary>
+        /// <param name="e">The <see cref="MouseEventArgs"/> containing the details of the event.</param>
+        /// <remarks>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+        /// </remarks>
+        protected override void OnMouseScroll(MouseEventArgs e)
+        {
+            _ = e ?? throw new ArgumentNullException(nameof(e));
+            base.OnMouseScroll(e);
 
-        //    var clientArea = GetClientArea();
-        //    var clientPoint = PointToClient(e.Position);
-        //    if (!new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
-        //    {
-        //        base.OnMouseEvent(sender, e);
-        //        return;
-        //    }
+            if (e.Handled || !(Enabled && Visible)) return;
 
-        //    switch (e.Kind)
-        //    {
-        //        case MouseEventFlags.Wheeled:
-        //            ScrollVertically(e.Scroll);
-        //            e.Handled = true;
-        //            break;
-        //        case MouseEventFlags.WheeledHorizontally:
-        //            ScrollHoritzontically(e.Scroll);
-        //            e.Handled = true;
-        //            break;
-        //        default:
-        //            if (e.ButtonState != MouseButtonStates.LeftButtonPressed) break;
-        //            e.Handled = true;
-        //            Caret = Point.Add(clientPoint, (Size)scroll);
-        //            Focused = true;
-        //            break;
-        //    }
-
-        //    base.OnMouseEvent(sender, e);
-        //}
-
+            switch (e.Kind)
+            {
+                case MouseEventFlags.Wheeled:
+                    ScrollVertically(e.Scroll);
+                    e.Handled = true;
+                    break;
+                case MouseEventFlags.WheeledHorizontally:
+                    ScrollHoritzontically(e.Scroll);
+                    e.Handled = true;
+                    break;
+            }
+        }
         /// <summary>
         /// Called when the <see cref="CanFocus"/> property changed.<br/>
         /// Raises the <see cref="CanFocusChanged"/> event.

@@ -1892,6 +1892,27 @@
         <member name="M:ConControls.Controls.TextControl.OnKeyEvent(ConControls.Controls.KeyEventArgs)">
             <inheritdoc />
         </member>
+        <member name="M:ConControls.Controls.TextControl.OnMouseClick(ConControls.Controls.MouseEventArgs)">
+            <summary>
+            This method is called when the <see cref="T:ConControls.Controls.TextControl"/> has been clicked on.
+            It sets the cursor position to the clicked location. If there is not enough
+            content to set the cursor to this position, the neares possible cursor position will be used.
+            </summary>
+            <param name="e">The <see cref="T:ConControls.Controls.MouseEventArgs"/> containing the details of the event.</param>
+            <remarks>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+            </remarks>
+        </member>
+        <member name="M:ConControls.Controls.TextControl.OnMouseScroll(ConControls.Controls.MouseEventArgs)">
+            <summary>
+            This method is called when the mouse wheel has been used above this <see cref="T:ConControls.Controls.TextControl"/>.
+            It sets scrolls the content if necessary and possible.
+            </summary>
+            <param name="e">The <see cref="T:ConControls.Controls.MouseEventArgs"/> containing the details of the event.</param>
+            <remarks>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+            </remarks>
+        </member>
         <member name="M:ConControls.Controls.TextControl.OnCanFocusChanged">
             <summary>
             Called when the <see cref="P:ConControls.Controls.TextControl.CanFocus"/> property changed.<br/>
