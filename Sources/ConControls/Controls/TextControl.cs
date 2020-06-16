@@ -159,6 +159,7 @@ namespace ConControls.Controls
         [ExcludeFromCodeCoverage]
         private protected TextControl(IConsoleWindow window)
             : this(window, null) { }
+        [ExcludeFromCodeCoverage]
         private protected TextControl(IConsoleWindow window, IConsoleTextController? textController)
             : base(window) =>
             this.textController = textController ?? new ConsoleTextController();

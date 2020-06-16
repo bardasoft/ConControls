@@ -50,6 +50,41 @@ lines.";
                     Text = "Close"
                 };
                 btClose.Click += (sender, e) => window.Close();
+                var block1 = new TextBlock(window)
+                {
+                    Area = new Rectangle(0, 0, 10, 6),
+                    BorderStyle = BorderStyle.None,
+                    BackgroundColor = ConsoleColor.Blue,
+                    ForegroundColor = ConsoleColor.White
+                };
+                var block2 = new TextBlock(window)
+                {
+                    Area = new Rectangle(12, 0, 10, 6),
+                    BorderStyle = BorderStyle.None,
+                    BackgroundColor = ConsoleColor.Blue,
+                    ForegroundColor = ConsoleColor.White,
+                    Wrap = true
+                };
+                var block3 = new TextBlock(window)
+                {
+                    Area = new Rectangle(0, 8, 10, 6),
+                    BorderStyle = BorderStyle.SingleLined,
+                    BackgroundColor = ConsoleColor.Blue,
+                    ForegroundColor = ConsoleColor.White
+                };
+                var label = new Label(window)
+                {
+                    Area = new Rectangle(12, 8, 10, 6),
+                    BorderStyle = BorderStyle.SingleLined,
+                    Wrap = true,
+                    BackgroundColor = ConsoleColor.Blue,
+                    ForegroundColor = ConsoleColor.White
+                };
+                var btClear = new Button(window)
+                {
+                    Area = new Rectangle(10, 15, 9, 3),
+                    Text = "Clear"
+                };
                 var btAppend = new Button(window)
                 {
                     Area = new Rectangle(0, 15, 10, 3),
@@ -59,55 +94,25 @@ lines.";
                 btAppend.Click += (sender, e) =>
                 {
                     string txt = string.Format(text, ++appends);
-                    foreach (var textBlock in panel.Controls.OfType<TextBlock>())
+                    foreach (var textBlock in panel.Controls.OfType<TextControl>())
                         textBlock.Append(txt);
-                };
-                var btClear = new Button(window)
-                {
-                    Area = new Rectangle(10, 15, 9, 3),
-                    Text = "Clear"
                 };
                 btClear.Click += (sender, e) =>
                 {
-                    foreach (var textBlock in panel.Controls.OfType<TextBlock>())
-                        textBlock.Clear();
+                    block1.Clear();
+                    block2.Clear();
+                    block3.Clear();
+                    label.Clear();
                 };
                 panel.Controls.AddRange(
-                    new TextBlock(window)
-                    {
-                        Area = new Rectangle(0, 0, 10, 6),
-                        BorderStyle = BorderStyle.None,
-                        BackgroundColor = ConsoleColor.Blue,
-                        ForegroundColor = ConsoleColor.White
-                    },
-                    new TextBlock(window)
-                    {
-                        Area = new Rectangle(12, 0, 10, 6),
-                        BorderStyle = BorderStyle.None,
-                        BackgroundColor = ConsoleColor.Blue,
-                        ForegroundColor = ConsoleColor.White,
-                        Wrap = true
-                    },
-                    new TextBlock(window)
-                    {
-                        Area = new Rectangle(0, 8, 10, 6),
-                        BorderStyle = BorderStyle.SingleLined,
-                        BackgroundColor = ConsoleColor.Blue,
-                        ForegroundColor = ConsoleColor.White
-                    },
-                    new TextBlock(window)
-                    {
-                        Area = new Rectangle(12, 8, 10, 6),
-                        BorderStyle = BorderStyle.SingleLined,
-                        Wrap = true,
-                        BackgroundColor = ConsoleColor.Blue,
-                        ForegroundColor = ConsoleColor.White,
-                        CursorVisible = false
-                    },
-                    btAppend,
-                    btClear,
-                    btClose
-                );
+                          block1,
+                          block2,
+                          block3,
+                          label,
+                          btAppend,
+                          btClear,
+                          btClose
+                      );
                 window.FocusedControl = panel.Controls[0];
             }
 
