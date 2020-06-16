@@ -16,6 +16,30 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
     public partial class ConsoleTextControllerTests
     {
         [TestMethod]
+        public void ValidateCaret_Empty_PointEmpty()
+        {
+            var sut = new ConControls.Controls.Text.ConsoleTextController
+            {
+                Width = 5,
+                Wrap = true,
+                Text = string.Empty
+            };
+
+            sut.BufferLineCount.Should().Be(0);
+
+            Point valid = Point.Empty;
+            Point tooLeft = new Point(-1, 0);
+            Point tooUp = new Point(0, -1);
+            Point tooRight = new Point(5, 0);
+            Point tooDown = new Point(0, 6);
+
+            sut.ValidateCaret(valid).Should().Be(valid);
+            sut.ValidateCaret(tooLeft).Should().Be(valid);
+            sut.ValidateCaret(tooUp).Should().Be(valid);
+            sut.ValidateCaret(tooRight).Should().Be(valid);
+            sut.ValidateCaret(tooDown).Should().Be(valid);
+        }
+        [TestMethod]
         public void ValidateCaret_AdjustedCaretProperly()
         {
             var sut = new ConControls.Controls.Text.ConsoleTextController
@@ -43,7 +67,6 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             sut.ValidateCaret(tooUp).Should().Be(up);
             sut.ValidateCaret(tooRight).Should().Be(right);
             sut.ValidateCaret(tooDown).Should().Be(down);
-
         }
         [TestMethod]
         public void ValidateCaret_NotWrapped_LowerEnd()

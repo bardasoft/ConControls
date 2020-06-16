@@ -47,7 +47,7 @@ namespace ConControlsTests
                         Area = window.Area,
                         BorderStyle = BorderStyle.DoubleLined
                     };
-                    _ = new TextBlock(window)
+                    _ = new Label(window)
                     {
                         Parent = frame,
                         Area = new Rectangle(2, 1, frame.Size.Width - 6, 3),
@@ -56,7 +56,7 @@ namespace ConControlsTests
                         ForegroundColor = ConsoleColor.Yellow,
                         Text = "Welcome to ConControls!"
                     };
-                    _ = new TextBlock(window)
+                    _ = new Label(window)
                     {
                         Parent = frame,
                         Area = new Rectangle(2, 6, 9, 1),
@@ -72,7 +72,7 @@ namespace ConControlsTests
                         BorderStyle = BorderStyle.SingleLined,
                         Percentage = 0.4
                     };
-                    _ = new TextBlock(window)
+                    _ = new Label(window)
                     {
                         Parent = frame,
                         Area = new Rectangle(2, 11, 6, 1),

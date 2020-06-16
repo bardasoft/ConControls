@@ -22,15 +22,16 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             bool cleared = false;
             var controller = new StubbedConsoleTextController
             {
-                BufferLineCountGet = () => 20,
-                MaxLineLengthGet = () => 20,
-                GetLineLengthInt32 = l => 20,
+                BufferLineCountGet = () => cleared ? 0 : 20,
+                MaxLineLengthGet = () => cleared ? 0 : 20,
+                GetLineLengthInt32 = l => cleared ? 0 : 20,
+                ValidateCaretPoint = p => cleared ? Point.Empty : p,
                 Clear = () => cleared = true
             };
             using var sut = new StubbedTextControl(stubbedWindow, controller)
             {
-                Size = (10,10).Sz(),
-                Caret = (3,4).Pt(),
+                Size = (10, 10).Sz(),
+                Caret = (3, 4).Pt(),
                 Scroll = (2, 2).Pt()
             };
             sut.Size.Should().Be((10, 10).Sz());

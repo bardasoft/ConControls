@@ -142,7 +142,7 @@ namespace ConControls.Controls.Text
         }
         public Point ValidateCaret(Point caret)
         {
-            int y = Math.Min(Math.Max(0, caret.Y), allLines.Count-1);
+            int y = Math.Max(0, Math.Min(caret.Y, allLines.Count-1));
             int x = Math.Max(0, NormalizeX(caret.X, y));
             return new Point(x, y);
         }
