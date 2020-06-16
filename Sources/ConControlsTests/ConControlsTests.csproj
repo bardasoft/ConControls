@@ -242,7 +242,6 @@
     <Compile Include="UnitTests\PointExtensions.cs" />
     <Compile Include="UnitTests\StubbedWindow.cs" />
     <Compile Include="UnitTests\Helpers\DisposableBlock\DispoableBlockTests.cs" />
-    <Compile Include="FileLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\TestLogger.cs" />
   </ItemGroup>
