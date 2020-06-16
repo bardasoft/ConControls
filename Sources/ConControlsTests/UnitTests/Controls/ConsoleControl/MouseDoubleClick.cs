@@ -14,7 +14,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
     public partial class ConsoleControlTests
     {
         [TestMethod]
-        public void DoubleClick_Inconclusive()
+        public void MouseDoubleClick_Inconclusive()
         {
             Assert.Inconclusive();
         }

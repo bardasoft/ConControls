@@ -124,8 +124,12 @@ namespace ConControls.Controls {
         {
             _ = e ?? throw new ArgumentNullException(paramName: nameof(e));
             base.OnMouseClick(e);
-            if (!e.Handled && e.ButtonState == MouseButtonStates.LeftButtonPressed)
+            if (!e.Handled && Visible && Enabled && e.ButtonState == MouseButtonStates.LeftButtonPressed)
+            {
+                e.Handled = true;
+                Focused = true;
                 PerformClick();
+            }
         }
     }
 }

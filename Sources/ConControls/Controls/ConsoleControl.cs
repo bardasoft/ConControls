@@ -8,6 +8,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using ConControls.Controls.Drawing;
 using ConControls.Helpers;
@@ -1089,25 +1090,58 @@ namespace ConControls.Controls
         /// </summary>
         /// <param name="e">The event details.</param>
         protected virtual void OnKeyEvent(KeyEventArgs e) { }
+
+        bool mouseInside;
+        MouseButtonStates lastMouseButtons = MouseButtonStates.None;
+        static readonly MouseButtonStates[] mouseButtons = Enum.GetValues(typeof(MouseButtonStates)).Cast<MouseButtonStates>().ToArray();
         void OnWindowMouseEvent(object sender, MouseEventArgs e)
         {
             lock (Window.SynchronizationLock)
             {
                 _ = e ?? throw new ArgumentNullException(nameof(e));
+                var lastButtons = lastMouseButtons;
+                lastMouseButtons = e.ButtonState;
 
-                if (e.Handled || !(Enabled && Visible && CanFocus)) return;
+                if (e.Handled || !(Enabled && Visible)) return;
 
-
-                if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
+                var clientArea = GetClientArea();
+                var clientPoint = PointToClient(e.Position);
+                var args = new MouseEventArgs(e, clientPoint);
+                if (!new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
                 {
-                    var clientArea = GetClientArea();
-                    var clientPoint = PointToClient(e.Position);
-                    if (new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
-                    {
-                        e.Handled = true;
-                        Focused = true;
-                    }
+                    if (mouseInside)
+                        OnMouseLeave(args);
+                    mouseInside = false;
+                    return;
                 }
+
+                if (!mouseInside)
+                {
+                    mouseInside = true;
+                    OnMouseEnter(args);
+                }
+
+                switch (args.Kind)
+                {
+                    case MouseEventFlags.Moved:
+                        OnMouseMove(args);
+                        break;
+                    case MouseEventFlags.DoubleClick:
+                        OnMouseDoubleClick(args);
+                        break;
+                    case MouseEventFlags.Wheeled:
+                    case MouseEventFlags.WheeledHorizontally:
+                        OnMouseScroll(args);
+                        break;
+                    default:
+                        if (mouseButtons.Any(b => args.ButtonState.HasFlag(b) && !lastButtons.HasFlag(b)))
+                            OnMouseClick(args);
+                        break;
+                }
+
+                if (e.Handled || e.ButtonState != MouseButtonStates.LeftButtonPressed) return;
+                e.Handled = true;
+                Focused = true;
             }
         }
         #endregion
