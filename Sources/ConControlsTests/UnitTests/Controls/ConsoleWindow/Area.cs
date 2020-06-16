@@ -8,6 +8,7 @@
 #nullable enable
 
 using System.Drawing;
+using ConControls.Extensions;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

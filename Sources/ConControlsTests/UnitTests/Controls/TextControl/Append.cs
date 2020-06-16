@@ -9,6 +9,7 @@
 
 using System;
 using System.Drawing;
+using ConControls.Extensions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

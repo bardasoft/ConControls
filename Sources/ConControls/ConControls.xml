@@ -1782,6 +1782,70 @@
         <member name="P:ConControls.Controls.Text.ConsoleTextController.Width">
             <inheritdoc />
         </member>
+        <member name="T:ConControls.Extensions.CoordinateExtensions">
+            <summary>
+            Provides extension methods to create <see cref="T:System.Drawing.Point"/>,
+            <see cref="T:System.Drawing.Size"/> or <see cref="T:System.Drawing.Rectangle"/> instances from tuples.
+            </summary>
+        </member>
+        <member name="M:ConControls.Extensions.CoordinateExtensions.Pt(System.ValueTuple{System.Int32,System.Int32})">
+            <summary>
+            Creates a <see cref="T:System.Drawing.Point"/> instance from the given coordinates.
+            </summary>
+            <param name="p">A tuple of two integers representing the <c>x</c> and <c>y</c> coordinates.</param>
+            <returns>A <see cref="T:System.Drawing.Point"/> with its <see cref="P:System.Drawing.Point.X"/> and <see cref="P:System.Drawing.Point.Y"/> properties set to the given coordinates.</returns>
+        </member>
+        <member name="M:ConControls.Extensions.CoordinateExtensions.Sz(System.ValueTuple{System.Int32,System.Int32})">
+            <summary>
+            Creates a <see cref="T:System.Drawing.Size"/> instance from the given values.
+            </summary>
+            <param name="p">A tuple of two integers representing the <c>width</c> and <c>height</c> values.</param>
+            <returns>A <see cref="T:System.Drawing.Size"/> with its <see cref="P:System.Drawing.Size.Width"/> and <see cref="P:System.Drawing.Size.Height"/> properties set to the given values.</returns>
+        </member>
+        <member name="M:ConControls.Extensions.CoordinateExtensions.Rect(System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32})">
+            <summary>
+            Creates a <see cref="T:System.Drawing.Rectangle"/> instance from the given values.
+            </summary>
+            <param name="r">A tuple of four integers representing the
+            <c>left</c>, <c>top</c>, <c>width</c> and <c>height</c> values.</param>
+            <returns>A <see cref="T:System.Drawing.Rectangle"/> with its properties set to the given values.</returns>
+        </member>
+        <member name="M:ConControls.Extensions.CoordinateExtensions.Rect(System.ValueTuple{System.Int32,System.Int32,System.Drawing.Size})">
+            <summary>
+            Creates a <see cref="T:System.Drawing.Rectangle"/> instance from the given values.
+            </summary>
+            <param name="r">A tuple of two integers (representing the
+            <c>left</c> and <c>top</c> values) and a <see cref="T:System.Drawing.Size"/>
+            value representing the size of the rectangle to create.</param>
+            <returns>A <see cref="T:System.Drawing.Rectangle"/> with its properties set to the given values.</returns>
+        </member>
+        <member name="M:ConControls.Extensions.CoordinateExtensions.Rect(System.ValueTuple{System.Drawing.Point,System.Int32,System.Int32})">
+            <summary>
+            Creates a <see cref="T:System.Drawing.Rectangle"/> instance from the given values.
+            </summary>
+            <param name="r">A tuple of a <see cref="T:System.Drawing.Point"/> value (representing
+            the rectangle's position) and two integers representing the
+            <c>width</c> and <c>height</c> values.</param>
+            <returns>A <see cref="T:System.Drawing.Rectangle"/> with its properties set to the given values.</returns>
+        </member>
+        <member name="M:ConControls.Extensions.CoordinateExtensions.Rect(System.ValueTuple{System.Drawing.Point,System.Drawing.Size})">
+            <summary>
+            Creates a <see cref="T:System.Drawing.Rectangle"/> instance from the given values.
+            </summary>
+            <param name="r">A tuple of a <see cref="T:System.Drawing.Point"/> value (representing
+            the rectangle's position) and a <see cref="T:System.Drawing.Size"/> value (representing
+            the rectangle's size).</param>
+            <returns>A <see cref="T:System.Drawing.Rectangle"/> with its properties set to the given values.</returns>
+        </member>
+        <member name="T:ConControls.Extensions.NamespaceDoc">
+            <summary>
+            Provides extensions that can be useful when working with ConControls.
+            </summary>
+            <remarks>
+            This namespace provides extension methods that can be helpful to
+            express code intentions more easily when working with ConControls.
+            </remarks>
+        </member>
         <member name="T:ConControls.Properties.Resources">
             <summary>
               Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
