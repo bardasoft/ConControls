@@ -22,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
     public partial class TextControlTests
     {
         [TestMethod]
-        public void KeyEvents_EVentArgsNull_ArgumentNullException()
+        public void KeyEvents_EventArgsNull_ArgumentNullException()
         {
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController
@@ -33,11 +33,12 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 EndCaretGet = () => (0, 20).Pt(),
                 GetLineLengthInt32 = l => 20
             };
-            using var sut = new StubbedTextControl(stubbedWindow, stubbedController)
+            using var sut = new ConControls.Controls.TextBlock(stubbedWindow, stubbedController)
             {
                 Area = (5, 5, 10, 10).Rect(),
                 Parent = stubbedWindow,
-                Caret = (10, 10).Pt()
+                Caret = (10, 10).Pt(),
+                Focused = true
             };
 
             sut.Invoking(s => stubbedWindow.KeyEventEvent(stubbedWindow, null!)).Should().Throw<ArgumentNullException>();
