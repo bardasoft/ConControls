@@ -7,6 +7,7 @@
 
 #nullable enable
 
+using ConControls.Extensions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

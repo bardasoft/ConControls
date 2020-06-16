@@ -10,6 +10,7 @@
 using System.Drawing;
 using ConControls.ConsoleApi;
 using ConControls.Controls;
+using ConControls.Extensions;
 using ConControls.WindowsApi.Types;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

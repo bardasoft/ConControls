@@ -9,6 +9,7 @@
 
 using System.Drawing;
 using ConControls.Controls;
+using ConControls.Extensions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 // ReSharper disable AccessToDisposedClosure

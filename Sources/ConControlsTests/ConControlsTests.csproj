@@ -212,6 +212,10 @@
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Text.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Clear.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ValidateCaret.cs" />
+    <Compile Include="UnitTests\Extensions\CoordinateExtensions\Rect.cs" />
+    <Compile Include="UnitTests\Extensions\CoordinateExtensions\Sz.cs" />
+    <Compile Include="UnitTests\Extensions\CoordinateExtensions\Pt.cs" />
+    <Compile Include="UnitTests\Extensions\CoordinateExtensions\CoordinateExtensionsTests.cs" />
     <Compile Include="UnitTests\Helpers\KeyHandlingExtensions\Matches.cs" />
     <Compile Include="UnitTests\StubbedTextControl.cs" />
     <Compile Include="UnitTests\StubbedConsoleControl.cs" />
@@ -239,7 +243,6 @@
     <Compile Include="UnitTests\StubbedNativeCalls.cs" />
     <Compile Include="UnitTests\StubbedGraphicsProvider.cs" />
     <Compile Include="UnitTests\StubbedConsoleTextControoler.cs" />
-    <Compile Include="UnitTests\PointExtensions.cs" />
     <Compile Include="UnitTests\StubbedWindow.cs" />
     <Compile Include="UnitTests\Helpers\DisposableBlock\DispoableBlockTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
