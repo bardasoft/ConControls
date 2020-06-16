@@ -20,7 +20,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
     public partial class TextControlTests
     {
         [TestMethod]
-        public void MouseEvents_LeftClickedOutsideArea_Notthing()
+        public void OnMouseClick_LeftClickedOutsideArea_Notthing()
         {
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController
@@ -47,7 +47,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void MouseEvents_LeftClickedHandled_Notthing()
+        public void OnMouseClick_LeftClickedHandled_Notthing()
         {
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController
@@ -73,7 +73,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             sut.Focused.Should().BeFalse();
         }
         [TestMethod]
-        public void MouseEvents_LeftClickedDisabled_Nothing()
+        public void OnMouseClick_LeftClickedDisabled_Nothing()
         {
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController
@@ -101,7 +101,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void MouseEvents_LeftClickedInvisible_Nothing()
+        public void OnMouseClick_LeftClickedInvisible_Nothing()
         {
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController
@@ -129,7 +129,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void MouseEvents_RightClicked_Nothing()
+        public void OnMouseClick_RightClicked_Nothing()
         {
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController
@@ -156,7 +156,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void MouseEvents_LeftClicked_FocusedAndCaretSet()
+        public void OnMouseClick_LeftClicked_FocusedAndCaretSet()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow

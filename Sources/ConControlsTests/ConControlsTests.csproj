@@ -185,22 +185,14 @@
     <Compile Include="UnitTests\Controls\TextBlock\TextBlockTests.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CanEdit.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CanFocus.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\OnMouseClick.cs" />
     <Compile Include="UnitTests\Controls\TextControl\TabStop.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Clear.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CursorPosition.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Wrap.cs" />
-    <Compile Include="UnitTests\Controls\TextControl\MouseEvents.LeftClick.cs">
-      <DependentUpon>MouseEvents.cs</DependentUpon>
-    </Compile>
     <Compile Include="UnitTests\Controls\TextControl\BorderStyleChanged.cs" />
     <Compile Include="UnitTests\Controls\TextControl\AreaChanged.cs" />
-    <Compile Include="UnitTests\Controls\TextControl\MouseEvents.cs" />
-    <Compile Include="UnitTests\Controls\TextControl\MouseEvents.ScrollHorizontically.cs">
-      <DependentUpon>MouseEvents.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UnitTests\Controls\TextControl\MouseEvents.ScrollVertically.cs">
-      <DependentUpon>MouseEvents.cs</DependentUpon>
-    </Compile>
+    <Compile Include="UnitTests\Controls\TextControl\OnMouseScroll.cs" />
     <Compile Include="UnitTests\Controls\TextControl\ScrollToCaret.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Text.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Caret.cs" />
