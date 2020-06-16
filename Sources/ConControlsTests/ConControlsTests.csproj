@@ -96,6 +96,12 @@
     <Compile Include="UnitTests\Controls\Button\KeyEvents.cs" />
     <Compile Include="UnitTests\Controls\Button\Constructor.cs" />
     <Compile Include="UnitTests\Controls\Button\ButtonTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\MouseEnter.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\MouseMove.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\MouseClick.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\MouseDoubleClick.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\MouseLeave.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\MouseScroll.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\PointToClient.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\PointToConsole.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\DrawClientAreaTests.cs" />
@@ -106,7 +112,7 @@
     <Compile Include="UnitTests\Controls\ConsoleControl\ControlsTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\ParentTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\FocusedTests.cs" />
-    <Compile Include="UnitTests\Controls\ConsoleControl\OnMouseEventTests.cs" />
+    <Compile Include="UnitTests\Controls\ConsoleControl\OnWindowMouseEvent.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\OnKeyEventTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\CheckDisposedTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\GetClientAreaTests.cs" />

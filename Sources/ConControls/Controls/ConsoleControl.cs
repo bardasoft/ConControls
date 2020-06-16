@@ -98,6 +98,48 @@ namespace ConControls.Controls
         /// The <see cref="CursorVisible"/> of the control has been changed.
         /// </summary>
         public event EventHandler? CursorVisibleChanged;
+        /// <summary>
+        /// The mouse has left the control's area.
+        /// </summary>
+        /// <remarks>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+        /// </remarks>
+        public event EventHandler<MouseEventArgs>? MouseLeave;
+        /// <summary>
+        /// The mouse has entered the control's area.
+        /// </summary>
+        /// <remarks>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+        /// </remarks>
+        public event EventHandler<MouseEventArgs>? MouseEnter;
+        /// <summary>
+        /// The mouse has been moved inside the control's area.
+        /// </summary>
+        /// <remarks>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+        /// </remarks>
+        public event EventHandler<MouseEventArgs>? MouseMove;
+        /// <summary>
+        /// The mouse has been clicked inside the control's area.
+        /// </summary>
+        /// <remarks>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+        /// </remarks>
+        public event EventHandler<MouseEventArgs>? MouseClick;
+        /// <summary>
+        /// The mouse has been double-clicked inside the control's area.
+        /// </summary>
+        /// <remarks>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+        /// </remarks>
+        public event EventHandler<MouseEventArgs>? MouseDoubleClick;
+        /// <summary>
+        /// The mouse wheel has been used inside the control's area.
+        /// </summary>
+        /// <remarks>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+        /// </remarks>
+        public event EventHandler<MouseEventArgs>? MouseScroll;
         #endregion
         #region Basic infrastructure properties
         /// <summary>
@@ -605,14 +647,17 @@ namespace ConControls.Controls
         private protected ConsoleControl(IConsoleWindow window)
         {
             Window = window ?? throw new ArgumentNullException(nameof(window));
-            drawingInhibiter = new DisposableBlock(EndDeferDrawing);
-            name = GetType().Name;
+            lock (Window.SynchronizationLock)
+            {
+                drawingInhibiter = new DisposableBlock(EndDeferDrawing);
+                name = GetType().Name;
 
-            Window.KeyEvent += OnWindowKeyEvent;
-            Window.MouseEvent += OnWindowMouseEvent;
+                Window.KeyEvent += OnWindowKeyEvent;
+                Window.MouseEvent += OnWindowMouseEvent;
 
-            Controls = new ControlCollection(this);
-            Controls.ControlCollectionChanged += OnControlCollectionChanged;
+                Controls = new ControlCollection(this);
+                Controls.ControlCollectionChanged += OnControlCollectionChanged;
+            }
         }
 
         /// <summary>
@@ -1037,41 +1082,126 @@ namespace ConControls.Controls
         void OnWindowKeyEvent(object sender, KeyEventArgs e)
         {
             lock (Window.SynchronizationLock)
-                OnKeyEvent(sender, e);
+                if (Visible && Enabled && Focused) OnKeyEvent(e);
         }
         /// <summary>
-        /// Called when a <see cref="IConsoleWindow.KeyEvent"/> has been received.
+        /// Called when a <see cref="IConsoleWindow.KeyEvent"/> has been received and this control is visible, enabled and owns the focus.
         /// </summary>
-        /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
         /// <param name="e">The event details.</param>
-        protected virtual void OnKeyEvent(object sender, KeyEventArgs e) { }
+        protected virtual void OnKeyEvent(KeyEventArgs e) { }
         void OnWindowMouseEvent(object sender, MouseEventArgs e)
         {
             lock (Window.SynchronizationLock)
-                OnMouseEvent(sender, e);
-        }
-        /// <summary>
-        /// Called when a <see cref="IConsoleWindow.MouseEvent"/> has been received.
-        /// </summary>
-        /// <param name="sender">The event source (must be <see cref="Window"/>).</param>
-        /// <param name="e">The event details.</param>
-        protected virtual void OnMouseEvent(object sender, MouseEventArgs e)
-        {
-            _ = e ?? throw new ArgumentNullException(nameof(e));
-
-            if (e.Handled || !(Enabled && Visible && CanFocus)) return;
-
-            if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
             {
-                var clientArea = GetClientArea();
-                var clientPoint = PointToClient(e.Position);
-                if (new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
+                _ = e ?? throw new ArgumentNullException(nameof(e));
+
+                if (e.Handled || !(Enabled && Visible && CanFocus)) return;
+
+
+                if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
                 {
-                    e.Handled = true;
-                    Focused = true;
+                    var clientArea = GetClientArea();
+                    var clientPoint = PointToClient(e.Position);
+                    if (new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
+                    {
+                        e.Handled = true;
+                        Focused = true;
+                    }
                 }
             }
         }
+        #endregion
+        #region Abstracted mouse events
+        /// <summary>
+        /// Called when the mouse has left the control's area.
+        /// </summary>
+        /// <param name="e">The <see cref="MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+        /// <remarks>
+        /// <para>
+        /// This method is called when the <see cref="ConsoleControl"/>'s event handler for the <see cref="Window"/>'s <see cref="IConsoleWindow.MouseEvent"/> detects
+        /// that the mouse has left the control's area.
+        /// </para>
+        /// <para>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+        /// </para>
+        /// </remarks>
+        [ExcludeFromCodeCoverage]
+        protected virtual void OnMouseLeave(MouseEventArgs e) => MouseLeave?.Invoke(this, e);
+        /// <summary>
+        /// Called when the mouse has entered the control's area.
+        /// </summary>
+        /// <param name="e">The <see cref="MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+        /// <remarks>
+        /// <para>
+        /// This method is called when the <see cref="ConsoleControl"/>'s event handler for the <see cref="Window"/>'s <see cref="IConsoleWindow.MouseEvent"/> detects
+        /// that the mouse has entered the control's area.
+        /// </para>
+        /// <para>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+        /// </para>
+        /// </remarks>
+        [ExcludeFromCodeCoverage]
+        protected virtual void OnMouseEnter(MouseEventArgs e) => MouseEnter?.Invoke(this, e);
+        /// <summary>
+        /// Called when the mouse has been moved inside the control's area.
+        /// </summary>
+        /// <param name="e">The <see cref="MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+        /// <remarks>
+        /// <para>
+        /// This method is called when the <see cref="ConsoleControl"/>'s event handler for the <see cref="Window"/>'s <see cref="IConsoleWindow.MouseEvent"/> detects
+        /// that the mouse has been moved inside the control's area.
+        /// </para>
+        /// <para>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+        /// </para>
+        /// </remarks>
+        [ExcludeFromCodeCoverage]
+        protected virtual void OnMouseMove(MouseEventArgs e) => MouseMove?.Invoke(this, e);
+        /// <summary>
+        /// Called when the mouse has been clicked inside the control's area.
+        /// </summary>
+        /// <param name="e">The <see cref="MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+        /// <remarks>
+        /// <para>
+        /// This method is called when the <see cref="ConsoleControl"/>'s event handler for the <see cref="Window"/>'s <see cref="IConsoleWindow.MouseEvent"/> detects
+        /// that the mouse has been clicked inside the control's area.
+        /// </para>
+        /// <para>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+        /// </para>
+        /// </remarks>
+        [ExcludeFromCodeCoverage]
+        protected virtual void OnMouseClick(MouseEventArgs e) => MouseClick?.Invoke(this, e);
+        /// <summary>
+        /// Called when the mouse has been double-clicked inside the control's area.
+        /// </summary>
+        /// <param name="e">The <see cref="MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+        /// <remarks>
+        /// <para>
+        /// This method is called when the <see cref="ConsoleControl"/>'s event handler for the <see cref="Window"/>'s <see cref="IConsoleWindow.MouseEvent"/> detects
+        /// that the mouse has been double clicked inside the control's area.
+        /// </para>
+        /// <para>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+        /// </para>
+        /// </remarks>
+        [ExcludeFromCodeCoverage]
+        protected virtual void OnMouseDoubleClick(MouseEventArgs e) => MouseDoubleClick?.Invoke(this, e);
+        /// <summary>
+        /// Called when the mouse wheel has been used inside the control's area.
+        /// </summary>
+        /// <param name="e">The <see cref="MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+        /// <remarks>
+        /// <para>
+        /// This method is called when the <see cref="ConsoleControl"/>'s event handler for the <see cref="Window"/>'s <see cref="IConsoleWindow.MouseEvent"/> detects
+        /// that the mouse wheel has been used inside the control's area.
+        /// </para>
+        /// <para>
+        /// The <see cref="MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+        /// </para>
+        /// </remarks>
+        [ExcludeFromCodeCoverage]
+        protected virtual void OnMouseScroll(MouseEventArgs e) => MouseScroll?.Invoke(this, e);
         #endregion
     }
 }

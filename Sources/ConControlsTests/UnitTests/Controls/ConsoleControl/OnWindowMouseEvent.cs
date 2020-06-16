@@ -21,22 +21,14 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
     public partial class ConsoleControlTests
     {
         [TestMethod]
-        public void OnMouseEvent_CalledThreadSafe()
-        {
-            var stubbedWindow = new StubbedWindow();
-            var sut = new StubbedConsoleControl(stubbedWindow);
-            stubbedWindow.MouseEventEvent(stubbedWindow, new MouseEventArgs(new ConsoleMouseEventArgs(default)));
-            sut.GetMethodCount(StubbedConsoleControl.MethodOnMouseEvent).Should().Be(1);
-        }
-        [TestMethod]
-        public void OnMouseEvent_EventArgsNull_ArgumentNullException()
+        public void OnWindowMouseEvent_EventArgsNull_ArgumentNullException()
         {
             using var stubbedWindow = new StubbedWindow();
             using var sut = new StubbedConsoleControl(stubbedWindow);
             sut.Invoking(s => stubbedWindow.MouseEventEvent(stubbedWindow, null!)).Should().Throw<ArgumentNullException>();
         }
         [TestMethod]
-        public void OnMouseEvents_Handled_Nothing()
+        public void OnWindowMouseEvent_Handled_Nothing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -60,7 +52,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             sut.Focused.Should().BeFalse();
         }
         [TestMethod]
-        public void OnMouseEvents_Disabled_Nothing()
+        public void OnWindowMouseEvent_Disabled_Nothing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -86,7 +78,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void OnMouseEvents_Invisible_Nothing()
+        public void OnWindowMouseEvent_Invisible_Nothing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -112,7 +104,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void OnMouseEvents_CantFocus_Nothing()
+        public void OnWindowMouseEvent_CantFocus_Nothing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -137,7 +129,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void OnMouseEvents_WrongButtton_Nothing()
+        public void OnWindowMouseEvent_WrongButtton_Nothing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -162,7 +154,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void OnMouseEvents_Outside_Nothing()
+        public void OnWindowMouseEvent_Outside_Nothing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -187,7 +179,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void OnMouseEvents_LeftClickedInside_Focused()
+        public void OnWindowMouseEvent_LeftClickedInside_Focused()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow

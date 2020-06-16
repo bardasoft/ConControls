@@ -256,12 +256,12 @@ namespace ConControls.Controls
             Caret = Point.Add(CursorPosition, (Size)scroll);
         }
         /// <inheritdoc />
-        protected override void OnKeyEvent(object sender, KeyEventArgs e)
+        protected override void OnKeyEvent(KeyEventArgs e)
         {
             _ = e ?? throw new ArgumentNullException(nameof(e));
             if (!(Focused && Enabled && Visible && e.KeyDown) || e.Handled)
             {
-                base.OnKeyEvent(sender, e);
+                base.OnKeyEvent(e);
                 return;
             }
 
@@ -301,43 +301,42 @@ namespace ConControls.Controls
                     break;
             }
 
-            base.OnKeyEvent(sender, e);
+            base.OnKeyEvent(e);
         }
-        /// <inheritdoc />
-        protected override void OnMouseEvent(object sender, MouseEventArgs e)
-        {
-            _ = e ?? throw new ArgumentNullException(nameof(e));
+        //protected override void OnMouseEvent(object sender, MouseEventArgs e)
+        //{
+        //    _ = e ?? throw new ArgumentNullException(nameof(e));
 
-            if (e.Handled || !(Enabled && Visible)) return;
+        //    if (e.Handled || !(Enabled && Visible)) return;
 
-            var clientArea = GetClientArea();
-            var clientPoint = PointToClient(e.Position);
-            if (!new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
-            {
-                base.OnMouseEvent(sender, e);
-                return;
-            }
+        //    var clientArea = GetClientArea();
+        //    var clientPoint = PointToClient(e.Position);
+        //    if (!new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
+        //    {
+        //        base.OnMouseEvent(sender, e);
+        //        return;
+        //    }
 
-            switch (e.Kind)
-            {
-                case MouseEventFlags.Wheeled:
-                    ScrollVertically(e.Scroll);
-                    e.Handled = true;
-                    break;
-                case MouseEventFlags.WheeledHorizontally:
-                    ScrollHoritzontically(e.Scroll);
-                    e.Handled = true;
-                    break;
-                default:
-                    if (e.ButtonState != MouseButtonStates.LeftButtonPressed) break;
-                    e.Handled = true;
-                    Caret = Point.Add(clientPoint, (Size)scroll);
-                    Focused = true;
-                    break;
-            }
+        //    switch (e.Kind)
+        //    {
+        //        case MouseEventFlags.Wheeled:
+        //            ScrollVertically(e.Scroll);
+        //            e.Handled = true;
+        //            break;
+        //        case MouseEventFlags.WheeledHorizontally:
+        //            ScrollHoritzontically(e.Scroll);
+        //            e.Handled = true;
+        //            break;
+        //        default:
+        //            if (e.ButtonState != MouseButtonStates.LeftButtonPressed) break;
+        //            e.Handled = true;
+        //            Caret = Point.Add(clientPoint, (Size)scroll);
+        //            Focused = true;
+        //            break;
+        //    }
 
-            base.OnMouseEvent(sender, e);
-        }
+        //    base.OnMouseEvent(sender, e);
+        //}
 
         /// <summary>
         /// Called when the <see cref="CanFocus"/> property changed.<br/>

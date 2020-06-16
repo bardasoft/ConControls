@@ -102,12 +102,12 @@ namespace ConControls.Controls {
         }
 
         /// <inheritdoc />
-        protected override void OnKeyEvent(object sender, KeyEventArgs e)
+        protected override void OnKeyEvent(KeyEventArgs e)
         {
             _ = e ?? throw new ArgumentNullException(nameof(e));
             if (e.Handled || !(Focused && Visible && Enabled && e.KeyDown))
             {
-                base.OnKeyEvent(sender, e);
+                base.OnKeyEvent(e);
                 return;
             }
 
@@ -116,24 +116,16 @@ namespace ConControls.Controls {
                 PerformClick();
                 e.Handled = true;
             }
-            base.OnKeyEvent(sender, e);
+            base.OnKeyEvent(e);
         }
 
         /// <inheritdoc />
-        protected override void OnMouseEvent(object sender, MouseEventArgs e)
+        protected override void OnMouseClick(MouseEventArgs e)
         {
             _ = e ?? throw new ArgumentNullException(paramName: nameof(e));
-            var clientPoint = Parent?.PointToClient(e.Position);
-            if (e.Handled || !(clientPoint.HasValue && Area.Contains(clientPoint.Value)))
-            {
-                base.OnMouseEvent(sender, e);
-                return;
-            }
-
-            if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
+            base.OnMouseClick(e);
+            if (!e.Handled && e.ButtonState == MouseButtonStates.LeftButtonPressed)
                 PerformClick();
-
-            base.OnMouseEvent(sender, e);
         }
     }
 }

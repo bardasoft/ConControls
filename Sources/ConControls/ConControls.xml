@@ -64,10 +64,10 @@
             Performs a button click (if the control is <see cref="P:ConControls.Controls.ConsoleControl.Enabled"/>).
             </summary>
         </member>
-        <member name="M:ConControls.Controls.Button.OnKeyEvent(System.Object,ConControls.Controls.KeyEventArgs)">
+        <member name="M:ConControls.Controls.Button.OnKeyEvent(ConControls.Controls.KeyEventArgs)">
             <inheritdoc />
         </member>
-        <member name="M:ConControls.Controls.Button.OnMouseEvent(System.Object,ConControls.Controls.MouseEventArgs)">
+        <member name="M:ConControls.Controls.Button.OnMouseClick(ConControls.Controls.MouseEventArgs)">
             <inheritdoc />
         </member>
         <member name="T:ConControls.Controls.ConsoleControl">
@@ -125,6 +125,54 @@
             <summary>
             The <see cref="P:ConControls.Controls.ConsoleControl.CursorVisible"/> of the control has been changed.
             </summary>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleControl.MouseLeave">
+            <summary>
+            The mouse has left the control's area.
+            </summary>
+            <remarks>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+            </remarks>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleControl.MouseEnter">
+            <summary>
+            The mouse has entered the control's area.
+            </summary>
+            <remarks>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+            </remarks>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleControl.MouseMove">
+            <summary>
+            The mouse has been moved inside the control's area.
+            </summary>
+            <remarks>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+            </remarks>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleControl.MouseClick">
+            <summary>
+            The mouse has been clicked inside the control's area.
+            </summary>
+            <remarks>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+            </remarks>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleControl.MouseDoubleClick">
+            <summary>
+            The mouse has been double-clicked inside the control's area.
+            </summary>
+            <remarks>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+            </remarks>
+        </member>
+        <member name="E:ConControls.Controls.ConsoleControl.MouseScroll">
+            <summary>
+            The mouse wheel has been used inside the control's area.
+            </summary>
+            <remarks>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments contains the mouse position in client coordinates (relative to the control's client area).
+            </remarks>
         </member>
         <member name="P:ConControls.Controls.ConsoleControl.Window">
             <summary>
@@ -523,19 +571,101 @@
             Called when the <see cref="P:ConControls.Controls.ConsoleControl.Area"/> of this control has been changed.
             </summary>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.OnKeyEvent(System.Object,ConControls.Controls.KeyEventArgs)">
+        <member name="M:ConControls.Controls.ConsoleControl.OnKeyEvent(ConControls.Controls.KeyEventArgs)">
             <summary>
-            Called when a <see cref="E:ConControls.Controls.IConsoleWindow.KeyEvent"/> has been received.
+            Called when a <see cref="E:ConControls.Controls.IConsoleWindow.KeyEvent"/> has been received and this control is visible, enabled and owns the focus.
             </summary>
-            <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
             <param name="e">The event details.</param>
         </member>
-        <member name="M:ConControls.Controls.ConsoleControl.OnMouseEvent(System.Object,ConControls.Controls.MouseEventArgs)">
+        <member name="M:ConControls.Controls.ConsoleControl.OnMouseLeave(ConControls.Controls.MouseEventArgs)">
             <summary>
-            Called when a <see cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/> has been received.
+            Called when the mouse has left the control's area.
             </summary>
-            <param name="sender">The event source (must be <see cref="P:ConControls.Controls.ConsoleControl.Window"/>).</param>
-            <param name="e">The event details.</param>
+            <param name="e">The <see cref="T:ConControls.Controls.MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+            <remarks>
+            <para>
+            This method is called when the <see cref="T:ConControls.Controls.ConsoleControl"/>'s event handler for the <see cref="P:ConControls.Controls.ConsoleControl.Window"/>'s <see cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/> detects
+            that the mouse has left the control's area.
+            </para>
+            <para>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnMouseEnter(ConControls.Controls.MouseEventArgs)">
+            <summary>
+            Called when the mouse has entered the control's area.
+            </summary>
+            <param name="e">The <see cref="T:ConControls.Controls.MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+            <remarks>
+            <para>
+            This method is called when the <see cref="T:ConControls.Controls.ConsoleControl"/>'s event handler for the <see cref="P:ConControls.Controls.ConsoleControl.Window"/>'s <see cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/> detects
+            that the mouse has entered the control's area.
+            </para>
+            <para>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnMouseMove(ConControls.Controls.MouseEventArgs)">
+            <summary>
+            Called when the mouse has been moved inside the control's area.
+            </summary>
+            <param name="e">The <see cref="T:ConControls.Controls.MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+            <remarks>
+            <para>
+            This method is called when the <see cref="T:ConControls.Controls.ConsoleControl"/>'s event handler for the <see cref="P:ConControls.Controls.ConsoleControl.Window"/>'s <see cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/> detects
+            that the mouse has been moved inside the control's area.
+            </para>
+            <para>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnMouseClick(ConControls.Controls.MouseEventArgs)">
+            <summary>
+            Called when the mouse has been clicked inside the control's area.
+            </summary>
+            <param name="e">The <see cref="T:ConControls.Controls.MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+            <remarks>
+            <para>
+            This method is called when the <see cref="T:ConControls.Controls.ConsoleControl"/>'s event handler for the <see cref="P:ConControls.Controls.ConsoleControl.Window"/>'s <see cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/> detects
+            that the mouse has been clicked inside the control's area.
+            </para>
+            <para>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnMouseDoubleClick(ConControls.Controls.MouseEventArgs)">
+            <summary>
+            Called when the mouse has been double-clicked inside the control's area.
+            </summary>
+            <param name="e">The <see cref="T:ConControls.Controls.MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+            <remarks>
+            <para>
+            This method is called when the <see cref="T:ConControls.Controls.ConsoleControl"/>'s event handler for the <see cref="P:ConControls.Controls.ConsoleControl.Window"/>'s <see cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/> detects
+            that the mouse has been double clicked inside the control's area.
+            </para>
+            <para>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:ConControls.Controls.ConsoleControl.OnMouseScroll(ConControls.Controls.MouseEventArgs)">
+            <summary>
+            Called when the mouse wheel has been used inside the control's area.
+            </summary>
+            <param name="e">The <see cref="T:ConControls.Controls.MouseEventArgs"/> containing information (in client coordinates) about the event.</param>
+            <remarks>
+            <para>
+            This method is called when the <see cref="T:ConControls.Controls.ConsoleControl"/>'s event handler for the <see cref="P:ConControls.Controls.ConsoleControl.Window"/>'s <see cref="E:ConControls.Controls.IConsoleWindow.MouseEvent"/> detects
+            that the mouse wheel has been used inside the control's area.
+            </para>
+            <para>
+            The <see cref="P:ConControls.Controls.MouseEventArgs.Position"/> property of the arguments <paramref name="e"/> contains the mouse position in client coordinates (relative to the control's client area).
+            </para>
+            </remarks>
         </member>
         <member name="T:ConControls.Controls.ConsoleWindow">
             <summary>
@@ -1759,10 +1889,7 @@
         <member name="M:ConControls.Controls.TextControl.OnCursorPositionChanged">
             <inheritdoc />
         </member>
-        <member name="M:ConControls.Controls.TextControl.OnKeyEvent(System.Object,ConControls.Controls.KeyEventArgs)">
-            <inheritdoc />
-        </member>
-        <member name="M:ConControls.Controls.TextControl.OnMouseEvent(System.Object,ConControls.Controls.MouseEventArgs)">
+        <member name="M:ConControls.Controls.TextControl.OnKeyEvent(ConControls.Controls.KeyEventArgs)">
             <inheritdoc />
         </member>
         <member name="M:ConControls.Controls.TextControl.OnCanFocusChanged">
