@@ -128,6 +128,8 @@
   <HelpKINode Title="ConControls.Controls.ProgressBar.ProgressOrientation enumeration" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
   <HelpKINode Title="ConControls.Controls.TextBlock class" Url="html/T_ConControls_Controls_TextBlock.htm" />
   <HelpKINode Title="ConControls.Controls.TextControl class" Url="html/T_ConControls_Controls_TextControl.htm" />
+  <HelpKINode Title="ConControls.Extensions namespace" Url="html/N_ConControls_Extensions.htm" />
+  <HelpKINode Title="ConControls.Extensions.CoordinateExtensions class" Url="html/T_ConControls_Extensions_CoordinateExtensions.htm" />
   <HelpKINode Title="ConControls.WindowsApi.Types namespace" Url="html/N_ConControls_WindowsApi_Types.htm" />
   <HelpKINode Title="ConControls.WindowsApi.Types.ControlKeyStates enumeration" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
   <HelpKINode Title="ConControls.WindowsApi.Types.MouseButtonStates enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
@@ -300,6 +302,13 @@
     <HelpKINode Title="IControlContainer.Controls Property " Url="html/P_ConControls_Controls_IControlContainer_Controls.htm" />
   </HelpKINode>
   <HelpKINode Title="Convert enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="CoordinateExtensions class">
+    <HelpKINode Title="CoordinateExtensions Class" Url="html/T_ConControls_Extensions_CoordinateExtensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_ConControls_Extensions_CoordinateExtensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CoordinateExtensions.Pt method" Url="html/M_ConControls_Extensions_CoordinateExtensions_Pt.htm" />
+  <HelpKINode Title="CoordinateExtensions.Rect method" Url="html/Overload_ConControls_Extensions_CoordinateExtensions_Rect.htm" />
+  <HelpKINode Title="CoordinateExtensions.Sz method" Url="html/M_ConControls_Extensions_CoordinateExtensions_Sz.htm" />
   <HelpKINode Title="CopyCharacters method" Url="html/M_ConControls_Controls_Drawing_IConsoleGraphics_CopyCharacters.htm" />
   <HelpKINode Title="Count property" Url="html/P_ConControls_Controls_ControlCollection_Count.htm" />
   <HelpKINode Title="CRSel enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
@@ -865,8 +874,10 @@
   <HelpKINode Title="ProgressBar.ProgressOrientation enumeration" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
   <HelpKINode Title="ProgressChar property" Url="html/P_ConControls_Controls_ProgressBar_ProgressChar.htm" />
   <HelpKINode Title="ProgressCharChanged event" Url="html/E_ConControls_Controls_ProgressBar_ProgressCharChanged.htm" />
+  <HelpKINode Title="Pt method" Url="html/M_ConControls_Extensions_CoordinateExtensions_Pt.htm" />
   <HelpKINode Title="Q enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="R enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
+  <HelpKINode Title="Rect method" Url="html/Overload_ConControls_Extensions_CoordinateExtensions_Rect.htm" />
   <HelpKINode Title="Remove method" Url="html/M_ConControls_Controls_ControlCollection_Remove.htm" />
   <HelpKINode Title="RemovedControls property" Url="html/P_ConControls_Controls_ControlCollectionChangedEventArgs_RemovedControls.htm" />
   <HelpKINode Title="RemoveRange method" Url="html/Overload_ConControls_Controls_ControlCollection_RemoveRange.htm" />
@@ -927,6 +938,7 @@
     <HelpKINode Title="ConsoleWindow.SynchronizationLock Property " Url="html/P_ConControls_Controls_ConsoleWindow_SynchronizationLock.htm" />
     <HelpKINode Title="IConsoleWindow.SynchronizationLock Property " Url="html/P_ConControls_Controls_IConsoleWindow_SynchronizationLock.htm" />
   </HelpKINode>
+  <HelpKINode Title="Sz method" Url="html/M_ConControls_Extensions_CoordinateExtensions_Sz.htm" />
   <HelpKINode Title="T enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="Tab enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="TabOrder property" Url="html/P_ConControls_Controls_ConsoleControl_TabOrder.htm" />

@@ -1,5 +1,17 @@
 # ConControls - Release notes
 
+### Version 0.1.1 (2020/06/16)
+
+Migrated `CoordinateExtensions` from the unit test project into the library.  
+These extensions enable consumers to easily create `Point`, `Size` or `Rectangle` instances
+from tuples:
+
+    var location = (5, 5).Pt();
+    var size = (30, 20).Sz();
+    var area = (location, size).Rect();
+
+Fixed [issue #15](https://github.com/ReneVogt/ConControls/issues/15).
+
 ### Version 0.1.0 (2020/06/15)
 
 The beta-time is over. There aren't any real beta testers anyway, and the nuget version has enough parts to
