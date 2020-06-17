@@ -22,7 +22,7 @@ namespace ConControls.Controls
     {
         readonly IConsoleTextController textController;
 
-        bool caretVisible, canFocus;
+        bool canFocus;
         Point scroll;
         Point caret;
 
@@ -34,6 +34,15 @@ namespace ConControls.Controls
         /// Raised when the <see cref="CanFocus"/> property has been changed.
         /// </summary>
         public event EventHandler? CanFocusChanged;
+
+        /// <summary>
+        /// Gets wether the caret is inside the currently displayed area.
+        /// </summary>
+        public virtual bool CaretVisible
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Gets or sets wether this <see cref="TextControl"/> is read-only or can be edited.
@@ -91,7 +100,7 @@ namespace ConControls.Controls
         /// <inheritdoc />
         public override bool CursorVisible
         {
-            get => base.CursorVisible && caretVisible;
+            get => base.CursorVisible && CaretVisible;
             set => base.CursorVisible = value;
         }
 
@@ -399,15 +408,15 @@ namespace ConControls.Controls
             if (clientArea.Contains(caretPosition))
             {
                 CursorPosition = caretPosition;
-                if (!caretVisible)
+                if (!CaretVisible)
                 {
-                    caretVisible = true;
+                    CaretVisible = true;
                     OnCursorVisibleChanged();
                 }
             }
-            else if (caretVisible)
+            else if (CaretVisible)
             {
-                caretVisible = false;
+                CaretVisible = false;
                 OnCursorVisibleChanged();
             }
         }

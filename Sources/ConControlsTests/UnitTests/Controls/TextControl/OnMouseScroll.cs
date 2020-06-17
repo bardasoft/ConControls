@@ -403,24 +403,39 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController
             {
-                BufferLineCountGet = () => 20
+                BufferLineCountGet = () => 20,
+                GetLineLengthInt32 = _ => 20,
+                MaxLineLengthGet = () => 20,
+                ValidateCaretPoint = p => p
             };
             using var sut = new StubbedTextControl(stubbedWindow, stubbedController)
             {
                 Area = (5, 5, 10, 10).Rect(),
                 Parent = stubbedWindow,
-                Scroll = (0, 5).Pt()
+                Scroll = (0, 5).Pt(),
+                Caret = (5, 6).Pt(),
+                CursorVisible = true,
+                CanFocus = true,
+                Focused = true
             };
 
             sut.Scroll.Should().Be((0, 5).Pt());
+            sut.Caret.Should().Be((5, 6).Pt());
+            sut.CursorVisible.Should().BeTrue();
+            sut.CursorPosition.Should().Be((5, 1).Pt());
             var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
             {
                 EventFlags = MouseEventFlags.Wheeled,
                 MousePosition = new COORD(5, 5),
                 Scroll = -360
             }));
+            bool changed = false;
+            sut.CursorVisibleChanged += (sender, e1) => changed = true;
             stubbedWindow.MouseEventEvent(stubbedWindow, e);
             sut.Scroll.Should().Be((0, 8).Pt());
+            sut.CursorVisible.Should().BeFalse();
+            changed.Should().BeTrue();
+            sut.Caret.Should().Be((5, 6).Pt());
             e.Handled.Should().BeTrue();
         }
         [TestMethod]

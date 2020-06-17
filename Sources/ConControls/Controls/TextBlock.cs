@@ -41,7 +41,7 @@ namespace ConControls.Controls
         /// <inheritdoc />
         public override bool CursorVisible
         {
-            get => base.CursorVisible || initCursorVisible;
+            get => (base.CursorVisible || initCursorVisible) && CaretVisible;
             set
             {
                 initCursorVisible = false;
