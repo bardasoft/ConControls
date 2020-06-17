@@ -2192,6 +2192,11 @@
             The different kinds of console mouse events.
             </summary>
         </member>
+        <member name="F:ConControls.WindowsApi.Types.MouseEventFlags.None">
+            <summary>
+            Place holder flag for simple mouse clicks.
+            </summary>
+        </member>
         <member name="F:ConControls.WindowsApi.Types.MouseEventFlags.Moved">
             <summary>
             A change in mouse position occurred.

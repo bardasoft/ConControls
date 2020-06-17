@@ -25,12 +25,13 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             var stubbedWindow = new StubbedWindow();
             var sut = new StubbedConsoleControl(stubbedWindow)
             {
-                Area = (10, 10, 10, 10).Rect()
+                Area = (10, 10, 10, 10).Rect(),
+                Parent = stubbedWindow
             };
             stubbedWindow.MouseEventEvent(stubbedWindow, new MouseEventArgs(new ConsoleMouseEventArgs(
                                                                                 new MOUSE_EVENT_RECORD
                                                                                 {
-                                                                                    EventFlags = MouseEventFlags.Moved,
+                                                                                    EventFlags = MouseEventFlags.None,
                                                                                     ButtonState = MouseButtonStates.LeftButtonPressed,
                                                                                     MousePosition = new COORD(12, 13)
                                                                                 })));

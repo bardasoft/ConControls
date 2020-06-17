@@ -186,6 +186,7 @@ namespace ConControlsTests.UnitTests
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnKeyEvent(e);
+            e.Handled = true;
             AddCount();
         }
         internal const string MethodOnMouseLeave = nameof(OnMouseLeave);
@@ -193,6 +194,7 @@ namespace ConControlsTests.UnitTests
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnMouseLeave(e);
+            e.Handled = true;
             AddCount();
         }
         internal const string MethodOnMouseEnter = nameof(OnMouseEnter);
@@ -200,6 +202,7 @@ namespace ConControlsTests.UnitTests
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnMouseEnter(e);
+            e.Handled = true;
             AddCount();
         }
         internal const string MethodOnMouseMove = nameof(OnMouseMove);
@@ -207,6 +210,7 @@ namespace ConControlsTests.UnitTests
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnMouseMove(e);
+            e.Handled = true;
             AddCount();
         }
         internal const string MethodOnMouseClick = nameof(OnMouseClick);
@@ -214,6 +218,7 @@ namespace ConControlsTests.UnitTests
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnMouseClick(e);
+            e.Handled = true;
             AddCount();
         }
         internal const string MethodOnMouseDoubleClick = nameof(OnMouseDoubleClick);
@@ -221,6 +226,7 @@ namespace ConControlsTests.UnitTests
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnMouseDoubleClick(e);
+            e.Handled = true;
             AddCount();
         }
         internal const string MethodOnMouseScroll = nameof(OnMouseScroll);
@@ -228,6 +234,7 @@ namespace ConControlsTests.UnitTests
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
             base.OnMouseScroll(e);
+            e.Handled = true;
             AddCount();
         }
 

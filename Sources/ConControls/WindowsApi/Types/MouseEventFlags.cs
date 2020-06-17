@@ -16,6 +16,10 @@ namespace ConControls.WindowsApi.Types
     public enum MouseEventFlags
     {
         /// <summary>
+        /// Place holder flag for simple mouse clicks.
+        /// </summary>
+        None = 0,
+        /// <summary>
         /// A change in mouse position occurred.
         /// </summary>
         Moved = 1 << 0,

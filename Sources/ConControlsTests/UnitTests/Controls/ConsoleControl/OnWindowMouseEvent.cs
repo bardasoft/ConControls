@@ -126,7 +126,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             }));
             stubbedWindow.MouseEventEvent(stubbedWindow, e);
             sut.Focused.Should().BeFalse();
-            e.Handled.Should().BeFalse();
+            e.Handled.Should().BeTrue($"{nameof(StubbedConsoleControl)} should always set handled flag");
         }
         [TestMethod]
         public void OnWindowMouseEvent_WrongButtton_Nothing()
@@ -151,7 +151,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             }));
             stubbedWindow.MouseEventEvent(stubbedWindow, e);
             sut.Focused.Should().BeFalse();
-            e.Handled.Should().BeFalse();
+            e.Handled.Should().BeTrue($"{nameof(StubbedConsoleControl)} should always set handled flag");
         }
         [TestMethod]
         public void OnWindowMouseEvent_Outside_Nothing()
