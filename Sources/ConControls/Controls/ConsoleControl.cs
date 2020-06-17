@@ -1139,6 +1139,7 @@ namespace ConControls.Controls
                         break;
                 }
 
+                e.Handled = args.Handled;
                 if (e.Handled || e.ButtonState != MouseButtonStates.LeftButtonPressed) return;
                 e.Handled = true;
                 Focused = true;

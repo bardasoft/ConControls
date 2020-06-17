@@ -7,6 +7,7 @@
 
 #nullable enable
 
+using System;
 using System.Drawing;
 using ConControls.ConsoleApi;
 using ConControls.Controls;
@@ -19,6 +20,14 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
 {
     public partial class TextControlTests
     {
+        [TestMethod]
+        public void OnMouseClick_Null_ArgumentNullException()
+        {
+            using var stubbedWindow = new StubbedWindow();
+            var stubbedController = new StubbedConsoleTextController();
+            using var sut = new StubbedTextControl(stubbedWindow, stubbedController);
+            sut.Invoking(s => s.CallOnMouseClick(null!)).Should().Throw<ArgumentNullException>();
+        }
         [TestMethod]
         public void OnMouseClick_LeftClickedOutsideArea_Notthing()
         {
@@ -68,7 +77,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 MousePosition = new COORD(10, 10),
                 ButtonState = MouseButtonStates.LeftButtonPressed
             })) {Handled = true};
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
+            sut.CallOnMouseClick(e);
             sut.Caret.Should().Be(Point.Empty);
             sut.Focused.Should().BeFalse();
         }
@@ -95,7 +104,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 MousePosition = new COORD(10, 10),
                 ButtonState = MouseButtonStates.LeftButtonPressed
             }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
+            sut.CallOnMouseClick(e);
             sut.Caret.Should().Be(Point.Empty);
             sut.Focused.Should().BeFalse();
             e.Handled.Should().BeFalse();
@@ -123,7 +132,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 MousePosition = new COORD(10, 10),
                 ButtonState = MouseButtonStates.LeftButtonPressed
             }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
+            sut.CallOnMouseClick(e);
             sut.Caret.Should().Be(Point.Empty);
             sut.Focused.Should().BeFalse();
             e.Handled.Should().BeFalse();
@@ -150,7 +159,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 MousePosition = new COORD(10, 10),
                 ButtonState = MouseButtonStates.RightButtonPressed
             }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
+            sut.CallOnMouseClick(e);
             sut.Caret.Should().Be(Point.Empty);
             sut.Focused.Should().BeFalse();
             e.Handled.Should().BeFalse();

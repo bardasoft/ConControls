@@ -7,6 +7,7 @@
 
 #nullable enable
 
+using System;
 using System.Drawing;
 using ConControls.ConsoleApi;
 using ConControls.Controls;
@@ -20,6 +21,14 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
 {
     public partial class TextControlTests
     {
+        [TestMethod]
+        public void OnMouseScroll_Null_ArgumentNullException()
+        {
+            using var stubbedWindow = new StubbedWindow();
+            var stubbedController = new StubbedConsoleTextController();
+            using var sut = new StubbedTextControl(stubbedWindow, stubbedController);
+            sut.Invoking(s => s.CallOnMouseScroll(null!)).Should().Throw<ArgumentNullException>();
+        }
         [TestMethod]
         public void OnMouseScroll_HorizontalScrollOutsideArea_NotScrolled()
         {
@@ -69,7 +78,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 Scroll = 120
             }))
             { Handled = true };
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
+            sut.CallOnMouseScroll(e);
             sut.Scroll.Should().Be(Point.Empty);
         }
         [TestMethod]
@@ -95,7 +104,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 MousePosition = new COORD(5, 5),
                 Scroll = 120
             }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
+            sut.CallOnMouseScroll(e);
             sut.Scroll.Should().Be(Point.Empty);
             e.Handled.Should().BeFalse();
         }
@@ -122,7 +131,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 MousePosition = new COORD(5, 5),
                 Scroll = 120
             }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
+            sut.CallOnMouseScroll(e);
             sut.Scroll.Should().Be(Point.Empty);
             e.Handled.Should().BeFalse();
         }
