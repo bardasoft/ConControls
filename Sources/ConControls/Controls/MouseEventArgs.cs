@@ -52,5 +52,13 @@ namespace ConControls.Controls
             Position = e.MousePosition;
             Scroll = e.Scroll;
         }
+        internal MouseEventArgs(MouseEventArgs e, Point position)
+        {
+            ControlKeys = e.ControlKeys;
+            ButtonState = e.ButtonState;
+            Kind = e.Kind;
+            Position = position;
+            Scroll = e.Scroll;
+        }
     }
 }

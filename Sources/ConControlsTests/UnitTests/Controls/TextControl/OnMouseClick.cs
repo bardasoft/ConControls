@@ -7,6 +7,7 @@
 
 #nullable enable
 
+using System;
 using System.Drawing;
 using ConControls.ConsoleApi;
 using ConControls.Controls;
@@ -20,59 +21,15 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
     public partial class TextControlTests
     {
         [TestMethod]
-        public void MouseEvents_HorizontalScrollOutsideArea_NotScrolled()
+        public void OnMouseClick_Null_ArgumentNullException()
         {
             using var stubbedWindow = new StubbedWindow();
-            var stubbedController = new StubbedConsoleTextController
-            {
-                BufferLineCountGet = () => 20,
-                MaxLineLengthGet = () => 20,
-                WidthGet = () => 20,
-                GetLineLengthInt32 = l => 20
-            };
-            using var sut = new StubbedTextControl(stubbedWindow, stubbedController)
-            {
-                Area = (5, 5, 10, 10).Rect(),
-                Parent = stubbedWindow
-            };
-            var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
-            {
-                EventFlags = MouseEventFlags.WheeledHorizontally,
-                MousePosition = new COORD(4, 4),
-                Scroll = 120
-            }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
-            sut.Scroll.Should().Be(Point.Empty);
-            e.Handled.Should().BeFalse();
+            var stubbedController = new StubbedConsoleTextController();
+            using var sut = new StubbedTextControl(stubbedWindow, stubbedController);
+            sut.Invoking(s => s.CallOnMouseClick(null!)).Should().Throw<ArgumentNullException>();
         }
         [TestMethod]
-        public void MouseEvents_HorizontalScrollHandled_NotScrolled()
-        {
-            using var stubbedWindow = new StubbedWindow();
-            var stubbedController = new StubbedConsoleTextController
-            {
-                BufferLineCountGet = () => 20,
-                MaxLineLengthGet = () => 20,
-                WidthGet = () => 20,
-                GetLineLengthInt32 = l => 20
-            };
-            using var sut = new StubbedTextControl(stubbedWindow, stubbedController)
-            {
-                Area = (5, 5, 10, 10).Rect(),
-                Parent = stubbedWindow
-            };
-            var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
-                {
-                    EventFlags = MouseEventFlags.WheeledHorizontally,
-                    MousePosition = new COORD(5, 5),
-                    Scroll = 120
-                }))
-                {Handled = true};
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
-            sut.Scroll.Should().Be(Point.Empty);
-        }
-        [TestMethod]
-        public void MouseEvents_HorizontalScrollDisabled_NotScrolled()
+        public void OnMouseClick_LeftClickedOutsideArea_Notthing()
         {
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController
@@ -86,20 +43,74 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             {
                 Area = (5, 5, 10, 10).Rect(),
                 Parent = stubbedWindow,
+                Scroll = (3, 3).Pt()
+            };
+            var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
+            {
+                MousePosition = new COORD(4, 4),
+                ButtonState = MouseButtonStates.LeftButtonPressed
+            }));
+            stubbedWindow.MouseEventEvent(stubbedWindow, e);
+            sut.Caret.Should().Be(Point.Empty);
+            sut.Focused.Should().BeFalse();
+            e.Handled.Should().BeFalse();
+        }
+        [TestMethod]
+        public void OnMouseClick_LeftClickedHandled_Notthing()
+        {
+            using var stubbedWindow = new StubbedWindow();
+            var stubbedController = new StubbedConsoleTextController
+            {
+                BufferLineCountGet = () => 20,
+                MaxLineLengthGet = () => 20,
+                WidthGet = () => 20,
+                GetLineLengthInt32 = l => 20
+            };
+            using var sut = new StubbedTextControl(stubbedWindow, stubbedController)
+            {
+                Area = (5, 5, 10, 10).Rect(),
+                Parent = stubbedWindow,
+                Scroll = (3, 3).Pt()
+            };
+            var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
+            {
+                MousePosition = new COORD(10, 10),
+                ButtonState = MouseButtonStates.LeftButtonPressed
+            })) {Handled = true};
+            sut.CallOnMouseClick(e);
+            sut.Caret.Should().Be(Point.Empty);
+            sut.Focused.Should().BeFalse();
+        }
+        [TestMethod]
+        public void OnMouseClick_LeftClickedDisabled_Nothing()
+        {
+            using var stubbedWindow = new StubbedWindow();
+            var stubbedController = new StubbedConsoleTextController
+            {
+                BufferLineCountGet = () => 20,
+                MaxLineLengthGet = () => 20,
+                WidthGet = () => 20,
+                GetLineLengthInt32 = l => 20
+            };
+            using var sut = new StubbedTextControl(stubbedWindow, stubbedController)
+            {
+                Area = (5, 5, 10, 10).Rect(),
+                Parent = stubbedWindow,
+                Scroll = (3, 3).Pt(),
                 Enabled = false
             };
             var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
             {
-                EventFlags = MouseEventFlags.WheeledHorizontally,
-                MousePosition = new COORD(5, 5),
-                Scroll = 120
+                MousePosition = new COORD(10, 10),
+                ButtonState = MouseButtonStates.LeftButtonPressed
             }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
-            sut.Scroll.Should().Be(Point.Empty);
+            sut.CallOnMouseClick(e);
+            sut.Caret.Should().Be(Point.Empty);
+            sut.Focused.Should().BeFalse();
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void MouseEvents_HorizontalScrollInvisible_NotScrolled()
+        public void OnMouseClick_LeftClickedInvisible_Nothing()
         {
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController
@@ -113,20 +124,21 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             {
                 Area = (5, 5, 10, 10).Rect(),
                 Parent = stubbedWindow,
+                Scroll = (3, 3).Pt(),
                 Visible = false
             };
             var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
             {
-                EventFlags = MouseEventFlags.WheeledHorizontally,
-                MousePosition = new COORD(5, 5),
-                Scroll = 120
+                MousePosition = new COORD(10, 10),
+                ButtonState = MouseButtonStates.LeftButtonPressed
             }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
-            sut.Scroll.Should().Be(Point.Empty);
+            sut.CallOnMouseClick(e);
+            sut.Caret.Should().Be(Point.Empty);
+            sut.Focused.Should().BeFalse();
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void MouseEvents_HorizontalScrollTooLeft_Left()
+        public void OnMouseClick_RightClicked_Nothing()
         {
             using var stubbedWindow = new StubbedWindow();
             var stubbedController = new StubbedConsoleTextController
@@ -140,24 +152,27 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             {
                 Area = (5, 5, 10, 10).Rect(),
                 Parent = stubbedWindow,
-                Scroll = (2, 0).Pt()
+                Scroll = (3, 3).Pt()
             };
-
-            sut.Scroll.Should().Be((2, 0).Pt());
             var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
             {
-                EventFlags = MouseEventFlags.WheeledHorizontally,
-                MousePosition = new COORD(5, 5),
-                Scroll = 480
+                MousePosition = new COORD(10, 10),
+                ButtonState = MouseButtonStates.RightButtonPressed
             }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
-            sut.Scroll.Should().Be(Point.Empty);
-            e.Handled.Should().BeTrue();
+            sut.CallOnMouseClick(e);
+            sut.Caret.Should().Be(Point.Empty);
+            sut.Focused.Should().BeFalse();
+            e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void MouseEvents_HorizontalScrollLeft_ScrolledLeft()
+        public void OnMouseClick_LeftClicked_FocusedAndCaretSet()
         {
-            using var stubbedWindow = new StubbedWindow();
+            ConControls.Controls.ConsoleControl? focused = null;
+            using var stubbedWindow = new StubbedWindow
+            {
+                FocusedControlGet = () => focused,
+                FocusedControlSetConsoleControl = c => focused = c
+            };
             var stubbedController = new StubbedConsoleTextController
             {
                 BufferLineCountGet = () => 20,
@@ -165,80 +180,23 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
                 WidthGet = () => 20,
                 GetLineLengthInt32 = l => 20
             };
-            using var sut = new StubbedTextControl(stubbedWindow, stubbedController)
+            using var sut = new ConControls.Controls.TextBlock(stubbedWindow, stubbedController)
             {
                 Area = (5, 5, 10, 10).Rect(),
                 Parent = stubbedWindow,
-                Scroll = (5, 0).Pt()
+                Scroll = (3, 2).Pt()
             };
-
-            sut.Scroll.Should().Be((5, 0).Pt());
             var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
             {
-                EventFlags = MouseEventFlags.WheeledHorizontally,
-                MousePosition = new COORD(5, 5),
-                Scroll = 480
+                MousePosition = new COORD(10, 10),
+                ButtonState = MouseButtonStates.LeftButtonPressed
             }));
+            sut.Focused.Should().BeFalse();
+            focused.Should().BeNull();
             stubbedWindow.MouseEventEvent(stubbedWindow, e);
-            sut.Scroll.Should().Be((1, 0).Pt());
-            e.Handled.Should().BeTrue();
-        }
-        [TestMethod]
-        public void MouseEvents_HorizontalScrollRight_ScrolledRight()
-        {
-            using var stubbedWindow = new StubbedWindow();
-            var stubbedController = new StubbedConsoleTextController
-            {
-                BufferLineCountGet = () => 20,
-                MaxLineLengthGet = () => 20,
-                WidthGet = () => 20,
-                GetLineLengthInt32 = l => 20
-            };
-            using var sut = new StubbedTextControl(stubbedWindow, stubbedController)
-            {
-                Area = (5, 5, 10, 10).Rect(),
-                Parent = stubbedWindow,
-                Scroll = (5, 0).Pt()
-            };
-
-            sut.Scroll.Should().Be((5, 0).Pt());
-            var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
-            {
-                EventFlags = MouseEventFlags.WheeledHorizontally,
-                MousePosition = new COORD(5, 5),
-                Scroll = -360
-            }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
-            sut.Scroll.Should().Be((8, 0).Pt());
-            e.Handled.Should().BeTrue();
-        }
-        [TestMethod]
-        public void MouseEvents_HorizontalScrollTooRight_Right()
-        {
-            using var stubbedWindow = new StubbedWindow();
-            var stubbedController = new StubbedConsoleTextController
-            {
-                BufferLineCountGet = () => 20,
-                MaxLineLengthGet = () => 25,
-                WidthGet = () => 20,
-                GetLineLengthInt32 = l => 20
-            };
-            using var sut = new StubbedTextControl(stubbedWindow, stubbedController)
-            {
-                Area = (5, 5, 10, 10).Rect(),
-                Parent = stubbedWindow,
-                Scroll = (22, 0).Pt()
-            };
-
-            sut.Scroll.Should().Be((22, 0).Pt());
-            var e = new MouseEventArgs(new ConsoleMouseEventArgs(new MOUSE_EVENT_RECORD
-            {
-                EventFlags = MouseEventFlags.WheeledHorizontally,
-                MousePosition = new COORD(5, 5),
-                Scroll = -480
-            }));
-            stubbedWindow.MouseEventEvent(stubbedWindow, e);
-            sut.Scroll.Should().Be((24, 0).Pt());
+            sut.Caret.Should().Be(new Point(8, 7));
+            sut.Focused.Should().BeTrue();
+            focused.Should().Be(sut);
             e.Handled.Should().BeTrue();
         }
     }

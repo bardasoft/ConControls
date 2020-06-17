@@ -28,5 +28,7 @@ namespace ConControlsTests.UnitTests
         }
 
         internal void CallDrawClientArea(IConsoleGraphics? graphics = null) => DrawClientArea(graphics!);
+        internal void CallOnMouseClick(MouseEventArgs e) => OnMouseClick(e);
+        internal void CallOnMouseScroll(MouseEventArgs e) => OnMouseScroll(e);
     }
 }

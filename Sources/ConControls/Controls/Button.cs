@@ -102,38 +102,31 @@ namespace ConControls.Controls {
         }
 
         /// <inheritdoc />
-        protected override void OnKeyEvent(object sender, KeyEventArgs e)
+        protected override void OnKeyEvent(KeyEventArgs e)
         {
-            _ = e ?? throw new ArgumentNullException(nameof(e));
-            if (e.Handled || !(Focused && Visible && Enabled && e.KeyDown))
-            {
-                base.OnKeyEvent(sender, e);
+            base.OnKeyEvent(e);
+            if (e.Handled || 
+                !e.KeyDown ||
+                e.ControlKeys.WithoutSwitches() != ControlKeyStates.None ||
+                e.VirtualKey != VirtualKey.Return && e.VirtualKey != VirtualKey.Space)
                 return;
-            }
 
-            if (e.ControlKeys.WithoutSwitches() == ControlKeyStates.None && (e.VirtualKey == VirtualKey.Return || e.VirtualKey == VirtualKey.Space))
-            {
-                PerformClick();
-                e.Handled = true;
-            }
-            base.OnKeyEvent(sender, e);
+            PerformClick();
+            e.Handled = true;
         }
 
         /// <inheritdoc />
-        protected override void OnMouseEvent(object sender, MouseEventArgs e)
+        protected override void OnMouseClick(MouseEventArgs e)
         {
-            _ = e ?? throw new ArgumentNullException(paramName: nameof(e));
-            var clientPoint = Parent?.PointToClient(e.Position);
-            if (e.Handled || !(clientPoint.HasValue && Area.Contains(clientPoint.Value)))
-            {
-                base.OnMouseEvent(sender, e);
+            base.OnMouseClick(e);
+
+            // When this class is no longer sealed,
+            // we need to check for Enabled and Visible properties.
+            if (e.ButtonState != MouseButtonStates.LeftButtonPressed)
                 return;
-            }
-
-            if (e.ButtonState == MouseButtonStates.LeftButtonPressed)
-                PerformClick();
-
-            base.OnMouseEvent(sender, e);
+            
+            e.Handled = true;
+            PerformClick();
         }
     }
 }

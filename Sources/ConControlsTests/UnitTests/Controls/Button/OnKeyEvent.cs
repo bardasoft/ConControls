@@ -5,7 +5,6 @@
  *
  */
 
-using System;
 using ConControls.ConsoleApi;
 using ConControls.Controls;
 using ConControls.Extensions;
@@ -21,14 +20,7 @@ namespace ConControlsTests.UnitTests.Controls.Button
     public partial class ButtonTests
     {
         [TestMethod]
-        public void KeyEvents_EventArgsNull_ArgumentNullException()
-        {
-            using var stubbedWindow = new StubbedWindow();
-            using var sut = new ConControls.Controls.Button(stubbedWindow);
-            sut.Invoking(s => stubbedWindow.KeyEventEvent(stubbedWindow, null!)).Should().Throw<ArgumentNullException>();
-        }
-        [TestMethod]
-        public void KeyEvents_Handled_Notthing()
+        public void OnKeyEvent_Handled_Notthing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -55,7 +47,7 @@ namespace ConControlsTests.UnitTests.Controls.Button
             clicked.Should().BeFalse();
         }
         [TestMethod]
-        public void KeyEvents_NotFocused_Notthing()
+        public void OnKeyEvent_NotFocused_Notthing()
         {
             using var stubbedWindow = new StubbedWindow
             {
@@ -80,7 +72,7 @@ namespace ConControlsTests.UnitTests.Controls.Button
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void KeyEvents_Disabled_Notthing()
+        public void OnKeyEvent_Disabled_Notthing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -109,7 +101,7 @@ namespace ConControlsTests.UnitTests.Controls.Button
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void KeyEvents_Invisible_Notthing()
+        public void OnKeyEvent_Invisible_Notthing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -138,7 +130,7 @@ namespace ConControlsTests.UnitTests.Controls.Button
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void KeyEvents_KeyUp_Notthing()
+        public void OnKeyEvent_KeyUp_Notthing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -166,7 +158,7 @@ namespace ConControlsTests.UnitTests.Controls.Button
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void KeyEvents_ControlKeys_Notthing()
+        public void OnKeyEvent_ControlKeys_Notthing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -194,7 +186,7 @@ namespace ConControlsTests.UnitTests.Controls.Button
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void KeyEvents_WrongKey_Notthing()
+        public void OnKeyEvent_WrongKey_Notthing()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -222,7 +214,7 @@ namespace ConControlsTests.UnitTests.Controls.Button
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void KeyEvents_ReturnKey_Clicked()
+        public void OnKeyEvent_ReturnKey_Clicked()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -250,7 +242,7 @@ namespace ConControlsTests.UnitTests.Controls.Button
             e.Handled.Should().BeTrue();
         }
         [TestMethod]
-        public void KeyEvents_SpaceKey_Clicked()
+        public void OnKeyEvent_SpaceKey_Clicked()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow

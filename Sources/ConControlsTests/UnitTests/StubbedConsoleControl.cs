@@ -182,17 +182,59 @@ namespace ConControlsTests.UnitTests
             AddCount();
         }
         internal const string MethodOnKeyEvent = nameof(OnKeyEvent);
-        protected override void OnKeyEvent(object sender, KeyEventArgs e)
+        protected override void OnKeyEvent(KeyEventArgs e)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
-            base.OnKeyEvent(sender, e);
+            base.OnKeyEvent(e);
+            e.Handled = true;
             AddCount();
         }
-        internal const string MethodOnMouseEvent = nameof(OnMouseEvent);
-        protected override void OnMouseEvent(object sender, MouseEventArgs e)
+        internal const string MethodOnMouseLeave = nameof(OnMouseLeave);
+        protected override void OnMouseLeave(MouseEventArgs e)
         {
             Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
-            base.OnMouseEvent(sender, e);
+            base.OnMouseLeave(e);
+            e.Handled = true;
+            AddCount();
+        }
+        internal const string MethodOnMouseEnter = nameof(OnMouseEnter);
+        protected override void OnMouseEnter(MouseEventArgs e)
+        {
+            Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
+            base.OnMouseEnter(e);
+            e.Handled = true;
+            AddCount();
+        }
+        internal const string MethodOnMouseMove = nameof(OnMouseMove);
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
+            base.OnMouseMove(e);
+            e.Handled = true;
+            AddCount();
+        }
+        internal const string MethodOnMouseClick = nameof(OnMouseClick);
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
+            base.OnMouseClick(e);
+            e.Handled = true;
+            AddCount();
+        }
+        internal const string MethodOnMouseDoubleClick = nameof(OnMouseDoubleClick);
+        protected override void OnMouseDoubleClick(MouseEventArgs e)
+        {
+            Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
+            base.OnMouseDoubleClick(e);
+            e.Handled = true;
+            AddCount();
+        }
+        internal const string MethodOnMouseScroll = nameof(OnMouseScroll);
+        protected override void OnMouseScroll(MouseEventArgs e)
+        {
+            Monitor.IsEntered(Window.SynchronizationLock).Should().BeTrue();
+            base.OnMouseScroll(e);
+            e.Handled = true;
             AddCount();
         }
 

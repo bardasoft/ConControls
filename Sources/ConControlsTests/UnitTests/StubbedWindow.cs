@@ -18,6 +18,7 @@ namespace ConControlsTests.UnitTests
     [ExcludeFromCodeCoverage]
     sealed class StubbedWindow : StubIConsoleWindow
     {
+        public ConsoleControl? Focused { get; set; }
         public StubIConsoleGraphics Graphics { get; } = new StubIConsoleGraphics();
         public ControlCollection Controls { get; }
 
@@ -37,6 +38,8 @@ namespace ConControlsTests.UnitTests
             DefaultBackgroundColorGet = () => ConsoleColor.Black;
             DefaultBorderColorGet = () => ConsoleColor.Yellow;
             DefaultCursorSizeGet = () => 1;
+            FocusedControlGet = () => Focused;
+            FocusedControlSetConsoleControl = c => Focused = c;
         }
     }
 }
