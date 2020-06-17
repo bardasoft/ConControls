@@ -1112,7 +1112,11 @@ namespace ConControls.Controls
                 if (!new Rectangle(Point.Empty, clientArea.Size).Contains(clientPoint))
                 {
                     if (mouseInside)
+                    {
                         OnMouseLeave(args);
+                        e.Handled = args.Handled;
+                    }
+
                     mouseInside = false;
                     return;
                 }
