@@ -1853,8 +1853,9 @@
         </member>
         <member name="P:ConControls.Controls.TextControl.WrapMode">
             <summary>
-            Gets or sets wether lines are wrapped or not.
+            Gets or sets wether and how lines are wrapped.
             </summary>
+            <value>One of the <see cref="T:ConControls.Controls.Text.WrapMode"/> enuemration values.</value>
         </member>
         <member name="M:ConControls.Controls.TextControl.#ctor(ConControls.Controls.IConsoleWindow)">
             <inheritdoc />
@@ -1929,6 +1930,11 @@
         </member>
         <member name="P:ConControls.Controls.Text.ConsoleTextController.Width">
             <inheritdoc />
+        </member>
+        <member name="T:ConControls.Controls.Text.NamespaceDoc">
+            <summary>
+            This namespace provides specific types for use with <see cref="T:ConControls.Controls.TextControl"/> and derived classes.
+            </summary>
         </member>
         <member name="T:ConControls.Controls.Text.WrapMode">
             <summary>

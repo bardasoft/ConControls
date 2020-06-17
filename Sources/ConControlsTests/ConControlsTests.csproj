@@ -195,7 +195,7 @@
     <Compile Include="UnitTests\Controls\TextControl\TabStop.cs" />
     <Compile Include="UnitTests\Controls\TextControl\Clear.cs" />
     <Compile Include="UnitTests\Controls\TextControl\CursorPosition.cs" />
-    <Compile Include="UnitTests\Controls\TextControl\Wrap.cs" />
+    <Compile Include="UnitTests\Controls\TextControl\WrapMode.cs" />
     <Compile Include="UnitTests\Controls\TextControl\BorderStyleChanged.cs" />
     <Compile Include="UnitTests\Controls\TextControl\AreaChanged.cs" />
     <Compile Include="UnitTests\Controls\TextControl\OnMouseScroll.cs" />
@@ -212,7 +212,7 @@
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MoveCaretPageUp.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\MoveCaret.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Width.cs" />
-    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Wrap.cs" />
+    <Compile Include="UnitTests\Controls\Text\ConsoleTextController\WrapMode.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Text.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\Clear.cs" />
     <Compile Include="UnitTests\Controls\Text\ConsoleTextController\ValidateCaret.cs" />

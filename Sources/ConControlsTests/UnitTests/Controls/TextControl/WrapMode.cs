@@ -16,7 +16,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
     public partial class TextControlTests
     {
         [TestMethod]
-        public void Wrap_GetControllers_Value()
+        public void WrapMode_GetControllers_Value()
         {
             using var stubbedWindow = new StubbedWindow();
             WrapMode wrap = WrapMode.NoWrap;
@@ -31,7 +31,7 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             sut.WrapMode.Should().Be(WrapMode.SimpleWrap);
         }
         [TestMethod]
-        public void Wrap_SetControllers_Value()
+        public void WrapMode_SetControllers_Value()
         {
             using var stubbedWindow = new StubbedWindow();
             WrapMode wrap = WrapMode.NoWrap;

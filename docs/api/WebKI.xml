@@ -126,6 +126,8 @@
   <HelpKINode Title="ConControls.Controls.Panel class" Url="html/T_ConControls_Controls_Panel.htm" />
   <HelpKINode Title="ConControls.Controls.ProgressBar class" Url="html/T_ConControls_Controls_ProgressBar.htm" />
   <HelpKINode Title="ConControls.Controls.ProgressBar.ProgressOrientation enumeration" Url="html/T_ConControls_Controls_ProgressBar_ProgressOrientation.htm" />
+  <HelpKINode Title="ConControls.Controls.Text namespace" Url="html/N_ConControls_Controls_Text.htm" />
+  <HelpKINode Title="ConControls.Controls.Text.WrapMode enumeration" Url="html/T_ConControls_Controls_Text_WrapMode.htm" />
   <HelpKINode Title="ConControls.Controls.TextBlock class" Url="html/T_ConControls_Controls_TextBlock.htm" />
   <HelpKINode Title="ConControls.Controls.TextControl class" Url="html/T_ConControls_Controls_TextControl.htm" />
   <HelpKINode Title="ConControls.Extensions namespace" Url="html/N_ConControls_Extensions.htm" />
@@ -183,6 +185,12 @@
   <HelpKINode Title="ConsoleControl.GetClientArea method" Url="html/M_ConControls_Controls_ConsoleControl_GetClientArea.htm" />
   <HelpKINode Title="ConsoleControl.Invalidate method" Url="html/M_ConControls_Controls_ConsoleControl_Invalidate.htm" />
   <HelpKINode Title="ConsoleControl.Location property" Url="html/P_ConControls_Controls_ConsoleControl_Location.htm" />
+  <HelpKINode Title="ConsoleControl.MouseClick event" Url="html/E_ConControls_Controls_ConsoleControl_MouseClick.htm" />
+  <HelpKINode Title="ConsoleControl.MouseDoubleClick event" Url="html/E_ConControls_Controls_ConsoleControl_MouseDoubleClick.htm" />
+  <HelpKINode Title="ConsoleControl.MouseEnter event" Url="html/E_ConControls_Controls_ConsoleControl_MouseEnter.htm" />
+  <HelpKINode Title="ConsoleControl.MouseLeave event" Url="html/E_ConControls_Controls_ConsoleControl_MouseLeave.htm" />
+  <HelpKINode Title="ConsoleControl.MouseMove event" Url="html/E_ConControls_Controls_ConsoleControl_MouseMove.htm" />
+  <HelpKINode Title="ConsoleControl.MouseScroll event" Url="html/E_ConControls_Controls_ConsoleControl_MouseScroll.htm" />
   <HelpKINode Title="ConsoleControl.Name property" Url="html/P_ConControls_Controls_ConsoleControl_Name.htm" />
   <HelpKINode Title="ConsoleControl.NameChanged event" Url="html/E_ConControls_Controls_ConsoleControl_NameChanged.htm" />
   <HelpKINode Title="ConsoleControl.OnAreaChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnAreaChanged.htm" />
@@ -196,7 +204,12 @@
   <HelpKINode Title="ConsoleControl.OnFocusedChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnFocusedChanged.htm" />
   <HelpKINode Title="ConsoleControl.OnForegroundColorChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnForegroundColorChanged.htm" />
   <HelpKINode Title="ConsoleControl.OnKeyEvent method" Url="html/M_ConControls_Controls_ConsoleControl_OnKeyEvent.htm" />
-  <HelpKINode Title="ConsoleControl.OnMouseEvent method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseEvent.htm" />
+  <HelpKINode Title="ConsoleControl.OnMouseClick method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseClick.htm" />
+  <HelpKINode Title="ConsoleControl.OnMouseDoubleClick method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseDoubleClick.htm" />
+  <HelpKINode Title="ConsoleControl.OnMouseEnter method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseEnter.htm" />
+  <HelpKINode Title="ConsoleControl.OnMouseLeave method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseLeave.htm" />
+  <HelpKINode Title="ConsoleControl.OnMouseMove method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseMove.htm" />
+  <HelpKINode Title="ConsoleControl.OnMouseScroll method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseScroll.htm" />
   <HelpKINode Title="ConsoleControl.OnNameChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnNameChanged.htm" />
   <HelpKINode Title="ConsoleControl.OnParentChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnParentChanged.htm" />
   <HelpKINode Title="ConsoleControl.OnVisibleChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnVisibleChanged.htm" />
@@ -707,6 +720,9 @@
   <HelpKINode Title="MiddleButton enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="ModeChange enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="MouseButtonStates enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
+  <HelpKINode Title="MouseClick event" Url="html/E_ConControls_Controls_ConsoleControl_MouseClick.htm" />
+  <HelpKINode Title="MouseDoubleClick event" Url="html/E_ConControls_Controls_ConsoleControl_MouseDoubleClick.htm" />
+  <HelpKINode Title="MouseEnter event" Url="html/E_ConControls_Controls_ConsoleControl_MouseEnter.htm" />
   <HelpKINode Title="MouseEvent event">
     <HelpKINode Title="ConsoleWindow.MouseEvent Event" Url="html/E_ConControls_Controls_ConsoleWindow_MouseEvent.htm" />
     <HelpKINode Title="IConsoleWindow.MouseEvent Event" Url="html/E_ConControls_Controls_IConsoleWindow_MouseEvent.htm" />
@@ -722,6 +738,9 @@
   <HelpKINode Title="MouseEventArgs.Position property" Url="html/P_ConControls_Controls_MouseEventArgs_Position.htm" />
   <HelpKINode Title="MouseEventArgs.Scroll property" Url="html/P_ConControls_Controls_MouseEventArgs_Scroll.htm" />
   <HelpKINode Title="MouseEventFlags enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseEventFlags.htm" />
+  <HelpKINode Title="MouseLeave event" Url="html/E_ConControls_Controls_ConsoleControl_MouseLeave.htm" />
+  <HelpKINode Title="MouseMove event" Url="html/E_ConControls_Controls_ConsoleControl_MouseMove.htm" />
+  <HelpKINode Title="MouseScroll event" Url="html/E_ConControls_Controls_ConsoleControl_MouseScroll.htm" />
   <HelpKINode Title="Moved enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseEventFlags.htm" />
   <HelpKINode Title="Multiply enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="N enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
@@ -743,8 +762,10 @@
     <HelpKINode Title="BorderStyle Enumeration" Url="html/T_ConControls_Controls_BorderStyle.htm" />
     <HelpKINode Title="ControlKeyStates Enumeration" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
     <HelpKINode Title="MouseButtonStates Enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
+    <HelpKINode Title="MouseEventFlags Enumeration" Url="html/T_ConControls_WindowsApi_Types_MouseEventFlags.htm" />
     <HelpKINode Title="VirtualKey Enumeration" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   </HelpKINode>
+  <HelpKINode Title="NoWrap enumeration member" Url="html/T_ConControls_Controls_Text_WrapMode.htm" />
   <HelpKINode Title="NumLock enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="NUMLOCK_ON enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
   <HelpKINode Title="Numpad0 enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
@@ -810,9 +831,17 @@
     <HelpKINode Title="ConsoleControl.OnKeyEvent Method " Url="html/M_ConControls_Controls_ConsoleControl_OnKeyEvent.htm" />
     <HelpKINode Title="TextControl.OnKeyEvent Method " Url="html/M_ConControls_Controls_TextControl_OnKeyEvent.htm" />
   </HelpKINode>
-  <HelpKINode Title="OnMouseEvent method">
-    <HelpKINode Title="ConsoleControl.OnMouseEvent Method " Url="html/M_ConControls_Controls_ConsoleControl_OnMouseEvent.htm" />
-    <HelpKINode Title="TextControl.OnMouseEvent Method " Url="html/M_ConControls_Controls_TextControl_OnMouseEvent.htm" />
+  <HelpKINode Title="OnMouseClick method">
+    <HelpKINode Title="ConsoleControl.OnMouseClick Method " Url="html/M_ConControls_Controls_ConsoleControl_OnMouseClick.htm" />
+    <HelpKINode Title="TextControl.OnMouseClick Method " Url="html/M_ConControls_Controls_TextControl_OnMouseClick.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OnMouseDoubleClick method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseDoubleClick.htm" />
+  <HelpKINode Title="OnMouseEnter method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseEnter.htm" />
+  <HelpKINode Title="OnMouseLeave method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseLeave.htm" />
+  <HelpKINode Title="OnMouseMove method" Url="html/M_ConControls_Controls_ConsoleControl_OnMouseMove.htm" />
+  <HelpKINode Title="OnMouseScroll method">
+    <HelpKINode Title="ConsoleControl.OnMouseScroll Method " Url="html/M_ConControls_Controls_ConsoleControl_OnMouseScroll.htm" />
+    <HelpKINode Title="TextControl.OnMouseScroll Method " Url="html/M_ConControls_Controls_TextControl_OnMouseScroll.htm" />
   </HelpKINode>
   <HelpKINode Title="OnNameChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnNameChanged.htm" />
   <HelpKINode Title="OnParentChanged method" Url="html/M_ConControls_Controls_ConsoleControl_OnParentChanged.htm" />
@@ -907,6 +936,7 @@
   <HelpKINode Title="Shift enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="Shift property" Url="html/P_ConControls_Controls_KeyCombination_Shift.htm" />
   <HelpKINode Title="SHIFT_PRESSED enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
+  <HelpKINode Title="SimpleWrap enumeration member" Url="html/T_ConControls_Controls_Text_WrapMode.htm" />
   <HelpKINode Title="SingleLined enumeration member" Url="html/T_ConControls_Controls_BorderStyle.htm" />
   <HelpKINode Title="SingleLinedFrameCharSet class">
     <HelpKINode Title="SingleLinedFrameCharSet Class" Url="html/T_ConControls_Controls_Drawing_SingleLinedFrameCharSet.htm" />
@@ -983,13 +1013,14 @@
   <HelpKINode Title="TextControl.OnCanFocusChanged method" Url="html/M_ConControls_Controls_TextControl_OnCanFocusChanged.htm" />
   <HelpKINode Title="TextControl.OnCursorPositionChanged method" Url="html/M_ConControls_Controls_TextControl_OnCursorPositionChanged.htm" />
   <HelpKINode Title="TextControl.OnKeyEvent method" Url="html/M_ConControls_Controls_TextControl_OnKeyEvent.htm" />
-  <HelpKINode Title="TextControl.OnMouseEvent method" Url="html/M_ConControls_Controls_TextControl_OnMouseEvent.htm" />
+  <HelpKINode Title="TextControl.OnMouseClick method" Url="html/M_ConControls_Controls_TextControl_OnMouseClick.htm" />
+  <HelpKINode Title="TextControl.OnMouseScroll method" Url="html/M_ConControls_Controls_TextControl_OnMouseScroll.htm" />
   <HelpKINode Title="TextControl.OnTextChanged method" Url="html/M_ConControls_Controls_TextControl_OnTextChanged.htm" />
   <HelpKINode Title="TextControl.Scroll property" Url="html/P_ConControls_Controls_TextControl_Scroll.htm" />
   <HelpKINode Title="TextControl.ScrollToCaret method" Url="html/M_ConControls_Controls_TextControl_ScrollToCaret.htm" />
   <HelpKINode Title="TextControl.Text property" Url="html/P_ConControls_Controls_TextControl_Text.htm" />
   <HelpKINode Title="TextControl.TextChanged event" Url="html/E_ConControls_Controls_TextControl_TextChanged.htm" />
-  <HelpKINode Title="TextControl.Wrap property" Url="html/P_ConControls_Controls_TextControl_Wrap.htm" />
+  <HelpKINode Title="TextControl.WrapMode property" Url="html/P_ConControls_Controls_TextControl_WrapMode.htm" />
   <HelpKINode Title="ThirdButtonPressed enumeration member" Url="html/T_ConControls_WindowsApi_Types_MouseButtonStates.htm" />
   <HelpKINode Title="Title property">
     <HelpKINode Title="ConsoleWindow.Title Property " Url="html/P_ConControls_Controls_ConsoleWindow_Title.htm" />
@@ -1048,7 +1079,8 @@
   <HelpKINode Title="WithoutCtrl method" Url="html/M_ConControls_Controls_KeyCombination_WithoutCtrl.htm" />
   <HelpKINode Title="WithoutShift method" Url="html/M_ConControls_Controls_KeyCombination_WithoutShift.htm" />
   <HelpKINode Title="WithShift method" Url="html/M_ConControls_Controls_KeyCombination_WithShift.htm" />
-  <HelpKINode Title="Wrap property" Url="html/P_ConControls_Controls_TextControl_Wrap.htm" />
+  <HelpKINode Title="WrapMode enumeration" Url="html/T_ConControls_Controls_Text_WrapMode.htm" />
+  <HelpKINode Title="WrapMode property" Url="html/P_ConControls_Controls_TextControl_WrapMode.htm" />
   <HelpKINode Title="X enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="Y enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="Z enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />

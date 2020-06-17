@@ -16,7 +16,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
     public partial class ConsoleTextControllerTests
     {
         [TestMethod]
-        public void Wrap_Applied()
+        public void WrapMode_Applied()
         {
             const string text = "hello world!\ngood bye!";
             var sut = new ConControls.Controls.Text.ConsoleTextController

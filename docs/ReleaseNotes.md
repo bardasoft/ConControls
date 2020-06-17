@@ -1,5 +1,11 @@
 # ConControls - Release notes
 
+### Version 0.2.0 (2020/06/17)
+
+- [issue #13](https://github.com/ReneVogt/ConControls/issues/13): abstracted generic mouse events in `ConsoleControl` into six semantig virtual handler methods
+- [Issue #18](https://github.com/ReneVogt/ConControls/issues/18): changed `TextControl.Wrap` from a `bool` to an enum value of `WrapMode`
+- added build configuration `DebugNoSign` to build and test without the `*.pfx` key file.
+
 ### Version 0.1.1 (2020/06/16)
 
 Migrated `CoordinateExtensions` from the unit test project into the library.  
@@ -51,4 +57,4 @@ This is the first published version of ConControls. There is still a lot missing
 
 ---
 Ren&eacute; Vogt  
-Dresden 2020/06/15
+Dresden 2020/06/17

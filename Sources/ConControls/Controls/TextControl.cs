@@ -137,8 +137,9 @@ namespace ConControls.Controls
         }
 
         /// <summary>
-        /// Gets or sets wether lines are wrapped or not.
+        /// Gets or sets wether and how lines are wrapped.
         /// </summary>
+        /// <value>One of the <see cref="Controls.Text.WrapMode"/> enuemration values.</value>
         public virtual WrapMode WrapMode
         {
             get
