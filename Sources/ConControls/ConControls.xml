@@ -1820,6 +1820,11 @@
             Raised when the <see cref="P:ConControls.Controls.TextControl.CanFocus"/> property has been changed.
             </summary>
         </member>
+        <member name="P:ConControls.Controls.TextControl.CaretVisible">
+            <summary>
+            Gets wether the caret is inside the currently displayed area.
+            </summary>
+        </member>
         <member name="P:ConControls.Controls.TextControl.CanEdit">
             <summary>
             Gets or sets wether this <see cref="T:ConControls.Controls.TextControl"/> is read-only or can be edited.

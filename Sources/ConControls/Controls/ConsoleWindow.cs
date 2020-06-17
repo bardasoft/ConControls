@@ -188,9 +188,10 @@ namespace ConControls.Controls
                         oldFocused.Focused = false;
                     }
                     focusedControl = value;
+                    UpdateCursor();
                     if (focusedControl == null) return;
                     focusedControl.Focused = true;
-                    api.SetCursorInfo(consoleController.OutputHandle, focusedControl.CursorVisible, GetCursorSizeForControl(focusedControl), focusedControl.PointToConsole(focusedControl.CursorPosition));
+//                    api.SetCursorInfo(consoleController.OutputHandle, focusedControl.CursorVisible, GetCursorSizeForControl(focusedControl), focusedControl.PointToConsole(focusedControl.CursorPosition));
                     focusedControl.CursorPositionChanged += OnFocusedControlCursorChanged;
                     focusedControl.CursorSizeChanged += OnFocusedControlCursorChanged;
                     focusedControl.CursorVisibleChanged += OnFocusedControlCursorChanged;
