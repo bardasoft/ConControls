@@ -179,7 +179,7 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             e.Handled.Should().BeFalse();
         }
         [TestMethod]
-        public void OnWindowMouseEvent_LeftClickedInside_Focused()
+        public void OnWindowMouseEvent_LeftClickedInside_FocusedAndOnMouseClickCalledThreadSafe()
         {
             ConControls.Controls.ConsoleControl? focused = null;
             using var stubbedWindow = new StubbedWindow
@@ -202,6 +202,9 @@ namespace ConControlsTests.UnitTests.Controls.ConsoleControl
             stubbedWindow.MouseEventEvent(stubbedWindow, e);
             sut.Focused.Should().BeTrue();
             e.Handled.Should().BeTrue();
+
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnMouseEnter).Should().Be(1);
+            sut.GetMethodCount(StubbedConsoleControl.MethodOnMouseClick).Should().Be(1);
         }
     }
 }
