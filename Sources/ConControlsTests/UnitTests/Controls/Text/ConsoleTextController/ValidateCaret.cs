@@ -8,6 +8,7 @@
 #nullable enable
 
 using System.Drawing;
+using ConControls.Controls.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Width = 5,
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Text = string.Empty
             };
 
@@ -45,7 +46,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Width = 5,
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Text = "0123456789\n0123456789"
             };
 
@@ -74,7 +75,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Width = 5,
-                Wrap = false,
+                WrapMode = WrapMode.NoWrap,
                 Text = "0123456789\n0123456789"
             };
 
@@ -94,7 +95,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Width = 5,
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Text = "0123456789\n0123456789"
             };
 

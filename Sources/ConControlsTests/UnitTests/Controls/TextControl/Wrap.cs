@@ -9,6 +9,7 @@
 
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WrapMode = ConControls.Controls.Text.WrapMode;
 
 namespace ConControlsTests.UnitTests.Controls.TextControl
 {
@@ -18,27 +19,27 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
         public void Wrap_GetControllers_Value()
         {
             using var stubbedWindow = new StubbedWindow();
-            bool wrap = false;
+            WrapMode wrap = WrapMode.NoWrap;
             var controller = new StubbedConsoleTextController
             {
-                WrapGet = () => wrap
+                WrapModeGet = () => wrap
             };
             using var sut = new StubbedTextControl(stubbedWindow, controller);
 
-            sut.Wrap.Should().BeFalse();
-            wrap = true;
-            sut.Wrap.Should().BeTrue();
+            sut.WrapMode.Should().Be(WrapMode.NoWrap);
+            wrap = WrapMode.SimpleWrap;
+            sut.WrapMode.Should().Be(WrapMode.SimpleWrap);
         }
         [TestMethod]
         public void Wrap_SetControllers_Value()
         {
             using var stubbedWindow = new StubbedWindow();
-            bool wrap = false;
+            WrapMode wrap = WrapMode.NoWrap;
             int called = 0;
             var controller = new StubbedConsoleTextController
             {
-                WrapGet = () => wrap,
-                WrapSetBoolean = b =>
+                WrapModeGet = () => wrap,
+                WrapModeSetWrapMode = b =>
                 {
                     called += 1;
                     wrap = b;
@@ -46,19 +47,19 @@ namespace ConControlsTests.UnitTests.Controls.TextControl
             };
             using var sut = new StubbedTextControl(stubbedWindow, controller);
 
-            sut.Wrap.Should().BeFalse();
-            sut.Wrap = true;
+            sut.WrapMode.Should().Be(WrapMode.NoWrap);
+            sut.WrapMode = WrapMode.SimpleWrap;
             called.Should().Be(1);
-            wrap.Should().BeTrue();
-            sut.Wrap = true;
+            wrap.Should().Be(WrapMode.SimpleWrap);
+            sut.WrapMode = WrapMode.SimpleWrap;
             called.Should().Be(1);
-            wrap.Should().BeTrue();
-            sut.Wrap = false;
+            wrap.Should().Be(WrapMode.SimpleWrap);
+            sut.WrapMode = WrapMode.NoWrap;
             called.Should().Be(2);
-            wrap.Should().BeFalse();
-            sut.Wrap = false;
+            wrap.Should().Be(WrapMode.NoWrap);
+            sut.WrapMode = WrapMode.NoWrap;
             called.Should().Be(2);
-            wrap.Should().BeFalse();
+            wrap.Should().Be(WrapMode.NoWrap);
         }
     }
 }

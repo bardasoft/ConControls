@@ -139,18 +139,18 @@ namespace ConControls.Controls
         /// <summary>
         /// Gets or sets wether lines are wrapped or not.
         /// </summary>
-        public bool Wrap
+        public virtual WrapMode WrapMode
         {
             get
             {
-                lock(Window.SynchronizationLock) return textController.Wrap;
+                lock(Window.SynchronizationLock) return textController.WrapMode;
             }
             set
             {
                 lock (Window.SynchronizationLock)
                 {
-                    if (value == textController.Wrap) return;
-                    textController.Wrap= value;
+                    if (value == textController.WrapMode) return;
+                    textController.WrapMode = value;
                 }
             }
         }

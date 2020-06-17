@@ -7,6 +7,7 @@
 
 #nullable enable
 
+using ConControls.Controls.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Width = 5,
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Text = text
             };
 

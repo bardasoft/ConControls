@@ -8,6 +8,7 @@
 #nullable enable
 
 using System.Drawing;
+using ConControls.Controls.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -22,7 +23,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Width = 5,
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Text = text
             };
 
@@ -30,7 +31,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             sut.MaxLineLength.Should().Be(5);
             sut.Text.Should().Be(text);
             sut.Width.Should().Be(5);
-            sut.Wrap.Should().BeTrue();
+            sut.WrapMode.Should().Be(WrapMode.SimpleWrap);
             sut.GetLineLength(-1).Should().Be(0);
             sut.GetLineLength(0).Should().Be(5);
             sut.GetLineLength(1).Should().Be(5);
@@ -54,14 +55,14 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
                    '\0', '\0', '\0', '\0', '\0', '\0', '\0',
                    '2', '3', '4', '\0', '\0', '\0', '\0');
 
-            sut.Wrap = false;
+            sut.WrapMode = WrapMode.NoWrap;
             sut.Width = 4;
 
             sut.BufferLineCount.Should().Be(2);
             sut.MaxLineLength.Should().Be(10);
             sut.Text.Should().Be(text);
             sut.Width.Should().Be(4);
-            sut.Wrap.Should().BeFalse();
+            sut.WrapMode.Should().Be(WrapMode.NoWrap);
             sut.GetLineLength(-1).Should().Be(0);
             sut.GetLineLength(0).Should().Be(10);
             sut.GetLineLength(1).Should().Be(10);
@@ -80,7 +81,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Width = 5,
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Text = text
             };
             sut.GetCharacters(new Rectangle(Point.Empty, new Size(6, 4)))
@@ -98,7 +99,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Width = 5,
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Text = text
             };
             sut.GetCharacters(new Rectangle(Point.Empty, new Size(-1, 1)))

@@ -1721,7 +1721,7 @@
             Gets or sets the caret position.
             </summary>
         </member>
-        <member name="P:ConControls.Controls.TextControl.Wrap">
+        <member name="P:ConControls.Controls.TextControl.WrapMode">
             <summary>
             Gets or sets wether lines are wrapped or not.
             </summary>
@@ -1781,6 +1781,21 @@
         </member>
         <member name="P:ConControls.Controls.Text.ConsoleTextController.Width">
             <inheritdoc />
+        </member>
+        <member name="T:ConControls.Controls.Text.WrapMode">
+            <summary>
+            The wrap modes for controls derived from <see cref="T:ConControls.Controls.TextControl"/>.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.Text.WrapMode.NoWrap">
+            <summary>
+            No wrapping at all.
+            </summary>
+        </member>
+        <member name="F:ConControls.Controls.Text.WrapMode.SimpleWrap">
+            <summary>
+            Simply wrap lines disregarding words or whitespaces etc.
+            </summary>
         </member>
         <member name="T:ConControls.Extensions.CoordinateExtensions">
             <summary>
