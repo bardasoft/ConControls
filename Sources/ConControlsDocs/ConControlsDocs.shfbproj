@@ -56,8 +56,9 @@ of a console application without the overhead of creating a UI with frameworks l
 </ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="ConControls.Controls" isDocumented="True" />
-<NamespaceSummaryItem name="ConControls.Extensions" isDocumented="True" />
-<NamespaceSummaryItem name="(global)" isDocumented="True" /></NamespaceSummaries>
+      <NamespaceSummaryItem name="ConControls.Extensions" isDocumented="True" />
+      <NamespaceSummaryItem name="(global)" isDocumented="True" />
+    </NamespaceSummaries>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
@@ -97,5 +98,8 @@ of a console application without the overhead of creating a UI with frameworks l
     <PostBuildEvent>
     </PostBuildEvent>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'DebugNoSign' ">
+    <OutputPath>bin\DebugNoSign\</OutputPath>
   </PropertyGroup>
 </Project>

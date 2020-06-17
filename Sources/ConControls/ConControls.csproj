@@ -14,10 +14,8 @@
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageProjectUrl>https://renevogt.github.io/ConControls/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ReneVogt/ConControls</RepositoryUrl>
-    <SignAssembly>true</SignAssembly>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
-    <AssemblyOriginatorKeyFile>René Vogt.pfx</AssemblyOriginatorKeyFile>
     <Company />
     <PackageOutputPath>..\..\nuget</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
@@ -26,6 +24,18 @@
     <PackageTags>windows console ui</PackageTags>
     <NeutralLanguage>en</NeutralLanguage>
     <DocumentationFile>ConControls.xml</DocumentationFile>
+    <Configurations>Debug;Release;DebugNoSign</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'DebugNoSign'">
+    <SignAssembly>false</SignAssembly>
+    <DefineConstants>TRACE;DEBUG;NoSign</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' != 'DebugNoSign'">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>René Vogt.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoSign|AnyCPU'">
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
