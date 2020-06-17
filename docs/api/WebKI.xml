@@ -87,6 +87,7 @@
   <HelpKINode Title="CapsLock enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="CAPSLOCK_ON enumeration member" Url="html/T_ConControls_WindowsApi_Types_ControlKeyStates.htm" />
   <HelpKINode Title="Caret property" Url="html/P_ConControls_Controls_TextControl_Caret.htm" />
+  <HelpKINode Title="CaretVisible property" Url="html/P_ConControls_Controls_TextControl_CaretVisible.htm" />
   <HelpKINode Title="CheckDisposed method" Url="html/M_ConControls_Controls_ConsoleControl_CheckDisposed.htm" />
   <HelpKINode Title="Clear enumeration member" Url="html/T_ConControls_WindowsApi_Types_VirtualKey.htm" />
   <HelpKINode Title="Clear method">
@@ -1005,6 +1006,7 @@
   <HelpKINode Title="TextControl.CanFocus property" Url="html/P_ConControls_Controls_TextControl_CanFocus.htm" />
   <HelpKINode Title="TextControl.CanFocusChanged event" Url="html/E_ConControls_Controls_TextControl_CanFocusChanged.htm" />
   <HelpKINode Title="TextControl.Caret property" Url="html/P_ConControls_Controls_TextControl_Caret.htm" />
+  <HelpKINode Title="TextControl.CaretVisible property" Url="html/P_ConControls_Controls_TextControl_CaretVisible.htm" />
   <HelpKINode Title="TextControl.Clear method" Url="html/M_ConControls_Controls_TextControl_Clear.htm" />
   <HelpKINode Title="TextControl.CursorVisible property" Url="html/P_ConControls_Controls_TextControl_CursorVisible.htm" />
   <HelpKINode Title="TextControl.DrawClientArea method" Url="html/M_ConControls_Controls_TextControl_DrawClientArea.htm" />

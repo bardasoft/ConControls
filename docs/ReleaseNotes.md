@@ -1,5 +1,9 @@
 # ConControls - Release notes
 
+### Version 0.2.1 (2020/06/17)
+
+- [issue #20](https://github.com/ReneVogt/ConControls/issues/20): Fixed wrong cursor behaviour when scrolling a `TextBlock` control.
+
 ### Version 0.2.0 (2020/06/17)
 
 - [issue #13](https://github.com/ReneVogt/ConControls/issues/13): abstracted generic mouse events in `ConsoleControl` into six semantig virtual handler methods
