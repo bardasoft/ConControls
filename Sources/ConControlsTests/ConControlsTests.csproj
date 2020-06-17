@@ -92,8 +92,8 @@
     <Compile Include="UnitTests\Controls\Button\TabStop.cs" />
     <Compile Include="UnitTests\Controls\Button\Text.cs" />
     <Compile Include="UnitTests\Controls\Button\PerformClick.cs" />
-    <Compile Include="UnitTests\Controls\Button\MouseEvents.cs" />
-    <Compile Include="UnitTests\Controls\Button\KeyEvents.cs" />
+    <Compile Include="UnitTests\Controls\Button\OnMouseClick.cs" />
+    <Compile Include="UnitTests\Controls\Button\OnKeyEvent.cs" />
     <Compile Include="UnitTests\Controls\Button\Constructor.cs" />
     <Compile Include="UnitTests\Controls\Button\ButtonTests.cs" />
     <Compile Include="UnitTests\Controls\ConsoleControl\MouseEnter.cs" />

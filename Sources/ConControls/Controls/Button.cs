@@ -104,32 +104,29 @@ namespace ConControls.Controls {
         /// <inheritdoc />
         protected override void OnKeyEvent(KeyEventArgs e)
         {
-            _ = e ?? throw new ArgumentNullException(nameof(e));
-            if (e.Handled || !(Focused && Visible && Enabled && e.KeyDown))
-            {
-                base.OnKeyEvent(e);
-                return;
-            }
-
-            if (e.ControlKeys.WithoutSwitches() == ControlKeyStates.None && (e.VirtualKey == VirtualKey.Return || e.VirtualKey == VirtualKey.Space))
-            {
-                PerformClick();
-                e.Handled = true;
-            }
             base.OnKeyEvent(e);
+            if (e.Handled || 
+                !e.KeyDown ||
+                e.ControlKeys.WithoutSwitches() != ControlKeyStates.None ||
+                e.VirtualKey != VirtualKey.Return && e.VirtualKey != VirtualKey.Space)
+                return;
+
+            PerformClick();
+            e.Handled = true;
         }
 
         /// <inheritdoc />
         protected override void OnMouseClick(MouseEventArgs e)
         {
-            _ = e ?? throw new ArgumentNullException(paramName: nameof(e));
             base.OnMouseClick(e);
-            if (!e.Handled && Visible && Enabled && e.ButtonState == MouseButtonStates.LeftButtonPressed)
-            {
-                e.Handled = true;
-                Focused = true;
-                PerformClick();
-            }
+
+            // When this class is no longer sealed,
+            // we need to check for Enabled and Visible properties.
+            if (e.ButtonState != MouseButtonStates.LeftButtonPressed)
+                return;
+            
+            e.Handled = true;
+            PerformClick();
         }
     }
 }

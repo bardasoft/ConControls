@@ -1093,7 +1093,9 @@ namespace ConControls.Controls
 
         bool mouseInside;
         MouseButtonStates lastMouseButtons = MouseButtonStates.None;
-        static readonly MouseButtonStates[] mouseButtons = Enum.GetValues(typeof(MouseButtonStates)).Cast<MouseButtonStates>().ToArray();
+        static readonly MouseButtonStates[] mouseButtons = (from MouseButtonStates state in Enum.GetValues(typeof(MouseButtonStates))
+                                                            where state != MouseButtonStates.None
+                                                            select state).ToArray();
         void OnWindowMouseEvent(object sender, MouseEventArgs e)
         {
             lock (Window.SynchronizationLock)
