@@ -7,6 +7,7 @@
 
 #nullable enable
 
+using ConControls.Controls.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -24,17 +25,17 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
                 Text = text
             };
 
-            sut.Wrap.Should().BeFalse();
+            sut.WrapMode.Should().Be(WrapMode.NoWrap);
             sut.BufferLineCount.Should().Be(2);
-            sut.Wrap = false;
-            sut.Wrap.Should().BeFalse();
+            sut.WrapMode = WrapMode.NoWrap;
+            sut.WrapMode.Should().Be(WrapMode.NoWrap);
             sut.BufferLineCount.Should().Be(2);
 
-            sut.Wrap = true;
-            sut.Wrap.Should().BeTrue();
+            sut.WrapMode = WrapMode.SimpleWrap;
+            sut.WrapMode.Should().Be(WrapMode.SimpleWrap);
             sut.BufferLineCount.Should().Be(7);
-            sut.Wrap = true;
-            sut.Wrap.Should().BeTrue();
+            sut.WrapMode = WrapMode.SimpleWrap;
+            sut.WrapMode.Should().Be(WrapMode.SimpleWrap);
             sut.BufferLineCount.Should().Be(7);
         }
     }

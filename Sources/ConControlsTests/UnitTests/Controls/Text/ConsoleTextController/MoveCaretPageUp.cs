@@ -8,6 +8,7 @@
 #nullable enable
 
 using System.Drawing;
+using ConControls.Controls.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,7 +21,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
         {
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
-                Wrap = false,
+                WrapMode = WrapMode.NoWrap,
                 Width = 5
             };
             sut.MoveCaretPageUp(Point.Empty, 5).Should().Be(Point.Empty);
@@ -31,7 +32,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
         {
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Width = 5
             };
             sut.MoveCaretPageUp(Point.Empty, 5).Should().Be(Point.Empty);
@@ -43,7 +44,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Text = "Line1\nLine2\nLine3\nLongLine4",
-                Wrap = false,
+                WrapMode = WrapMode.NoWrap,
                 Width = 5
             };
             sut.MoveCaretPageUp(Point.Empty, 5).Should().Be(Point.Empty);
@@ -57,7 +58,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Text = "Line1Line2L3\nLine4",
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Width = 5
             };
             sut.MoveCaretPageUp(Point.Empty, 5).Should().Be(Point.Empty);

@@ -11,7 +11,7 @@ namespace ConControls.Controls.Text
 {
     interface IConsoleTextController
     {
-        bool Wrap { get; set; }
+        WrapMode WrapMode { get; set; }
         int Width { get; set; }
         int BufferLineCount { get; }
         int MaxLineLength { get; }

@@ -8,6 +8,7 @@
 #nullable enable
 
 using System.Drawing;
+using ConControls.Controls.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,7 +21,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
         {
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
-                Wrap = false,
+                WrapMode = WrapMode.NoWrap,
                 Width = 5
             };
 
@@ -38,7 +39,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
         {
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Width = 5
             };
 
@@ -57,7 +58,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Text = "Hello\nWor",
-                Wrap = false,
+                WrapMode = WrapMode.NoWrap,
                 Width = 5
             };
 
@@ -83,7 +84,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Text = "Hello\nWorld!\n",
-                Wrap = false,
+                WrapMode = WrapMode.NoWrap,
                 Width = 5
             };
 
@@ -109,7 +110,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Text = "Hi\nWor",
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Width = 5
             };
 
@@ -134,7 +135,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Text = "Hi\nWorld",
-                Wrap = true,
+                WrapMode = WrapMode.SimpleWrap,
                 Width = 5
             };
 

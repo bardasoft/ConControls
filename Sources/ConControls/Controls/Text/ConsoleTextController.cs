@@ -18,9 +18,9 @@ namespace ConControls.Controls.Text
         {
             internal List<string> BufferLines { get; } = new List<string>();
 
-            internal Line(string line, bool wrap, int width)
+            internal Line(string line, WrapMode wrapMode, int width)
             {
-                if (!wrap)
+                if (wrapMode == WrapMode.NoWrap)
                 {
                     BufferLines.Add(line);
                     return;
@@ -42,7 +42,7 @@ namespace ConControls.Controls.Text
         readonly List<Line> lines = new List<Line>();
         readonly List<string> allLines = new List<string>();
 
-        bool wrap;
+        WrapMode wrapMode;
         string text = string.Empty;
         int width = 1;
 
@@ -58,13 +58,13 @@ namespace ConControls.Controls.Text
             }
         }
 
-        public bool Wrap
+        public WrapMode WrapMode
         {
-            get => wrap;
+            get => wrapMode;
             set
             {
-                if (wrap == value) return;
-                wrap = value;
+                if (wrapMode == value) return;
+                wrapMode = value;
                 Refresh();
             }
         }
@@ -135,7 +135,7 @@ namespace ConControls.Controls.Text
             var unwrappedLines = content.Split(new[] { "\r\n" }, StringSplitOptions.None)
                                      .SelectMany(s => s.Split(new[] { "\n" }, StringSplitOptions.None))
                                      .ToArray();
-            var addedLines = unwrappedLines.Select(l => new Line(l, wrap, width)).ToArray();
+            var addedLines = unwrappedLines.Select(l => new Line(l, wrapMode, width)).ToArray();
             lines.AddRange(addedLines);
             allLines.AddRange(addedLines.SelectMany(l => l.BufferLines));
             MaxLineLength = allLines.Max(l => l.Length);
@@ -194,19 +194,19 @@ namespace ConControls.Controls.Text
         int NormalizeX(int x, int line)
         {
             int length = GetLineLength(line);
-            return Wrap && line < BufferLineCount - 1
+            return WrapMode != WrapMode.NoWrap && line < BufferLineCount - 1
                        ? Math.Min(x, Math.Min(length, width - 1))
                        : Math.Min(x, length);
         }
         bool ExceedsLine(int x, int y)
         {
             int length = GetLineLength(y);
-            return Wrap && y < BufferLineCount - 1 && x > length - 1 || x > length;
+            return WrapMode != WrapMode.NoWrap && y < BufferLineCount - 1 && x > length - 1 || x > length;
         }
         int EndOfLine(int line)
         {
             int length = GetLineLength(line);
-            return Wrap && line < BufferLineCount - 1 ? Math.Min(length, width - 1) : length;
+            return WrapMode != WrapMode.NoWrap && line < BufferLineCount - 1 ? Math.Min(length, width - 1) : length;
         }
     }
 }

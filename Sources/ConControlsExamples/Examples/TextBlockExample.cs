@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using ConControls.Controls;
+using ConControls.Controls.Text;
 
 // ReSharper disable AccessToDisposedClosure
 
@@ -63,7 +64,7 @@ lines.";
                     BorderStyle = BorderStyle.None,
                     BackgroundColor = ConsoleColor.Blue,
                     ForegroundColor = ConsoleColor.White,
-                    Wrap = true
+                    WrapMode = WrapMode.SimpleWrap
                 };
                 var block3 = new TextBlock(window)
                 {
@@ -76,7 +77,7 @@ lines.";
                 {
                     Area = new Rectangle(12, 8, 10, 6),
                     BorderStyle = BorderStyle.SingleLined,
-                    Wrap = true,
+                    WrapMode = WrapMode.SimpleWrap,
                     BackgroundColor = ConsoleColor.Blue,
                     ForegroundColor = ConsoleColor.White
                 };

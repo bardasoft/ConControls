@@ -8,6 +8,7 @@
 #nullable enable
 
 using System.Drawing;
+using ConControls.Controls.Text;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,7 +22,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Width = 5,
-                Wrap = false
+                WrapMode = WrapMode.NoWrap
             };
             sut.EndCaret.Should().Be(Point.Empty);
         }
@@ -31,7 +32,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             var sut = new ConControls.Controls.Text.ConsoleTextController
             {
                 Width = 5,
-                Wrap = true
+                WrapMode = WrapMode.SimpleWrap
             };
             sut.EndCaret.Should().Be(Point.Empty);
         }
@@ -42,7 +43,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             {
                 Text = "Hello\nWorld",
                 Width = 5,
-                Wrap = false
+                WrapMode = WrapMode.NoWrap
             };
             sut.EndCaret.Should().Be(new Point(5, 1));
         }
@@ -53,7 +54,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             {
                 Text = "Hello\nWorld\n",
                 Width = 5,
-                Wrap = false
+                WrapMode = WrapMode.NoWrap
             };
             sut.EndCaret.Should().Be(new Point(0, 2));
         }
@@ -64,7 +65,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             {
                 Text = "Hello\nWor",
                 Width = 5,
-                Wrap = true
+                WrapMode = WrapMode.SimpleWrap
             };
             sut.EndCaret.Should().Be(new Point(3, 2));
         }
@@ -75,7 +76,7 @@ namespace ConControlsTests.UnitTests.Controls.Text.ConsoleTextController
             {
                 Text = "HelloWorld\n",
                 Width = 5,
-                Wrap = true
+                WrapMode = WrapMode.SimpleWrap
             };
             sut.EndCaret.Should().Be(new Point(0, 3));
         }
