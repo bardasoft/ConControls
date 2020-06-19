@@ -40,26 +40,15 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'DebugNoSign'">
-    <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' != 'DebugNoSign'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>René Vogt.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' != 'Release'">
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugNoSign|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\DebugNoSign\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>latest</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ConControls.Fakes">
@@ -256,7 +245,7 @@
     <Fakes Include="Fakes\ConControls.fakes" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)' != 'DebugNoSign'">
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
     <None Include="René Vogt.pfx" />
   </ItemGroup>
   <ItemGroup>

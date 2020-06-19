@@ -26,16 +26,12 @@
     <DocumentationFile>ConControls.xml</DocumentationFile>
     <Configurations>Debug;Release;DebugNoSign</Configurations>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'DebugNoSign'">
+  <PropertyGroup Condition="'$(Configuration)' != 'Release'">
     <SignAssembly>false</SignAssembly>
-    <DefineConstants>TRACE;DEBUG;NoSign</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' != 'DebugNoSign'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>René Vogt.pfx</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugNoSign|AnyCPU'">
-    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <ItemGroup>

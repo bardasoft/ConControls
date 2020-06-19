@@ -173,7 +173,6 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
 
         }
         [TestMethod]
-        // ReSharper disable once FunctionComplexityOverflow
         public async Task InputEvents_InvalidRecordType_Logged()
         {
             var record = new INPUT_RECORD
@@ -203,7 +202,6 @@ namespace ConControlsTests.UnitTests.ConsoleApi.ConsoleController
             }
         }
         [TestMethod]
-        // ReSharper disable once FunctionComplexityOverflow
         public async Task InputEvents_Exception_Logged()
         {
             const string message = "--message--";
