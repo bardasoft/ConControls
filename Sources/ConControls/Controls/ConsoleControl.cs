@@ -777,7 +777,7 @@ namespace ConControls.Controls
                 }
 
                 var color = EffectiveBackgroundColor;
-                Logger.Log(DebugContext.Control | DebugContext.Drawing, $"drawing background ({color}.");
+                Logger.Log(DebugContext.Control | DebugContext.Drawing, $"drawing background ({color}).");
                 graphics.DrawBackground(color, new Rectangle(Parent!.PointToConsole(Location), Size));
             }
         }
@@ -1101,6 +1101,7 @@ namespace ConControls.Controls
             lock (Window.SynchronizationLock)
             {
                 _ = e ?? throw new ArgumentNullException(nameof(e));
+
                 var lastButtons = lastMouseButtons;
                 lastMouseButtons = e.ButtonState;
 
@@ -1113,6 +1114,7 @@ namespace ConControls.Controls
                 {
                     if (mouseInside)
                     {
+                        Logger.Log(DebugContext.Control | DebugContext.Mouse, $"Mouse left control {GetType().Name} (Name: {Name})");
                         OnMouseLeave(args);
                         e.Handled = args.Handled;
                     }
@@ -1123,9 +1125,12 @@ namespace ConControls.Controls
 
                 if (!mouseInside)
                 {
+                    Logger.Log(DebugContext.Control | DebugContext.Mouse, $"Mouse entered control {GetType().Name} (Name: {Name})");
                     mouseInside = true;
                     OnMouseEnter(args);
                 }
+
+                Logger.Log(DebugContext.Control | DebugContext.Mouse, $"Mouse event in {GetType().Name} (Name: {Name}): Kind {e.Kind}, Buttons {e.ButtonState}, Position {e.Position}, Scroll {e.Scroll}, Keys {e.ControlKeys}");
 
                 switch (args.Kind)
                 {

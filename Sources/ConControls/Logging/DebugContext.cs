@@ -23,6 +23,9 @@ namespace ConControls.Logging
         ProgressBar = 1 << 6,
         Text = 1 << 7,
 
+        Mouse = 1 << 20,
+        Keys = 1 << 21,
+
         Exception = 1 << 30,
         All = -1
     }

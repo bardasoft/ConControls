@@ -464,7 +464,7 @@ namespace ConControls.Controls
         {
             lock (SynchronizationLock)
             {
-                Logger.Log(DebugContext.Window,
+                Logger.Log(DebugContext.Window | DebugContext.Keys,
                            $"Received key event: VK {e.VirtualKeyCode} UC '{e.UnicodeChar}' Down: {e.KeyDown} CK {e.ControlKeys} RC {e.RepeatCount}");
 
                 var eventArgs = new KeyEventArgs(e);
@@ -498,7 +498,7 @@ namespace ConControls.Controls
         {
             lock (SynchronizationLock)
             {
-                Logger.Log(DebugContext.Window,
+                Logger.Log(DebugContext.Window | DebugContext.Mouse,
                            $"Received mouse event: [{e.EventFlags}] at {e.MousePosition} button '{e.ButtonState}' CK {e.ControlKeys} Scroll: {e.Scroll}");
                 MouseEvent?.Invoke(this, new MouseEventArgs(e));
             }

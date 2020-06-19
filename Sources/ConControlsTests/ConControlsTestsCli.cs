@@ -27,7 +27,7 @@ namespace ConControlsTests
         static async Task Main()
         {
             using var consoleLogger = new TestLogger(Console.WriteLine);
-            Logger.Context = DebugContext.Window;
+            Logger.Context = DebugContext.Mouse;
 
             Console.WriteLine("Starting test.");
             try
