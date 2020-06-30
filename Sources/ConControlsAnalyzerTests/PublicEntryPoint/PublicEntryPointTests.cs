@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using Verify = Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.MSTest.CodeFixVerifier<
+using Verify = Microsoft.CodeAnalysis.CSharp.Testing.MSTest.CodeFixVerifier<
     ConControls.CodeAnalysis.PublicEntryPoint.PublicEntryPointAnalyzer,
     ConControls.CodeAnalysis.PublicEntryPoint.PublicEntryPointFixProvider>;
 
@@ -14,16 +14,16 @@ namespace ConControlsAnalyzerTests.PublicEntryPoint
         [TestMethod]
         public async Task TestMethod1()
         {
-            var test = @"";
+            const string test = @"";
 
-            await Verify.VerifyCSharpDiagnosticAsync(test);
+            await Verify.VerifyAnalyzerAsync(test);
         }
 
         //Diagnostic and CodeFix both triggered and checked for
         [TestMethod]
         public async Task TestMethod2()
         {
-            var test = @"
+            const string test = @"
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -54,7 +54,7 @@ namespace ConControlsAnalyzerTests.PublicEntryPoint
     }";
 
             var expected = Verify.Diagnostic("ConControlsAnalyzer").WithLocation(11, 15).WithArguments("TypeName");
-            await Verify.VerifyCSharpFixAsync(test, expected, fixtest);
+            await Verify.VerifyCodeFixAsync(test, expected, fixtest);
         }
     }
 }
